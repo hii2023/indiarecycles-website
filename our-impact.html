@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Our Impact — India Recycles</title>
+  <meta name="description" content="35,500+ clothes recycled, 132 slum sales, 400+ volunteers. See the real-world impact India Recycles creates across Ahmedabad and Vadodara."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['Playfair Display', 'Georgia', 'serif'],
+            sans:  ['Inter', 'sans-serif'],
+          },
+          colors: {
+            forest: { 50:'#f0f7f2', 100:'#d4edda', 200:'#a8d9b4', 300:'#72bf87', 400:'#3fa35e', 500:'#1a8a3f', 600:'#1a6b3a', 700:'#155530', 800:'#0d3320', 900:'#081a10' },
+            saffron: { 100:'#fef3e2', 200:'#fcd9a0', 400:'#f5a623', 500:'#e07b39', 600:'#c4621e' },
+            cream: '#fdfef8',
+          },
+          borderRadius: { '4xl': '2rem' },
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { background-color: #fdfef8; }
+    .nav-link { transition: color .15s ease; }
+    .nav-link:hover { color: #1a6b3a; }
+    .card-lift { transition: transform .25s ease, box-shadow .25s ease; }
+    .card-lift:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(26,107,58,.18); }
+    .photo-zoom { overflow: hidden; }
+    .photo-zoom img { transition: transform .4s ease; }
+    .photo-zoom:hover img { transform: scale(1.06); }
+    #mob-menu { display: none; }
+    #mob-menu.open { display: block; }
+    .texture-bg { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E"); }
+    @media (prefers-reduced-motion: reduce) {
+      .card-lift:hover { transform: none; }
+      .photo-zoom:hover img { transform: none; }
+    }
+  </style>
+</head>
+<body class="font-sans text-forest-800 antialiased">
+
+<!-- NAVBAR -->
+<nav class="fixed top-0 inset-x-0 z-50 bg-white/95 backdrop-blur border-b border-forest-100 shadow-sm" role="navigation" aria-label="Main navigation">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-20">
+    <a href="index.html" class="flex items-center gap-3 cursor-pointer shrink-0" aria-label="India Recycles — home">
+      <img src="images/logo.png" alt="India Recycles logo" class="h-12 w-auto" loading="eager"/>
+      <span class="font-serif text-forest-800 text-lg leading-tight hidden sm:block">India Recycles</span>
+    </a>
+    <div class="hidden lg:flex items-center gap-0.5 text-sm font-medium text-gray-600">
+      <a href="index.html"              class="nav-link px-3 py-2 rounded-lg">Home</a>
+      <a href="about-us.html"           class="nav-link px-3 py-2 rounded-lg">About Us</a>
+      <a href="our-model.html"          class="nav-link px-3 py-2 rounded-lg">Our Model</a>
+      <a href="drop-locations.html"     class="nav-link px-3 py-2 rounded-lg">Drop Locations</a>
+      <a href="zero-waste-promise.html" class="nav-link px-3 py-2 rounded-lg">Zero Waste</a>
+      <a href="our-impact.html"         class="nav-link px-3 py-2 rounded-lg text-forest-700 font-semibold bg-forest-50">Our Impact</a>
+      <a href="our-partners.html"       class="nav-link px-3 py-2 rounded-lg">Partners</a>
+      <a href="contact.html"            class="nav-link px-3 py-2 rounded-lg">Contact</a>
+    </div>
+    <div class="flex items-center gap-2">
+      <a href="donate.html" class="bg-forest-600 hover:bg-forest-700 text-white px-5 py-2 rounded-xl font-semibold text-sm transition-colors cursor-pointer shadow">Donate Now</a>
+      <button id="menu-toggle" class="lg:hidden p-2 rounded-xl hover:bg-forest-50 cursor-pointer" aria-label="Toggle menu" aria-expanded="false" aria-controls="mob-menu">
+        <svg class="w-5 h-5 text-gray-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+  <div id="mob-menu" class="lg:hidden border-t border-forest-100 bg-white">
+    <div class="px-4 py-4 flex flex-col gap-1 text-sm font-medium">
+      <a href="index.html"              class="px-4 py-3 rounded-xl text-gray-600 hover:bg-forest-50 cursor-pointer">Home</a>
+      <a href="about-us.html"           class="px-4 py-3 rounded-xl text-gray-600 hover:bg-forest-50 cursor-pointer">About Us</a>
+      <a href="our-model.html"          class="px-4 py-3 rounded-xl text-gray-600 hover:bg-forest-50 cursor-pointer">Our Model</a>
+      <a href="drop-locations.html"     class="px-4 py-3 rounded-xl text-gray-600 hover:bg-forest-50 cursor-pointer">Drop Locations</a>
+      <a href="zero-waste-promise.html" class="px-4 py-3 rounded-xl text-gray-600 hover:bg-forest-50 cursor-pointer">Zero Waste</a>
+      <a href="our-impact.html"         class="px-4 py-3 rounded-xl text-forest-700 bg-forest-50 font-semibold cursor-pointer">Our Impact</a>
+      <a href="our-partners.html"       class="px-4 py-3 rounded-xl text-gray-600 hover:bg-forest-50 cursor-pointer">Partners</a>
+      <a href="contact.html"            class="px-4 py-3 rounded-xl text-gray-600 hover:bg-forest-50 cursor-pointer">Contact</a>
+      <a href="donate.html"             class="mt-2 px-4 py-3 rounded-xl bg-forest-600 text-white font-semibold text-center cursor-pointer">Donate Now</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+<!-- HERO -->
+<section class="relative pt-20 overflow-hidden" aria-labelledby="impact-h1">
+  <div class="absolute inset-0">
+    <img src="images/impact8.jpg" alt="India Recycles community impact" class="w-full h-full object-cover object-center"/>
+    <div class="absolute inset-0 bg-gradient-to-b from-forest-900/80 via-forest-900/65 to-forest-900/85"></div>
+  </div>
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-28 text-center">
+    <div class="inline-flex items-center gap-2 bg-saffron-500/90 text-white px-4 py-2 rounded-full text-sm font-semibold mb-6 backdrop-blur-sm">By the Numbers</div>
+    <h1 id="impact-h1" class="font-serif text-5xl lg:text-6xl text-white mb-5 leading-tight">Our <em class="not-italic text-saffron-400">Impact</em></h1>
+    <p class="text-forest-100 text-xl max-w-2xl mx-auto leading-relaxed">Real numbers. Real change. See what India Recycles has achieved since we started.</p>
+  </div>
+</section>
+
+<!-- STATS BENTO GRID -->
+<section class="py-20 bg-cream texture-bg" aria-labelledby="stats-heading">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 id="stats-heading" class="sr-only">Impact statistics</h2>
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-5 mb-5">
+      <div class="bg-forest-700 rounded-4xl p-8 text-center card-lift cursor-default">
+        <div class="font-serif text-5xl lg:text-6xl text-white font-bold mb-2">35,500<span class="text-saffron-400">+</span></div>
+        <div class="text-forest-200 text-sm font-semibold uppercase tracking-wide">Clothes Recycled</div>
+      </div>
+      <div class="bg-white rounded-4xl p-8 text-center border border-forest-100 card-lift cursor-default">
+        <div class="font-serif text-5xl lg:text-6xl text-forest-600 font-bold mb-2">132</div>
+        <div class="text-forest-600 text-sm font-semibold uppercase tracking-wide">Slum Sales Held</div>
+      </div>
+      <div class="bg-saffron-500 rounded-4xl p-8 text-center card-lift cursor-default">
+        <div class="font-serif text-5xl lg:text-6xl text-white font-bold mb-2">400<span class="text-saffron-100">+</span></div>
+        <div class="text-saffron-100 text-sm font-semibold uppercase tracking-wide">Active Volunteers</div>
+      </div>
+      <div class="bg-white rounded-4xl p-8 text-center border border-forest-100 card-lift cursor-default">
+        <div class="font-serif text-5xl lg:text-6xl text-forest-600 font-bold mb-2">1,000<span class="text-saffron-500">+</span></div>
+        <div class="text-forest-600 text-sm font-semibold uppercase tracking-wide">Medical Beneficiaries</div>
+      </div>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+      <div class="bg-forest-800 rounded-4xl p-8 text-center card-lift cursor-default">
+        <div class="font-serif text-5xl text-white font-bold mb-2">20<span class="text-saffron-400">+</span></div>
+        <div class="text-forest-300 text-sm font-semibold uppercase tracking-wide">Drop Locations</div>
+      </div>
+      <div class="bg-white rounded-4xl p-8 text-center border border-forest-100 card-lift cursor-default">
+        <div class="font-serif text-5xl text-forest-600 font-bold mb-2">25<span class="text-saffron-500">+</span></div>
+        <div class="text-forest-600 text-sm font-semibold uppercase tracking-wide">Students Supported</div>
+      </div>
+      <div class="bg-white rounded-4xl p-8 text-center border border-forest-100 card-lift cursor-default">
+        <div class="font-serif text-5xl text-forest-600 font-bold mb-2">2</div>
+        <div class="text-forest-600 text-sm font-semibold uppercase tracking-wide">Cities Served</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT PHOTO GALLERY -->
+<section class="py-16 bg-white" aria-label="Impact photo gallery">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="photo-zoom rounded-3xl overflow-hidden aspect-square">
+        <img src="images/impact1.jpg" alt="India Recycles community event" class="w-full h-full object-cover"/>
+      </div>
+      <div class="photo-zoom rounded-3xl overflow-hidden aspect-square">
+        <img src="images/impact2.jpg" alt="Volunteers at India Recycles" class="w-full h-full object-cover"/>
+      </div>
+      <div class="photo-zoom rounded-3xl overflow-hidden aspect-square">
+        <img src="images/impact3.jpg" alt="Medical camp beneficiaries" class="w-full h-full object-cover"/>
+      </div>
+      <div class="photo-zoom rounded-3xl overflow-hidden aspect-square">
+        <img src="images/impact4.png" alt="Community at India Recycles slum sale" class="w-full h-full object-cover"/>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SDG + CARBON -->
+<section class="py-24 bg-cream texture-bg" aria-labelledby="env-heading">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-14">
+      <div class="inline-flex items-center gap-2 bg-forest-100 text-forest-700 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wide mb-4">Global Goals</div>
+      <h2 id="env-heading" class="font-serif text-4xl text-forest-800">Environmental &amp; Social Impact</h2>
+      <p class="text-forest-600 mt-3 max-w-xl mx-auto">Our work contributes directly to multiple UN Sustainable Development Goals and measurably reduces carbon footprint.</p>
+    </div>
+    <div class="grid md:grid-cols-2 gap-8">
+      <div class="bg-white rounded-4xl overflow-hidden border border-forest-100 card-lift cursor-default">
+        <div class="photo-zoom h-56">
+          <img src="images/sdg.png" alt="UN SDGs supported by India Recycles" class="w-full h-full object-cover object-top"/>
+        </div>
+        <div class="p-7">
+          <h3 class="font-serif text-2xl text-forest-800 mb-3">UN SDG Alignment</h3>
+          <p class="text-forest-600 leading-relaxed text-sm">India Recycles directly addresses SDGs 1 (No Poverty), 8 (Decent Work), 10 (Reduced Inequalities), 12 (Responsible Consumption), and 13 (Climate Action).</p>
+        </div>
+      </div>
+      <div class="bg-white rounded-4xl overflow-hidden border border-forest-100 card-lift cursor-default">
+        <div class="photo-zoom h-56">
+          <img src="images/carbon.png" alt="Carbon footprint reduction" class="w-full h-full object-cover object-top"/>
+        </div>
+        <div class="p-7">
+          <h3 class="font-serif text-2xl text-forest-800 mb-3">Carbon Footprint Saved</h3>
+          <p class="text-forest-600 leading-relaxed text-sm">Every recycled garment saves approximately 3–5 kg of CO₂ vs. producing new. 35,500+ clothes recycled means over 100 tonnes of CO₂ avoided from landfills.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAM HIGHLIGHTS -->
+<section class="py-24 bg-white" aria-labelledby="programs-heading">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-14">
+      <div class="inline-flex items-center gap-2 bg-forest-100 text-forest-700 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wide mb-4">Beyond Clothes</div>
+      <h2 id="programs-heading" class="font-serif text-4xl text-forest-800">Community Programs</h2>
+      <p class="text-forest-600 mt-3 max-w-xl mx-auto">Revenue from our sales funds life-changing programs for the communities we serve.</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="bg-cream rounded-4xl p-8 border border-forest-100 card-lift cursor-default">
+        <div class="photo-zoom rounded-2xl overflow-hidden h-44 mb-5">
+          <img src="images/impact5.png" alt="Medical camp by India Recycles" class="w-full h-full object-cover"/>
+        </div>
+        <h3 class="font-serif text-xl text-forest-800 mb-2">Medical Camps</h3>
+        <p class="text-forest-600 text-sm leading-relaxed">Regular health checkups, eye exams, and gynaecological services for slum residents. 1,000+ beneficiaries served so far.</p>
+      </div>
+      <div class="bg-cream rounded-4xl p-8 border border-forest-100 card-lift cursor-default">
+        <div class="photo-zoom rounded-2xl overflow-hidden h-44 mb-5">
+          <img src="images/impact6.jpg" alt="Education scholarships by India Recycles" class="w-full h-full object-cover"/>
+        </div>
+        <h3 class="font-serif text-xl text-forest-800 mb-2">Education Scholarships</h3>
+        <p class="text-forest-600 text-sm leading-relaxed">School scholarships for underprivileged children from slum families. 25+ students supported to date.</p>
+      </div>
+      <div class="bg-cream rounded-4xl p-8 border border-forest-100 card-lift cursor-default">
+        <div class="photo-zoom rounded-2xl overflow-hidden h-44 mb-5">
+          <img src="images/impact7.jpg" alt="Women livelihood by India Recycles" class="w-full h-full object-cover"/>
+        </div>
+        <h3 class="font-serif text-xl text-forest-800 mb-2">Women's Livelihoods</h3>
+        <p class="text-forest-600 text-sm leading-relaxed">REVIBE and Godadi stitching units provide dignified income for women from slum communities in Ahmedabad.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="py-24 bg-cream texture-bg" aria-labelledby="test-heading">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-14">
+      <div class="inline-flex items-center gap-2 bg-forest-100 text-forest-700 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wide mb-4">Real Voices</div>
+      <h2 id="test-heading" class="font-serif text-4xl text-forest-800">What People Say</h2>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      <div class="rounded-3xl overflow-hidden shadow-md card-lift cursor-default">
+        <img src="images/testimonial1.png" alt="Community member testimonial" class="w-full h-auto"/>
+      </div>
+      <div class="rounded-3xl overflow-hidden shadow-md card-lift cursor-default sm:mt-6">
+        <img src="images/testimonial2.png" alt="Volunteer testimonial" class="w-full h-auto"/>
+      </div>
+      <div class="rounded-3xl overflow-hidden shadow-md card-lift cursor-default">
+        <img src="images/testimonial3.png" alt="Donor testimonial" class="w-full h-auto"/>
+      </div>
+      <div class="rounded-3xl overflow-hidden shadow-md card-lift cursor-default sm:mt-6">
+        <img src="images/testimonial4.png" alt="Slum sale buyer testimonial" class="w-full h-auto"/>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="relative py-24 overflow-hidden" aria-labelledby="impact-cta">
+  <div class="absolute inset-0">
+    <img src="images/impact2.jpg" alt="" class="w-full h-full object-cover" aria-hidden="true"/>
+    <div class="absolute inset-0 bg-forest-900/82"></div>
+  </div>
+  <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <h2 id="impact-cta" class="font-serif text-4xl lg:text-5xl text-white mb-5">Help Us Go Further</h2>
+    <p class="text-forest-200 text-lg mb-8 max-w-xl mx-auto">Your donation funds every camp, scholarship and livelihood we create. Be part of the numbers.</p>
+    <div class="flex flex-wrap justify-center gap-4">
+      <a href="donate.html"         class="bg-saffron-500 hover:bg-saffron-600 text-white px-8 py-4 rounded-2xl font-semibold transition-colors cursor-pointer shadow-lg">Donate Now</a>
+      <a href="drop-locations.html" class="border-2 border-white/50 text-white px-8 py-4 rounded-2xl font-semibold hover:bg-white/10 cursor-pointer transition-colors">Donate Clothes</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="bg-forest-900 text-white" role="contentinfo">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+    <div class="grid md:grid-cols-4 gap-10 mb-10">
+      <div class="md:col-span-2">
+        <a href="index.html" class="flex items-center gap-3 cursor-pointer mb-4">
+          <img src="images/logo.png" alt="India Recycles" class="h-8 w-auto brightness-200"/>
+          <span class="font-serif text-lg text-white">India Recycles</span>
+        </a>
+        <p class="text-forest-300 text-sm leading-relaxed max-w-xs">Giving donated clothes a second life through community slum sales, upcycling and livelihood creation across Ahmedabad &amp; Vadodara.</p>
+      </div>
+      <div>
+        <div class="font-semibold text-forest-200 mb-4 text-sm uppercase tracking-wide">Pages</div>
+        <div class="flex flex-col gap-2 text-sm text-forest-400">
+          <a href="index.html"              class="hover:text-white transition-colors cursor-pointer">Home</a>
+          <a href="about-us.html"           class="hover:text-white transition-colors cursor-pointer">About Us</a>
+          <a href="our-model.html"          class="hover:text-white transition-colors cursor-pointer">Our Model</a>
+          <a href="drop-locations.html"     class="hover:text-white transition-colors cursor-pointer">Drop Locations</a>
+          <a href="zero-waste-promise.html" class="hover:text-white transition-colors cursor-pointer">Zero Waste</a>
+        </div>
+      </div>
+      <div>
+        <div class="font-semibold text-forest-200 mb-4 text-sm uppercase tracking-wide">More</div>
+        <div class="flex flex-col gap-2 text-sm text-forest-400">
+          <a href="our-impact.html"   class="hover:text-white transition-colors cursor-pointer">Our Impact</a>
+          <a href="our-partners.html" class="hover:text-white transition-colors cursor-pointer">Partners</a>
+          <a href="contact.html"      class="hover:text-white transition-colors cursor-pointer">Contact</a>
+          <a href="donate.html"       class="hover:text-white transition-colors cursor-pointer">Donate</a>
+        </div>
+      </div>
+    </div>
+    <div class="border-t border-forest-800 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-forest-500">
+      <span>&copy; 2025 India Recycles. All rights reserved.</span>
+      <span>Registered Non-Profit, Gujarat, India</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const menu   = document.getElementById('mob-menu');
+  toggle.addEventListener('click', () => {
+    const open = menu.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open);
+  });
+</script>
+</body>
+</html>

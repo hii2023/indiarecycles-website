@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us — India Recycles</title>
+  <meta name="description" content="Learn the story, mission and team behind India Recycles — giving donated clothes a second life since our founding."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['Playfair Display', 'Georgia', 'serif'],
+            sans:  ['Inter', 'sans-serif'],
+          },
+          colors: {
+            forest: { 50:'#f0f7f2', 100:'#d4edda', 200:'#a8d9b4', 300:'#72bf87', 400:'#3fa35e', 500:'#1a8a3f', 600:'#1a6b3a', 700:'#155530', 800:'#0d3320', 900:'#081a10' },
+            saffron: { 100:'#fef3e2', 200:'#fcd9a0', 400:'#f5a623', 500:'#e07b39', 600:'#c4621e' },
+            cream: '#fdfef8',
+          },
+          borderRadius: { '4xl': '2rem' },
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { background-color: #fdfef8; }
+    .nav-link { transition: color .15s ease; }
+    .nav-link:hover { color: #1a6b3a; }
+    .card-lift { transition: transform .25s ease, box-shadow .25s ease; }
+    .card-lift:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(26,107,58,.18); }
+    .photo-zoom { overflow: hidden; }
+    .photo-zoom img { transition: transform .4s ease; }
+    .photo-zoom:hover img { transform: scale(1.06); }
+    #mob-menu { display: none; }
+    #mob-menu.open { display: block; }
+    .texture-bg { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E"); }
+    @media (prefers-reduced-motion: reduce) {
+      .card-lift:hover { transform: none; }
+      .photo-zoom:hover img { transform: none; }
+    }
+  </style>
+</head>
+<body class="font-sans text-forest-800 antialiased">
+
+<!-- NAVBAR -->
+<nav class="fixed top-0 inset-x-0 z-50 bg-white/95 backdrop-blur border-b border-forest-100 shadow-sm" role="navigation" aria-label="Main navigation">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-20">
+    <a href="index.html" class="flex items-center gap-3 cursor-pointer shrink-0" aria-label="India Recycles — home">
+      <img src="images/logo.png" alt="India Recycles logo" class="h-12 w-auto" loading="eager"/>
+      <span class="font-serif font-700 text-forest-800 text-lg leading-tight hidden sm:block">India Recycles</span>
+    </a>
+    <div class="hidden lg:flex items-center gap-0.5 text-sm font-medium text-gray-600">
+      <a href="index.html"              class="nav-link px-3 py-2 rounded-lg">Home</a>
+      <a href="about-us.html"           class="nav-link px-3 py-2 rounded-lg text-forest-700 font-semibold bg-forest-50">About Us</a>
+      <a href="our-model.html"          class="nav-link px-3 py-2 rounded-lg">Our Model</a>
+      <a href="drop-locations.html"     class="nav-link px-3 py-2 rounded-lg">Drop Locations</a>
+      <a href="zero-waste-promise.html" class="nav-link px-3 py-2 rounded-lg">Zero Waste</a>
+      <a href="our-impact.html"         class="nav-link px-3 py-2 rounded-lg">Our Impact</a>
+      <a href="our-partners.html"       class="nav-link px-3 py-2 rounded-lg">Partners</a>
+      <a href="contact.html"            class="nav-link px-3 py-2 rounded-lg">Contact</a>
+    </div>
+    <div class="flex items-center gap-2">
+      <a href="donate.html" class="bg-forest-600 hover:bg-forest-700 text-white px-5 py-2 rounded-xl font-semibold text-sm transition-colors cursor-pointer shadow focus-visible:ring-2 focus-visible:ring-forest-500 focus-visible:ring-offset-2">Donate Now</a>
+      <button id="menu-toggle" class="lg:hidden p-2 rounded-xl hover:bg-forest-50 cursor-pointer" aria-label="Toggle menu" aria-expanded="false" aria-controls="mob-menu">
+        <svg class="w-5 h-5 text-gray-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+  <div id="mob-menu" class="lg:hidden border-t border-forest-100 bg-white">
+    <div class="px-4 py-4 flex flex-col gap-1 text-sm font-medium">
+      <a href="index.html"              class="px-4 py-3 rounded-xl text-gray-600 hover:bg-forest-50 cursor-pointer">Home</a>
+      <a href="about-us.html"           class="px-4 py-3 rounded-xl text-forest-700 bg-forest-50 font-semibold cursor-pointer">About Us</a>
+      <a href="our-model.html"          class="px-4 py-3 rounded-xl text-gray-600 hover:bg-forest-50 cursor-pointer">Our Model</a>
+      <a href="drop-locations.html"     class="px-4 py-3 rounded-xl text-gray-600 hover:bg-forest-50 cursor-pointer">Drop Locations</a>
+      <a href="zero-waste-promise.html" class="px-4 py-3 rounded-xl text-gray-600 hover:bg-forest-50 cursor-pointer">Zero Waste</a>
+      <a href="our-impact.html"         class="px-4 py-3 rounded-xl text-gray-600 hover:bg-forest-50 cursor-pointer">Our Impact</a>
+      <a href="our-partners.html"       class="px-4 py-3 rounded-xl text-gray-600 hover:bg-forest-50 cursor-pointer">Partners</a>
+      <a href="contact.html"            class="px-4 py-3 rounded-xl text-gray-600 hover:bg-forest-50 cursor-pointer">Contact</a>
+      <a href="donate.html"             class="mt-2 px-4 py-3 rounded-xl bg-forest-600 text-white font-semibold text-center cursor-pointer">Donate Now</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+<!-- PAGE HERO -->
+<section class="relative pt-20 overflow-hidden" aria-labelledby="about-h1">
+  <div class="absolute inset-0">
+    <img src="images/event2.jpg" alt="India Recycles community event" class="w-full h-full object-cover object-center"/>
+    <div class="absolute inset-0 bg-gradient-to-b from-forest-900/70 via-forest-900/60 to-forest-900/85"></div>
+  </div>
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-28 text-center">
+    <div class="inline-flex items-center gap-2 bg-saffron-500/90 text-white px-4 py-2 rounded-full text-sm font-semibold mb-6 backdrop-blur-sm">Our Story</div>
+    <h1 id="about-h1" class="font-serif text-5xl lg:text-6xl text-white mb-5 leading-tight">About <em class="not-italic text-saffron-400">India Recycles</em></h1>
+    <p class="text-forest-100 text-xl max-w-2xl mx-auto leading-relaxed">A people-powered movement to give donated clothes dignity, purpose and a second life, while building healthier, more empowered communities.</p>
+  </div>
+</section>
+
+<!-- OUR STORY -->
+<section class="py-24 bg-cream texture-bg" aria-labelledby="story-heading">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-16 items-center">
+    <div>
+      <div class="inline-flex items-center gap-2 bg-forest-100 text-forest-700 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wide mb-5">How It Began</div>
+      <h2 id="story-heading" class="font-serif text-4xl text-forest-800 mb-6 leading-tight">A Simple Observation, <br/><em class="not-italic text-saffron-500">A Big Change</em></h2>
+      <div class="space-y-4 text-forest-700 leading-relaxed">
+        <p>India Recycles began in 2017 when co-founder Renu Pokharna organised a simple clothing swap event in Ahmedabad. Renu had studied public policy at Columbia University in New York, served as a Chief Minister's Fellow in Gujarat and worked at a social enterprise in Uganda. After returning to India, she was struck by how much the city's households discarded and how much its communities needed. The swap was a first answer.</p>
+        <p>Within months the small swap grew into something structured: a non-profit that collects donated clothes at drop points across the city, sorts them with the help of dedicated volunteers, and sells them at weekly community events in urban slum neighbourhoods. Every item is priced between ₹10 and ₹50 so that cost is never a barrier to dignity.</p>
+        <p>Every garment that cannot be resold finds a second life through our upcycling programmes, REVIBE and the Godadi Project, creating handcrafted products and warm bedding made entirely from donated textiles and providing livelihoods to women in the communities we serve.</p>
+        <p>Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locations, 400+ volunteers and over 35,000 lives touched through clothes alone. Surplus sales revenue funds medical camps, scholarships and livelihood programmes.</p>
+      </div>
+    </div>
+    <div class="relative">
+      <div class="photo-zoom rounded-4xl overflow-hidden shadow-xl aspect-[4/3]">
+        <img src="images/event3.jpg" alt="India Recycles team at a community event" class="w-full h-full object-cover"/>
+      </div>
+      <div class="absolute -bottom-5 -left-5 bg-white rounded-3xl px-6 py-4 shadow-xl border border-forest-100">
+        <div class="font-serif text-3xl text-forest-600 font-bold">Since 2017</div>
+        <div class="text-xs text-forest-500 font-medium mt-0.5">Growing stronger every year</div>
+      </div>
+      <div class="absolute -top-4 -right-4 bg-saffron-500 rounded-2xl px-4 py-3 shadow-lg">
+        <div class="font-serif text-2xl text-white font-bold">400+</div>
+        <div class="text-xs text-saffron-100 font-medium">Volunteers</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION, VISION, VALUES -->
+<section class="py-24 bg-white" aria-labelledby="mvv-heading">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-14">
+      <div class="inline-flex items-center gap-2 bg-forest-100 text-forest-700 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wide mb-4">What We Stand For</div>
+      <h2 id="mvv-heading" class="font-serif text-4xl text-forest-800">Our Purpose &amp; Values</h2>
+    </div>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="bg-cream rounded-4xl p-8 border border-forest-100 card-lift cursor-default">
+        <div class="w-14 h-14 bg-forest-100 rounded-2xl flex items-center justify-center mb-5">
+          <svg class="w-7 h-7 text-forest-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+        </div>
+        <h3 class="font-serif text-xl text-forest-800 mb-3">Our Mission</h3>
+        <p class="text-forest-700 leading-relaxed text-sm">To create a circular economy for clothes in India by diverting textile waste from landfills, making quality clothing accessible to all, and generating livelihoods in the communities we serve.</p>
+      </div>
+      <div class="bg-forest-700 rounded-4xl p-8 card-lift cursor-default">
+        <div class="w-14 h-14 bg-forest-600/40 rounded-2xl flex items-center justify-center mb-5">
+          <svg class="w-7 h-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        <h3 class="font-serif text-xl text-white mb-3">Our Vision</h3>
+        <p class="text-forest-200 leading-relaxed text-sm">A sustainable India where no textile goes to waste, every family has access to quality clothing regardless of income, and slum communities are economically empowered through dignified livelihoods.</p>
+      </div>
+      <div class="bg-cream rounded-4xl p-8 border border-forest-100 card-lift cursor-default">
+        <div class="w-14 h-14 bg-saffron-100 rounded-2xl flex items-center justify-center mb-5">
+          <svg class="w-7 h-7 text-saffron-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3 class="font-serif text-xl text-forest-800 mb-3">Our Values</h3>
+        <ul class="text-forest-700 space-y-2 text-sm">
+          <li class="flex items-center gap-2"><svg class="w-4 h-4 text-forest-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Dignity for every person</li>
+          <li class="flex items-center gap-2"><svg class="w-4 h-4 text-forest-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Zero waste commitment</li>
+          <li class="flex items-center gap-2"><svg class="w-4 h-4 text-forest-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Community empowerment</li>
+          <li class="flex items-center gap-2"><svg class="w-4 h-4 text-forest-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Transparency &amp; trust</li>
+          <li class="flex items-center gap-2"><svg class="w-4 h-4 text-forest-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Environmental responsibility</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="py-24 bg-cream texture-bg" aria-labelledby="team-heading">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-14">
+      <div class="inline-flex items-center gap-2 bg-forest-100 text-forest-700 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wide mb-4">The People</div>
+      <h2 id="team-heading" class="font-serif text-4xl text-forest-800">Our Team</h2>
+      <p class="text-forest-600 mt-3 max-w-xl mx-auto">Passionate individuals driving a sustainable future for India's textile ecosystem.</p>
+    </div>
+    <div class="grid sm:grid-cols-2 gap-8 max-w-2xl mx-auto mb-12">
+      <div class="bg-white rounded-4xl overflow-hidden border border-forest-100 card-lift cursor-default">
+        <div class="photo-zoom aspect-[3/4]">
+          <img src="images/team1.jpg" alt="Renu Pokharna — Co-Founder, India Recycles" class="w-full h-full object-cover object-top"/>
+        </div>
+        <div class="p-6">
+          <h3 class="font-serif text-xl text-forest-800 mb-1">Renu Pokharna</h3>
+          <p class="text-saffron-500 text-sm font-semibold mb-2">Co-Founder</p>
+          <p class="text-forest-600 text-sm leading-relaxed">Renu holds a degree in public policy from Columbia University, New York, served as a Chief Minister's Fellow in Gujarat and worked at a social enterprise in Uganda. Published in The Wall Street Journal, she returned to India in 2017 and founded India Recycles from a single clothing swap in Ahmedabad. She leads strategy, fundraising and external partnerships.</p>
+        </div>
+      </div>
+      <div class="bg-white rounded-4xl overflow-hidden border border-forest-100 card-lift cursor-default">
+        <div class="photo-zoom aspect-[3/4]">
+          <img src="images/team2.jpg" alt="Pranav Gupta — Co-Founder, India Recycles" class="w-full h-full object-cover object-top"/>
+        </div>
+        <div class="p-6">
+          <h3 class="font-serif text-xl text-forest-800 mb-1">Pranav Gupta</h3>
+          <p class="text-saffron-500 text-sm font-semibold mb-2">Co-Founder</p>
+          <p class="text-forest-600 text-sm leading-relaxed">Pranav is a CSR and sustainability policy specialist who joined as co-founder to drive operational execution. He manages stakeholder partnerships, volunteer coordination and day-to-day programs including slum sales, medical camps and upcycling initiatives across Ahmedabad and Vadodara.</p>
+        </div>
+      </div>
+    </div>
+    <div class="text-center">
+      <p class="text-forest-600 mb-6">India Recycles runs on the passion of <strong class="text-forest-700">400+ volunteers</strong> who give their time every week.</p>
+      <a href="contact.html" class="inline-flex items-center gap-2 bg-forest-600 hover:bg-forest-700 text-white px-8 py-4 rounded-2xl font-semibold transition-colors cursor-pointer shadow-lg">
+        Join Our Team
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section class="relative py-24 overflow-hidden" aria-labelledby="about-cta-h2">
+  <div class="absolute inset-0">
+    <img src="images/impact8.jpg" alt="" class="w-full h-full object-cover" aria-hidden="true"/>
+    <div class="absolute inset-0 bg-forest-900/80"></div>
+  </div>
+  <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <h2 id="about-cta-h2" class="font-serif text-4xl lg:text-5xl text-white mb-5">Be Part of the Story</h2>
+    <p class="text-forest-100 text-lg mb-8 max-w-xl mx-auto">Whether you donate clothes, volunteer your time, or fund our programs, every contribution matters.</p>
+    <div class="flex flex-wrap justify-center gap-4">
+      <a href="donate.html"  class="bg-saffron-500 hover:bg-saffron-600 text-white px-8 py-4 rounded-2xl font-semibold transition-colors cursor-pointer shadow-lg">Donate Now</a>
+      <a href="contact.html" class="border-2 border-white/50 text-white px-8 py-4 rounded-2xl font-semibold hover:bg-white/10 cursor-pointer transition-colors">Volunteer</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="bg-forest-900 text-white" role="contentinfo">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+    <div class="grid md:grid-cols-4 gap-10 mb-10">
+      <div class="md:col-span-2">
+        <a href="index.html" class="flex items-center gap-3 cursor-pointer mb-4">
+          <img src="images/logo.png" alt="India Recycles" class="h-8 w-auto brightness-200"/>
+          <span class="font-serif text-lg text-white">India Recycles</span>
+        </a>
+        <p class="text-forest-300 text-sm leading-relaxed max-w-xs">Giving donated clothes a second life through community slum sales, upcycling and livelihood creation across Ahmedabad &amp; Vadodara.</p>
+      </div>
+      <div>
+        <div class="font-semibold text-forest-200 mb-4 text-sm uppercase tracking-wide">Pages</div>
+        <div class="flex flex-col gap-2 text-sm text-forest-400">
+          <a href="index.html"              class="hover:text-white transition-colors cursor-pointer">Home</a>
+          <a href="about-us.html"           class="hover:text-white transition-colors cursor-pointer">About Us</a>
+          <a href="our-model.html"          class="hover:text-white transition-colors cursor-pointer">Our Model</a>
+          <a href="drop-locations.html"     class="hover:text-white transition-colors cursor-pointer">Drop Locations</a>
+          <a href="zero-waste-promise.html" class="hover:text-white transition-colors cursor-pointer">Zero Waste</a>
+        </div>
+      </div>
+      <div>
+        <div class="font-semibold text-forest-200 mb-4 text-sm uppercase tracking-wide">More</div>
+        <div class="flex flex-col gap-2 text-sm text-forest-400">
+          <a href="our-impact.html"   class="hover:text-white transition-colors cursor-pointer">Our Impact</a>
+          <a href="our-partners.html" class="hover:text-white transition-colors cursor-pointer">Partners</a>
+          <a href="contact.html"      class="hover:text-white transition-colors cursor-pointer">Contact</a>
+          <a href="donate.html"       class="hover:text-white transition-colors cursor-pointer">Donate</a>
+        </div>
+      </div>
+    </div>
+    <div class="border-t border-forest-800 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-forest-500">
+      <span>&copy; 2025 India Recycles. All rights reserved.</span>
+      <span>Registered Non-Profit, Gujarat, India</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const menu   = document.getElementById('mob-menu');
+  toggle.addEventListener('click', () => {
+    const open = menu.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open);
+  });
+</script>
+</body>
+</html>

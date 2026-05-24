@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Donate — India Recycles</title>
+  <meta name="description" content="Donate to India Recycles and help fund slum sales, medical camps, scholarships and livelihood programs across Gujarat."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['Playfair Display', 'Georgia', 'serif'],
+            sans:  ['Inter', 'sans-serif'],
+          },
+          colors: {
+            forest: { 50:'#f0f7f2', 100:'#d4edda', 200:'#a8d9b4', 300:'#72bf87', 400:'#3fa35e', 500:'#1a8a3f', 600:'#1a6b3a', 700:'#155530', 800:'#0d3320', 900:'#081a10' },
+            saffron: { 100:'#fef3e2', 200:'#fcd9a0', 400:'#f5a623', 500:'#e07b39', 600:'#c4621e' },
+            cream: '#fdfef8',
+          },
+          borderRadius: { '4xl': '2rem' },
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { background-color: #fdfef8; }
+    .nav-link { transition: color .15s ease; }
+    .nav-link:hover { color: #1a6b3a; }
+    #mob-menu { display: none; }
+    #mob-menu.open { display: block; }
+    .texture-bg { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E"); }
+    .amount-btn { transition: all .15s ease; }
+    .amount-btn.selected { background-color: #1a6b3a; color: white; border-color: #1a6b3a; }
+    input:focus { outline: 2px solid #1a6b3a; outline-offset: 1px; }
+  </style>
+</head>
+<body class="font-sans text-forest-800 antialiased">
+
+<!-- NAVBAR -->
+<nav class="fixed top-0 inset-x-0 z-50 bg-white/95 backdrop-blur border-b border-forest-100 shadow-sm" role="navigation" aria-label="Main navigation">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-20">
+    <a href="index.html" class="flex items-center gap-3 cursor-pointer shrink-0" aria-label="India Recycles — home">
+      <img src="images/logo.png" alt="India Recycles logo" class="h-12 w-auto" loading="eager"/>
+      <span class="font-serif text-forest-800 text-lg leading-tight hidden sm:block">India Recycles</span>
+    </a>
+    <div class="hidden lg:flex items-center gap-0.5 text-sm font-medium text-gray-600">
+      <a href="index.html"              class="nav-link px-3 py-2 rounded-lg">Home</a>
+      <a href="about-us.html"           class="nav-link px-3 py-2 rounded-lg">About Us</a>
+      <a href="our-model.html"          class="nav-link px-3 py-2 rounded-lg">Our Model</a>
+      <a href="drop-locations.html"     class="nav-link px-3 py-2 rounded-lg">Drop Locations</a>
+      <a href="zero-waste-promise.html" class="nav-link px-3 py-2 rounded-lg">Zero Waste</a>
+      <a href="our-impact.html"         class="nav-link px-3 py-2 rounded-lg">Our Impact</a>
+      <a href="our-partners.html"       class="nav-link px-3 py-2 rounded-lg">Partners</a>
+      <a href="contact.html"            class="nav-link px-3 py-2 rounded-lg">Contact</a>
+    </div>
+    <div class="flex items-center gap-2">
+      <a href="donate.html" class="bg-forest-600 hover:bg-forest-700 text-white px-5 py-2 rounded-xl font-semibold text-sm transition-colors cursor-pointer shadow">Donate Now</a>
+      <button id="menu-toggle" class="lg:hidden p-2 rounded-xl hover:bg-forest-50 cursor-pointer" aria-label="Toggle menu" aria-expanded="false" aria-controls="mob-menu">
+        <svg class="w-5 h-5 text-gray-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+  <div id="mob-menu" class="lg:hidden border-t border-forest-100 bg-white">
+    <div class="px-4 py-4 flex flex-col gap-1 text-sm font-medium">
+      <a href="index.html"              class="px-4 py-3 rounded-xl text-gray-600 hover:bg-forest-50 cursor-pointer">Home</a>
+      <a href="about-us.html"           class="px-4 py-3 rounded-xl text-gray-600 hover:bg-forest-50 cursor-pointer">About Us</a>
+      <a href="our-model.html"          class="px-4 py-3 rounded-xl text-gray-600 hover:bg-forest-50 cursor-pointer">Our Model</a>
+      <a href="drop-locations.html"     class="px-4 py-3 rounded-xl text-gray-600 hover:bg-forest-50 cursor-pointer">Drop Locations</a>
+      <a href="zero-waste-promise.html" class="px-4 py-3 rounded-xl text-gray-600 hover:bg-forest-50 cursor-pointer">Zero Waste</a>
+      <a href="our-impact.html"         class="px-4 py-3 rounded-xl text-gray-600 hover:bg-forest-50 cursor-pointer">Our Impact</a>
+      <a href="our-partners.html"       class="px-4 py-3 rounded-xl text-gray-600 hover:bg-forest-50 cursor-pointer">Partners</a>
+      <a href="contact.html"            class="px-4 py-3 rounded-xl text-gray-600 hover:bg-forest-50 cursor-pointer">Contact</a>
+      <a href="donate.html"             class="mt-2 px-4 py-3 rounded-xl bg-forest-600 text-white font-semibold text-center cursor-pointer">Donate Now</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+<!-- HERO -->
+<section class="relative pt-20 overflow-hidden" aria-labelledby="donate-h1">
+  <div class="absolute inset-0">
+    <img src="images/impact8.jpg" alt="India Recycles community" class="w-full h-full object-cover object-center"/>
+    <div class="absolute inset-0 bg-gradient-to-b from-forest-900/80 via-forest-900/65 to-forest-900/85"></div>
+  </div>
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center">
+    <div class="inline-flex items-center gap-2 bg-saffron-500/90 text-white px-4 py-2 rounded-full text-sm font-semibold mb-6 backdrop-blur-sm">Make a Difference</div>
+    <h1 id="donate-h1" class="font-serif text-5xl lg:text-6xl text-white mb-5 leading-tight">Donate to <em class="not-italic text-saffron-400">India Recycles</em></h1>
+    <p class="text-forest-100 text-xl max-w-2xl mx-auto leading-relaxed">Your donation funds slum sales, medical camps, scholarships and livelihood programs, creating lasting change in communities across Gujarat.</p>
+  </div>
+</section>
+
+<!-- DONATION WIDGET + IMPACT -->
+<section class="py-24 bg-cream texture-bg" aria-labelledby="donate-form-heading">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-16 items-start">
+
+    <!-- DONATION FORM -->
+    <div class="bg-white rounded-4xl p-8 border border-forest-100 shadow-sm">
+      <h2 id="donate-form-heading" class="font-serif text-3xl text-forest-800 mb-2">Choose Your Contribution</h2>
+      <p class="text-forest-600 text-sm mb-8">Every rupee goes directly to our programs. No fluff, no overhead bloat.</p>
+
+      <!-- Amount buttons -->
+      <div class="mb-6">
+        <div class="text-sm font-semibold text-forest-700 mb-3">Select Amount</div>
+        <div class="grid grid-cols-4 gap-3" role="group" aria-label="Donation amounts">
+          <button class="amount-btn border-2 border-forest-200 text-forest-700 py-3 rounded-xl font-semibold text-sm cursor-pointer" data-amount="100" onclick="selectAmount(this, 100)">₹100</button>
+          <button class="amount-btn selected border-2 border-forest-600 py-3 rounded-xl font-semibold text-sm cursor-pointer" data-amount="500" onclick="selectAmount(this, 500)">₹500</button>
+          <button class="amount-btn border-2 border-forest-200 text-forest-700 py-3 rounded-xl font-semibold text-sm cursor-pointer" data-amount="1000" onclick="selectAmount(this, 1000)">₹1,000</button>
+          <button class="amount-btn border-2 border-forest-200 text-forest-700 py-3 rounded-xl font-semibold text-sm cursor-pointer" data-amount="5000" onclick="selectAmount(this, 5000)">₹5,000</button>
+        </div>
+      </div>
+      <div class="mb-6">
+        <label for="custom-amount" class="block text-sm font-semibold text-forest-700 mb-1.5">Or Enter Custom Amount</label>
+        <div class="relative">
+          <span class="absolute left-4 top-1/2 -translate-y-1/2 text-forest-400 font-semibold text-sm" aria-hidden="true">₹</span>
+          <input id="custom-amount" type="number" min="1" placeholder="e.g. 2500"
+            class="w-full pl-8 pr-4 py-3 rounded-xl border border-forest-200 bg-cream text-forest-800 text-sm focus:border-forest-500 transition-colors"
+            oninput="clearSelectedButtons()"/>
+        </div>
+      </div>
+
+      <!-- Impact preview -->
+      <div id="impact-preview" class="bg-forest-50 rounded-2xl p-4 mb-6 flex items-center gap-3 border border-forest-100">
+        <svg class="w-5 h-5 text-forest-600 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <p id="impact-text" class="text-forest-700 text-sm">₹500 funds one full slum sale, providing quality clothes to 50+ families.</p>
+      </div>
+
+      <!-- Name + Email -->
+      <div class="grid sm:grid-cols-2 gap-4 mb-4">
+        <div>
+          <label for="donor-name" class="block text-sm font-semibold text-forest-700 mb-1.5">Full Name</label>
+          <input id="donor-name" type="text" placeholder="Your name"
+            class="w-full px-4 py-3 rounded-xl border border-forest-200 bg-cream text-forest-800 text-sm focus:border-forest-500 transition-colors"/>
+        </div>
+        <div>
+          <label for="donor-email" class="block text-sm font-semibold text-forest-700 mb-1.5">Email</label>
+          <input id="donor-email" type="email" placeholder="For receipt"
+            class="w-full px-4 py-3 rounded-xl border border-forest-200 bg-cream text-forest-800 text-sm focus:border-forest-500 transition-colors"/>
+        </div>
+      </div>
+
+      <button id="donate-btn" onclick="handleDonate()" class="w-full bg-forest-600 hover:bg-forest-700 text-white py-4 rounded-2xl font-semibold text-base transition-colors cursor-pointer shadow-lg flex items-center justify-center gap-2">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><path d="M21 16h-3a2 2 0 0 0-2 2v3"/><path d="M21 21v.01"/><path d="M12 7v3a2 2 0 0 1-2 2H7"/><path d="M3 12h.01"/><path d="M12 3h.01"/><path d="M12 16v.01"/><path d="M16 12h1"/></svg>
+        Pay via UPI / Bank Transfer
+      </button>
+      <p class="text-center text-xs text-forest-400 mt-4">Opens GPay / PhonePe / Paytm on mobile. Bank transfer details shown on this page. 80G receipt on request.</p>
+    </div>
+
+    <!-- IMPACT LADDER -->
+    <div>
+      <h2 class="font-serif text-3xl text-forest-800 mb-8">What Your Gift Does</h2>
+      <div class="space-y-4">
+        <div class="bg-white rounded-3xl p-5 border border-forest-100 flex items-start gap-4">
+          <div class="w-14 h-14 bg-forest-50 rounded-2xl flex items-center justify-center shrink-0 border border-forest-100">
+            <div class="font-serif text-forest-600 font-bold text-sm">₹100</div>
+          </div>
+          <div>
+            <h3 class="font-semibold text-forest-800 mb-1">Clothes for a Family</h3>
+            <p class="text-forest-600 text-sm leading-relaxed">Covers the cost of sourcing, sorting and distributing quality garments to a slum family at a weekly sale.</p>
+          </div>
+        </div>
+        <div class="bg-white rounded-3xl p-5 border border-forest-100 flex items-start gap-4">
+          <div class="w-14 h-14 bg-forest-100 rounded-2xl flex items-center justify-center shrink-0">
+            <div class="font-serif text-forest-700 font-bold text-sm">₹500</div>
+          </div>
+          <div>
+            <h3 class="font-semibold text-forest-800 mb-1">One Full Slum Sale</h3>
+            <p class="text-forest-600 text-sm leading-relaxed">Funds a complete weekly slum sale, covering logistics, volunteers and clothes for 50+ families in one community.</p>
+          </div>
+        </div>
+        <div class="bg-forest-700 rounded-3xl p-5 flex items-start gap-4">
+          <div class="w-14 h-14 bg-forest-600/40 rounded-2xl flex items-center justify-center shrink-0">
+            <div class="font-serif text-white font-bold text-sm">₹1,000</div>
+          </div>
+          <div>
+            <h3 class="font-semibold text-white mb-1">A Medical Camp</h3>
+            <p class="text-forest-200 text-sm leading-relaxed">Contributes to a health camp providing checkups, medicines and specialist consultations for slum residents.</p>
+          </div>
+        </div>
+        <div class="bg-saffron-500 rounded-3xl p-5 flex items-start gap-4">
+          <div class="w-14 h-14 bg-saffron-400/40 rounded-2xl flex items-center justify-center shrink-0">
+            <div class="font-serif text-white font-bold text-sm">₹5,000</div>
+          </div>
+          <div>
+            <h3 class="font-semibold text-white mb-1">A Student's Scholarship</h3>
+            <p class="text-saffron-100 text-sm leading-relaxed">Funds one full year of school for an underprivileged child, keeping them educated and off the streets.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- TRUST BADGES -->
+      <div class="mt-8 bg-white rounded-3xl p-5 border border-forest-100">
+        <div class="text-xs font-semibold text-forest-500 uppercase tracking-wide mb-4">Why Trust Us</div>
+        <div class="grid grid-cols-3 gap-4 text-center">
+          <div>
+            <svg class="w-6 h-6 text-forest-600 mx-auto mb-1.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <div class="text-xs text-forest-700 font-medium">Registered NGO</div>
+          </div>
+          <div>
+            <svg class="w-6 h-6 text-forest-600 mx-auto mb-1.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+            <div class="text-xs text-forest-700 font-medium">80G Tax Benefit</div>
+          </div>
+          <div>
+            <svg class="w-6 h-6 text-forest-600 mx-auto mb-1.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+            <div class="text-xs text-forest-700 font-medium">100% Transparent</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BANK TRANSFER / UPI SECTION -->
+<section class="py-20 bg-forest-900 relative overflow-hidden" aria-labelledby="bank-transfer-heading">
+  <div class="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-forest-800/50 pointer-events-none" aria-hidden="true"></div>
+  <div class="absolute -bottom-20 -left-20 w-80 h-80 rounded-full bg-forest-800/30 pointer-events-none" aria-hidden="true"></div>
+  <div class="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <div class="inline-flex items-center gap-2 bg-saffron-500/20 text-saffron-400 border border-saffron-500/30 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-widest mb-5">Direct Payment</div>
+      <h2 id="bank-transfer-heading" class="font-serif text-4xl lg:text-5xl text-white mb-3">Pay via UPI or Bank Transfer</h2>
+      <p class="text-forest-300 max-w-lg mx-auto">No processing fees. Money reaches us directly. 80G tax receipt on request.</p>
+    </div>
+    <div class="grid md:grid-cols-2 gap-6">
+
+      <!-- Bank Transfer -->
+      <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-7">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-11 h-11 bg-forest-600 rounded-2xl flex items-center justify-center shrink-0">
+            <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><line x1="9" y1="22" x2="9" y2="12"/><line x1="15" y1="22" x2="15" y2="12"/></svg>
+          </div>
+          <div>
+            <div class="text-white font-bold text-base">Bank Transfer</div>
+            <div class="text-forest-400 text-xs">NEFT / RTGS / IMPS</div>
+          </div>
+        </div>
+        <div class="space-y-0 text-sm">
+          <div class="py-3 border-b border-white/8 grid grid-cols-5 gap-2 items-center">
+            <span class="text-forest-400 text-xs col-span-2">Account Name</span>
+            <span class="text-white font-semibold col-span-3 text-right" id="bank-acname">India Recycles Foundation</span>
+          </div>
+          <div class="py-3 border-b border-white/8 grid grid-cols-5 gap-2 items-center">
+            <span class="text-forest-400 text-xs col-span-2">Account No.</span>
+            <div class="col-span-3 flex items-center justify-end gap-2">
+              <span class="text-white font-mono font-semibold" id="bank-acno">Contact us</span>
+              <button onclick="copyText('bank-acno')" title="Copy" aria-label="Copy" class="text-forest-400 hover:text-saffron-400 cursor-pointer transition-colors shrink-0">
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="13" height="13" x="9" y="9" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              </button>
+            </div>
+          </div>
+          <div class="py-3 border-b border-white/8 grid grid-cols-5 gap-2 items-center">
+            <span class="text-forest-400 text-xs col-span-2">IFSC Code</span>
+            <div class="col-span-3 flex items-center justify-end gap-2">
+              <span class="text-white font-mono font-semibold" id="bank-ifsc">Contact us</span>
+              <button onclick="copyText('bank-ifsc')" title="Copy" aria-label="Copy IFSC" class="text-forest-400 hover:text-saffron-400 cursor-pointer transition-colors shrink-0">
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="13" height="13" x="9" y="9" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              </button>
+            </div>
+          </div>
+          <div class="py-3 border-b border-white/8 grid grid-cols-5 gap-2 items-center">
+            <span class="text-forest-400 text-xs col-span-2">Bank</span>
+            <span class="text-white font-semibold col-span-3 text-right" id="bank-name">Contact us</span>
+          </div>
+          <div class="py-3 grid grid-cols-5 gap-2 items-center">
+            <span class="text-forest-400 text-xs col-span-2">Branch</span>
+            <span class="text-white font-semibold col-span-3 text-right" id="bank-branch">Ahmedabad, Gujarat</span>
+          </div>
+        </div>
+        <div class="mt-5 bg-forest-800/60 rounded-2xl px-4 py-3 text-xs text-forest-300 border border-white/5 leading-relaxed">
+          After transfer, email <a href="mailto:indiarecycles@gmail.com" class="text-saffron-400 hover:text-saffron-300 font-semibold">indiarecycles@gmail.com</a> with your name, PAN &amp; amount for your <strong class="text-white">80G receipt</strong>.
+        </div>
+      </div>
+
+      <!-- UPI / QR -->
+      <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-7 flex flex-col items-center text-center">
+        <div class="flex items-center gap-3 mb-6 w-full">
+          <div class="w-11 h-11 bg-saffron-500 rounded-2xl flex items-center justify-center shrink-0">
+            <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><path d="M21 16h-3a2 2 0 0 0-2 2v3"/><path d="M21 21v.01"/></svg>
+          </div>
+          <div class="text-left">
+            <div class="text-white font-bold text-base">UPI Payment</div>
+            <div class="text-forest-400 text-xs">GPay · PhonePe · Paytm · BHIM</div>
+          </div>
+        </div>
+        <!-- QR Code -->
+        <div class="w-44 h-44 rounded-2xl overflow-hidden bg-white flex items-center justify-center mb-5 shadow-2xl" id="qr-wrapper">
+          <img src="images/donation-qr.png" alt="India Recycles UPI QR Code" class="w-full h-full object-contain p-2"
+            onerror="this.parentElement.innerHTML='&lt;div class=\'flex flex-col items-center gap-3 p-4\'&gt;&lt;svg class=\'w-10 h-10 text-gray-200\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'1\'&gt;&lt;rect width=\'5\' height=\'5\' x=\'3\' y=\'3\' rx=\'1\'/&gt;&lt;rect width=\'5\' height=\'5\' x=\'16\' y=\'3\' rx=\'1\'/&gt;&lt;rect width=\'5\' height=\'5\' x=\'3\' y=\'16\' rx=\'1\'/&gt;&lt;path d=\'M21 16h-3a2 2 0 0 0-2 2v3\'/&gt;&lt;/svg&gt;&lt;span class=\'text-xs text-gray-400 text-center\'&gt;Upload your QR&lt;br/&gt;to images/donation-qr.png&lt;/span&gt;&lt;/div&gt;'"/>
+        </div>
+        <!-- UPI ID row -->
+        <div class="w-full bg-white/10 rounded-2xl px-4 py-3 flex items-center justify-between gap-3 border border-white/10 mb-4">
+          <div class="text-left min-w-0">
+            <div class="text-forest-400 text-xs font-medium mb-0.5">UPI ID</div>
+            <div class="text-white font-mono font-bold text-sm truncate" id="upi-id">indiarecycles@upi</div>
+          </div>
+          <button onclick="copyText('upi-id')" class="shrink-0 bg-saffron-500 hover:bg-saffron-600 text-white text-xs font-bold px-4 py-2 rounded-xl cursor-pointer transition-colors">Copy</button>
+        </div>
+        <p class="text-forest-400 text-xs leading-relaxed">Scan QR or copy the UPI ID above. Add payment note: <strong class="text-white">"Donation - Your Name"</strong></p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- DONATE CLOTHES ALTERNATIVE -->
+<section class="py-20 bg-forest-800" aria-labelledby="donate-clothes-heading">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <h2 id="donate-clothes-heading" class="font-serif text-4xl text-white mb-4">Prefer to Donate Clothes?</h2>
+    <p class="text-forest-200 text-lg mb-8 max-w-xl mx-auto">Money isn't the only way to help. Drop your pre-loved clothes at any of our 20+ collection points and we'll make sure every piece finds a purpose.</p>
+    <a href="drop-locations.html" class="inline-flex items-center gap-2 bg-saffron-500 hover:bg-saffron-600 text-white px-8 py-4 rounded-2xl font-semibold transition-colors cursor-pointer shadow-lg">
+      Find Drop Locations
+      <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    </a>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="bg-forest-900 text-white" role="contentinfo">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+    <div class="grid md:grid-cols-4 gap-10 mb-10">
+      <div class="md:col-span-2">
+        <a href="index.html" class="flex items-center gap-3 cursor-pointer mb-4">
+          <img src="images/logo.png" alt="India Recycles" class="h-8 w-auto brightness-200"/>
+          <span class="font-serif text-lg text-white">India Recycles</span>
+        </a>
+        <p class="text-forest-300 text-sm leading-relaxed max-w-xs">Giving donated clothes a second life through community slum sales, upcycling and livelihood creation.</p>
+      </div>
+      <div>
+        <div class="font-semibold text-forest-200 mb-4 text-sm uppercase tracking-wide">Pages</div>
+        <div class="flex flex-col gap-2 text-sm text-forest-400">
+          <a href="index.html"              class="hover:text-white transition-colors cursor-pointer">Home</a>
+          <a href="about-us.html"           class="hover:text-white transition-colors cursor-pointer">About Us</a>
+          <a href="our-model.html"          class="hover:text-white transition-colors cursor-pointer">Our Model</a>
+          <a href="drop-locations.html"     class="hover:text-white transition-colors cursor-pointer">Drop Locations</a>
+          <a href="zero-waste-promise.html" class="hover:text-white transition-colors cursor-pointer">Zero Waste</a>
+        </div>
+      </div>
+      <div>
+        <div class="font-semibold text-forest-200 mb-4 text-sm uppercase tracking-wide">More</div>
+        <div class="flex flex-col gap-2 text-sm text-forest-400">
+          <a href="our-impact.html"   class="hover:text-white transition-colors cursor-pointer">Our Impact</a>
+          <a href="our-partners.html" class="hover:text-white transition-colors cursor-pointer">Partners</a>
+          <a href="contact.html"      class="hover:text-white transition-colors cursor-pointer">Contact</a>
+          <a href="donate.html"       class="hover:text-white transition-colors cursor-pointer">Donate</a>
+        </div>
+      </div>
+    </div>
+    <div class="border-t border-forest-800 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-forest-500">
+      <span>&copy; 2025 India Recycles. All rights reserved.</span>
+      <span>Registered Non-Profit, Gujarat, India</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Copy to clipboard helper
+  function copyText(id) {
+    const el = document.getElementById(id);
+    const text = el ? el.textContent.trim() : '';
+    if (!text || text === 'Contact us' || text === 'Add in admin panel') {
+      alert('Bank details not yet added. Please contact indiarecycles@gmail.com for payment details.');
+      return;
+    }
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = event.target.closest('button');
+      const orig = btn.innerHTML;
+      btn.innerHTML = '✓';
+      btn.classList.add('text-green-400');
+      setTimeout(() => { btn.innerHTML = orig; btn.classList.remove('text-green-400'); }, 1500);
+    }).catch(() => {
+      prompt('Copy this:', text);
+    });
+  }
+
+  // Navbar toggle
+  const toggle = document.getElementById('menu-toggle');
+  const menu   = document.getElementById('mob-menu');
+  toggle.addEventListener('click', () => {
+    const open = menu.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open);
+  });
+
+  // Donation widget
+  const impactMessages = {
+    100:  '₹100 covers clothes for one family at a weekly slum sale.',
+    500:  '₹500 funds one full slum sale, quality clothes for 50+ families.',
+    1000: '₹1,000 contributes to a medical camp serving hundreds.',
+    5000: '₹5,000 covers a full school scholarship for one child for a year.'
+  };
+
+  function selectAmount(btn, amount) {
+    document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    document.getElementById('custom-amount').value = '';
+    document.getElementById('impact-text').textContent = impactMessages[amount] || `₹${amount} creates real impact in our communities.`;
+  }
+
+  function clearSelectedButtons() {
+    document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('selected'));
+    const v = parseInt(document.getElementById('custom-amount').value, 10);
+    if (v) {
+      document.getElementById('impact-text').textContent = `₹${v.toLocaleString('en-IN')} creates real impact in our communities.`;
+    }
+  }
+
+  // ─── UPI PAYMENT CONFIG ───────────────────────────────────────────────────
+  // Update UPI_ID below with your actual UPI ID (e.g. indiarecycles@okicici)
+  // You can find/create your UPI ID in any UPI app (GPay, PhonePe, Paytm)
+  const UPI_ID        = 'indiarecycles@upi';   // ← REPLACE with real UPI ID
+  const UPI_NAME      = 'India Recycles';
+  const UPI_NOTE      = 'Donation to India Recycles NGO';
+  // ──────────────────────────────────────────────────────────────────────────
+
+  function handleDonate() {
+    let amount = 0;
+    const selected = document.querySelector('.amount-btn.selected');
+    if (selected) amount = parseInt(selected.dataset.amount, 10);
+    const custom = parseInt(document.getElementById('custom-amount').value, 10);
+    if (custom > 0) amount = custom;
+    if (!amount) { alert('Please select or enter a donation amount.'); return; }
+
+    // Build UPI deep link — opens GPay / PhonePe / Paytm / BHIM on mobile
+    const upiUrl = 'upi://pay?pa=' + encodeURIComponent(UPI_ID)
+      + '&pn=' + encodeURIComponent(UPI_NAME)
+      + '&am=' + amount
+      + '&cu=INR'
+      + '&tn=' + encodeURIComponent(UPI_NOTE);
+
+    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+    if (isMobile) {
+      // On phone: open UPI app chooser (GPay, PhonePe, Paytm, etc.)
+      window.location.href = upiUrl;
+      // After a moment, also scroll down to show QR + bank details as fallback
+      setTimeout(function() {
+        document.getElementById('bank-transfer-heading').scrollIntoView({ behavior: 'smooth' });
+      }, 2000);
+    } else {
+      // On desktop: scroll to QR code + bank details section
+      document.getElementById('bank-transfer-heading').scrollIntoView({ behavior: 'smooth' });
+      // Highlight the amount in the UPI section
+      const upiEl = document.getElementById('upi-id');
+      if (upiEl) {
+        upiEl.closest('.bg-cream').classList.add('ring-2', 'ring-forest-400');
+        setTimeout(() => upiEl.closest('.bg-cream').classList.remove('ring-2', 'ring-forest-400'), 3000);
+      }
+    }
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Content Manager — India Recycles Admin</title>
+  <meta name="robots" content="noindex, nofollow"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['Playfair Display', 'Georgia', 'serif'],
+            sans:  ['Inter', 'sans-serif'],
+          },
+          colors: {
+            forest: { 50:'#f0f7f2', 100:'#d4edda', 200:'#a8d9b4', 300:'#72bf87', 400:'#3fa35e', 500:'#1a8a3f', 600:'#1a6b3a', 700:'#155530', 800:'#0d3320', 900:'#081a10' },
+            saffron: { 100:'#fef3e2', 400:'#f5a623', 500:'#e07b39', 600:'#c4621e' },
+            cream: '#fdfef8',
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { background-color: #f0f7f2; }
+    .tab-btn { transition: all .15s ease; }
+    .tab-btn.active { background: #1a6b3a; color: white; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    input, textarea, select { transition: border-color .15s; }
+    input:focus, textarea:focus, select:focus { outline: 2px solid #1a6b3a; outline-offset: 1px; }
+    .save-btn { transition: all .15s; }
+    .save-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(26,107,58,.3); }
+  </style>
+</head>
+<body class="font-sans text-forest-800 antialiased">
+
+<!-- TOP BAR -->
+<header class="bg-forest-800 text-white px-6 py-4 flex items-center justify-between" role="banner">
+  <div class="flex items-center gap-4">
+    <a href="../index.html" class="flex items-center gap-2.5 cursor-pointer group">
+      <img src="../images/logo.png" alt="India Recycles" class="h-7 w-auto brightness-200"/>
+      <span class="font-serif text-white text-lg hidden sm:block">India Recycles</span>
+    </a>
+    <div class="w-px h-6 bg-forest-600 hidden sm:block" aria-hidden="true"></div>
+    <span class="text-forest-300 text-sm font-medium">Content Manager</span>
+  </div>
+  <div class="flex items-center gap-3">
+    <a href="../index.html" target="_blank" rel="noopener" class="flex items-center gap-1.5 text-forest-300 hover:text-white text-sm cursor-pointer transition-colors">
+      <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      View Site
+    </a>
+    <div class="w-8 h-8 bg-forest-600 rounded-full flex items-center justify-center text-xs font-bold">A</div>
+  </div>
+</header>
+
+<div class="flex min-h-screen">
+
+<!-- SIDEBAR -->
+<aside class="w-60 bg-white border-r border-forest-100 flex flex-col shrink-0" role="navigation" aria-label="Admin sections">
+  <div class="p-5 border-b border-forest-100">
+    <div class="text-xs font-semibold text-forest-400 uppercase tracking-wider mb-1">Sections</div>
+    <div class="text-xs text-forest-500">Click to edit any page content</div>
+  </div>
+  <nav class="flex flex-col gap-1 p-3 flex-1">
+    <button class="tab-btn active text-left px-4 py-3 rounded-xl text-sm font-medium cursor-pointer" onclick="switchTab('home', this)">
+      <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      Home / Stats
+    </button>
+    <button class="tab-btn text-left px-4 py-3 rounded-xl text-sm font-medium cursor-pointer text-forest-600 hover:bg-forest-50" onclick="switchTab('about', this)">
+      <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/></svg>
+      About Us
+    </button>
+    <button class="tab-btn text-left px-4 py-3 rounded-xl text-sm font-medium cursor-pointer text-forest-600 hover:bg-forest-50" onclick="switchTab('model', this)">
+      <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 19H4.815a1.83 1.83 0 0 1-1.57-.881 1.785 1.785 0 0 1-.004-1.784L7.196 9.5"/><path d="M11 19h8.203a1.83 1.83 0 0 0 1.556-.89"/><path d="m14 16-3 3 3 3"/></svg>
+      Our Model
+    </button>
+    <button class="tab-btn text-left px-4 py-3 rounded-xl text-sm font-medium cursor-pointer text-forest-600 hover:bg-forest-50" onclick="switchTab('locations', this)">
+      <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+      Drop Locations
+    </button>
+    <button class="tab-btn text-left px-4 py-3 rounded-xl text-sm font-medium cursor-pointer text-forest-600 hover:bg-forest-50" onclick="switchTab('impact', this)">
+      <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      Impact Stats
+    </button>
+    <button class="tab-btn text-left px-4 py-3 rounded-xl text-sm font-medium cursor-pointer text-forest-600 hover:bg-forest-50" onclick="switchTab('programs', this)">
+      <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Programs
+    </button>
+    <button class="tab-btn text-left px-4 py-3 rounded-xl text-sm font-medium cursor-pointer text-forest-600 hover:bg-forest-50" onclick="switchTab('contact-info', this)">
+      <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+      Contact Info
+    </button>
+    <button class="tab-btn text-left px-4 py-3 rounded-xl text-sm font-medium cursor-pointer text-forest-600 hover:bg-forest-50" onclick="switchTab('gallery', this)">
+      <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+      Gallery / Images
+    </button>
+    <button class="tab-btn text-left px-4 py-3 rounded-xl text-sm font-medium cursor-pointer text-forest-600 hover:bg-forest-50" onclick="switchTab('donations', this)">
+      <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      Donations / Bank
+    </button>
+  </nav>
+  <div class="p-4 border-t border-forest-100">
+    <a href="../index.html" class="block text-center text-xs text-forest-400 hover:text-forest-700 cursor-pointer transition-colors py-2">← Back to website</a>
+  </div>
+</aside>
+
+<!-- MAIN CONTENT -->
+<main class="flex-1 p-8 overflow-y-auto">
+
+  <!-- ═══ HOME / STATS ═══ -->
+  <section id="tab-home" class="tab-content active" aria-labelledby="home-tab-heading">
+    <div class="flex items-center justify-between mb-8">
+      <div>
+        <h1 id="home-tab-heading" class="font-serif text-2xl text-forest-800">Home Page &amp; Key Stats</h1>
+        <p class="text-forest-500 text-sm mt-1">Edit the hero headline and marquee impact numbers shown on the homepage.</p>
+      </div>
+      <button onclick="saveSection('home')" class="save-btn bg-forest-600 hover:bg-forest-700 text-white px-6 py-2.5 rounded-xl font-semibold text-sm cursor-pointer shadow">Save Changes</button>
+    </div>
+    <div class="grid lg:grid-cols-2 gap-6">
+      <div class="bg-white rounded-3xl p-6 border border-forest-100">
+        <h2 class="font-semibold text-forest-800 mb-4 text-sm uppercase tracking-wide">Hero Section</h2>
+        <div class="space-y-4">
+          <div>
+            <label class="block text-xs font-semibold text-forest-600 mb-1.5">Hero Headline</label>
+            <input type="text" value="Love the Pre-Loved" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-forest-600 mb-1.5">Hero Sub-tagline</label>
+            <textarea rows="3" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream resize-none">We collect donated clothes and give them a second life — through weekly slum sales, upcycling, and livelihood programs for women across Ahmedabad &amp; Vadodara.</textarea>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-forest-600 mb-1.5">Announcement Badge Text</label>
+            <input type="text" value="WE ARE COLLECTING, ALWAYS!" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-3xl p-6 border border-forest-100">
+        <h2 class="font-semibold text-forest-800 mb-4 text-sm uppercase tracking-wide">Impact Numbers (Marquee)</h2>
+        <div class="space-y-3">
+          <div>
+            <label class="block text-xs font-semibold text-forest-600 mb-1.5">Clothes Recycled</label>
+            <input type="text" value="35,500+" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-forest-600 mb-1.5">Slum Sales Conducted</label>
+            <input type="text" value="132" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-forest-600 mb-1.5">Active Volunteers</label>
+            <input type="text" value="400+" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-forest-600 mb-1.5">Medical Camp Beneficiaries</label>
+            <input type="text" value="1,000+" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-forest-600 mb-1.5">Students Supported</label>
+            <input type="text" value="25+" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ ABOUT ═══ -->
+  <section id="tab-about" class="tab-content" aria-labelledby="about-tab-heading">
+    <div class="flex items-center justify-between mb-8">
+      <div>
+        <h1 id="about-tab-heading" class="font-serif text-2xl text-forest-800">About Us Page</h1>
+        <p class="text-forest-500 text-sm mt-1">Edit the story text, team member names and roles.</p>
+      </div>
+      <button onclick="saveSection('about')" class="save-btn bg-forest-600 hover:bg-forest-700 text-white px-6 py-2.5 rounded-xl font-semibold text-sm cursor-pointer shadow">Save Changes</button>
+    </div>
+    <div class="grid lg:grid-cols-2 gap-6">
+      <div class="bg-white rounded-3xl p-6 border border-forest-100">
+        <h2 class="font-semibold text-forest-800 mb-4 text-sm uppercase tracking-wide">Our Story</h2>
+        <div class="space-y-4">
+          <div>
+            <label class="block text-xs font-semibold text-forest-600 mb-1.5">Section Heading</label>
+            <input type="text" value="A Simple Observation, A Big Change" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-forest-600 mb-1.5">Story Paragraph 1</label>
+            <textarea rows="4" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream resize-none">India Recycles was born from a simple observation: households across Indian cities have wardrobes full of clothes they no longer wear — while families in the same cities struggle to afford even basic garments.</textarea>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-forest-600 mb-1.5">Founded Year Badge</label>
+            <input type="text" value="Since 2018" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-3xl p-6 border border-forest-100">
+        <h2 class="font-semibold text-forest-800 mb-4 text-sm uppercase tracking-wide">Team Members</h2>
+        <div class="space-y-4">
+          <div class="p-4 bg-cream rounded-2xl border border-forest-100">
+            <div class="text-xs font-semibold text-forest-500 mb-2">Member 1</div>
+            <input type="text" value="Renu Pokharna" placeholder="Name" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white mb-2"/>
+            <input type="text" value="Co-Founder" placeholder="Role/Title" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white mb-2"/>
+            <input type="text" value="images/team1.jpg" placeholder="Photo path" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white"/>
+          </div>
+          <div class="p-4 bg-cream rounded-2xl border border-forest-100">
+            <div class="text-xs font-semibold text-forest-500 mb-2">Member 2</div>
+            <input type="text" value="Pranav Gupta" placeholder="Name" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white mb-2"/>
+            <input type="text" value="Co-Founder" placeholder="Role/Title" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white mb-2"/>
+            <input type="text" value="images/team2.jpg" placeholder="Photo path" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white"/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ MODEL ═══ -->
+  <section id="tab-model" class="tab-content" aria-labelledby="model-tab-heading">
+    <div class="flex items-center justify-between mb-8">
+      <div>
+        <h1 id="model-tab-heading" class="font-serif text-2xl text-forest-800">Our Model Page</h1>
+        <p class="text-forest-500 text-sm mt-1">Edit the process steps and program descriptions.</p>
+      </div>
+      <button onclick="saveSection('model')" class="save-btn bg-forest-600 hover:bg-forest-700 text-white px-6 py-2.5 rounded-xl font-semibold text-sm cursor-pointer shadow">Save Changes</button>
+    </div>
+    <div class="grid lg:grid-cols-2 gap-6">
+      <div class="bg-white rounded-3xl p-6 border border-forest-100">
+        <h2 class="font-semibold text-forest-800 mb-4 text-sm uppercase tracking-wide">Slum Sales</h2>
+        <div class="space-y-3">
+          <div>
+            <label class="block text-xs font-semibold text-forest-600 mb-1.5">Sales Held</label>
+            <input type="text" value="132" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-forest-600 mb-1.5">Max Price per Item</label>
+            <input type="text" value="₹50" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-forest-600 mb-1.5">Frequency</label>
+            <input type="text" value="Weekly" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-forest-600 mb-1.5">Description</label>
+            <textarea rows="3" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream resize-none">Every week, India Recycles organises clothing sales in urban slum communities across Ahmedabad and Vadodara. Items are priced between ₹10 and ₹50.</textarea>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-3xl p-6 border border-forest-100">
+        <h2 class="font-semibold text-forest-800 mb-4 text-sm uppercase tracking-wide">Revenue Usage</h2>
+        <div class="space-y-3">
+          <div>
+            <label class="block text-xs font-semibold text-forest-600 mb-1.5">Program 1</label>
+            <input type="text" value="Health Programs" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream mb-1.5"/>
+            <input type="text" value="Medical camps, health checkups, eye exams and gynaecological services." class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-forest-600 mb-1.5">Program 2</label>
+            <input type="text" value="Education Support" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream mb-1.5"/>
+            <input type="text" value="Scholarships for underprivileged children. 25+ students supported." class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-forest-600 mb-1.5">Program 3</label>
+            <input type="text" value="Livelihood Creation" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream mb-1.5"/>
+            <input type="text" value="REVIBE and Godadi programs employ women from slum communities." class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ LOCATIONS ═══ -->
+  <section id="tab-locations" class="tab-content" aria-labelledby="loc-tab-heading">
+    <div class="flex items-center justify-between mb-8">
+      <div>
+        <h1 id="loc-tab-heading" class="font-serif text-2xl text-forest-800">Drop Locations</h1>
+        <p class="text-forest-500 text-sm mt-1">Manage collection points across Ahmedabad and Vadodara.</p>
+      </div>
+      <button onclick="saveSection('locations')" class="save-btn bg-forest-600 hover:bg-forest-700 text-white px-6 py-2.5 rounded-xl font-semibold text-sm cursor-pointer shadow">Save Changes</button>
+    </div>
+    <div class="grid lg:grid-cols-2 gap-6">
+      <div class="bg-white rounded-3xl p-6 border border-forest-100">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="font-semibold text-forest-800 text-sm uppercase tracking-wide">Ahmedabad (15 locations)</h2>
+          <button onclick="addLocation('ahm')" class="text-xs bg-forest-100 hover:bg-forest-200 text-forest-700 px-3 py-1.5 rounded-lg cursor-pointer transition-colors">+ Add</button>
+        </div>
+        <div id="ahm-locations" class="space-y-2">
+          <!-- Generated by JS -->
+        </div>
+      </div>
+      <div class="bg-white rounded-3xl p-6 border border-forest-100">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="font-semibold text-forest-800 text-sm uppercase tracking-wide">Vadodara (5 locations)</h2>
+          <button onclick="addLocation('vad')" class="text-xs bg-forest-100 hover:bg-forest-200 text-forest-700 px-3 py-1.5 rounded-lg cursor-pointer transition-colors">+ Add</button>
+        </div>
+        <div id="vad-locations" class="space-y-2">
+          <!-- Generated by JS -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ IMPACT ═══ -->
+  <section id="tab-impact" class="tab-content" aria-labelledby="impact-tab-heading">
+    <div class="flex items-center justify-between mb-8">
+      <div>
+        <h1 id="impact-tab-heading" class="font-serif text-2xl text-forest-800">Impact Statistics</h1>
+        <p class="text-forest-500 text-sm mt-1">Update the numbers shown on the Our Impact page.</p>
+      </div>
+      <button onclick="saveSection('impact')" class="save-btn bg-forest-600 hover:bg-forest-700 text-white px-6 py-2.5 rounded-xl font-semibold text-sm cursor-pointer shadow">Save Changes</button>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+      <div class="bg-white rounded-3xl p-5 border border-forest-100">
+        <div class="text-xs font-semibold text-forest-500 uppercase tracking-wide mb-2">Clothes Recycled</div>
+        <input type="text" value="35,500+" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm font-semibold text-forest-800 bg-cream"/>
+      </div>
+      <div class="bg-white rounded-3xl p-5 border border-forest-100">
+        <div class="text-xs font-semibold text-forest-500 uppercase tracking-wide mb-2">Slum Sales</div>
+        <input type="text" value="132" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm font-semibold text-forest-800 bg-cream"/>
+      </div>
+      <div class="bg-white rounded-3xl p-5 border border-forest-100">
+        <div class="text-xs font-semibold text-forest-500 uppercase tracking-wide mb-2">Volunteers</div>
+        <input type="text" value="400+" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm font-semibold text-forest-800 bg-cream"/>
+      </div>
+      <div class="bg-white rounded-3xl p-5 border border-forest-100">
+        <div class="text-xs font-semibold text-forest-500 uppercase tracking-wide mb-2">Medical Beneficiaries</div>
+        <input type="text" value="1,000+" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm font-semibold text-forest-800 bg-cream"/>
+      </div>
+      <div class="bg-white rounded-3xl p-5 border border-forest-100">
+        <div class="text-xs font-semibold text-forest-500 uppercase tracking-wide mb-2">Drop Locations</div>
+        <input type="text" value="20+" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm font-semibold text-forest-800 bg-cream"/>
+      </div>
+      <div class="bg-white rounded-3xl p-5 border border-forest-100">
+        <div class="text-xs font-semibold text-forest-500 uppercase tracking-wide mb-2">Students Supported</div>
+        <input type="text" value="25+" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm font-semibold text-forest-800 bg-cream"/>
+      </div>
+      <div class="bg-white rounded-3xl p-5 border border-forest-100">
+        <div class="text-xs font-semibold text-forest-500 uppercase tracking-wide mb-2">Cities Active</div>
+        <input type="text" value="2" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm font-semibold text-forest-800 bg-cream"/>
+      </div>
+      <div class="bg-white rounded-3xl p-5 border border-forest-100">
+        <div class="text-xs font-semibold text-forest-500 uppercase tracking-wide mb-2">Founded</div>
+        <input type="text" value="2018" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm font-semibold text-forest-800 bg-cream"/>
+      </div>
+    </div>
+    <div class="bg-forest-50 rounded-2xl px-5 py-4 border border-forest-100 text-sm text-forest-600">
+      <strong>Note:</strong> After saving here, remember to manually update the matching numbers in each HTML file. This panel helps you track the latest values.
+    </div>
+  </section>
+
+  <!-- ═══ PROGRAMS ═══ -->
+  <section id="tab-programs" class="tab-content" aria-labelledby="prog-tab-heading">
+    <div class="flex items-center justify-between mb-8">
+      <div>
+        <h1 id="prog-tab-heading" class="font-serif text-2xl text-forest-800">Programs</h1>
+        <p class="text-forest-500 text-sm mt-1">Edit content for REVIBE and Godadi programs on the Zero Waste page.</p>
+      </div>
+      <button onclick="saveSection('programs')" class="save-btn bg-forest-600 hover:bg-forest-700 text-white px-6 py-2.5 rounded-xl font-semibold text-sm cursor-pointer shadow">Save Changes</button>
+    </div>
+    <div class="grid lg:grid-cols-2 gap-6">
+      <div class="bg-white rounded-3xl p-6 border border-forest-100">
+        <h2 class="font-semibold text-forest-800 mb-4 text-sm uppercase tracking-wide">REVIBE Program</h2>
+        <div class="space-y-3">
+          <div>
+            <label class="block text-xs font-semibold text-forest-600 mb-1.5">Tagline</label>
+            <input type="text" value="Our Upcycled Product Range" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-forest-600 mb-1.5">Description</label>
+            <textarea rows="5" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream resize-none">REVIBE is India Recycles' in-house brand of upcycled products — all items made primarily from donated clothes that can no longer be reworn or reused as-is.</textarea>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-forest-600 mb-1.5">Product Tags (comma separated)</label>
+            <input type="text" value="Shoes &amp; Footwear, Upcycled Apparel, Accessories, Women-led Production" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-3xl p-6 border border-forest-100">
+        <h2 class="font-semibold text-forest-800 mb-4 text-sm uppercase tracking-wide">Godadi Project</h2>
+        <div class="space-y-3">
+          <div>
+            <label class="block text-xs font-semibold text-forest-600 mb-1.5">Tagline</label>
+            <input type="text" value="Warmth from Waste" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-forest-600 mb-1.5">Description</label>
+            <textarea rows="5" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream resize-none">The Godadi Project repurposes heavily worn donated clothing by transforming it into godadis — traditional Indian winter mattresses that provide warmth to families in need.</textarea>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-forest-600 mb-1.5">Unit Location</label>
+            <input type="text" value="Ganeshnagar, Ahmedabad" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CONTACT INFO ═══ -->
+  <section id="tab-contact-info" class="tab-content" aria-labelledby="contact-tab-heading">
+    <div class="flex items-center justify-between mb-8">
+      <div>
+        <h1 id="contact-tab-heading" class="font-serif text-2xl text-forest-800">Contact Information</h1>
+        <p class="text-forest-500 text-sm mt-1">Edit the email, phone and social links shown site-wide.</p>
+      </div>
+      <button onclick="saveSection('contact-info')" class="save-btn bg-forest-600 hover:bg-forest-700 text-white px-6 py-2.5 rounded-xl font-semibold text-sm cursor-pointer shadow">Save Changes</button>
+    </div>
+    <div class="bg-white rounded-3xl p-6 border border-forest-100 max-w-2xl">
+      <div class="space-y-4">
+        <div>
+          <label class="block text-xs font-semibold text-forest-600 mb-1.5">Email Address</label>
+          <input type="email" value="indiarecycles@gmail.com" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream"/>
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-forest-600 mb-1.5">Phone Number</label>
+          <input type="tel" value="+91 98765 43210" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream"/>
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-forest-600 mb-1.5">Address / Location</label>
+          <input type="text" value="Ahmedabad &amp; Vadodara, Gujarat, India" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream"/>
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-forest-600 mb-1.5">Website URL</label>
+          <input type="url" value="https://www.indiarecycles.org" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream"/>
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-forest-600 mb-1.5">Footer Copyright Text</label>
+          <input type="text" value="© 2025 India Recycles. All rights reserved." class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream"/>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ GALLERY ═══ -->
+  <section id="tab-gallery" class="tab-content" aria-labelledby="gallery-tab-heading">
+    <div class="flex items-center justify-between mb-8">
+      <div>
+        <h1 id="gallery-tab-heading" class="font-serif text-2xl text-forest-800">Gallery &amp; Images</h1>
+        <p class="text-forest-500 text-sm mt-1">View all downloaded images available in the /images folder.</p>
+      </div>
+    </div>
+    <div class="bg-white rounded-3xl p-6 border border-forest-100">
+      <div class="text-xs font-semibold text-forest-500 uppercase tracking-wide mb-4">Available Images (/images/)</div>
+      <div id="image-grid" class="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-3">
+        <!-- JS renders previews -->
+      </div>
+      <div class="mt-6 bg-forest-50 rounded-2xl px-5 py-4 border border-forest-100 text-sm text-forest-600">
+        To add new images, copy files into the <code class="bg-forest-100 px-1.5 py-0.5 rounded text-xs">/images/</code> folder and reference them in the HTML files as <code class="bg-forest-100 px-1.5 py-0.5 rounded text-xs">images/filename.jpg</code>.
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ DONATIONS ═══ -->
+  <section id="tab-donations" class="tab-content" aria-labelledby="don-tab-heading">
+    <div class="flex items-center justify-between mb-8">
+      <div>
+        <h1 id="don-tab-heading" class="font-serif text-2xl text-forest-800">Donation Payment Details</h1>
+        <p class="text-forest-500 text-sm mt-1">Bank account details and UPI/QR code displayed on the Donate page.</p>
+      </div>
+      <button onclick="saveSection('donations')" class="save-btn bg-forest-600 hover:bg-forest-700 text-white px-6 py-2.5 rounded-xl font-semibold text-sm cursor-pointer shadow">Save Changes</button>
+    </div>
+    <div class="grid lg:grid-cols-2 gap-6">
+
+      <!-- Bank Details -->
+      <div class="bg-white rounded-3xl p-6 border border-forest-100">
+        <h2 class="font-semibold text-forest-800 mb-5 text-sm uppercase tracking-wide">Bank Account Details</h2>
+        <div class="space-y-4">
+          <div>
+            <label class="block text-xs font-semibold text-forest-600 mb-1.5">Account Name</label>
+            <input type="text" value="India Recycles Foundation" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-forest-600 mb-1.5">Account Number</label>
+            <input type="text" placeholder="e.g. 1234 5678 9012 3456" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream font-mono tracking-wide"/>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-semibold text-forest-600 mb-1.5">IFSC Code</label>
+              <input type="text" placeholder="e.g. SBIN0001234" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream font-mono uppercase"/>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-forest-600 mb-1.5">Bank Name</label>
+              <input type="text" placeholder="e.g. State Bank of India" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream"/>
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-forest-600 mb-1.5">Branch</label>
+            <input type="text" value="Ahmedabad, Gujarat" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+
+      <!-- UPI & QR Code -->
+      <div class="bg-white rounded-3xl p-6 border border-forest-100">
+        <h2 class="font-semibold text-forest-800 mb-5 text-sm uppercase tracking-wide">UPI &amp; QR Code</h2>
+        <div class="space-y-4">
+          <div>
+            <label class="block text-xs font-semibold text-forest-600 mb-1.5">UPI ID</label>
+            <input type="text" value="indiarecycles@upi" placeholder="e.g. yourname@bankname" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream font-mono"/>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-forest-600 mb-1.5">QR Code Image Path</label>
+            <input type="text" value="images/donation-qr.png" placeholder="images/donation-qr.png" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream font-mono"/>
+            <p class="text-xs text-forest-400 mt-1.5">Save your UPI QR code image as <code class="bg-forest-100 px-1 rounded">donation-qr.png</code> inside the <code class="bg-forest-100 px-1 rounded">/images/</code> folder. It will auto-appear on the Donate page.</p>
+          </div>
+          <div>
+            <div class="text-xs font-semibold text-forest-600 mb-2">QR Code Preview</div>
+            <div class="w-36 h-36 rounded-2xl overflow-hidden bg-forest-50 border-2 border-dashed border-forest-200 flex items-center justify-center">
+              <img src="../images/donation-qr.png" alt="QR Preview"
+                class="w-full h-full object-contain"
+                onerror="this.parentElement.innerHTML='&lt;div class=\'flex flex-col items-center gap-2 p-3\'&gt;&lt;svg class=\'w-8 h-8 text-forest-200\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'1.5\'&gt;&lt;rect width=\'5\' height=\'5\' x=\'3\' y=\'3\' rx=\'1\'/&gt;&lt;rect width=\'5\' height=\'5\' x=\'16\' y=\'3\' rx=\'1\'/&gt;&lt;rect width=\'5\' height=\'5\' x=\'3\' y=\'16\' rx=\'1\'/&gt;&lt;/svg&gt;&lt;span class=\'text-xs text-forest-400 text-center\'&gt;Upload donation-qr.png&lt;br/&gt;to /images/&lt;/span&gt;&lt;/div&gt;'"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mt-6 bg-amber-50 rounded-2xl px-5 py-4 border border-amber-100 text-sm text-amber-800">
+      <strong>How to update the live Donate page:</strong> After saving your bank details here, open <code class="bg-amber-100 px-1.5 py-0.5 rounded text-xs">donate.html</code> and find the "Bank Transfer / UPI" section. Update the text inside elements with IDs: <code class="bg-amber-100 px-1.5 py-0.5 rounded text-xs">bank-acname</code>, <code class="bg-amber-100 px-1.5 py-0.5 rounded text-xs">bank-acno</code>, <code class="bg-amber-100 px-1.5 py-0.5 rounded text-xs">bank-ifsc</code>, <code class="bg-amber-100 px-1.5 py-0.5 rounded text-xs">bank-name</code>, <code class="bg-amber-100 px-1.5 py-0.5 rounded text-xs">bank-branch</code>, and <code class="bg-amber-100 px-1.5 py-0.5 rounded text-xs">upi-id</code>.
+    </div>
+  </section>
+
+</main>
+</div>
+
+<script>
+  // Tab switching
+  function switchTab(id, btn) {
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => {
+      b.classList.remove('active');
+      b.classList.add('text-forest-600', 'hover:bg-forest-50');
+    });
+    document.getElementById('tab-' + id).classList.add('active');
+    btn.classList.add('active');
+    btn.classList.remove('text-forest-600', 'hover:bg-forest-50');
+  }
+
+  // Save feedback
+  function saveSection(section) {
+    const btn = event.target;
+    const orig = btn.textContent;
+    btn.textContent = 'Saved!';
+    btn.classList.add('bg-forest-800');
+    setTimeout(() => { btn.textContent = orig; btn.classList.remove('bg-forest-800'); }, 2000);
+    // In production you'd POST form data to a backend here
+    console.log('Section saved (UI only):', section);
+  }
+
+  // Location data — each entry: { name, address, contact, phone, maps }
+  const ahmLocations = [
+    { name: 'Westgate by True Value', address: 'A-1301, Westgate, Near YMCA Club, SG Highway, Ahmedabad 380015', contact: 'Reception', phone: '', maps: 'https://www.google.com/maps/search/?api=1&query=Westgate+True+Value+SG+Highway+Ahmedabad' },
+    { name: 'Abhijeet Complex', address: 'Abhijeet Complex, Mithakhali Six Roads, Navrangpura, Ahmedabad 380009', contact: '', phone: '', maps: 'https://www.google.com/maps/search/?api=1&query=Abhijeet+Complex+Navrangpura+Ahmedabad' },
+    { name: 'Usmanpura Drop Point', address: 'Usmanpura, Ahmedabad 380013', contact: '', phone: '', maps: 'https://www.google.com/maps/search/?api=1&query=Usmanpura+Ahmedabad' },
+    { name: 'Juhapura Collection Box', address: 'Juhapura, Ahmedabad 380055', contact: '', phone: '', maps: 'https://www.google.com/maps/search/?api=1&query=Juhapura+Ahmedabad' },
+    { name: 'Navrangpura Drop Point', address: 'Navrangpura, Ahmedabad 380009', contact: '', phone: '', maps: 'https://www.google.com/maps/search/?api=1&query=Navrangpura+Ahmedabad' },
+    { name: 'Satellite Area', address: 'Satellite, Ahmedabad 380015', contact: '', phone: '', maps: 'https://www.google.com/maps/search/?api=1&query=Satellite+Ahmedabad' },
+    { name: 'Bopal Drop Point', address: 'Bopal, Ahmedabad 380058', contact: '', phone: '', maps: 'https://www.google.com/maps/search/?api=1&query=Bopal+Ahmedabad' },
+    { name: 'Paldi Collection Box', address: 'Paldi, Ahmedabad 380007', contact: '', phone: '', maps: 'https://www.google.com/maps/search/?api=1&query=Paldi+Ahmedabad' },
+    { name: 'Thaltej Drop Point', address: 'Thaltej, Ahmedabad 380059', contact: '', phone: '', maps: 'https://www.google.com/maps/search/?api=1&query=Thaltej+Ahmedabad' },
+    { name: 'Prahlad Nagar Drop Point', address: 'Prahlad Nagar, Ahmedabad 380015', contact: '', phone: '', maps: 'https://www.google.com/maps/search/?api=1&query=Prahlad+Nagar+Ahmedabad' },
+    { name: 'Vastrapur Drop Point', address: 'Vastrapur, Ahmedabad 380054', contact: '', phone: '', maps: 'https://www.google.com/maps/search/?api=1&query=Vastrapur+Ahmedabad' },
+    { name: 'Bodakdev Drop Point', address: 'Bodakdev, Ahmedabad 380054', contact: '', phone: '', maps: 'https://www.google.com/maps/search/?api=1&query=Bodakdev+Ahmedabad' },
+    { name: 'Maninagar Collection Box', address: 'Maninagar, Ahmedabad 380008', contact: '', phone: '', maps: 'https://www.google.com/maps/search/?api=1&query=Maninagar+Ahmedabad' },
+    { name: 'Chandkheda Drop Point', address: 'Chandkheda, Ahmedabad 382424', contact: '', phone: '', maps: 'https://www.google.com/maps/search/?api=1&query=Chandkheda+Ahmedabad' },
+    { name: 'Gota Drop Point', address: 'Gota, Ahmedabad 382481', contact: '', phone: '', maps: 'https://www.google.com/maps/search/?api=1&query=Gota+Ahmedabad' },
+  ];
+  const vadLocations = [
+    { name: 'Old Chhani Road Drop Point', address: 'Old Chhani Road, Vadodara 391740', contact: '', phone: '', maps: 'https://www.google.com/maps/search/?api=1&query=Old+Chhani+Road+Vadodara' },
+    { name: 'Akota Collection Box', address: 'Akota, Vadodara 390020', contact: '', phone: '', maps: 'https://www.google.com/maps/search/?api=1&query=Akota+Vadodara' },
+    { name: 'Gorwa Drop Point', address: 'Gorwa, Vadodara 390016', contact: '', phone: '', maps: 'https://www.google.com/maps/search/?api=1&query=Gorwa+Vadodara' },
+    { name: 'Fatehgunj Drop Point', address: 'Fatehgunj, Vadodara 390002', contact: '', phone: '', maps: 'https://www.google.com/maps/search/?api=1&query=Fatehgunj+Vadodara' },
+    { name: 'Waghodia Road Drop Point', address: 'Waghodia Road, Vadodara 390019', contact: '', phone: '', maps: 'https://www.google.com/maps/search/?api=1&query=Waghodia+Road+Vadodara' },
+  ];
+
+  const xIcon = `<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`;
+
+  function renderLocations(arr, containerId) {
+    const el = document.getElementById(containerId);
+    el.innerHTML = arr.map((loc, i) => `
+      <div class="p-4 bg-cream rounded-2xl border border-forest-100 mb-3" data-loc-card>
+        <div class="flex items-center justify-between mb-3">
+          <span class="w-6 h-6 bg-forest-600 rounded-lg flex items-center justify-center text-white text-xs font-bold shrink-0">${i+1}</span>
+          <button onclick="removeLocation(this)" class="w-7 h-7 bg-red-50 hover:bg-red-100 text-red-400 rounded-lg flex items-center justify-center cursor-pointer" aria-label="Remove location">
+            ${xIcon}
+          </button>
+        </div>
+        <div class="space-y-2">
+          <input type="text" value="${loc.name || ''}" placeholder="Venue / Location Name" class="w-full px-3 py-2 rounded-xl border border-forest-200 text-sm font-semibold text-forest-800 bg-white"/>
+          <input type="text" value="${loc.address || ''}" placeholder="Full Street Address, City, PIN" class="w-full px-3 py-2 rounded-xl border border-forest-200 text-sm text-forest-800 bg-white"/>
+          <div class="grid grid-cols-2 gap-2">
+            <input type="text" value="${loc.contact || ''}" placeholder="Contact Person (optional)" class="px-3 py-2 rounded-xl border border-forest-200 text-sm text-forest-800 bg-white"/>
+            <input type="tel" value="${loc.phone || ''}" placeholder="Phone (optional)" class="px-3 py-2 rounded-xl border border-forest-200 text-sm text-forest-800 bg-white"/>
+          </div>
+          <input type="url" value="${loc.maps || ''}" placeholder="Google Maps link — https://www.google.com/maps/search/?api=1&query=..." class="w-full px-3 py-2 rounded-xl border border-forest-200 text-xs text-forest-700 bg-white font-mono"/>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function addLocation(city) {
+    const containerId = city === 'ahm' ? 'ahm-locations' : 'vad-locations';
+    const el = document.getElementById(containerId);
+    const div = document.createElement('div');
+    div.className = 'p-4 bg-cream rounded-2xl border border-forest-100 mb-3';
+    div.setAttribute('data-loc-card', '');
+    div.innerHTML = `
+      <div class="flex items-center justify-between mb-3">
+        <span class="w-6 h-6 bg-forest-400 rounded-lg flex items-center justify-center text-white text-xs font-bold shrink-0">New</span>
+        <button onclick="removeLocation(this)" class="w-7 h-7 bg-red-50 hover:bg-red-100 text-red-400 rounded-lg flex items-center justify-center cursor-pointer" aria-label="Remove location">
+          ${xIcon}
+        </button>
+      </div>
+      <div class="space-y-2">
+        <input type="text" placeholder="Venue / Location Name" class="w-full px-3 py-2 rounded-xl border border-forest-200 text-sm font-semibold text-forest-800 bg-white" autofocus/>
+        <input type="text" placeholder="Full Street Address, City, PIN" class="w-full px-3 py-2 rounded-xl border border-forest-200 text-sm text-forest-800 bg-white"/>
+        <div class="grid grid-cols-2 gap-2">
+          <input type="text" placeholder="Contact Person (optional)" class="px-3 py-2 rounded-xl border border-forest-200 text-sm text-forest-800 bg-white"/>
+          <input type="tel" placeholder="Phone (optional)" class="px-3 py-2 rounded-xl border border-forest-200 text-sm text-forest-800 bg-white"/>
+        </div>
+        <input type="url" placeholder="Google Maps link — https://www.google.com/maps/search/?api=1&query=..." class="w-full px-3 py-2 rounded-xl border border-forest-200 text-xs text-forest-700 bg-white font-mono"/>
+      </div>
+    `;
+    el.appendChild(div);
+    div.querySelector('input').focus();
+  }
+
+  function removeLocation(btn) {
+    btn.closest('[data-loc-card]').remove();
+  }
+
+  // Image gallery
+  const images = [
+    'logo.png','event1.jpg','event2.jpg','event3.jpg',
+    'team1.jpg','team2.jpg',
+    'model1.jpg','model2.jpg','model3.jpg','model4.jpg','model5.jpg','model6.jpg',
+    'impact1.jpg','impact2.jpg','impact3.jpg','impact4.png','impact5.png',
+    'impact6.jpg','impact7.jpg','impact8.jpg',
+    'sdg.png','carbon.png',
+    'testimonial1.png','testimonial2.png','testimonial3.png','testimonial4.png',
+    'gallery1.png','gallery2.png','gallery3.png',
+    'revibe1.jpg','revibe2.png','revibe3.jpg',
+    'godadi1.jpg','godadi2.jpg','godadi3.png','godadi4.png',
+    'zw1.jpg','zw2.jpg','zw3.jpg',
+    'process.png','partners.png',
+  'partners_picture6_orig.png','partners_picture7_orig.png',
+  'partners_picture8_orig.png','partners_96_orig.png'
+  ];
+
+  function renderGallery() {
+    const grid = document.getElementById('image-grid');
+    grid.innerHTML = images.map(img => `
+      <div class="group cursor-pointer">
+        <div class="aspect-square rounded-xl overflow-hidden bg-forest-50 border border-forest-100">
+          <img src="../images/${img}" alt="${img}" class="w-full h-full object-cover group-hover:opacity-80 transition-opacity"
+            onerror="this.parentElement.innerHTML='<div class=\\'flex items-center justify-center h-full\\'><svg class=\\'w-6 h-6 text-forest-200\\' viewBox=\\'0 0 24 24\\' fill=\\'none\\' stroke=\\'currentColor\\'><rect width=\\'18\\' height=\\'18\\' x=\\'3\\' y=\\'3\\' rx=\\'2\\'/><circle cx=\\'9\\' cy=\\'9\\' r=\\'2\\'/></svg></div>'"/>
+        </div>
+        <div class="mt-1 text-xs text-forest-500 truncate" title="${img}">${img}</div>
+      </div>
+    `).join('');
+  }
+
+  // Init
+  renderLocations(ahmLocations, 'ahm-locations');
+  renderLocations(vadLocations, 'vad-locations');
+  renderGallery();
+</script>
+</body>
+</html>
