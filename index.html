@@ -7,7 +7,7 @@
   <meta name="description" content="India Recycles gives donated clothes a second life through community slum sales, upcycling and livelihood creation across India."/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,600;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -18,621 +18,686 @@
             sans:  ['Inter', 'sans-serif'],
           },
           colors: {
-            forest: {
-              50:  '#f0f7f2',
-              100: '#d4edda',
-              200: '#a8d9b4',
-              300: '#72bf87',
-              400: '#3fa35e',
-              500: '#1a8a3f',
-              600: '#1a6b3a',
-              700: '#155530',
-              800: '#0d3320',
-              900: '#081a10',
+            /* Green — used SPARINGLY: icons, badges, borders, CTAs only */
+            green: {
+              50:  '#EEF7F2',
+              100: '#D4EBDC',
+              200: '#A8D6B8',
+              300: '#6DB88A',
+              400: '#3D9B60',
+              500: '#2D7A4F',
+              600: '#236040',
+              700: '#1A4830',
+              800: '#112E1E',
+              900: '#091910',
             },
-            saffron: {
-              50:  '#fff8f0',
-              100: '#fef3e2',
-              200: '#fcd9a0',
-              300: '#f9bf5e',
-              400: '#f5a623',
-              500: '#e07b39',
-              600: '#c4621e',
+            /* Amber/Orange — CTAs, accent numbers */
+            amber: {
+              50:  '#FFFBF0',
+              100: '#FEF3E2',
+              200: '#FCD9A0',
+              300: '#F9BF5E',
+              400: '#F59E0B',
+              500: '#D97706',
+              600: '#B45309',
             },
-            cream: '#fdfef8',
+            /* Ivory & off-white — section backgrounds */
+            ivory: '#F5F2EC',
+            offwhite: '#FAFAF7',
           },
         }
       }
     }
   </script>
   <style>
+    /* ── Base ─────────────────────────────── */
     html { scroll-behavior: smooth; }
-    body { background-color: #ffffff; font-family: 'Inter', sans-serif; }
+    body { background-color: #FAFAF7; font-family: 'Inter', sans-serif; color: #374151; }
 
-    /* Navbar mobile */
+    /* ── Mobile nav ───────────────────────── */
     #mob-menu { display: none; }
     #mob-menu.open { display: block; }
 
-    /* Gradient text */
-    .grad-text {
-      background: linear-gradient(135deg, #f5a623 0%, #e07b39 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .grad-text-green {
-      background: linear-gradient(135deg, #1a8a3f 0%, #1a6b3a 100%);
+    /* ── Gradient text (orange) ───────────── */
+    .grad-amber {
+      background: linear-gradient(135deg, #D97706 0%, #B45309 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
 
-    /* Marquee */
+    /* ── Marquee ──────────────────────────── */
     @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-    .marquee-track { animation: marquee 34s linear infinite; }
+    .marquee-track { animation: marquee 36s linear infinite; }
+    @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }
 
-    /* Card hover */
+    /* ── Card hover lift ──────────────────── */
     .card { transition: transform .22s ease, box-shadow .22s ease; }
-    .card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(26,107,58,.10); }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 14px 32px rgba(0,0,0,.09); }
+    @media (prefers-reduced-motion: reduce) { .card:hover { transform: none; } }
 
-    /* Subtle leaf background for light sections */
+    /* ── Subtle organic SVG patterns ─────── */
+    /* Leaf outline — very faint, 4% opacity */
     .leaf-bg {
-      background-image: url("data:image/svg+xml,%3Csvg width='140' height='140' viewBox='0 0 140 140' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M25 115 C25 48 90 18 118 18 C90 18 104 72 65 102 C104 72 100 132 65 132 C100 132 90 58 25 115Z' fill='none' stroke='%231a6b3a' stroke-width='1' opacity='0.06'/%3E%3C/svg%3E");
-      background-size: 140px 140px;
-    }
-
-    /* Recycle circles for off-white/peach sections */
-    .recycle-bg {
-      background-image: url("data:image/svg+xml,%3Csvg width='160' height='160' viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='80' cy='80' r='50' fill='none' stroke='%231a6b3a' stroke-width='1' opacity='0.06'/%3E%3Ccircle cx='80' cy='80' r='34' fill='none' stroke='%231a6b3a' stroke-width='0.7' opacity='0.04' stroke-dasharray='5 4'/%3E%3Cpath d='M80 30 L86 42 L74 42 Z' fill='%231a6b3a' opacity='0.06'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg width='160' height='160' viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 130 C30 55 105 20 135 20 C105 20 120 85 75 118 C120 85 115 148 75 148 C115 148 105 65 30 130Z' fill='none' stroke='%232D7A4F' stroke-width='1.2' opacity='0.04'/%3E%3C/svg%3E");
       background-size: 160px 160px;
     }
-
-    @media (prefers-reduced-motion: reduce) {
-      .marquee-track { animation: none; }
-      .card:hover { transform: none; }
+    /* Recycle rings — very faint, 4% opacity */
+    .ring-bg {
+      background-image: url("data:image/svg+xml,%3Csvg width='180' height='180' viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='90' cy='90' r='58' fill='none' stroke='%232D7A4F' stroke-width='1.2' opacity='0.04'/%3E%3Ccircle cx='90' cy='90' r='38' fill='none' stroke='%232D7A4F' stroke-width='0.8' opacity='0.03' stroke-dasharray='5 4'/%3E%3Cpath d='M90 32 L97 46 L83 46 Z' fill='%232D7A4F' opacity='0.04'/%3E%3C/svg%3E");
+      background-size: 180px 180px;
     }
+
+    /* ── Section divider line ─────────────── */
+    .divider { height: 1px; background: linear-gradient(90deg, transparent, #D4EBDC 30%, #D4EBDC 70%, transparent); }
+
+    /* ── Stat number ─────────────────────── */
+    .stat-num { font-family: 'Playfair Display', Georgia, serif; font-weight: 700; }
   </style>
 </head>
-<body class="text-forest-800 antialiased">
+<body class="antialiased">
 
-<!-- ════════ NAVBAR ════════ -->
-<nav class="fixed top-0 inset-x-0 z-50 bg-white/98 backdrop-blur border-b border-forest-100 shadow-sm" role="navigation" aria-label="Main navigation">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between py-3">
+<!-- ════════════ NAVBAR ════════════ -->
+<nav class="fixed top-0 inset-x-0 z-50 bg-white/97 backdrop-blur-sm border-b border-gray-200/80 shadow-sm" role="navigation" aria-label="Main navigation">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
     <a href="index.html" class="flex items-center gap-3" aria-label="India Recycles home">
-      <img src="images/logo.png" alt="India Recycles logo" class="h-11 w-auto" loading="eager"/>
-      <span class="font-serif font-bold text-forest-800 text-base hidden sm:block">India Recycles</span>
+      <img src="images/logo.png" alt="India Recycles logo" class="h-10 w-auto" loading="eager"/>
+      <span class="font-serif font-bold text-green-800 text-[15px] hidden sm:block tracking-tight">India Recycles</span>
     </a>
-    <div class="hidden lg:flex items-center gap-0.5 text-sm font-medium">
-      <a href="index.html"              class="px-3 py-2 rounded-lg text-forest-700 font-semibold">Home</a>
-      <a href="about-us.html"           class="px-3 py-2 rounded-lg text-gray-600 hover:text-forest-700 transition-colors">About Us</a>
-      <a href="our-model.html"          class="px-3 py-2 rounded-lg text-gray-600 hover:text-forest-700 transition-colors">Our Model</a>
-      <a href="drop-locations.html"     class="px-3 py-2 rounded-lg text-gray-600 hover:text-forest-700 transition-colors">Drop Locations</a>
-      <a href="zero-waste-promise.html" class="px-3 py-2 rounded-lg text-gray-600 hover:text-forest-700 transition-colors">Zero Waste</a>
-      <a href="our-impact.html"         class="px-3 py-2 rounded-lg text-gray-600 hover:text-forest-700 transition-colors">Our Impact</a>
-      <a href="our-partners.html"       class="px-3 py-2 rounded-lg text-gray-600 hover:text-forest-700 transition-colors">Partners</a>
-      <a href="contact.html"            class="px-3 py-2 rounded-lg text-gray-600 hover:text-forest-700 transition-colors">Contact</a>
+    <div class="hidden lg:flex items-center gap-0.5 text-[13px] font-medium">
+      <a href="index.html"              class="px-3 py-2 rounded-lg text-green-600 font-semibold">Home</a>
+      <a href="about-us.html"           class="px-3 py-2 rounded-lg text-gray-600 hover:text-green-600 hover:bg-green-50 transition-colors duration-200 cursor-pointer">About Us</a>
+      <a href="our-model.html"          class="px-3 py-2 rounded-lg text-gray-600 hover:text-green-600 hover:bg-green-50 transition-colors duration-200 cursor-pointer">Our Model</a>
+      <a href="drop-locations.html"     class="px-3 py-2 rounded-lg text-gray-600 hover:text-green-600 hover:bg-green-50 transition-colors duration-200 cursor-pointer">Drop Locations</a>
+      <a href="zero-waste-promise.html" class="px-3 py-2 rounded-lg text-gray-600 hover:text-green-600 hover:bg-green-50 transition-colors duration-200 cursor-pointer">Zero Waste</a>
+      <a href="our-impact.html"         class="px-3 py-2 rounded-lg text-gray-600 hover:text-green-600 hover:bg-green-50 transition-colors duration-200 cursor-pointer">Our Impact</a>
+      <a href="our-partners.html"       class="px-3 py-2 rounded-lg text-gray-600 hover:text-green-600 hover:bg-green-50 transition-colors duration-200 cursor-pointer">Partners</a>
+      <a href="contact.html"            class="px-3 py-2 rounded-lg text-gray-600 hover:text-green-600 hover:bg-green-50 transition-colors duration-200 cursor-pointer">Contact</a>
     </div>
     <div class="flex items-center gap-2">
-      <a href="donate.html" class="bg-forest-600 hover:bg-forest-700 text-white px-5 py-2.5 rounded-xl font-semibold text-sm transition-colors shadow-sm">Donate Now</a>
-      <button id="menu-toggle" class="lg:hidden p-2 rounded-lg hover:bg-forest-50" aria-label="Toggle menu" aria-expanded="false" aria-controls="mob-menu">
+      <a href="donate.html" class="bg-amber-500 hover:bg-amber-600 text-white px-5 py-2.5 rounded-xl font-semibold text-sm transition-colors duration-200 shadow-sm cursor-pointer">Donate Now</a>
+      <button id="menu-toggle" class="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer" aria-label="Toggle menu" aria-expanded="false" aria-controls="mob-menu">
         <svg class="w-5 h-5 text-gray-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       </button>
     </div>
   </div>
-  <div id="mob-menu" class="lg:hidden border-t border-forest-100 bg-white px-4 py-3 flex flex-col gap-1 text-sm font-medium">
-    <a href="index.html"              class="px-4 py-2.5 rounded-lg bg-forest-50 text-forest-700 font-semibold">Home</a>
-    <a href="about-us.html"           class="px-4 py-2.5 rounded-lg text-gray-600 hover:bg-forest-50">About Us</a>
-    <a href="our-model.html"          class="px-4 py-2.5 rounded-lg text-gray-600 hover:bg-forest-50">Our Model</a>
-    <a href="drop-locations.html"     class="px-4 py-2.5 rounded-lg text-gray-600 hover:bg-forest-50">Drop Locations</a>
-    <a href="zero-waste-promise.html" class="px-4 py-2.5 rounded-lg text-gray-600 hover:bg-forest-50">Zero Waste</a>
-    <a href="our-impact.html"         class="px-4 py-2.5 rounded-lg text-gray-600 hover:bg-forest-50">Our Impact</a>
-    <a href="our-partners.html"       class="px-4 py-2.5 rounded-lg text-gray-600 hover:bg-forest-50">Partners</a>
-    <a href="contact.html"            class="px-4 py-2.5 rounded-lg text-gray-600 hover:bg-forest-50">Contact</a>
-    <a href="donate.html"             class="mt-1 px-4 py-2.5 rounded-lg bg-forest-600 text-white font-semibold text-center">Donate Now</a>
+  <div id="mob-menu" class="lg:hidden border-t border-gray-100 bg-white px-4 py-3 flex flex-col gap-1 text-sm font-medium">
+    <a href="index.html"              class="px-4 py-2.5 rounded-lg bg-green-50 text-green-700 font-semibold cursor-pointer">Home</a>
+    <a href="about-us.html"           class="px-4 py-2.5 rounded-lg text-gray-600 hover:bg-green-50 hover:text-green-700 transition-colors cursor-pointer">About Us</a>
+    <a href="our-model.html"          class="px-4 py-2.5 rounded-lg text-gray-600 hover:bg-green-50 hover:text-green-700 transition-colors cursor-pointer">Our Model</a>
+    <a href="drop-locations.html"     class="px-4 py-2.5 rounded-lg text-gray-600 hover:bg-green-50 hover:text-green-700 transition-colors cursor-pointer">Drop Locations</a>
+    <a href="zero-waste-promise.html" class="px-4 py-2.5 rounded-lg text-gray-600 hover:bg-green-50 hover:text-green-700 transition-colors cursor-pointer">Zero Waste</a>
+    <a href="our-impact.html"         class="px-4 py-2.5 rounded-lg text-gray-600 hover:bg-green-50 hover:text-green-700 transition-colors cursor-pointer">Our Impact</a>
+    <a href="our-partners.html"       class="px-4 py-2.5 rounded-lg text-gray-600 hover:bg-green-50 hover:text-green-700 transition-colors cursor-pointer">Partners</a>
+    <a href="contact.html"            class="px-4 py-2.5 rounded-lg text-gray-600 hover:bg-green-50 hover:text-green-700 transition-colors cursor-pointer">Contact</a>
+    <a href="donate.html"             class="mt-1 px-4 py-2.5 rounded-lg bg-amber-500 text-white font-semibold text-center cursor-pointer">Donate Now</a>
   </div>
 </nav>
 
 <main>
 
-<!-- ════════ HERO ════════ -->
-<section class="relative pt-[68px] overflow-hidden" aria-labelledby="hero-h1">
+<!-- ════════════ HERO ════════════ -->
+<section class="relative pt-16 overflow-hidden min-h-[92vh] flex items-center" aria-labelledby="hero-h1">
+  <!-- Background photo -->
   <div class="absolute inset-0">
     <img src="images/event1.jpg" alt="India Recycles community event" class="w-full h-full object-cover object-center" loading="eager"/>
-    <div class="absolute inset-0 bg-gradient-to-r from-forest-900/88 via-forest-900/65 to-transparent"></div>
-    <div class="absolute inset-0 bg-gradient-to-t from-forest-900/50 via-transparent to-transparent"></div>
+    <!-- Classic editorial overlay — warm dark gradient left to right -->
+    <div class="absolute inset-0 bg-gradient-to-r from-[#0A1C11]/90 via-[#0A1C11]/70 to-[#0A1C11]/30"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-[#0A1C11]/60 via-transparent to-transparent"></div>
   </div>
-  <!-- Recycling SVG decoration -->
-  <svg class="absolute top-16 right-12 w-56 h-56 pointer-events-none opacity-[0.10] hidden lg:block" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="60" cy="60" r="52" stroke="#a8d9b4" stroke-width="3"/>
-    <circle cx="60" cy="60" r="36" stroke="#a8d9b4" stroke-width="2" stroke-dasharray="6 4"/>
-    <path d="M60 8 L68 22 L52 22 Z" fill="#a8d9b4"/>
-    <path d="M104 82 L96 68 L112 68 Z" fill="#a8d9b4"/>
-    <path d="M16 82 L24 96 L8 96 Z" fill="#a8d9b4"/>
+
+  <!-- Decorative recycling motif — top right -->
+  <svg class="absolute top-20 right-10 w-52 h-52 opacity-[0.12] pointer-events-none hidden lg:block" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <circle cx="60" cy="60" r="52" stroke="#A8D6B8" stroke-width="2.5"/>
+    <circle cx="60" cy="60" r="36" stroke="#A8D6B8" stroke-width="1.5" stroke-dasharray="6 4"/>
+    <path d="M60 8 L68 22 L52 22 Z" fill="#A8D6B8"/>
+    <path d="M104 82 L96 68 L112 68 Z" fill="#A8D6B8"/>
+    <path d="M16 82 L24 96 L8 96 Z" fill="#A8D6B8"/>
   </svg>
 
-  <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
-    <div class="max-w-xl">
-      <div class="inline-flex items-center gap-2 bg-white/12 border border-white/25 text-white px-4 py-1.5 rounded-full text-xs font-semibold mb-6 uppercase tracking-wide">
-        <span class="w-1.5 h-1.5 rounded-full bg-saffron-400 animate-pulse" aria-hidden="true"></span>
+  <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28 w-full">
+    <div class="max-w-[540px]">
+      <!-- Badge -->
+      <div class="inline-flex items-center gap-2 bg-white/10 border border-white/25 text-white/90 px-4 py-1.5 rounded-full text-[11px] font-semibold mb-6 uppercase tracking-widest">
+        <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" aria-hidden="true"></span>
         We are collecting, always!
       </div>
-      <h1 id="hero-h1" class="font-serif font-black leading-tight mb-5">
-        <span class="block text-4xl sm:text-5xl lg:text-6xl text-white">Love the</span>
-        <span class="block text-5xl sm:text-6xl lg:text-7xl grad-text">Pre-Loved</span>
+      <!-- Heading -->
+      <h1 id="hero-h1" class="font-serif leading-[1.1] mb-6" style="text-shadow: 0 2px 8px rgba(0,0,0,0.3);">
+        <span class="block text-4xl sm:text-5xl lg:text-6xl text-white font-medium">Love the</span>
+        <span class="block text-5xl sm:text-6xl lg:text-7xl font-extrabold grad-amber">Pre-Loved</span>
       </h1>
-      <p class="text-white/85 text-base sm:text-lg mb-8 leading-relaxed">
-        We collect donated clothes and give them a second life through weekly slum sales, upcycling, and livelihood programs for women across Ahmedabad and Vadodara.
+      <!-- Subheadline -->
+      <p class="text-white/88 text-base sm:text-lg mb-8 leading-relaxed max-w-[460px]" style="text-shadow: 0 1px 4px rgba(0,0,0,0.4);">
+        We collect donated clothes and give them a dignified second life through weekly slum sales, upcycling, and livelihood programs for women across Ahmedabad and Vadodara.
       </p>
-      <div class="flex flex-wrap gap-3">
-        <a href="drop-locations.html" class="inline-flex items-center gap-2 bg-forest-500 hover:bg-forest-400 text-white px-6 py-3 rounded-xl font-semibold text-sm transition-colors">
-          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+      <!-- CTAs -->
+      <div class="flex flex-wrap gap-3 mb-10">
+        <a href="drop-locations.html" class="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-600 text-white px-7 py-3.5 rounded-xl font-semibold text-sm transition-colors duration-200 shadow-md cursor-pointer">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
           Find Drop Location
         </a>
-        <a href="our-model.html" class="inline-flex items-center gap-2 bg-white/15 hover:bg-white/22 text-white border border-white/30 px-6 py-3 rounded-xl font-semibold text-sm transition-colors">
+        <a href="our-model.html" class="inline-flex items-center gap-2 bg-white/12 hover:bg-white/20 text-white border border-white/35 px-7 py-3.5 rounded-xl font-semibold text-sm transition-colors duration-200 cursor-pointer">
           How It Works
-          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
         </a>
       </div>
-      <!-- Stats strip -->
-      <div class="flex flex-wrap gap-6 mt-9 pt-7 border-t border-white/20">
+      <!-- Inline stats strip -->
+      <div class="flex flex-wrap gap-x-8 gap-y-4 pt-7 border-t border-white/20">
         <div>
-          <div class="text-2xl font-serif font-bold text-saffron-400">35,500+</div>
-          <div class="text-white/65 text-xs uppercase tracking-wide">Clothes Recycled</div>
+          <div class="stat-num text-2xl text-amber-400">35,500+</div>
+          <div class="text-white/60 text-[11px] uppercase tracking-widest mt-0.5">Clothes Recycled</div>
         </div>
         <div class="w-px bg-white/20 self-stretch hidden sm:block"></div>
         <div>
-          <div class="text-2xl font-serif font-bold text-white">132</div>
-          <div class="text-white/65 text-xs uppercase tracking-wide">Slum Sales</div>
+          <div class="stat-num text-2xl text-white">132</div>
+          <div class="text-white/60 text-[11px] uppercase tracking-widest mt-0.5">Slum Sales</div>
         </div>
         <div class="w-px bg-white/20 self-stretch hidden sm:block"></div>
         <div>
-          <div class="text-2xl font-serif font-bold text-saffron-400">400+</div>
-          <div class="text-white/65 text-xs uppercase tracking-wide">Volunteers</div>
+          <div class="stat-num text-2xl text-amber-400">400+</div>
+          <div class="text-white/60 text-[11px] uppercase tracking-widest mt-0.5">Volunteers</div>
         </div>
         <div class="w-px bg-white/20 self-stretch hidden sm:block"></div>
         <div>
-          <div class="text-2xl font-serif font-bold text-white">2017</div>
-          <div class="text-white/65 text-xs uppercase tracking-wide">Est. Ahmedabad</div>
+          <div class="stat-num text-2xl text-white">2017</div>
+          <div class="text-white/60 text-[11px] uppercase tracking-widest mt-0.5">Est. Ahmedabad</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ════════ MARQUEE ════════ -->
-<div class="bg-forest-100 border-y border-forest-200 py-3 overflow-hidden" aria-label="Key statistics">
+<!-- ════════════ MARQUEE ════════════ -->
+<div class="bg-[#F5F2EC] border-y border-gray-200 py-3 overflow-hidden" aria-label="Key statistics ticker">
   <div class="flex whitespace-nowrap marquee-track">
-    <div class="flex gap-12 shrink-0 pr-12 text-sm font-semibold text-forest-700">
-      <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-saffron-500"></span>35,500+ Clothes Recycled</span>
-      <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-saffron-500"></span>132 Slum Sales Conducted</span>
-      <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-saffron-500"></span>400+ Active Volunteers</span>
-      <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-saffron-500"></span>1,000+ Medical Camp Beneficiaries</span>
-      <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-saffron-500"></span>25+ Students Supported</span>
-      <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-saffron-500"></span>Founded 2017 in Ahmedabad</span>
+    <div class="flex gap-14 shrink-0 pr-14 text-[13px] font-semibold text-green-700">
+      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-amber-500" aria-hidden="true"></span>35,500+ Clothes Recycled</span>
+      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-amber-500" aria-hidden="true"></span>132 Slum Sales Conducted</span>
+      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-amber-500" aria-hidden="true"></span>400+ Active Volunteers</span>
+      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-amber-500" aria-hidden="true"></span>1,000+ Medical Camp Beneficiaries</span>
+      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-amber-500" aria-hidden="true"></span>25+ Students Supported</span>
+      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-amber-500" aria-hidden="true"></span>Founded 2017 in Ahmedabad</span>
     </div>
-    <div class="flex gap-12 shrink-0 pr-12 text-sm font-semibold text-forest-700" aria-hidden="true">
-      <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-saffron-500"></span>35,500+ Clothes Recycled</span>
-      <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-saffron-500"></span>132 Slum Sales Conducted</span>
-      <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-saffron-500"></span>400+ Active Volunteers</span>
-      <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-saffron-500"></span>1,000+ Medical Camp Beneficiaries</span>
-      <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-saffron-500"></span>25+ Students Supported</span>
-      <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-saffron-500"></span>Founded 2017 in Ahmedabad</span>
+    <div class="flex gap-14 shrink-0 pr-14 text-[13px] font-semibold text-green-700" aria-hidden="true">
+      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>35,500+ Clothes Recycled</span>
+      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>132 Slum Sales Conducted</span>
+      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>400+ Active Volunteers</span>
+      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>1,000+ Medical Camp Beneficiaries</span>
+      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>25+ Students Supported</span>
+      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>Founded 2017 in Ahmedabad</span>
     </div>
   </div>
 </div>
 
-<!-- ════════ ABOUT ════════ -->
-<section class="py-16 lg:py-20 bg-white leaf-bg" aria-labelledby="about-h2">
+<!-- ════════════ ABOUT ════════════ -->
+<section class="py-16 lg:py-24 bg-white leaf-bg" aria-labelledby="about-h2">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-      <!-- Image -->
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+      <!-- Image column -->
       <div class="relative">
-        <div class="rounded-3xl overflow-hidden shadow-lg">
-          <img src="images/event2.jpg" alt="India Recycles community slum sale" class="w-full h-72 sm:h-80 object-cover"/>
+        <div class="rounded-3xl overflow-hidden shadow-lg border border-gray-100">
+          <img src="images/event2.jpg" alt="India Recycles community slum sale event" class="w-full h-80 object-cover object-center"/>
         </div>
-        <div class="absolute bottom-5 left-5 bg-forest-700/90 text-white px-4 py-2 rounded-xl text-sm font-semibold backdrop-blur-sm">
+        <!-- Price badge -->
+        <div class="absolute bottom-5 left-5 bg-white/95 text-green-700 border border-green-200 px-4 py-2 rounded-xl text-sm font-bold shadow-md backdrop-blur-sm">
           ₹10 to ₹50 per item
         </div>
+        <!-- Thumbnail inset -->
         <div class="absolute -bottom-5 -right-4 w-28 h-28 rounded-2xl overflow-hidden border-4 border-white shadow-lg hidden md:block">
           <img src="images/event3.jpg" alt="India Recycles volunteers" class="w-full h-full object-cover"/>
         </div>
       </div>
-      <!-- Text -->
-      <div>
-        <div class="inline-flex items-center gap-2 bg-forest-100 text-forest-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-4">Our Mission</div>
-        <h2 id="about-h2" class="font-serif text-3xl lg:text-4xl font-bold text-forest-900 mb-5 leading-snug">
-          Giving clothes a<br/><span class="italic grad-text-green">second life</span>
+      <!-- Text column -->
+      <div class="lg:pl-2">
+        <span class="inline-flex items-center gap-1.5 bg-green-50 text-green-600 border border-green-200 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-widest mb-5">
+          <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M12 2a10 10 0 0 1 10 10"/><path d="M12 6v6l4 2"/></svg>
+          Our Mission
+        </span>
+        <h2 id="about-h2" class="font-serif text-3xl lg:text-[2.6rem] font-bold text-gray-900 mb-5 leading-[1.2]">
+          Giving clothes a<br/><em class="grad-amber not-italic">second life</em>
         </h2>
-        <p class="text-gray-700 mb-4 leading-relaxed text-sm">
+        <p class="text-gray-700 mb-4 leading-[1.75] text-[15px]">
           India Recycles collects donated clothes from households and redistributes them through weekly sales in urban slum communities, priced between ₹10 and ₹50 to preserve dignity and promote responsibility.
         </p>
-        <p class="text-gray-600 text-sm mb-6 leading-relaxed">
-          Clothes that can no longer be worn are upcycled into shoes and apparel through our <strong class="text-forest-700">REVIBE</strong> brand, or transformed into traditional winter mattresses through the <strong class="text-forest-700">Godadi Project</strong>, creating livelihoods for women in slum communities.
+        <p class="text-gray-600 text-[15px] mb-7 leading-[1.75]">
+          Clothes that can no longer be worn are upcycled into shoes and apparel through our <strong class="text-green-600 font-semibold">REVIBE</strong> brand, or transformed into traditional winter mattresses through the <strong class="text-green-600 font-semibold">Godadi Project</strong>, creating livelihoods for women.
         </p>
-        <ul class="grid grid-cols-2 gap-2 mb-7 text-sm">
-          <li class="flex items-center gap-2 text-gray-700"><svg class="w-4 h-4 text-forest-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Dignity First</li>
-          <li class="flex items-center gap-2 text-gray-700"><svg class="w-4 h-4 text-forest-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Zero Waste Goal</li>
-          <li class="flex items-center gap-2 text-gray-700"><svg class="w-4 h-4 text-forest-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Women-Led Programs</li>
-          <li class="flex items-center gap-2 text-gray-700"><svg class="w-4 h-4 text-forest-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Health and Education</li>
+        <!-- Feature list -->
+        <ul class="grid grid-cols-2 gap-2.5 mb-8 text-[14px]">
+          <li class="flex items-center gap-2 text-gray-700">
+            <svg class="w-4 h-4 text-green-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Dignity First
+          </li>
+          <li class="flex items-center gap-2 text-gray-700">
+            <svg class="w-4 h-4 text-green-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Zero Waste Goal
+          </li>
+          <li class="flex items-center gap-2 text-gray-700">
+            <svg class="w-4 h-4 text-green-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Women-Led Programs
+          </li>
+          <li class="flex items-center gap-2 text-gray-700">
+            <svg class="w-4 h-4 text-green-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Health &amp; Education
+          </li>
         </ul>
-        <a href="about-us.html" class="inline-flex items-center gap-2 bg-forest-600 hover:bg-forest-700 text-white px-6 py-3 rounded-xl font-semibold text-sm transition-colors">
+        <a href="about-us.html" class="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-7 py-3 rounded-xl font-semibold text-sm transition-colors duration-200 cursor-pointer">
           Read Our Full Story
-          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
         </a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ════════ IMPACT NUMBERS ════════ -->
-<section class="py-16 lg:py-20 recycle-bg" style="background-color:#fef3e2;" aria-labelledby="stats-h2">
+<div class="divider"></div>
+
+<!-- ════════════ IMPACT NUMBERS ════════════ -->
+<section class="py-16 lg:py-24 bg-[#FAFAF7] ring-bg" aria-labelledby="stats-h2">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-12">
-      <div class="inline-flex items-center gap-2 bg-saffron-200 text-saffron-600 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-4">Impact in Numbers</div>
-      <h2 id="stats-h2" class="font-serif text-3xl lg:text-4xl font-bold text-forest-900 mb-2">What We've Achieved</h2>
-      <p class="text-gray-600 text-sm max-w-md mx-auto">Every number represents a life touched, a garment saved, a community served.</p>
+      <span class="inline-flex items-center gap-1.5 bg-amber-100 text-amber-600 border border-amber-200 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-widest mb-5">Impact in Numbers</span>
+      <h2 id="stats-h2" class="font-serif text-3xl lg:text-4xl font-bold text-gray-900 mb-3">What We Have Achieved</h2>
+      <p class="text-gray-500 text-[15px] max-w-md mx-auto leading-relaxed">Every number represents a life touched, a garment saved, a community served.</p>
     </div>
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-      <div class="bg-white rounded-2xl p-6 text-center shadow-sm border border-saffron-200 card">
-        <svg class="w-8 h-8 mx-auto mb-3 text-forest-400 opacity-80" viewBox="0 0 32 32" fill="currentColor"><path d="M4 28 C4 10 20 3 28 3 C20 3 23 16 14 23 C23 16 22 29 14 29 C22 29 20 14 4 28Z"/></svg>
-        <div class="text-3xl font-serif font-bold text-saffron-500 mb-1">35,500+</div>
-        <div class="text-gray-500 text-xs uppercase tracking-wide">Clothes Recycled</div>
+    <!-- 4 stat cards — all white, uniform -->
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-5">
+      <!-- Card 1 -->
+      <div class="bg-white rounded-2xl p-6 text-center shadow-sm border border-gray-200 card cursor-pointer">
+        <div class="w-10 h-10 bg-green-50 rounded-xl flex items-center justify-center mx-auto mb-4">
+          <svg class="w-5 h-5 text-green-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+        </div>
+        <div class="stat-num text-[2.2rem] text-amber-500 leading-none mb-2">35,500+</div>
+        <div class="text-gray-500 text-[12px] uppercase tracking-wide font-medium">Clothes Recycled</div>
       </div>
-      <div class="bg-forest-600 rounded-2xl p-6 text-center shadow-sm card">
-        <svg class="w-8 h-8 mx-auto mb-3 text-forest-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-        <div class="text-3xl font-serif font-bold text-white mb-1">132</div>
-        <div class="text-forest-200 text-xs uppercase tracking-wide">Slum Sales Held</div>
+      <!-- Card 2 -->
+      <div class="bg-white rounded-2xl p-6 text-center shadow-sm border border-gray-200 card cursor-pointer">
+        <div class="w-10 h-10 bg-green-50 rounded-xl flex items-center justify-center mx-auto mb-4">
+          <svg class="w-5 h-5 text-green-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div class="stat-num text-[2.2rem] text-green-600 leading-none mb-2">132</div>
+        <div class="text-gray-500 text-[12px] uppercase tracking-wide font-medium">Slum Sales Held</div>
       </div>
-      <div class="bg-white rounded-2xl p-6 text-center shadow-sm border border-saffron-200 card">
-        <svg class="w-8 h-8 mx-auto mb-3 text-forest-400 opacity-80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        <div class="text-3xl font-serif font-bold text-saffron-500 mb-1">400+</div>
-        <div class="text-gray-500 text-xs uppercase tracking-wide">Active Volunteers</div>
+      <!-- Card 3 -->
+      <div class="bg-white rounded-2xl p-6 text-center shadow-sm border border-gray-200 card cursor-pointer">
+        <div class="w-10 h-10 bg-amber-50 rounded-xl flex items-center justify-center mx-auto mb-4">
+          <svg class="w-5 h-5 text-amber-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="stat-num text-[2.2rem] text-amber-500 leading-none mb-2">400+</div>
+        <div class="text-gray-500 text-[12px] uppercase tracking-wide font-medium">Active Volunteers</div>
       </div>
-      <div class="bg-saffron-500 rounded-2xl p-6 text-center shadow-sm card">
-        <svg class="w-8 h-8 mx-auto mb-3 text-white/80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-        <div class="text-3xl font-serif font-bold text-white mb-1">20+</div>
-        <div class="text-white/80 text-xs uppercase tracking-wide">Drop Locations</div>
+      <!-- Card 4 -->
+      <div class="bg-white rounded-2xl p-6 text-center shadow-sm border border-gray-200 card cursor-pointer">
+        <div class="w-10 h-10 bg-green-50 rounded-xl flex items-center justify-center mx-auto mb-4">
+          <svg class="w-5 h-5 text-green-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div class="stat-num text-[2.2rem] text-green-600 leading-none mb-2">20+</div>
+        <div class="text-gray-500 text-[12px] uppercase tracking-wide font-medium">Drop Locations</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ════════ HOW IT WORKS ════════ -->
-<section class="py-16 lg:py-20 bg-white leaf-bg" aria-labelledby="model-h2">
+<div class="divider"></div>
+
+<!-- ════════════ HOW IT WORKS ════════════ -->
+<section class="py-16 lg:py-24 bg-[#F5F2EC] leaf-bg" aria-labelledby="model-h2">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-12">
-      <div class="inline-flex items-center gap-2 bg-forest-100 text-forest-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-4">How It Works</div>
-      <h2 id="model-h2" class="font-serif text-3xl lg:text-4xl font-bold text-forest-900">Our Simple Model</h2>
-      <p class="text-gray-500 mt-2 text-sm max-w-md mx-auto">A full circle — from your wardrobe to communities that need it most.</p>
+      <span class="inline-flex items-center gap-1.5 bg-green-50 text-green-600 border border-green-200 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-widest mb-5">How It Works</span>
+      <h2 id="model-h2" class="font-serif text-3xl lg:text-4xl font-bold text-gray-900 mb-3">Our Simple Model</h2>
+      <p class="text-gray-500 text-[15px] max-w-md mx-auto leading-relaxed">A full circle — from your wardrobe to communities that need it most.</p>
     </div>
     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-      <div class="bg-cream rounded-2xl overflow-hidden border border-forest-100 card">
+      <!-- Step 1 -->
+      <div class="bg-white rounded-2xl overflow-hidden border border-gray-200 card cursor-pointer">
         <div class="h-44 overflow-hidden">
-          <img src="images/model1.jpg" alt="Donate clothes at drop points" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"/>
+          <img src="images/model1.jpg" alt="Donate clothes at collection points" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"/>
         </div>
         <div class="p-5">
-          <div class="w-7 h-7 bg-forest-600 text-white rounded-full flex items-center justify-center text-xs font-bold mb-3">1</div>
-          <h3 class="font-serif font-bold text-forest-900 text-base mb-1">You Donate</h3>
-          <p class="text-gray-600 text-sm leading-relaxed">Drop clothes at any of our 20+ collection points across the city.</p>
+          <div class="w-7 h-7 bg-amber-500 text-white rounded-full flex items-center justify-center text-xs font-bold mb-3" aria-hidden="true">1</div>
+          <h3 class="font-serif font-bold text-gray-900 text-[15px] mb-1.5">You Donate</h3>
+          <p class="text-gray-600 text-[13px] leading-relaxed">Drop clothes at any of our 20+ collection points across the city.</p>
         </div>
       </div>
-      <div class="bg-cream rounded-2xl overflow-hidden border border-forest-100 card">
+      <!-- Step 2 -->
+      <div class="bg-white rounded-2xl overflow-hidden border border-gray-200 card cursor-pointer">
         <div class="h-44 overflow-hidden">
-          <img src="images/model2.jpg" alt="Sorting and cleaning clothes" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"/>
+          <img src="images/model2.jpg" alt="Sorting and cleaning donated clothes" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"/>
         </div>
         <div class="p-5">
-          <div class="w-7 h-7 bg-forest-600 text-white rounded-full flex items-center justify-center text-xs font-bold mb-3">2</div>
-          <h3 class="font-serif font-bold text-forest-900 text-base mb-1">We Sort</h3>
-          <p class="text-gray-600 text-sm leading-relaxed">Volunteers sort, clean and prepare each item for its next life.</p>
+          <div class="w-7 h-7 bg-green-500 text-white rounded-full flex items-center justify-center text-xs font-bold mb-3" aria-hidden="true">2</div>
+          <h3 class="font-serif font-bold text-gray-900 text-[15px] mb-1.5">We Sort</h3>
+          <p class="text-gray-600 text-[13px] leading-relaxed">Volunteers sort, clean and prepare each item for its next life.</p>
         </div>
       </div>
-      <div class="bg-saffron-50 rounded-2xl overflow-hidden border border-saffron-200 card">
+      <!-- Step 3 -->
+      <div class="bg-white rounded-2xl overflow-hidden border border-amber-200 card cursor-pointer">
         <div class="h-44 overflow-hidden">
           <img src="images/model3.jpg" alt="Weekly slum sale event" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"/>
         </div>
         <div class="p-5">
-          <div class="w-7 h-7 bg-saffron-500 text-white rounded-full flex items-center justify-center text-xs font-bold mb-3">3</div>
-          <h3 class="font-serif font-bold text-forest-900 text-base mb-1">Slum Sales</h3>
-          <p class="text-gray-600 text-sm leading-relaxed">Weekly sales in slum communities. Clothes ₹10 to ₹50.</p>
+          <div class="w-7 h-7 bg-amber-500 text-white rounded-full flex items-center justify-center text-xs font-bold mb-3" aria-hidden="true">3</div>
+          <h3 class="font-serif font-bold text-gray-900 text-[15px] mb-1.5">Slum Sales</h3>
+          <p class="text-gray-600 text-[13px] leading-relaxed">Weekly sales in slum communities. Clothes from ₹10 to ₹50.</p>
         </div>
       </div>
-      <div class="bg-cream rounded-2xl overflow-hidden border border-forest-100 card">
+      <!-- Step 4 -->
+      <div class="bg-white rounded-2xl overflow-hidden border border-gray-200 card cursor-pointer">
         <div class="h-44 overflow-hidden">
-          <img src="images/model4.jpg" alt="Zero waste upcycling" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"/>
+          <img src="images/model4.jpg" alt="Zero waste upcycling process" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"/>
         </div>
         <div class="p-5">
-          <div class="w-7 h-7 bg-forest-600 text-white rounded-full flex items-center justify-center text-xs font-bold mb-3">4</div>
-          <h3 class="font-serif font-bold text-forest-900 text-base mb-1">Zero Waste</h3>
-          <p class="text-gray-600 text-sm leading-relaxed">Leftover items become REVIBE products or Godadi mattresses.</p>
+          <div class="w-7 h-7 bg-green-500 text-white rounded-full flex items-center justify-center text-xs font-bold mb-3" aria-hidden="true">4</div>
+          <h3 class="font-serif font-bold text-gray-900 text-[15px] mb-1.5">Zero Waste</h3>
+          <p class="text-gray-600 text-[13px] leading-relaxed">Leftover items become REVIBE products or Godadi mattresses.</p>
         </div>
       </div>
     </div>
-    <div class="text-center mt-8">
-      <a href="our-model.html" class="inline-flex items-center gap-2 text-forest-600 hover:text-forest-700 font-semibold text-sm transition-colors">
+    <div class="text-center mt-9">
+      <a href="our-model.html" class="inline-flex items-center gap-2 text-green-600 hover:text-green-700 font-semibold text-[14px] transition-colors duration-200 cursor-pointer">
         Learn More About Our Model
-        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       </a>
     </div>
   </div>
 </section>
 
-<!-- ════════ COMMUNITY IMPACT ════════ -->
-<section class="py-16 lg:py-20 bg-forest-50 leaf-bg" aria-labelledby="impact-h2">
+<div class="divider"></div>
+
+<!-- ════════════ COMMUNITY IMPACT ════════════ -->
+<section class="py-16 lg:py-24 bg-white ring-bg" aria-labelledby="impact-h2">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-12">
-      <div class="inline-flex items-center gap-2 bg-forest-100 text-forest-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-4">Beyond Clothes</div>
-      <h2 id="impact-h2" class="font-serif text-3xl lg:text-4xl font-bold text-forest-900 mb-2">Community <span class="italic grad-text-green">Impact</span></h2>
-      <p class="text-gray-600 text-sm max-w-md mx-auto">Our surplus funds power health, education and livelihood programs for slum communities.</p>
+      <span class="inline-flex items-center gap-1.5 bg-green-50 text-green-600 border border-green-200 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-widest mb-5">Beyond Clothes</span>
+      <h2 id="impact-h2" class="font-serif text-3xl lg:text-4xl font-bold text-gray-900 mb-3">Community <em class="grad-amber not-italic">Impact</em></h2>
+      <p class="text-gray-500 text-[15px] max-w-md mx-auto leading-relaxed">Our surplus funds power health, education and livelihood programs for slum communities.</p>
     </div>
     <div class="grid md:grid-cols-3 gap-5">
       <!-- Medical -->
-      <div class="relative rounded-2xl overflow-hidden shadow-md card">
-        <img src="images/impact4.png" alt="Medical camps for slum communities" class="w-full h-56 object-cover"/>
-        <div class="absolute inset-0 bg-gradient-to-t from-forest-900/85 via-forest-900/15 to-transparent flex flex-col justify-end p-5">
-          <div class="inline-block bg-saffron-500 text-white text-xs font-bold px-3 py-1 rounded-full mb-2 w-fit">Medical Camps</div>
-          <div class="text-3xl font-serif font-bold text-white">1,000<span class="text-saffron-400">+</span></div>
-          <p class="text-white/80 text-xs mt-1">Beneficiaries across 3 slums</p>
+      <div class="relative rounded-2xl overflow-hidden shadow-md card cursor-pointer">
+        <img src="images/impact4.png" alt="Medical camps for slum communities" class="w-full h-60 object-cover"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-gray-900/85 via-gray-900/15 to-transparent flex flex-col justify-end p-5">
+          <span class="inline-block bg-amber-500 text-white text-[11px] font-bold px-3 py-1 rounded-full mb-3 w-fit">Medical Camps</span>
+          <div class="stat-num text-3xl text-white">1,000<span class="text-amber-400">+</span></div>
+          <p class="text-white/80 text-[12px] mt-1 leading-snug">Beneficiaries across 3 slums</p>
         </div>
       </div>
       <!-- Students -->
-      <div class="relative rounded-2xl overflow-hidden shadow-md card">
-        <img src="images/impact5.png" alt="Students supported through scholarships" class="w-full h-56 object-cover"/>
-        <div class="absolute inset-0 bg-gradient-to-t from-forest-900/85 via-forest-900/15 to-transparent flex flex-col justify-end p-5">
-          <div class="inline-block bg-forest-600 text-white text-xs font-bold px-3 py-1 rounded-full mb-2 w-fit">Scholarships</div>
-          <div class="text-3xl font-serif font-bold text-white">25<span class="text-saffron-400">+</span></div>
-          <p class="text-white/80 text-xs mt-1">Students supported through education</p>
+      <div class="relative rounded-2xl overflow-hidden shadow-md card cursor-pointer">
+        <img src="images/impact5.png" alt="Students supported through scholarships" class="w-full h-60 object-cover"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-gray-900/85 via-gray-900/15 to-transparent flex flex-col justify-end p-5">
+          <span class="inline-block bg-green-500 text-white text-[11px] font-bold px-3 py-1 rounded-full mb-3 w-fit">Scholarships</span>
+          <div class="stat-num text-3xl text-white">25<span class="text-amber-400">+</span></div>
+          <p class="text-white/80 text-[12px] mt-1 leading-snug">Students supported through education</p>
         </div>
       </div>
-      <!-- Zero Waste stat -->
-      <div class="bg-white rounded-2xl p-6 border border-forest-100 shadow-sm flex flex-col justify-between card">
+      <!-- Zero waste stat -->
+      <div class="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm flex flex-col justify-between card cursor-pointer">
         <div>
-          <svg class="w-12 h-12 mb-4" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="28" cy="28" r="22" stroke="#1a6b3a" stroke-width="2.5" fill="none"/>
-            <path d="M28 6 L33 16 L23 16 Z" fill="#e07b39"/>
-            <path d="M46 38 L41 28 L51 28 Z" fill="#e07b39"/>
-            <path d="M10 38 L15 48 L5 48 Z" fill="#e07b39"/>
-            <circle cx="28" cy="28" r="10" stroke="#1a6b3a" stroke-width="1.5" fill="none" stroke-dasharray="4 3"/>
+          <!-- Recycle icon — green ring, orange arrows -->
+          <svg class="w-12 h-12 mb-5" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="28" cy="28" r="22" stroke="#2D7A4F" stroke-width="2.5" fill="none"/>
+            <path d="M28 6 L33 16 L23 16 Z" fill="#D97706"/>
+            <path d="M46 38 L41 28 L51 28 Z" fill="#D97706"/>
+            <path d="M10 38 L15 48 L5 48 Z" fill="#D97706"/>
+            <circle cx="28" cy="28" r="10" stroke="#2D7A4F" stroke-width="1.5" fill="none" stroke-dasharray="4 3"/>
           </svg>
-          <div class="text-3xl font-serif font-bold text-forest-800 mb-1">19,200<span class="text-saffron-500">+</span></div>
-          <div class="font-semibold text-forest-700 text-sm mb-2">Cloth Pieces Saved from Landfill</div>
-          <p class="text-gray-500 text-sm leading-relaxed">Through REVIBE upcycling and the Godadi Project, we convert textile waste into livelihoods.</p>
+          <div class="stat-num text-3xl text-gray-900 mb-1">19,200<span class="text-amber-500">+</span></div>
+          <div class="font-semibold text-green-700 text-[14px] mb-3">Cloth Pieces Saved from Landfill</div>
+          <p class="text-gray-500 text-[13px] leading-relaxed">Through REVIBE upcycling and the Godadi Project, we convert textile waste into livelihoods for women.</p>
         </div>
-        <a href="our-impact.html" class="mt-5 inline-flex items-center gap-2 text-forest-600 hover:text-forest-700 font-semibold text-sm transition-colors">
+        <a href="our-impact.html" class="mt-5 inline-flex items-center gap-2 text-green-600 hover:text-green-700 font-semibold text-[13px] transition-colors duration-200 cursor-pointer">
           See Full Impact Report
-          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
         </a>
       </div>
     </div>
-    <!-- SDG + Carbon -->
+    <!-- SDG + Carbon row -->
     <div class="grid md:grid-cols-2 gap-5 mt-5">
-      <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-forest-100 card">
+      <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-200 card cursor-pointer">
         <img src="images/sdg.png" alt="India Recycles SDG alignment" class="w-full h-44 object-cover object-top"/>
       </div>
-      <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-forest-100 card">
+      <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-200 card cursor-pointer">
         <img src="images/carbon.png" alt="Carbon footprint impact" class="w-full h-44 object-cover object-top"/>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ════════ TESTIMONIALS ════════ -->
-<section class="py-16 lg:py-20 bg-white recycle-bg" aria-labelledby="testimonials-h2">
+<div class="divider"></div>
+
+<!-- ════════════ TESTIMONIALS ════════════ -->
+<section class="py-16 lg:py-24 bg-[#F5F2EC] ring-bg" aria-labelledby="testimonials-h2">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-12">
-      <div class="inline-flex items-center gap-2 bg-saffron-100 text-saffron-600 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-4">Community Voices</div>
-      <h2 id="testimonials-h2" class="font-serif text-3xl lg:text-4xl font-bold text-forest-900">Stories of Change</h2>
-      <p class="text-gray-500 text-sm mt-2">Real voices from volunteers, donors and community members.</p>
+      <span class="inline-flex items-center gap-1.5 bg-amber-100 text-amber-600 border border-amber-200 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-widest mb-5">Community Voices</span>
+      <h2 id="testimonials-h2" class="font-serif text-3xl lg:text-4xl font-bold text-gray-900 mb-3">Stories of Change</h2>
+      <p class="text-gray-500 text-[15px]">Real voices from volunteers, donors and community members.</p>
     </div>
+    <!-- 4 uniform white cards — NO dark coloured card -->
     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
 
-      <!-- Review 1 -->
-      <div class="bg-cream rounded-2xl p-5 border border-forest-100 shadow-sm card">
-        <div class="flex gap-0.5 mb-3">
-          <svg class="w-3.5 h-3.5 text-saffron-400" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg class="w-3.5 h-3.5 text-saffron-400" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg class="w-3.5 h-3.5 text-saffron-400" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg class="w-3.5 h-3.5 text-saffron-400" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg class="w-3.5 h-3.5 text-saffron-400" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      <!-- Testimonial 1 -->
+      <div class="bg-white rounded-2xl p-5 border border-gray-200 shadow-sm card cursor-pointer">
+        <div class="flex gap-0.5 mb-4" aria-label="5 stars">
+          <svg class="w-3.5 h-3.5 text-amber-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="w-3.5 h-3.5 text-amber-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="w-3.5 h-3.5 text-amber-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="w-3.5 h-3.5 text-amber-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="w-3.5 h-3.5 text-amber-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
         </div>
-        <div class="flex justify-center bg-white rounded-xl mb-4 p-2 h-28 overflow-hidden border border-forest-100">
-          <img src="images/testimonial1.png" alt="Volunteer review" class="max-h-full w-auto max-w-full rounded-lg object-contain"/>
+        <div class="flex items-center justify-center bg-gray-50 rounded-xl mb-4 p-2 h-28 overflow-hidden border border-gray-100">
+          <img src="images/testimonial1.png" alt="Volunteer testimonial screenshot" class="max-h-full w-auto max-w-full rounded-lg object-contain"/>
         </div>
-        <p class="text-gray-700 text-xs leading-relaxed italic">"Volunteering with India Recycles opened my eyes to the real power of community. Every rupee, every shirt, every hour matters."</p>
+        <p class="text-gray-700 text-[13px] leading-relaxed italic">"Volunteering with India Recycles opened my eyes to the real power of community. Every rupee, every shirt, every hour matters."</p>
       </div>
 
-      <!-- Review 2 -->
-      <div class="bg-forest-700 rounded-2xl p-5 card">
-        <div class="flex gap-0.5 mb-3">
-          <svg class="w-3.5 h-3.5 text-saffron-300" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg class="w-3.5 h-3.5 text-saffron-300" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg class="w-3.5 h-3.5 text-saffron-300" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg class="w-3.5 h-3.5 text-saffron-300" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg class="w-3.5 h-3.5 text-saffron-300" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      <!-- Testimonial 2 -->
+      <div class="bg-white rounded-2xl p-5 border border-gray-200 shadow-sm card cursor-pointer">
+        <div class="flex gap-0.5 mb-4" aria-label="5 stars">
+          <svg class="w-3.5 h-3.5 text-amber-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="w-3.5 h-3.5 text-amber-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="w-3.5 h-3.5 text-amber-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="w-3.5 h-3.5 text-amber-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="w-3.5 h-3.5 text-amber-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
         </div>
-        <div class="flex justify-center bg-white/15 rounded-xl mb-4 p-2 h-28 overflow-hidden">
-          <img src="images/testimonial2.png" alt="Volunteer review" class="max-h-full w-auto max-w-full rounded-lg object-contain"/>
+        <div class="flex items-center justify-center bg-gray-50 rounded-xl mb-4 p-2 h-28 overflow-hidden border border-gray-100">
+          <img src="images/testimonial2.png" alt="Volunteer testimonial screenshot" class="max-h-full w-auto max-w-full rounded-lg object-contain"/>
         </div>
-        <p class="text-forest-100 text-xs leading-relaxed italic">"India Recycles doesn't just redistribute clothes; it redistributes dignity. I am proud to be a part of it."</p>
+        <p class="text-gray-700 text-[13px] leading-relaxed italic">"India Recycles doesn't just redistribute clothes; it redistributes dignity. I am proud to be a part of it."</p>
       </div>
 
-      <!-- Review 3 -->
-      <div class="bg-saffron-50 rounded-2xl p-5 border border-saffron-200 card">
-        <div class="flex justify-center bg-white rounded-xl mb-4 p-2 h-28 overflow-hidden border border-saffron-100">
-          <img src="images/testimonial3.png" alt="Customer review" class="max-h-full w-auto max-w-full rounded-lg object-contain"/>
+      <!-- Testimonial 3 -->
+      <div class="bg-white rounded-2xl p-5 border border-gray-200 shadow-sm card cursor-pointer">
+        <div class="flex items-center justify-center bg-gray-50 rounded-xl mb-4 p-2 h-28 overflow-hidden border border-gray-100">
+          <img src="images/testimonial3.png" alt="Community member testimonial screenshot" class="max-h-full w-auto max-w-full rounded-lg object-contain"/>
         </div>
-        <p class="text-gray-700 text-xs leading-relaxed italic">"I bought three good shirts for my children at ₹30 each. The quality is wonderful. India Recycles is a blessing."</p>
+        <p class="text-gray-700 text-[13px] leading-relaxed italic">"I bought three good shirts for my children at ₹30 each. The quality is wonderful. India Recycles is a blessing."</p>
       </div>
 
-      <!-- Review 4 -->
-      <div class="bg-cream rounded-2xl p-5 border border-forest-100 shadow-sm card">
-        <div class="flex justify-center bg-white rounded-xl mb-4 p-2 h-28 overflow-hidden border border-forest-100">
-          <img src="images/testimonial4.png" alt="Customer review" class="max-h-full w-auto max-w-full rounded-lg object-contain"/>
+      <!-- Testimonial 4 -->
+      <div class="bg-white rounded-2xl p-5 border border-gray-200 shadow-sm card cursor-pointer">
+        <div class="flex items-center justify-center bg-gray-50 rounded-xl mb-4 p-2 h-28 overflow-hidden border border-gray-100">
+          <img src="images/testimonial4.png" alt="Community member testimonial screenshot" class="max-h-full w-auto max-w-full rounded-lg object-contain"/>
         </div>
-        <p class="text-gray-700 text-xs leading-relaxed italic">"I found amazing branded items at the yearly sale. Now I wait for it every year. A wonderful initiative!"</p>
+        <p class="text-gray-700 text-[13px] leading-relaxed italic">"I found amazing branded items at the yearly sale. Now I wait for it every year. A wonderful initiative!"</p>
       </div>
 
     </div>
   </div>
 </section>
 
-<!-- ════════ GALLERY ════════ -->
-<section class="py-16 lg:py-20 bg-forest-50 leaf-bg" aria-labelledby="gallery-h2">
+<div class="divider"></div>
+
+<!-- ════════════ GALLERY ════════════ -->
+<section class="py-16 lg:py-24 bg-white leaf-bg" aria-labelledby="gallery-h2">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-10">
-      <div class="inline-flex items-center gap-2 bg-forest-100 text-forest-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-4">Photo Gallery</div>
-      <h2 id="gallery-h2" class="font-serif text-3xl font-bold text-forest-900">On the <span class="grad-text">Ground</span></h2>
-      <p class="text-gray-500 text-sm mt-2">Real moments from our events, volunteers and communities.</p>
+      <span class="inline-flex items-center gap-1.5 bg-green-50 text-green-600 border border-green-200 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-widest mb-5">Photo Gallery</span>
+      <h2 id="gallery-h2" class="font-serif text-3xl font-bold text-gray-900 mb-3">On the <em class="grad-amber not-italic">Ground</em></h2>
+      <p class="text-gray-500 text-[15px]">Real moments from our events, volunteers and communities.</p>
     </div>
-    <!-- 3×3 grid — 9 photos total -->
+    <!-- 3×3 grid -->
     <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-      <div class="rounded-2xl overflow-hidden aspect-square group cursor-pointer shadow-sm">
-        <img src="images/gallery1.png" alt="India Recycles slum sale" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+      <div class="rounded-2xl overflow-hidden aspect-square group cursor-pointer shadow-sm border border-gray-100">
+        <img src="images/gallery1.png" alt="India Recycles slum sale" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy"/>
       </div>
-      <div class="rounded-2xl overflow-hidden aspect-square group cursor-pointer shadow-sm">
-        <img src="images/gallery2.png" alt="Community event" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+      <div class="rounded-2xl overflow-hidden aspect-square group cursor-pointer shadow-sm border border-gray-100">
+        <img src="images/gallery2.png" alt="Community event at India Recycles" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy"/>
       </div>
-      <div class="rounded-2xl overflow-hidden aspect-square group cursor-pointer shadow-sm">
-        <img src="images/gallery3.png" alt="Community members" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+      <div class="rounded-2xl overflow-hidden aspect-square group cursor-pointer shadow-sm border border-gray-100">
+        <img src="images/gallery3.png" alt="Community members at slum sale" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy"/>
       </div>
-      <div class="rounded-2xl overflow-hidden aspect-square group cursor-pointer shadow-sm">
-        <img src="images/model5.jpg" alt="Clothes sorting" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+      <div class="rounded-2xl overflow-hidden aspect-square group cursor-pointer shadow-sm border border-gray-100">
+        <img src="images/model5.jpg" alt="Clothes sorting volunteers" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy"/>
       </div>
-      <div class="rounded-2xl overflow-hidden aspect-square group cursor-pointer shadow-sm">
-        <img src="images/model6.jpg" alt="Volunteers at work" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+      <div class="rounded-2xl overflow-hidden aspect-square group cursor-pointer shadow-sm border border-gray-100">
+        <img src="images/model6.jpg" alt="Volunteers preparing clothes" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy"/>
       </div>
-      <div class="rounded-2xl overflow-hidden aspect-square group cursor-pointer shadow-sm">
-        <img src="images/zw1.jpg" alt="REVIBE upcycled products" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+      <div class="rounded-2xl overflow-hidden aspect-square group cursor-pointer shadow-sm border border-gray-100">
+        <img src="images/zw1.jpg" alt="REVIBE upcycled products" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy"/>
       </div>
-      <div class="rounded-2xl overflow-hidden aspect-square group cursor-pointer shadow-sm">
-        <img src="images/godadi2.jpg" alt="Godadi mattress project" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+      <div class="rounded-2xl overflow-hidden aspect-square group cursor-pointer shadow-sm border border-gray-100">
+        <img src="images/godadi2.jpg" alt="Godadi mattress project" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy"/>
       </div>
-      <div class="rounded-2xl overflow-hidden aspect-square group cursor-pointer shadow-sm">
-        <img src="images/event2.jpg" alt="India Recycles event" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+      <div class="rounded-2xl overflow-hidden aspect-square group cursor-pointer shadow-sm border border-gray-100">
+        <img src="images/event2.jpg" alt="India Recycles community event" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy"/>
       </div>
-      <div class="rounded-2xl overflow-hidden aspect-square group cursor-pointer shadow-sm">
-        <img src="images/revibe1.jpg" alt="REVIBE products" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+      <div class="rounded-2xl overflow-hidden aspect-square group cursor-pointer shadow-sm border border-gray-100">
+        <img src="images/revibe1.jpg" alt="REVIBE upcycled apparel products" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy"/>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ════════ PARTNERS ════════ -->
-<section class="py-14 bg-white recycle-bg" aria-labelledby="partners-h2">
+<div class="divider"></div>
+
+<!-- ════════════ PARTNERS ════════════ -->
+<section class="py-14 bg-[#FAFAF7] ring-bg" aria-labelledby="partners-h2">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-    <div class="inline-flex items-center gap-2 bg-forest-100 text-forest-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-3">Our Partners</div>
-    <h2 id="partners-h2" class="font-serif text-2xl font-bold text-forest-900 mb-7">Mission Partners</h2>
-    <div class="bg-cream rounded-2xl p-6 border border-forest-100 shadow-sm">
-      <img src="images/partners.png" alt="India Recycles mission partners" class="w-full max-h-64 object-contain" loading="lazy"/>
+    <span class="inline-flex items-center gap-1.5 bg-green-50 text-green-600 border border-green-200 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-widest mb-4">Our Partners</span>
+    <h2 id="partners-h2" class="font-serif text-2xl font-bold text-gray-900 mb-8">Mission Partners</h2>
+    <div class="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm">
+      <img src="images/partners.png" alt="India Recycles mission partners logos" class="w-full max-h-64 object-contain" loading="lazy"/>
     </div>
-    <div class="mt-5">
-      <a href="our-partners.html" class="inline-flex items-center gap-2 text-forest-600 hover:text-forest-700 font-semibold text-sm transition-colors">
+    <div class="mt-6">
+      <a href="our-partners.html" class="inline-flex items-center gap-2 text-green-600 hover:text-green-700 font-semibold text-[14px] transition-colors duration-200 cursor-pointer">
         See All Partners
-        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       </a>
     </div>
   </div>
 </section>
 
-<!-- ════════ DONATE CTA ════════ -->
-<section class="relative py-20 lg:py-24 overflow-hidden" aria-labelledby="cta-h2">
+<!-- ════════════ DONATE CTA ════════════ -->
+<section class="relative py-20 lg:py-28 overflow-hidden" aria-labelledby="cta-h2">
   <div class="absolute inset-0">
-    <img src="images/impact8.jpg" alt="India Recycles community" class="w-full h-full object-cover" loading="lazy"/>
-    <div class="absolute inset-0 bg-forest-900/85"></div>
+    <img src="images/impact8.jpg" alt="India Recycles community in action" class="w-full h-full object-cover" loading="lazy"/>
+    <div class="absolute inset-0 bg-[#0A1C11]/88"></div>
   </div>
-  <svg class="absolute right-10 top-10 w-44 h-44 opacity-[0.12] pointer-events-none hidden lg:block" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M60 10 L70 28 L50 28 Z" fill="#a8d9b4"/>
-    <path d="M98 75 L88 57 L108 57 Z" fill="#a8d9b4"/>
-    <path d="M22 75 L32 93 L12 93 Z" fill="#a8d9b4"/>
-    <circle cx="60" cy="60" r="45" stroke="#a8d9b4" stroke-width="3" fill="none"/>
-    <circle cx="60" cy="60" r="30" stroke="#a8d9b4" stroke-width="1.5" fill="none" stroke-dasharray="5 4"/>
+  <!-- Decorative recycle SVG -->
+  <svg class="absolute right-10 top-10 w-44 h-44 opacity-[0.12] pointer-events-none hidden lg:block" viewBox="0 0 120 120" fill="none" aria-hidden="true">
+    <path d="M60 10 L70 28 L50 28 Z" fill="#A8D6B8"/>
+    <path d="M98 75 L88 57 L108 57 Z" fill="#A8D6B8"/>
+    <path d="M22 75 L32 93 L12 93 Z" fill="#A8D6B8"/>
+    <circle cx="60" cy="60" r="45" stroke="#A8D6B8" stroke-width="2.5" fill="none"/>
+    <circle cx="60" cy="60" r="30" stroke="#A8D6B8" stroke-width="1.5" fill="none" stroke-dasharray="5 4"/>
   </svg>
   <div class="relative max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-    <div class="inline-flex items-center gap-2 bg-saffron-500/20 text-saffron-300 border border-saffron-400/30 px-4 py-1.5 rounded-full text-sm font-semibold mb-6">
-      <span class="w-1.5 h-1.5 rounded-full bg-saffron-400 animate-pulse"></span>
+    <div class="inline-flex items-center gap-2 bg-amber-500/20 text-amber-300 border border-amber-400/30 px-4 py-1.5 rounded-full text-[12px] font-semibold mb-7 uppercase tracking-widest">
+      <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" aria-hidden="true"></span>
       Make a Difference Today
     </div>
-    <h2 id="cta-h2" class="font-serif text-4xl lg:text-5xl font-black text-white mb-4 leading-tight">
-      Every Rupee Creates<br/><span class="grad-text">Real Change</span>
+    <h2 id="cta-h2" class="font-serif text-4xl lg:text-5xl font-extrabold text-white mb-5 leading-[1.1]">
+      Every Rupee Creates<br/><span class="grad-amber">Real Change</span>
     </h2>
-    <p class="text-white/80 text-base mb-8 leading-relaxed">Your donation powers slum sales, medical camps, scholarships and livelihoods for women across two cities.</p>
-    <div class="flex flex-wrap justify-center gap-3 mb-8">
-      <div class="bg-white/10 border border-white/20 rounded-xl px-5 py-3 text-center">
-        <div class="text-saffron-400 font-bold text-lg">₹100</div>
-        <div class="text-white/65 text-xs mt-0.5">Clothes for a family</div>
+    <p class="text-white/80 text-base mb-9 leading-relaxed max-w-lg mx-auto">Your donation powers slum sales, medical camps, scholarships and livelihoods for women across two cities.</p>
+    <!-- Donation tiers -->
+    <div class="flex flex-wrap justify-center gap-3 mb-9">
+      <div class="bg-white/10 border border-white/20 rounded-xl px-5 py-3 text-center cursor-pointer hover:bg-white/15 transition-colors duration-200">
+        <div class="text-amber-400 font-bold text-lg stat-num">₹100</div>
+        <div class="text-white/65 text-[12px] mt-0.5">Clothes for a family</div>
       </div>
-      <div class="bg-white/10 border border-white/20 rounded-xl px-5 py-3 text-center">
-        <div class="text-saffron-400 font-bold text-lg">₹500</div>
-        <div class="text-white/65 text-xs mt-0.5">Funds one slum sale</div>
+      <div class="bg-white/10 border border-white/20 rounded-xl px-5 py-3 text-center cursor-pointer hover:bg-white/15 transition-colors duration-200">
+        <div class="text-amber-400 font-bold text-lg stat-num">₹500</div>
+        <div class="text-white/65 text-[12px] mt-0.5">Funds one slum sale</div>
       </div>
-      <div class="bg-white/10 border border-white/20 rounded-xl px-5 py-3 text-center">
-        <div class="text-saffron-400 font-bold text-lg">₹2,000</div>
-        <div class="text-white/65 text-xs mt-0.5">Medical camp support</div>
+      <div class="bg-white/10 border border-white/20 rounded-xl px-5 py-3 text-center cursor-pointer hover:bg-white/15 transition-colors duration-200">
+        <div class="text-amber-400 font-bold text-lg stat-num">₹2,000</div>
+        <div class="text-white/65 text-[12px] mt-0.5">Medical camp support</div>
       </div>
     </div>
     <div class="flex flex-wrap justify-center gap-4">
-      <a href="donate.html" class="bg-saffron-500 hover:bg-saffron-600 text-white px-10 py-4 rounded-xl font-bold text-base transition-colors shadow-lg">Donate Now</a>
-      <a href="contact.html" class="border-2 border-white/30 text-white px-10 py-4 rounded-xl font-bold text-base hover:bg-white/10 transition-colors">Volunteer with Us</a>
+      <a href="donate.html" class="bg-amber-500 hover:bg-amber-600 text-white px-10 py-4 rounded-xl font-bold text-base transition-colors duration-200 shadow-lg cursor-pointer">Donate Now</a>
+      <a href="contact.html" class="border-2 border-white/30 text-white px-10 py-4 rounded-xl font-bold text-base hover:bg-white/10 transition-colors duration-200 cursor-pointer">Volunteer with Us</a>
     </div>
   </div>
 </section>
 
 </main>
 
-<!-- ════════ FOOTER ════════ -->
-<footer class="bg-forest-900 text-white" role="contentinfo">
-  <div class="h-0.5 bg-gradient-to-r from-forest-700 via-saffron-500 to-forest-700"></div>
+<!-- ════════════ FOOTER ════════════ -->
+<footer class="bg-[#0A1C11] text-white" role="contentinfo">
+  <!-- Gradient accent line -->
+  <div class="h-0.5 bg-gradient-to-r from-green-700 via-amber-500 to-green-700"></div>
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
+      <!-- Brand -->
       <div>
-        <a href="index.html" class="flex items-center gap-3 mb-4">
+        <a href="index.html" class="flex items-center gap-3 mb-4 cursor-pointer">
           <img src="images/logo.png" alt="India Recycles" class="h-9 w-auto brightness-200"/>
-          <span class="font-serif font-bold text-base">India Recycles</span>
+          <span class="font-serif font-bold text-[15px] text-white">India Recycles</span>
         </a>
-        <p class="text-forest-300 text-sm leading-relaxed mb-4">Love the Pre-Loved. A non-profit giving donated clothes a dignified second life across India.</p>
+        <p class="text-green-300/80 text-[13px] leading-relaxed mb-5">Love the Pre-Loved. A non-profit giving donated clothes a dignified second life across India.</p>
         <div class="flex gap-2">
-          <a href="#" class="w-8 h-8 bg-forest-800 hover:bg-saffron-500 rounded-lg flex items-center justify-center transition-colors" aria-label="Facebook">
-            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          <a href="#" class="w-8 h-8 bg-white/10 hover:bg-amber-500 rounded-lg flex items-center justify-center transition-colors duration-200 cursor-pointer" aria-label="Facebook">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
           </a>
-          <a href="#" class="w-8 h-8 bg-forest-800 hover:bg-saffron-500 rounded-lg flex items-center justify-center transition-colors" aria-label="Instagram">
-            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          <a href="#" class="w-8 h-8 bg-white/10 hover:bg-amber-500 rounded-lg flex items-center justify-center transition-colors duration-200 cursor-pointer" aria-label="Instagram">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="#" class="w-8 h-8 bg-white/10 hover:bg-amber-500 rounded-lg flex items-center justify-center transition-colors duration-200 cursor-pointer" aria-label="YouTube">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.96-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#0A1C11"/></svg>
           </a>
         </div>
       </div>
+      <!-- Quick Links -->
       <div>
-        <h3 class="font-bold text-xs uppercase tracking-widest text-forest-400 mb-3">Quick Links</h3>
-        <ul class="space-y-2 text-sm">
-          <li><a href="about-us.html"           class="text-forest-300 hover:text-white transition-colors">About Us</a></li>
-          <li><a href="our-model.html"          class="text-forest-300 hover:text-white transition-colors">Our Model</a></li>
-          <li><a href="drop-locations.html"     class="text-forest-300 hover:text-white transition-colors">Drop Locations</a></li>
-          <li><a href="our-impact.html"         class="text-forest-300 hover:text-white transition-colors">Our Impact</a></li>
-          <li><a href="our-partners.html"       class="text-forest-300 hover:text-white transition-colors">Our Partners</a></li>
+        <h3 class="font-bold text-[11px] uppercase tracking-widest text-green-400/80 mb-4">Quick Links</h3>
+        <ul class="space-y-2.5 text-[13px]">
+          <li><a href="about-us.html"           class="text-green-300/80 hover:text-white transition-colors duration-200 cursor-pointer">About Us</a></li>
+          <li><a href="our-model.html"          class="text-green-300/80 hover:text-white transition-colors duration-200 cursor-pointer">Our Model</a></li>
+          <li><a href="drop-locations.html"     class="text-green-300/80 hover:text-white transition-colors duration-200 cursor-pointer">Drop Locations</a></li>
+          <li><a href="our-impact.html"         class="text-green-300/80 hover:text-white transition-colors duration-200 cursor-pointer">Our Impact</a></li>
+          <li><a href="our-partners.html"       class="text-green-300/80 hover:text-white transition-colors duration-200 cursor-pointer">Our Partners</a></li>
         </ul>
       </div>
+      <!-- Programs -->
       <div>
-        <h3 class="font-bold text-xs uppercase tracking-widest text-forest-400 mb-3">Programs</h3>
-        <ul class="space-y-2 text-sm">
-          <li><a href="zero-waste-promise.html" class="text-forest-300 hover:text-white transition-colors">REVIBE Upcycling</a></li>
-          <li><a href="zero-waste-promise.html" class="text-forest-300 hover:text-white transition-colors">Godadi Project</a></li>
-          <li><a href="our-model.html"          class="text-forest-300 hover:text-white transition-colors">Slum Sales</a></li>
-          <li><a href="our-impact.html"         class="text-forest-300 hover:text-white transition-colors">Medical Camps</a></li>
-          <li><a href="our-impact.html"         class="text-forest-300 hover:text-white transition-colors">Scholarships</a></li>
+        <h3 class="font-bold text-[11px] uppercase tracking-widest text-green-400/80 mb-4">Programs</h3>
+        <ul class="space-y-2.5 text-[13px]">
+          <li><a href="zero-waste-promise.html" class="text-green-300/80 hover:text-white transition-colors duration-200 cursor-pointer">REVIBE Upcycling</a></li>
+          <li><a href="zero-waste-promise.html" class="text-green-300/80 hover:text-white transition-colors duration-200 cursor-pointer">Godadi Project</a></li>
+          <li><a href="our-model.html"          class="text-green-300/80 hover:text-white transition-colors duration-200 cursor-pointer">Slum Sales</a></li>
+          <li><a href="our-impact.html"         class="text-green-300/80 hover:text-white transition-colors duration-200 cursor-pointer">Medical Camps</a></li>
+          <li><a href="our-impact.html"         class="text-green-300/80 hover:text-white transition-colors duration-200 cursor-pointer">Scholarships</a></li>
         </ul>
       </div>
+      <!-- Get Involved -->
       <div>
-        <h3 class="font-bold text-xs uppercase tracking-widest text-forest-400 mb-3">Get Involved</h3>
-        <ul class="space-y-2 text-sm mb-4">
-          <li><a href="contact.html" class="text-forest-300 hover:text-white transition-colors">Volunteer</a></li>
-          <li><a href="contact.html" class="text-forest-300 hover:text-white transition-colors">Host a Drop Location</a></li>
-          <li><a href="donate.html"  class="text-forest-300 hover:text-white transition-colors">Donate</a></li>
+        <h3 class="font-bold text-[11px] uppercase tracking-widest text-green-400/80 mb-4">Get Involved</h3>
+        <ul class="space-y-2.5 text-[13px] mb-5">
+          <li><a href="contact.html" class="text-green-300/80 hover:text-white transition-colors duration-200 cursor-pointer">Volunteer</a></li>
+          <li><a href="contact.html" class="text-green-300/80 hover:text-white transition-colors duration-200 cursor-pointer">Host a Drop Location</a></li>
+          <li><a href="donate.html"  class="text-green-300/80 hover:text-white transition-colors duration-200 cursor-pointer">Donate</a></li>
         </ul>
-        <a href="donate.html" class="inline-block bg-saffron-500 hover:bg-saffron-600 text-white px-4 py-2 rounded-lg font-bold text-sm transition-colors">Donate Now</a>
+        <a href="donate.html" class="inline-block bg-amber-500 hover:bg-amber-600 text-white px-5 py-2.5 rounded-lg font-bold text-[13px] transition-colors duration-200 cursor-pointer">Donate Now</a>
       </div>
     </div>
-    <div class="border-t border-forest-800 pt-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-forest-500">
+    <!-- Bottom bar -->
+    <div class="border-t border-white/10 pt-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-[12px] text-green-400/60">
       <p>&copy; 2025 India Recycles. All rights reserved.</p>
       <div class="flex gap-5">
-        <a href="#" class="hover:text-forest-300 transition-colors">Terms and Conditions</a>
-        <a href="#" class="hover:text-forest-300 transition-colors">Privacy Policy</a>
+        <a href="#" class="hover:text-green-300 transition-colors cursor-pointer">Terms and Conditions</a>
+        <a href="#" class="hover:text-green-300 transition-colors cursor-pointer">Privacy Policy</a>
       </div>
     </div>
   </div>
@@ -643,7 +708,7 @@
   const menu   = document.getElementById('mob-menu');
   toggle.addEventListener('click', () => {
     const open = menu.classList.toggle('open');
-    toggle.setAttribute('aria-expanded', open);
+    toggle.setAttribute('aria-expanded', String(open));
   });
 </script>
 </body>
