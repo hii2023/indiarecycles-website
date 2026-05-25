@@ -130,73 +130,110 @@
 <main>
 
 <!-- ════════════ HERO ════════════ -->
-<section class="relative pt-16 overflow-hidden min-h-[92vh] flex items-center" aria-labelledby="hero-h1">
-  <!-- Background photo -->
-  <div class="absolute inset-0">
-    <img src="images/event1.jpg" alt="India Recycles community event" class="w-full h-full object-cover object-center" loading="eager"/>
-    <!-- Classic editorial overlay — warm dark gradient left to right -->
-    <div class="absolute inset-0 bg-gradient-to-r from-[#0A1C11]/90 via-[#0A1C11]/70 to-[#0A1C11]/30"></div>
-    <div class="absolute inset-0 bg-gradient-to-t from-[#0A1C11]/60 via-transparent to-transparent"></div>
-  </div>
+<!-- Clean split layout: text left on light bg, photo right in card. No dark overlay. -->
+<section class="relative pt-16 overflow-hidden" style="background:linear-gradient(135deg,#EEF7F2 0%,#FAFAF7 55%,#FEF9EE 100%);" aria-labelledby="hero-h1">
 
-  <!-- Decorative recycling motif — top right -->
-  <svg class="absolute top-20 right-10 w-52 h-52 opacity-[0.12] pointer-events-none hidden lg:block" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <circle cx="60" cy="60" r="52" stroke="#A8D6B8" stroke-width="2.5"/>
-    <circle cx="60" cy="60" r="36" stroke="#A8D6B8" stroke-width="1.5" stroke-dasharray="6 4"/>
-    <path d="M60 8 L68 22 L52 22 Z" fill="#A8D6B8"/>
-    <path d="M104 82 L96 68 L112 68 Z" fill="#A8D6B8"/>
-    <path d="M16 82 L24 96 L8 96 Z" fill="#A8D6B8"/>
+  <!-- Low-opacity recycling decorations (background) -->
+  <!-- Large recycle ring — top right -->
+  <svg class="absolute top-10 right-6 w-72 h-72 pointer-events-none opacity-[0.07]" viewBox="0 0 200 200" fill="none" aria-hidden="true">
+    <circle cx="100" cy="100" r="88" stroke="#2D7A4F" stroke-width="3"/>
+    <circle cx="100" cy="100" r="60" stroke="#2D7A4F" stroke-width="2" stroke-dasharray="8 6"/>
+    <path d="M100 12 L112 34 L88 34 Z" fill="#2D7A4F"/>
+    <path d="M168 138 L152 116 L188 116 Z" fill="#D97706"/>
+    <path d="M32 138 L48 160 L12 160 Z" fill="#D97706"/>
+  </svg>
+  <!-- Leaf outline — bottom left -->
+  <svg class="absolute bottom-0 left-0 w-56 h-56 pointer-events-none opacity-[0.07]" viewBox="0 0 160 160" fill="none" aria-hidden="true">
+    <path d="M20 145 C20 55 110 15 148 15 C110 15 126 90 72 125 C126 90 120 158 72 158 C120 158 110 68 20 145Z" fill="#2D7A4F"/>
+  </svg>
+  <!-- Small leaf — mid right -->
+  <svg class="absolute top-1/2 right-1/3 w-24 h-24 pointer-events-none opacity-[0.05] hidden lg:block" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+    <path d="M10 90 C10 30 72 8 90 8 C72 8 80 55 46 78 C80 55 76 98 46 98 C76 98 72 38 10 90Z" fill="#2D7A4F"/>
   </svg>
 
-  <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28 w-full">
-    <div class="max-w-[540px]">
-      <!-- Badge -->
-      <div class="inline-flex items-center gap-2 bg-white/10 border border-white/25 text-white/90 px-4 py-1.5 rounded-full text-[11px] font-semibold mb-6 uppercase tracking-widest">
-        <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" aria-hidden="true"></span>
-        We are collecting, always!
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
+    <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+
+      <!-- LEFT: Text content — dark text on light bg, zero readability issues -->
+      <div class="relative z-10">
+        <!-- Badge -->
+        <div class="inline-flex items-center gap-2 bg-green-100 border border-green-200 text-green-700 px-4 py-1.5 rounded-full text-[11px] font-bold mb-6 uppercase tracking-widest">
+          <span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" aria-hidden="true"></span>
+          We are collecting, always!
+        </div>
+        <!-- Heading -->
+        <h1 id="hero-h1" class="font-serif leading-[1.1] mb-5">
+          <span class="block text-4xl sm:text-5xl lg:text-6xl text-gray-900 font-semibold">Love the</span>
+          <span class="block text-5xl sm:text-6xl lg:text-7xl font-extrabold grad-amber">Pre-Loved</span>
+        </h1>
+        <!-- Subheadline — fully dark, no shadow needed -->
+        <p class="text-gray-700 text-base sm:text-lg mb-8 leading-relaxed max-w-[480px]">
+          We collect donated clothes and give them a dignified second life through weekly slum sales, upcycling, and livelihood programs for women across Ahmedabad and Vadodara.
+        </p>
+        <!-- CTAs -->
+        <div class="flex flex-wrap gap-3 mb-10">
+          <a href="drop-locations.html" class="inline-flex items-center gap-2 bg-amber-600 hover:bg-amber-700 text-white px-7 py-3.5 rounded-xl font-semibold text-sm transition-colors duration-200 shadow cursor-pointer">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            Find Drop Location
+          </a>
+          <a href="our-model.html" class="inline-flex items-center gap-2 bg-white border border-green-300 text-green-700 hover:bg-green-50 px-7 py-3.5 rounded-xl font-semibold text-sm transition-colors duration-200 cursor-pointer">
+            How It Works
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        </div>
+        <!-- Stats strip — dark text, always readable -->
+        <div class="flex flex-wrap gap-x-7 gap-y-4 pt-7 border-t border-green-200">
+          <div>
+            <div class="stat-num text-2xl text-amber-700">35,500+</div>
+            <div class="text-gray-600 text-[11px] uppercase tracking-widest mt-0.5 font-medium">Clothes Recycled</div>
+          </div>
+          <div class="w-px bg-green-200 self-stretch hidden sm:block"></div>
+          <div>
+            <div class="stat-num text-2xl text-green-700">132</div>
+            <div class="text-gray-600 text-[11px] uppercase tracking-widest mt-0.5 font-medium">Slum Sales</div>
+          </div>
+          <div class="w-px bg-green-200 self-stretch hidden sm:block"></div>
+          <div>
+            <div class="stat-num text-2xl text-amber-700">400+</div>
+            <div class="text-gray-600 text-[11px] uppercase tracking-widest mt-0.5 font-medium">Volunteers</div>
+          </div>
+          <div class="w-px bg-green-200 self-stretch hidden sm:block"></div>
+          <div>
+            <div class="stat-num text-2xl text-green-700">2017</div>
+            <div class="text-gray-600 text-[11px] uppercase tracking-widest mt-0.5 font-medium">Est. Ahmedabad</div>
+          </div>
+        </div>
       </div>
-      <!-- Heading -->
-      <h1 id="hero-h1" class="font-serif leading-[1.1] mb-6" style="text-shadow: 0 2px 8px rgba(0,0,0,0.3);">
-        <span class="block text-4xl sm:text-5xl lg:text-6xl text-white font-medium">Love the</span>
-        <span class="block text-5xl sm:text-6xl lg:text-7xl font-extrabold grad-amber">Pre-Loved</span>
-      </h1>
-      <!-- Subheadline -->
-      <p class="text-white text-base sm:text-lg mb-8 leading-relaxed max-w-[460px]" style="text-shadow: 0 2px 6px rgba(0,0,0,0.6);">
-        We collect donated clothes and give them a dignified second life through weekly slum sales, upcycling, and livelihood programs for women across Ahmedabad and Vadodara.
-      </p>
-      <!-- CTAs -->
-      <div class="flex flex-wrap gap-3 mb-10">
-        <a href="drop-locations.html" class="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-600 text-white px-7 py-3.5 rounded-xl font-semibold text-sm transition-colors duration-200 shadow-md cursor-pointer">
-          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-          Find Drop Location
-        </a>
-        <a href="our-model.html" class="inline-flex items-center gap-2 bg-white/12 hover:bg-white/20 text-white border border-white/35 px-7 py-3.5 rounded-xl font-semibold text-sm transition-colors duration-200 cursor-pointer">
-          How It Works
-          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-        </a>
-      </div>
-      <!-- Inline stats strip -->
-      <div class="flex flex-wrap gap-x-8 gap-y-4 pt-7 border-t border-white/20">
-        <div>
-          <div class="stat-num text-2xl text-amber-400">35,500+</div>
-          <div class="text-white/85 text-[11px] uppercase tracking-widest mt-0.5">Clothes Recycled</div>
+
+      <!-- RIGHT: Photo in a contained card — not full bleed -->
+      <div class="relative hidden lg:block">
+        <!-- Main photo card -->
+        <div class="rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
+          <img src="images/event1.jpg" alt="India Recycles community event" class="w-full h-[520px] object-cover object-center" loading="eager"/>
         </div>
-        <div class="w-px bg-white/20 self-stretch hidden sm:block"></div>
-        <div>
-          <div class="stat-num text-2xl text-white">132</div>
-          <div class="text-white/85 text-[11px] uppercase tracking-widest mt-0.5">Slum Sales</div>
+        <!-- Floating badge -->
+        <div class="absolute bottom-8 left-6 bg-white/95 backdrop-blur-sm border border-green-200 shadow-lg rounded-2xl px-5 py-3">
+          <div class="flex items-center gap-3">
+            <!-- Mini recycle icon -->
+            <svg class="w-8 h-8 text-green-600" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+              <path d="M16 4 L19 10 L13 10 Z"/>
+              <path d="M26 22 L23 16 L29 16 Z"/>
+              <path d="M6 22 L9 28 L3 28 Z"/>
+              <circle cx="16" cy="16" r="10"/>
+            </svg>
+            <div>
+              <div class="font-serif font-bold text-green-800 text-sm">Zero Waste Goal</div>
+              <div class="text-gray-600 text-[11px]">Every garment finds a purpose</div>
+            </div>
+          </div>
         </div>
-        <div class="w-px bg-white/20 self-stretch hidden sm:block"></div>
-        <div>
-          <div class="stat-num text-2xl text-amber-400">400+</div>
-          <div class="text-white/85 text-[11px] uppercase tracking-widest mt-0.5">Volunteers</div>
-        </div>
-        <div class="w-px bg-white/20 self-stretch hidden sm:block"></div>
-        <div>
-          <div class="stat-num text-2xl text-white">2017</div>
-          <div class="text-white/85 text-[11px] uppercase tracking-widest mt-0.5">Est. Ahmedabad</div>
+        <!-- Year badge -->
+        <div class="absolute -top-4 -right-4 w-20 h-20 bg-amber-600 rounded-full flex flex-col items-center justify-center shadow-lg border-4 border-white">
+          <div class="text-white font-bold text-lg leading-none">7+</div>
+          <div class="text-white/85 text-[9px] uppercase tracking-wide">Years</div>
         </div>
       </div>
+
     </div>
   </div>
 </section>
@@ -581,46 +618,71 @@
 </section>
 
 <!-- ════════════ DONATE CTA ════════════ -->
-<section class="relative py-20 lg:py-28 overflow-hidden" aria-labelledby="cta-h2">
-  <div class="absolute inset-0">
-    <img src="images/impact8.jpg" alt="India Recycles community in action" class="w-full h-full object-cover" loading="lazy"/>
-    <div class="absolute inset-0 bg-[#0A1C11]/88"></div>
-  </div>
-  <!-- Decorative recycle SVG -->
-  <svg class="absolute right-10 top-10 w-44 h-44 opacity-[0.12] pointer-events-none hidden lg:block" viewBox="0 0 120 120" fill="none" aria-hidden="true">
-    <path d="M60 10 L70 28 L50 28 Z" fill="#A8D6B8"/>
-    <path d="M98 75 L88 57 L108 57 Z" fill="#A8D6B8"/>
-    <path d="M22 75 L32 93 L12 93 Z" fill="#A8D6B8"/>
-    <circle cx="60" cy="60" r="45" stroke="#A8D6B8" stroke-width="2.5" fill="none"/>
-    <circle cx="60" cy="60" r="30" stroke="#A8D6B8" stroke-width="1.5" fill="none" stroke-dasharray="5 4"/>
+<!-- Solid dark green — NO photo overlay. Recycling SVGs at low opacity. Perfect contrast. -->
+<section class="relative py-20 lg:py-28 overflow-hidden" style="background-color:#1A4830;" aria-labelledby="cta-h2">
+
+  <!-- Low-opacity recycling decorations -->
+  <!-- Giant recycle ring — centred background -->
+  <svg class="absolute inset-0 w-full h-full pointer-events-none opacity-[0.06]" viewBox="0 0 800 400" fill="none" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <circle cx="400" cy="200" r="240" stroke="#A8D6B8" stroke-width="3"/>
+    <circle cx="400" cy="200" r="170" stroke="#A8D6B8" stroke-width="2" stroke-dasharray="12 8"/>
+    <circle cx="400" cy="200" r="100" stroke="#A8D6B8" stroke-width="1.5" stroke-dasharray="6 5"/>
+    <path d="M400 -40 L420 -5 L380 -5 Z" fill="#A8D6B8"/>
+    <path d="M634 320 L614 285 L654 285 Z" fill="#F9BF5E"/>
+    <path d="M166 320 L186 355 L146 355 Z" fill="#F9BF5E"/>
   </svg>
+  <!-- Leaf outline — top left -->
+  <svg class="absolute -top-10 -left-10 w-72 h-72 pointer-events-none opacity-[0.07]" viewBox="0 0 200 200" fill="none" aria-hidden="true">
+    <path d="M20 185 C20 65 140 18 175 18 C140 18 158 105 90 148 C158 105 150 195 90 195 C150 195 140 82 20 185Z" fill="#A8D6B8"/>
+  </svg>
+  <!-- Leaf outline — bottom right -->
+  <svg class="absolute -bottom-10 -right-10 w-72 h-72 pointer-events-none opacity-[0.07]" viewBox="0 0 200 200" fill="none" aria-hidden="true">
+    <path d="M20 185 C20 65 140 18 175 18 C140 18 158 105 90 148 C158 105 150 195 90 195 C150 195 140 82 20 185Z" fill="#A8D6B8"/>
+  </svg>
+  <!-- Small recycle arrow hint — left -->
+  <svg class="absolute left-8 top-1/2 -translate-y-1/2 w-20 h-20 pointer-events-none opacity-[0.10] hidden lg:block" viewBox="0 0 80 80" fill="none" aria-hidden="true">
+    <circle cx="40" cy="40" r="32" stroke="#A8D6B8" stroke-width="2.5"/>
+    <path d="M40 8 L46 18 L34 18 Z" fill="#A8D6B8"/>
+    <path d="M64 60 L58 50 L70 50 Z" fill="#F9BF5E"/>
+    <path d="M16 60 L22 70 L10 70 Z" fill="#F9BF5E"/>
+  </svg>
+  <!-- Small recycle arrow hint — right -->
+  <svg class="absolute right-8 top-1/2 -translate-y-1/2 w-20 h-20 pointer-events-none opacity-[0.10] hidden lg:block" viewBox="0 0 80 80" fill="none" aria-hidden="true">
+    <circle cx="40" cy="40" r="32" stroke="#A8D6B8" stroke-width="2.5"/>
+    <path d="M40 8 L46 18 L34 18 Z" fill="#A8D6B8"/>
+    <path d="M64 60 L58 50 L70 50 Z" fill="#F9BF5E"/>
+    <path d="M16 60 L22 70 L10 70 Z" fill="#F9BF5E"/>
+  </svg>
+
   <div class="relative max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-    <div class="inline-flex items-center gap-2 bg-amber-500/20 text-amber-300 border border-amber-400/30 px-4 py-1.5 rounded-full text-[12px] font-semibold mb-7 uppercase tracking-widest">
+    <!-- Badge -->
+    <div class="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-green-200 px-4 py-1.5 rounded-full text-[12px] font-semibold mb-7 uppercase tracking-widest">
       <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" aria-hidden="true"></span>
       Make a Difference Today
     </div>
+    <!-- Heading — pure white on dark green = 14:1 contrast -->
     <h2 id="cta-h2" class="font-serif text-4xl lg:text-5xl font-extrabold text-white mb-5 leading-[1.1]">
-      Every Rupee Creates<br/><span class="grad-amber">Real Change</span>
+      Every Rupee Creates<br/><span class="text-amber-400">Real Change</span>
     </h2>
-    <p class="text-white/80 text-base mb-9 leading-relaxed max-w-lg mx-auto">Your donation powers slum sales, medical camps, scholarships and livelihoods for women across two cities.</p>
-    <!-- Donation tiers -->
+    <p class="text-green-100 text-base mb-9 leading-relaxed max-w-lg mx-auto">Your donation powers slum sales, medical camps, scholarships and livelihoods for women across two cities.</p>
+    <!-- Donation tiers — white cards on dark green -->
     <div class="flex flex-wrap justify-center gap-3 mb-9">
-      <div class="bg-white/10 border border-white/20 rounded-xl px-5 py-3 text-center cursor-pointer hover:bg-white/15 transition-colors duration-200">
-        <div class="text-amber-400 font-bold text-lg stat-num">₹100</div>
-        <div class="text-white/65 text-[12px] mt-0.5">Clothes for a family</div>
+      <div class="bg-white/12 border border-white/20 rounded-xl px-5 py-4 text-center cursor-pointer hover:bg-white/20 transition-colors duration-200">
+        <div class="text-amber-400 font-bold text-xl stat-num">₹100</div>
+        <div class="text-green-200 text-[12px] mt-1">Clothes for a family</div>
       </div>
-      <div class="bg-white/10 border border-white/20 rounded-xl px-5 py-3 text-center cursor-pointer hover:bg-white/15 transition-colors duration-200">
-        <div class="text-amber-400 font-bold text-lg stat-num">₹500</div>
-        <div class="text-white/65 text-[12px] mt-0.5">Funds one slum sale</div>
+      <div class="bg-white/12 border border-white/20 rounded-xl px-5 py-4 text-center cursor-pointer hover:bg-white/20 transition-colors duration-200">
+        <div class="text-amber-400 font-bold text-xl stat-num">₹500</div>
+        <div class="text-green-200 text-[12px] mt-1">Funds one slum sale</div>
       </div>
-      <div class="bg-white/10 border border-white/20 rounded-xl px-5 py-3 text-center cursor-pointer hover:bg-white/15 transition-colors duration-200">
-        <div class="text-amber-400 font-bold text-lg stat-num">₹2,000</div>
-        <div class="text-white/65 text-[12px] mt-0.5">Medical camp support</div>
+      <div class="bg-white/12 border border-white/20 rounded-xl px-5 py-4 text-center cursor-pointer hover:bg-white/20 transition-colors duration-200">
+        <div class="text-amber-400 font-bold text-xl stat-num">₹2,000</div>
+        <div class="text-green-200 text-[12px] mt-1">Medical camp support</div>
       </div>
     </div>
     <div class="flex flex-wrap justify-center gap-4">
-      <a href="donate.html" class="bg-amber-500 hover:bg-amber-600 text-white px-10 py-4 rounded-xl font-bold text-base transition-colors duration-200 shadow-lg cursor-pointer">Donate Now</a>
-      <a href="contact.html" class="border-2 border-white/30 text-white px-10 py-4 rounded-xl font-bold text-base hover:bg-white/10 transition-colors duration-200 cursor-pointer">Volunteer with Us</a>
+      <a href="donate.html" class="bg-amber-500 hover:bg-amber-400 text-white px-10 py-4 rounded-xl font-bold text-base transition-colors duration-200 shadow-lg cursor-pointer">Donate Now</a>
+      <a href="contact.html" class="border-2 border-white/40 text-white px-10 py-4 rounded-xl font-bold text-base hover:bg-white/10 transition-colors duration-200 cursor-pointer">Volunteer with Us</a>
     </div>
   </div>
 </section>
