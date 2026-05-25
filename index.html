@@ -94,39 +94,45 @@
 <body class="antialiased">
 
 <!-- ════════════ NAVBAR ════════════ -->
-<nav class="fixed top-0 inset-x-0 z-50 bg-white/97 backdrop-blur-sm border-b border-gray-200/80 shadow-sm" role="navigation" aria-label="Main navigation">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
+<nav class="fixed top-0 inset-x-0 z-50 bg-white shadow-sm" style="border-bottom: 2px solid #1A4830;" role="navigation" aria-label="Main navigation">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-[72px]">
+    <!-- Brand: bigger logo + name in exact logo green -->
     <a href="index.html" class="flex items-center gap-3" aria-label="India Recycles home">
-      <img src="images/logo.png" alt="India Recycles logo" class="h-10 w-auto" loading="eager"/>
-      <span class="font-serif font-bold text-green-800 text-[15px] hidden sm:block tracking-tight">India Recycles</span>
+      <img src="images/logo.png" alt="India Recycles logo" class="h-14 w-auto" loading="eager"/>
+      <div class="hidden sm:flex flex-col leading-tight">
+        <span class="font-serif font-bold text-[17px] tracking-tight" style="color:#1A4830;">India Recycles</span>
+        <span class="text-[10px] uppercase tracking-[0.18em] font-medium" style="color:#92400E;">Love the Pre-Loved</span>
+      </div>
     </a>
+    <!-- Desktop nav — links synced with logo dark green -->
     <div class="hidden lg:flex items-center gap-0.5 text-[13px] font-medium">
-      <a href="index.html"              class="px-3 py-2 rounded-lg text-green-600 font-semibold">Home</a>
-      <a href="about-us.html"           class="px-3 py-2 rounded-lg text-gray-700 hover:text-green-600 hover:bg-green-50 transition-colors duration-200 cursor-pointer">About Us</a>
-      <a href="our-model.html"          class="px-3 py-2 rounded-lg text-gray-700 hover:text-green-600 hover:bg-green-50 transition-colors duration-200 cursor-pointer">Our Model</a>
-      <a href="drop-locations.html"     class="px-3 py-2 rounded-lg text-gray-700 hover:text-green-600 hover:bg-green-50 transition-colors duration-200 cursor-pointer">Drop Locations</a>
-      <a href="zero-waste-promise.html" class="px-3 py-2 rounded-lg text-gray-700 hover:text-green-600 hover:bg-green-50 transition-colors duration-200 cursor-pointer">Zero Waste</a>
-      <a href="our-impact.html"         class="px-3 py-2 rounded-lg text-gray-700 hover:text-green-600 hover:bg-green-50 transition-colors duration-200 cursor-pointer">Our Impact</a>
-      <a href="our-partners.html"       class="px-3 py-2 rounded-lg text-gray-700 hover:text-green-600 hover:bg-green-50 transition-colors duration-200 cursor-pointer">Partners</a>
-      <a href="contact.html"            class="px-3 py-2 rounded-lg text-gray-700 hover:text-green-600 hover:bg-green-50 transition-colors duration-200 cursor-pointer">Contact</a>
+      <a href="index.html"              class="px-3 py-2 rounded-lg font-semibold" style="color:#1A4830;">Home</a>
+      <a href="about-us.html"           class="px-3 py-2 rounded-lg text-gray-600 hover:bg-green-50 transition-colors duration-200 cursor-pointer" style="--tw-text-opacity:1;" onmouseover="this.style.color='#1A4830'" onmouseout="this.style.color=''">About Us</a>
+      <a href="our-model.html"          class="px-3 py-2 rounded-lg text-gray-600 hover:bg-green-50 transition-colors duration-200 cursor-pointer" onmouseover="this.style.color='#1A4830'" onmouseout="this.style.color=''">Our Model</a>
+      <a href="drop-locations.html"     class="px-3 py-2 rounded-lg text-gray-600 hover:bg-green-50 transition-colors duration-200 cursor-pointer" onmouseover="this.style.color='#1A4830'" onmouseout="this.style.color=''">Drop Locations</a>
+      <a href="zero-waste-promise.html" class="px-3 py-2 rounded-lg text-gray-600 hover:bg-green-50 transition-colors duration-200 cursor-pointer" onmouseover="this.style.color='#1A4830'" onmouseout="this.style.color=''">Zero Waste</a>
+      <a href="our-impact.html"         class="px-3 py-2 rounded-lg text-gray-600 hover:bg-green-50 transition-colors duration-200 cursor-pointer" onmouseover="this.style.color='#1A4830'" onmouseout="this.style.color=''">Our Impact</a>
+      <a href="our-partners.html"       class="px-3 py-2 rounded-lg text-gray-600 hover:bg-green-50 transition-colors duration-200 cursor-pointer" onmouseover="this.style.color='#1A4830'" onmouseout="this.style.color=''">Partners</a>
+      <a href="contact.html"            class="px-3 py-2 rounded-lg text-gray-600 hover:bg-green-50 transition-colors duration-200 cursor-pointer" onmouseover="this.style.color='#1A4830'" onmouseout="this.style.color=''">Contact</a>
     </div>
     <div class="flex items-center gap-2">
-      <a href="donate.html" class="bg-amber-500 hover:bg-amber-600 text-white px-5 py-2.5 rounded-xl font-semibold text-sm transition-colors duration-200 shadow-sm cursor-pointer">Donate Now</a>
-      <button id="menu-toggle" class="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer" aria-label="Toggle menu" aria-expanded="false" aria-controls="mob-menu">
-        <svg class="w-5 h-5 text-gray-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      <a href="donate.html" class="text-white px-5 py-2.5 rounded-xl font-semibold text-sm transition-colors duration-200 shadow-sm cursor-pointer" style="background-color:#92400E;" onmouseover="this.style.backgroundColor='#78350F'" onmouseout="this.style.backgroundColor='#92400E'">Donate Now</a>
+      <button id="menu-toggle" class="lg:hidden p-2 rounded-lg hover:bg-green-50 transition-colors cursor-pointer" aria-label="Toggle menu" aria-expanded="false" aria-controls="mob-menu">
+        <svg class="w-5 h-5" style="color:#1A4830;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       </button>
     </div>
   </div>
-  <div id="mob-menu" class="lg:hidden border-t border-gray-100 bg-white px-4 py-3 flex flex-col gap-1 text-sm font-medium">
-    <a href="index.html"              class="px-4 py-2.5 rounded-lg bg-green-50 text-green-700 font-semibold cursor-pointer">Home</a>
-    <a href="about-us.html"           class="px-4 py-2.5 rounded-lg text-gray-600 hover:bg-green-50 hover:text-green-700 transition-colors cursor-pointer">About Us</a>
-    <a href="our-model.html"          class="px-4 py-2.5 rounded-lg text-gray-600 hover:bg-green-50 hover:text-green-700 transition-colors cursor-pointer">Our Model</a>
-    <a href="drop-locations.html"     class="px-4 py-2.5 rounded-lg text-gray-600 hover:bg-green-50 hover:text-green-700 transition-colors cursor-pointer">Drop Locations</a>
-    <a href="zero-waste-promise.html" class="px-4 py-2.5 rounded-lg text-gray-600 hover:bg-green-50 hover:text-green-700 transition-colors cursor-pointer">Zero Waste</a>
-    <a href="our-impact.html"         class="px-4 py-2.5 rounded-lg text-gray-600 hover:bg-green-50 hover:text-green-700 transition-colors cursor-pointer">Our Impact</a>
-    <a href="our-partners.html"       class="px-4 py-2.5 rounded-lg text-gray-600 hover:bg-green-50 hover:text-green-700 transition-colors cursor-pointer">Partners</a>
-    <a href="contact.html"            class="px-4 py-2.5 rounded-lg text-gray-600 hover:bg-green-50 hover:text-green-700 transition-colors cursor-pointer">Contact</a>
-    <a href="donate.html"             class="mt-1 px-4 py-2.5 rounded-lg bg-amber-500 text-white font-semibold text-center cursor-pointer">Donate Now</a>
+  <!-- Mobile menu — same green theme -->
+  <div id="mob-menu" class="lg:hidden border-t bg-white px-4 py-3 flex flex-col gap-1 text-sm font-medium" style="border-color:#D4EBDC;">
+    <a href="index.html"              class="px-4 py-2.5 rounded-lg font-semibold cursor-pointer" style="background:#EEF7F2;color:#1A4830;">Home</a>
+    <a href="about-us.html"           class="px-4 py-2.5 rounded-lg text-gray-700 hover:bg-green-50 transition-colors cursor-pointer">About Us</a>
+    <a href="our-model.html"          class="px-4 py-2.5 rounded-lg text-gray-700 hover:bg-green-50 transition-colors cursor-pointer">Our Model</a>
+    <a href="drop-locations.html"     class="px-4 py-2.5 rounded-lg text-gray-700 hover:bg-green-50 transition-colors cursor-pointer">Drop Locations</a>
+    <a href="zero-waste-promise.html" class="px-4 py-2.5 rounded-lg text-gray-700 hover:bg-green-50 transition-colors cursor-pointer">Zero Waste</a>
+    <a href="our-impact.html"         class="px-4 py-2.5 rounded-lg text-gray-700 hover:bg-green-50 transition-colors cursor-pointer">Our Impact</a>
+    <a href="our-partners.html"       class="px-4 py-2.5 rounded-lg text-gray-700 hover:bg-green-50 transition-colors cursor-pointer">Partners</a>
+    <a href="contact.html"            class="px-4 py-2.5 rounded-lg text-gray-700 hover:bg-green-50 transition-colors cursor-pointer">Contact</a>
+    <a href="donate.html"             class="mt-1 px-4 py-2.5 rounded-lg text-white font-semibold text-center cursor-pointer" style="background-color:#92400E;">Donate Now</a>
   </div>
 </nav>
 
@@ -134,7 +140,7 @@
 
 <!-- ════════════ HERO ════════════ -->
 <!-- Clean split layout: text left on light bg, photo right in card. No dark overlay. -->
-<section class="relative pt-16 overflow-hidden" style="background:linear-gradient(135deg,#EEF7F2 0%,#FAFAF7 55%,#FEF9EE 100%);" aria-labelledby="hero-h1">
+<section class="relative pt-[72px] overflow-hidden" style="background:linear-gradient(135deg,#EEF7F2 0%,#FAFAF7 55%,#FEF9EE 100%);" aria-labelledby="hero-h1">
 
   <!-- Low-opacity recycling decorations (background) -->
   <!-- Large recycle ring — top right -->
