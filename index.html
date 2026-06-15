@@ -73,7 +73,7 @@
     #mob-menu.open { display: block; }
     .grad-amber, em.grad-amber { color: var(--brand-amber); font-style: normal; background: none; -webkit-text-fill-color: unset; }
     @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-    .marquee-track { animation: marquee 36s linear infinite; }
+    .marquee-track { animation: marquee 16s linear infinite; }
     @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }
     .card { transition: transform .2s ease, box-shadow .2s ease; }
     .card:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(0,0,0,.07); }
@@ -102,6 +102,17 @@
     }
 
     .font-serif { font-family: var(--font-sans) !important; font-style: normal; }
+
+    /* ── Hamburger: hide on desktop (inline display:flex was overriding lg:hidden) ── */
+    #menu-toggle { display: flex; }
+    @media (min-width: 1024px) { #menu-toggle { display: none !important; } }
+    /* ── Mobile spacing improvements ────────────────────────────────────────────── */
+    @media (max-width: 1023px) {
+      body { font-size: 15px; }
+      nav { height: auto; }
+      #mob-menu .flex.flex-col { gap: 4px; }
+      section { padding-left: 16px; padding-right: 16px; }
+    }
   </style>
 </head>
 <body class="antialiased">
@@ -144,7 +155,7 @@
       <!-- Donate Now -->
       <a href="donate.html" class="hidden sm:inline-flex" style="color:#fff;font-size:13px;font-weight:500;background:#92400E;padding:8px 20px;border-radius:9999px;text-decoration:none;cursor:pointer;transition:background .2s;white-space:nowrap;" onmouseover="this.style.background='#78350F'" onmouseout="this.style.background='#92400E'">Donate Now</a>
       <!-- Hamburger (mobile) -->
-      <button id="menu-toggle" class="lg:hidden" style="display:flex;align-items:center;justify-content:center;width:36px;height:36px;border:none;background:transparent;cursor:pointer;border-radius:8px;" aria-label="Toggle menu" aria-expanded="false" aria-controls="mob-menu">
+      <button id="menu-toggle" class="lg:hidden" style="align-items:center;justify-content:center;width:36px;height:36px;border:none;background:transparent;cursor:pointer;border-radius:8px;" aria-label="Toggle menu" aria-expanded="false" aria-controls="mob-menu">
         <svg style="width:20px;height:20px;color:#1A4830;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       </button>
     </div>
