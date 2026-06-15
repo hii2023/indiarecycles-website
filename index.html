@@ -14,38 +14,27 @@
       theme: {
         extend: {
           fontFamily: {
-            serif: ['Playfair Display', 'Georgia', 'serif'],
-            sans:  ['Inter', 'sans-serif'],
+            sans: ['Inter', 'sans-serif'],
           },
           colors: {
-            /* Green — used SPARINGLY: icons, badges, borders, CTAs only */
             green: {
-              50:  '#EEF7F2',
-              100: '#D4EBDC',
-              200: '#A8D6B8',
-              300: '#6DB88A',
-              400: '#3D9B60',
-              500: '#2D7A4F',
-              600: '#236040',
-              700: '#1A4830',
-              800: '#112E1E',
-              900: '#091910',
+              50:  '#EEF7F2', 100: '#D4EBDC', 200: '#A8D6B8',
+              300: '#6DB88A', 400: '#3D9B60', 500: '#2D7A4F',
+              600: '#236040', 700: '#1A4830', 800: '#112E1E', 900: '#091910',
             },
-            /* Amber/Orange — CTAs, accent numbers */
             amber: {
-              50:  '#FFFBF0',
-              100: '#FEF3E2',
-              200: '#FCD9A0',
-              300: '#F9BF5E',
-              400: '#F59E0B',
-              500: '#D97706',
-              600: '#B45309',
-              700: '#92400E',  /* high contrast on white: 7.7:1 */
-              800: '#78350F',
+              50:  '#FFFBF0', 100: '#FEF3E2', 200: '#FCD9A0',
+              300: '#F9BF5E', 400: '#F59E0B', 500: '#D97706',
+              600: '#B45309', 700: '#92400E', 800: '#78350F',
             },
+            forest: { 50:'#f0f7f2', 100:'#d4edda', 200:'#a8d9b4', 300:'#72bf87', 400:'#3fa35e', 500:'#1a8a3f', 600:'#1a6b3a', 700:'#155530', 800:'#0d3320', 900:'#081a10' },
+            saffron: { 100:'#fef3e2', 200:'#fcd9a0', 400:'#f5a623', 500:'#e07b39', 600:'#c4621e' },
+            cream: '#fdfef8',
           },
+          borderRadius: { '4xl': '2rem' },
         }
       }
+    }
     }
   </script>
 
@@ -123,9 +112,9 @@
 
 <!-- NAVBAR -->
 <nav style="position:fixed;top:0;left:0;right:0;z-index:50;background:#ffffff;border-bottom:1px solid rgba(0,0,0,0.08);box-shadow:0 1px 3px rgba(0,0,0,0.05);" role="navigation" aria-label="Main navigation">
-  <div style="width:100%;padding:0 32px;height:84px;display:flex;align-items:center;gap:16px;box-sizing:border-box;">
+  <div style="width:100%;padding:0 32px;height:64px;display:flex;align-items:center;gap:16px;box-sizing:border-box;">
     <a href="index.html" style="flex-shrink:0;text-decoration:none;" aria-label="India Recycles home">
-      <img src="images/logo.png" alt="India Recycles logo" style="height:68px;width:auto;display:block;" loading="eager"/>
+      <img src="images/logo.png" alt="India Recycles logo" style="height:44px;width:auto;display:block;" loading="eager"/>
     </a>
     <div style="flex:1;display:flex;justify-content:center;align-items:center;">
       <div class="hidden lg:flex" style="align-items:center;gap:2px;background:#1A4830;border-radius:9999px;padding:6px 8px;">
@@ -168,7 +157,7 @@
 
 <!-- ════════════ HERO ════════════ -->
 <!-- Clean split layout: text left on light bg, photo right in card. No dark overlay. -->
-<section class="relative pt-[84px] overflow-hidden bg-white" aria-labelledby="hero-h1">
+<section class="relative pt-[64px] overflow-hidden bg-white" aria-labelledby="hero-h1">
 
   <!-- Low-opacity recycling decorations (background) -->
   <!-- Large recycle ring — top right -->
