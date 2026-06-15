@@ -79,46 +79,76 @@
     @media (prefers-reduced-motion: reduce) {
       body { animation: none; }
     }
+
+    .font-serif { font-family: var(--font-sans) !important; font-style: normal; }
   </style>
 </head>
 <body class="font-sans text-forest-800 antialiased">
 
 <!-- NAVBAR -->
 <nav style="position:fixed;top:0;left:0;right:0;z-index:50;background:#ffffff;border-bottom:1px solid rgba(0,0,0,0.08);box-shadow:0 1px 3px rgba(0,0,0,0.05);" role="navigation" aria-label="Main navigation">
-  <div style="max-width:1280px;margin:0 auto;padding:0 28px;height:84px;display:flex;align-items:center;justify-content:space-between;">
-    <div style="display:flex;align-items:center;gap:18px;">
-      <a href="index.html" style="flex-shrink:0;text-decoration:none;" aria-label="India Recycles home">
-        <img src="images/logo.png" alt="India Recycles logo" style="height:68px;width:auto;display:block;" loading="eager"/>
-      </a>
+  <div style="width:100%;padding:0 32px;height:84px;display:flex;align-items:center;gap:16px;box-sizing:border-box;">
+    <!-- Logo: left anchor -->
+    <a href="index.html" style="flex-shrink:0;text-decoration:none;" aria-label="India Recycles home">
+      <img src="images/logo.png" alt="India Recycles logo" style="height:68px;width:auto;display:block;" loading="eager"/>
+    </a>
+    <!-- Nav pill: centred in remaining space -->
+    <div style="flex:1;display:flex;justify-content:center;align-items:center;">
       <div class="hidden lg:flex" style="align-items:center;gap:2px;background:#1A4830;border-radius:9999px;padding:6px 8px;">
-      <a href="index.html" style="display:inline-flex;padding:6px 16px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">Home</a>
-      <a href="about-us.html" style="display:inline-flex;padding:6px 16px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">About Us</a>
-      <a href="our-model.html" style="display:inline-flex;padding:6px 16px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">Our Model</a>
-      <a href="drop-locations.html" style="display:inline-flex;padding:6px 16px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">Drop Locations</a>
-      <a href="zero-waste-promise.html" style="display:inline-flex;padding:6px 16px;border-radius:9999px;color:#fff;font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;background:rgba(255,255,255,0.22);">Zero Waste</a>
-      <a href="our-impact.html" style="display:inline-flex;padding:6px 16px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">Our Impact</a>
-      <a href="our-partners.html" style="display:inline-flex;padding:6px 16px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">Partners</a>
-      <a href="contact.html" style="display:inline-flex;padding:6px 16px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">Contact</a>
+        <a href="index.html" style="display:inline-flex;padding:6px 16px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">Home</a>
+        <a href="about-us.html" style="display:inline-flex;padding:6px 16px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">About Us</a>
+        <a href="our-model.html" style="display:inline-flex;padding:6px 16px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">Our Model</a>
+        <a href="drop-locations.html" style="display:inline-flex;padding:6px 16px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">Drop Locations</a>
+        <a href="zero-waste-promise.html" style="display:inline-flex;padding:6px 16px;border-radius:9999px;color:#fff;font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;background:rgba(255,255,255,0.22);">Zero Waste</a>
+        <a href="our-impact.html" style="display:inline-flex;padding:6px 16px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">Our Impact</a>
+        <a href="our-partners.html" style="display:inline-flex;padding:6px 16px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">Partners</a>
+        <a href="contact.html" style="display:inline-flex;padding:6px 16px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">Contact</a>
+      </div>
     </div>
-    </div>
-    <div style="display:flex;align-items:center;gap:12px;">
+    <!-- Right cluster: Thrift Store + Instagram + Donate + Hamburger -->
+    <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
+      <!-- Thrift Store — colorful gradient pill -->
+      <a href="https://indiarecycles.org" target="_blank" rel="noopener noreferrer" class="hidden lg:inline-flex" style="align-items:center;gap:6px;padding:7px 16px;border-radius:9999px;font-size:13px;font-weight:700;text-decoration:none;cursor:pointer;white-space:nowrap;background:linear-gradient(135deg,#F59E0B 0%,#EF4444 50%,#8B5CF6 100%);color:#fff;letter-spacing:0.01em;" aria-label="Visit India Recycles Thrift Store">
+        <svg style="width:13px;height:13px;flex-shrink:0;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        Thrift Store
+      </a>
+      <!-- Instagram -->
+      <a href="https://www.instagram.com/india.recycles" target="_blank" rel="noopener noreferrer" class="hidden lg:flex" style="width:34px;height:34px;background:#f5f4ef;border-radius:8px;align-items:center;justify-content:center;text-decoration:none;color:#1a1a1a;transition:all .15s;flex-shrink:0;" onmouseover="this.style.background='#E1306C';this.style.color='#fff'" onmouseout="this.style.background='#f5f4ef';this.style.color='#1a1a1a'" aria-label="India Recycles on Instagram">
+        <svg style="width:16px;height:16px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect width="20" height="20" x="2" y="2" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      </a>
+      <!-- Facebook -->
+      <a href="#" class="hidden lg:flex" style="width:34px;height:34px;background:#f5f4ef;border-radius:8px;align-items:center;justify-content:center;text-decoration:none;color:#1a1a1a;transition:all .15s;flex-shrink:0;" onmouseover="this.style.background='#1877F2';this.style.color='#fff'" onmouseout="this.style.background='#f5f4ef';this.style.color='#1a1a1a'" aria-label="India Recycles on Facebook">
+        <svg style="width:15px;height:15px;" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+      </a>
+      <!-- Donate Now -->
       <a href="donate.html" class="hidden sm:inline-flex" style="color:#fff;font-size:13px;font-weight:500;background:#92400E;padding:8px 20px;border-radius:9999px;text-decoration:none;cursor:pointer;transition:background .2s;white-space:nowrap;" onmouseover="this.style.background='#78350F'" onmouseout="this.style.background='#92400E'">Donate Now</a>
+      <!-- Hamburger (mobile) -->
       <button id="menu-toggle" class="lg:hidden" style="display:flex;align-items:center;justify-content:center;width:36px;height:36px;border:none;background:transparent;cursor:pointer;border-radius:8px;" aria-label="Toggle menu" aria-expanded="false" aria-controls="mob-menu">
         <svg style="width:20px;height:20px;color:#1A4830;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       </button>
     </div>
   </div>
+  <!-- Mobile menu -->
   <div id="mob-menu" class="lg:hidden" style="background:#fff;border-top:1px solid rgba(0,0,0,0.08);">
     <div style="padding:10px 16px;display:flex;flex-direction:column;gap:2px;">
-    <a href="index.html" style="display:block;padding:9px 14px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Home</a>
-    <a href="about-us.html" style="display:block;padding:9px 14px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">About Us</a>
-    <a href="our-model.html" style="display:block;padding:9px 14px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Our Model</a>
-    <a href="drop-locations.html" style="display:block;padding:9px 14px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Drop Locations</a>
-    <a href="zero-waste-promise.html" style="display:block;padding:9px 14px;border-radius:8px;background:#f5f4ef;color:#1a1a1a;font-size:14px;font-weight:500;text-decoration:none;">Zero Waste</a>
-    <a href="our-impact.html" style="display:block;padding:9px 14px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Our Impact</a>
-    <a href="our-partners.html" style="display:block;padding:9px 14px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Partners</a>
-    <a href="contact.html" style="display:block;padding:9px 14px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Contact</a>
-      <a href="donate.html" style="display:block;margin-top:8px;padding:10px 14px;border-radius:8px;background:#92400E;color:#fff;font-size:14px;font-weight:500;text-align:center;text-decoration:none;cursor:pointer;">Donate Now</a>
+      <a href="index.html" style="display:block;padding:9px 14px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Home</a>
+      <a href="about-us.html" style="display:block;padding:9px 14px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">About Us</a>
+      <a href="our-model.html" style="display:block;padding:9px 14px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Our Model</a>
+      <a href="drop-locations.html" style="display:block;padding:9px 14px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Drop Locations</a>
+      <a href="zero-waste-promise.html" style="display:block;padding:9px 14px;border-radius:8px;background:#f5f4ef;color:#1a1a1a;font-size:14px;font-weight:500;text-decoration:none;">Zero Waste</a>
+      <a href="our-impact.html" style="display:block;padding:9px 14px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Our Impact</a>
+      <a href="our-partners.html" style="display:block;padding:9px 14px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Partners</a>
+      <a href="contact.html" style="display:block;padding:9px 14px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Contact</a>
+      <a href="https://indiarecycles.org" target="_blank" rel="noopener noreferrer" style="display:block;margin-top:8px;padding:10px 14px;border-radius:8px;background:linear-gradient(135deg,#F59E0B,#EF4444,#8B5CF6);color:#fff;font-size:14px;font-weight:700;text-align:center;text-decoration:none;cursor:pointer;">Thrift Store</a>
+      <a href="donate.html" style="display:block;margin-top:4px;padding:10px 14px;border-radius:8px;background:#92400E;color:#fff;font-size:14px;font-weight:500;text-align:center;text-decoration:none;cursor:pointer;">Donate Now</a>
+      <div style="display:flex;justify-content:center;gap:12px;padding:12px 0 4px;">
+        <a href="https://www.instagram.com/india.recycles" target="_blank" rel="noopener noreferrer" style="width:36px;height:36px;background:#f5f4ef;border-radius:8px;display:flex;align-items:center;justify-content:center;text-decoration:none;color:#1a1a1a;" aria-label="Instagram">
+          <svg style="width:17px;height:17px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect width="20" height="20" x="2" y="2" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a href="#" style="width:36px;height:36px;background:#f5f4ef;border-radius:8px;display:flex;align-items:center;justify-content:center;text-decoration:none;color:#1a1a1a;" aria-label="Facebook">
+          <svg style="width:16px;height:16px;" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+      </div>
     </div>
   </div>
 </nav>
