@@ -29,6 +29,16 @@
     #mob-menu.open { display: block; }
     h1,h2,h3 { font-family: var(--font-sans); color: var(--text-primary); letter-spacing: -0.02em; }
     h1 { font-weight: 600; }
+
+    /* ── Page transitions ─────────────────── */
+    body { animation: ir-in 0.32s ease both; }
+    @keyframes ir-in {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      body { animation: none; }
+    }
   </style>
 </head>
 <body>
@@ -36,9 +46,8 @@
 <!-- NAVBAR -->
 <nav style="position:fixed;top:0;left:0;right:0;z-index:50;background:#ffffff;border-bottom:1px solid rgba(0,0,0,0.08);box-shadow:0 1px 3px rgba(0,0,0,0.05);" role="navigation" aria-label="Main navigation">
   <div style="max-width:1280px;margin:0 auto;padding:0 24px;height:72px;display:flex;align-items:center;justify-content:space-between;">
-    <a href="index.html" style="flex-shrink:0;text-decoration:none;display:flex;align-items:center;gap:10px;" aria-label="India Recycles home">
-      <img src="images/logo.png" alt="India Recycles logo" style="height:48px;width:auto;display:block;" loading="eager"/>
-      <span style="font-size:15px;font-weight:600;color:#1a1a1a;letter-spacing:-0.01em;line-height:1.25;">India<br/>Recycles</span>
+    <a href="index.html" style="flex-shrink:0;text-decoration:none;" aria-label="India Recycles home">
+      <img src="images/logo.png" alt="India Recycles logo" style="height:56px;width:auto;display:block;" loading="eager"/>
     </a>
     <div class="hidden lg:flex" style="align-items:center;gap:2px;background:#1A4830;border-radius:9999px;padding:5px 6px;">
       <a href="index.html" style="display:inline-flex;padding:6px 16px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:13px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">Home</a>
@@ -94,6 +103,25 @@
     const open = menu.classList.toggle('open');
     toggle.setAttribute('aria-expanded', open);
   });
+</script>
+
+<script>
+(function(){
+  // Fade out before navigating to any internal .html page
+  document.addEventListener('click', function(e) {
+    var a = e.target.closest('a');
+    if (!a) return;
+    var href = a.getAttribute('href');
+    if (!href) return;
+    // Only internal html pages, skip anchors / mailto / tel / external
+    if (href.startsWith('#') || href.startsWith('mailto') || href.startsWith('tel') || href.startsWith('http')) return;
+    if (!href.match(/\.html$/)) return;
+    e.preventDefault();
+    document.body.style.opacity = '0';
+    document.body.style.transition = 'opacity 0.22s ease';
+    setTimeout(function(){ window.location.href = href; }, 240);
+  });
+})();
 </script>
 </body>
 </html>
