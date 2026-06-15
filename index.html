@@ -46,30 +46,33 @@
               700: '#92400E',  /* high contrast on white: 7.7:1 */
               800: '#78350F',
             },
-            /* Ivory & off-white — section backgrounds */
-            ivory: '#F5F2EC',
-            offwhite: '#FAFAF7',
           },
         }
       }
     }
   </script>
   <style>
+    /* ── Design tokens ───────────────────── */
+    :root {
+      --green:  #1A4830;
+      --amber:  #92400E;
+      --text:   #111827;
+      --muted:  #6B7280;
+      --border: #E5E7EB;
+      --bg:     #FFFFFF;
+      --bg-alt: #F9FAFB;
+    }
+
     /* ── Base ─────────────────────────────── */
     html { scroll-behavior: smooth; }
-    body { background-color: #FAFAF7; font-family: 'Inter', sans-serif; color: #1f2937; }
+    body { background-color: var(--bg); font-family: 'Inter', sans-serif; color: #111827; line-height: 1.6; }
 
     /* ── Mobile nav ───────────────────────── */
     #mob-menu { display: none; }
     #mob-menu.open { display: block; }
 
-    /* ── Gradient text (orange) ───────────── */
-    .grad-amber {
-      background: linear-gradient(135deg, #D97706 0%, #B45309 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
+    /* ── Amber accent text ────────────────── */
+    .grad-amber { color: #92400E; }
 
     /* ── Marquee ──────────────────────────── */
     @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
@@ -77,29 +80,42 @@
     @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }
 
     /* ── Card hover lift ──────────────────── */
-    .card { transition: transform .22s ease, box-shadow .22s ease; }
-    .card:hover { transform: translateY(-4px); box-shadow: 0 14px 32px rgba(0,0,0,.09); }
+    .card { transition: transform .2s ease, box-shadow .2s ease; }
+    .card:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(0,0,0,.08); }
     @media (prefers-reduced-motion: reduce) { .card:hover { transform: none; } }
 
-    /* ── SVG patterns removed for clarity ── */
-    .leaf-bg, .ring-bg { /* no background pattern — clean sections */ }
+    /* ── Section rhythm ─────────────────────
+       Even sections  → bg-white
+       Odd sections   → bg-[#F9FAFB]
+       CTA            → bg-[#1A4830]          */
+    .leaf-bg, .ring-bg {}
 
-    /* ── Section divider line ─────────────── */
-    .divider { height: 1px; background-color: #e5e7eb; }
+    /* ── Divider ─────────────────────────── */
+    .divider { height: 1px; background-color: var(--border); }
 
-    /* ── Stat number ─────────────────────── */
+    /* ── Stat numbers ───────────────────── */
     .stat-num { font-family: 'Inter', sans-serif; font-weight: 800; letter-spacing: -0.02em; }
+
+    /* ── Section badge ─────────────────── */
+    .badge { display:inline-flex; align-items:center; gap:6px; background:#F3F4F6; color:#374151; border:1px solid #E5E7EB; padding:4px 12px; border-radius:9999px; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.14em; margin-bottom:20px; }
+
+    /* ── Typography scale ───────────────── */
+    h1,h2,h3 { font-family:'Playfair Display',Georgia,serif; line-height:1.15; color:var(--text); }
+    h1 { font-weight:700; }
+    h2 { font-weight:700; }
+    h3 { font-weight:600; }
+    p  { line-height:1.7; }
   </style>
 </head>
 <body class="antialiased">
 
 <!-- ════════════ NAVBAR ════════════ -->
 <nav class="fixed top-0 inset-x-0 z-50 bg-white shadow-md" role="navigation" aria-label="Main navigation">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-[200px]">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-[76px]">
 
     <!-- Logo — 192px height so brand name is clearly readable -->
     <a href="index.html" class="shrink-0" aria-label="India Recycles home">
-      <img src="images/logo.png" alt="India Recycles logo" class="h-[192px] w-auto" loading="eager"/>
+      <img src="images/logo.png" alt="India Recycles logo" class="h-14 w-auto" loading="eager"/>
     </a>
 
     <!-- Desktop nav — green pill capsule -->
@@ -141,7 +157,7 @@
 
 <!-- ════════════ HERO ════════════ -->
 <!-- Clean split layout: text left on light bg, photo right in card. No dark overlay. -->
-<section class="relative pt-[200px] overflow-hidden" style="background:linear-gradient(135deg,#FAFAF8 0%,#FFFFFF 50%,#FFFBF4 100%);" aria-labelledby="hero-h1">
+<section class="relative pt-[76px] overflow-hidden bg-white" aria-labelledby="hero-h1">
 
   <!-- Low-opacity recycling decorations (background) -->
   <!-- Large recycle ring — top right -->
@@ -249,7 +265,7 @@
 </section>
 
 <!-- ════════════ MARQUEE ════════════ -->
-<div class="bg-[#EDE9DF] border-y border-gray-200 py-3 overflow-hidden" aria-label="Key statistics ticker">
+<div class="bg-gray-100 border-y border-gray-200 py-3 overflow-hidden" aria-label="Key statistics ticker">
   <div class="flex whitespace-nowrap marquee-track">
     <div class="flex gap-14 shrink-0 pr-14 text-[13px] font-semibold text-gray-600">
       <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-amber-500" aria-hidden="true"></span>35,500+ Clothes Recycled</span>
@@ -330,7 +346,7 @@
 <div class="divider"></div>
 
 <!-- ════════════ IMPACT NUMBERS ════════════ -->
-<section class="py-16 lg:py-24 bg-[#F3F0EA] ring-bg" aria-labelledby="stats-h2">
+<section class="py-16 lg:py-24 bg-gray-50" aria-labelledby="stats-h2">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-12">
       <span class="inline-flex items-center gap-1.5 bg-amber-100 text-amber-600 border border-amber-200 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-widest mb-5">Impact in Numbers</span>
@@ -378,7 +394,7 @@
 <div class="divider"></div>
 
 <!-- ════════════ HOW IT WORKS ════════════ -->
-<section class="py-16 lg:py-24 bg-[#EDE9DF] leaf-bg" aria-labelledby="model-h2">
+<section class="py-16 lg:py-24 bg-white" aria-labelledby="model-h2">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-12">
       <span class="inline-flex items-center gap-1.5 bg-gray-100 text-gray-600 border border-gray-200 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-widest mb-5">How It Works</span>
@@ -505,7 +521,7 @@
 <div class="divider"></div>
 
 <!-- ════════════ TESTIMONIALS ════════════ -->
-<section class="py-16 lg:py-24 bg-[#EDE9DF] ring-bg" aria-labelledby="testimonials-h2">
+<section class="py-16 lg:py-24 bg-gray-50" aria-labelledby="testimonials-h2">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-12">
       <span class="inline-flex items-center gap-1.5 bg-amber-100 text-amber-600 border border-amber-200 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-widest mb-5">Community Voices</span>
@@ -611,7 +627,7 @@
 <div class="divider"></div>
 
 <!-- ════════════ PARTNERS ════════════ -->
-<section class="py-14 bg-[#F3F0EA] ring-bg" aria-labelledby="partners-h2">
+<section class="py-14 bg-gray-50" aria-labelledby="partners-h2">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
     <span class="inline-flex items-center gap-1.5 bg-gray-100 text-gray-600 border border-gray-200 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-widest mb-4">Our Partners</span>
     <h2 id="partners-h2" class="font-serif text-2xl font-bold text-gray-900 mb-8">Mission Partners</h2>
