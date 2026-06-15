@@ -46,48 +46,54 @@
 <body class="font-sans text-forest-800 antialiased">
 
 <!-- NAVBAR -->
-<nav class="fixed top-0 inset-x-0 z-50 bg-white/95 backdrop-blur border-b border-forest-100 shadow-sm" role="navigation" aria-label="Main navigation">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-20">
-    <a href="index.html" class="flex items-center gap-3 cursor-pointer shrink-0" aria-label="India Recycles — home">
-      <img src="images/logo.png" alt="India Recycles logo" class="h-12 w-auto" loading="eager"/>
-      <span class="font-serif text-forest-800 text-lg leading-tight hidden sm:block">India Recycles</span>
+<!-- ════════════ NAVBAR ════════════ -->
+<nav class="fixed top-0 inset-x-0 z-50 bg-white shadow-md" role="navigation" aria-label="Main navigation">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-[200px]">
+
+    <!-- Logo -->
+    <a href="index.html" class="shrink-0" aria-label="India Recycles home">
+      <img src="images/logo.png" alt="India Recycles logo" class="h-[192px] w-auto" loading="eager"/>
     </a>
-    <div class="hidden lg:flex items-center gap-0.5 text-sm font-medium text-gray-600">
-      <a href="index.html"              class="nav-link px-3 py-2 rounded-lg">Home</a>
-      <a href="about-us.html"           class="nav-link px-3 py-2 rounded-lg">About Us</a>
-      <a href="our-model.html"          class="nav-link px-3 py-2 rounded-lg">Our Model</a>
-      <a href="drop-locations.html"     class="nav-link px-3 py-2 rounded-lg text-forest-700 font-semibold bg-forest-50">Drop Locations</a>
-      <a href="zero-waste-promise.html" class="nav-link px-3 py-2 rounded-lg">Zero Waste</a>
-      <a href="our-impact.html"         class="nav-link px-3 py-2 rounded-lg">Our Impact</a>
-      <a href="our-partners.html"       class="nav-link px-3 py-2 rounded-lg">Partners</a>
-      <a href="contact.html"            class="nav-link px-3 py-2 rounded-lg">Contact</a>
+
+    <!-- Desktop nav — green pill -->
+    <div class="hidden lg:flex items-center rounded-full px-3 py-2.5 gap-0.5 text-[13.5px] font-semibold" style="background-color:#1A4830;">
+      <a href="index.html" class="px-4 py-1.5 rounded-full text-white/90 hover:text-white hover:bg-white/20 transition-colors duration-200 cursor-pointer">Home</a>
+      <a href="about-us.html" class="px-4 py-1.5 rounded-full text-white/90 hover:text-white hover:bg-white/20 transition-colors duration-200 cursor-pointer">About Us</a>
+      <a href="our-model.html" class="px-4 py-1.5 rounded-full text-white/90 hover:text-white hover:bg-white/20 transition-colors duration-200 cursor-pointer">Our Model</a>
+      <a href="drop-locations.html" class="px-4 py-1.5 rounded-full text-white transition-colors duration-200 cursor-pointer" style="background:rgba(255,255,255,0.18);">Drop Locations</a>
+      <a href="zero-waste-promise.html" class="px-4 py-1.5 rounded-full text-white/90 hover:text-white hover:bg-white/20 transition-colors duration-200 cursor-pointer">Zero Waste</a>
+      <a href="our-impact.html" class="px-4 py-1.5 rounded-full text-white/90 hover:text-white hover:bg-white/20 transition-colors duration-200 cursor-pointer">Our Impact</a>
+      <a href="our-partners.html" class="px-4 py-1.5 rounded-full text-white/90 hover:text-white hover:bg-white/20 transition-colors duration-200 cursor-pointer">Partners</a>
+      <a href="contact.html" class="px-4 py-1.5 rounded-full text-white/90 hover:text-white hover:bg-white/20 transition-colors duration-200 cursor-pointer">Contact</a>
     </div>
-    <div class="flex items-center gap-2">
-      <a href="donate.html" class="bg-forest-600 hover:bg-forest-700 text-white px-5 py-2 rounded-xl font-semibold text-sm transition-colors cursor-pointer shadow">Donate Now</a>
-      <button id="menu-toggle" class="lg:hidden p-2 rounded-xl hover:bg-forest-50 cursor-pointer" aria-label="Toggle menu" aria-expanded="false" aria-controls="mob-menu">
-        <svg class="w-5 h-5 text-gray-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+
+    <!-- Right: Donate + hamburger -->
+    <div class="flex items-center gap-3">
+      <a href="donate.html" class="hidden sm:inline-flex text-white px-5 py-2.5 rounded-full font-semibold text-sm transition-colors duration-200 shadow cursor-pointer" style="background-color:#92400E;" onmouseover="this.style.backgroundColor='#78350F'" onmouseout="this.style.backgroundColor='#92400E'">Donate Now</a>
+      <button id="menu-toggle" class="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer" aria-label="Toggle menu" aria-expanded="false" aria-controls="mob-menu">
+        <svg class="w-6 h-6" style="color:#1A4830;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       </button>
     </div>
   </div>
-  <div id="mob-menu" class="lg:hidden border-t border-forest-100 bg-white">
-    <div class="px-4 py-4 flex flex-col gap-1 text-sm font-medium">
-      <a href="index.html"              class="px-4 py-3 rounded-xl text-gray-600 hover:bg-forest-50">Home</a>
-      <a href="about-us.html"           class="px-4 py-3 rounded-xl text-gray-600 hover:bg-forest-50">About Us</a>
-      <a href="our-model.html"          class="px-4 py-3 rounded-xl text-gray-600 hover:bg-forest-50">Our Model</a>
-      <a href="drop-locations.html"     class="px-4 py-3 rounded-xl text-forest-700 bg-forest-50 font-semibold">Drop Locations</a>
-      <a href="zero-waste-promise.html" class="px-4 py-3 rounded-xl text-gray-600 hover:bg-forest-50">Zero Waste</a>
-      <a href="our-impact.html"         class="px-4 py-3 rounded-xl text-gray-600 hover:bg-forest-50">Our Impact</a>
-      <a href="our-partners.html"       class="px-4 py-3 rounded-xl text-gray-600 hover:bg-forest-50">Partners</a>
-      <a href="contact.html"            class="px-4 py-3 rounded-xl text-gray-600 hover:bg-forest-50">Contact</a>
-      <a href="donate.html"             class="mt-2 px-4 py-3 rounded-xl bg-forest-600 text-white font-semibold text-center">Donate Now</a>
-    </div>
+
+  <!-- Mobile menu -->
+  <div id="mob-menu" class="lg:hidden border-t bg-white px-4 py-3 flex flex-col gap-1 text-sm font-medium" style="border-color:#e5e7eb;">
+    <a href="index.html" class="px-4 py-2.5 rounded-xl text-gray-700 hover:bg-gray-100 transition-colors cursor-pointer">Home</a>
+    <a href="about-us.html" class="px-4 py-2.5 rounded-xl text-gray-700 hover:bg-gray-100 transition-colors cursor-pointer">About Us</a>
+    <a href="our-model.html" class="px-4 py-2.5 rounded-xl text-gray-700 hover:bg-gray-100 transition-colors cursor-pointer">Our Model</a>
+    <a href="drop-locations.html" class="px-4 py-2.5 rounded-xl font-semibold cursor-pointer" style="background:#1A4830;color:#fff;">Drop Locations</a>
+    <a href="zero-waste-promise.html" class="px-4 py-2.5 rounded-xl text-gray-700 hover:bg-gray-100 transition-colors cursor-pointer">Zero Waste</a>
+    <a href="our-impact.html" class="px-4 py-2.5 rounded-xl text-gray-700 hover:bg-gray-100 transition-colors cursor-pointer">Our Impact</a>
+    <a href="our-partners.html" class="px-4 py-2.5 rounded-xl text-gray-700 hover:bg-gray-100 transition-colors cursor-pointer">Partners</a>
+    <a href="contact.html" class="px-4 py-2.5 rounded-xl text-gray-700 hover:bg-gray-100 transition-colors cursor-pointer">Contact</a>
+    <a href="donate.html" class="mt-1 px-4 py-2.5 rounded-xl text-white font-semibold text-center cursor-pointer" style="background-color:#92400E;">Donate Now</a>
   </div>
 </nav>
 
 <main>
 
 <!-- HERO -->
-<section class="relative pt-20 overflow-hidden" aria-labelledby="locations-h1">
+<section class="relative pt-[200px] overflow-hidden" aria-labelledby="locations-h1">
   <div class="absolute inset-0">
     <img src="images/event1.jpg" alt="Drop location at India Recycles" class="w-full h-full object-cover object-center"/>
     <div class="absolute inset-0 bg-gradient-to-b from-forest-900/75 via-forest-900/65 to-forest-900/85"></div>
