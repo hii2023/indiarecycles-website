@@ -94,7 +94,7 @@
     }
   </style>
 </head>
-<body class="font-sans text-forest-800 antialiased">
+<body class="antialiased">
 
 <!-- NAVBAR -->
 <nav style="position:fixed;top:0;left:0;right:0;z-index:50;background:#ffffff;border-bottom:1px solid rgba(0,0,0,0.08);box-shadow:0 1px 3px rgba(0,0,0,0.05);" role="navigation" aria-label="Main navigation">
@@ -147,20 +147,20 @@
     <img src="images/impact8.jpg" alt="India Recycles community" class="w-full h-full object-cover object-center"/>
     <div class="absolute inset-0 bg-gradient-to-b from-forest-900/80 via-forest-900/65 to-forest-900/85"></div>
   </div>
-  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center">
-    <div class="inline-flex items-center gap-2 bg-saffron-500/90 text-white px-4 py-2 rounded-full text-sm font-semibold mb-6 backdrop-blur-sm">Make a Difference</div>
-    <h1 id="donate-h1" class="font-serif text-5xl lg:text-6xl text-white mb-5 leading-tight">Donate to <em class="not-italic text-saffron-400">India Recycles</em></h1>
+  <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 text-center">
+    <div class="inline-flex items-center gap-2 bg-amber-600/90 text-white px-4 py-2 rounded-full text-sm font-semibold mb-6 backdrop-blur-sm">Make a Difference</div>
+    <h1 id="donate-h1" class="text-5xl lg:text-6xl text-white mb-5 leading-tight">Donate to <em class="not-italic text-amber-400">India Recycles</em></h1>
     <p class="text-forest-100 text-xl max-w-2xl mx-auto leading-relaxed">Your donation funds slum sales, medical camps, scholarships and livelihood programs, creating lasting change in communities across Gujarat.</p>
   </div>
 </section>
 
 <!-- DONATION WIDGET + IMPACT -->
-<section class="py-24 bg-cream texture-bg" aria-labelledby="donate-form-heading">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-16 items-start">
+<section class="py-16 lg:py-24 bg-[#f5f4ef] texture-bg" aria-labelledby="donate-form-heading">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-16 items-start">
 
     <!-- DONATION FORM -->
-    <div class="bg-white rounded-4xl p-8 border border-forest-100 shadow-sm">
-      <h2 id="donate-form-heading" class="font-serif text-3xl text-forest-800 mb-2">Choose Your Contribution</h2>
+    <div class="bg-white rounded-3xl p-8 border border-forest-100 shadow-sm">
+      <h2 id="donate-form-heading" class="text-3xl text-forest-800 mb-2">Choose Your Contribution</h2>
       <p class="text-forest-600 text-sm mb-8">Every rupee goes directly to our programs. No fluff, no overhead bloat.</p>
 
       <!-- Amount buttons -->
@@ -178,7 +178,7 @@
         <div class="relative">
           <span class="absolute left-4 top-1/2 -translate-y-1/2 text-forest-400 font-semibold text-sm" aria-hidden="true">₹</span>
           <input id="custom-amount" type="number" min="1" placeholder="e.g. 2500"
-            class="w-full pl-8 pr-4 py-3 rounded-xl border border-forest-200 bg-cream text-forest-800 text-sm focus:border-forest-500 transition-colors"
+            class="w-full pl-8 pr-4 py-3 rounded-xl border border-forest-200 bg-[#f5f4ef] text-forest-800 text-sm focus:border-forest-500 transition-colors"
             oninput="clearSelectedButtons()"/>
         </div>
       </div>
@@ -194,16 +194,16 @@
         <div>
           <label for="donor-name" class="block text-sm font-semibold text-forest-700 mb-1.5">Full Name</label>
           <input id="donor-name" type="text" placeholder="Your name"
-            class="w-full px-4 py-3 rounded-xl border border-forest-200 bg-cream text-forest-800 text-sm focus:border-forest-500 transition-colors"/>
+            class="w-full px-4 py-3 rounded-xl border border-forest-200 bg-[#f5f4ef] text-forest-800 text-sm focus:border-forest-500 transition-colors"/>
         </div>
         <div>
           <label for="donor-email" class="block text-sm font-semibold text-forest-700 mb-1.5">Email</label>
           <input id="donor-email" type="email" placeholder="For receipt"
-            class="w-full px-4 py-3 rounded-xl border border-forest-200 bg-cream text-forest-800 text-sm focus:border-forest-500 transition-colors"/>
+            class="w-full px-4 py-3 rounded-xl border border-forest-200 bg-[#f5f4ef] text-forest-800 text-sm focus:border-forest-500 transition-colors"/>
         </div>
       </div>
 
-      <button id="donate-btn" onclick="handleDonate()" class="w-full bg-forest-600 hover:bg-forest-700 text-white py-4 rounded-2xl font-semibold text-base transition-colors cursor-pointer shadow-lg flex items-center justify-center gap-2">
+      <button id="donate-btn" onclick="handleDonate()" class="w-full bg-green-800 hover:bg-green-900 text-white py-4 rounded-2xl font-semibold text-base transition-colors cursor-pointer shadow-lg flex items-center justify-center gap-2">
         <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><path d="M21 16h-3a2 2 0 0 0-2 2v3"/><path d="M21 21v.01"/><path d="M12 7v3a2 2 0 0 1-2 2H7"/><path d="M3 12h.01"/><path d="M12 3h.01"/><path d="M12 16v.01"/><path d="M16 12h1"/></svg>
         Pay via UPI / Bank Transfer
       </button>
@@ -212,7 +212,7 @@
 
     <!-- IMPACT LADDER -->
     <div>
-      <h2 class="font-serif text-3xl text-forest-800 mb-8">What Your Gift Does</h2>
+      <h2 class="text-3xl text-forest-800 mb-8">What Your Gift Does</h2>
       <div class="space-y-4">
         <div class="bg-white rounded-3xl p-5 border border-forest-100 flex items-start gap-4">
           <div class="w-14 h-14 bg-forest-50 rounded-2xl flex items-center justify-center shrink-0 border border-forest-100">
@@ -241,13 +241,13 @@
             <p class="text-forest-200 text-sm leading-relaxed">Contributes to a health camp providing checkups, medicines and specialist consultations for slum residents.</p>
           </div>
         </div>
-        <div class="bg-saffron-500 rounded-3xl p-5 flex items-start gap-4">
+        <div class="bg-amber-600 rounded-3xl p-5 flex items-start gap-4">
           <div class="w-14 h-14 bg-saffron-400/40 rounded-2xl flex items-center justify-center shrink-0">
             <div class="font-sans text-white font-extrabold text-sm tracking-tight">₹5,000</div>
           </div>
           <div>
             <h3 class="font-semibold text-white mb-1">A Student's Scholarship</h3>
-            <p class="text-saffron-100 text-sm leading-relaxed">Funds one full year of school for an underprivileged child, keeping them educated and off the streets.</p>
+            <p class="text-amber-100 text-sm leading-relaxed">Funds one full year of school for an underprivileged child, keeping them educated and off the streets.</p>
           </div>
         </div>
       </div>
@@ -275,13 +275,13 @@
 </section>
 
 <!-- BANK TRANSFER / UPI SECTION -->
-<section class="py-20 bg-forest-900 relative overflow-hidden" aria-labelledby="bank-transfer-heading">
+<section class="py-16 bg-forest-900 relative overflow-hidden" aria-labelledby="bank-transfer-heading">
   <div class="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-forest-800/50 pointer-events-none" aria-hidden="true"></div>
   <div class="absolute -bottom-20 -left-20 w-80 h-80 rounded-full bg-forest-800/30 pointer-events-none" aria-hidden="true"></div>
   <div class="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-12">
-      <div class="inline-flex items-center gap-2 bg-saffron-500/20 text-saffron-400 border border-saffron-500/30 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-widest mb-5">Direct Payment</div>
-      <h2 id="bank-transfer-heading" class="font-serif text-4xl lg:text-5xl text-white mb-3">Pay via UPI or Bank Transfer</h2>
+      <div class="inline-flex items-center gap-2 bg-amber-600/20 text-amber-400 border border-saffron-500/30 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-widest mb-5">Direct Payment</div>
+      <h2 id="bank-transfer-heading" class="text-4xl lg:text-5xl text-white mb-3">Pay via UPI or Bank Transfer</h2>
       <p class="text-forest-300 max-w-lg mx-auto">No processing fees. Money reaches us directly. 80G tax receipt on request.</p>
     </div>
     <div class="grid md:grid-cols-2 gap-6">
@@ -306,7 +306,7 @@
             <span class="text-forest-400 text-xs col-span-2">Account No.</span>
             <div class="col-span-3 flex items-center justify-end gap-2">
               <span class="text-white font-mono font-semibold" id="bank-acno">10244651950</span>
-              <button onclick="copyText('bank-acno')" title="Copy" aria-label="Copy" class="text-forest-400 hover:text-saffron-400 cursor-pointer transition-colors shrink-0">
+              <button onclick="copyText('bank-acno')" title="Copy" aria-label="Copy" class="text-forest-400 hover:text-amber-400 cursor-pointer transition-colors shrink-0">
                 <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="13" height="13" x="9" y="9" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
               </button>
             </div>
@@ -315,7 +315,7 @@
             <span class="text-forest-400 text-xs col-span-2">IFSC Code</span>
             <div class="col-span-3 flex items-center justify-end gap-2">
               <span class="text-white font-mono font-semibold" id="bank-ifsc">IDFB0040301</span>
-              <button onclick="copyText('bank-ifsc')" title="Copy" aria-label="Copy IFSC" class="text-forest-400 hover:text-saffron-400 cursor-pointer transition-colors shrink-0">
+              <button onclick="copyText('bank-ifsc')" title="Copy" aria-label="Copy IFSC" class="text-forest-400 hover:text-amber-400 cursor-pointer transition-colors shrink-0">
                 <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="13" height="13" x="9" y="9" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
               </button>
             </div>
@@ -330,14 +330,14 @@
           </div>
         </div>
         <div class="mt-5 bg-forest-800/60 rounded-2xl px-4 py-3 text-xs text-forest-300 border border-white/5 leading-relaxed">
-          After transfer, email <a href="mailto:indiarecycles@gmail.com" class="text-saffron-400 hover:text-saffron-300 font-semibold">indiarecycles@gmail.com</a> with your name, PAN &amp; amount for your <strong class="text-white">80G receipt</strong>.
+          After transfer, email <a href="mailto:indiarecycles@gmail.com" class="text-amber-400 hover:text-saffron-300 font-semibold">indiarecycles@gmail.com</a> with your name, PAN &amp; amount for your <strong class="text-white">80G receipt</strong>.
         </div>
       </div>
 
       <!-- UPI / QR -->
       <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-7 flex flex-col items-center text-center">
         <div class="flex items-center gap-3 mb-6 w-full">
-          <div class="w-11 h-11 bg-saffron-500 rounded-2xl flex items-center justify-center shrink-0">
+          <div class="w-11 h-11 bg-amber-600 rounded-2xl flex items-center justify-center shrink-0">
             <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><path d="M21 16h-3a2 2 0 0 0-2 2v3"/><path d="M21 21v.01"/></svg>
           </div>
           <div class="text-left">
@@ -356,7 +356,7 @@
             <div class="text-forest-400 text-xs font-medium mb-0.5">UPI ID</div>
             <div class="text-white font-mono font-bold text-sm truncate" id="upi-id">innovativerevive@idfcbank</div>
           </div>
-          <button onclick="copyText('upi-id')" class="shrink-0 bg-saffron-500 hover:bg-saffron-600 text-white text-xs font-bold px-4 py-2 rounded-xl cursor-pointer transition-colors">Copy</button>
+          <button onclick="copyText('upi-id')" class="shrink-0 bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold px-4 py-2 rounded-xl cursor-pointer transition-colors">Copy</button>
         </div>
         <p class="text-forest-400 text-xs leading-relaxed">Scan QR or copy the UPI ID above. Add payment note: <strong class="text-white">"Donation - Your Name"</strong></p>
       </div>
@@ -366,11 +366,11 @@
 </section>
 
 <!-- DONATE CLOTHES ALTERNATIVE -->
-<section class="py-20 bg-forest-800" aria-labelledby="donate-clothes-heading">
+<section class="py-16 bg-forest-800" aria-labelledby="donate-clothes-heading">
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-    <h2 id="donate-clothes-heading" class="font-serif text-4xl text-white mb-4">Prefer to Donate Clothes?</h2>
+    <h2 id="donate-clothes-heading" class="text-4xl text-white mb-4">Prefer to Donate Clothes?</h2>
     <p class="text-forest-200 text-lg mb-8 max-w-xl mx-auto">Money isn't the only way to help. Drop your pre-loved clothes at any of our 20+ collection points and we'll make sure every piece finds a purpose.</p>
-    <a href="drop-locations.html" class="inline-flex items-center gap-2 bg-saffron-500 hover:bg-saffron-600 text-white px-8 py-4 rounded-2xl font-semibold transition-colors cursor-pointer shadow-lg">
+    <a href="drop-locations.html" class="inline-flex items-center gap-2 bg-amber-600 hover:bg-amber-700 text-white px-8 py-4 rounded-2xl font-semibold transition-colors cursor-pointer shadow-lg">
       Find Drop Locations
       <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
     </a>
@@ -381,7 +381,7 @@
 
 <!-- FOOTER -->
 <footer class="bg-forest-900 text-white" role="contentinfo">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
     <div class="grid md:grid-cols-4 gap-10 mb-10">
       <div class="md:col-span-2">
         <a href="index.html" class="flex items-center gap-3 cursor-pointer mb-4">
@@ -506,8 +506,8 @@
       // Highlight the amount in the UPI section
       const upiEl = document.getElementById('upi-id');
       if (upiEl) {
-        upiEl.closest('.bg-cream').classList.add('ring-2', 'ring-forest-400');
-        setTimeout(() => upiEl.closest('.bg-cream').classList.remove('ring-2', 'ring-forest-400'), 3000);
+        upiEl.closest('.bg-[#f5f4ef]').classList.add('ring-2', 'ring-forest-400');
+        setTimeout(() => upiEl.closest('.bg-[#f5f4ef]').classList.remove('ring-2', 'ring-forest-400'), 3000);
       }
     }
   }
