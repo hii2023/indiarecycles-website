@@ -7,41 +7,92 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/indiarecycles-website/favicon-32.png"/>
   <link rel="shortcut icon" href="/indiarecycles-website/favicon.png"/>
   <title>Thank You — India Recycles</title>
+  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            serif: ['Playfair Display', 'Georgia', 'serif'],
-            sans:  ['Inter', 'sans-serif'],
-          },
-          colors: {
-            forest: { 50:'#f0f7f2', 100:'#d4edda', 200:'#a8d9b4', 600:'#1a6b3a', 700:'#155530', 800:'#0d3320', 900:'#081a10' },
-            saffron: { 400:'#f5a623', 500:'#e07b39' },
-            cream: '#fdfef8',
-          },
-        }
-      }
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --font-sans: 'Inter', sans-serif;
+      --bg-primary: #ffffff;
+      --bg-secondary: #f5f4ef;
+      --text-primary: #1a1a1a;
+      --text-secondary: #6b6b6b;
+      --text-muted: #9b9b9b;
+      --border: rgba(0,0,0,0.12);
+      --brand-green: #1A4830;
+      --brand-amber: #92400E;
     }
-  </script>
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-sans); color: var(--text-primary); background: var(--bg-primary); font-size: 15px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+    #mob-menu { display: none; }
+    #mob-menu.open { display: block; }
+    h1,h2,h3 { font-family: var(--font-sans); color: var(--text-primary); letter-spacing: -0.02em; }
+    h1 { font-weight: 600; }
+  </style>
 </head>
-<body class="font-sans bg-cream min-h-screen flex flex-col items-center justify-center px-4 text-center">
-  <div class="max-w-lg">
-    <!-- Checkmark -->
-    <div class="w-20 h-20 bg-forest-100 rounded-full flex items-center justify-center mx-auto mb-8">
-      <svg class="w-10 h-10 text-forest-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+<body>
+
+<!-- NAVBAR -->
+<nav style="position:fixed;top:0;left:0;right:0;z-index:50;background:#ffffff;border-bottom:1px solid rgba(0,0,0,0.08);box-shadow:0 1px 3px rgba(0,0,0,0.05);" role="navigation" aria-label="Main navigation">
+  <div style="max-width:1280px;margin:0 auto;padding:0 24px;height:72px;display:flex;align-items:center;justify-content:space-between;">
+    <a href="index.html" style="flex-shrink:0;text-decoration:none;" aria-label="India Recycles home">
+      <img src="images/logo.png" alt="India Recycles logo" style="height:52px;width:auto;display:block;" loading="eager"/>
+    </a>
+    <div class="hidden lg:flex" style="align-items:center;gap:2px;background:#1A4830;border-radius:9999px;padding:5px 6px;">
+      <a href="index.html" style="display:inline-flex;padding:6px 16px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:13px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">Home</a>
+      <a href="about-us.html" style="display:inline-flex;padding:6px 16px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:13px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">About Us</a>
+      <a href="our-model.html" style="display:inline-flex;padding:6px 16px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:13px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">Our Model</a>
+      <a href="drop-locations.html" style="display:inline-flex;padding:6px 16px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:13px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">Drop Locations</a>
+      <a href="zero-waste-promise.html" style="display:inline-flex;padding:6px 16px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:13px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">Zero Waste</a>
+      <a href="our-impact.html" style="display:inline-flex;padding:6px 16px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:13px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">Our Impact</a>
+      <a href="our-partners.html" style="display:inline-flex;padding:6px 16px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:13px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">Partners</a>
+      <a href="contact.html" style="display:inline-flex;padding:6px 16px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:13px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">Contact</a>
     </div>
-    <h1 class="font-serif text-4xl text-forest-800 mb-4">Thank You!</h1>
-    <p class="text-forest-600 text-lg leading-relaxed mb-3">Your message has been received. We'll get back to you within 1–2 working days.</p>
-    <p class="text-forest-500 text-sm mb-10">If you'd like to reach us sooner, email us directly at <a href="mailto:indiarecycles@gmail.com" class="text-forest-700 font-semibold underline">indiarecycles@gmail.com</a></p>
-    <div class="flex flex-wrap justify-center gap-4">
-      <a href="index.html" class="bg-forest-600 hover:bg-forest-700 text-white px-8 py-3 rounded-2xl font-semibold transition-colors cursor-pointer">Back to Home</a>
-      <a href="donate.html" class="border-2 border-forest-200 text-forest-700 px-8 py-3 rounded-2xl font-semibold hover:bg-forest-50 cursor-pointer transition-colors">Donate Instead</a>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <a href="donate.html" class="hidden sm:inline-flex" style="color:#fff;font-size:13px;font-weight:500;background:#92400E;padding:8px 20px;border-radius:9999px;text-decoration:none;cursor:pointer;transition:background .2s;white-space:nowrap;" onmouseover="this.style.background='#78350F'" onmouseout="this.style.background='#92400E'">Donate Now</a>
+      <button id="menu-toggle" class="lg:hidden" style="display:flex;align-items:center;justify-content:center;width:36px;height:36px;border:none;background:transparent;cursor:pointer;border-radius:8px;" aria-label="Toggle menu" aria-expanded="false" aria-controls="mob-menu">
+        <svg style="width:20px;height:20px;color:#1A4830;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
     </div>
   </div>
+  <div id="mob-menu" class="lg:hidden" style="background:#fff;border-top:1px solid rgba(0,0,0,0.08);">
+    <div style="padding:10px 16px;display:flex;flex-direction:column;gap:2px;">
+      <a href="index.html" style="display:block;padding:9px 14px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Home</a>
+      <a href="about-us.html" style="display:block;padding:9px 14px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">About Us</a>
+      <a href="our-model.html" style="display:block;padding:9px 14px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Our Model</a>
+      <a href="drop-locations.html" style="display:block;padding:9px 14px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Drop Locations</a>
+      <a href="zero-waste-promise.html" style="display:block;padding:9px 14px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Zero Waste</a>
+      <a href="our-impact.html" style="display:block;padding:9px 14px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Our Impact</a>
+      <a href="our-partners.html" style="display:block;padding:9px 14px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Partners</a>
+      <a href="contact.html" style="display:block;padding:9px 14px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Contact</a>
+      <a href="donate.html" style="display:block;margin-top:8px;padding:10px 14px;border-radius:8px;background:#92400E;color:#fff;font-size:14px;font-weight:500;text-align:center;text-decoration:none;cursor:pointer;">Donate Now</a>
+    </div>
+  </div>
+</nav>
+
+<main style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:100px 24px 48px;">
+  <div style="max-width:480px;text-align:center;">
+    <div style="width:72px;height:72px;background:#f5f4ef;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 28px;">
+      <svg style="width:36px;height:36px;color:#1A4830;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+    </div>
+    <h1 style="font-size:2rem;font-weight:600;color:#1a1a1a;margin-bottom:12px;letter-spacing:-0.02em;">Thank You!</h1>
+    <p style="color:#6b6b6b;font-size:16px;line-height:1.7;margin-bottom:8px;">Your message has been received. We'll get back to you within 1-2 working days.</p>
+    <p style="color:#9b9b9b;font-size:13px;margin-bottom:36px;">If you'd like to reach us sooner, email us directly at <a href="mailto:indiarecycles@gmail.com" style="color:#1A4830;font-weight:500;text-decoration:underline;">indiarecycles@gmail.com</a></p>
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px;">
+      <a href="index.html" style="background:#1A4830;color:#fff;padding:10px 28px;border-radius:9999px;font-size:14px;font-weight:500;text-decoration:none;cursor:pointer;transition:background .2s;" onmouseover="this.style.background='#12311f'" onmouseout="this.style.background='#1A4830'">Back to Home</a>
+      <a href="donate.html" style="border:1.5px solid rgba(0,0,0,0.12);color:#1a1a1a;padding:10px 28px;border-radius:9999px;font-size:14px;font-weight:500;text-decoration:none;cursor:pointer;transition:background .2s;" onmouseover="this.style.background='#f5f4ef'" onmouseout="this.style.background='transparent'">Donate Instead</a>
+    </div>
+  </div>
+</main>
+
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const menu   = document.getElementById('mob-menu');
+  toggle.addEventListener('click', () => {
+    const open = menu.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open);
+  });
+</script>
 </body>
 </html>
