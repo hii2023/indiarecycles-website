@@ -6,7 +6,7 @@
   <link rel="icon" type="image/png" sizes="64x64" href="/indiarecycles-website/favicon.png"/>
   <link rel="icon" type="image/png" sizes="32x32" href="/indiarecycles-website/favicon-32.png"/>
   <link rel="shortcut icon" href="/indiarecycles-website/favicon.png"/>
-  <title>India Recycles — Love the Pre-Loved</title>
+  <title>India Recycles - Love the Pre-Loved</title>
   <meta name="description" content="India Recycles gives donated clothes a second life through community slum sales, upcycling and livelihood creation across India."/>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -15,6 +15,7 @@
         extend: {
           fontFamily: {
             sans: ['Inter', 'sans-serif'],
+            serif: ['Lora', 'Georgia', 'serif'],
           },
           colors: {
             green: {
@@ -40,7 +41,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:wght@500;600;700&display=swap" rel="stylesheet"/>
   <style>
     :root {
       --font-sans: 'Inter', sans-serif;
@@ -71,7 +72,7 @@
     .stat-num { font-family: var(--font-sans); font-weight: 700; letter-spacing: -0.02em; }
     .leaf-bg, .ring-bg {}
     .badge { display:inline-flex;align-items:center;gap:6px;background:#F3F4F6;color:#6b6b6b;border:1px solid rgba(0,0,0,0.1);padding:3px 12px;border-radius:9999px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.12em;margin-bottom:16px; }
-    h1,h2,h3,h4 { font-family: var(--font-sans); line-height: 1.2; color: var(--text-primary); letter-spacing: -0.02em; }
+    h1,h2,h3,h4 { font-family: 'Lora', Georgia, serif; line-height: 1.2; color: var(--text-primary); letter-spacing: -0.01em; }
     h1 { font-weight: 600; }
     h2 { font-weight: 600; }
     h3 { font-weight: 500; }
@@ -90,7 +91,7 @@
       body { animation: none; }
     }
 
-    .font-serif { font-family: var(--font-sans) !important; font-style: normal; }
+    .font-serif { font-family: 'Lora', Georgia, serif !important; font-style: normal; }
 
     /* ── Collecting badge: bigger on mobile ─────────────────────────────────────── */
     @media (max-width: 1023px) {
@@ -106,6 +107,13 @@
       #mob-menu .flex.flex-col { gap: 4px; }
       section { padding-left: 16px; padding-right: 16px; }
     }
+    /* ── Nav dropdowns ─────────────────── */
+    .nav-dd { position: relative; display: inline-flex; }
+    .nav-dd-panel { position: absolute; top: 100%; left: 50%; transform: translateX(-50%) translateY(6px); padding-top: 12px; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .18s ease, transform .18s ease; z-index: 60; }
+    .nav-dd:hover .nav-dd-panel, .nav-dd:focus-within .nav-dd-panel { opacity: 1; visibility: visible; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+    .nav-dd-card { background: #fff; border-radius: 14px; border: 1px solid rgba(0,0,0,0.06); box-shadow: 0 16px 40px rgba(0,0,0,0.14); padding: 8px; min-width: 210px; }
+    .nav-dd-item { display: block; padding: 10px 14px; border-radius: 9px; color: #1a1a1a; font-size: 14px; font-weight: 500; text-decoration: none; white-space: nowrap; transition: background .15s, color .15s; }
+    .nav-dd-item:hover { background: #f5f4ef; color: var(--brand-green); }
   </style>
 </head>
 <body class="antialiased">
@@ -118,16 +126,14 @@
     </a>
     <div style="flex:1;display:flex;justify-content:center;align-items:center;">
       <div class="hidden lg:flex" style="align-items:center;gap:2px;background:#1A4830;border-radius:9999px;padding:6px 8px;">
-        <a href="index.html" style="display:inline-flex;padding:6px 16px;border-radius:9999px;color:#fff;font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;background:rgba(255,255,255,0.22);">Home</a>
-        <a href="about-us.html" style="display:inline-flex;padding:6px 16px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">About Us</a>
-        <a href="our-model.html" style="display:inline-flex;padding:6px 16px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">Our Model</a>
-        <a href="drop-locations.html" style="display:inline-flex;padding:6px 16px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">Drop Locations</a>
-        <a href="zero-waste-promise.html" style="display:inline-flex;padding:6px 16px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">Zero Waste</a>
-        <a href="our-impact.html" style="display:inline-flex;padding:6px 16px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">Our Impact</a>
-        <a href="our-partners.html" style="display:inline-flex;padding:6px 16px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">Partners</a>
-        <a href="contact.html" style="display:inline-flex;padding:6px 16px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">Contact</a>
-        <span style="display:inline-block;width:1px;height:16px;background:rgba(255,255,255,0.2);margin:0 4px;"></span>
-        <a href="https://indiarecycles.org" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:5px;padding:6px 16px;border-radius:9999px;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'"><svg style="width:12px;height:12px;flex-shrink:0;fill:none;stroke:#F59E0B;stroke-width:2.5;stroke-linecap:round;" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span style="background:linear-gradient(135deg,#F59E0B,#EF4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Thrift Store</span></a>
+        <a href="index.html" style="display:inline-flex;align-items:center;padding:6px 14px;border-radius:9999px;color:#fff;font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;background:rgba(255,255,255,0.22);">Home</a>
+        <a href="about-us.html" style="display:inline-flex;align-items:center;padding:6px 14px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">About Us</a>
+        <a href="our-model.html" style="display:inline-flex;align-items:center;padding:6px 14px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">Our Model</a>
+        <div class="nav-dd"><a href="our-impact.html" style="display:inline-flex;align-items:center;padding:6px 14px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">Our Impact<svg style="width:11px;height:11px;margin-left:3px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a><div class="nav-dd-panel"><div class="nav-dd-card"><a href="our-impact.html" class="nav-dd-item">Our Impact</a><a href="zero-waste-promise.html" class="nav-dd-item">Zero Waste</a></div></div></div>
+        <a href="revibe.html" style="display:inline-flex;align-items:center;padding:6px 14px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">ReVibe</a>
+        <div class="nav-dd"><a href="volunteer.html" style="display:inline-flex;align-items:center;padding:6px 14px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">Join Us<svg style="width:11px;height:11px;margin-left:3px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a><div class="nav-dd-panel"><div class="nav-dd-card"><a href="our-partners.html" class="nav-dd-item">Partners</a><a href="careers.html" class="nav-dd-item">Careers</a><a href="volunteer.html" class="nav-dd-item">Volunteer</a><a href="drop-locations.html" class="nav-dd-item">Become a Drop Location</a></div></div></div>
+        <a href="contact.html" style="display:inline-flex;align-items:center;padding:6px 14px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">Contact</a>
+        <span style="display:inline-block;width:1px;height:16px;background:rgba(255,255,255,0.2);margin:0 4px;"></span><a href="https://store.indiarecycles.org" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border-radius:9999px;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'"><svg style="width:12px;height:12px;flex-shrink:0;fill:none;stroke:#F59E0B;stroke-width:2.5;stroke-linecap:round;" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span style="background:linear-gradient(135deg,#F59E0B,#EF4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Thrift Store</span></a>
       </div>
     </div>
     <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
@@ -142,12 +148,17 @@
       <a href="index.html" style="display:block;padding:9px 14px;border-radius:8px;background:#f5f4ef;color:#1a1a1a;font-size:14px;font-weight:500;text-decoration:none;">Home</a>
       <a href="about-us.html" style="display:block;padding:9px 14px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">About Us</a>
       <a href="our-model.html" style="display:block;padding:9px 14px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Our Model</a>
-      <a href="drop-locations.html" style="display:block;padding:9px 14px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Drop Locations</a>
-      <a href="zero-waste-promise.html" style="display:block;padding:9px 14px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Zero Waste</a>
-      <a href="our-impact.html" style="display:block;padding:9px 14px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Our Impact</a>
-      <a href="our-partners.html" style="display:block;padding:9px 14px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Partners</a>
+      <div style="padding:12px 14px 4px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#9b9b9b;">Our Impact</div>
+      <a href="our-impact.html" style="display:block;padding:9px 24px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Our Impact</a>
+      <a href="zero-waste-promise.html" style="display:block;padding:9px 24px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Zero Waste</a>
+      <a href="revibe.html" style="display:block;padding:9px 14px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">ReVibe</a>
+      <div style="padding:12px 14px 4px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#9b9b9b;">Join Us</div>
+      <a href="our-partners.html" style="display:block;padding:9px 24px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Partners</a>
+      <a href="careers.html" style="display:block;padding:9px 24px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Careers</a>
+      <a href="volunteer.html" style="display:block;padding:9px 24px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Volunteer</a>
+      <a href="drop-locations.html" style="display:block;padding:9px 24px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Become a Drop Location</a>
       <a href="contact.html" style="display:block;padding:9px 14px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Contact</a>
-      <a href="https://indiarecycles.org" target="_blank" rel="noopener noreferrer" style="display:block;margin-top:8px;padding:10px 14px;border-radius:8px;background:linear-gradient(135deg,#F59E0B,#EF4444,#8B5CF6);color:#fff;font-size:14px;font-weight:700;text-align:center;text-decoration:none;cursor:pointer;">Thrift Store &rarr;</a>
+      <a href="https://store.indiarecycles.org" target="_blank" rel="noopener noreferrer" style="display:block;margin-top:8px;padding:10px 14px;border-radius:8px;background:linear-gradient(135deg,#F59E0B,#EF4444,#8B5CF6);color:#fff;font-size:14px;font-weight:700;text-align:center;text-decoration:none;cursor:pointer;">Thrift Store &rarr;</a>
       <a href="donate.html" style="display:block;margin-top:4px;padding:10px 14px;border-radius:8px;background:#92400E;color:#fff;font-size:14px;font-weight:500;text-align:center;text-decoration:none;cursor:pointer;">Donate Now</a>
     </div>
   </div>
@@ -160,7 +171,7 @@
 <section class="relative pt-[64px] overflow-hidden bg-white" aria-labelledby="hero-h1">
 
   <!-- Low-opacity recycling decorations (background) -->
-  <!-- Large recycle ring — top right -->
+  <!-- Large recycle ring - top right -->
   <svg class="absolute top-10 right-6 w-72 h-72 pointer-events-none opacity-[0.07]" viewBox="0 0 200 200" fill="none" aria-hidden="true">
     <circle cx="100" cy="100" r="88" stroke="#2D7A4F" stroke-width="3"/>
     <circle cx="100" cy="100" r="60" stroke="#2D7A4F" stroke-width="2" stroke-dasharray="8 6"/>
@@ -168,11 +179,11 @@
     <path d="M168 138 L152 116 L188 116 Z" fill="#D97706"/>
     <path d="M32 138 L48 160 L12 160 Z" fill="#D97706"/>
   </svg>
-  <!-- Leaf outline — bottom left -->
+  <!-- Leaf outline - bottom left -->
   <svg class="absolute bottom-0 left-0 w-56 h-56 pointer-events-none opacity-[0.07]" viewBox="0 0 160 160" fill="none" aria-hidden="true">
     <path d="M20 145 C20 55 110 15 148 15 C110 15 126 90 72 125 C126 90 120 158 72 158 C120 158 110 68 20 145Z" fill="#2D7A4F"/>
   </svg>
-  <!-- Small leaf — mid right -->
+  <!-- Small leaf - mid right -->
   <svg class="absolute top-1/2 right-1/3 w-24 h-24 pointer-events-none opacity-[0.05] hidden lg:block" viewBox="0 0 100 100" fill="none" aria-hidden="true">
     <path d="M10 90 C10 30 72 8 90 8 C72 8 80 55 46 78 C80 55 76 98 46 98 C76 98 72 38 10 90Z" fill="#2D7A4F"/>
   </svg>
@@ -180,7 +191,7 @@
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-16">
     <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 
-      <!-- LEFT: Text content — dark text on light bg, zero readability issues -->
+      <!-- LEFT: Text content - dark text on light bg, zero readability issues -->
       <div class="relative z-10">
         <!-- Badge -->
         <div id="collecting-badge" class="inline-flex items-center gap-2 bg-amber-50 border border-amber-200 text-amber-700 px-4 py-1.5 rounded-full text-[11px] font-bold mb-6 uppercase tracking-widest">
@@ -192,7 +203,7 @@
           <span class="block text-4xl sm:text-5xl lg:text-6xl text-gray-900 font-semibold">Love the</span>
           <span class="block text-5xl sm:text-6xl lg:text-7xl font-extrabold grad-amber">Pre-Loved</span>
         </h1>
-        <!-- Subheadline — fully dark, no shadow needed -->
+        <!-- Subheadline - fully dark, no shadow needed -->
         <p class="text-gray-700 text-base sm:text-lg mb-8 leading-relaxed max-w-[480px]">
           We collect donated clothes and give them a dignified second life through weekly slum sales, upcycling, and livelihood programs for women across Ahmedabad and Vadodara.
         </p>
@@ -207,7 +218,7 @@
             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
           </a>
         </div>
-        <!-- Stats strip — dark text, always readable -->
+        <!-- Stats strip - dark text, always readable -->
         <div class="flex flex-nowrap gap-x-6 pt-7 border-t border-gray-200">
           <div>
             <div class="stat-num text-2xl text-amber-700">35,500+</div>
@@ -231,7 +242,7 @@
         </div>
       </div>
 
-      <!-- RIGHT: Photo in a contained card — not full bleed -->
+      <!-- RIGHT: Photo in a contained card - not full bleed -->
       <div class="relative hidden lg:block">
         <!-- Main photo card -->
         <div class="rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
@@ -353,7 +364,7 @@
       <h2 id="stats-h2" class="text-3xl lg:text-4xl font-bold text-gray-900 mb-3">What We Have Achieved</h2>
       <p class="text-gray-700 text-[15px] max-w-md mx-auto leading-relaxed">Every number represents a life touched, a garment saved, a community served.</p>
     </div>
-    <!-- 4 stat cards — all white, uniform -->
+    <!-- 4 stat cards - all white, uniform -->
     <div class="grid grid-cols-4 gap-5">
       <!-- Card 1 -->
       <div class="bg-white rounded-2xl p-6 text-center shadow-sm border border-gray-200 card cursor-pointer">
@@ -399,7 +410,7 @@
     <div class="text-center mb-12">
       <span class="inline-flex items-center gap-1.5 bg-gray-100 text-gray-600 border border-gray-200 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-widest mb-5">How It Works</span>
       <h2 id="model-h2" class="text-3xl lg:text-4xl font-bold text-gray-900 mb-3">Our Simple Model</h2>
-      <p class="text-gray-700 text-[15px] max-w-md mx-auto leading-relaxed">A full circle — from your wardrobe to communities that need it most.</p>
+      <p class="text-gray-700 text-[15px] max-w-md mx-auto leading-relaxed">A full circle - from your wardrobe to communities that need it most.</p>
     </div>
     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
       <!-- Step 1 -->
@@ -488,7 +499,7 @@
       <!-- Zero waste stat -->
       <div class="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm flex flex-col justify-between card cursor-pointer">
         <div>
-          <!-- Recycle icon — green ring, orange arrows -->
+          <!-- Recycle icon - green ring, orange arrows -->
           <svg class="w-12 h-12 mb-5" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <circle cx="28" cy="28" r="22" stroke="#2D7A4F" stroke-width="2.5" fill="none"/>
             <path d="M28 6 L33 16 L23 16 Z" fill="#D97706"/>
@@ -528,7 +539,7 @@
       <h2 id="testimonials-h2" class="text-3xl lg:text-4xl font-bold text-gray-900 mb-3">Stories of Change</h2>
       <p class="text-gray-700 text-[15px]">Real voices from volunteers, donors and community members.</p>
     </div>
-    <!-- 4 uniform white cards — NO dark coloured card -->
+    <!-- 4 uniform white cards - NO dark coloured card -->
     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
 
       <!-- Testimonial 1 -->
@@ -644,11 +655,11 @@
 </section>
 
 <!-- ════════════ DONATE CTA ════════════ -->
-<!-- Solid dark green — NO photo overlay. Recycling SVGs at low opacity. Perfect contrast. -->
+<!-- Solid dark green - NO photo overlay. Recycling SVGs at low opacity. Perfect contrast. -->
 <section class="relative py-16 lg:py-20 lg:py-28 overflow-hidden" style="background-color:#1A4830;" aria-labelledby="cta-h2">
 
   <!-- Low-opacity recycling decorations -->
-  <!-- Giant recycle ring — centred background -->
+  <!-- Giant recycle ring - centred background -->
   <svg class="absolute inset-0 w-full h-full pointer-events-none opacity-[0.06]" viewBox="0 0 800 400" fill="none" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
     <circle cx="400" cy="200" r="240" stroke="#A8D6B8" stroke-width="3"/>
     <circle cx="400" cy="200" r="170" stroke="#A8D6B8" stroke-width="2" stroke-dasharray="12 8"/>
@@ -657,22 +668,22 @@
     <path d="M634 320 L614 285 L654 285 Z" fill="#F9BF5E"/>
     <path d="M166 320 L186 355 L146 355 Z" fill="#F9BF5E"/>
   </svg>
-  <!-- Leaf outline — top left -->
+  <!-- Leaf outline - top left -->
   <svg class="absolute -top-10 -left-10 w-72 h-72 pointer-events-none opacity-[0.07]" viewBox="0 0 200 200" fill="none" aria-hidden="true">
     <path d="M20 185 C20 65 140 18 175 18 C140 18 158 105 90 148 C158 105 150 195 90 195 C150 195 140 82 20 185Z" fill="#A8D6B8"/>
   </svg>
-  <!-- Leaf outline — bottom right -->
+  <!-- Leaf outline - bottom right -->
   <svg class="absolute -bottom-10 -right-10 w-72 h-72 pointer-events-none opacity-[0.07]" viewBox="0 0 200 200" fill="none" aria-hidden="true">
     <path d="M20 185 C20 65 140 18 175 18 C140 18 158 105 90 148 C158 105 150 195 90 195 C150 195 140 82 20 185Z" fill="#A8D6B8"/>
   </svg>
-  <!-- Small recycle arrow hint — left -->
+  <!-- Small recycle arrow hint - left -->
   <svg class="absolute left-8 top-1/2 -translate-y-1/2 w-20 h-20 pointer-events-none opacity-[0.10] hidden lg:block" viewBox="0 0 80 80" fill="none" aria-hidden="true">
     <circle cx="40" cy="40" r="32" stroke="#A8D6B8" stroke-width="2.5"/>
     <path d="M40 8 L46 18 L34 18 Z" fill="#A8D6B8"/>
     <path d="M64 60 L58 50 L70 50 Z" fill="#F9BF5E"/>
     <path d="M16 60 L22 70 L10 70 Z" fill="#F9BF5E"/>
   </svg>
-  <!-- Small recycle arrow hint — right -->
+  <!-- Small recycle arrow hint - right -->
   <svg class="absolute right-8 top-1/2 -translate-y-1/2 w-20 h-20 pointer-events-none opacity-[0.10] hidden lg:block" viewBox="0 0 80 80" fill="none" aria-hidden="true">
     <circle cx="40" cy="40" r="32" stroke="#A8D6B8" stroke-width="2.5"/>
     <path d="M40 8 L46 18 L34 18 Z" fill="#A8D6B8"/>
@@ -686,12 +697,12 @@
       <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" aria-hidden="true"></span>
       Make a Difference Today
     </div>
-    <!-- Heading — pure white on dark green = 14:1 contrast -->
+    <!-- Heading - pure white on dark green = 14:1 contrast -->
     <h2 id="cta-h2" class="text-4xl lg:text-5xl font-extrabold text-white mb-5 leading-[1.1]">
       Every Rupee Creates<br/><span class="text-amber-400">Real Change</span>
     </h2>
     <p class="text-green-100 text-base mb-9 leading-relaxed max-w-lg mx-auto">Your donation powers slum sales, medical camps, scholarships and livelihoods for women across two cities.</p>
-    <!-- Donation tiers — white cards on dark green -->
+    <!-- Donation tiers - white cards on dark green -->
     <div class="flex flex-wrap justify-center gap-3 mb-9">
       <div class="bg-white/12 border border-white/20 rounded-xl px-5 py-4 text-center cursor-pointer hover:bg-white/20 transition-colors duration-200">
         <div class="text-amber-400 font-bold text-xl stat-num">₹100</div>
@@ -755,7 +766,7 @@
       <div>
         <h3 class="font-bold text-[11px] uppercase tracking-widest text-green-300/70 mb-4">Programs</h3>
         <ul class="space-y-2.5 text-[13px]">
-          <li><a href="zero-waste-promise.html" class="text-green-300/80 hover:text-white transition-colors duration-200 cursor-pointer">REVIBE Upcycling</a></li>
+          <li><a href="revibe.html" class="text-green-300/80 hover:text-white transition-colors duration-200 cursor-pointer">ReVibe Upcycling</a></li>
           <li><a href="zero-waste-promise.html" class="text-green-300/80 hover:text-white transition-colors duration-200 cursor-pointer">Godadi Project</a></li>
           <li><a href="our-model.html"          class="text-green-300/80 hover:text-white transition-colors duration-200 cursor-pointer">Slum Sales</a></li>
           <li><a href="our-impact.html"         class="text-green-300/80 hover:text-white transition-colors duration-200 cursor-pointer">Medical Camps</a></li>
@@ -766,7 +777,7 @@
       <div>
         <h3 class="font-bold text-[11px] uppercase tracking-widest text-green-300/70 mb-4">Get Involved</h3>
         <ul class="space-y-2.5 text-[13px] mb-5">
-          <li><a href="contact.html" class="text-green-300/80 hover:text-white transition-colors duration-200 cursor-pointer">Volunteer</a></li>
+          <li><a href="volunteer.html" class="text-green-300/80 hover:text-white transition-colors duration-200 cursor-pointer">Volunteer</a></li>
           <li><a href="contact.html" class="text-green-300/80 hover:text-white transition-colors duration-200 cursor-pointer">Host a Drop Location</a></li>
           <li><a href="donate.html"  class="text-green-300/80 hover:text-white transition-colors duration-200 cursor-pointer">Donate</a></li>
         </ul>
@@ -805,9 +816,11 @@
     if (href.startsWith('#') || href.startsWith('mailto') || href.startsWith('tel') || href.startsWith('http')) return;
     if (!href.match(/\.html$/)) return;
     e.preventDefault();
+    document.body.style.animation = 'none';
+    document.body.style.transition = 'opacity 0.28s ease, transform 0.28s ease';
     document.body.style.opacity = '0';
-    document.body.style.transition = 'opacity 0.22s ease';
-    setTimeout(function(){ window.location.href = href; }, 240);
+    document.body.style.transform = 'translateY(10px)';
+    setTimeout(function(){ window.location.href = href; }, 280);
   });
 })();
 </script>

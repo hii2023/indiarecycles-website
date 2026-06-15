@@ -6,8 +6,8 @@
   <link rel="icon" type="image/png" sizes="64x64" href="/indiarecycles-website/favicon.png"/>
   <link rel="icon" type="image/png" sizes="32x32" href="/indiarecycles-website/favicon-32.png"/>
   <link rel="shortcut icon" href="/indiarecycles-website/favicon.png"/>
-  <title>Zero Waste Promise - India Recycles</title>
-  <meta name="description" content="REVIBE and Godadi Project - India Recycles' zero waste upcycling programs that turn textile waste into livelihoods."/>
+  <title>Volunteer - India Recycles</title>
+  <meta name="description" content="Volunteer with India Recycles. Help sort clothes, run community sales and give donated garments a dignified second life."/>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -93,6 +93,10 @@
 
     .font-serif { font-family: 'Lora', Georgia, serif !important; font-style: normal; }
 
+    /* ── Collecting badge: bigger on mobile ─────────────────────────────────────── */
+    @media (max-width: 1023px) {
+      #collecting-badge { font-size: 14px !important; padding: 8px 18px !important; letter-spacing: .08em !important; }
+    }
     /* ── Hamburger: hide on desktop (inline display:flex was overriding lg:hidden) ── */
     #menu-toggle { display: flex; }
     @media (min-width: 1024px) { #menu-toggle { display: none !important; } }
@@ -125,9 +129,9 @@
         <a href="index.html" style="display:inline-flex;align-items:center;padding:6px 14px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">Home</a>
         <a href="about-us.html" style="display:inline-flex;align-items:center;padding:6px 14px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">About Us</a>
         <a href="our-model.html" style="display:inline-flex;align-items:center;padding:6px 14px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">Our Model</a>
-        <div class="nav-dd"><a href="our-impact.html" style="display:inline-flex;align-items:center;padding:6px 14px;border-radius:9999px;color:#fff;font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;background:rgba(255,255,255,0.22);">Our Impact<svg style="width:11px;height:11px;margin-left:3px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a><div class="nav-dd-panel"><div class="nav-dd-card"><a href="our-impact.html" class="nav-dd-item">Our Impact</a><a href="zero-waste-promise.html" class="nav-dd-item">Zero Waste</a></div></div></div>
+        <div class="nav-dd"><a href="our-impact.html" style="display:inline-flex;align-items:center;padding:6px 14px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">Our Impact<svg style="width:11px;height:11px;margin-left:3px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a><div class="nav-dd-panel"><div class="nav-dd-card"><a href="our-impact.html" class="nav-dd-item">Our Impact</a><a href="zero-waste-promise.html" class="nav-dd-item">Zero Waste</a></div></div></div>
         <a href="revibe.html" style="display:inline-flex;align-items:center;padding:6px 14px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">ReVibe</a>
-        <div class="nav-dd"><a href="volunteer.html" style="display:inline-flex;align-items:center;padding:6px 14px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">Join Us<svg style="width:11px;height:11px;margin-left:3px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a><div class="nav-dd-panel"><div class="nav-dd-card"><a href="our-partners.html" class="nav-dd-item">Partners</a><a href="careers.html" class="nav-dd-item">Careers</a><a href="volunteer.html" class="nav-dd-item">Volunteer</a><a href="drop-locations.html" class="nav-dd-item">Become a Drop Location</a></div></div></div>
+        <div class="nav-dd"><a href="volunteer.html" style="display:inline-flex;align-items:center;padding:6px 14px;border-radius:9999px;color:#fff;font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;background:rgba(255,255,255,0.22);">Join Us<svg style="width:11px;height:11px;margin-left:3px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a><div class="nav-dd-panel"><div class="nav-dd-card"><a href="our-partners.html" class="nav-dd-item">Partners</a><a href="careers.html" class="nav-dd-item">Careers</a><a href="volunteer.html" class="nav-dd-item">Volunteer</a><a href="drop-locations.html" class="nav-dd-item">Become a Drop Location</a></div></div></div>
         <a href="contact.html" style="display:inline-flex;align-items:center;padding:6px 14px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">Contact</a>
         <span style="display:inline-block;width:1px;height:16px;background:rgba(255,255,255,0.2);margin:0 4px;"></span><a href="https://store.indiarecycles.org" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border-radius:9999px;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'"><svg style="width:12px;height:12px;flex-shrink:0;fill:none;stroke:#F59E0B;stroke-width:2.5;stroke-linecap:round;" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span style="background:linear-gradient(135deg,#F59E0B,#EF4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Thrift Store</span></a>
       </div>
@@ -163,170 +167,131 @@
 <main>
 
 <!-- HERO -->
-<section class="relative pt-[64px] overflow-hidden" aria-labelledby="zw-h1">
-  <div class="absolute inset-0">
-    <img src="images/zw1.jpg" alt="Zero waste textile upcycling" class="w-full h-full object-cover object-center"/>
-    <div class="absolute inset-0 bg-gradient-to-b from-forest-900/80 via-forest-900/65 to-forest-900/85"></div>
-  </div>
-  <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28 text-center">
-    <div class="inline-flex items-center gap-2 bg-amber-600/90 text-white px-4 py-2 rounded-full text-sm font-semibold mb-6 backdrop-blur-sm">Our Commitment</div>
-    <h1 id="zw-h1" class="text-5xl lg:text-6xl text-white mb-5 leading-tight">Zero Waste <em class="not-italic text-amber-400">Promise</em></h1>
-    <p class="text-forest-100 text-xl max-w-3xl mx-auto leading-relaxed">Every piece of donated clothing finds a purpose, whether it's worn again, upcycled into a product, or transformed into warmth for a family in winter. Nothing goes to waste. Ever.</p>
+<section class="relative pt-[64px] overflow-hidden bg-white" aria-labelledby="volunteer-h1">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 text-center">
+    <div class="badge">Volunteer</div>
+    <h1 id="volunteer-h1" class="text-4xl lg:text-6xl mb-5 leading-tight">Give a few hours, <em class="grad-amber">change a life</em></h1>
+    <p class="text-[var(--text-secondary)] text-lg max-w-2xl mx-auto leading-relaxed">Volunteers are the heart of India Recycles. Whether you have an afternoon or a weekend, there is a way for you to help clothes find their second home.</p>
   </div>
 </section>
 
-<!-- THREE PATHS -->
-<section class="py-16 lg:py-24 bg-[#f5f4ef] texture-bg" aria-labelledby="paths-heading">
+<!-- WAYS TO HELP -->
+<section class="py-16 lg:py-24 bg-[#f5f4ef]">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-14">
-      <h2 id="paths-heading" class="text-4xl text-forest-800">Every Cloth Finds a Purpose</h2>
-      <p class="text-forest-600 mt-3 max-w-xl mx-auto">Our three-path system ensures not a single thread is wasted.</p>
+    <div class="text-center max-w-2xl mx-auto mb-12">
+      <h2 class="text-3xl lg:text-4xl mb-4">Ways to help</h2>
+      <p class="text-[var(--text-secondary)] text-lg">Pick what fits your time and your strengths.</p>
     </div>
-    <div class="grid md:grid-cols-3 gap-6">
-      <div class="bg-white rounded-3xl p-8 border border-forest-100 text-center card-lift cursor-default">
-        <div class="w-16 h-16 bg-forest-100 rounded-2xl flex items-center justify-center mx-auto mb-5">
-          <svg class="w-8 h-8 text-forest-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-        </div>
-        <div class="font-serif text-4xl text-forest-600 font-bold mb-2">Path 1</div>
-        <h3 class="text-xl text-forest-800 mb-3">Can Be Worn</h3>
-        <p class="text-forest-600 leading-relaxed text-sm">Goes directly to slum sales (₹10–₹50) or the yearly curated sale for urban audiences.</p>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="card bg-white rounded-3xl p-8 border border-[var(--border)]">
+        <h3 class="text-xl mb-2">Sorting and packing</h3>
+        <p class="text-[var(--text-secondary)] text-[15px]">Help us receive, sort and pack donated clothes so they reach the right communities in good shape.</p>
       </div>
-      <div class="bg-forest-700 rounded-3xl p-8 text-center card-lift cursor-default">
-        <div class="w-16 h-16 bg-forest-600/40 rounded-2xl flex items-center justify-center mx-auto mb-5">
-          <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        </div>
-        <div class="font-serif text-4xl text-amber-400 font-bold mb-2">Path 2</div>
-        <h3 class="text-xl text-white mb-3">Can Be Upcycled</h3>
-        <p class="text-forest-200 leading-relaxed text-sm">Becomes a REVIBE product: shoes, apparel, or accessories made by women in stitching units.</p>
+      <div class="card bg-white rounded-3xl p-8 border border-[var(--border)]">
+        <h3 class="text-xl mb-2">Slum sale days</h3>
+        <p class="text-[var(--text-secondary)] text-[15px]">Join our weekly community sales, set up stalls and spend the day with the families we serve.</p>
       </div>
-      <div class="bg-white rounded-3xl p-8 border border-forest-100 text-center card-lift cursor-default">
-        <div class="w-16 h-16 bg-amber-100 rounded-2xl flex items-center justify-center mx-auto mb-5">
-          <svg class="w-8 h-8 text-amber-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-        </div>
-        <div class="font-serif text-4xl text-amber-600 font-bold mb-2">Path 3</div>
-        <h3 class="text-xl text-forest-800 mb-3">Heavily Worn</h3>
-        <p class="text-forest-600 leading-relaxed text-sm">Transformed into a Godadi winter mattress, providing warmth to a family in need.</p>
+      <div class="card bg-white rounded-3xl p-8 border border-[var(--border)]">
+        <h3 class="text-xl mb-2">Skills and outreach</h3>
+        <p class="text-[var(--text-secondary)] text-[15px]">Lend your skills in design, photography, social media or fundraising to widen our reach.</p>
+      </div>
+      <div class="card bg-white rounded-3xl p-8 border border-[var(--border)]">
+        <h3 class="text-xl mb-2">Host a drive</h3>
+        <p class="text-[var(--text-secondary)] text-[15px]">Run a clothing collection drive at your office, society or school and rally your circle.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- REVIBE -->
-<section class="py-16 lg:py-24 bg-white" aria-labelledby="revibe-heading">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-16 items-center">
-    <div>
-      <div class="inline-flex items-center gap-2 bg-forest-100 text-forest-700 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wide mb-5">Program 1</div>
-      <h2 id="revibe-heading" class="text-5xl text-forest-800 mb-4">REVIBE</h2>
-      <div class="text-amber-600 font-semibold text-lg mb-6">Our Upcycled Product Range</div>
-      <p class="text-forest-700 leading-relaxed mb-5">REVIBE is India Recycles' in-house brand of upcycled products. All items are made primarily from donated clothes that can no longer be reworn or reused as-is.</p>
-      <p class="text-forest-700 leading-relaxed mb-5">We've established stitching units in slum communities across Ahmedabad and Vadodara, where trained women convert waste textiles into entirely new products: shoes, apparel and accessories.</p>
-      <p class="text-forest-700 leading-relaxed mb-8">Sales revenue from REVIBE products is distributed equally among all the women workers involved in production, creating dignified and stable livelihoods.</p>
-      <div class="flex flex-wrap gap-3">
-        <span class="bg-forest-100 text-forest-700 px-4 py-2 rounded-xl text-sm font-semibold">Shoes &amp; Footwear</span>
-        <span class="bg-forest-100 text-forest-700 px-4 py-2 rounded-xl text-sm font-semibold">Upcycled Apparel</span>
-        <span class="bg-forest-100 text-forest-700 px-4 py-2 rounded-xl text-sm font-semibold">Accessories</span>
-        <span class="bg-amber-100 text-amber-700 px-4 py-2 rounded-xl text-sm font-semibold">Women-led Production</span>
-      </div>
-    </div>
-    <div class="grid grid-cols-2 gap-4">
-      <div class="photo-zoom rounded-3xl overflow-hidden aspect-square">
-        <img src="images/revibe1.jpg" alt="REVIBE upcycled shoes" class="w-full h-full object-cover"/>
-      </div>
-      <div class="photo-zoom rounded-3xl overflow-hidden aspect-square mt-8">
-        <img src="images/revibe2.png" alt="REVIBE product range" class="w-full h-full object-cover"/>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- GODADI PROJECT -->
-<section class="py-16 lg:py-24 bg-[#f5f4ef] texture-bg" aria-labelledby="godadi-heading">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-16 items-center">
-    <div class="grid grid-cols-2 gap-4 order-2 lg:order-1">
-      <div class="photo-zoom rounded-3xl overflow-hidden aspect-square">
-        <img src="images/godadi1.jpg" alt="Godadi mattress being made" class="w-full h-full object-cover"/>
-      </div>
-      <div class="photo-zoom rounded-3xl overflow-hidden aspect-square mt-8">
-        <img src="images/godadi2.jpg" alt="Women making Godadi mattresses" class="w-full h-full object-cover"/>
-      </div>
-    </div>
-    <div class="order-1 lg:order-2">
-      <div class="inline-flex items-center gap-2 bg-amber-100 text-amber-700 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wide mb-5">Program 2</div>
-      <h2 id="godadi-heading" class="text-5xl text-forest-800 mb-4">The Godadi Project</h2>
-      <div class="text-amber-600 font-semibold text-lg mb-6">Warmth from Waste</div>
-      <p class="text-forest-700 leading-relaxed mb-5">The Godadi Project repurposes heavily worn donated clothing by transforming it into godadis, traditional Indian winter mattresses that provide warmth to families in need.</p>
-      <p class="text-forest-700 leading-relaxed mb-5">Operating from a stitching unit in Ganeshnagar, Ahmedabad, the program employs local women who manufacture these mattresses from supplied materials. Sale proceeds are shared equitably among the workers.</p>
-      <p class="text-forest-700 leading-relaxed mb-8">This program ensures that even the most worn-out donated clothes find a dignified second life, while creating income for women who need it most.</p>
-      <div class="flex flex-wrap gap-3">
-        <span class="bg-amber-100 text-amber-700 px-4 py-2 rounded-xl text-sm font-semibold">Zero Textile Waste</span>
-        <span class="bg-amber-100 text-amber-700 px-4 py-2 rounded-xl text-sm font-semibold">Women Employed</span>
-        <span class="bg-forest-100 text-forest-700 px-4 py-2 rounded-xl text-sm font-semibold">Ganeshnagar Unit</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ZW3 PHOTO + QUOTE -->
-<section class="relative py-20 lg:py-28" aria-label="Zero waste impact">
-  <div class="absolute inset-0">
-    <img src="images/zw3.jpg" alt="" class="w-full h-full object-cover" aria-hidden="true"/>
-    <div class="absolute inset-0 bg-forest-900/78"></div>
-  </div>
-  <div class="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-    <svg class="w-12 h-12 text-amber-400/60 mx-auto mb-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.691 6.292C5.094 4.771 7.217 4 10.062 4v2.7c-1.42.056-2.525.459-3.28 1.2-.736.722-1.104 1.74-1.104 3.056v.5h3.325v7.544H3v-6.44c0-2.608.23-4.605.691-5.268zm11.937 0C17.03 4.771 19.153 4 22 4v2.7c-1.42.056-2.525.459-3.28 1.2-.736.722-1.104 1.74-1.104 3.056v.5h3.325v7.544H14.938v-6.44c0-2.608.23-4.605.69-5.268z"/></svg>
-    <p class="font-serif text-2xl lg:text-3xl text-white leading-relaxed italic mb-8">"Nothing goes to waste. Every thread of every donated garment serves a purpose: feeding a family, creating a livelihood, or keeping someone warm."</p>
-    <div class="text-saffron-300 font-semibold">India Recycles</div>
+<!-- CTA to contact -->
+<section class="py-16 lg:py-24 bg-white">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <h2 class="text-3xl lg:text-4xl mb-4">Sign up to volunteer</h2>
+    <p class="text-[var(--text-secondary)] text-lg mb-8">Tell us a little about yourself and how you would like to help. We will get back to you with the next steps.</p>
+    <a href="contact.html" class="inline-flex bg-green-700 hover:bg-green-800 text-white px-7 py-3 rounded-full font-semibold text-[15px] transition-colors duration-200 cursor-pointer">Join as a Volunteer</a>
   </div>
 </section>
 
 <!-- CTA -->
-<section class="py-16 bg-forest-800" aria-labelledby="zw-cta-heading">
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-    <h2 id="zw-cta-heading" class="text-4xl text-white mb-4">Support Zero Waste</h2>
-    <p class="text-forest-200 text-lg mb-8 max-w-xl mx-auto">Every donation you make helps power REVIBE, Godadi and our community programs. No textile waste. No excuses.</p>
-    <div class="flex flex-wrap justify-center gap-4">
-      <a href="donate.html"         class="bg-amber-600 hover:bg-amber-700 text-white px-8 py-4 rounded-2xl font-semibold transition-colors cursor-pointer shadow-lg">Donate Now</a>
-      <a href="drop-locations.html" class="border-2 border-white/50 text-white px-8 py-4 rounded-2xl font-semibold hover:bg-white/10 cursor-pointer transition-colors">Donate Clothes</a>
+<section class="py-16 lg:py-24 bg-white">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="rounded-3xl bg-green-700 text-white text-center px-6 py-14 lg:py-16">
+      <h2 class="text-3xl lg:text-4xl mb-4 text-white">Ready to be part of it?</h2>
+      <p class="text-green-100 text-lg max-w-xl mx-auto mb-8">Every pair of hands and every donated garment moves the circle forward.</p>
+      <div class="flex flex-wrap justify-center gap-3">
+        <a href="contact.html" class="bg-amber-500 hover:bg-amber-600 text-white px-7 py-3 rounded-full font-semibold text-[15px] transition-colors duration-200 cursor-pointer">Get in Touch</a>
+        <a href="donate.html" class="bg-white/10 hover:bg-white/20 text-white px-7 py-3 rounded-full font-semibold text-[15px] transition-colors duration-200 cursor-pointer">Donate Now</a>
+      </div>
     </div>
   </div>
 </section>
-
 </main>
 
-<!-- FOOTER -->
-<footer class="bg-forest-900 text-white" role="contentinfo">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-    <div class="grid md:grid-cols-4 gap-10 mb-10">
-      <div class="md:col-span-2">
-        <a href="index.html" class="flex items-center gap-3 cursor-pointer mb-4">
-          <img src="images/logo.png" alt="India Recycles" class="h-8 w-auto brightness-200"/>
-          <span class="font-serif text-lg text-white">India Recycles</span>
+<!-- ════════════ FOOTER ════════════ -->
+<footer class="bg-[#0A1C11] text-white" role="contentinfo">
+  <!-- Gradient accent line -->
+  <div class="h-0.5 bg-gradient-to-r from-green-700 via-amber-500 to-green-700"></div>
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
+      <!-- Brand -->
+      <div>
+        <a href="index.html" class="flex items-center gap-3 mb-4 cursor-pointer">
+          <img src="images/logo.png" alt="India Recycles" class="h-9 w-auto brightness-200"/>
+          <span class="font-bold text-[15px] text-white" style="font-family:var(--font-sans);">India Recycles</span>
         </a>
-        <p class="text-forest-300 text-sm leading-relaxed max-w-xs">Giving donated clothes a second life through community slum sales, upcycling and livelihood creation across Ahmedabad &amp; Vadodara.</p>
-      </div>
-      <div>
-        <div class="font-semibold text-forest-200 mb-4 text-sm uppercase tracking-wide">Pages</div>
-        <div class="flex flex-col gap-2 text-sm text-forest-400">
-          <a href="index.html"              class="hover:text-white transition-colors cursor-pointer">Home</a>
-          <a href="about-us.html"           class="hover:text-white transition-colors cursor-pointer">About Us</a>
-          <a href="our-model.html"          class="hover:text-white transition-colors cursor-pointer">Our Model</a>
-          <a href="drop-locations.html"     class="hover:text-white transition-colors cursor-pointer">Drop Locations</a>
-          <a href="zero-waste-promise.html" class="hover:text-white transition-colors cursor-pointer">Zero Waste</a>
+        <p class="text-green-300/80 text-[13px] leading-relaxed mb-5">Love the Pre-Loved. A non-profit giving donated clothes a dignified second life across India.</p>
+        <div class="flex gap-2">
+          <a href="#" class="w-8 h-8 bg-white/10 hover:bg-amber-500 rounded-lg flex items-center justify-center transition-colors duration-200 cursor-pointer" aria-label="Facebook">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/india.recycles" target="_blank" rel="noopener noreferrer" class="w-8 h-8 bg-white/10 hover:bg-amber-500 rounded-lg flex items-center justify-center transition-colors duration-200 cursor-pointer" aria-label="India Recycles on Instagram">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="#" class="w-8 h-8 bg-white/10 hover:bg-amber-500 rounded-lg flex items-center justify-center transition-colors duration-200 cursor-pointer" aria-label="YouTube">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.96-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#0A1C11"/></svg>
+          </a>
         </div>
       </div>
+      <!-- Quick Links -->
       <div>
-        <div class="font-semibold text-forest-200 mb-4 text-sm uppercase tracking-wide">More</div>
-        <div class="flex flex-col gap-2 text-sm text-forest-400">
-          <a href="our-impact.html"   class="hover:text-white transition-colors cursor-pointer">Our Impact</a>
-          <a href="our-partners.html" class="hover:text-white transition-colors cursor-pointer">Partners</a>
-          <a href="contact.html"      class="hover:text-white transition-colors cursor-pointer">Contact</a>
-          <a href="donate.html"       class="hover:text-white transition-colors cursor-pointer">Donate</a>
-        </div>
+        <h3 class="font-bold text-[11px] uppercase tracking-widest text-green-300/70 mb-4">Quick Links</h3>
+        <ul class="space-y-2.5 text-[13px]">
+          <li><a href="about-us.html"           class="text-green-300/80 hover:text-white transition-colors duration-200 cursor-pointer">About Us</a></li>
+          <li><a href="our-model.html"          class="text-green-300/80 hover:text-white transition-colors duration-200 cursor-pointer">Our Model</a></li>
+          <li><a href="drop-locations.html"     class="text-green-300/80 hover:text-white transition-colors duration-200 cursor-pointer">Drop Locations</a></li>
+          <li><a href="our-impact.html"         class="text-green-300/80 hover:text-white transition-colors duration-200 cursor-pointer">Our Impact</a></li>
+          <li><a href="our-partners.html"       class="text-green-300/80 hover:text-white transition-colors duration-200 cursor-pointer">Our Partners</a></li>
+        </ul>
+      </div>
+      <!-- Programs -->
+      <div>
+        <h3 class="font-bold text-[11px] uppercase tracking-widest text-green-300/70 mb-4">Programs</h3>
+        <ul class="space-y-2.5 text-[13px]">
+          <li><a href="revibe.html" class="text-green-300/80 hover:text-white transition-colors duration-200 cursor-pointer">ReVibe Upcycling</a></li>
+          <li><a href="zero-waste-promise.html" class="text-green-300/80 hover:text-white transition-colors duration-200 cursor-pointer">Godadi Project</a></li>
+          <li><a href="our-model.html"          class="text-green-300/80 hover:text-white transition-colors duration-200 cursor-pointer">Slum Sales</a></li>
+          <li><a href="our-impact.html"         class="text-green-300/80 hover:text-white transition-colors duration-200 cursor-pointer">Medical Camps</a></li>
+          <li><a href="our-impact.html"         class="text-green-300/80 hover:text-white transition-colors duration-200 cursor-pointer">Scholarships</a></li>
+        </ul>
+      </div>
+      <!-- Get Involved -->
+      <div>
+        <h3 class="font-bold text-[11px] uppercase tracking-widest text-green-300/70 mb-4">Get Involved</h3>
+        <ul class="space-y-2.5 text-[13px] mb-5">
+          <li><a href="volunteer.html" class="text-green-300/80 hover:text-white transition-colors duration-200 cursor-pointer">Volunteer</a></li>
+          <li><a href="contact.html" class="text-green-300/80 hover:text-white transition-colors duration-200 cursor-pointer">Host a Drop Location</a></li>
+          <li><a href="donate.html"  class="text-green-300/80 hover:text-white transition-colors duration-200 cursor-pointer">Donate</a></li>
+        </ul>
+        <a href="donate.html" class="inline-block bg-amber-500 hover:bg-amber-600 text-white px-5 py-2.5 rounded-lg font-bold text-[13px] transition-colors duration-200 cursor-pointer">Donate Now</a>
       </div>
     </div>
-    <div class="border-t border-forest-800 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-forest-500">
-      <span>&copy; 2025 India Recycles. All rights reserved.</span>
-      <span>Registered Non-Profit, Gujarat, India</span>
+    <!-- Bottom bar -->
+    <div class="border-t border-white/10 pt-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-[12px] text-green-400/60">
+      <p>&copy; 2025 India Recycles. All rights reserved.</p>
+      <div class="flex gap-5">
+        <a href="#" class="hover:text-green-300 transition-colors cursor-pointer">Terms and Conditions</a>
+        <a href="#" class="hover:text-green-300 transition-colors cursor-pointer">Privacy Policy</a>
+      </div>
     </div>
   </div>
 </footer>
@@ -336,7 +301,7 @@
   const menu   = document.getElementById('mob-menu');
   toggle.addEventListener('click', () => {
     const open = menu.classList.toggle('open');
-    toggle.setAttribute('aria-expanded', open);
+    toggle.setAttribute('aria-expanded', String(open));
   });
 </script>
 
