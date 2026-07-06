@@ -23,14 +23,6 @@
               300: '#93c1a5', 400: '#5ca07a', 500: '#35825b',
               600: '#256b49', 700: '#1c5439', 800: '#133a28', 900: '#0b2418',
             },
-            amber: {
-              50:  '#f2f7f4', 100: '#e0ede5', 200: '#c2dccc',
-              300: '#93c1a5', 400: '#4f9c74', 500: '#256b49',
-              600: '#1c5439', 700: '#256b49', 800: '#1c5439',
-            },
-            forest: { 50:'#f2f7f4', 100:'#e0ede5', 200:'#c2dccc', 300:'#93c1a5', 400:'#5ca07a', 500:'#35825b', 600:'#256b49', 700:'#1c5439', 800:'#133a28', 900:'#0b2418' },
-            saffron: { 100:'#e0ede5', 200:'#c2dccc', 400:'#5ca07a', 500:'#35825b', 600:'#256b49' },
-            cream: '#ffffff',
           },
           borderRadius: { '4xl': '2rem' },
         }
@@ -48,19 +40,19 @@
       --bg-secondary: #f6f7f6;
       --text-primary: #1a1a1a;
       --text-secondary: #6b6b6b;
-      --text-muted: #9b9b9b;
+      --text-muted: #767676;
       --border: rgba(0,0,0,0.12);
       --radius-sm: 6px;
       --radius-md: 10px;
       --radius-lg: 16px;
       --brand-green: #1c5439;
-      --brand-amber: #256b49;
+      --brand-accent: #256b49;
     }
     html { scroll-behavior: smooth; }
-    body { font-family: var(--font-sans); color: var(--text-primary); background: var(--bg-primary); font-size: 15px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+    body { font-family: var(--font-sans); color: var(--text-primary); background: var(--bg-primary); font-size: 16px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
     #mob-menu { display: none; }
     #mob-menu.open { display: block; }
-    .grad-amber, em.grad-amber { color: var(--brand-amber); font-style: normal; background: none; -webkit-text-fill-color: unset; }
+    .grad-accent, em.grad-accent { color: var(--brand-accent); font-style: normal; background: none; -webkit-text-fill-color: unset; }
     @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
     .marquee-track { animation: marquee 16s linear infinite; }
     @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }
@@ -97,7 +89,7 @@
     @media (min-width: 1024px) { #menu-toggle { display: none !important; } }
     /* ── Mobile spacing improvements ────────────────────────────────────────────── */
     @media (max-width: 1023px) {
-      body { font-size: 15px; }
+      body { font-size: 16px; }
       nav { height: auto; }
       #mob-menu .flex.flex-col { gap: 4px; }
       section { padding-left: 16px; padding-right: 16px; }
@@ -128,7 +120,7 @@
         <a href="revibe.html" style="display:inline-flex;align-items:center;padding:6px 14px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">ReVibe</a>
         <div class="nav-dd"><a href="volunteer.html" style="display:inline-flex;align-items:center;padding:6px 14px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">Join Us<svg style="width:11px;height:11px;margin-left:3px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a><div class="nav-dd-panel"><div class="nav-dd-card"><a href="our-partners.html" class="nav-dd-item">Partners</a><a href="careers.html" class="nav-dd-item">Careers</a><a href="volunteer.html" class="nav-dd-item">Volunteer</a><a href="drop-locations.html" class="nav-dd-item">Become a Drop Location</a></div></div></div>
         <a href="contact.html" style="display:inline-flex;align-items:center;padding:6px 14px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">Contact</a>
-        <span style="display:inline-block;width:1px;height:16px;background:rgba(255,255,255,0.2);margin:0 4px;"></span><a href="https://store.indiarecycles.org" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border-radius:9999px;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'"><svg style="width:12px;height:12px;flex-shrink:0;fill:none;stroke:#4f9c74;stroke-width:2.5;stroke-linecap:round;" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span style="color:#93c1a5;">Thrift Store</span></a>
+        <span style="display:inline-block;width:1px;height:16px;background:rgba(255,255,255,0.2);margin:0 4px;"></span><a href="https://store.indiarecycles.org" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border-radius:9999px;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'"><svg style="width:12px;height:12px;flex-shrink:0;fill:none;stroke:#aed3bf;stroke-width:2.5;stroke-linecap:round;" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span style="color:#aed3bf;">Thrift Store</span></a>
       </div>
     </div>
     <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
@@ -143,11 +135,11 @@
       <a href="index.html" style="display:block;padding:9px 14px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Home</a>
       <a href="about-us.html" style="display:block;padding:9px 14px;border-radius:8px;background:#f6f7f6;color:#1a1a1a;font-size:14px;font-weight:500;text-decoration:none;">About Us</a>
       <a href="our-model.html" style="display:block;padding:9px 14px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Our Model</a>
-      <div style="padding:12px 14px 4px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#9b9b9b;">Our Impact</div>
+      <div style="padding:12px 14px 4px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#767676;">Our Impact</div>
       <a href="our-impact.html" style="display:block;padding:9px 24px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Our Impact</a>
       <a href="zero-waste-promise.html" style="display:block;padding:9px 24px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Zero Waste</a>
       <a href="revibe.html" style="display:block;padding:9px 14px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">ReVibe</a>
-      <div style="padding:12px 14px 4px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#9b9b9b;">Join Us</div>
+      <div style="padding:12px 14px 4px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#767676;">Join Us</div>
       <a href="our-partners.html" style="display:block;padding:9px 24px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Partners</a>
       <a href="careers.html" style="display:block;padding:9px 24px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Careers</a>
       <a href="volunteer.html" style="display:block;padding:9px 24px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Volunteer</a>
@@ -165,12 +157,12 @@
 <section class="relative pt-[64px] overflow-hidden" aria-labelledby="about-h1">
   <div class="absolute inset-0">
     <img src="images/event2.jpg" alt="India Recycles community event" class="w-full h-full object-cover object-center"/>
-    <div class="absolute inset-0 bg-gradient-to-b from-forest-900/70 via-forest-900/60 to-forest-900/85"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-green-900/70 via-green-900/60 to-green-900/85"></div>
   </div>
   <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28 text-center">
-    <div class="inline-flex items-center gap-2 bg-amber-600/90 text-white px-4 py-2 rounded-full text-sm font-semibold mb-6 backdrop-blur-sm">Our Story</div>
-    <h1 id="about-h1" class="text-5xl lg:text-6xl text-white mb-5 leading-tight">About <em class="not-italic text-amber-400">India Recycles</em></h1>
-    <p class="text-forest-100 text-xl max-w-2xl mx-auto leading-relaxed">A people-powered movement to give donated clothes dignity, purpose and a second life, while building healthier, more empowered communities.</p>
+    <div class="inline-flex items-center gap-2 bg-green-700/90 text-white px-4 py-2 rounded-full text-sm font-semibold mb-6 backdrop-blur-sm">Our Story</div>
+    <h1 id="about-h1" class="text-5xl lg:text-6xl text-white mb-5 leading-tight">About <em class="not-italic text-green-400">India Recycles</em></h1>
+    <p class="text-green-100 text-xl max-w-2xl mx-auto leading-relaxed">A people-powered movement to give donated clothes dignity, purpose and a second life, while building healthier, more empowered communities.</p>
   </div>
 </section>
 
@@ -178,9 +170,9 @@
 <section class="py-16 lg:py-24 bg-[#f6f7f6] texture-bg" aria-labelledby="story-heading">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-16 items-center">
     <div>
-      <div class="inline-flex items-center gap-2 bg-forest-100 text-forest-700 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wide mb-5">How It Began</div>
-      <h2 id="story-heading" class="text-4xl text-forest-800 mb-6 leading-tight">A Simple Observation, <br/><em class="not-italic text-amber-600">A Big Change</em></h2>
-      <div class="space-y-4 text-forest-700 leading-relaxed">
+      <div class="inline-flex items-center gap-2 bg-green-100 text-green-700 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wide mb-5">How It Began</div>
+      <h2 id="story-heading" class="text-4xl text-green-800 mb-6 leading-tight">A Simple Observation, <br/><em class="not-italic text-green-700">A Big Change</em></h2>
+      <div class="space-y-4 text-green-700 leading-relaxed">
         <p>India Recycles began in 2017 when co-founder Renu Pokharna organised a simple clothing swap event in Ahmedabad. Renu had studied public policy at Columbia University in New York, served as a Chief Minister's Fellow in Gujarat and worked at a social enterprise in Uganda. After returning to India, she was struck by how much the city's households discarded and how much its communities needed. The swap was a first answer.</p>
         <p>Within months the small swap grew into something structured: a non-profit that collects donated clothes at drop points across the city, sorts them with the help of dedicated volunteers, and sells them at weekly community events in urban slum neighbourhoods. Every item is priced between ₹10 and ₹50 so that cost is never a barrier to dignity.</p>
         <p>Every garment that cannot be resold finds a second life through our upcycling programs, ReVibe and the Godadi Project, creating handcrafted products and warm bedding made entirely from donated textiles and providing livelihoods to women in the communities we serve.</p>
@@ -191,13 +183,13 @@
       <div class="photo-zoom rounded-3xl overflow-hidden shadow-xl aspect-[4/3]">
         <img src="images/event3.jpg" alt="India Recycles team at a community event" class="w-full h-full object-cover"/>
       </div>
-      <div class="absolute -bottom-5 -left-5 bg-white rounded-3xl px-6 py-4 shadow-xl border border-forest-100">
-        <div class="font-serif text-3xl text-forest-600 font-bold">Since 2017</div>
-        <div class="text-xs text-forest-500 font-medium mt-0.5">Growing stronger every year</div>
+      <div class="absolute -bottom-5 -left-5 bg-white rounded-3xl px-6 py-4 shadow-xl border border-green-100">
+        <div class="font-serif text-3xl text-green-600 font-bold">Since 2017</div>
+        <div class="text-xs text-green-500 font-medium mt-0.5">Growing stronger every year</div>
       </div>
-      <div class="absolute -top-4 -right-4 bg-amber-600 rounded-2xl px-4 py-3 shadow-lg">
+      <div class="absolute -top-4 -right-4 bg-green-700 rounded-2xl px-4 py-3 shadow-lg">
         <div class="font-serif text-2xl text-white font-bold">400+</div>
-        <div class="text-xs text-amber-100 font-medium">Volunteers</div>
+        <div class="text-xs text-green-100 font-medium">Volunteers</div>
       </div>
     </div>
   </div>
@@ -207,35 +199,35 @@
 <section class="py-16 lg:py-24 bg-white" aria-labelledby="mvv-heading">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-14">
-      <div class="inline-flex items-center gap-2 bg-forest-100 text-forest-700 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wide mb-4">What We Stand For</div>
-      <h2 id="mvv-heading" class="text-4xl text-forest-800">Our Purpose &amp; Values</h2>
+      <div class="inline-flex items-center gap-2 bg-green-100 text-green-700 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wide mb-4">What We Stand For</div>
+      <h2 id="mvv-heading" class="text-4xl text-green-800">Our Purpose &amp; Values</h2>
     </div>
     <div class="grid md:grid-cols-3 gap-6">
-      <div class="bg-[#f6f7f6] rounded-3xl p-8 border border-forest-100 card-lift cursor-default">
-        <div class="w-14 h-14 bg-forest-100 rounded-2xl flex items-center justify-center mb-5">
-          <svg class="w-7 h-7 text-forest-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+      <div class="bg-[#f6f7f6] rounded-3xl p-8 border border-green-100 card-lift cursor-default">
+        <div class="w-14 h-14 bg-green-100 rounded-2xl flex items-center justify-center mb-5">
+          <svg class="w-7 h-7 text-green-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
         </div>
-        <h3 class="text-xl text-forest-800 mb-3">Our Mission</h3>
-        <p class="text-forest-700 leading-relaxed text-sm">To create a circular economy for clothes in India by diverting textile waste from landfills, making quality clothing accessible to all, and generating livelihoods in the communities we serve.</p>
+        <h3 class="text-xl text-green-800 mb-3">Our Mission</h3>
+        <p class="text-green-700 leading-relaxed text-sm">To create a circular economy for clothes in India by diverting textile waste from landfills, making quality clothing accessible to all, and generating livelihoods in the communities we serve.</p>
       </div>
-      <div class="bg-forest-700 rounded-3xl p-8 card-lift cursor-default">
-        <div class="w-14 h-14 bg-forest-600/40 rounded-2xl flex items-center justify-center mb-5">
+      <div class="bg-green-700 rounded-3xl p-8 card-lift cursor-default">
+        <div class="w-14 h-14 bg-green-600/40 rounded-2xl flex items-center justify-center mb-5">
           <svg class="w-7 h-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
         </div>
         <h3 class="text-xl text-white mb-3">Our Vision</h3>
-        <p class="text-forest-200 leading-relaxed text-sm">A sustainable India where no textile goes to waste, every family has access to quality clothing regardless of income, and slum communities are economically empowered through dignified livelihoods.</p>
+        <p class="text-green-200 leading-relaxed text-sm">A sustainable India where no textile goes to waste, every family has access to quality clothing regardless of income, and slum communities are economically empowered through dignified livelihoods.</p>
       </div>
-      <div class="bg-[#f6f7f6] rounded-3xl p-8 border border-forest-100 card-lift cursor-default">
-        <div class="w-14 h-14 bg-amber-100 rounded-2xl flex items-center justify-center mb-5">
-          <svg class="w-7 h-7 text-amber-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <div class="bg-[#f6f7f6] rounded-3xl p-8 border border-green-100 card-lift cursor-default">
+        <div class="w-14 h-14 bg-green-100 rounded-2xl flex items-center justify-center mb-5">
+          <svg class="w-7 h-7 text-green-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </div>
-        <h3 class="text-xl text-forest-800 mb-3">Our Values</h3>
-        <ul class="text-forest-700 space-y-2 text-sm">
-          <li class="flex items-center gap-2"><svg class="w-4 h-4 text-forest-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Dignity for every person</li>
-          <li class="flex items-center gap-2"><svg class="w-4 h-4 text-forest-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Zero waste commitment</li>
-          <li class="flex items-center gap-2"><svg class="w-4 h-4 text-forest-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Community empowerment</li>
-          <li class="flex items-center gap-2"><svg class="w-4 h-4 text-forest-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Transparency &amp; trust</li>
-          <li class="flex items-center gap-2"><svg class="w-4 h-4 text-forest-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Environmental responsibility</li>
+        <h3 class="text-xl text-green-800 mb-3">Our Values</h3>
+        <ul class="text-green-700 space-y-2 text-sm">
+          <li class="flex items-center gap-2"><svg class="w-4 h-4 text-green-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Dignity for every person</li>
+          <li class="flex items-center gap-2"><svg class="w-4 h-4 text-green-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Zero waste commitment</li>
+          <li class="flex items-center gap-2"><svg class="w-4 h-4 text-green-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Community empowerment</li>
+          <li class="flex items-center gap-2"><svg class="w-4 h-4 text-green-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Transparency &amp; trust</li>
+          <li class="flex items-center gap-2"><svg class="w-4 h-4 text-green-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Environmental responsibility</li>
         </ul>
       </div>
     </div>
@@ -246,34 +238,34 @@
 <section class="py-16 lg:py-24 bg-[#f6f7f6] texture-bg" aria-labelledby="team-heading">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-14">
-      <div class="inline-flex items-center gap-2 bg-forest-100 text-forest-700 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wide mb-4">The People</div>
-      <h2 id="team-heading" class="text-4xl text-forest-800">Our Team</h2>
-      <p class="text-forest-600 mt-3 max-w-xl mx-auto">Passionate individuals driving a sustainable future for India's textile ecosystem.</p>
+      <div class="inline-flex items-center gap-2 bg-green-100 text-green-700 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wide mb-4">The People</div>
+      <h2 id="team-heading" class="text-4xl text-green-800">Our Team</h2>
+      <p class="text-green-600 mt-3 max-w-xl mx-auto">Passionate individuals driving a sustainable future for India's textile ecosystem.</p>
     </div>
     <div class="grid sm:grid-cols-2 gap-8 max-w-2xl mx-auto mb-12">
-      <div class="bg-white rounded-3xl overflow-hidden border border-forest-100 card-lift cursor-default">
+      <div class="bg-white rounded-3xl overflow-hidden border border-green-100 card-lift cursor-default">
         <div class="photo-zoom aspect-[3/4]">
           <img src="images/team1.jpg" alt="Renu Pokharna - Co-Founder, India Recycles" class="w-full h-full object-cover object-top"/>
         </div>
         <div class="p-6">
-          <h3 class="text-xl text-forest-800 mb-1">Renu Pokharna</h3>
-          <p class="text-amber-600 text-sm font-semibold mb-2">Co-Founder</p>
-          <p class="text-forest-600 text-sm leading-relaxed">Renu holds a degree in public policy from Columbia University, New York, served as a Chief Minister's Fellow in Gujarat and worked at a social enterprise in Uganda. Published in The Wall Street Journal, she returned to India in 2017 and founded India Recycles from a single clothing swap in Ahmedabad. She leads strategy, fundraising and external partnerships.</p>
+          <h3 class="text-xl text-green-800 mb-1">Renu Pokharna</h3>
+          <p class="text-green-700 text-sm font-semibold mb-2">Co-Founder</p>
+          <p class="text-green-600 text-sm leading-relaxed">Renu holds a degree in public policy from Columbia University, New York, served as a Chief Minister's Fellow in Gujarat and worked at a social enterprise in Uganda. Published in The Wall Street Journal, she returned to India in 2017 and founded India Recycles from a single clothing swap in Ahmedabad. She leads strategy, fundraising and external partnerships.</p>
         </div>
       </div>
-      <div class="bg-white rounded-3xl overflow-hidden border border-forest-100 card-lift cursor-default">
+      <div class="bg-white rounded-3xl overflow-hidden border border-green-100 card-lift cursor-default">
         <div class="photo-zoom aspect-[3/4]">
           <img src="images/team2.jpg" alt="Pranav Gupta - Co-Founder, India Recycles" class="w-full h-full object-cover object-top"/>
         </div>
         <div class="p-6">
-          <h3 class="text-xl text-forest-800 mb-1">Pranav Gupta</h3>
-          <p class="text-amber-600 text-sm font-semibold mb-2">Co-Founder</p>
-          <p class="text-forest-600 text-sm leading-relaxed">Pranav is a CSR and sustainability policy specialist who joined as co-founder to drive operational execution. He manages stakeholder partnerships, volunteer coordination and day-to-day programs including slum sales, medical camps and upcycling initiatives across Ahmedabad and Vadodara.</p>
+          <h3 class="text-xl text-green-800 mb-1">Pranav Gupta</h3>
+          <p class="text-green-700 text-sm font-semibold mb-2">Co-Founder</p>
+          <p class="text-green-600 text-sm leading-relaxed">Pranav is a CSR and sustainability policy specialist who joined as co-founder to drive operational execution. He manages stakeholder partnerships, volunteer coordination and day-to-day programs including slum sales, medical camps and upcycling initiatives across Ahmedabad and Vadodara.</p>
         </div>
       </div>
     </div>
     <div class="text-center">
-      <p class="text-forest-600 mb-6">India Recycles runs on the passion of <strong class="text-forest-700">400+ volunteers</strong> who give their time every week.</p>
+      <p class="text-green-600 mb-6">India Recycles runs on the passion of <strong class="text-green-700">400+ volunteers</strong> who give their time every week.</p>
       <a href="contact.html" class="inline-flex items-center gap-2 bg-green-800 hover:bg-green-900 text-white px-8 py-4 rounded-2xl font-semibold transition-colors cursor-pointer shadow-lg">
         Join Our Team
         <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
@@ -286,13 +278,13 @@
 <section class="relative py-16 lg:py-24 overflow-hidden" aria-labelledby="about-cta-h2">
   <div class="absolute inset-0">
     <img src="images/impact8.jpg" alt="" class="w-full h-full object-cover" aria-hidden="true"/>
-    <div class="absolute inset-0 bg-forest-900/80"></div>
+    <div class="absolute inset-0 bg-green-900/80"></div>
   </div>
   <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
     <h2 id="about-cta-h2" class="text-4xl lg:text-5xl text-white mb-5">Be Part of the Story</h2>
-    <p class="text-forest-100 text-lg mb-8 max-w-xl mx-auto">Whether you donate clothes, volunteer your time, or fund our programs, every contribution matters.</p>
+    <p class="text-green-100 text-lg mb-8 max-w-xl mx-auto">Whether you donate clothes, volunteer your time, or fund our programs, every contribution matters.</p>
     <div class="flex flex-wrap justify-center gap-4">
-      <a href="donate.html"  class="bg-amber-600 hover:bg-amber-700 text-white px-8 py-4 rounded-2xl font-semibold transition-colors cursor-pointer shadow-lg">Donate Now</a>
+      <a href="donate.html"  class="bg-green-700 hover:bg-green-600 text-white px-8 py-4 rounded-2xl font-semibold transition-colors cursor-pointer shadow-lg">Donate Now</a>
       <a href="contact.html" class="border-2 border-white/50 text-white px-8 py-4 rounded-2xl font-semibold hover:bg-white/10 cursor-pointer transition-colors">Volunteer</a>
     </div>
   </div>
@@ -303,7 +295,7 @@
 <!-- FOOTER -->
 <footer class="bg-[#0A1C11] text-white" role="contentinfo">
   <!-- Gradient accent line -->
-  <div class="h-0.5 bg-gradient-to-r from-green-700 via-amber-500 to-green-700"></div>
+  <div class="h-0.5 bg-gradient-to-r from-green-700 via-green-600 to-green-700"></div>
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
       <!-- Brand -->

@@ -18,13 +18,13 @@
       --bg-secondary: #f6f7f6;
       --text-primary: #1a1a1a;
       --text-secondary: #6b6b6b;
-      --text-muted: #9b9b9b;
+      --text-muted: #767676;
       --border: rgba(0,0,0,0.12);
       --brand-green: #1c5439;
-      --brand-amber: #256b49;
+      --brand-accent: #256b49;
     }
     html { scroll-behavior: smooth; }
-    body { font-family: var(--font-sans); color: var(--text-primary); background: var(--bg-primary); font-size: 15px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+    body { font-family: var(--font-sans); color: var(--text-primary); background: var(--bg-primary); font-size: 16px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
     #mob-menu { display: none; }
     #mob-menu.open { display: block; }
     h1,h2,h3 { font-family: 'Lora', Georgia, serif; color: var(--text-primary); letter-spacing: -0.01em; }
@@ -47,7 +47,7 @@
     @media (min-width: 1024px) { #menu-toggle { display: none !important; } }
     /* ── Mobile spacing improvements ────────────────────────────────────────────── */
     @media (max-width: 1023px) {
-      body { font-size: 15px; }
+      body { font-size: 16px; }
       nav { height: auto; }
       #mob-menu .flex.flex-col { gap: 4px; }
       section { padding-left: 16px; padding-right: 16px; }
@@ -78,7 +78,7 @@
         <a href="revibe.html" style="display:inline-flex;align-items:center;padding:6px 14px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">ReVibe</a>
         <div class="nav-dd"><a href="volunteer.html" style="display:inline-flex;align-items:center;padding:6px 14px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">Join Us<svg style="width:11px;height:11px;margin-left:3px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a><div class="nav-dd-panel"><div class="nav-dd-card"><a href="our-partners.html" class="nav-dd-item">Partners</a><a href="careers.html" class="nav-dd-item">Careers</a><a href="volunteer.html" class="nav-dd-item">Volunteer</a><a href="drop-locations.html" class="nav-dd-item">Become a Drop Location</a></div></div></div>
         <a href="contact.html" style="display:inline-flex;align-items:center;padding:6px 14px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">Contact</a>
-        <span style="display:inline-block;width:1px;height:16px;background:rgba(255,255,255,0.2);margin:0 4px;"></span><a href="https://store.indiarecycles.org" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border-radius:9999px;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'"><svg style="width:12px;height:12px;flex-shrink:0;fill:none;stroke:#4f9c74;stroke-width:2.5;stroke-linecap:round;" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span style="color:#93c1a5;">Thrift Store</span></a>
+        <span style="display:inline-block;width:1px;height:16px;background:rgba(255,255,255,0.2);margin:0 4px;"></span><a href="https://store.indiarecycles.org" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border-radius:9999px;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'"><svg style="width:12px;height:12px;flex-shrink:0;fill:none;stroke:#aed3bf;stroke-width:2.5;stroke-linecap:round;" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span style="color:#aed3bf;">Thrift Store</span></a>
       </div>
     </div>
     <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
@@ -93,11 +93,11 @@
       <a href="index.html" style="display:block;padding:9px 14px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Home</a>
       <a href="about-us.html" style="display:block;padding:9px 14px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">About Us</a>
       <a href="our-model.html" style="display:block;padding:9px 14px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Our Model</a>
-      <div style="padding:12px 14px 4px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#9b9b9b;">Our Impact</div>
+      <div style="padding:12px 14px 4px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#767676;">Our Impact</div>
       <a href="our-impact.html" style="display:block;padding:9px 24px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Our Impact</a>
       <a href="zero-waste-promise.html" style="display:block;padding:9px 24px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Zero Waste</a>
       <a href="revibe.html" style="display:block;padding:9px 14px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">ReVibe</a>
-      <div style="padding:12px 14px 4px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#9b9b9b;">Join Us</div>
+      <div style="padding:12px 14px 4px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#767676;">Join Us</div>
       <a href="our-partners.html" style="display:block;padding:9px 24px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Partners</a>
       <a href="careers.html" style="display:block;padding:9px 24px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Careers</a>
       <a href="volunteer.html" style="display:block;padding:9px 24px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Volunteer</a>
@@ -116,7 +116,7 @@
     </div>
     <h1 style="font-size:2rem;font-weight:600;color:#1a1a1a;margin-bottom:12px;letter-spacing:-0.02em;">Thank You!</h1>
     <p style="color:#6b6b6b;font-size:16px;line-height:1.7;margin-bottom:8px;">Your message has been received. We'll get back to you within 1-2 working days.</p>
-    <p style="color:#9b9b9b;font-size:13px;margin-bottom:36px;">If you'd like to reach us sooner, email us directly at <a href="mailto:indiarecycles@gmail.com" style="color:#1c5439;font-weight:500;text-decoration:underline;">indiarecycles@gmail.com</a></p>
+    <p style="color:#767676;font-size:13px;margin-bottom:36px;">If you'd like to reach us sooner, email us directly at <a href="mailto:indiarecycles@gmail.com" style="color:#1c5439;font-weight:500;text-decoration:underline;">indiarecycles@gmail.com</a></p>
     <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px;">
       <a href="index.html" style="background:#1c5439;color:#fff;padding:10px 28px;border-radius:9999px;font-size:14px;font-weight:500;text-decoration:none;cursor:pointer;transition:background .2s;" onmouseover="this.style.background='#12311f'" onmouseout="this.style.background='#1c5439'">Back to Home</a>
       <a href="donate.html" style="border:1.5px solid rgba(0,0,0,0.12);color:#1a1a1a;padding:10px 28px;border-radius:9999px;font-size:14px;font-weight:500;text-decoration:none;cursor:pointer;transition:background .2s;" onmouseover="this.style.background='#f6f7f6'" onmouseout="this.style.background='transparent'">Donate Instead</a>

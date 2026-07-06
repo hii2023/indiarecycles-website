@@ -23,14 +23,6 @@
               300: '#93c1a5', 400: '#5ca07a', 500: '#35825b',
               600: '#256b49', 700: '#1c5439', 800: '#133a28', 900: '#0b2418',
             },
-            amber: {
-              50:  '#f2f7f4', 100: '#e0ede5', 200: '#c2dccc',
-              300: '#93c1a5', 400: '#4f9c74', 500: '#256b49',
-              600: '#1c5439', 700: '#256b49', 800: '#1c5439',
-            },
-            forest: { 50:'#f2f7f4', 100:'#e0ede5', 200:'#c2dccc', 300:'#93c1a5', 400:'#5ca07a', 500:'#35825b', 600:'#256b49', 700:'#1c5439', 800:'#133a28', 900:'#0b2418' },
-            saffron: { 100:'#e0ede5', 200:'#c2dccc', 400:'#5ca07a', 500:'#35825b', 600:'#256b49' },
-            cream: '#ffffff',
           },
           borderRadius: { '4xl': '2rem' },
         }
@@ -48,19 +40,19 @@
       --bg-secondary: #f6f7f6;
       --text-primary: #1a1a1a;
       --text-secondary: #6b6b6b;
-      --text-muted: #9b9b9b;
+      --text-muted: #767676;
       --border: rgba(0,0,0,0.12);
       --radius-sm: 6px;
       --radius-md: 10px;
       --radius-lg: 16px;
       --brand-green: #1c5439;
-      --brand-amber: #256b49;
+      --brand-accent: #256b49;
     }
     html { scroll-behavior: smooth; }
-    body { font-family: var(--font-sans); color: var(--text-primary); background: var(--bg-primary); font-size: 15px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+    body { font-family: var(--font-sans); color: var(--text-primary); background: var(--bg-primary); font-size: 16px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
     #mob-menu { display: none; }
     #mob-menu.open { display: block; }
-    .grad-amber, em.grad-amber { color: var(--brand-amber); font-style: normal; background: none; -webkit-text-fill-color: unset; }
+    .grad-accent, em.grad-accent { color: var(--brand-accent); font-style: normal; background: none; -webkit-text-fill-color: unset; }
     @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
     .marquee-track { animation: marquee 16s linear infinite; }
     @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }
@@ -101,7 +93,7 @@
     @media (min-width: 1024px) { #menu-toggle { display: none !important; } }
     /* ── Mobile spacing improvements ────────────────────────────────────────────── */
     @media (max-width: 1023px) {
-      body { font-size: 15px; }
+      body { font-size: 16px; }
       nav { height: auto; }
       #mob-menu .flex.flex-col { gap: 4px; }
       section { padding-left: 16px; padding-right: 16px; }
@@ -132,7 +124,7 @@
         <a href="revibe.html" style="display:inline-flex;align-items:center;padding:6px 14px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">ReVibe</a>
         <div class="nav-dd"><a href="volunteer.html" style="display:inline-flex;align-items:center;padding:6px 14px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">Join Us<svg style="width:11px;height:11px;margin-left:3px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a><div class="nav-dd-panel"><div class="nav-dd-card"><a href="our-partners.html" class="nav-dd-item">Partners</a><a href="careers.html" class="nav-dd-item">Careers</a><a href="volunteer.html" class="nav-dd-item">Volunteer</a><a href="drop-locations.html" class="nav-dd-item">Become a Drop Location</a></div></div></div>
         <a href="contact.html" style="display:inline-flex;align-items:center;padding:6px 14px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">Contact</a>
-        <span style="display:inline-block;width:1px;height:16px;background:rgba(255,255,255,0.2);margin:0 4px;"></span><a href="https://store.indiarecycles.org" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border-radius:9999px;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'"><svg style="width:12px;height:12px;flex-shrink:0;fill:none;stroke:#4f9c74;stroke-width:2.5;stroke-linecap:round;" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span style="color:#93c1a5;">Thrift Store</span></a>
+        <span style="display:inline-block;width:1px;height:16px;background:rgba(255,255,255,0.2);margin:0 4px;"></span><a href="https://store.indiarecycles.org" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border-radius:9999px;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'"><svg style="width:12px;height:12px;flex-shrink:0;fill:none;stroke:#aed3bf;stroke-width:2.5;stroke-linecap:round;" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span style="color:#aed3bf;">Thrift Store</span></a>
       </div>
     </div>
     <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
@@ -147,11 +139,11 @@
       <a href="index.html" style="display:block;padding:9px 14px;border-radius:8px;background:#f6f7f6;color:#1a1a1a;font-size:14px;font-weight:500;text-decoration:none;">Home</a>
       <a href="about-us.html" style="display:block;padding:9px 14px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">About Us</a>
       <a href="our-model.html" style="display:block;padding:9px 14px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Our Model</a>
-      <div style="padding:12px 14px 4px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#9b9b9b;">Our Impact</div>
+      <div style="padding:12px 14px 4px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#767676;">Our Impact</div>
       <a href="our-impact.html" style="display:block;padding:9px 24px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Our Impact</a>
       <a href="zero-waste-promise.html" style="display:block;padding:9px 24px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Zero Waste</a>
       <a href="revibe.html" style="display:block;padding:9px 14px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">ReVibe</a>
-      <div style="padding:12px 14px 4px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#9b9b9b;">Join Us</div>
+      <div style="padding:12px 14px 4px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#767676;">Join Us</div>
       <a href="our-partners.html" style="display:block;padding:9px 24px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Partners</a>
       <a href="careers.html" style="display:block;padding:9px 24px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Careers</a>
       <a href="volunteer.html" style="display:block;padding:9px 24px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Volunteer</a>
@@ -193,14 +185,14 @@
       <!-- LEFT: Text content - dark text on light bg, zero readability issues -->
       <div class="relative z-10">
         <!-- Badge -->
-        <div id="collecting-badge" class="inline-flex items-center gap-2 bg-amber-50 border border-amber-200 text-amber-700 px-4 py-1.5 rounded-full text-[11px] font-bold mb-6 uppercase tracking-widest">
-          <span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" aria-hidden="true"></span>
+        <div id="collecting-badge" class="inline-flex items-center gap-2 bg-green-50 border border-green-200 text-green-600 px-4 py-1.5 rounded-full text-[11px] font-bold mb-6 uppercase tracking-widest">
+          <span class="w-1.5 h-1.5 rounded-full bg-green-600 animate-pulse" aria-hidden="true"></span>
           We are collecting, always!
         </div>
         <!-- Heading -->
         <h1 id="hero-h1" class="leading-[1.1] mb-5">
           <span class="block text-4xl sm:text-5xl lg:text-6xl text-gray-900 font-semibold">Love the</span>
-          <span class="block text-5xl sm:text-6xl lg:text-7xl font-extrabold grad-amber">Pre-Loved</span>
+          <span class="block text-5xl sm:text-6xl lg:text-7xl font-extrabold grad-accent">Pre-Loved</span>
         </h1>
         <!-- Subheadline - fully dark, no shadow needed -->
         <p class="text-gray-700 text-base sm:text-lg mb-8 leading-relaxed max-w-[480px]">
@@ -208,7 +200,7 @@
         </p>
         <!-- CTAs -->
         <div class="flex flex-wrap gap-3 mb-10">
-          <a href="drop-locations.html" class="inline-flex items-center gap-2 bg-amber-600 hover:bg-amber-700 text-white px-7 py-3.5 rounded-xl font-semibold text-sm transition-colors duration-200 shadow cursor-pointer">
+          <a href="drop-locations.html" class="inline-flex items-center gap-2 bg-green-700 hover:bg-green-600 text-white px-7 py-3.5 rounded-xl font-semibold text-sm transition-colors duration-200 shadow cursor-pointer">
             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
             Find Drop Location
           </a>
@@ -220,7 +212,7 @@
         <!-- Stats strip - dark text, always readable -->
         <div class="grid grid-cols-2 gap-x-4 gap-y-5 sm:flex sm:gap-x-6 pt-7 border-t border-gray-200">
           <div>
-            <div class="stat-num text-2xl text-amber-700">35,500+</div>
+            <div class="stat-num text-2xl text-green-600">35,500+</div>
             <div class="text-gray-600 text-[11px] uppercase tracking-widest mt-0.5 font-medium">Clothes Recycled</div>
           </div>
           <div class="w-px bg-gray-200 self-stretch hidden sm:block"></div>
@@ -230,7 +222,7 @@
           </div>
           <div class="w-px bg-gray-200 self-stretch hidden sm:block"></div>
           <div>
-            <div class="stat-num text-2xl text-amber-700">400+</div>
+            <div class="stat-num text-2xl text-green-600">400+</div>
             <div class="text-gray-600 text-[11px] uppercase tracking-widest mt-0.5 font-medium">Volunteers</div>
           </div>
           <div class="w-px bg-gray-200 self-stretch hidden sm:block"></div>
@@ -264,7 +256,7 @@
           </div>
         </div>
         <!-- Year badge -->
-        <div class="absolute -top-4 -right-4 w-20 h-20 bg-amber-600 rounded-full flex flex-col items-center justify-center shadow-lg border-4 border-white">
+        <div class="absolute -top-4 -right-4 w-20 h-20 bg-green-700 rounded-full flex flex-col items-center justify-center shadow-lg border-4 border-white">
           <div class="text-white font-bold text-lg leading-none">7+</div>
           <div class="text-white/85 text-[9px] uppercase tracking-wide">Years</div>
         </div>
@@ -278,20 +270,20 @@
 <div class="bg-gray-100 border-y border-gray-200 py-3 overflow-hidden" aria-label="Key statistics ticker">
   <div class="flex whitespace-nowrap marquee-track">
     <div class="flex gap-14 shrink-0 pr-14 text-[13px] font-semibold text-gray-600">
-      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-amber-500" aria-hidden="true"></span>35,500+ Clothes Recycled</span>
-      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-amber-500" aria-hidden="true"></span>132 Slum Sales Conducted</span>
-      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-amber-500" aria-hidden="true"></span>400+ Active Volunteers</span>
-      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-amber-500" aria-hidden="true"></span>1,000+ Medical Camp Beneficiaries</span>
-      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-amber-500" aria-hidden="true"></span>25+ Students Supported</span>
-      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-amber-500" aria-hidden="true"></span>Founded 2017 in Ahmedabad</span>
+      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-green-600" aria-hidden="true"></span>35,500+ Clothes Recycled</span>
+      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-green-600" aria-hidden="true"></span>132 Slum Sales Conducted</span>
+      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-green-600" aria-hidden="true"></span>400+ Active Volunteers</span>
+      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-green-600" aria-hidden="true"></span>1,000+ Medical Camp Beneficiaries</span>
+      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-green-600" aria-hidden="true"></span>25+ Students Supported</span>
+      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-green-600" aria-hidden="true"></span>Founded 2017 in Ahmedabad</span>
     </div>
     <div class="flex gap-14 shrink-0 pr-14 text-[13px] font-semibold text-gray-600" aria-hidden="true">
-      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>35,500+ Clothes Recycled</span>
-      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>132 Slum Sales Conducted</span>
-      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>400+ Active Volunteers</span>
-      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>1,000+ Medical Camp Beneficiaries</span>
-      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>25+ Students Supported</span>
-      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>Founded 2017 in Ahmedabad</span>
+      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-green-600"></span>35,500+ Clothes Recycled</span>
+      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-green-600"></span>132 Slum Sales Conducted</span>
+      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-green-600"></span>400+ Active Volunteers</span>
+      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-green-600"></span>1,000+ Medical Camp Beneficiaries</span>
+      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-green-600"></span>25+ Students Supported</span>
+      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-green-600"></span>Founded 2017 in Ahmedabad</span>
     </div>
   </div>
 </div>
@@ -321,27 +313,27 @@
           Our Mission
         </span>
         <h2 id="about-h2" class="text-3xl lg:text-[2.6rem] font-bold text-gray-900 mb-5 leading-[1.2]">
-          Giving clothes a<br/><em class="grad-amber not-italic">second life</em>
+          Giving clothes a<br/><em class="grad-accent not-italic">second life</em>
         </h2>
         <p class="text-gray-800 mb-4 leading-[1.75] text-[15px]">
           India Recycles collects donated clothes from households and redistributes them through weekly sales in urban slum communities, priced between ₹10 and ₹50 to preserve dignity and promote responsibility.
         </p>
         <p class="text-gray-700 text-[15px] mb-7 leading-[1.75]">
-          Clothes that can no longer be worn are upcycled into shoes and apparel through our <strong class="text-amber-700 font-semibold">ReVibe</strong> brand, or transformed into traditional winter mattresses through the <strong class="text-amber-700 font-semibold">Godadi Project</strong>, creating livelihoods for women.
+          Clothes that can no longer be worn are upcycled into shoes and apparel through our <strong class="text-green-600 font-semibold">ReVibe</strong> brand, or transformed into traditional winter mattresses through the <strong class="text-green-600 font-semibold">Godadi Project</strong>, creating livelihoods for women.
         </p>
         <!-- Feature list -->
         <ul class="grid grid-cols-2 gap-2.5 mb-8 text-[14px]">
           <li class="flex items-center gap-2 text-gray-800">
-            <svg class="w-4 h-4 text-amber-600 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Dignity First
+            <svg class="w-4 h-4 text-green-700 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Dignity First
           </li>
           <li class="flex items-center gap-2 text-gray-800">
-            <svg class="w-4 h-4 text-amber-600 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Zero Waste Goal
+            <svg class="w-4 h-4 text-green-700 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Zero Waste Goal
           </li>
           <li class="flex items-center gap-2 text-gray-800">
-            <svg class="w-4 h-4 text-amber-600 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Women-Led Programs
+            <svg class="w-4 h-4 text-green-700 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Women-Led Programs
           </li>
           <li class="flex items-center gap-2 text-gray-800">
-            <svg class="w-4 h-4 text-amber-600 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Health &amp; Education
+            <svg class="w-4 h-4 text-green-700 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Health &amp; Education
           </li>
         </ul>
         <a href="about-us.html" class="inline-flex items-center gap-2 text-white px-7 py-3 rounded-xl font-semibold text-sm transition-colors duration-200 cursor-pointer" style="background-color:#256b49;" onmouseover="this.style.backgroundColor='#1c5439'" onmouseout="this.style.backgroundColor='#256b49'">
@@ -359,7 +351,7 @@
 <section class="py-16 lg:py-16 lg:py-24 bg-gray-50" aria-labelledby="stats-h2">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-12">
-      <span class="inline-flex items-center gap-1.5 bg-amber-100 text-amber-600 border border-amber-200 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-widest mb-5">Impact in Numbers</span>
+      <span class="inline-flex items-center gap-1.5 bg-green-100 text-green-700 border border-green-200 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-widest mb-5">Impact in Numbers</span>
       <h2 id="stats-h2" class="text-3xl lg:text-4xl font-bold text-gray-900 mb-3">What We Have Achieved</h2>
       <p class="text-gray-700 text-[15px] max-w-md mx-auto leading-relaxed">Every number represents a life touched, a garment saved, a community served.</p>
     </div>
@@ -370,7 +362,7 @@
         <div class="w-10 h-10 bg-gray-100 rounded-xl flex items-center justify-center mx-auto mb-4">
           <svg class="w-5 h-5 text-gray-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
         </div>
-        <div class="stat-num text-[2.2rem] text-amber-700 leading-none mb-2">35,500+</div>
+        <div class="stat-num text-[2.2rem] text-green-600 leading-none mb-2">35,500+</div>
         <div class="text-gray-600 text-[12px] uppercase tracking-wide font-semibold">Clothes Recycled</div>
       </div>
       <!-- Card 2 -->
@@ -383,10 +375,10 @@
       </div>
       <!-- Card 3 -->
       <div class="bg-white rounded-2xl p-6 text-center shadow-sm border border-gray-200 card cursor-pointer">
-        <div class="w-10 h-10 bg-amber-50 rounded-xl flex items-center justify-center mx-auto mb-4">
-          <svg class="w-5 h-5 text-amber-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <div class="w-10 h-10 bg-green-50 rounded-xl flex items-center justify-center mx-auto mb-4">
+          <svg class="w-5 h-5 text-green-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         </div>
-        <div class="stat-num text-[2.2rem] text-amber-700 leading-none mb-2">400+</div>
+        <div class="stat-num text-[2.2rem] text-green-600 leading-none mb-2">400+</div>
         <div class="text-gray-600 text-[12px] uppercase tracking-wide font-semibold">Active Volunteers</div>
       </div>
       <!-- Card 4 -->
@@ -418,7 +410,7 @@
           <img src="images/model1.jpg" alt="Donate clothes at collection points" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"/>
         </div>
         <div class="p-5">
-          <div class="w-7 h-7 bg-amber-500 text-white rounded-full flex items-center justify-center text-xs font-bold mb-3" aria-hidden="true">1</div>
+          <div class="w-7 h-7 bg-green-600 text-white rounded-full flex items-center justify-center text-xs font-bold mb-3" aria-hidden="true">1</div>
           <h3 class="font-bold text-gray-900 text-[15px] mb-1.5">You Donate</h3>
           <p class="text-gray-800 text-[13px] leading-relaxed">Drop clothes at any of our 20+ collection points across the city.</p>
         </div>
@@ -435,12 +427,12 @@
         </div>
       </div>
       <!-- Step 3 -->
-      <div class="bg-white rounded-2xl overflow-hidden border border-amber-200 card cursor-pointer">
+      <div class="bg-white rounded-2xl overflow-hidden border border-green-200 card cursor-pointer">
         <div class="h-44 overflow-hidden">
           <img src="images/model3.jpg" alt="Weekly slum sale event" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"/>
         </div>
         <div class="p-5">
-          <div class="w-7 h-7 bg-amber-500 text-white rounded-full flex items-center justify-center text-xs font-bold mb-3" aria-hidden="true">3</div>
+          <div class="w-7 h-7 bg-green-600 text-white rounded-full flex items-center justify-center text-xs font-bold mb-3" aria-hidden="true">3</div>
           <h3 class="font-bold text-gray-900 text-[15px] mb-1.5">Slum Sales</h3>
           <p class="text-gray-800 text-[13px] leading-relaxed">Weekly sales in slum communities. Clothes from ₹10 to ₹50.</p>
         </div>
@@ -473,7 +465,7 @@
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-12">
       <span class="inline-flex items-center gap-1.5 bg-gray-100 text-gray-600 border border-gray-200 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-widest mb-5">Beyond Clothes</span>
-      <h2 id="impact-h2" class="text-3xl lg:text-4xl font-bold text-gray-900 mb-3">Community <em class="grad-amber not-italic">Impact</em></h2>
+      <h2 id="impact-h2" class="text-3xl lg:text-4xl font-bold text-gray-900 mb-3">Community <em class="grad-accent not-italic">Impact</em></h2>
       <p class="text-gray-700 text-[15px] max-w-md mx-auto leading-relaxed">Our surplus funds power health, education and livelihood programs for slum communities.</p>
     </div>
     <div class="grid md:grid-cols-3 gap-5">
@@ -481,8 +473,8 @@
       <div class="relative rounded-2xl overflow-hidden shadow-md card cursor-pointer">
         <img src="images/impact4.png" alt="Medical camps for slum communities" class="w-full h-60 object-cover"/>
         <div class="absolute inset-0 bg-gradient-to-t from-gray-900/85 via-gray-900/15 to-transparent flex flex-col justify-end p-5">
-          <span class="inline-block bg-amber-500 text-white text-[11px] font-bold px-3 py-1 rounded-full mb-3 w-fit">Medical Camps</span>
-          <div class="stat-num text-3xl text-white">1,000<span class="text-amber-400">+</span></div>
+          <span class="inline-block bg-green-600 text-white text-[11px] font-bold px-3 py-1 rounded-full mb-3 w-fit">Medical Camps</span>
+          <div class="stat-num text-3xl text-white">1,000<span class="text-green-400">+</span></div>
           <p class="text-white/80 text-[12px] mt-1 leading-snug">Beneficiaries across 3 slums</p>
         </div>
       </div>
@@ -490,8 +482,8 @@
       <div class="relative rounded-2xl overflow-hidden shadow-md card cursor-pointer">
         <img src="images/impact5.png" alt="Students supported through scholarships" class="w-full h-60 object-cover"/>
         <div class="absolute inset-0 bg-gradient-to-t from-gray-900/85 via-gray-900/15 to-transparent flex flex-col justify-end p-5">
-          <span class="inline-block bg-amber-600 text-white text-[11px] font-bold px-3 py-1 rounded-full mb-3 w-fit">Scholarships</span>
-          <div class="stat-num text-3xl text-white">25<span class="text-amber-400">+</span></div>
+          <span class="inline-block bg-green-700 text-white text-[11px] font-bold px-3 py-1 rounded-full mb-3 w-fit">Scholarships</span>
+          <div class="stat-num text-3xl text-white">25<span class="text-green-400">+</span></div>
           <p class="text-white/80 text-[12px] mt-1 leading-snug">Students supported through education</p>
         </div>
       </div>
@@ -506,7 +498,7 @@
             <path d="M10 38 L15 48 L5 48 Z" fill="#256b49"/>
             <circle cx="28" cy="28" r="10" stroke="#35825b" stroke-width="1.5" fill="none" stroke-dasharray="4 3"/>
           </svg>
-          <div class="stat-num text-3xl text-gray-900 mb-1">19,200<span class="text-amber-700">+</span></div>
+          <div class="stat-num text-3xl text-gray-900 mb-1">19,200<span class="text-green-600">+</span></div>
           <div class="font-semibold text-gray-700 text-[14px] mb-3">Cloth Pieces Saved from Landfill</div>
           <p class="text-gray-800 text-[13px] leading-relaxed">Through ReVibe upcycling and the Godadi Project, we convert textile waste into livelihoods for women.</p>
         </div>
@@ -534,7 +526,7 @@
 <section class="py-16 lg:py-16 lg:py-24 bg-gray-50" aria-labelledby="testimonials-h2">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-12">
-      <span class="inline-flex items-center gap-1.5 bg-amber-100 text-amber-600 border border-amber-200 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-widest mb-5">Community Voices</span>
+      <span class="inline-flex items-center gap-1.5 bg-green-100 text-green-700 border border-green-200 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-widest mb-5">Community Voices</span>
       <h2 id="testimonials-h2" class="text-3xl lg:text-4xl font-bold text-gray-900 mb-3">Stories of Change</h2>
       <p class="text-gray-700 text-[15px]">Real voices from volunteers, donors and community members.</p>
     </div>
@@ -544,11 +536,11 @@
       <!-- Testimonial 1 -->
       <div class="bg-white rounded-2xl p-5 border border-gray-200 shadow-sm card cursor-pointer">
         <div class="flex gap-0.5 mb-4" aria-label="5 stars">
-          <svg class="w-3.5 h-3.5 text-amber-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg class="w-3.5 h-3.5 text-amber-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg class="w-3.5 h-3.5 text-amber-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg class="w-3.5 h-3.5 text-amber-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg class="w-3.5 h-3.5 text-amber-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="w-3.5 h-3.5 text-green-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="w-3.5 h-3.5 text-green-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="w-3.5 h-3.5 text-green-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="w-3.5 h-3.5 text-green-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="w-3.5 h-3.5 text-green-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
         </div>
         <div class="flex items-center justify-center bg-gray-50 rounded-xl mb-4 p-2 h-28 overflow-hidden border border-gray-100">
           <img src="images/testimonial1.png" alt="Volunteer testimonial screenshot" class="max-h-full w-auto max-w-full rounded-lg object-contain"/>
@@ -559,11 +551,11 @@
       <!-- Testimonial 2 -->
       <div class="bg-white rounded-2xl p-5 border border-gray-200 shadow-sm card cursor-pointer">
         <div class="flex gap-0.5 mb-4" aria-label="5 stars">
-          <svg class="w-3.5 h-3.5 text-amber-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg class="w-3.5 h-3.5 text-amber-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg class="w-3.5 h-3.5 text-amber-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg class="w-3.5 h-3.5 text-amber-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg class="w-3.5 h-3.5 text-amber-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="w-3.5 h-3.5 text-green-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="w-3.5 h-3.5 text-green-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="w-3.5 h-3.5 text-green-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="w-3.5 h-3.5 text-green-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="w-3.5 h-3.5 text-green-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
         </div>
         <div class="flex items-center justify-center bg-gray-50 rounded-xl mb-4 p-2 h-28 overflow-hidden border border-gray-100">
           <img src="images/testimonial2.png" alt="Volunteer testimonial screenshot" class="max-h-full w-auto max-w-full rounded-lg object-contain"/>
@@ -598,7 +590,7 @@
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-10">
       <span class="inline-flex items-center gap-1.5 bg-gray-100 text-gray-600 border border-gray-200 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-widest mb-5">Photo Gallery</span>
-      <h2 id="gallery-h2" class="text-3xl font-bold text-gray-900 mb-3">On the <em class="grad-amber not-italic">Ground</em></h2>
+      <h2 id="gallery-h2" class="text-3xl font-bold text-gray-900 mb-3">On the <em class="grad-accent not-italic">Ground</em></h2>
       <p class="text-gray-700 text-[15px]">Real moments from our events, volunteers and communities.</p>
     </div>
     <!-- 3×3 grid -->
@@ -693,26 +685,26 @@
   <div class="relative max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
     <!-- Badge -->
     <div class="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-green-200 px-4 py-1.5 rounded-full text-[12px] font-semibold mb-7 uppercase tracking-widest">
-      <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" aria-hidden="true"></span>
+      <span class="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" aria-hidden="true"></span>
       Make a Difference Today
     </div>
     <!-- Heading - pure white on dark green = 14:1 contrast -->
     <h2 id="cta-h2" class="text-4xl lg:text-5xl font-extrabold text-white mb-5 leading-[1.1]">
-      Every Rupee Creates<br/><span class="text-amber-400">Real Change</span>
+      Every Rupee Creates<br/><span class="text-green-400">Real Change</span>
     </h2>
     <p class="text-green-100 text-base mb-9 leading-relaxed max-w-lg mx-auto">Your donation powers slum sales, medical camps, scholarships and livelihoods for women across two cities.</p>
     <!-- Donation tiers - white cards on dark green -->
     <div class="flex flex-wrap justify-center gap-3 mb-9">
       <div class="bg-white/12 border border-white/20 rounded-xl px-5 py-4 text-center cursor-pointer hover:bg-white/20 transition-colors duration-200">
-        <div class="text-amber-400 font-bold text-xl stat-num">₹100</div>
+        <div class="text-green-400 font-bold text-xl stat-num">₹100</div>
         <div class="text-green-200 text-[12px] mt-1">Clothes for a family</div>
       </div>
       <div class="bg-white/12 border border-white/20 rounded-xl px-5 py-4 text-center cursor-pointer hover:bg-white/20 transition-colors duration-200">
-        <div class="text-amber-400 font-bold text-xl stat-num">₹500</div>
+        <div class="text-green-400 font-bold text-xl stat-num">₹500</div>
         <div class="text-green-200 text-[12px] mt-1">Funds one slum sale</div>
       </div>
       <div class="bg-white/12 border border-white/20 rounded-xl px-5 py-4 text-center cursor-pointer hover:bg-white/20 transition-colors duration-200">
-        <div class="text-amber-400 font-bold text-xl stat-num">₹2,000</div>
+        <div class="text-green-400 font-bold text-xl stat-num">₹2,000</div>
         <div class="text-green-200 text-[12px] mt-1">Medical camp support</div>
       </div>
     </div>
@@ -728,7 +720,7 @@
 <!-- ════════════ FOOTER ════════════ -->
 <footer class="bg-[#0A1C11] text-white" role="contentinfo">
   <!-- Gradient accent line -->
-  <div class="h-0.5 bg-gradient-to-r from-green-700 via-amber-500 to-green-700"></div>
+  <div class="h-0.5 bg-gradient-to-r from-green-700 via-green-600 to-green-700"></div>
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
       <!-- Brand -->

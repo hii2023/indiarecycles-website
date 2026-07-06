@@ -23,14 +23,6 @@
               300: '#93c1a5', 400: '#5ca07a', 500: '#35825b',
               600: '#256b49', 700: '#1c5439', 800: '#133a28', 900: '#0b2418',
             },
-            amber: {
-              50:  '#f2f7f4', 100: '#e0ede5', 200: '#c2dccc',
-              300: '#93c1a5', 400: '#4f9c74', 500: '#256b49',
-              600: '#1c5439', 700: '#256b49', 800: '#1c5439',
-            },
-            forest: { 50:'#f2f7f4', 100:'#e0ede5', 200:'#c2dccc', 300:'#93c1a5', 400:'#5ca07a', 500:'#35825b', 600:'#256b49', 700:'#1c5439', 800:'#133a28', 900:'#0b2418' },
-            saffron: { 100:'#e0ede5', 200:'#c2dccc', 400:'#5ca07a', 500:'#35825b', 600:'#256b49' },
-            cream: '#ffffff',
           },
           borderRadius: { '4xl': '2rem' },
         }
@@ -48,19 +40,19 @@
       --bg-secondary: #f6f7f6;
       --text-primary: #1a1a1a;
       --text-secondary: #6b6b6b;
-      --text-muted: #9b9b9b;
+      --text-muted: #767676;
       --border: rgba(0,0,0,0.12);
       --radius-sm: 6px;
       --radius-md: 10px;
       --radius-lg: 16px;
       --brand-green: #1c5439;
-      --brand-amber: #256b49;
+      --brand-accent: #256b49;
     }
     html { scroll-behavior: smooth; }
-    body { font-family: var(--font-sans); color: var(--text-primary); background: var(--bg-primary); font-size: 15px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+    body { font-family: var(--font-sans); color: var(--text-primary); background: var(--bg-primary); font-size: 16px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
     #mob-menu { display: none; }
     #mob-menu.open { display: block; }
-    .grad-amber, em.grad-amber { color: var(--brand-amber); font-style: normal; background: none; -webkit-text-fill-color: unset; }
+    .grad-accent, em.grad-accent { color: var(--brand-accent); font-style: normal; background: none; -webkit-text-fill-color: unset; }
     @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
     .marquee-track { animation: marquee 16s linear infinite; }
     @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }
@@ -97,7 +89,7 @@
     @media (min-width: 1024px) { #menu-toggle { display: none !important; } }
     /* ── Mobile spacing improvements ────────────────────────────────────────────── */
     @media (max-width: 1023px) {
-      body { font-size: 15px; }
+      body { font-size: 16px; }
       nav { height: auto; }
       #mob-menu .flex.flex-col { gap: 4px; }
       section { padding-left: 16px; padding-right: 16px; }
@@ -128,7 +120,7 @@
         <a href="revibe.html" style="display:inline-flex;align-items:center;padding:6px 14px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">ReVibe</a>
         <div class="nav-dd"><a href="volunteer.html" style="display:inline-flex;align-items:center;padding:6px 14px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">Join Us<svg style="width:11px;height:11px;margin-left:3px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a><div class="nav-dd-panel"><div class="nav-dd-card"><a href="our-partners.html" class="nav-dd-item">Partners</a><a href="careers.html" class="nav-dd-item">Careers</a><a href="volunteer.html" class="nav-dd-item">Volunteer</a><a href="drop-locations.html" class="nav-dd-item">Become a Drop Location</a></div></div></div>
         <a href="contact.html" style="display:inline-flex;align-items:center;padding:6px 14px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">Contact</a>
-        <span style="display:inline-block;width:1px;height:16px;background:rgba(255,255,255,0.2);margin:0 4px;"></span><a href="https://store.indiarecycles.org" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border-radius:9999px;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'"><svg style="width:12px;height:12px;flex-shrink:0;fill:none;stroke:#4f9c74;stroke-width:2.5;stroke-linecap:round;" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span style="color:#93c1a5;">Thrift Store</span></a>
+        <span style="display:inline-block;width:1px;height:16px;background:rgba(255,255,255,0.2);margin:0 4px;"></span><a href="https://store.indiarecycles.org" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border-radius:9999px;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'"><svg style="width:12px;height:12px;flex-shrink:0;fill:none;stroke:#aed3bf;stroke-width:2.5;stroke-linecap:round;" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span style="color:#aed3bf;">Thrift Store</span></a>
       </div>
     </div>
     <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
@@ -143,11 +135,11 @@
       <a href="index.html" style="display:block;padding:9px 14px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Home</a>
       <a href="about-us.html" style="display:block;padding:9px 14px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">About Us</a>
       <a href="our-model.html" style="display:block;padding:9px 14px;border-radius:8px;background:#f6f7f6;color:#1a1a1a;font-size:14px;font-weight:500;text-decoration:none;">Our Model</a>
-      <div style="padding:12px 14px 4px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#9b9b9b;">Our Impact</div>
+      <div style="padding:12px 14px 4px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#767676;">Our Impact</div>
       <a href="our-impact.html" style="display:block;padding:9px 24px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Our Impact</a>
       <a href="zero-waste-promise.html" style="display:block;padding:9px 24px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Zero Waste</a>
       <a href="revibe.html" style="display:block;padding:9px 14px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">ReVibe</a>
-      <div style="padding:12px 14px 4px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#9b9b9b;">Join Us</div>
+      <div style="padding:12px 14px 4px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#767676;">Join Us</div>
       <a href="our-partners.html" style="display:block;padding:9px 24px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Partners</a>
       <a href="careers.html" style="display:block;padding:9px 24px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Careers</a>
       <a href="volunteer.html" style="display:block;padding:9px 24px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Volunteer</a>
@@ -165,12 +157,12 @@
 <section class="relative pt-[64px] overflow-hidden" aria-labelledby="model-h1">
   <div class="absolute inset-0">
     <img src="images/model1.jpg" alt="India Recycles clothes sorting and distribution" class="w-full h-full object-cover object-center"/>
-    <div class="absolute inset-0 bg-gradient-to-b from-forest-900/75 via-forest-900/60 to-forest-900/80"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-green-900/75 via-green-900/60 to-green-900/80"></div>
   </div>
   <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28 text-center">
-    <div class="inline-flex items-center gap-2 bg-amber-600/90 text-white px-4 py-2 rounded-full text-sm font-semibold mb-6 backdrop-blur-sm">How It Works</div>
-    <h1 id="model-h1" class="text-5xl lg:text-6xl text-white mb-5 leading-tight">Our <em class="not-italic text-amber-400">Model</em></h1>
-    <p class="text-forest-100 text-xl max-w-2xl mx-auto leading-relaxed">A circular economy for clothes, from your wardrobe to communities that need it most, with zero waste along the way.</p>
+    <div class="inline-flex items-center gap-2 bg-green-700/90 text-white px-4 py-2 rounded-full text-sm font-semibold mb-6 backdrop-blur-sm">How It Works</div>
+    <h1 id="model-h1" class="text-5xl lg:text-6xl text-white mb-5 leading-tight">Our <em class="not-italic text-green-400">Model</em></h1>
+    <p class="text-green-100 text-xl max-w-2xl mx-auto leading-relaxed">A circular economy for clothes, from your wardrobe to communities that need it most, with zero waste along the way.</p>
   </div>
 </section>
 
@@ -178,41 +170,41 @@
 <section class="py-16 lg:py-24 bg-[#f6f7f6] texture-bg" aria-labelledby="process-heading">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-14">
-      <h2 id="process-heading" class="text-4xl text-forest-800">How India Recycles Works</h2>
-      <p class="text-forest-600 mt-3 max-w-xl mx-auto">Four simple steps that create a complete circular economy for donated clothing.</p>
+      <h2 id="process-heading" class="text-4xl text-green-800">How India Recycles Works</h2>
+      <p class="text-green-600 mt-3 max-w-xl mx-auto">Four simple steps that create a complete circular economy for donated clothing.</p>
     </div>
     <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-      <div class="bg-white rounded-3xl p-8 text-center border border-forest-100 card-lift cursor-default">
-        <div class="w-16 h-16 bg-forest-600 rounded-2xl flex items-center justify-center mx-auto mb-5">
+      <div class="bg-white rounded-3xl p-8 text-center border border-green-100 card-lift cursor-default">
+        <div class="w-16 h-16 bg-green-600 rounded-2xl flex items-center justify-center mx-auto mb-5">
           <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
         </div>
-        <div class="inline-block bg-forest-600 text-white text-xs font-bold px-3 py-1 rounded-full mb-3">STEP 1</div>
-        <h3 class="text-xl text-forest-800 mb-3">You Donate</h3>
-        <p class="text-forest-600 text-sm leading-relaxed">Drop your pre-loved clothes at any of our 20+ collection points across Ahmedabad and Vadodara. We accept all kinds of clothing.</p>
+        <div class="inline-block bg-green-600 text-white text-xs font-bold px-3 py-1 rounded-full mb-3">STEP 1</div>
+        <h3 class="text-xl text-green-800 mb-3">You Donate</h3>
+        <p class="text-green-600 text-sm leading-relaxed">Drop your pre-loved clothes at any of our 20+ collection points across Ahmedabad and Vadodara. We accept all kinds of clothing.</p>
       </div>
-      <div class="bg-white rounded-3xl p-8 text-center border border-forest-100 card-lift cursor-default">
-        <div class="w-16 h-16 bg-amber-600 rounded-2xl flex items-center justify-center mx-auto mb-5">
+      <div class="bg-white rounded-3xl p-8 text-center border border-green-100 card-lift cursor-default">
+        <div class="w-16 h-16 bg-green-700 rounded-2xl flex items-center justify-center mx-auto mb-5">
           <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         </div>
-        <div class="inline-block bg-amber-600 text-white text-xs font-bold px-3 py-1 rounded-full mb-3">STEP 2</div>
-        <h3 class="text-xl text-forest-800 mb-3">Volunteers Sort</h3>
-        <p class="text-forest-600 text-sm leading-relaxed">Our dedicated volunteers sort, clean and categorise all incoming donations, separating wearable items from those that need upcycling.</p>
+        <div class="inline-block bg-green-700 text-white text-xs font-bold px-3 py-1 rounded-full mb-3">STEP 2</div>
+        <h3 class="text-xl text-green-800 mb-3">Volunteers Sort</h3>
+        <p class="text-green-600 text-sm leading-relaxed">Our dedicated volunteers sort, clean and categorise all incoming donations, separating wearable items from those that need upcycling.</p>
       </div>
-      <div class="bg-forest-700 rounded-3xl p-8 text-center card-lift cursor-default">
-        <div class="w-16 h-16 bg-forest-600/40 rounded-2xl flex items-center justify-center mx-auto mb-5">
+      <div class="bg-green-700 rounded-3xl p-8 text-center card-lift cursor-default">
+        <div class="w-16 h-16 bg-green-600/40 rounded-2xl flex items-center justify-center mx-auto mb-5">
           <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
         </div>
-        <div class="inline-block bg-forest-500/50 text-white text-xs font-bold px-3 py-1 rounded-full mb-3">STEP 3</div>
+        <div class="inline-block bg-green-500/50 text-white text-xs font-bold px-3 py-1 rounded-full mb-3">STEP 3</div>
         <h3 class="text-xl text-white mb-3">Slum &amp; Yearly Sales</h3>
-        <p class="text-forest-200 text-sm leading-relaxed">Good clothes go to weekly slum sales (₹10–₹50) or our biannual Yearly Sale events for urban audiences.</p>
+        <p class="text-green-200 text-sm leading-relaxed">Good clothes go to weekly slum sales (₹10–₹50) or our biannual Yearly Sale events for urban audiences.</p>
       </div>
-      <div class="bg-white rounded-3xl p-8 text-center border border-forest-100 card-lift cursor-default">
-        <div class="w-16 h-16 bg-forest-800 rounded-2xl flex items-center justify-center mx-auto mb-5">
+      <div class="bg-white rounded-3xl p-8 text-center border border-green-100 card-lift cursor-default">
+        <div class="w-16 h-16 bg-green-800 rounded-2xl flex items-center justify-center mx-auto mb-5">
           <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 19H4.815a1.83 1.83 0 0 1-1.57-.881 1.785 1.785 0 0 1-.004-1.784L7.196 9.5"/><path d="M11 19h8.203a1.83 1.83 0 0 0 1.556-.89 1.784 1.784 0 0 0 0-1.775l-1.226-2.12"/><path d="m14 16-3 3 3 3"/></svg>
         </div>
-        <div class="inline-block bg-forest-800 text-white text-xs font-bold px-3 py-1 rounded-full mb-3">STEP 4</div>
-        <h3 class="text-xl text-forest-800 mb-3">Zero Waste Upcycling</h3>
-        <p class="text-forest-600 text-sm leading-relaxed">Remaining clothes become ReVibe upcycled products or Godadi winter mattresses. Zero textile waste, zero excuses.</p>
+        <div class="inline-block bg-green-800 text-white text-xs font-bold px-3 py-1 rounded-full mb-3">STEP 4</div>
+        <h3 class="text-xl text-green-800 mb-3">Zero Waste Upcycling</h3>
+        <p class="text-green-600 text-sm leading-relaxed">Remaining clothes become ReVibe upcycled products or Godadi winter mattresses. Zero textile waste, zero excuses.</p>
       </div>
     </div>
   </div>
@@ -222,22 +214,22 @@
 <section class="py-16 lg:py-24 bg-white" aria-labelledby="slum-heading">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-16 items-center">
     <div>
-      <div class="inline-flex items-center gap-2 bg-forest-100 text-forest-700 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wide mb-5">Model 1</div>
-      <h2 id="slum-heading" class="text-4xl text-forest-800 mb-6 leading-tight">Slum Sales</h2>
-      <p class="text-forest-700 leading-relaxed mb-5">Every week, India Recycles organises clothing sales in urban slum communities across Ahmedabad and Vadodara. Items are priced between ₹10 and ₹50, making quality clothing accessible to families who need it most.</p>
-      <p class="text-forest-700 leading-relaxed mb-8">By charging a small price rather than giving clothes for free, we help our customers gain a sense of responsibility and maintain their dignity. The sales are organised events, not handouts.</p>
+      <div class="inline-flex items-center gap-2 bg-green-100 text-green-700 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wide mb-5">Model 1</div>
+      <h2 id="slum-heading" class="text-4xl text-green-800 mb-6 leading-tight">Slum Sales</h2>
+      <p class="text-green-700 leading-relaxed mb-5">Every week, India Recycles organises clothing sales in urban slum communities across Ahmedabad and Vadodara. Items are priced between ₹10 and ₹50, making quality clothing accessible to families who need it most.</p>
+      <p class="text-green-700 leading-relaxed mb-8">By charging a small price rather than giving clothes for free, we help our customers gain a sense of responsibility and maintain their dignity. The sales are organised events, not handouts.</p>
       <div class="grid grid-cols-3 gap-4">
-        <div class="bg-[#f6f7f6] rounded-2xl p-4 text-center border border-forest-100">
-          <div class="font-serif text-3xl text-forest-600 mb-1">132</div>
-          <div class="text-xs text-forest-500">Sales held</div>
+        <div class="bg-[#f6f7f6] rounded-2xl p-4 text-center border border-green-100">
+          <div class="font-serif text-3xl text-green-600 mb-1">132</div>
+          <div class="text-xs text-green-500">Sales held</div>
         </div>
-        <div class="bg-[#f6f7f6] rounded-2xl p-4 text-center border border-forest-100">
-          <div class="font-serif text-3xl text-amber-600 mb-1">₹50</div>
-          <div class="text-xs text-forest-500">Max price</div>
+        <div class="bg-[#f6f7f6] rounded-2xl p-4 text-center border border-green-100">
+          <div class="font-serif text-3xl text-green-700 mb-1">₹50</div>
+          <div class="text-xs text-green-500">Max price</div>
         </div>
-        <div class="bg-[#f6f7f6] rounded-2xl p-4 text-center border border-forest-100">
-          <div class="font-serif text-3xl text-forest-600 mb-1">Weekly</div>
-          <div class="text-xs text-forest-500">Frequency</div>
+        <div class="bg-[#f6f7f6] rounded-2xl p-4 text-center border border-green-100">
+          <div class="font-serif text-3xl text-green-600 mb-1">Weekly</div>
+          <div class="text-xs text-green-500">Frequency</div>
         </div>
       </div>
     </div>
@@ -248,21 +240,21 @@
 </section>
 
 <!-- YEARLY SALE -->
-<section class="py-16 lg:py-24 bg-forest-800" aria-labelledby="yearly-heading">
+<section class="py-16 lg:py-24 bg-green-800" aria-labelledby="yearly-heading">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-16 items-center">
     <div class="photo-zoom rounded-3xl overflow-hidden shadow-xl order-2 lg:order-1">
       <img src="images/model3.jpg" alt="India Recycles yearly sale event" class="w-full h-80 object-cover"/>
     </div>
     <div class="order-1 lg:order-2">
-      <div class="inline-flex items-center gap-2 bg-forest-700 text-forest-200 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wide mb-5">Model 2</div>
+      <div class="inline-flex items-center gap-2 bg-green-700 text-green-200 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wide mb-5">Model 2</div>
       <h2 id="yearly-heading" class="text-4xl text-white mb-6 leading-tight">Yearly Sale</h2>
-      <p class="text-forest-200 leading-relaxed mb-5">Twice a year, India Recycles organises curated second-hand clothing events targeting urban, affluent audiences in Ahmedabad. These events showcase higher-end donated items at affordable prices.</p>
-      <p class="text-forest-200 leading-relaxed mb-6">The goal is to normalise the concept of using pre-loved items in urban, moneyed populations, shifting cultural attitudes towards sustainable consumption.</p>
+      <p class="text-green-200 leading-relaxed mb-5">Twice a year, India Recycles organises curated second-hand clothing events targeting urban, affluent audiences in Ahmedabad. These events showcase higher-end donated items at affordable prices.</p>
+      <p class="text-green-200 leading-relaxed mb-6">The goal is to normalise the concept of using pre-loved items in urban, moneyed populations, shifting cultural attitudes towards sustainable consumption.</p>
       <div class="flex flex-wrap gap-3">
-        <span class="bg-forest-700 text-forest-200 px-4 py-2 rounded-xl text-sm font-semibold">Curated items</span>
-        <span class="bg-forest-700 text-forest-200 px-4 py-2 rounded-xl text-sm font-semibold">Urban audience</span>
-        <span class="bg-forest-700 text-forest-200 px-4 py-2 rounded-xl text-sm font-semibold">Sustainable culture</span>
-        <span class="bg-amber-600/30 text-saffron-200 px-4 py-2 rounded-xl text-sm font-semibold">2× per year</span>
+        <span class="bg-green-700 text-green-200 px-4 py-2 rounded-xl text-sm font-semibold">Curated items</span>
+        <span class="bg-green-700 text-green-200 px-4 py-2 rounded-xl text-sm font-semibold">Urban audience</span>
+        <span class="bg-green-700 text-green-200 px-4 py-2 rounded-xl text-sm font-semibold">Sustainable culture</span>
+        <span class="bg-green-700/30 text-green-200 px-4 py-2 rounded-xl text-sm font-semibold">2× per year</span>
       </div>
     </div>
   </div>
@@ -271,30 +263,30 @@
 <!-- HOW REVENUE IS USED -->
 <section class="py-16 lg:py-24 bg-[#f6f7f6] texture-bg" aria-labelledby="revenue-heading">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-    <div class="inline-flex items-center gap-2 bg-forest-100 text-forest-700 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wide mb-5">Where the money goes</div>
-    <h2 id="revenue-heading" class="text-4xl text-forest-800 mb-4">Revenue Fuels Impact</h2>
-    <p class="text-forest-600 max-w-xl mx-auto mb-14 text-lg">Every rupee from our sales goes back into community programs, creating a self-sustaining model of social impact.</p>
+    <div class="inline-flex items-center gap-2 bg-green-100 text-green-700 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wide mb-5">Where the money goes</div>
+    <h2 id="revenue-heading" class="text-4xl text-green-800 mb-4">Revenue Fuels Impact</h2>
+    <p class="text-green-600 max-w-xl mx-auto mb-14 text-lg">Every rupee from our sales goes back into community programs, creating a self-sustaining model of social impact.</p>
     <div class="grid md:grid-cols-3 gap-6">
-      <div class="bg-white rounded-3xl p-8 border border-forest-100 card-lift cursor-default">
+      <div class="bg-white rounded-3xl p-8 border border-green-100 card-lift cursor-default">
         <div class="w-14 h-14 bg-red-50 rounded-2xl flex items-center justify-center mx-auto mb-5">
           <svg class="w-7 h-7 text-red-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
         </div>
-        <h3 class="text-xl text-forest-800 mb-3">Health Programs</h3>
-        <p class="text-forest-600 text-sm leading-relaxed">Medical camps, health checkups, eye exams and gynaecological services for slum residents who can't afford private healthcare.</p>
+        <h3 class="text-xl text-green-800 mb-3">Health Programs</h3>
+        <p class="text-green-600 text-sm leading-relaxed">Medical camps, health checkups, eye exams and gynaecological services for slum residents who can't afford private healthcare.</p>
       </div>
-      <div class="bg-white rounded-3xl p-8 border border-forest-100 card-lift cursor-default">
+      <div class="bg-white rounded-3xl p-8 border border-green-100 card-lift cursor-default">
         <div class="w-14 h-14 bg-purple-50 rounded-2xl flex items-center justify-center mx-auto mb-5">
           <svg class="w-7 h-7 text-purple-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/></svg>
         </div>
-        <h3 class="text-xl text-forest-800 mb-3">Education Support</h3>
-        <p class="text-forest-600 text-sm leading-relaxed">Scholarships for children from under-resourced families so they can stay in school. We've supported 25+ students so far.</p>
+        <h3 class="text-xl text-green-800 mb-3">Education Support</h3>
+        <p class="text-green-600 text-sm leading-relaxed">Scholarships for children from under-resourced families so they can stay in school. We've supported 25+ students so far.</p>
       </div>
-      <div class="bg-white rounded-3xl p-8 border border-forest-100 card-lift cursor-default">
-        <div class="w-14 h-14 bg-forest-100 rounded-2xl flex items-center justify-center mx-auto mb-5">
-          <svg class="w-7 h-7 text-forest-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/></svg>
+      <div class="bg-white rounded-3xl p-8 border border-green-100 card-lift cursor-default">
+        <div class="w-14 h-14 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-5">
+          <svg class="w-7 h-7 text-green-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/></svg>
         </div>
-        <h3 class="text-xl text-forest-800 mb-3">Livelihood Creation</h3>
-        <p class="text-forest-600 text-sm leading-relaxed">ReVibe and Godadi programs employ women from slum communities, turning waste into income and empowerment.</p>
+        <h3 class="text-xl text-green-800 mb-3">Livelihood Creation</h3>
+        <p class="text-green-600 text-sm leading-relaxed">ReVibe and Godadi programs employ women from slum communities, turning waste into income and empowerment.</p>
       </div>
     </div>
     <div class="mt-12">
@@ -331,7 +323,7 @@
 <!-- FOOTER -->
 <footer class="bg-[#0A1C11] text-white" role="contentinfo">
   <!-- Gradient accent line -->
-  <div class="h-0.5 bg-gradient-to-r from-green-700 via-amber-500 to-green-700"></div>
+  <div class="h-0.5 bg-gradient-to-r from-green-700 via-green-600 to-green-700"></div>
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
       <!-- Brand -->

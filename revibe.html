@@ -23,14 +23,6 @@
               300: '#93c1a5', 400: '#5ca07a', 500: '#35825b',
               600: '#256b49', 700: '#1c5439', 800: '#133a28', 900: '#0b2418',
             },
-            amber: {
-              50:  '#f2f7f4', 100: '#e0ede5', 200: '#c2dccc',
-              300: '#93c1a5', 400: '#4f9c74', 500: '#256b49',
-              600: '#1c5439', 700: '#256b49', 800: '#1c5439',
-            },
-            forest: { 50:'#f2f7f4', 100:'#e0ede5', 200:'#c2dccc', 300:'#93c1a5', 400:'#5ca07a', 500:'#35825b', 600:'#256b49', 700:'#1c5439', 800:'#133a28', 900:'#0b2418' },
-            saffron: { 100:'#e0ede5', 200:'#c2dccc', 400:'#5ca07a', 500:'#35825b', 600:'#256b49' },
-            cream: '#ffffff',
           },
           borderRadius: { '4xl': '2rem' },
         }
@@ -48,19 +40,19 @@
       --bg-secondary: #f6f7f6;
       --text-primary: #1a1a1a;
       --text-secondary: #6b6b6b;
-      --text-muted: #9b9b9b;
+      --text-muted: #767676;
       --border: rgba(0,0,0,0.12);
       --radius-sm: 6px;
       --radius-md: 10px;
       --radius-lg: 16px;
       --brand-green: #1c5439;
-      --brand-amber: #256b49;
+      --brand-accent: #256b49;
     }
     html { scroll-behavior: smooth; }
-    body { font-family: var(--font-sans); color: var(--text-primary); background: var(--bg-primary); font-size: 15px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+    body { font-family: var(--font-sans); color: var(--text-primary); background: var(--bg-primary); font-size: 16px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
     #mob-menu { display: none; }
     #mob-menu.open { display: block; }
-    .grad-amber, em.grad-amber { color: var(--brand-amber); font-style: normal; background: none; -webkit-text-fill-color: unset; }
+    .grad-accent, em.grad-accent { color: var(--brand-accent); font-style: normal; background: none; -webkit-text-fill-color: unset; }
     @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
     .marquee-track { animation: marquee 16s linear infinite; }
     @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }
@@ -101,7 +93,7 @@
     @media (min-width: 1024px) { #menu-toggle { display: none !important; } }
     /* ── Mobile spacing improvements ────────────────────────────────────────────── */
     @media (max-width: 1023px) {
-      body { font-size: 15px; }
+      body { font-size: 16px; }
       nav { height: auto; }
       #mob-menu .flex.flex-col { gap: 4px; }
       section { padding-left: 16px; padding-right: 16px; }
@@ -132,7 +124,7 @@
         <a href="revibe.html" style="display:inline-flex;align-items:center;padding:6px 14px;border-radius:9999px;color:#fff;font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;background:rgba(255,255,255,0.22);">ReVibe</a>
         <div class="nav-dd"><a href="volunteer.html" style="display:inline-flex;align-items:center;padding:6px 14px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">Join Us<svg style="width:11px;height:11px;margin-left:3px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a><div class="nav-dd-panel"><div class="nav-dd-card"><a href="our-partners.html" class="nav-dd-item">Partners</a><a href="careers.html" class="nav-dd-item">Careers</a><a href="volunteer.html" class="nav-dd-item">Volunteer</a><a href="drop-locations.html" class="nav-dd-item">Become a Drop Location</a></div></div></div>
         <a href="contact.html" style="display:inline-flex;align-items:center;padding:6px 14px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">Contact</a>
-        <span style="display:inline-block;width:1px;height:16px;background:rgba(255,255,255,0.2);margin:0 4px;"></span><a href="https://store.indiarecycles.org" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border-radius:9999px;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'"><svg style="width:12px;height:12px;flex-shrink:0;fill:none;stroke:#4f9c74;stroke-width:2.5;stroke-linecap:round;" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span style="color:#93c1a5;">Thrift Store</span></a>
+        <span style="display:inline-block;width:1px;height:16px;background:rgba(255,255,255,0.2);margin:0 4px;"></span><a href="https://store.indiarecycles.org" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border-radius:9999px;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'"><svg style="width:12px;height:12px;flex-shrink:0;fill:none;stroke:#aed3bf;stroke-width:2.5;stroke-linecap:round;" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span style="color:#aed3bf;">Thrift Store</span></a>
       </div>
     </div>
     <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
@@ -147,11 +139,11 @@
       <a href="index.html" style="display:block;padding:9px 14px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Home</a>
       <a href="about-us.html" style="display:block;padding:9px 14px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">About Us</a>
       <a href="our-model.html" style="display:block;padding:9px 14px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Our Model</a>
-      <div style="padding:12px 14px 4px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#9b9b9b;">Our Impact</div>
+      <div style="padding:12px 14px 4px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#767676;">Our Impact</div>
       <a href="our-impact.html" style="display:block;padding:9px 24px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Our Impact</a>
       <a href="zero-waste-promise.html" style="display:block;padding:9px 24px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Zero Waste</a>
       <a href="revibe.html" style="display:block;padding:9px 14px;border-radius:8px;background:#f6f7f6;color:#1a1a1a;font-size:14px;font-weight:500;text-decoration:none;">ReVibe</a>
-      <div style="padding:12px 14px 4px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#9b9b9b;">Join Us</div>
+      <div style="padding:12px 14px 4px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#767676;">Join Us</div>
       <a href="our-partners.html" style="display:block;padding:9px 24px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Partners</a>
       <a href="careers.html" style="display:block;padding:9px 24px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Careers</a>
       <a href="volunteer.html" style="display:block;padding:9px 24px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Volunteer</a>
@@ -171,7 +163,7 @@
     <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
       <div>
         <div class="badge">ReVibe Upcycling</div>
-        <h1 id="revibe-h1" class="text-4xl lg:text-6xl mb-5 leading-tight">Old Cloth, <em class="grad-amber">New Life</em></h1>
+        <h1 id="revibe-h1" class="text-4xl lg:text-6xl mb-5 leading-tight">Old Cloth, <em class="grad-accent">New Life</em></h1>
         <p class="text-[var(--text-secondary)] text-lg leading-relaxed mb-8">ReVibe is our upcycling line. Garments that cannot be resold are reborn through the hands of women artisans into quilts, bags and home goods. Nothing is wasted, and every stitch creates a dignified livelihood.</p>
         <div class="flex flex-wrap gap-3">
           <a href="https://store.indiarecycles.org" target="_blank" rel="noopener noreferrer" class="bg-green-700 hover:bg-green-800 text-white px-7 py-3 rounded-full font-semibold text-[15px] transition-colors duration-200 cursor-pointer">Shop ReVibe</a>
@@ -199,7 +191,7 @@
         <p class="text-[var(--text-secondary)] text-[15px]">Donated clothes that are too worn to resell are set aside for upcycling instead of going to landfill.</p>
       </div>
       <div class="card bg-white rounded-3xl p-8 border border-[var(--border)]">
-        <div class="w-12 h-12 rounded-2xl bg-amber-50 flex items-center justify-center mb-5"><span class="stat-num text-amber-700 text-xl">02</span></div>
+        <div class="w-12 h-12 rounded-2xl bg-green-50 flex items-center justify-center mb-5"><span class="stat-num text-green-600 text-xl">02</span></div>
         <h3 class="text-xl mb-2">Transform by hand</h3>
         <p class="text-[var(--text-secondary)] text-[15px]">Women artisans cut, stitch and quilt the fabric into new products, earning a fair wage for their craft.</p>
       </div>
@@ -230,7 +222,7 @@
       <h2 class="text-3xl lg:text-4xl mb-4 text-white">Ready to Be Part of It?</h2>
       <p class="text-green-100 text-lg max-w-xl mx-auto mb-8">Every pair of hands and every donated garment moves the circle forward.</p>
       <div class="flex flex-wrap justify-center gap-3">
-        <a href="contact.html" class="bg-amber-500 hover:bg-amber-600 text-white px-7 py-3 rounded-full font-semibold text-[15px] transition-colors duration-200 cursor-pointer">Get in Touch</a>
+        <a href="contact.html" class="bg-green-600 hover:bg-green-700 text-white px-7 py-3 rounded-full font-semibold text-[15px] transition-colors duration-200 cursor-pointer">Get in Touch</a>
         <a href="donate.html" class="bg-white/10 hover:bg-white/20 text-white px-7 py-3 rounded-full font-semibold text-[15px] transition-colors duration-200 cursor-pointer">Donate Now</a>
       </div>
     </div>
@@ -241,7 +233,7 @@
 <!-- ════════════ FOOTER ════════════ -->
 <footer class="bg-[#0A1C11] text-white" role="contentinfo">
   <!-- Gradient accent line -->
-  <div class="h-0.5 bg-gradient-to-r from-green-700 via-amber-500 to-green-700"></div>
+  <div class="h-0.5 bg-gradient-to-r from-green-700 via-green-600 to-green-700"></div>
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
       <!-- Brand -->

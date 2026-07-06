@@ -23,14 +23,6 @@
               300: '#93c1a5', 400: '#5ca07a', 500: '#35825b',
               600: '#256b49', 700: '#1c5439', 800: '#133a28', 900: '#0b2418',
             },
-            amber: {
-              50:  '#f2f7f4', 100: '#e0ede5', 200: '#c2dccc',
-              300: '#93c1a5', 400: '#4f9c74', 500: '#256b49',
-              600: '#1c5439', 700: '#256b49', 800: '#1c5439',
-            },
-            forest: { 50:'#f2f7f4', 100:'#e0ede5', 200:'#c2dccc', 300:'#93c1a5', 400:'#5ca07a', 500:'#35825b', 600:'#256b49', 700:'#1c5439', 800:'#133a28', 900:'#0b2418' },
-            saffron: { 100:'#e0ede5', 200:'#c2dccc', 400:'#5ca07a', 500:'#35825b', 600:'#256b49' },
-            cream: '#ffffff',
           },
           borderRadius: { '4xl': '2rem' },
         }
@@ -48,19 +40,19 @@
       --bg-secondary: #f6f7f6;
       --text-primary: #1a1a1a;
       --text-secondary: #6b6b6b;
-      --text-muted: #9b9b9b;
+      --text-muted: #767676;
       --border: rgba(0,0,0,0.12);
       --radius-sm: 6px;
       --radius-md: 10px;
       --radius-lg: 16px;
       --brand-green: #1c5439;
-      --brand-amber: #256b49;
+      --brand-accent: #256b49;
     }
     html { scroll-behavior: smooth; }
-    body { font-family: var(--font-sans); color: var(--text-primary); background: var(--bg-primary); font-size: 15px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+    body { font-family: var(--font-sans); color: var(--text-primary); background: var(--bg-primary); font-size: 16px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
     #mob-menu { display: none; }
     #mob-menu.open { display: block; }
-    .grad-amber, em.grad-amber { color: var(--brand-amber); font-style: normal; background: none; -webkit-text-fill-color: unset; }
+    .grad-accent, em.grad-accent { color: var(--brand-accent); font-style: normal; background: none; -webkit-text-fill-color: unset; }
     @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
     .marquee-track { animation: marquee 16s linear infinite; }
     @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }
@@ -97,7 +89,7 @@
     @media (min-width: 1024px) { #menu-toggle { display: none !important; } }
     /* ── Mobile spacing improvements ────────────────────────────────────────────── */
     @media (max-width: 1023px) {
-      body { font-size: 15px; }
+      body { font-size: 16px; }
       nav { height: auto; }
       #mob-menu .flex.flex-col { gap: 4px; }
       section { padding-left: 16px; padding-right: 16px; }
@@ -128,7 +120,7 @@
         <a href="revibe.html" style="display:inline-flex;align-items:center;padding:6px 14px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">ReVibe</a>
         <div class="nav-dd"><a href="volunteer.html" style="display:inline-flex;align-items:center;padding:6px 14px;border-radius:9999px;color:#fff;font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;background:rgba(255,255,255,0.22);">Join Us<svg style="width:11px;height:11px;margin-left:3px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a><div class="nav-dd-panel"><div class="nav-dd-card"><a href="our-partners.html" class="nav-dd-item">Partners</a><a href="careers.html" class="nav-dd-item">Careers</a><a href="volunteer.html" class="nav-dd-item">Volunteer</a><a href="drop-locations.html" class="nav-dd-item">Become a Drop Location</a></div></div></div>
         <a href="contact.html" style="display:inline-flex;align-items:center;padding:6px 14px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">Contact</a>
-        <span style="display:inline-block;width:1px;height:16px;background:rgba(255,255,255,0.2);margin:0 4px;"></span><a href="https://store.indiarecycles.org" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border-radius:9999px;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'"><svg style="width:12px;height:12px;flex-shrink:0;fill:none;stroke:#4f9c74;stroke-width:2.5;stroke-linecap:round;" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span style="color:#93c1a5;">Thrift Store</span></a>
+        <span style="display:inline-block;width:1px;height:16px;background:rgba(255,255,255,0.2);margin:0 4px;"></span><a href="https://store.indiarecycles.org" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border-radius:9999px;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'"><svg style="width:12px;height:12px;flex-shrink:0;fill:none;stroke:#aed3bf;stroke-width:2.5;stroke-linecap:round;" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span style="color:#aed3bf;">Thrift Store</span></a>
       </div>
     </div>
     <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
@@ -143,11 +135,11 @@
       <a href="index.html" style="display:block;padding:9px 14px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Home</a>
       <a href="about-us.html" style="display:block;padding:9px 14px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">About Us</a>
       <a href="our-model.html" style="display:block;padding:9px 14px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Our Model</a>
-      <div style="padding:12px 14px 4px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#9b9b9b;">Our Impact</div>
+      <div style="padding:12px 14px 4px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#767676;">Our Impact</div>
       <a href="our-impact.html" style="display:block;padding:9px 24px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Our Impact</a>
       <a href="zero-waste-promise.html" style="display:block;padding:9px 24px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Zero Waste</a>
       <a href="revibe.html" style="display:block;padding:9px 14px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">ReVibe</a>
-      <div style="padding:12px 14px 4px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#9b9b9b;">Join Us</div>
+      <div style="padding:12px 14px 4px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#767676;">Join Us</div>
       <a href="our-partners.html" style="display:block;padding:9px 24px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Partners</a>
       <a href="careers.html" style="display:block;padding:9px 24px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Careers</a>
       <a href="volunteer.html" style="display:block;padding:9px 24px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Volunteer</a>
@@ -165,12 +157,12 @@
 <section class="relative pt-[64px] overflow-hidden" aria-labelledby="partners-h1">
   <div class="absolute inset-0">
     <img src="images/event2.jpg" alt="India Recycles partners" class="w-full h-full object-cover object-center"/>
-    <div class="absolute inset-0 bg-gradient-to-b from-forest-900/80 via-forest-900/65 to-forest-900/85"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-green-900/80 via-green-900/65 to-green-900/85"></div>
   </div>
   <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 text-center">
-    <div class="inline-flex items-center gap-2 bg-amber-600/90 text-white px-4 py-2 rounded-full text-sm font-semibold mb-6 backdrop-blur-sm">Collaboration</div>
-    <h1 id="partners-h1" class="text-5xl lg:text-6xl text-white mb-5 leading-tight">Our <em class="not-italic text-amber-400">Partners</em></h1>
-    <p class="text-forest-100 text-xl max-w-2xl mx-auto leading-relaxed">We couldn't do this alone. Meet the organisations and communities that power our mission.</p>
+    <div class="inline-flex items-center gap-2 bg-green-700/90 text-white px-4 py-2 rounded-full text-sm font-semibold mb-6 backdrop-blur-sm">Collaboration</div>
+    <h1 id="partners-h1" class="text-5xl lg:text-6xl text-white mb-5 leading-tight">Our <em class="not-italic text-green-400">Partners</em></h1>
+    <p class="text-green-100 text-xl max-w-2xl mx-auto leading-relaxed">We couldn't do this alone. Meet the organisations and communities that power our mission.</p>
   </div>
 </section>
 
@@ -178,9 +170,9 @@
 <section class="py-16 bg-[#f6f7f6] texture-bg" aria-labelledby="partner-wall-heading">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-16">
-      <div class="inline-flex items-center gap-2 bg-forest-100 text-forest-700 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wide mb-4">Our Network</div>
-      <h2 id="partner-wall-heading" class="text-4xl text-forest-800 mb-3">Together We Create Impact</h2>
-      <p class="text-forest-600 max-w-xl mx-auto">From government bodies to design studios, our partner network spans four key categories, all united by a commitment to sustainability.</p>
+      <div class="inline-flex items-center gap-2 bg-green-100 text-green-700 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wide mb-4">Our Network</div>
+      <h2 id="partner-wall-heading" class="text-4xl text-green-800 mb-3">Together We Create Impact</h2>
+      <p class="text-green-600 max-w-xl mx-auto">From government bodies to design studios, our partner network spans four key categories, all united by a commitment to sustainability.</p>
     </div>
 
     <div class="space-y-20">
@@ -188,13 +180,13 @@
       <!-- Category 01: Government / NGOs / Educational -->
       <div class="grid lg:grid-cols-2 gap-12 items-center">
         <div>
-          <div class="inline-flex items-center gap-2 bg-forest-100 text-forest-700 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wide mb-5">Category 01</div>
-          <h3 class="text-3xl text-forest-800 mb-4 leading-snug">Government, NGOs &amp;<br/>Educational Institutions</h3>
-          <p class="text-forest-700 leading-relaxed mb-4">We collaborate with government bodies, non-profit organisations and academic institutions that share our mission of building a more equitable and sustainable society. These partners help us expand our reach, co-run health camps, and support educational scholarship programs for children from under-resourced families.</p>
-          <ul class="space-y-2 text-sm text-forest-700">
-            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-forest-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Co-run community health camps</li>
-            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-forest-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Student scholarship support</li>
-            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-forest-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Awareness &amp; policy advocacy</li>
+          <div class="inline-flex items-center gap-2 bg-green-100 text-green-700 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wide mb-5">Category 01</div>
+          <h3 class="text-3xl text-green-800 mb-4 leading-snug">Government, NGOs &amp;<br/>Educational Institutions</h3>
+          <p class="text-green-700 leading-relaxed mb-4">We collaborate with government bodies, non-profit organisations and academic institutions that share our mission of building a more equitable and sustainable society. These partners help us expand our reach, co-run health camps, and support educational scholarship programs for children from under-resourced families.</p>
+          <ul class="space-y-2 text-sm text-green-700">
+            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-green-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Co-run community health camps</li>
+            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-green-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Student scholarship support</li>
+            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-green-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Awareness &amp; policy advocacy</li>
           </ul>
         </div>
         <div class="rounded-3xl overflow-hidden shadow-2xl">
@@ -205,13 +197,13 @@
       <!-- Category 02: Corporates -->
       <div class="grid lg:grid-cols-2 gap-12 items-center">
         <div class="lg:order-2">
-          <div class="inline-flex items-center gap-2 bg-amber-100 text-amber-700 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wide mb-5">Category 02</div>
-          <h3 class="text-3xl text-forest-800 mb-4 leading-snug">Corporate Partners</h3>
-          <p class="text-forest-700 leading-relaxed mb-4">Offices and corporations across Ahmedabad and Vadodara host our collection boxes, making it effortless for thousands of employees to donate clothes they no longer wear. These partnerships form the backbone of our donation network and are fully CSR-eligible with documentation provided.</p>
-          <ul class="space-y-2 text-sm text-forest-700">
-            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-amber-600 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Drop box installed &amp; managed by us</li>
-            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-amber-600 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Monthly impact reports</li>
-            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-amber-600 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>CSR certificates provided</li>
+          <div class="inline-flex items-center gap-2 bg-green-100 text-green-600 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wide mb-5">Category 02</div>
+          <h3 class="text-3xl text-green-800 mb-4 leading-snug">Corporate Partners</h3>
+          <p class="text-green-700 leading-relaxed mb-4">Offices and corporations across Ahmedabad and Vadodara host our collection boxes, making it effortless for thousands of employees to donate clothes they no longer wear. These partnerships form the backbone of our donation network and are fully CSR-eligible with documentation provided.</p>
+          <ul class="space-y-2 text-sm text-green-700">
+            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-green-700 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Drop box installed &amp; managed by us</li>
+            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-green-700 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Monthly impact reports</li>
+            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-green-700 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>CSR certificates provided</li>
           </ul>
         </div>
         <div class="rounded-3xl overflow-hidden shadow-2xl lg:order-1">
@@ -222,13 +214,13 @@
       <!-- Category 03: Hospitality -->
       <div class="grid lg:grid-cols-2 gap-12 items-center">
         <div>
-          <div class="inline-flex items-center gap-2 bg-forest-100 text-forest-700 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wide mb-5">Category 03</div>
-          <h3 class="text-3xl text-forest-800 mb-4 leading-snug">Hospitality Partners</h3>
-          <p class="text-forest-700 leading-relaxed mb-4">Hotels, clubs, gyms and recreational spaces host our drop boxes in high-footfall areas, making it convenient for members and guests to donate. These partnerships help us reach a wider donor base and keep our collection points accessible and visible across both cities.</p>
-          <ul class="space-y-2 text-sm text-forest-700">
-            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-forest-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>High-footfall collection points</li>
-            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-forest-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Guest &amp; member engagement</li>
-            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-forest-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Zero effort from property side</li>
+          <div class="inline-flex items-center gap-2 bg-green-100 text-green-700 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wide mb-5">Category 03</div>
+          <h3 class="text-3xl text-green-800 mb-4 leading-snug">Hospitality Partners</h3>
+          <p class="text-green-700 leading-relaxed mb-4">Hotels, clubs, gyms and recreational spaces host our drop boxes in high-footfall areas, making it convenient for members and guests to donate. These partnerships help us reach a wider donor base and keep our collection points accessible and visible across both cities.</p>
+          <ul class="space-y-2 text-sm text-green-700">
+            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-green-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>High-footfall collection points</li>
+            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-green-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Guest &amp; member engagement</li>
+            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-green-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Zero effort from property side</li>
           </ul>
         </div>
         <div class="rounded-3xl overflow-hidden shadow-2xl">
@@ -239,13 +231,13 @@
       <!-- Category 04: Design -->
       <div class="grid lg:grid-cols-2 gap-12 items-center">
         <div class="lg:order-2">
-          <div class="inline-flex items-center gap-2 bg-amber-100 text-amber-700 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wide mb-5">Category 04</div>
-          <h3 class="text-3xl text-forest-800 mb-4 leading-snug">Design Partners</h3>
-          <p class="text-forest-700 leading-relaxed mb-4">Our design partners collaborate on the creative side of our ReVibe upcycled product line, bringing craft skill, design sensibility and market access to help us create beautiful products from donated textiles. Together we prove that sustainable can also be stylish and commercially viable.</p>
-          <ul class="space-y-2 text-sm text-forest-700">
-            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-amber-600 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>ReVibe product collaboration</li>
-            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-amber-600 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Craft &amp; design expertise</li>
-            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-amber-600 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Market &amp; retail access</li>
+          <div class="inline-flex items-center gap-2 bg-green-100 text-green-600 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wide mb-5">Category 04</div>
+          <h3 class="text-3xl text-green-800 mb-4 leading-snug">Design Partners</h3>
+          <p class="text-green-700 leading-relaxed mb-4">Our design partners collaborate on the creative side of our ReVibe upcycled product line, bringing craft skill, design sensibility and market access to help us create beautiful products from donated textiles. Together we prove that sustainable can also be stylish and commercially viable.</p>
+          <ul class="space-y-2 text-sm text-green-700">
+            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-green-700 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>ReVibe product collaboration</li>
+            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-green-700 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Craft &amp; design expertise</li>
+            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-green-700 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Market &amp; retail access</li>
           </ul>
         </div>
         <div class="rounded-3xl overflow-hidden shadow-2xl lg:order-1">
@@ -261,24 +253,24 @@
 <section class="py-16 lg:py-24 bg-white" aria-labelledby="how-partner-heading">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-16 items-center">
     <div>
-      <div class="inline-flex items-center gap-2 bg-forest-100 text-forest-700 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wide mb-5">Partner with Us</div>
-      <h2 id="how-partner-heading" class="text-4xl text-forest-800 mb-6 leading-tight">Bring India Recycles<br/><em class="not-italic text-amber-600">to Your Organisation</em></h2>
-      <p class="text-forest-700 leading-relaxed mb-5">Whether you're a startup with 10 employees or a corporation with 10,000, every partnership creates measurable social and environmental impact your team can be proud of.</p>
+      <div class="inline-flex items-center gap-2 bg-green-100 text-green-700 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wide mb-5">Partner with Us</div>
+      <h2 id="how-partner-heading" class="text-4xl text-green-800 mb-6 leading-tight">Bring India Recycles<br/><em class="not-italic text-green-700">to Your Organisation</em></h2>
+      <p class="text-green-700 leading-relaxed mb-5">Whether you're a startup with 10 employees or a corporation with 10,000, every partnership creates measurable social and environmental impact your team can be proud of.</p>
       <ul class="space-y-3 mb-8">
-        <li class="flex items-start gap-3 text-forest-700 text-sm">
-          <svg class="w-5 h-5 text-forest-500 shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+        <li class="flex items-start gap-3 text-green-700 text-sm">
+          <svg class="w-5 h-5 text-green-500 shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
           We install and manage the collection box. No effort required from your end
         </li>
-        <li class="flex items-start gap-3 text-forest-700 text-sm">
-          <svg class="w-5 h-5 text-forest-500 shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+        <li class="flex items-start gap-3 text-green-700 text-sm">
+          <svg class="w-5 h-5 text-green-500 shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
           Monthly impact reports showing clothes collected, families served
         </li>
-        <li class="flex items-start gap-3 text-forest-700 text-sm">
-          <svg class="w-5 h-5 text-forest-500 shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+        <li class="flex items-start gap-3 text-green-700 text-sm">
+          <svg class="w-5 h-5 text-green-500 shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
           CSR documentation and partnership certificates provided
         </li>
-        <li class="flex items-start gap-3 text-forest-700 text-sm">
-          <svg class="w-5 h-5 text-forest-500 shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+        <li class="flex items-start gap-3 text-green-700 text-sm">
+          <svg class="w-5 h-5 text-green-500 shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
           Volunteer days organised for your employees at slum sales
         </li>
       </ul>
@@ -288,33 +280,33 @@
       </a>
     </div>
     <div class="grid grid-cols-2 gap-4">
-      <div class="bg-[#f6f7f6] rounded-3xl p-6 border border-forest-100 text-center">
-        <div class="font-serif text-4xl text-forest-600 font-bold mb-1">20<span class="text-amber-600">+</span></div>
-        <div class="text-forest-600 text-xs font-semibold uppercase tracking-wide">Drop Partners</div>
+      <div class="bg-[#f6f7f6] rounded-3xl p-6 border border-green-100 text-center">
+        <div class="font-serif text-4xl text-green-600 font-bold mb-1">20<span class="text-green-700">+</span></div>
+        <div class="text-green-600 text-xs font-semibold uppercase tracking-wide">Drop Partners</div>
       </div>
-      <div class="bg-forest-700 rounded-3xl p-6 text-center">
+      <div class="bg-green-700 rounded-3xl p-6 text-center">
         <div class="font-serif text-4xl text-white font-bold mb-1">2</div>
-        <div class="text-forest-300 text-xs font-semibold uppercase tracking-wide">Cities</div>
+        <div class="text-green-300 text-xs font-semibold uppercase tracking-wide">Cities</div>
       </div>
-      <div class="bg-amber-600 rounded-3xl p-6 text-center">
+      <div class="bg-green-700 rounded-3xl p-6 text-center">
         <div class="font-serif text-4xl text-white font-bold mb-1">0</div>
-        <div class="text-amber-100 text-xs font-semibold uppercase tracking-wide">Setup Fees</div>
+        <div class="text-green-100 text-xs font-semibold uppercase tracking-wide">Setup Fees</div>
       </div>
-      <div class="bg-[#f6f7f6] rounded-3xl p-6 border border-forest-100 text-center">
-        <div class="font-serif text-4xl text-forest-600 font-bold mb-1">CSR</div>
-        <div class="text-forest-600 text-xs font-semibold uppercase tracking-wide">Eligible</div>
+      <div class="bg-[#f6f7f6] rounded-3xl p-6 border border-green-100 text-center">
+        <div class="font-serif text-4xl text-green-600 font-bold mb-1">CSR</div>
+        <div class="text-green-600 text-xs font-semibold uppercase tracking-wide">Eligible</div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- CTA BANNER -->
-<section class="py-16 bg-forest-700" aria-labelledby="partner-cta">
+<section class="py-16 bg-green-700" aria-labelledby="partner-cta">
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
     <h2 id="partner-cta" class="text-4xl text-white mb-4">Ready to Make an Impact Together?</h2>
-    <p class="text-forest-200 text-lg mb-8 max-w-xl mx-auto">Reach out and we'll set up your organisation as a drop location within days, free of charge with maximum impact.</p>
+    <p class="text-green-200 text-lg mb-8 max-w-xl mx-auto">Reach out and we'll set up your organisation as a drop location within days, free of charge with maximum impact.</p>
     <div class="flex flex-wrap justify-center gap-4">
-      <a href="contact.html" class="bg-amber-600 hover:bg-amber-700 text-white px-8 py-4 rounded-2xl font-semibold transition-colors cursor-pointer shadow-lg">Partner with Us</a>
+      <a href="contact.html" class="bg-green-700 hover:bg-green-600 text-white px-8 py-4 rounded-2xl font-semibold transition-colors cursor-pointer shadow-lg">Partner with Us</a>
       <a href="donate.html"  class="border-2 border-white/50 text-white px-8 py-4 rounded-2xl font-semibold hover:bg-white/10 cursor-pointer transition-colors">Donate Instead</a>
     </div>
   </div>
@@ -325,7 +317,7 @@
 <!-- FOOTER -->
 <footer class="bg-[#0A1C11] text-white" role="contentinfo">
   <!-- Gradient accent line -->
-  <div class="h-0.5 bg-gradient-to-r from-green-700 via-amber-500 to-green-700"></div>
+  <div class="h-0.5 bg-gradient-to-r from-green-700 via-green-600 to-green-700"></div>
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
       <!-- Brand -->

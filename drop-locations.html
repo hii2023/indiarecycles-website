@@ -23,14 +23,6 @@
               300: '#93c1a5', 400: '#5ca07a', 500: '#35825b',
               600: '#256b49', 700: '#1c5439', 800: '#133a28', 900: '#0b2418',
             },
-            amber: {
-              50:  '#f2f7f4', 100: '#e0ede5', 200: '#c2dccc',
-              300: '#93c1a5', 400: '#4f9c74', 500: '#256b49',
-              600: '#1c5439', 700: '#256b49', 800: '#1c5439',
-            },
-            forest: { 50:'#f2f7f4', 100:'#e0ede5', 200:'#c2dccc', 300:'#93c1a5', 400:'#5ca07a', 500:'#35825b', 600:'#256b49', 700:'#1c5439', 800:'#133a28', 900:'#0b2418' },
-            saffron: { 100:'#e0ede5', 200:'#c2dccc', 400:'#5ca07a', 500:'#35825b', 600:'#256b49' },
-            cream: '#ffffff',
           },
           borderRadius: { '4xl': '2rem' },
         }
@@ -48,19 +40,19 @@
       --bg-secondary: #f6f7f6;
       --text-primary: #1a1a1a;
       --text-secondary: #6b6b6b;
-      --text-muted: #9b9b9b;
+      --text-muted: #767676;
       --border: rgba(0,0,0,0.12);
       --radius-sm: 6px;
       --radius-md: 10px;
       --radius-lg: 16px;
       --brand-green: #1c5439;
-      --brand-amber: #256b49;
+      --brand-accent: #256b49;
     }
     html { scroll-behavior: smooth; }
-    body { font-family: var(--font-sans); color: var(--text-primary); background: var(--bg-primary); font-size: 15px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+    body { font-family: var(--font-sans); color: var(--text-primary); background: var(--bg-primary); font-size: 16px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
     #mob-menu { display: none; }
     #mob-menu.open { display: block; }
-    .grad-amber, em.grad-amber { color: var(--brand-amber); font-style: normal; background: none; -webkit-text-fill-color: unset; }
+    .grad-accent, em.grad-accent { color: var(--brand-accent); font-style: normal; background: none; -webkit-text-fill-color: unset; }
     @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
     .marquee-track { animation: marquee 16s linear infinite; }
     @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }
@@ -97,7 +89,7 @@
     @media (min-width: 1024px) { #menu-toggle { display: none !important; } }
     /* ── Mobile spacing improvements ────────────────────────────────────────────── */
     @media (max-width: 1023px) {
-      body { font-size: 15px; }
+      body { font-size: 16px; }
       nav { height: auto; }
       #mob-menu .flex.flex-col { gap: 4px; }
       section { padding-left: 16px; padding-right: 16px; }
@@ -128,7 +120,7 @@
         <a href="revibe.html" style="display:inline-flex;align-items:center;padding:6px 14px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">ReVibe</a>
         <div class="nav-dd"><a href="volunteer.html" style="display:inline-flex;align-items:center;padding:6px 14px;border-radius:9999px;color:#fff;font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;background:rgba(255,255,255,0.22);">Join Us<svg style="width:11px;height:11px;margin-left:3px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a><div class="nav-dd-panel"><div class="nav-dd-card"><a href="our-partners.html" class="nav-dd-item">Partners</a><a href="careers.html" class="nav-dd-item">Careers</a><a href="volunteer.html" class="nav-dd-item">Volunteer</a><a href="drop-locations.html" class="nav-dd-item">Become a Drop Location</a></div></div></div>
         <a href="contact.html" style="display:inline-flex;align-items:center;padding:6px 14px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">Contact</a>
-        <span style="display:inline-block;width:1px;height:16px;background:rgba(255,255,255,0.2);margin:0 4px;"></span><a href="https://store.indiarecycles.org" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border-radius:9999px;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'"><svg style="width:12px;height:12px;flex-shrink:0;fill:none;stroke:#4f9c74;stroke-width:2.5;stroke-linecap:round;" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span style="color:#93c1a5;">Thrift Store</span></a>
+        <span style="display:inline-block;width:1px;height:16px;background:rgba(255,255,255,0.2);margin:0 4px;"></span><a href="https://store.indiarecycles.org" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border-radius:9999px;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'"><svg style="width:12px;height:12px;flex-shrink:0;fill:none;stroke:#aed3bf;stroke-width:2.5;stroke-linecap:round;" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span style="color:#aed3bf;">Thrift Store</span></a>
       </div>
     </div>
     <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
@@ -143,11 +135,11 @@
       <a href="index.html" style="display:block;padding:9px 14px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Home</a>
       <a href="about-us.html" style="display:block;padding:9px 14px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">About Us</a>
       <a href="our-model.html" style="display:block;padding:9px 14px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Our Model</a>
-      <div style="padding:12px 14px 4px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#9b9b9b;">Our Impact</div>
+      <div style="padding:12px 14px 4px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#767676;">Our Impact</div>
       <a href="our-impact.html" style="display:block;padding:9px 24px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Our Impact</a>
       <a href="zero-waste-promise.html" style="display:block;padding:9px 24px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Zero Waste</a>
       <a href="revibe.html" style="display:block;padding:9px 14px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">ReVibe</a>
-      <div style="padding:12px 14px 4px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#9b9b9b;">Join Us</div>
+      <div style="padding:12px 14px 4px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#767676;">Join Us</div>
       <a href="our-partners.html" style="display:block;padding:9px 24px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Partners</a>
       <a href="careers.html" style="display:block;padding:9px 24px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Careers</a>
       <a href="volunteer.html" style="display:block;padding:9px 24px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Volunteer</a>
@@ -165,16 +157,16 @@
 <section class="relative pt-[64px] overflow-hidden" aria-labelledby="locations-h1">
   <div class="absolute inset-0">
     <img src="images/event1.jpg" alt="Drop location at India Recycles" class="w-full h-full object-cover object-center"/>
-    <div class="absolute inset-0 bg-gradient-to-b from-forest-900/75 via-forest-900/65 to-forest-900/85"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-green-900/75 via-green-900/65 to-green-900/85"></div>
   </div>
   <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 text-center">
-    <div class="inline-flex items-center gap-2 bg-amber-600/90 text-white px-4 py-2 rounded-full text-sm font-semibold mb-6 backdrop-blur-sm">
+    <div class="inline-flex items-center gap-2 bg-green-700/90 text-white px-4 py-2 rounded-full text-sm font-semibold mb-6 backdrop-blur-sm">
       <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
       WE ARE COLLECTING, ALWAYS!
     </div>
-    <h1 id="locations-h1" class="text-5xl lg:text-6xl text-white mb-5 leading-tight">Drop <em class="not-italic text-amber-400">Locations</em></h1>
-    <p class="text-forest-100 text-xl max-w-2xl mx-auto leading-relaxed mb-8">Find your nearest donation point across Ahmedabad and Vadodara. Drop off your pre-loved clothes anytime.</p>
-    <a href="https://www.google.com/maps/search/?api=1&query=India+Recycles+Ahmedabad" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-forest-600 hover:bg-forest-500 text-white px-6 py-3 rounded-2xl font-semibold transition-colors cursor-pointer shadow-lg">
+    <h1 id="locations-h1" class="text-5xl lg:text-6xl text-white mb-5 leading-tight">Drop <em class="not-italic text-green-400">Locations</em></h1>
+    <p class="text-green-100 text-xl max-w-2xl mx-auto leading-relaxed mb-8">Find your nearest donation point across Ahmedabad and Vadodara. Drop off your pre-loved clothes anytime.</p>
+    <a href="https://www.google.com/maps/search/?api=1&query=India+Recycles+Ahmedabad" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-green-600 hover:bg-green-500 text-white px-6 py-3 rounded-2xl font-semibold transition-colors cursor-pointer shadow-lg">
       <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
       View All on Google Maps
     </a>
@@ -182,13 +174,13 @@
 </section>
 
 <!-- STATS BAR -->
-<section class="bg-forest-700 py-5" aria-label="Drop location counts">
+<section class="bg-green-700 py-5" aria-label="Drop location counts">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap justify-center gap-12 text-center">
-    <div><div class="font-serif text-3xl text-white font-bold">16</div><div class="text-forest-300 text-sm mt-0.5">Ahmedabad Locations</div></div>
-    <div class="w-px bg-forest-600 hidden sm:block" aria-hidden="true"></div>
-    <div><div class="font-serif text-3xl text-white font-bold">5</div><div class="text-forest-300 text-sm mt-0.5">Vadodara Locations</div></div>
-    <div class="w-px bg-forest-600 hidden sm:block" aria-hidden="true"></div>
-    <div><div class="font-serif text-3xl text-amber-400 font-bold">Always</div><div class="text-forest-300 text-sm mt-0.5">Open for donations</div></div>
+    <div><div class="font-serif text-3xl text-white font-bold">16</div><div class="text-green-300 text-sm mt-0.5">Ahmedabad Locations</div></div>
+    <div class="w-px bg-green-600 hidden sm:block" aria-hidden="true"></div>
+    <div><div class="font-serif text-3xl text-white font-bold">5</div><div class="text-green-300 text-sm mt-0.5">Vadodara Locations</div></div>
+    <div class="w-px bg-green-600 hidden sm:block" aria-hidden="true"></div>
+    <div><div class="font-serif text-3xl text-green-400 font-bold">Always</div><div class="text-green-300 text-sm mt-0.5">Open for donations</div></div>
   </div>
 </section>
 
@@ -196,25 +188,25 @@
 <section class="py-16 bg-[#f6f7f6] texture-bg" aria-labelledby="ahm-heading">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center gap-4 mb-10">
-      <div class="w-12 h-12 bg-forest-600 rounded-2xl flex items-center justify-center shadow-sm">
+      <div class="w-12 h-12 bg-green-600 rounded-2xl flex items-center justify-center shadow-sm">
         <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
       </div>
       <div>
-        <h2 id="ahm-heading" class="text-3xl text-forest-800">Ahmedabad</h2>
-        <p class="text-forest-500">16 drop locations across the city</p>
+        <h2 id="ahm-heading" class="text-3xl text-green-800">Ahmedabad</h2>
+        <p class="text-green-500">16 drop locations across the city</p>
       </div>
     </div>
 
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
 
       <!-- 1 -->
-      <div class="bg-white rounded-3xl p-5 border border-forest-100 card-lift">
+      <div class="bg-white rounded-3xl p-5 border border-green-100 card-lift">
         <div class="flex items-start gap-3 mb-3">
-          <div class="w-8 h-8 bg-forest-600 rounded-xl flex items-center justify-center shrink-0"><span class="text-white font-bold text-xs">1</span></div>
+          <div class="w-8 h-8 bg-green-600 rounded-xl flex items-center justify-center shrink-0"><span class="text-white font-bold text-xs">1</span></div>
           <div class="flex-1 min-w-0">
-            <h3 class="font-semibold text-forest-800 mb-0.5">S.G. Highway (Main Office)</h3>
-            <p class="text-xs text-forest-500 leading-relaxed">A-1301, Westgate by True Value, Near YMCA Club, Ahmedabad 380015</p>
-            <p class="text-xs text-forest-500 mt-1">Ramdev Sangar · <a href="tel:+918799414070" class="text-forest-600 hover:text-forest-800 cursor-pointer">+91 8799414070</a></p>
+            <h3 class="font-semibold text-green-800 mb-0.5">S.G. Highway (Main Office)</h3>
+            <p class="text-xs text-green-500 leading-relaxed">A-1301, Westgate by True Value, Near YMCA Club, Ahmedabad 380015</p>
+            <p class="text-xs text-green-500 mt-1">Ramdev Sangar · <a href="tel:+918799414070" class="text-green-600 hover:text-green-800 cursor-pointer">+91 8799414070</a></p>
           </div>
         </div>
         <a href="https://www.google.com/maps/search/?api=1&query=Westgate+by+True+Value+YMCA+Club+SG+Highway+Ahmedabad+380015" target="_blank" rel="noopener noreferrer" class="mt-3 inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-4 py-2 rounded-xl cursor-pointer transition-colors shadow-sm">
@@ -224,13 +216,13 @@
       </div>
 
       <!-- 2 -->
-      <div class="bg-white rounded-3xl p-5 border border-forest-100 card-lift">
+      <div class="bg-white rounded-3xl p-5 border border-green-100 card-lift">
         <div class="flex items-start gap-3 mb-3">
-          <div class="w-8 h-8 bg-forest-600 rounded-xl flex items-center justify-center shrink-0"><span class="text-white font-bold text-xs">2</span></div>
+          <div class="w-8 h-8 bg-green-600 rounded-xl flex items-center justify-center shrink-0"><span class="text-white font-bold text-xs">2</span></div>
           <div class="flex-1 min-w-0">
-            <h3 class="font-semibold text-forest-800 mb-0.5">Ashram Road</h3>
-            <p class="text-xs text-forest-500 leading-relaxed">7th Floor, Popular House, Above ICICI Bank, Ashram Road, Ahmedabad 380009</p>
-            <p class="text-xs text-forest-500 mt-1">Mrugesh Mehta · <a href="tel:+919974244901" class="text-forest-600 hover:text-forest-800 cursor-pointer">+91 9974244901</a></p>
+            <h3 class="font-semibold text-green-800 mb-0.5">Ashram Road</h3>
+            <p class="text-xs text-green-500 leading-relaxed">7th Floor, Popular House, Above ICICI Bank, Ashram Road, Ahmedabad 380009</p>
+            <p class="text-xs text-green-500 mt-1">Mrugesh Mehta · <a href="tel:+919974244901" class="text-green-600 hover:text-green-800 cursor-pointer">+91 9974244901</a></p>
           </div>
         </div>
         <a href="https://www.google.com/maps/search/?api=1&query=Popular+House+ICICI+Bank+Ashram+Road+Ahmedabad+380009" target="_blank" rel="noopener noreferrer" class="mt-3 inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-4 py-2 rounded-xl cursor-pointer transition-colors shadow-sm">
@@ -240,13 +232,13 @@
       </div>
 
       <!-- 3 -->
-      <div class="bg-white rounded-3xl p-5 border border-forest-100 card-lift">
+      <div class="bg-white rounded-3xl p-5 border border-green-100 card-lift">
         <div class="flex items-start gap-3 mb-3">
-          <div class="w-8 h-8 bg-forest-600 rounded-xl flex items-center justify-center shrink-0"><span class="text-white font-bold text-xs">3</span></div>
+          <div class="w-8 h-8 bg-green-600 rounded-xl flex items-center justify-center shrink-0"><span class="text-white font-bold text-xs">3</span></div>
           <div class="flex-1 min-w-0">
-            <h3 class="font-semibold text-forest-800 mb-0.5">Income Tax / Ashram Road</h3>
-            <p class="text-xs text-forest-500 leading-relaxed">601, Diwan Chambers, Near Income Tax Cross Roads, Ashram Road, Ahmedabad 380009</p>
-            <p class="text-xs text-forest-500 mt-1">Kunal Shah · <a href="tel:+919409113007" class="text-forest-600 hover:text-forest-800 cursor-pointer">+91 9409113007</a></p>
+            <h3 class="font-semibold text-green-800 mb-0.5">Income Tax / Ashram Road</h3>
+            <p class="text-xs text-green-500 leading-relaxed">601, Diwan Chambers, Near Income Tax Cross Roads, Ashram Road, Ahmedabad 380009</p>
+            <p class="text-xs text-green-500 mt-1">Kunal Shah · <a href="tel:+919409113007" class="text-green-600 hover:text-green-800 cursor-pointer">+91 9409113007</a></p>
           </div>
         </div>
         <a href="https://www.google.com/maps/search/?api=1&query=Diwan+Chambers+Income+Tax+Cross+Roads+Ashram+Road+Ahmedabad+380009" target="_blank" rel="noopener noreferrer" class="mt-3 inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-4 py-2 rounded-xl cursor-pointer transition-colors shadow-sm">
@@ -256,13 +248,13 @@
       </div>
 
       <!-- 4 -->
-      <div class="bg-white rounded-3xl p-5 border border-forest-100 card-lift">
+      <div class="bg-white rounded-3xl p-5 border border-green-100 card-lift">
         <div class="flex items-start gap-3 mb-3">
-          <div class="w-8 h-8 bg-forest-600 rounded-xl flex items-center justify-center shrink-0"><span class="text-white font-bold text-xs">4</span></div>
+          <div class="w-8 h-8 bg-green-600 rounded-xl flex items-center justify-center shrink-0"><span class="text-white font-bold text-xs">4</span></div>
           <div class="flex-1 min-w-0">
-            <h3 class="font-semibold text-forest-800 mb-0.5">Usmanpura</h3>
-            <p class="text-xs text-forest-500 leading-relaxed">The Greenstraw, 32 Usmanpura Village, River Front Road, Ahmedabad 380014</p>
-            <p class="text-xs text-forest-500 mt-1">Pooja Mathur · <a href="tel:+919426863215" class="text-forest-600 hover:text-forest-800 cursor-pointer">+91 9426863215</a></p>
+            <h3 class="font-semibold text-green-800 mb-0.5">Usmanpura</h3>
+            <p class="text-xs text-green-500 leading-relaxed">The Greenstraw, 32 Usmanpura Village, River Front Road, Ahmedabad 380014</p>
+            <p class="text-xs text-green-500 mt-1">Pooja Mathur · <a href="tel:+919426863215" class="text-green-600 hover:text-green-800 cursor-pointer">+91 9426863215</a></p>
           </div>
         </div>
         <a href="https://www.google.com/maps/search/?api=1&query=The+Greenstraw+Usmanpura+River+Front+Road+Ahmedabad+380014" target="_blank" rel="noopener noreferrer" class="mt-3 inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-4 py-2 rounded-xl cursor-pointer transition-colors shadow-sm">
@@ -272,13 +264,13 @@
       </div>
 
       <!-- 5 -->
-      <div class="bg-white rounded-3xl p-5 border border-forest-100 card-lift">
+      <div class="bg-white rounded-3xl p-5 border border-green-100 card-lift">
         <div class="flex items-start gap-3 mb-3">
-          <div class="w-8 h-8 bg-forest-600 rounded-xl flex items-center justify-center shrink-0"><span class="text-white font-bold text-xs">5</span></div>
+          <div class="w-8 h-8 bg-green-600 rounded-xl flex items-center justify-center shrink-0"><span class="text-white font-bold text-xs">5</span></div>
           <div class="flex-1 min-w-0">
-            <h3 class="font-semibold text-forest-800 mb-0.5">Juhapura</h3>
-            <p class="text-xs text-forest-500 leading-relaxed">14 Rangavdhoot Society, Behind Gandhi Smriti Society, Near Moti Bakery, Ahmedabad 380055</p>
-            <p class="text-xs text-forest-500 mt-1">Sheeba Malik · <a href="tel:+917572823071" class="text-forest-600 hover:text-forest-800 cursor-pointer">+91 7572823071</a></p>
+            <h3 class="font-semibold text-green-800 mb-0.5">Juhapura</h3>
+            <p class="text-xs text-green-500 leading-relaxed">14 Rangavdhoot Society, Behind Gandhi Smriti Society, Near Moti Bakery, Ahmedabad 380055</p>
+            <p class="text-xs text-green-500 mt-1">Sheeba Malik · <a href="tel:+917572823071" class="text-green-600 hover:text-green-800 cursor-pointer">+91 7572823071</a></p>
           </div>
         </div>
         <a href="https://www.google.com/maps/search/?api=1&query=Rangavdhoot+Society+Juhapura+Ahmedabad+380055" target="_blank" rel="noopener noreferrer" class="mt-3 inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-4 py-2 rounded-xl cursor-pointer transition-colors shadow-sm">
@@ -288,13 +280,13 @@
       </div>
 
       <!-- 6 -->
-      <div class="bg-white rounded-3xl p-5 border border-forest-100 card-lift">
+      <div class="bg-white rounded-3xl p-5 border border-green-100 card-lift">
         <div class="flex items-start gap-3 mb-3">
-          <div class="w-8 h-8 bg-forest-600 rounded-xl flex items-center justify-center shrink-0"><span class="text-white font-bold text-xs">6</span></div>
+          <div class="w-8 h-8 bg-green-600 rounded-xl flex items-center justify-center shrink-0"><span class="text-white font-bold text-xs">6</span></div>
           <div class="flex-1 min-w-0">
-            <h3 class="font-semibold text-forest-800 mb-0.5">Navrangpura</h3>
-            <p class="text-xs text-forest-500 leading-relaxed">Sumeru Sadan, Behind Krishna Dairy, Stadium Circle, Navrangpura, Ahmedabad</p>
-            <p class="text-xs text-forest-500 mt-1">Anshuman Dasani · <a href="tel:+919898017439" class="text-forest-600 hover:text-forest-800 cursor-pointer">+91 9898017439</a></p>
+            <h3 class="font-semibold text-green-800 mb-0.5">Navrangpura</h3>
+            <p class="text-xs text-green-500 leading-relaxed">Sumeru Sadan, Behind Krishna Dairy, Stadium Circle, Navrangpura, Ahmedabad</p>
+            <p class="text-xs text-green-500 mt-1">Anshuman Dasani · <a href="tel:+919898017439" class="text-green-600 hover:text-green-800 cursor-pointer">+91 9898017439</a></p>
           </div>
         </div>
         <a href="https://www.google.com/maps/search/?api=1&query=Sumeru+Sadan+Stadium+Circle+Navrangpura+Ahmedabad" target="_blank" rel="noopener noreferrer" class="mt-3 inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-4 py-2 rounded-xl cursor-pointer transition-colors shadow-sm">
@@ -304,13 +296,13 @@
       </div>
 
       <!-- 7 -->
-      <div class="bg-white rounded-3xl p-5 border border-forest-100 card-lift">
+      <div class="bg-white rounded-3xl p-5 border border-green-100 card-lift">
         <div class="flex items-start gap-3 mb-3">
-          <div class="w-8 h-8 bg-forest-600 rounded-xl flex items-center justify-center shrink-0"><span class="text-white font-bold text-xs">7</span></div>
+          <div class="w-8 h-8 bg-green-600 rounded-xl flex items-center justify-center shrink-0"><span class="text-white font-bold text-xs">7</span></div>
           <div class="flex-1 min-w-0">
-            <h3 class="font-semibold text-forest-800 mb-0.5">Bopal</h3>
-            <p class="text-xs text-forest-500 leading-relaxed">Patel Was, Mumatpura, Behind Karanavati Club, Ahmedabad</p>
-            <p class="text-xs text-forest-500 mt-1">Ramdev Sangar · <a href="tel:+918799414070" class="text-forest-600 hover:text-forest-800 cursor-pointer">+91 8799414070</a></p>
+            <h3 class="font-semibold text-green-800 mb-0.5">Bopal</h3>
+            <p class="text-xs text-green-500 leading-relaxed">Patel Was, Mumatpura, Behind Karanavati Club, Ahmedabad</p>
+            <p class="text-xs text-green-500 mt-1">Ramdev Sangar · <a href="tel:+918799414070" class="text-green-600 hover:text-green-800 cursor-pointer">+91 8799414070</a></p>
           </div>
         </div>
         <a href="https://www.google.com/maps/search/?api=1&query=Karanavati+Club+Bopal+Ahmedabad" target="_blank" rel="noopener noreferrer" class="mt-3 inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-4 py-2 rounded-xl cursor-pointer transition-colors shadow-sm">
@@ -320,13 +312,13 @@
       </div>
 
       <!-- 8 -->
-      <div class="bg-white rounded-3xl p-5 border border-forest-100 card-lift">
+      <div class="bg-white rounded-3xl p-5 border border-green-100 card-lift">
         <div class="flex items-start gap-3 mb-3">
-          <div class="w-8 h-8 bg-forest-600 rounded-xl flex items-center justify-center shrink-0"><span class="text-white font-bold text-xs">8</span></div>
+          <div class="w-8 h-8 bg-green-600 rounded-xl flex items-center justify-center shrink-0"><span class="text-white font-bold text-xs">8</span></div>
           <div class="flex-1 min-w-0">
-            <h3 class="font-semibold text-forest-800 mb-0.5">Sabarmati</h3>
-            <p class="text-xs text-forest-500 leading-relaxed">12 Raichandnagar Society, Near Visat Petrol Pump, Ahmedabad 380005</p>
-            <p class="text-xs text-forest-500 mt-1">Maulik Patel · <a href="tel:+919173810942" class="text-forest-600 hover:text-forest-800 cursor-pointer">+91 9173810942</a></p>
+            <h3 class="font-semibold text-green-800 mb-0.5">Sabarmati</h3>
+            <p class="text-xs text-green-500 leading-relaxed">12 Raichandnagar Society, Near Visat Petrol Pump, Ahmedabad 380005</p>
+            <p class="text-xs text-green-500 mt-1">Maulik Patel · <a href="tel:+919173810942" class="text-green-600 hover:text-green-800 cursor-pointer">+91 9173810942</a></p>
           </div>
         </div>
         <a href="https://www.google.com/maps/search/?api=1&query=Raichandnagar+Society+Visat+Petrol+Pump+Sabarmati+Ahmedabad+380005" target="_blank" rel="noopener noreferrer" class="mt-3 inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-4 py-2 rounded-xl cursor-pointer transition-colors shadow-sm">
@@ -336,13 +328,13 @@
       </div>
 
       <!-- 9 -->
-      <div class="bg-white rounded-3xl p-5 border border-forest-100 card-lift">
+      <div class="bg-white rounded-3xl p-5 border border-green-100 card-lift">
         <div class="flex items-start gap-3 mb-3">
-          <div class="w-8 h-8 bg-forest-600 rounded-xl flex items-center justify-center shrink-0"><span class="text-white font-bold text-xs">9</span></div>
+          <div class="w-8 h-8 bg-green-600 rounded-xl flex items-center justify-center shrink-0"><span class="text-white font-bold text-xs">9</span></div>
           <div class="flex-1 min-w-0">
-            <h3 class="font-semibold text-forest-800 mb-0.5">Ambli: Bento B</h3>
-            <p class="text-xs text-forest-500 leading-relaxed">Bento B, Courtyard ONE42, Billionaires Street, Ambli Road, Ashok Vatika</p>
-            <p class="text-xs text-forest-500 mt-1">Bento B Staff · <a href="tel:+917202035700" class="text-forest-600 hover:text-forest-800 cursor-pointer">+91 7202035700</a></p>
+            <h3 class="font-semibold text-green-800 mb-0.5">Ambli: Bento B</h3>
+            <p class="text-xs text-green-500 leading-relaxed">Bento B, Courtyard ONE42, Billionaires Street, Ambli Road, Ashok Vatika</p>
+            <p class="text-xs text-green-500 mt-1">Bento B Staff · <a href="tel:+917202035700" class="text-green-600 hover:text-green-800 cursor-pointer">+91 7202035700</a></p>
           </div>
         </div>
         <a href="https://www.google.com/maps/search/?api=1&query=Courtyard+ONE42+Billionaires+Street+Ambli+Road+Ahmedabad" target="_blank" rel="noopener noreferrer" class="mt-3 inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-4 py-2 rounded-xl cursor-pointer transition-colors shadow-sm">
@@ -352,13 +344,13 @@
       </div>
 
       <!-- 10 -->
-      <div class="bg-white rounded-3xl p-5 border border-forest-100 card-lift">
+      <div class="bg-white rounded-3xl p-5 border border-green-100 card-lift">
         <div class="flex items-start gap-3 mb-3">
-          <div class="w-8 h-8 bg-forest-600 rounded-xl flex items-center justify-center shrink-0"><span class="text-white font-bold text-xs">10</span></div>
+          <div class="w-8 h-8 bg-green-600 rounded-xl flex items-center justify-center shrink-0"><span class="text-white font-bold text-xs">10</span></div>
           <div class="flex-1 min-w-0">
-            <h3 class="font-semibold text-forest-800 mb-0.5">Vastral</h3>
-            <p class="text-xs text-forest-500 leading-relaxed">B 703, Krish Luxuria, Near Canara Bank, Vastral 382418</p>
-            <p class="text-xs text-forest-500 mt-1">Milan Prajapati · <a href="tel:+918511205218" class="text-forest-600 hover:text-forest-800 cursor-pointer">+91 8511205218</a></p>
+            <h3 class="font-semibold text-green-800 mb-0.5">Vastral</h3>
+            <p class="text-xs text-green-500 leading-relaxed">B 703, Krish Luxuria, Near Canara Bank, Vastral 382418</p>
+            <p class="text-xs text-green-500 mt-1">Milan Prajapati · <a href="tel:+918511205218" class="text-green-600 hover:text-green-800 cursor-pointer">+91 8511205218</a></p>
           </div>
         </div>
         <a href="https://www.google.com/maps/search/?api=1&query=Krish+Luxuria+Canara+Bank+Vastral+382418+Ahmedabad" target="_blank" rel="noopener noreferrer" class="mt-3 inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-4 py-2 rounded-xl cursor-pointer transition-colors shadow-sm">
@@ -368,13 +360,13 @@
       </div>
 
       <!-- 11 -->
-      <div class="bg-white rounded-3xl p-5 border border-forest-100 card-lift">
+      <div class="bg-white rounded-3xl p-5 border border-green-100 card-lift">
         <div class="flex items-start gap-3 mb-3">
-          <div class="w-8 h-8 bg-forest-600 rounded-xl flex items-center justify-center shrink-0"><span class="text-white font-bold text-xs">11</span></div>
+          <div class="w-8 h-8 bg-green-600 rounded-xl flex items-center justify-center shrink-0"><span class="text-white font-bold text-xs">11</span></div>
           <div class="flex-1 min-w-0">
-            <h3 class="font-semibold text-forest-800 mb-0.5">Drive-in Road</h3>
-            <p class="text-xs text-forest-500 leading-relaxed">B-2/22, Goyal Intercity, Near SAL Hospital, Drive-in Road, Ahmedabad</p>
-            <p class="text-xs text-forest-500 mt-1">Pranav Gupta · <a href="tel:+919727988901" class="text-forest-600 hover:text-forest-800 cursor-pointer">+91 9727988901</a></p>
+            <h3 class="font-semibold text-green-800 mb-0.5">Drive-in Road</h3>
+            <p class="text-xs text-green-500 leading-relaxed">B-2/22, Goyal Intercity, Near SAL Hospital, Drive-in Road, Ahmedabad</p>
+            <p class="text-xs text-green-500 mt-1">Pranav Gupta · <a href="tel:+919727988901" class="text-green-600 hover:text-green-800 cursor-pointer">+91 9727988901</a></p>
           </div>
         </div>
         <a href="https://www.google.com/maps/search/?api=1&query=Goyal+Intercity+SAL+Hospital+Drive-in+Road+Ahmedabad" target="_blank" rel="noopener noreferrer" class="mt-3 inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-4 py-2 rounded-xl cursor-pointer transition-colors shadow-sm">
@@ -384,13 +376,13 @@
       </div>
 
       <!-- 12 -->
-      <div class="bg-white rounded-3xl p-5 border border-forest-100 card-lift">
+      <div class="bg-white rounded-3xl p-5 border border-green-100 card-lift">
         <div class="flex items-start gap-3 mb-3">
-          <div class="w-8 h-8 bg-forest-600 rounded-xl flex items-center justify-center shrink-0"><span class="text-white font-bold text-xs">12</span></div>
+          <div class="w-8 h-8 bg-green-600 rounded-xl flex items-center justify-center shrink-0"><span class="text-white font-bold text-xs">12</span></div>
           <div class="flex-1 min-w-0">
-            <h3 class="font-semibold text-forest-800 mb-0.5">Vatva / Ghodasar</h3>
-            <p class="text-xs text-forest-500 leading-relaxed">SPSS Foundation, B7, Smruti Bindu Park, Behind Vajinath Mahadev Temple, Ghodasar, Ahmedabad 380050</p>
-            <p class="text-xs text-forest-500 mt-1">Jigar · <a href="tel:+918005666127" class="text-forest-600 hover:text-forest-800 cursor-pointer">+91 8005666127</a></p>
+            <h3 class="font-semibold text-green-800 mb-0.5">Vatva / Ghodasar</h3>
+            <p class="text-xs text-green-500 leading-relaxed">SPSS Foundation, B7, Smruti Bindu Park, Behind Vajinath Mahadev Temple, Ghodasar, Ahmedabad 380050</p>
+            <p class="text-xs text-green-500 mt-1">Jigar · <a href="tel:+918005666127" class="text-green-600 hover:text-green-800 cursor-pointer">+91 8005666127</a></p>
           </div>
         </div>
         <a href="https://www.google.com/maps/search/?api=1&query=Smruti+Bindu+Park+Vajinath+Mahadev+Temple+Ghodasar+Ahmedabad+380050" target="_blank" rel="noopener noreferrer" class="mt-3 inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-4 py-2 rounded-xl cursor-pointer transition-colors shadow-sm">
@@ -400,13 +392,13 @@
       </div>
 
       <!-- 13 -->
-      <div class="bg-white rounded-3xl p-5 border border-forest-100 card-lift">
+      <div class="bg-white rounded-3xl p-5 border border-green-100 card-lift">
         <div class="flex items-start gap-3 mb-3">
-          <div class="w-8 h-8 bg-forest-600 rounded-xl flex items-center justify-center shrink-0"><span class="text-white font-bold text-xs">13</span></div>
+          <div class="w-8 h-8 bg-green-600 rounded-xl flex items-center justify-center shrink-0"><span class="text-white font-bold text-xs">13</span></div>
           <div class="flex-1 min-w-0">
-            <h3 class="font-semibold text-forest-800 mb-0.5">Science City Road</h3>
-            <p class="text-xs text-forest-500 leading-relaxed">27 Panchamrut Earth Bungalow, Near CIMS Hospital, Ahmedabad 380060</p>
-            <p class="text-xs text-forest-500 mt-1">Dimpal Patel · <a href="tel:+919898623103" class="text-forest-600 hover:text-forest-800 cursor-pointer">+91 9898623103</a> (WhatsApp)</p>
+            <h3 class="font-semibold text-green-800 mb-0.5">Science City Road</h3>
+            <p class="text-xs text-green-500 leading-relaxed">27 Panchamrut Earth Bungalow, Near CIMS Hospital, Ahmedabad 380060</p>
+            <p class="text-xs text-green-500 mt-1">Dimpal Patel · <a href="tel:+919898623103" class="text-green-600 hover:text-green-800 cursor-pointer">+91 9898623103</a> (WhatsApp)</p>
           </div>
         </div>
         <a href="https://www.google.com/maps/search/?api=1&query=Panchamrut+Earth+Bungalow+CIMS+Hospital+Science+City+Road+Ahmedabad+380060" target="_blank" rel="noopener noreferrer" class="mt-3 inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-4 py-2 rounded-xl cursor-pointer transition-colors shadow-sm">
@@ -416,13 +408,13 @@
       </div>
 
       <!-- 14 -->
-      <div class="bg-white rounded-3xl p-5 border border-forest-100 card-lift">
+      <div class="bg-white rounded-3xl p-5 border border-green-100 card-lift">
         <div class="flex items-start gap-3 mb-3">
-          <div class="w-8 h-8 bg-forest-600 rounded-xl flex items-center justify-center shrink-0"><span class="text-white font-bold text-xs">14</span></div>
+          <div class="w-8 h-8 bg-green-600 rounded-xl flex items-center justify-center shrink-0"><span class="text-white font-bold text-xs">14</span></div>
           <div class="flex-1 min-w-0">
-            <h3 class="font-semibold text-forest-800 mb-0.5">Bodakdev: Kitabi Aangan</h3>
-            <p class="text-xs text-forest-500 leading-relaxed">Zion Z1, Sindhu Bhawan 05, Near Maple County Road, Bodakdev, Ahmedabad 380054</p>
-            <p class="text-xs text-forest-500 mt-1">Reena · <a href="tel:+917231853214" class="text-forest-600 hover:text-forest-800 cursor-pointer">+91 7231853214</a></p>
+            <h3 class="font-semibold text-green-800 mb-0.5">Bodakdev: Kitabi Aangan</h3>
+            <p class="text-xs text-green-500 leading-relaxed">Zion Z1, Sindhu Bhawan 05, Near Maple County Road, Bodakdev, Ahmedabad 380054</p>
+            <p class="text-xs text-green-500 mt-1">Reena · <a href="tel:+917231853214" class="text-green-600 hover:text-green-800 cursor-pointer">+91 7231853214</a></p>
           </div>
         </div>
         <a href="https://www.google.com/maps/search/?api=1&query=Sindhu+Bhawan+Maple+County+Road+Bodakdev+Ahmedabad+380054" target="_blank" rel="noopener noreferrer" class="mt-3 inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-4 py-2 rounded-xl cursor-pointer transition-colors shadow-sm">
@@ -432,13 +424,13 @@
       </div>
 
       <!-- 15 -->
-      <div class="bg-white rounded-3xl p-5 border border-forest-100 card-lift">
+      <div class="bg-white rounded-3xl p-5 border border-green-100 card-lift">
         <div class="flex items-start gap-3 mb-3">
-          <div class="w-8 h-8 bg-forest-600 rounded-xl flex items-center justify-center shrink-0"><span class="text-white font-bold text-xs">15</span></div>
+          <div class="w-8 h-8 bg-green-600 rounded-xl flex items-center justify-center shrink-0"><span class="text-white font-bold text-xs">15</span></div>
           <div class="flex-1 min-w-0">
-            <h3 class="font-semibold text-forest-800 mb-0.5">South Bopal</h3>
-            <p class="text-xs text-forest-500 leading-relaxed">B 402, Gala Marvella, Opposite Orchid Elegance, South Bopal, Ahmedabad 380058</p>
-            <p class="text-xs text-forest-500 mt-1">Gayatri Ayyangar · <a href="tel:+919727715665" class="text-forest-600 hover:text-forest-800 cursor-pointer">+91 9727715665</a></p>
+            <h3 class="font-semibold text-green-800 mb-0.5">South Bopal</h3>
+            <p class="text-xs text-green-500 leading-relaxed">B 402, Gala Marvella, Opposite Orchid Elegance, South Bopal, Ahmedabad 380058</p>
+            <p class="text-xs text-green-500 mt-1">Gayatri Ayyangar · <a href="tel:+919727715665" class="text-green-600 hover:text-green-800 cursor-pointer">+91 9727715665</a></p>
           </div>
         </div>
         <a href="https://www.google.com/maps/search/?api=1&query=Gala+Marvella+Orchid+Elegance+South+Bopal+Ahmedabad+380058" target="_blank" rel="noopener noreferrer" class="mt-3 inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-4 py-2 rounded-xl cursor-pointer transition-colors shadow-sm">
@@ -448,13 +440,13 @@
       </div>
 
       <!-- 16 -->
-      <div class="bg-white rounded-3xl p-5 border border-forest-100 card-lift">
+      <div class="bg-white rounded-3xl p-5 border border-green-100 card-lift">
         <div class="flex items-start gap-3 mb-3">
-          <div class="w-8 h-8 bg-forest-600 rounded-xl flex items-center justify-center shrink-0"><span class="text-white font-bold text-xs">16</span></div>
+          <div class="w-8 h-8 bg-green-600 rounded-xl flex items-center justify-center shrink-0"><span class="text-white font-bold text-xs">16</span></div>
           <div class="flex-1 min-w-0">
-            <h3 class="font-semibold text-forest-800 mb-0.5">Nava Naroda</h3>
-            <p class="text-xs text-forest-500 leading-relaxed">A-101, Shivam Residency, Opposite Shyamkutir 56 Bungalows, Hanspura Village Road, Nava Naroda 382330</p>
-            <p class="text-xs text-forest-500 mt-1">Ekta Kamlani · <a href="tel:+919725290910" class="text-forest-600 hover:text-forest-800 cursor-pointer">+91 9725290910</a> (WhatsApp)</p>
+            <h3 class="font-semibold text-green-800 mb-0.5">Nava Naroda</h3>
+            <p class="text-xs text-green-500 leading-relaxed">A-101, Shivam Residency, Opposite Shyamkutir 56 Bungalows, Hanspura Village Road, Nava Naroda 382330</p>
+            <p class="text-xs text-green-500 mt-1">Ekta Kamlani · <a href="tel:+919725290910" class="text-green-600 hover:text-green-800 cursor-pointer">+91 9725290910</a> (WhatsApp)</p>
           </div>
         </div>
         <a href="https://www.google.com/maps/search/?api=1&query=Shivam+Residency+Hanspura+Village+Road+Nava+Naroda+382330" target="_blank" rel="noopener noreferrer" class="mt-3 inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-4 py-2 rounded-xl cursor-pointer transition-colors shadow-sm">
@@ -471,24 +463,24 @@
 <section class="py-16 bg-white" aria-labelledby="vad-heading">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center gap-4 mb-10">
-      <div class="w-12 h-12 bg-forest-800 rounded-2xl flex items-center justify-center shadow-sm">
+      <div class="w-12 h-12 bg-green-800 rounded-2xl flex items-center justify-center shadow-sm">
         <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
       </div>
       <div>
-        <h2 id="vad-heading" class="text-3xl text-forest-800">Vadodara</h2>
-        <p class="text-forest-500">5 drop locations across the city</p>
+        <h2 id="vad-heading" class="text-3xl text-green-800">Vadodara</h2>
+        <p class="text-green-500">5 drop locations across the city</p>
       </div>
     </div>
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
 
       <!-- V1 -->
-      <div class="bg-[#f6f7f6] rounded-3xl p-5 border border-forest-100 card-lift">
+      <div class="bg-[#f6f7f6] rounded-3xl p-5 border border-green-100 card-lift">
         <div class="flex items-start gap-3 mb-3">
-          <div class="w-8 h-8 bg-forest-800 rounded-xl flex items-center justify-center shrink-0"><span class="text-white font-bold text-xs">1</span></div>
+          <div class="w-8 h-8 bg-green-800 rounded-xl flex items-center justify-center shrink-0"><span class="text-white font-bold text-xs">1</span></div>
           <div class="flex-1 min-w-0">
-            <h3 class="font-semibold text-forest-800 mb-0.5">Old Chhani Road</h3>
-            <p class="text-xs text-forest-500 leading-relaxed">Pratibha Foundation, B/12 MBC &amp; Das Patel Residency, Near St. Joseph School, Vadodara 390002</p>
-            <p class="text-xs text-forest-500 mt-1"><a href="tel:+919426233488" class="text-forest-600 hover:text-forest-800 cursor-pointer">+91 9426233488</a></p>
+            <h3 class="font-semibold text-green-800 mb-0.5">Old Chhani Road</h3>
+            <p class="text-xs text-green-500 leading-relaxed">Pratibha Foundation, B/12 MBC &amp; Das Patel Residency, Near St. Joseph School, Vadodara 390002</p>
+            <p class="text-xs text-green-500 mt-1"><a href="tel:+919426233488" class="text-green-600 hover:text-green-800 cursor-pointer">+91 9426233488</a></p>
           </div>
         </div>
         <a href="https://www.google.com/maps/search/?api=1&query=Pratibha+Foundation+St+Joseph+School+Old+Chhani+Road+Vadodara+390002" target="_blank" rel="noopener noreferrer" class="mt-3 inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-4 py-2 rounded-xl cursor-pointer transition-colors shadow-sm">
@@ -498,13 +490,13 @@
       </div>
 
       <!-- V2 -->
-      <div class="bg-[#f6f7f6] rounded-3xl p-5 border border-forest-100 card-lift">
+      <div class="bg-[#f6f7f6] rounded-3xl p-5 border border-green-100 card-lift">
         <div class="flex items-start gap-3 mb-3">
-          <div class="w-8 h-8 bg-forest-800 rounded-xl flex items-center justify-center shrink-0"><span class="text-white font-bold text-xs">2</span></div>
+          <div class="w-8 h-8 bg-green-800 rounded-xl flex items-center justify-center shrink-0"><span class="text-white font-bold text-xs">2</span></div>
           <div class="flex-1 min-w-0">
-            <h3 class="font-semibold text-forest-800 mb-0.5">Akota</h3>
-            <p class="text-xs text-forest-500 leading-relaxed">House C/7, Haaji Park, Akota, Vadodara</p>
-            <p class="text-xs text-forest-500 mt-1">Humera Memon · <a href="tel:+918160166831" class="text-forest-600 hover:text-forest-800 cursor-pointer">+91 8160166831</a></p>
+            <h3 class="font-semibold text-green-800 mb-0.5">Akota</h3>
+            <p class="text-xs text-green-500 leading-relaxed">House C/7, Haaji Park, Akota, Vadodara</p>
+            <p class="text-xs text-green-500 mt-1">Humera Memon · <a href="tel:+918160166831" class="text-green-600 hover:text-green-800 cursor-pointer">+91 8160166831</a></p>
           </div>
         </div>
         <a href="https://www.google.com/maps/search/?api=1&query=Haaji+Park+Akota+Vadodara" target="_blank" rel="noopener noreferrer" class="mt-3 inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-4 py-2 rounded-xl cursor-pointer transition-colors shadow-sm">
@@ -514,13 +506,13 @@
       </div>
 
       <!-- V3 -->
-      <div class="bg-[#f6f7f6] rounded-3xl p-5 border border-forest-100 card-lift">
+      <div class="bg-[#f6f7f6] rounded-3xl p-5 border border-green-100 card-lift">
         <div class="flex items-start gap-3 mb-3">
-          <div class="w-8 h-8 bg-forest-800 rounded-xl flex items-center justify-center shrink-0"><span class="text-white font-bold text-xs">3</span></div>
+          <div class="w-8 h-8 bg-green-800 rounded-xl flex items-center justify-center shrink-0"><span class="text-white font-bold text-xs">3</span></div>
           <div class="flex-1 min-w-0">
-            <h3 class="font-semibold text-forest-800 mb-0.5">Gorwa: Bento B</h3>
-            <p class="text-xs text-forest-500 leading-relaxed">Bento B, R2 Museum Square, Alembic City, Gorwa, Vadodara 390003</p>
-            <p class="text-xs text-forest-500 mt-1"><a href="tel:+917202035700" class="text-forest-600 hover:text-forest-800 cursor-pointer">+91 7202035700</a></p>
+            <h3 class="font-semibold text-green-800 mb-0.5">Gorwa: Bento B</h3>
+            <p class="text-xs text-green-500 leading-relaxed">Bento B, R2 Museum Square, Alembic City, Gorwa, Vadodara 390003</p>
+            <p class="text-xs text-green-500 mt-1"><a href="tel:+917202035700" class="text-green-600 hover:text-green-800 cursor-pointer">+91 7202035700</a></p>
           </div>
         </div>
         <a href="https://www.google.com/maps/search/?api=1&query=Bento+B+Museum+Square+Alembic+City+Gorwa+Vadodara+390003" target="_blank" rel="noopener noreferrer" class="mt-3 inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-4 py-2 rounded-xl cursor-pointer transition-colors shadow-sm">
@@ -530,13 +522,13 @@
       </div>
 
       <!-- V4 -->
-      <div class="bg-[#f6f7f6] rounded-3xl p-5 border border-forest-100 card-lift">
+      <div class="bg-[#f6f7f6] rounded-3xl p-5 border border-green-100 card-lift">
         <div class="flex items-start gap-3 mb-3">
-          <div class="w-8 h-8 bg-forest-800 rounded-xl flex items-center justify-center shrink-0"><span class="text-white font-bold text-xs">4</span></div>
+          <div class="w-8 h-8 bg-green-800 rounded-xl flex items-center justify-center shrink-0"><span class="text-white font-bold text-xs">4</span></div>
           <div class="flex-1 min-w-0">
-            <h3 class="font-semibold text-forest-800 mb-0.5">Fatehgunj</h3>
-            <p class="text-xs text-forest-500 leading-relaxed">A/504, Heritage Apartment, Near Lady of Pillar Hospital, Fatehgunj, Vadodara</p>
-            <p class="text-xs text-forest-500 mt-1">Farha · <a href="tel:+919879195229" class="text-forest-600 hover:text-forest-800 cursor-pointer">+91 9879195229</a></p>
+            <h3 class="font-semibold text-green-800 mb-0.5">Fatehgunj</h3>
+            <p class="text-xs text-green-500 leading-relaxed">A/504, Heritage Apartment, Near Lady of Pillar Hospital, Fatehgunj, Vadodara</p>
+            <p class="text-xs text-green-500 mt-1">Farha · <a href="tel:+919879195229" class="text-green-600 hover:text-green-800 cursor-pointer">+91 9879195229</a></p>
           </div>
         </div>
         <a href="https://www.google.com/maps/search/?api=1&query=Heritage+Apartment+Lady+of+Pillar+Hospital+Fatehgunj+Vadodara" target="_blank" rel="noopener noreferrer" class="mt-3 inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-4 py-2 rounded-xl cursor-pointer transition-colors shadow-sm">
@@ -546,13 +538,13 @@
       </div>
 
       <!-- V5 -->
-      <div class="bg-[#f6f7f6] rounded-3xl p-5 border border-forest-100 card-lift">
+      <div class="bg-[#f6f7f6] rounded-3xl p-5 border border-green-100 card-lift">
         <div class="flex items-start gap-3 mb-3">
-          <div class="w-8 h-8 bg-forest-800 rounded-xl flex items-center justify-center shrink-0"><span class="text-white font-bold text-xs">5</span></div>
+          <div class="w-8 h-8 bg-green-800 rounded-xl flex items-center justify-center shrink-0"><span class="text-white font-bold text-xs">5</span></div>
           <div class="flex-1 min-w-0">
-            <h3 class="font-semibold text-forest-800 mb-0.5">Wagehla Nagar</h3>
-            <p class="text-xs text-forest-500 leading-relaxed">10 Sakhar Society, Near Shiv Vatika Party Plot, Near Omkar Orthopaedic Hospital, Harni Warashia Ring Road, Vadodara</p>
-            <p class="text-xs text-forest-500 mt-1">Jay · <a href="tel:+918200529435" class="text-forest-600 hover:text-forest-800 cursor-pointer">+91 8200529435</a></p>
+            <h3 class="font-semibold text-green-800 mb-0.5">Wagehla Nagar</h3>
+            <p class="text-xs text-green-500 leading-relaxed">10 Sakhar Society, Near Shiv Vatika Party Plot, Near Omkar Orthopaedic Hospital, Harni Warashia Ring Road, Vadodara</p>
+            <p class="text-xs text-green-500 mt-1">Jay · <a href="tel:+918200529435" class="text-green-600 hover:text-green-800 cursor-pointer">+91 8200529435</a></p>
           </div>
         </div>
         <a href="https://www.google.com/maps/search/?api=1&query=Omkar+Orthopaedic+Hospital+Harni+Warashia+Ring+Road+Vadodara" target="_blank" rel="noopener noreferrer" class="mt-3 inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-4 py-2 rounded-xl cursor-pointer transition-colors shadow-sm">
@@ -566,11 +558,11 @@
 </section>
 
 <!-- BECOME A DROP POINT -->
-<section class="py-16 bg-forest-700" aria-labelledby="host-heading">
+<section class="py-16 bg-green-700" aria-labelledby="host-heading">
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
     <h2 id="host-heading" class="text-4xl text-white mb-4">Want to Host a Drop Point?</h2>
-    <p class="text-forest-200 text-lg mb-8 max-w-xl mx-auto">If you have a workspace, housing society, or office that can serve as a collection point, we'd love to partner with you. Setup is free. We manage everything.</p>
-    <a href="contact.html" class="inline-flex items-center gap-2 bg-amber-600 hover:bg-amber-700 text-white px-8 py-4 rounded-2xl font-semibold transition-colors cursor-pointer shadow-lg">
+    <p class="text-green-200 text-lg mb-8 max-w-xl mx-auto">If you have a workspace, housing society, or office that can serve as a collection point, we'd love to partner with you. Setup is free. We manage everything.</p>
+    <a href="contact.html" class="inline-flex items-center gap-2 bg-green-700 hover:bg-green-600 text-white px-8 py-4 rounded-2xl font-semibold transition-colors cursor-pointer shadow-lg">
       Partner with Us
       <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
     </a>
@@ -581,27 +573,27 @@
 <section class="py-16 bg-[#f6f7f6] texture-bg" aria-labelledby="what-heading">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-12">
-      <h2 id="what-heading" class="text-4xl text-forest-800 mb-3">What Can You Donate?</h2>
-      <p class="text-forest-600">We accept a wide variety of clothing, in any condition.</p>
+      <h2 id="what-heading" class="text-4xl text-green-800 mb-3">What Can You Donate?</h2>
+      <p class="text-green-600">We accept a wide variety of clothing, in any condition.</p>
     </div>
     <div class="grid sm:grid-cols-3 gap-5">
-      <div class="bg-white rounded-3xl p-6 border border-forest-100 flex items-start gap-4">
-        <div class="w-10 h-10 bg-forest-100 rounded-xl flex items-center justify-center shrink-0">
-          <svg class="w-5 h-5 text-forest-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+      <div class="bg-white rounded-3xl p-6 border border-green-100 flex items-start gap-4">
+        <div class="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center shrink-0">
+          <svg class="w-5 h-5 text-green-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
         </div>
-        <div><h3 class="font-semibold text-forest-800 mb-1">Any Clothing</h3><p class="text-sm text-forest-600">Shirts, pants, sarees, kurtas, kids' wear and more, all accepted.</p></div>
+        <div><h3 class="font-semibold text-green-800 mb-1">Any Clothing</h3><p class="text-sm text-green-600">Shirts, pants, sarees, kurtas, kids' wear and more, all accepted.</p></div>
       </div>
-      <div class="bg-white rounded-3xl p-6 border border-forest-100 flex items-start gap-4">
-        <div class="w-10 h-10 bg-forest-100 rounded-xl flex items-center justify-center shrink-0">
-          <svg class="w-5 h-5 text-forest-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+      <div class="bg-white rounded-3xl p-6 border border-green-100 flex items-start gap-4">
+        <div class="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center shrink-0">
+          <svg class="w-5 h-5 text-green-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
         </div>
-        <div><h3 class="font-semibold text-forest-800 mb-1">All Conditions</h3><p class="text-sm text-forest-600">Wearable, lightly worn or heavily worn, we'll find a use for every piece.</p></div>
+        <div><h3 class="font-semibold text-green-800 mb-1">All Conditions</h3><p class="text-sm text-green-600">Wearable, lightly worn or heavily worn, we'll find a use for every piece.</p></div>
       </div>
-      <div class="bg-white rounded-3xl p-6 border border-forest-100 flex items-start gap-4">
-        <div class="w-10 h-10 bg-amber-100 rounded-xl flex items-center justify-center shrink-0">
-          <svg class="w-5 h-5 text-amber-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+      <div class="bg-white rounded-3xl p-6 border border-green-100 flex items-start gap-4">
+        <div class="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center shrink-0">
+          <svg class="w-5 h-5 text-green-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
         </div>
-        <div><h3 class="font-semibold text-forest-800 mb-1">Clean &amp; Bagged</h3><p class="text-sm text-forest-600">Please wash and bag your donations before dropping them off.</p></div>
+        <div><h3 class="font-semibold text-green-800 mb-1">Clean &amp; Bagged</h3><p class="text-sm text-green-600">Please wash and bag your donations before dropping them off.</p></div>
       </div>
     </div>
   </div>
@@ -612,7 +604,7 @@
 <!-- FOOTER -->
 <footer class="bg-[#0A1C11] text-white" role="contentinfo">
   <!-- Gradient accent line -->
-  <div class="h-0.5 bg-gradient-to-r from-green-700 via-amber-500 to-green-700"></div>
+  <div class="h-0.5 bg-gradient-to-r from-green-700 via-green-600 to-green-700"></div>
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
       <!-- Brand -->
