@@ -49,6 +49,7 @@
       --brand-accent: #256b49;
     }
     html { scroll-behavior: smooth; }
+    .zoom-crop { object-view-box: inset(11.5%); }
     body { font-family: var(--font-sans); color: var(--text-primary); background: var(--bg-primary); font-size: 16px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
     #mob-menu { display: none; }
     #mob-menu.open { display: block; }
@@ -111,9 +112,9 @@
 
 <!-- NAVBAR -->
 <nav style="position:fixed;top:0;left:0;right:0;z-index:50;background:#ffffff;border-bottom:1px solid rgba(0,0,0,0.08);box-shadow:0 1px 3px rgba(0,0,0,0.05);" role="navigation" aria-label="Main navigation">
-  <div style="width:100%;max-width:1152px;margin:0 auto;padding:0 32px;height:64px;display:flex;align-items:center;gap:16px;box-sizing:border-box;">
+  <div style="width:100%;max-width:1152px;margin:0 auto;padding:0 32px;height:84px;display:flex;align-items:center;gap:16px;box-sizing:border-box;">
     <a href="index.html" style="flex-shrink:0;text-decoration:none;" aria-label="India Recycles home">
-      <img src="images/logo.png" alt="India Recycles logo" style="height:44px;width:auto;display:block;" loading="eager"/>
+      <img src="images/logo.png" alt="India Recycles logo" style="height:66px;width:auto;display:block;" loading="eager"/>
     </a>
     <div style="flex:1;display:flex;justify-content:center;align-items:center;">
       <div class="hidden lg:flex" style="align-items:center;gap:2px;background:#1c5439;border-radius:9999px;padding:6px 8px;">
@@ -159,7 +160,7 @@
 
 <!-- ════════════ HERO ════════════ -->
 <!-- Clean split layout: text left on light bg, photo right in card. No dark overlay. -->
-<section class="relative pt-[64px] overflow-hidden bg-white" aria-labelledby="hero-h1">
+<section class="relative pt-[84px] overflow-hidden bg-white" aria-labelledby="hero-h1">
 
   <!-- Low-opacity recycling decorations (background) -->
   <!-- Large recycle ring - top right -->
@@ -236,8 +237,10 @@
       <!-- RIGHT: Photo in a contained card - not full bleed -->
       <div class="relative hidden lg:block">
         <!-- Main photo card -->
-        <div class="rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
-          <img src="images/event1.jpg" alt="India Recycles community event" class="w-full h-[520px] object-cover object-center" loading="eager"/>
+        <div class="rounded-3xl overflow-hidden relative">
+          <img src="images/event1.jpg" alt="India Recycles community event" class="zoom-crop w-full h-[520px] object-cover object-center" loading="eager"/>
+          <div class="absolute inset-y-0 left-0 w-44 bg-gradient-to-r from-white to-transparent pointer-events-none" aria-hidden="true"></div>
+          <div class="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-white to-transparent pointer-events-none" aria-hidden="true"></div>
         </div>
         <!-- Floating badge -->
         <div class="absolute bottom-8 left-6 bg-white/95 backdrop-blur-sm border border-gray-200 shadow-lg rounded-2xl px-5 py-3">
@@ -257,7 +260,7 @@
         </div>
         <!-- Year badge -->
         <div class="absolute -top-4 -right-4 w-20 h-20 bg-green-700 rounded-full flex flex-col items-center justify-center shadow-lg border-4 border-white">
-          <div class="text-white font-bold text-lg leading-none">7+</div>
+          <div class="text-white font-bold text-lg leading-none">9+</div>
           <div class="text-white/85 text-[9px] uppercase tracking-wide">Years</div>
         </div>
       </div>
@@ -295,7 +298,7 @@
       <!-- Image column -->
       <div class="relative">
         <div class="rounded-3xl overflow-hidden shadow-lg border border-gray-100">
-          <img src="images/event2.jpg" alt="India Recycles community slum sale event" class="w-full h-80 object-cover object-center"/>
+          <img src="images/event2.jpg" alt="India Recycles community slum sale event" class="zoom-crop w-full h-80 object-cover object-center"/>
         </div>
         <!-- Price badge -->
         <div class="absolute bottom-5 left-5 bg-white/95 text-gray-800 border border-gray-200 px-4 py-2 rounded-xl text-sm font-bold shadow-md backdrop-blur-sm">
@@ -303,7 +306,7 @@
         </div>
         <!-- Thumbnail inset -->
         <div class="absolute -bottom-5 -right-4 w-28 h-28 rounded-2xl overflow-hidden border-4 border-white shadow-lg hidden md:block">
-          <img src="images/event3.jpg" alt="India Recycles volunteers" class="w-full h-full object-cover"/>
+          <img src="images/event3.jpg" alt="India Recycles volunteers" class="zoom-crop w-full h-full object-cover"/>
         </div>
       </div>
       <!-- Text column -->
@@ -407,7 +410,7 @@
       <!-- Step 1 -->
       <div class="bg-white rounded-2xl overflow-hidden border border-gray-200 card cursor-pointer">
         <div class="h-44 overflow-hidden">
-          <img src="images/model1.jpg" alt="Donate clothes at collection points" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"/>
+          <img src="images/model1.jpg" alt="Donate clothes at collection points" class="zoom-crop w-full h-full object-cover hover:scale-105 transition-transform duration-500"/>
         </div>
         <div class="p-5">
           <div class="w-7 h-7 bg-green-600 text-white rounded-full flex items-center justify-center text-xs font-bold mb-3" aria-hidden="true">1</div>
@@ -418,7 +421,7 @@
       <!-- Step 2 -->
       <div class="bg-white rounded-2xl overflow-hidden border border-gray-200 card cursor-pointer">
         <div class="h-44 overflow-hidden">
-          <img src="images/model2.jpg" alt="Sorting and cleaning donated clothes" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"/>
+          <img src="images/model2.jpg" alt="Sorting and cleaning donated clothes" class="zoom-crop w-full h-full object-cover hover:scale-105 transition-transform duration-500"/>
         </div>
         <div class="p-5">
           <div class="w-7 h-7 bg-gray-700 text-white rounded-full flex items-center justify-center text-xs font-bold mb-3" aria-hidden="true">2</div>
@@ -429,7 +432,7 @@
       <!-- Step 3 -->
       <div class="bg-white rounded-2xl overflow-hidden border border-green-200 card cursor-pointer">
         <div class="h-44 overflow-hidden">
-          <img src="images/model3.jpg" alt="Weekly slum sale event" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"/>
+          <img src="images/model3.jpg" alt="Weekly slum sale event" class="zoom-crop w-full h-full object-cover hover:scale-105 transition-transform duration-500"/>
         </div>
         <div class="p-5">
           <div class="w-7 h-7 bg-green-600 text-white rounded-full flex items-center justify-center text-xs font-bold mb-3" aria-hidden="true">3</div>
@@ -440,7 +443,7 @@
       <!-- Step 4 -->
       <div class="bg-white rounded-2xl overflow-hidden border border-gray-200 card cursor-pointer">
         <div class="h-44 overflow-hidden">
-          <img src="images/model4.jpg" alt="Zero waste upcycling process" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"/>
+          <img src="images/model4.jpg" alt="Zero waste upcycling process" class="zoom-crop w-full h-full object-cover hover:scale-105 transition-transform duration-500"/>
         </div>
         <div class="p-5">
           <div class="w-7 h-7 bg-gray-700 text-white rounded-full flex items-center justify-center text-xs font-bold mb-3" aria-hidden="true">4</div>
@@ -471,7 +474,7 @@
     <div class="grid md:grid-cols-3 gap-5">
       <!-- Medical -->
       <div class="relative rounded-2xl overflow-hidden shadow-md card cursor-pointer">
-        <img src="images/impact4.png" alt="Medical camps for slum communities" class="w-full h-60 object-cover"/>
+        <img src="images/impact4.png" alt="Medical camps for slum communities" class="zoom-crop w-full h-60 object-cover"/>
         <div class="absolute inset-0 bg-gradient-to-t from-gray-900/85 via-gray-900/15 to-transparent flex flex-col justify-end p-5">
           <span class="inline-block bg-green-600 text-white text-[11px] font-bold px-3 py-1 rounded-full mb-3 w-fit">Medical Camps</span>
           <div class="stat-num text-3xl text-white">1,000<span class="text-green-400">+</span></div>
@@ -480,7 +483,7 @@
       </div>
       <!-- Students -->
       <div class="relative rounded-2xl overflow-hidden shadow-md card cursor-pointer">
-        <img src="images/impact5.png" alt="Students supported through scholarships" class="w-full h-60 object-cover"/>
+        <img src="images/impact5.png" alt="Students supported through scholarships" class="zoom-crop w-full h-60 object-cover"/>
         <div class="absolute inset-0 bg-gradient-to-t from-gray-900/85 via-gray-900/15 to-transparent flex flex-col justify-end p-5">
           <span class="inline-block bg-green-700 text-white text-[11px] font-bold px-3 py-1 rounded-full mb-3 w-fit">Scholarships</span>
           <div class="stat-num text-3xl text-white">25<span class="text-green-400">+</span></div>
@@ -596,31 +599,31 @@
     <!-- 3×3 grid -->
     <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
       <div class="rounded-2xl overflow-hidden aspect-square group cursor-pointer shadow-sm border border-gray-100">
-        <img src="images/gallery1.png" alt="India Recycles slum sale" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy"/>
+        <img src="images/gallery1.png" alt="India Recycles slum sale" class="zoom-crop w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy"/>
       </div>
       <div class="rounded-2xl overflow-hidden aspect-square group cursor-pointer shadow-sm border border-gray-100">
-        <img src="images/gallery2.png" alt="Community event at India Recycles" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy"/>
+        <img src="images/gallery2.png" alt="Community event at India Recycles" class="zoom-crop w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy"/>
       </div>
       <div class="rounded-2xl overflow-hidden aspect-square group cursor-pointer shadow-sm border border-gray-100">
-        <img src="images/gallery3.png" alt="Community members at slum sale" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy"/>
+        <img src="images/gallery3.png" alt="Community members at slum sale" class="zoom-crop w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy"/>
       </div>
       <div class="rounded-2xl overflow-hidden aspect-square group cursor-pointer shadow-sm border border-gray-100">
-        <img src="images/model5.jpg" alt="Clothes sorting volunteers" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy"/>
+        <img src="images/model5.jpg" alt="Clothes sorting volunteers" class="zoom-crop w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy"/>
       </div>
       <div class="rounded-2xl overflow-hidden aspect-square group cursor-pointer shadow-sm border border-gray-100">
-        <img src="images/model6.jpg" alt="Volunteers preparing clothes" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy"/>
+        <img src="images/model6.jpg" alt="Volunteers preparing clothes" class="zoom-crop w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy"/>
       </div>
       <div class="rounded-2xl overflow-hidden aspect-square group cursor-pointer shadow-sm border border-gray-100">
-        <img src="images/zw1.jpg" alt="ReVibe upcycled products" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy"/>
+        <img src="images/zw1.jpg" alt="ReVibe upcycled products" class="zoom-crop w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy"/>
       </div>
       <div class="rounded-2xl overflow-hidden aspect-square group cursor-pointer shadow-sm border border-gray-100">
-        <img src="images/godadi2.jpg" alt="Godadi mattress project" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy"/>
+        <img src="images/godadi2.jpg" alt="Godadi mattress project" class="zoom-crop w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy"/>
       </div>
       <div class="rounded-2xl overflow-hidden aspect-square group cursor-pointer shadow-sm border border-gray-100">
-        <img src="images/event2.jpg" alt="India Recycles community event" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy"/>
+        <img src="images/event2.jpg" alt="India Recycles community event" class="zoom-crop w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy"/>
       </div>
       <div class="rounded-2xl overflow-hidden aspect-square group cursor-pointer shadow-sm border border-gray-100">
-        <img src="images/revibe1.jpg" alt="ReVibe upcycled apparel products" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy"/>
+        <img src="images/revibe1.jpg" alt="ReVibe upcycled apparel products" class="zoom-crop w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy"/>
       </div>
     </div>
   </div>
@@ -726,7 +729,7 @@
       <!-- Brand -->
       <div>
         <a href="index.html" class="flex items-center gap-3 mb-4 cursor-pointer">
-          <img src="images/logo.png" alt="India Recycles" class="h-9 w-auto brightness-200"/>
+          <img src="images/logo.png" alt="India Recycles" class="h-[54px] w-auto brightness-200"/>
           <span class="font-bold text-[15px] text-white" style="font-family:var(--font-sans);">India Recycles</span>
         </a>
         <p class="text-green-300/80 text-[13px] leading-relaxed mb-5">Love the Pre-Loved. A non-profit giving donated clothes a dignified second life across India.</p>
@@ -777,7 +780,7 @@
     </div>
     <!-- Bottom bar -->
     <div class="border-t border-white/10 pt-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-[12px] text-green-400/60">
-      <p>&copy; 2025 India Recycles. Registered non-profit, Gujarat, India.</p>
+      <p>&copy; 2026 India Recycles. Registered non-profit, Gujarat, India.</p>
       <div class="flex gap-5">
         <a href="#" class="hover:text-green-300 transition-colors cursor-pointer">Terms and Conditions</a>
         <a href="#" class="hover:text-green-300 transition-colors cursor-pointer">Privacy Policy</a>

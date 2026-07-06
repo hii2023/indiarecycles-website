@@ -49,6 +49,7 @@
       --brand-accent: #256b49;
     }
     html { scroll-behavior: smooth; }
+    .zoom-crop { object-view-box: inset(11.5%); }
     body { font-family: var(--font-sans); color: var(--text-primary); background: var(--bg-primary); font-size: 16px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
     #mob-menu { display: none; }
     #mob-menu.open { display: block; }
@@ -107,9 +108,9 @@
 
 <!-- NAVBAR -->
 <nav style="position:fixed;top:0;left:0;right:0;z-index:50;background:#ffffff;border-bottom:1px solid rgba(0,0,0,0.08);box-shadow:0 1px 3px rgba(0,0,0,0.05);" role="navigation" aria-label="Main navigation">
-  <div style="width:100%;max-width:1152px;margin:0 auto;padding:0 32px;height:64px;display:flex;align-items:center;gap:16px;box-sizing:border-box;">
+  <div style="width:100%;max-width:1152px;margin:0 auto;padding:0 32px;height:84px;display:flex;align-items:center;gap:16px;box-sizing:border-box;">
     <a href="index.html" style="flex-shrink:0;text-decoration:none;" aria-label="India Recycles home">
-      <img src="images/logo.png" alt="India Recycles logo" style="height:44px;width:auto;display:block;" loading="eager"/>
+      <img src="images/logo.png" alt="India Recycles logo" style="height:66px;width:auto;display:block;" loading="eager"/>
     </a>
     <div style="flex:1;display:flex;justify-content:center;align-items:center;">
       <div class="hidden lg:flex" style="align-items:center;gap:2px;background:#1c5439;border-radius:9999px;padding:6px 8px;">
@@ -154,9 +155,9 @@
 <main>
 
 <!-- HERO -->
-<section class="relative pt-[64px] overflow-hidden" aria-labelledby="locations-h1">
+<section class="relative pt-[84px] overflow-hidden" aria-labelledby="locations-h1">
   <div class="absolute inset-0">
-    <img src="images/event1.jpg" alt="Drop location at India Recycles" class="w-full h-full object-cover object-center"/>
+    <img src="images/event1.jpg" alt="Drop location at India Recycles" class="zoom-crop w-full h-full object-cover object-center"/>
     <div class="absolute inset-0 bg-gradient-to-b from-green-900/75 via-green-900/65 to-green-900/85"></div>
   </div>
   <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 text-center">
@@ -610,7 +611,7 @@
       <!-- Brand -->
       <div>
         <a href="index.html" class="flex items-center gap-3 mb-4 cursor-pointer">
-          <img src="images/logo.png" alt="India Recycles" class="h-9 w-auto brightness-200"/>
+          <img src="images/logo.png" alt="India Recycles" class="h-[54px] w-auto brightness-200"/>
           <span class="font-bold text-[15px] text-white" style="font-family:var(--font-sans);">India Recycles</span>
         </a>
         <p class="text-green-300/80 text-[13px] leading-relaxed mb-5">Love the Pre-Loved. A non-profit giving donated clothes a dignified second life across India.</p>
@@ -661,7 +662,7 @@
     </div>
     <!-- Bottom bar -->
     <div class="border-t border-white/10 pt-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-[12px] text-green-400/60">
-      <p>&copy; 2025 India Recycles. Registered non-profit, Gujarat, India.</p>
+      <p>&copy; 2026 India Recycles. Registered non-profit, Gujarat, India.</p>
       <div class="flex gap-5">
         <a href="#" class="hover:text-green-300 transition-colors cursor-pointer">Terms and Conditions</a>
         <a href="#" class="hover:text-green-300 transition-colors cursor-pointer">Privacy Policy</a>
