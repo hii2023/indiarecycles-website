@@ -88,7 +88,7 @@
       <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
       Drop Locations
     </button>
-    <button class="tab-btn text-left px-4 py-3 rounded-xl text-sm font-medium cursor-pointer text-forest-600 hover:bg-forest-50" onclick="switchTab('impact', this)">
+    <button class="tab-btn text-left px-4 py-3 rounded-xl text-sm font-medium cursor-pointer text-forest-600 hover:bg-forest-50" onclick="switchTab('stats', this)">
       <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
       Impact Stats
     </button>
@@ -121,8 +121,8 @@
   <section id="tab-home" class="tab-content active" aria-labelledby="home-tab-heading">
     <div class="flex items-center justify-between mb-8">
       <div>
-        <h1 id="home-tab-heading" class="font-serif text-2xl text-forest-800">Home Page &amp; Key Stats</h1>
-        <p class="text-forest-500 text-sm mt-1">Edit the hero headline and marquee impact numbers shown on the homepage.</p>
+        <h1 id="home-tab-heading" class="font-serif text-2xl text-forest-800">Home Page</h1>
+        <p class="text-forest-500 text-sm mt-1">Edit the hero headline and tagline. All impact numbers now live in the <strong>Stats</strong> tab.</p>
       </div>
       <button onclick="saveSection('home')" class="save-btn bg-forest-600 hover:bg-forest-700 text-white px-6 py-2.5 rounded-xl font-semibold text-sm cursor-pointer shadow">Save Changes</button>
     </div>
@@ -144,30 +144,9 @@
           </div>
         </div>
       </div>
-      <div class="bg-white rounded-3xl p-6 border border-forest-100">
-        <h2 class="font-semibold text-forest-800 mb-4 text-sm uppercase tracking-wide">Impact Numbers (Marquee)</h2>
-        <div class="space-y-3">
-          <div>
-            <label class="block text-xs font-semibold text-forest-600 mb-1.5">Clothes Recycled</label>
-            <input type="text" value="35,500+" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream"/>
-          </div>
-          <div>
-            <label class="block text-xs font-semibold text-forest-600 mb-1.5">Slum Sales Conducted</label>
-            <input type="text" value="132" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream"/>
-          </div>
-          <div>
-            <label class="block text-xs font-semibold text-forest-600 mb-1.5">Active Volunteers</label>
-            <input type="text" value="400+" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream"/>
-          </div>
-          <div>
-            <label class="block text-xs font-semibold text-forest-600 mb-1.5">Medical Camp Beneficiaries</label>
-            <input type="text" value="1,000+" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream"/>
-          </div>
-          <div>
-            <label class="block text-xs font-semibold text-forest-600 mb-1.5">Students Supported</label>
-            <input type="text" value="25+" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream"/>
-          </div>
-        </div>
+      <div class="bg-forest-50 rounded-3xl p-6 border border-forest-100 flex flex-col justify-center">
+        <h2 class="font-semibold text-forest-800 mb-2 text-sm uppercase tracking-wide">Impact Numbers</h2>
+        <p class="text-forest-600 text-sm leading-relaxed">All the impact numbers (clothes recycled, slum sales, volunteers, and so on) are now managed together in the <strong>Stats</strong> tab, where you can also set a monthly growth rate so the numbers keep rising automatically.</p>
       </div>
     </div>
   </section>
@@ -304,51 +283,159 @@
     </div>
   </section>
 
-  <!-- ═══ IMPACT ═══ -->
-  <section id="tab-impact" class="tab-content" aria-labelledby="impact-tab-heading">
+  <!-- ═══ STATS (all impact numbers in one place) ═══ -->
+  <section id="tab-stats" class="tab-content" aria-labelledby="stats-tab-heading">
     <div class="flex items-center justify-between mb-8">
       <div>
-        <h1 id="impact-tab-heading" class="font-serif text-2xl text-forest-800">Impact Statistics</h1>
-        <p class="text-forest-500 text-sm mt-1">Update the numbers shown on the Our Impact page.</p>
+        <h1 id="stats-tab-heading" class="font-serif text-2xl text-forest-800">Impact Stats</h1>
+        <p class="text-forest-500 text-sm mt-1">Every impact number on the website, in one place. Set a monthly average and the numbers rise on their own.</p>
       </div>
-      <button onclick="saveSection('impact')" class="save-btn bg-forest-600 hover:bg-forest-700 text-white px-6 py-2.5 rounded-xl font-semibold text-sm cursor-pointer shadow">Save Changes</button>
+      <button onclick="saveSection('stats')" class="save-btn bg-forest-600 hover:bg-forest-700 text-white px-6 py-2.5 rounded-xl font-semibold text-sm cursor-pointer shadow">Save Changes</button>
     </div>
-    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-      <div class="bg-white rounded-3xl p-5 border border-forest-100">
-        <div class="text-xs font-semibold text-forest-500 uppercase tracking-wide mb-2">Clothes Recycled</div>
-        <input type="text" value="35,500+" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm font-semibold text-forest-800 bg-cream"/>
-      </div>
-      <div class="bg-white rounded-3xl p-5 border border-forest-100">
-        <div class="text-xs font-semibold text-forest-500 uppercase tracking-wide mb-2">Slum Sales</div>
-        <input type="text" value="132" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm font-semibold text-forest-800 bg-cream"/>
-      </div>
-      <div class="bg-white rounded-3xl p-5 border border-forest-100">
-        <div class="text-xs font-semibold text-forest-500 uppercase tracking-wide mb-2">Volunteers</div>
-        <input type="text" value="400+" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm font-semibold text-forest-800 bg-cream"/>
-      </div>
-      <div class="bg-white rounded-3xl p-5 border border-forest-100">
-        <div class="text-xs font-semibold text-forest-500 uppercase tracking-wide mb-2">Medical Beneficiaries</div>
-        <input type="text" value="1,000+" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm font-semibold text-forest-800 bg-cream"/>
-      </div>
-      <div class="bg-white rounded-3xl p-5 border border-forest-100">
-        <div class="text-xs font-semibold text-forest-500 uppercase tracking-wide mb-2">Drop Locations</div>
-        <input type="text" value="20+" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm font-semibold text-forest-800 bg-cream"/>
-      </div>
-      <div class="bg-white rounded-3xl p-5 border border-forest-100">
-        <div class="text-xs font-semibold text-forest-500 uppercase tracking-wide mb-2">Students Supported</div>
-        <input type="text" value="25+" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm font-semibold text-forest-800 bg-cream"/>
-      </div>
-      <div class="bg-white rounded-3xl p-5 border border-forest-100">
-        <div class="text-xs font-semibold text-forest-500 uppercase tracking-wide mb-2">Cities Active</div>
-        <input type="text" value="2" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm font-semibold text-forest-800 bg-cream"/>
-      </div>
-      <div class="bg-white rounded-3xl p-5 border border-forest-100">
-        <div class="text-xs font-semibold text-forest-500 uppercase tracking-wide mb-2">Founded</div>
-        <input type="text" value="2017" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm font-semibold text-forest-800 bg-cream"/>
-      </div>
+    <div class="bg-forest-50 rounded-2xl px-5 py-4 border border-forest-100 text-sm text-forest-600 mb-6">
+      <strong>How the auto-increase works:</strong> Enter today&apos;s <em>Current count</em> and the <em>average added each month</em>. From the <em>Counting since</em> month onward, the website adds that monthly amount automatically over time, so the figures keep climbing without you editing anything. Leave &quot;Avg added / month&quot; at 0 to keep a number fixed.
     </div>
-    <div class="bg-forest-50 rounded-2xl px-5 py-4 border border-forest-100 text-sm text-forest-600">
-      <strong>Live:</strong> Saving here publishes instantly. The website loads these numbers on every page view.
+    <div class="grid lg:grid-cols-2 gap-4">
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Clothes Recycled</div>
+          <div class="text-xs text-forest-400">e.g. 3,00,000+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="clothes.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="clothes.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="clothes.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Slum Sales</div>
+          <div class="text-xs text-forest-400">e.g. 500+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="sales.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="sales.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="sales.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Volunteers</div>
+          <div class="text-xs text-forest-400">e.g. 2,500+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="volunteers.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="volunteers.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="volunteers.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Medical Beneficiaries</div>
+          <div class="text-xs text-forest-400">e.g. 1,000+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="medical.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="medical.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="medical.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Students Supported</div>
+          <div class="text-xs text-forest-400">e.g. 25+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="students.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="students.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="students.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Drop Locations</div>
+          <div class="text-xs text-forest-400">e.g. 20+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="drop_locations.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="drop_locations.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="drop_locations.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Cities Active</div>
+          <div class="text-xs text-forest-400">e.g. 2</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="cities.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="cities.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="cities.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -532,14 +619,18 @@
 
   // Field keys in the same order as the inputs inside each tab
   const FIELD_MAP = {
-    'home': ['hero_headline','hero_sub','badge','stat_clothes','stat_sales','stat_volunteers','stat_medical','stat_students'],
+    'home': ['hero_headline','hero_sub','badge'],
     'about': ['story_heading','story_p1','founded_badge','t1_name','t1_role','t1_photo','t2_name','t2_role','t2_photo'],
     'model': ['sales_held','max_price','frequency','description','p1_title','p1_desc','p2_title','p2_desc','p3_title','p3_desc'],
-    'impact': ['clothes','sales','volunteers','medical','drop_locations','students','cities','founded'],
     'programs': ['revibe_tagline','revibe_desc','revibe_tags','godadi_tagline','godadi_desc','godadi_location'],
     'contact-info': ['email','phone','address','website','copyright'],
     'donations': ['ac_name','ac_no','ifsc','bank_name','branch','upi_id','qr_path'],
   };
+
+  // Live impact stats (base count + monthly average growth) - managed on the Stats tab
+  const STAT_KEYS = ['clothes','sales','volunteers','medical','students','drop_locations','cities'];
+  const STAT_SUFFIX = { clothes:'+', sales:'+', volunteers:'+', medical:'+', students:'+', drop_locations:'+', cities:'' };
+  function toInt(v) { return Math.max(0, Math.round(Number(String(v).replace(/[^0-9.]/g,'')) || 0)); }
 
   function fieldsOf(section) {
     return Array.from(document.querySelectorAll('#tab-' + section + ' input, #tab-' + section + ' textarea'));
@@ -555,6 +646,18 @@
   function collectSection(section) {
     if (section === 'locations') {
       return { ahm: collectCards('ahm-locations'), vad: collectCards('vad-locations') };
+    }
+    if (section === 'stats') {
+      const out = {};
+      STAT_KEYS.forEach(k => { out[k] = { base: 0, per_month: 0, as_of: '2026-07', suffix: STAT_SUFFIX[k] }; });
+      document.querySelectorAll('#tab-stats [data-stat-field]').forEach(el => {
+        const parts = el.getAttribute('data-stat-field').split('.');
+        const k = parts[0], sub = parts[1];
+        if (!out[k]) return;
+        if (sub === 'as_of') out[k][sub] = el.value || '2026-07';
+        else out[k][sub] = toInt(el.value);
+      });
+      return out;
     }
     const keys = FIELD_MAP[section] || [];
     const data = {};
@@ -623,6 +726,14 @@
       if (cms.locations) {
         if (Array.isArray(cms.locations.ahm) && cms.locations.ahm.length) renderLocations(cms.locations.ahm, 'ahm-locations');
         if (Array.isArray(cms.locations.vad) && cms.locations.vad.length) renderLocations(cms.locations.vad, 'vad-locations');
+      }
+      if (cms.stats) {
+        document.querySelectorAll('#tab-stats [data-stat-field]').forEach(el => {
+          const parts = el.getAttribute('data-stat-field').split('.');
+          const cfg = cms.stats[parts[0]];
+          if (!cfg || cfg[parts[1]] === undefined || cfg[parts[1]] === null) return;
+          el.value = cfg[parts[1]];
+        });
       }
     } catch (e) {
       console.warn('Could not load saved content:', e);

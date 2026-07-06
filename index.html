@@ -240,17 +240,17 @@
         <!-- Stats strip - dark text, always readable -->
         <div class="grid grid-cols-2 gap-x-4 gap-y-5 sm:flex sm:gap-x-6 pt-7 border-t border-gray-200">
           <div>
-            <div class="stat-num text-2xl text-green-600" data-cms="home.stat_clothes">35,500+</div>
+            <div class="stat-num text-2xl text-green-600" data-stat="clothes">35,500+</div>
             <div class="text-gray-600 text-[11px] uppercase tracking-widest mt-0.5 font-medium">Clothes Recycled</div>
           </div>
           <div class="w-px bg-gray-200 self-stretch hidden sm:block"></div>
           <div>
-            <div class="stat-num text-2xl text-gray-800" data-cms="home.stat_sales">132</div>
+            <div class="stat-num text-2xl text-gray-800" data-stat="sales">132</div>
             <div class="text-gray-600 text-[11px] uppercase tracking-widest mt-0.5 font-medium">Slum Sales</div>
           </div>
           <div class="w-px bg-gray-200 self-stretch hidden sm:block"></div>
           <div>
-            <div class="stat-num text-2xl text-green-600" data-cms="home.stat_volunteers">400+</div>
+            <div class="stat-num text-2xl text-green-600" data-stat="volunteers">400+</div>
             <div class="text-gray-600 text-[11px] uppercase tracking-widest mt-0.5 font-medium">Volunteers</div>
           </div>
           <div class="w-px bg-gray-200 self-stretch hidden sm:block"></div>
@@ -476,7 +476,7 @@
         <img src="images/impact4.png" alt="Medical camps for slum communities" class="zoom-crop w-full h-60 object-cover"/>
         <div class="absolute inset-0 bg-gradient-to-t from-gray-900/85 via-gray-900/15 to-transparent flex flex-col justify-end p-5">
           <span class="inline-block bg-green-600 text-white text-[11px] font-bold px-3 py-1 rounded-full mb-3 w-fit">Medical Camps</span>
-          <div class="stat-num text-3xl text-white" data-cms-plus="impact.medical">1,000<span class="text-green-400">+</span></div>
+          <div class="stat-num text-3xl text-white" data-stat="medical">1,000<span class="text-green-400">+</span></div>
           <p class="text-white/80 text-[12px] mt-1 leading-snug">Beneficiaries across 3 slums</p>
         </div>
       </div>
@@ -485,7 +485,7 @@
         <img src="images/impact5.png" alt="Students supported through scholarships" class="zoom-crop w-full h-60 object-cover"/>
         <div class="absolute inset-0 bg-gradient-to-t from-gray-900/85 via-gray-900/15 to-transparent flex flex-col justify-end p-5">
           <span class="inline-block bg-green-700 text-white text-[11px] font-bold px-3 py-1 rounded-full mb-3 w-fit">Scholarships</span>
-          <div class="stat-num text-3xl text-white" data-cms-plus="impact.students">25<span class="text-green-400">+</span></div>
+          <div class="stat-num text-3xl text-white" data-stat="students">25<span class="text-green-400">+</span></div>
           <p class="text-white/80 text-[12px] mt-1 leading-snug">Students supported through education</p>
         </div>
       </div>
@@ -817,7 +817,7 @@
   });
 })();
 </script>
-<script src="js/cms.js"></script>
+<script src="js/cms.js?v=3"></script>
 <script>
 IR_CMS.then(function (c) {
   var h = c.home || {};
@@ -829,13 +829,18 @@ IR_CMS.then(function (c) {
       else { l2.textContent = h.hero_headline.trim(); l1.textContent = ''; }
     }
   }
-  if (c.home) {
+  {
+    var st = window.IR_STATS || {};
+    function liveText(key, fallback) {
+      if (!window.IR_LIVE || window.IR_LIVE(key) == null) return fallback;
+      return Number(window.IR_LIVE(key)).toLocaleString('en-IN') + ((st[key] && st[key].suffix) || '');
+    }
     var items = [
-      [h.stat_clothes || '35,500+', 'Clothes Recycled'],
-      [h.stat_sales || '132', 'Slum Sales Conducted'],
-      [h.stat_volunteers || '400+', 'Active Volunteers'],
-      [h.stat_medical || '1,000+', 'Medical Camp Beneficiaries'],
-      [h.stat_students || '25+', 'Students Supported'],
+      [liveText('clothes', '35,500+'), 'Clothes Recycled'],
+      [liveText('sales', '132'), 'Slum Sales Conducted'],
+      [liveText('volunteers', '400+'), 'Active Volunteers'],
+      [liveText('medical', '1,000+'), 'Medical Camp Beneficiaries'],
+      [liveText('students', '25+'), 'Students Supported'],
       ['', 'Founded 2017 in Ahmedabad']
     ];
     document.querySelectorAll('.marquee-track > div').forEach(function (g) {
