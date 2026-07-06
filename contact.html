@@ -259,7 +259,7 @@
           </div>
           <div>
             <div class="font-semibold text-green-800 text-sm mb-0.5">Email</div>
-            <a href="mailto:indiarecycles@gmail.com" class="text-green-600 hover:text-green-800 text-sm cursor-pointer transition-colors">indiarecycles@gmail.com</a>
+            <a id="cms-email" href="mailto:indiarecycles@gmail.com" class="text-green-600 hover:text-green-800 text-sm cursor-pointer transition-colors" data-cms="contact-info.email">indiarecycles@gmail.com</a>
           </div>
         </div>
         <div class="flex items-start gap-4">
@@ -268,7 +268,7 @@
           </div>
           <div>
             <div class="font-semibold text-green-800 text-sm mb-0.5">Phone</div>
-            <a href="tel:+919876543210" class="text-green-600 hover:text-green-800 text-sm cursor-pointer transition-colors">+91 98765 43210</a>
+            <a id="cms-phone" href="tel:+919876543210" class="text-green-600 hover:text-green-800 text-sm cursor-pointer transition-colors" data-cms="contact-info.phone">+91 98765 43210</a>
           </div>
         </div>
         <div class="flex items-start gap-4">
@@ -390,7 +390,7 @@
     </div>
     <!-- Bottom bar -->
     <div class="border-t border-white/10 pt-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-[12px] text-green-400/60">
-      <p>&copy; 2026 India Recycles. Registered non-profit, Gujarat, India.</p>
+      <p data-cms="contact-info.copyright">&copy; 2026 India Recycles. Registered non-profit, Gujarat, India.</p>
       <div class="flex gap-5">
         <a href="#" class="hover:text-green-300 transition-colors cursor-pointer">Terms and Conditions</a>
         <a href="#" class="hover:text-green-300 transition-colors cursor-pointer">Privacy Policy</a>
@@ -427,6 +427,15 @@
     setTimeout(function(){ window.location.href = href; }, 280);
   });
 })();
+</script>
+<script src="js/cms.js"></script>
+<script>
+IR_CMS.then(function (c) {
+  var ci = c['contact-info'] || {};
+  var e = document.getElementById('cms-email'), p = document.getElementById('cms-phone');
+  if (ci.email && e) e.href = 'mailto:' + ci.email;
+  if (ci.phone && p) p.href = 'tel:' + ci.phone.replace(/[^+0-9]/g, '');
+});
 </script>
 </body>
 </html>

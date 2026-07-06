@@ -188,15 +188,15 @@
         <!-- Badge -->
         <div id="collecting-badge" class="inline-flex items-center gap-2 bg-green-50 border border-green-200 text-green-600 px-4 py-1.5 rounded-full text-[11px] font-bold mb-6 uppercase tracking-widest">
           <span class="w-1.5 h-1.5 rounded-full bg-green-600 animate-pulse" aria-hidden="true"></span>
-          We are collecting, always!
+          <span data-cms="home.badge">We are collecting, always!</span>
         </div>
         <!-- Heading -->
         <h1 id="hero-h1" class="leading-[1.1] mb-5">
-          <span class="block text-4xl sm:text-5xl lg:text-6xl text-gray-900 font-semibold">Love the</span>
-          <span class="block text-5xl sm:text-6xl lg:text-7xl font-extrabold grad-accent">Pre-Loved</span>
+          <span class="block text-4xl sm:text-5xl lg:text-6xl text-gray-900 font-semibold" id="hero-l1">Love the</span>
+          <span class="block text-5xl sm:text-6xl lg:text-7xl font-extrabold grad-accent" id="hero-l2">Pre-Loved</span>
         </h1>
         <!-- Subheadline - fully dark, no shadow needed -->
-        <p class="text-gray-700 text-base sm:text-lg mb-8 leading-relaxed max-w-[480px]">
+        <p data-cms="home.hero_sub" class="text-gray-700 text-base sm:text-lg mb-8 leading-relaxed max-w-[480px]">
           We collect donated clothes and give them a dignified second life through weekly slum sales, upcycling, and livelihood programs for women across Ahmedabad and Vadodara.
         </p>
         <!-- CTAs -->
@@ -213,17 +213,17 @@
         <!-- Stats strip - dark text, always readable -->
         <div class="grid grid-cols-2 gap-x-4 gap-y-5 sm:flex sm:gap-x-6 pt-7 border-t border-gray-200">
           <div>
-            <div class="stat-num text-2xl text-green-600">35,500+</div>
+            <div class="stat-num text-2xl text-green-600" data-cms="home.stat_clothes">35,500+</div>
             <div class="text-gray-600 text-[11px] uppercase tracking-widest mt-0.5 font-medium">Clothes Recycled</div>
           </div>
           <div class="w-px bg-gray-200 self-stretch hidden sm:block"></div>
           <div>
-            <div class="stat-num text-2xl text-gray-800">132</div>
+            <div class="stat-num text-2xl text-gray-800" data-cms="home.stat_sales">132</div>
             <div class="text-gray-600 text-[11px] uppercase tracking-widest mt-0.5 font-medium">Slum Sales</div>
           </div>
           <div class="w-px bg-gray-200 self-stretch hidden sm:block"></div>
           <div>
-            <div class="stat-num text-2xl text-green-600">400+</div>
+            <div class="stat-num text-2xl text-green-600" data-cms="home.stat_volunteers">400+</div>
             <div class="text-gray-600 text-[11px] uppercase tracking-widest mt-0.5 font-medium">Volunteers</div>
           </div>
           <div class="w-px bg-gray-200 self-stretch hidden sm:block"></div>
@@ -477,7 +477,7 @@
         <img src="images/impact4.png" alt="Medical camps for slum communities" class="zoom-crop w-full h-60 object-cover"/>
         <div class="absolute inset-0 bg-gradient-to-t from-gray-900/85 via-gray-900/15 to-transparent flex flex-col justify-end p-5">
           <span class="inline-block bg-green-600 text-white text-[11px] font-bold px-3 py-1 rounded-full mb-3 w-fit">Medical Camps</span>
-          <div class="stat-num text-3xl text-white">1,000<span class="text-green-400">+</span></div>
+          <div class="stat-num text-3xl text-white" data-cms-plus="impact.medical">1,000<span class="text-green-400">+</span></div>
           <p class="text-white/80 text-[12px] mt-1 leading-snug">Beneficiaries across 3 slums</p>
         </div>
       </div>
@@ -486,7 +486,7 @@
         <img src="images/impact5.png" alt="Students supported through scholarships" class="zoom-crop w-full h-60 object-cover"/>
         <div class="absolute inset-0 bg-gradient-to-t from-gray-900/85 via-gray-900/15 to-transparent flex flex-col justify-end p-5">
           <span class="inline-block bg-green-700 text-white text-[11px] font-bold px-3 py-1 rounded-full mb-3 w-fit">Scholarships</span>
-          <div class="stat-num text-3xl text-white">25<span class="text-green-400">+</span></div>
+          <div class="stat-num text-3xl text-white" data-cms-plus="impact.students">25<span class="text-green-400">+</span></div>
           <p class="text-white/80 text-[12px] mt-1 leading-snug">Students supported through education</p>
         </div>
       </div>
@@ -780,7 +780,7 @@
     </div>
     <!-- Bottom bar -->
     <div class="border-t border-white/10 pt-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-[12px] text-green-400/60">
-      <p>&copy; 2026 India Recycles. Registered non-profit, Gujarat, India.</p>
+      <p data-cms="contact-info.copyright">&copy; 2026 India Recycles. Registered non-profit, Gujarat, India.</p>
       <div class="flex gap-5">
         <a href="#" class="hover:text-green-300 transition-colors cursor-pointer">Terms and Conditions</a>
         <a href="#" class="hover:text-green-300 transition-colors cursor-pointer">Privacy Policy</a>
@@ -817,6 +817,43 @@
     setTimeout(function(){ window.location.href = href; }, 280);
   });
 })();
+</script>
+<script src="js/cms.js"></script>
+<script>
+IR_CMS.then(function (c) {
+  var h = c.home || {};
+  if (h.hero_headline) {
+    var w = h.hero_headline.trim().split(/\s+/);
+    var l1 = document.getElementById('hero-l1'), l2 = document.getElementById('hero-l2');
+    if (l1 && l2) {
+      if (w.length >= 2) { l2.textContent = w.pop(); l1.textContent = w.join(' '); }
+      else { l2.textContent = h.hero_headline.trim(); l1.textContent = ''; }
+    }
+  }
+  if (c.home) {
+    var items = [
+      [h.stat_clothes || '35,500+', 'Clothes Recycled'],
+      [h.stat_sales || '132', 'Slum Sales Conducted'],
+      [h.stat_volunteers || '400+', 'Active Volunteers'],
+      [h.stat_medical || '1,000+', 'Medical Camp Beneficiaries'],
+      [h.stat_students || '25+', 'Students Supported'],
+      ['', 'Founded 2017 in Ahmedabad']
+    ];
+    document.querySelectorAll('.marquee-track > div').forEach(function (g) {
+      g.innerHTML = '';
+      items.forEach(function (it) {
+        var outer = document.createElement('span');
+        outer.className = 'flex items-center gap-2.5';
+        var dot = document.createElement('span');
+        dot.className = 'w-1.5 h-1.5 rounded-full bg-green-600';
+        dot.setAttribute('aria-hidden', 'true');
+        outer.appendChild(dot);
+        outer.appendChild(document.createTextNode((it[0] ? it[0] + ' ' : '') + it[1]));
+        g.appendChild(outer);
+      });
+    });
+  }
+});
 </script>
 </body>
 </html>
