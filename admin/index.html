@@ -552,17 +552,17 @@
   <section id="tab-gallery" class="tab-content" aria-labelledby="gallery-tab-heading">
     <div class="flex items-center justify-between mb-8">
       <div>
-        <h1 id="gallery-tab-heading" class="font-serif text-2xl text-forest-800">Gallery &amp; Images</h1>
-        <p class="text-forest-500 text-sm mt-1">View all downloaded images available in the /images folder.</p>
+        <h1 id="gallery-tab-heading" class="font-serif text-2xl text-forest-800">Website Images</h1>
+        <p class="text-forest-500 text-sm mt-1">Replace any image on the website - no code needed. Click Replace under a picture, choose a new one, then Save Changes to publish.</p>
       </div>
+      <button onclick="saveSection('images')" class="save-btn bg-forest-600 hover:bg-forest-700 text-white px-6 py-2.5 rounded-xl font-semibold text-sm cursor-pointer shadow">Save Changes</button>
     </div>
+    <div class="mb-5 bg-amber-50 rounded-2xl px-5 py-4 border border-amber-100 text-sm text-amber-800">
+      <strong>How it works:</strong> Uploading swaps the picture wherever it appears on the site. It stays live until you replace it again or click <strong>Reset</strong>. Remember to click <strong>Save Changes</strong> after your uploads.</div>
     <div class="bg-white rounded-3xl p-6 border border-forest-100">
-      <div class="text-xs font-semibold text-forest-500 uppercase tracking-wide mb-4">Available Images (/images/)</div>
-      <div id="image-grid" class="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-3">
-        <!-- JS renders previews -->
-      </div>
-      <div class="mt-6 bg-forest-50 rounded-2xl px-5 py-4 border border-forest-100 text-sm text-forest-600">
-        To add new images, copy files into the <code class="bg-forest-100 px-1.5 py-0.5 rounded text-xs">/images/</code> folder and reference them in the HTML files as <code class="bg-forest-100 px-1.5 py-0.5 rounded text-xs">images/filename.jpg</code>.
+      <div class="text-xs font-semibold text-forest-500 uppercase tracking-wide mb-4">Every image on the website</div>
+      <div id="image-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+        <!-- JS renders each image with a Replace button -->
       </div>
     </div>
   </section>
@@ -674,6 +674,9 @@
     if (section === 'locations') {
       return { ahm: collectCards('ahm-locations'), vad: collectCards('vad-locations') };
     }
+    if (section === 'images') {
+      return imageOverrides;
+    }
     if (section === 'team') {
       var members = Array.from(document.querySelectorAll('#team-members [data-member-card]')).map(function (card) {
         return {
@@ -775,6 +778,10 @@
       }
       if (cms.team && Array.isArray(cms.team.members) && cms.team.members.length) {
         renderMembers(cms.team.members);
+      }
+      if (cms.images && typeof cms.images === 'object') {
+        imageOverrides = Object.assign({}, cms.images);
+        renderGallery();
       }
     } catch (e) {
       console.warn('Could not load saved content:', e);
@@ -971,16 +978,109 @@
   'partners_picture8_orig.png','partners_96_orig.png'
   ];
 
+  // ── Image replacement (filename -> published URL) ─────────────
+  // Uploads go through the passcode-checked `admin-upload-image` edge function
+  // (service role writes to the public `site-images` bucket); only the URL map
+  // is stored in the CMS `images` section, which cms.js applies site-wide.
+  const UPLOAD_FN = SB_URL + '/functions/v1/admin-upload-image';
+  let imageOverrides = {};
+
   function renderGallery() {
     const grid = document.getElementById('image-grid');
-    grid.innerHTML = images.map(img => `
-      <div class="group cursor-pointer">
-        <div class="aspect-square rounded-xl overflow-hidden bg-forest-50 border border-forest-100">
-          <img src="../images/${img}" alt="${img}" class="w-full h-full object-cover group-hover:opacity-80 transition-opacity"/>
+    grid.innerHTML = images.map(img => {
+      const over = imageOverrides[img];
+      const cur = over ? over : ('../images/' + img);
+      return `
+      <div class="rounded-xl border border-forest-100 p-2" data-img-card>
+        <div class="aspect-square rounded-lg overflow-hidden bg-forest-50 border border-forest-100 relative">
+          <img src="${cur}" alt="${img}" class="w-full h-full object-cover"/>
+          ${over ? '<span class="absolute top-1 left-1 bg-forest-600 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full">Changed</span>' : ''}
         </div>
-        <div class="mt-1 text-xs text-forest-500 truncate" title="${img}">${img}</div>
-      </div>
-    `).join('');
+        <div class="mt-1.5 text-[11px] text-forest-500 truncate" title="${img}">${img}</div>
+        <div class="mt-1 flex items-center gap-1">
+          <label class="flex-1 text-center text-[11px] font-semibold text-forest-700 bg-forest-50 hover:bg-forest-100 rounded-lg py-1.5 cursor-pointer transition-colors">Replace<input type="file" accept="image/*" class="hidden" onchange="onImagePick(this,'${img}')"/></label>
+          ${over ? `<button onclick="resetImage('${img}')" class="text-[11px] text-red-400 hover:text-red-600 px-2 py-1.5 cursor-pointer" title="Reset to original">Reset</button>` : ''}
+        </div>
+        <div class="text-[10px] text-forest-500 mt-0.5 h-4 leading-4" data-img-status></div>
+      </div>`;
+    }).join('');
+  }
+
+  // Downscale big rasters (keep PNG transparency); upload SVG/GIF untouched.
+  function fileToUpload(file) {
+    return new Promise(function (resolve, reject) {
+      if (file.type === 'image/svg+xml' || file.type === 'image/gif') {
+        const fr = new FileReader();
+        fr.onload = function () { resolve({ base64: String(fr.result).split(',')[1], contentType: file.type }); };
+        fr.onerror = reject;
+        fr.readAsDataURL(file);
+        return;
+      }
+      const fr = new FileReader();
+      fr.onload = function (e) {
+        const im = new Image();
+        im.onload = function () {
+          const max = 1600;
+          let w = im.width, h = im.height;
+          if (w > max || h > max) {
+            if (w >= h) { h = Math.round(h * max / w); w = max; }
+            else { w = Math.round(w * max / h); h = max; }
+          }
+          const c = document.createElement('canvas');
+          c.width = w; c.height = h;
+          c.getContext('2d').drawImage(im, 0, 0, w, h);
+          const isPng = file.type === 'image/png';
+          const type = isPng ? 'image/png' : 'image/jpeg';
+          const url = c.toDataURL(type, isPng ? undefined : 0.85);
+          resolve({ base64: url.split(',')[1], contentType: type });
+        };
+        im.onerror = reject;
+        im.src = e.target.result;
+      };
+      fr.onerror = reject;
+      fr.readAsDataURL(file);
+    });
+  }
+
+  function onImagePick(input, fname) {
+    const file = input.files && input.files[0];
+    if (!file) return;
+    const passcode = getPasscode();
+    if (!passcode) { input.value = ''; return; }
+    const card = input.closest('[data-img-card]');
+    const status = card.querySelector('[data-img-status]');
+    status.textContent = 'Uploading...';
+    fileToUpload(file).then(function (u) {
+      return fetch(UPLOAD_FN, {
+        method: 'POST',
+        headers: { apikey: SB_KEY, Authorization: 'Bearer ' + SB_KEY, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: fname, contentType: u.contentType, dataBase64: u.base64, passcode: passcode })
+      });
+    }).then(function (res) {
+      return res.json().then(function (j) { return { ok: res.ok, j: j }; });
+    }).then(function (r) {
+      if (!r.ok) {
+        if ((r.j.error || '').indexOf('Invalid passcode') !== -1) {
+          sessionStorage.removeItem('ir_pass');
+          alert('Wrong passcode. Try the upload again and re-enter it.');
+        } else {
+          alert('Upload failed: ' + (r.j.error || 'unknown error'));
+        }
+        status.textContent = '';
+        return;
+      }
+      imageOverrides[fname] = r.j.url;
+      renderGallery();
+    }).catch(function (e) {
+      status.textContent = '';
+      alert('Upload failed: ' + e.message);
+    });
+    input.value = '';
+  }
+
+  function resetImage(fname) {
+    delete imageOverrides[fname];
+    renderGallery();
   }
 
   // Init

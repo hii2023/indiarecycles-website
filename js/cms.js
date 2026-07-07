@@ -96,6 +96,16 @@
         if (typeof v === 'string' && v.trim()) el.textContent = v;
       });
 
+      /* Image swaps: replace any images/<name> src with an admin-uploaded URL */
+      var imgMap = content.images || {};
+      if (imgMap && typeof imgMap === 'object') {
+        document.querySelectorAll('img[src]').forEach(function (img) {
+          var m = (img.getAttribute('src') || '').match(/(?:^|\/)images\/([^\/?#]+)/);
+          var name = m && m[1];
+          if (name && imgMap[name]) img.src = imgMap[name];
+        });
+      }
+
       /* Live impact numbers: base + monthly-average growth */
       var stats = content.stats || {};
       window.IR_STATS = stats;
