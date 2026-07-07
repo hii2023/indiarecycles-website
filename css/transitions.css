@@ -1,0 +1,21 @@
+/* Smooth cross-page transitions (View Transitions API).
+   Supported browsers animate a directional slide between pages; others just
+   navigate normally (no breakage). Direction is set by js/transitions.js. */
+@view-transition { navigation: auto; }
+
+@keyframes ir-new-fwd  { from { transform: translateX(100%); }  to { transform: translateX(0); } }
+@keyframes ir-old-fwd  { from { transform: translateX(0); opacity: 1; } to { transform: translateX(-18%); opacity: .4; } }
+@keyframes ir-new-back { from { transform: translateX(-100%); } to { transform: translateX(0); } }
+@keyframes ir-old-back { from { transform: translateX(0); opacity: 1; } to { transform: translateX(18%); opacity: .4; } }
+
+/* Default = forward (new slides in from the right, old parallax-shifts left) */
+::view-transition-old(root) { animation: ir-old-fwd .35s cubic-bezier(.4, 0, .2, 1) both; }
+::view-transition-new(root) { animation: ir-new-fwd .35s cubic-bezier(.4, 0, .2, 1) both; z-index: 1; }
+
+/* Back = reverse (new slides in from the left) */
+html:active-view-transition-type(back)::view-transition-old(root) { animation: ir-old-back .35s cubic-bezier(.4, 0, .2, 1) both; }
+html:active-view-transition-type(back)::view-transition-new(root) { animation: ir-new-back .35s cubic-bezier(.4, 0, .2, 1) both; }
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root), ::view-transition-new(root) { animation: none; }
+}

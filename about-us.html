@@ -74,7 +74,6 @@
     input:focus, textarea:focus { outline: 2px solid var(--brand-green); outline-offset: 1px; }
 
     /* ── Page transitions ─────────────────── */
-    body { animation: ir-in 0.32s ease both; }
     @keyframes ir-in {
       from { opacity: 0; transform: translateY(10px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -103,6 +102,7 @@
     .nav-dd-item { display: block; padding: 10px 14px; border-radius: 9px; color: #1a1a1a; font-size: 14px; font-weight: 500; text-decoration: none; white-space: nowrap; transition: background .15s, color .15s; }
     .nav-dd-item:hover { background: #f6f7f6; color: var(--brand-green); }
   </style>
+  <link rel="stylesheet" href="css/transitions.css?v=1"/>
 </head>
 <body class="antialiased">
 
@@ -393,5 +393,6 @@
   });
 })();
 </script>
+<script src="js/transitions.js?v=1"></script>
 </body>
 </html>

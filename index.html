@@ -74,7 +74,6 @@
     input:focus, textarea:focus { outline: 2px solid var(--brand-green); outline-offset: 1px; }
 
     /* ── Page transitions ─────────────────── */
-    body { animation: ir-in 0.32s ease both; }
     @keyframes ir-in {
       from { opacity: 0; transform: translateY(10px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -107,6 +106,7 @@
     .nav-dd-item { display: block; padding: 10px 14px; border-radius: 9px; color: #1a1a1a; font-size: 14px; font-weight: 500; text-decoration: none; white-space: nowrap; transition: background .15s, color .15s; }
     .nav-dd-item:hover { background: #f6f7f6; color: var(--brand-green); }
   </style>
+  <link rel="stylesheet" href="css/transitions.css?v=1"/>
 </head>
 <body class="antialiased">
 
@@ -340,54 +340,6 @@
           Read Our Full Story
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
         </a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- ════════════ IMPACT NUMBERS ════════════ -->
-<section class="py-16 lg:py-16 lg:py-24 bg-gray-50" aria-labelledby="stats-h2">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-12">
-      <span class="inline-flex items-center gap-1.5 bg-green-100 text-green-700 border border-green-200 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-widest mb-5">Impact in Numbers</span>
-      <h2 id="stats-h2" class="text-3xl lg:text-4xl font-bold text-gray-900 mb-3">What We Have Achieved</h2>
-      <p class="text-gray-700 text-[15px] max-w-md mx-auto leading-relaxed">Every number represents a life touched, a garment saved, a community served.</p>
-    </div>
-    <!-- 4 stat cards - all white, uniform -->
-    <div class="grid grid-cols-2 gap-4 sm:grid-cols-4 sm:gap-5">
-      <!-- Card 1 -->
-      <div class="bg-white rounded-2xl p-6 text-center shadow-sm border border-gray-200 card cursor-pointer">
-        <div class="w-10 h-10 bg-gray-100 rounded-xl flex items-center justify-center mx-auto mb-4">
-          <svg class="w-5 h-5 text-gray-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
-        </div>
-        <div class="stat-num text-[2.2rem] text-green-600 leading-none mb-2">35,500+</div>
-        <div class="text-gray-600 text-[12px] uppercase tracking-wide font-semibold">Clothes Recycled</div>
-      </div>
-      <!-- Card 2 -->
-      <div class="bg-white rounded-2xl p-6 text-center shadow-sm border border-gray-200 card cursor-pointer">
-        <div class="w-10 h-10 bg-gray-100 rounded-xl flex items-center justify-center mx-auto mb-4">
-          <svg class="w-5 h-5 text-gray-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-        </div>
-        <div class="stat-num text-[2.2rem] text-gray-800 leading-none mb-2">132</div>
-        <div class="text-gray-600 text-[12px] uppercase tracking-wide font-semibold">Slum Sales Held</div>
-      </div>
-      <!-- Card 3 -->
-      <div class="bg-white rounded-2xl p-6 text-center shadow-sm border border-gray-200 card cursor-pointer">
-        <div class="w-10 h-10 bg-green-50 rounded-xl flex items-center justify-center mx-auto mb-4">
-          <svg class="w-5 h-5 text-green-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        </div>
-        <div class="stat-num text-[2.2rem] text-green-600 leading-none mb-2">400+</div>
-        <div class="text-gray-600 text-[12px] uppercase tracking-wide font-semibold">Active Volunteers</div>
-      </div>
-      <!-- Card 4 -->
-      <div class="bg-white rounded-2xl p-6 text-center shadow-sm border border-gray-200 card cursor-pointer">
-        <div class="w-10 h-10 bg-gray-100 rounded-xl flex items-center justify-center mx-auto mb-4">
-          <svg class="w-5 h-5 text-gray-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-        </div>
-        <div class="stat-num text-[2.2rem] text-gray-800 leading-none mb-2">20+</div>
-        <div class="text-gray-600 text-[12px] uppercase tracking-wide font-semibold">Drop Locations</div>
       </div>
     </div>
   </div>
@@ -857,5 +809,6 @@ IR_CMS.then(function (c) {
   }
 });
 </script>
+<script src="js/transitions.js?v=1"></script>
 </body>
 </html>
