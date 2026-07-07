@@ -6,8 +6,8 @@
   <link rel="icon" type="image/png" sizes="64x64" href="/indiarecycles-website/favicon.png"/>
   <link rel="icon" type="image/png" sizes="32x32" href="/indiarecycles-website/favicon-32.png"/>
   <link rel="shortcut icon" href="/indiarecycles-website/favicon.png"/>
-  <title>Careers - India Recycles</title>
-  <meta name="description" content="Join the India Recycles team. Purpose-driven work giving donated clothes a second life across India."/>
+  <title>Impact Calculator - India Recycles</title>
+  <meta name="description" content="See the environmental impact of recycling your clothes. Pick the garments you would donate and estimate the CO2, water and energy saved."/>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -84,10 +84,6 @@
 
     .font-serif { font-family: 'Lora', Georgia, serif !important; font-style: normal; }
 
-    /* ── Collecting badge: bigger on mobile ─────────────────────────────────────── */
-    @media (max-width: 1023px) {
-      #collecting-badge { font-size: 14px !important; padding: 8px 18px !important; letter-spacing: .08em !important; }
-    }
     /* ── Hamburger: hide on desktop (inline display:flex was overriding lg:hidden) ── */
     #menu-toggle { display: flex; }
     @media (min-width: 1024px) { #menu-toggle { display: none !important; } }
@@ -123,8 +119,8 @@
         <a href="our-model.html" style="display:inline-flex;align-items:center;padding:6px 14px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">Our Model</a>
         <div class="nav-dd"><a href="our-impact.html" style="display:inline-flex;align-items:center;padding:6px 14px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">Our Impact<svg style="width:11px;height:11px;margin-left:3px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a><div class="nav-dd-panel"><div class="nav-dd-card"><a href="our-impact.html" class="nav-dd-item">Our Impact</a><a href="zero-waste-promise.html" class="nav-dd-item">Zero Waste</a><a href="impact-calculator.html" class="nav-dd-item">Impact Calculator</a></div></div></div>
         <a href="revibe.html" style="display:inline-flex;align-items:center;padding:6px 14px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">ReVibe</a>
-        <div class="nav-dd"><a href="volunteer.html" style="display:inline-flex;align-items:center;padding:6px 14px;border-radius:9999px;color:#fff;font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;background:rgba(255,255,255,0.22);">Join Us<svg style="width:11px;height:11px;margin-left:3px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a><div class="nav-dd-panel"><div class="nav-dd-card"><a href="our-partners.html" class="nav-dd-item">Partners</a><a href="careers.html" class="nav-dd-item">Careers</a><a href="volunteer.html" class="nav-dd-item">Volunteer</a><a href="drop-locations.html" class="nav-dd-item">Become a Drop Location</a></div></div></div>
-        <a href="contact.html" style="display:inline-flex;align-items:center;padding:6px 14px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">Contact</a>
+        <div class="nav-dd"><a href="volunteer.html" style="display:inline-flex;align-items:center;padding:6px 14px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">Join Us<svg style="width:11px;height:11px;margin-left:3px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a><div class="nav-dd-panel"><div class="nav-dd-card"><a href="our-partners.html" class="nav-dd-item">Partners</a><a href="careers.html" class="nav-dd-item">Careers</a><a href="volunteer.html" class="nav-dd-item">Volunteer</a><a href="drop-locations.html" class="nav-dd-item">Become a Drop Location</a></div></div></div>
+        <a href="contact.html" style="display:inline-flex;align-items:center;padding:6px 14px;border-radius:9999px;color:#fff;font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;background:rgba(255,255,255,0.22);">Contact</a>
         <span style="display:inline-block;width:1px;height:16px;background:rgba(255,255,255,0.2);margin:0 4px;"></span><a href="https://store.indiarecycles.org" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border-radius:9999px;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'"><svg style="width:12px;height:12px;flex-shrink:0;fill:none;stroke:#aed3bf;stroke-width:2.5;stroke-linecap:round;" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span style="color:#aed3bf;">Thrift Store</span></a>
       </div>
     </div>
@@ -150,7 +146,7 @@
       <a href="careers.html" style="display:block;padding:9px 24px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Careers</a>
       <a href="volunteer.html" style="display:block;padding:9px 24px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Volunteer</a>
       <a href="drop-locations.html" style="display:block;padding:9px 24px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Become a Drop Location</a>
-      <a href="contact.html" style="display:block;padding:9px 14px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Contact</a>
+      <a href="contact.html" style="display:block;padding:9px 14px;border-radius:8px;background:#f6f7f6;color:#1a1a1a;font-size:14px;font-weight:500;text-decoration:none;">Contact</a>
       <a href="https://store.indiarecycles.org" target="_blank" rel="noopener noreferrer" style="display:block;margin-top:8px;padding:10px 14px;border-radius:8px;background:#256b49;color:#fff;font-size:14px;font-weight:700;text-align:center;text-decoration:none;cursor:pointer;">Thrift Store &rarr;</a>
       <a href="donate.html" style="display:block;margin-top:4px;padding:10px 14px;border-radius:8px;background:#256b49;color:#fff;font-size:14px;font-weight:500;text-align:center;text-decoration:none;cursor:pointer;">Donate Now</a>
     </div>
@@ -160,63 +156,87 @@
 <main>
 
 <!-- HERO -->
-<section class="relative pt-[84px] overflow-hidden bg-white" aria-labelledby="careers-h1">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 text-center">
-    <div class="badge">Careers</div>
-    <h1 id="careers-h1" class="text-4xl lg:text-6xl mb-5 leading-tight">Build a <em class="grad-accent">Second Life</em> With Us</h1>
-    <p class="text-[var(--text-secondary)] text-lg max-w-2xl mx-auto leading-relaxed">We are a small, hands-on team that cares deeply about people and the planet. If you want work that leaves communities better than you found them, we would love to hear from you.</p>
+<section class="relative pt-[84px] overflow-hidden" aria-labelledby="calc-h1">
+  <div class="absolute inset-0">
+    <img src="images/event1.jpg" alt="India Recycles community slum sale" class="zoom-crop w-full h-full object-cover object-center"/>
+    <div class="absolute inset-0 bg-gradient-to-b from-green-900/80 via-green-900/70 to-green-900/90"></div>
+  </div>
+  <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 text-center">
+    <div class="inline-flex items-center gap-2 bg-green-700/90 text-white px-4 py-2 rounded-full text-sm font-semibold mb-6 backdrop-blur-sm">Every Garment Counts</div>
+    <h1 id="calc-h1" class="text-5xl lg:text-6xl text-white mb-5 leading-tight">Impact <em class="not-italic text-green-400">Calculator</em></h1>
+    <p class="text-green-100 text-xl max-w-2xl mx-auto leading-relaxed">Pick the clothes you would donate and see the carbon, water and energy your gift helps save. No weighing needed.</p>
   </div>
 </section>
 
-<!-- WHY WORK WITH US -->
-<section class="py-16 lg:py-24 bg-[#f6f7f6]">
+<!-- CALCULATOR -->
+<section class="py-16 lg:py-24 bg-[#f6f7f6] texture-bg" aria-labelledby="calc-heading">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center max-w-2xl mx-auto mb-12">
-      <h2 class="text-3xl lg:text-4xl mb-4">Why Work With Us</h2>
-      <p class="text-[var(--text-secondary)] text-lg">Purpose first, people always.</p>
-    </div>
-    <div class="grid md:grid-cols-3 gap-6">
-      <div class="card bg-white rounded-3xl p-8 border border-[var(--border)]">
-        <h3 class="text-xl mb-2">Real impact</h3>
-        <p class="text-[var(--text-secondary)] text-[15px]">Your work translates directly into clothes, dignity and livelihoods for families across Gujarat.</p>
+    <h2 id="calc-heading" class="sr-only">Impact calculator</h2>
+    <div class="grid lg:grid-cols-[1fr_380px] gap-8 lg:gap-10 items-start">
+
+      <!-- LEFT: item picker -->
+      <div>
+        <div class="flex items-center justify-between mb-6">
+          <div>
+            <h3 class="text-2xl text-green-800">What would you donate?</h3>
+            <p class="text-green-600 text-sm mt-1">Tap + to add items. Your impact updates instantly.</p>
+          </div>
+          <button id="calc-reset" class="text-sm text-green-700 hover:text-green-900 font-semibold cursor-pointer inline-flex items-center gap-1.5 transition-colors">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+            Reset
+          </button>
+        </div>
+        <div id="calc-groups" class="space-y-8"></div>
       </div>
-      <div class="card bg-white rounded-3xl p-8 border border-[var(--border)]">
-        <h3 class="text-xl mb-2">Learn broadly</h3>
-        <p class="text-[var(--text-secondary)] text-[15px]">From operations to community work, a small team means you wear many hats and grow fast.</p>
-      </div>
-      <div class="card bg-white rounded-3xl p-8 border border-[var(--border)]">
-        <h3 class="text-xl mb-2">Good company</h3>
-        <p class="text-[var(--text-secondary)] text-[15px]">Work alongside volunteers, artisans and partners who show up with heart every single day.</p>
-      </div>
+
+      <!-- RIGHT: results -->
+      <aside class="lg:sticky lg:top-[100px]">
+        <div class="bg-white rounded-3xl border border-green-100 shadow-sm overflow-hidden">
+          <div class="bg-green-700 px-6 py-5 text-center">
+            <div class="text-green-200 text-xs font-semibold uppercase tracking-widest mb-1">Total textile recycled</div>
+            <div class="font-serif text-white"><span id="r-total" class="text-5xl font-bold">0.00</span> <span class="text-2xl">kg</span></div>
+            <div id="r-count" class="text-green-200/90 text-sm mt-1">0 items selected</div>
+          </div>
+          <div class="p-6">
+            <div class="grid grid-cols-3 gap-3 mb-6">
+              <div class="text-center bg-green-50 rounded-2xl py-4 px-2">
+                <div class="stat-num text-2xl text-green-700" id="r-co2">0</div>
+                <div class="text-[11px] text-green-600 uppercase tracking-wide mt-1 font-semibold">kg CO2e</div>
+              </div>
+              <div class="text-center bg-green-50 rounded-2xl py-4 px-2">
+                <div class="stat-num text-2xl text-green-700" id="r-water">0</div>
+                <div class="text-[11px] text-green-600 uppercase tracking-wide mt-1 font-semibold">L water</div>
+              </div>
+              <div class="text-center bg-green-50 rounded-2xl py-4 px-2">
+                <div class="stat-num text-2xl text-green-700" id="r-energy">0</div>
+                <div class="text-[11px] text-green-600 uppercase tracking-wide mt-1 font-semibold">kWh energy</div>
+              </div>
+            </div>
+            <div class="text-xs font-semibold text-green-500 uppercase tracking-widest mb-3">That is the same as</div>
+            <ul id="r-equivalents" class="space-y-2.5"></ul>
+            <a href="drop-locations.html" class="mt-6 w-full inline-flex items-center justify-center gap-2 bg-green-700 hover:bg-green-800 text-white px-6 py-3.5 rounded-xl font-semibold text-sm transition-colors duration-200 cursor-pointer">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              Find a Drop Location
+            </a>
+          </div>
+        </div>
+      </aside>
+
     </div>
   </div>
 </section>
 
-<!-- OPENINGS -->
-<section class="py-16 lg:py-24 bg-white">
+<!-- METHODOLOGY -->
+<section class="py-14 lg:py-16 bg-white" aria-labelledby="method-heading">
   <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-    <h2 class="text-3xl lg:text-4xl mb-4">Current Openings</h2>
-    <p class="text-[var(--text-secondary)] text-lg mb-8">We do not have formal openings listed right now, but we are always glad to meet people who share our mission. Send us a short note about yourself and how you would like to contribute.</p>
-    <a href="contact.html" class="inline-flex bg-green-700 hover:bg-green-800 text-white px-7 py-3 rounded-full font-semibold text-[15px] transition-colors duration-200 cursor-pointer">Write to Us</a>
+    <h2 id="method-heading" class="text-2xl text-green-800 mb-4">How we estimate</h2>
+    <p class="text-green-600 leading-relaxed text-[15px]">Each garment is given an average weight and its most common fabric. We then apply published recycling-impact factors for that fabric (carbon, water and energy saved per kilogram of textile diverted from landfill) and add everything up. These are careful estimates meant to show the scale of your contribution, not exact measurements.</p>
   </div>
 </section>
 
-<!-- CTA -->
-<section class="py-16 lg:py-24 bg-white">
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="rounded-3xl bg-green-700 text-white text-center px-6 py-14 lg:py-16">
-      <h2 class="text-3xl lg:text-4xl mb-4 text-white">Ready to Be Part of It?</h2>
-      <p class="text-green-100 text-lg max-w-xl mx-auto mb-8">Every pair of hands and every donated garment moves the circle forward.</p>
-      <div class="flex flex-wrap justify-center gap-3">
-        <a href="contact.html" class="bg-green-600 hover:bg-green-700 text-white px-7 py-3 rounded-full font-semibold text-[15px] transition-colors duration-200 cursor-pointer">Get in Touch</a>
-        <a href="donate.html" class="bg-white/10 hover:bg-white/20 text-white px-7 py-3 rounded-full font-semibold text-[15px] transition-colors duration-200 cursor-pointer">Donate Now</a>
-      </div>
-    </div>
-  </div>
-</section>
 </main>
 
-<!-- ════════════ FOOTER ════════════ -->
+<!-- FOOTER -->
 <footer class="bg-[#0A1C11] text-white" role="contentinfo">
   <!-- Gradient accent line -->
   <div class="h-0.5 bg-gradient-to-r from-green-700 via-green-600 to-green-700"></div>
@@ -268,7 +288,7 @@
         <h3 class="font-bold text-[11px] uppercase tracking-widest text-green-300/70 mb-4">Get Involved</h3>
         <ul class="space-y-2.5 text-[13px] mb-5">
           <li><a href="volunteer.html" class="text-green-300/80 hover:text-white transition-colors duration-200 cursor-pointer">Volunteer</a></li>
-          <li><a href="contact.html" class="text-green-300/80 hover:text-white transition-colors duration-200 cursor-pointer">Host a Drop Location</a></li>
+          <li><a href="contact.html" class="text-green-300/80 hover:text-white transition-colors duration-200 cursor-pointer">Become a Drop Location</a></li>
           <li><a href="donate.html"  class="text-green-300/80 hover:text-white transition-colors duration-200 cursor-pointer">Donate</a></li>
         </ul>
         <a href="donate.html" class="inline-block bg-white hover:bg-green-100 text-green-800 px-5 py-2.5 rounded-lg font-bold text-[13px] transition-colors duration-200 cursor-pointer">Donate Now</a>
@@ -276,7 +296,7 @@
     </div>
     <!-- Bottom bar -->
     <div class="border-t border-white/10 pt-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-[12px] text-green-400/60">
-      <p>&copy; 2026 India Recycles. Registered non-profit, Gujarat, India.</p>
+      <p data-cms="contact-info.copyright">&copy; 2026 India Recycles. Registered non-profit, Gujarat, India.</p>
       <div class="flex gap-5">
         <a href="#" class="hover:text-green-300 transition-colors cursor-pointer">Terms and Conditions</a>
         <a href="#" class="hover:text-green-300 transition-colors cursor-pointer">Privacy Policy</a>
@@ -290,10 +310,157 @@
   const menu   = document.getElementById('mob-menu');
   toggle.addEventListener('click', () => {
     const open = menu.classList.toggle('open');
-    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-expanded', open);
   });
 </script>
 
+<script src="js/cms.js?v=3"></script>
+
 <script src="js/transitions.js?v=1"></script>
+<script>
+(function () {
+  var MATERIALS = {
+    cotton:    { co2: 18, water: 10000, energy: 20 },
+    polyester: { co2: 8,  water: 100,   energy: 45 },
+    wool:      { co2: 28, water: 6000,  energy: 30 },
+    denim:     { co2: 22, water: 8500,  energy: 22 },
+    mixed:     { co2: 15, water: 5000,  energy: 18 }
+  };
+  var ITEMS = [
+    ["T-shirt", 0.18, "cotton", "100% Cotton", "Everyday"],
+    ["Polo T-shirt", 0.25, "mixed", "Cotton Blend", "Everyday"],
+    ["Formal Shirt", 0.30, "cotton", "Cotton", "Everyday"],
+    ["Casual Shirt", 0.28, "cotton", "Cotton", "Everyday"],
+    ["Jeans", 0.70, "denim", "Denim", "Everyday"],
+    ["Trousers", 0.45, "mixed", "Cotton/Polyester", "Everyday"],
+    ["Shorts", 0.25, "cotton", "Cotton", "Everyday"],
+    ["Dress", 0.45, "mixed", "Cotton/Polyester", "Everyday"],
+    ["Kurta", 0.35, "cotton", "Cotton", "Indian Wear"],
+    ["Saree", 0.70, "mixed", "Cotton/Synthetic", "Indian Wear"],
+    ["Salwar Kameez", 0.60, "cotton", "Cotton", "Indian Wear"],
+    ["Dupatta", 0.18, "mixed", "Cotton/Polyester", "Indian Wear"],
+    ["Jacket", 0.80, "mixed", "Mixed Fabric", "Warm Wear"],
+    ["Sweater", 0.60, "wool", "Wool/Acrylic", "Warm Wear"],
+    ["Hoodie", 0.75, "mixed", "Cotton Blend", "Warm Wear"],
+    ["Blazer", 0.90, "wool", "Wool Blend", "Warm Wear"],
+    ["Children's T-shirt", 0.10, "cotton", "Cotton", "Children's"],
+    ["Children's Pants", 0.18, "cotton", "Cotton", "Children's"],
+    ["Bedsheet", 0.90, "cotton", "Cotton", "Home & Linen"],
+    ["Towel", 0.50, "cotton", "Cotton", "Home & Linen"]
+  ];
+  var qty = ITEMS.map(function () { return 0; });
+
+  function fmt(n, d) {
+    return Number(n).toLocaleString('en-IN', { minimumFractionDigits: d, maximumFractionDigits: d });
+  }
+
+  // Render grouped item cards
+  var groupsEl = document.getElementById('calc-groups');
+  var order = [];
+  ITEMS.forEach(function (it) { if (order.indexOf(it[4]) === -1) order.push(it[4]); });
+  order.forEach(function (cat) {
+    var wrap = document.createElement('div');
+    var h = document.createElement('h4');
+    h.className = 'text-xs font-bold text-green-500 uppercase tracking-widest mb-3';
+    h.textContent = cat;
+    wrap.appendChild(h);
+    var grid = document.createElement('div');
+    grid.className = 'grid sm:grid-cols-2 gap-3';
+    ITEMS.forEach(function (it, i) {
+      if (it[4] !== cat) return;
+      var card = document.createElement('div');
+      card.className = 'bg-white rounded-2xl p-4 border border-green-100 flex items-center justify-between gap-3';
+      card.innerHTML =
+        '<div class="min-w-0">' +
+          '<div class="font-semibold text-green-800 text-sm truncate">' + it[0] + '</div>' +
+          '<div class="text-xs text-green-500">' + it[1].toFixed(2) + ' kg &middot; ' + it[3] + '</div>' +
+        '</div>' +
+        '<div class="flex items-center gap-1.5 shrink-0">' +
+          '<button type="button" data-act="dec" data-i="' + i + '" aria-label="Remove one ' + it[0] + '" class="w-8 h-8 rounded-lg bg-green-50 hover:bg-green-100 text-green-700 font-bold text-lg flex items-center justify-center cursor-pointer transition-colors">&minus;</button>' +
+          '<input type="text" inputmode="numeric" data-i="' + i + '" value="0" aria-label="Quantity of ' + it[0] + '" class="qty-in w-10 text-center text-sm font-semibold text-green-800 bg-transparent border-0 focus:outline-none"/>' +
+          '<button type="button" data-act="inc" data-i="' + i + '" aria-label="Add one ' + it[0] + '" class="w-8 h-8 rounded-lg bg-green-700 hover:bg-green-800 text-white font-bold text-lg flex items-center justify-center cursor-pointer transition-colors">+</button>' +
+        '</div>';
+      grid.appendChild(card);
+    });
+    wrap.appendChild(grid);
+    groupsEl.appendChild(wrap);
+  });
+
+  function compute() {
+    var totalKg = 0, co2 = 0, water = 0, energy = 0, count = 0;
+    ITEMS.forEach(function (it, i) {
+      var q = qty[i]; if (!q) return;
+      var w = q * it[1], m = MATERIALS[it[2]];
+      totalKg += w; count += q;
+      co2 += w * m.co2; water += w * m.water; energy += w * m.energy;
+    });
+    return { totalKg: totalKg, co2: co2, water: water, energy: energy, count: count };
+  }
+
+  function render() {
+    var r = compute();
+    document.getElementById('r-total').textContent = fmt(r.totalKg, 2);
+    document.getElementById('r-count').textContent = r.count + (r.count === 1 ? ' item selected' : ' items selected');
+    document.getElementById('r-co2').textContent = fmt(r.co2, 1);
+    document.getElementById('r-water').textContent = fmt(r.water, 0);
+    document.getElementById('r-energy').textContent = fmt(r.energy, 1);
+
+    var eq = [
+      ['tree', fmt(r.co2 / 22, 1), 'trees absorbing carbon for a year'],
+      ['car', fmt(r.co2 / 0.12, 0), 'km of petrol-car driving avoided'],
+      ['fuel', fmt(r.co2 / 2.3, 1), 'litres of petrol not burned'],
+      ['shower', fmt(r.water / 60, 0), 'showers worth of water'],
+      ['droplet', fmt(r.water, 0), '1-litre water bottles'],
+      ['phone', fmt(r.energy * 120, 0), 'phone charges of energy']
+    ];
+    var ICONS = {
+      tree: '<path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/>',
+      car: '<path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/>',
+      fuel: '<line x1="3" x2="15" y1="22" y2="22"/><line x1="4" x2="14" y1="9" y2="9"/><path d="M14 22V4a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v18"/><path d="M14 13h2a2 2 0 0 1 2 2v2a2 2 0 0 0 2 2 2 2 0 0 0 2-2V9.83a2 2 0 0 0-.59-1.42L18 5"/>',
+      shower: '<path d="m4 4 2.5 2.5"/><path d="M13.5 6.5a4.95 4.95 0 0 0-7 7"/><path d="M15 5 5 15"/><path d="M14 17v.01"/><path d="M10 16v.01"/><path d="M13 13v.01"/><path d="M16 10v.01"/><path d="M11 20v.01"/><path d="M17 14v.01"/><path d="M20 11v.01"/>',
+      droplet: '<path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C4 11.1 5 15 5 15a7 7 0 0 0 7 7z"/>',
+      phone: '<rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/>'
+    };
+    var html = eq.map(function (e) {
+      return '<li class="flex items-center gap-3">' +
+        '<span class="w-9 h-9 rounded-xl bg-green-100 text-green-700 flex items-center justify-center shrink-0">' +
+          '<svg class="w-4.5 h-4.5" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + ICONS[e[0]] + '</svg>' +
+        '</span>' +
+        '<span class="text-sm text-green-800"><span class="font-bold">' + e[1] + '</span> <span class="text-green-600">' + e[2] + '</span></span>' +
+      '</li>';
+    }).join('');
+    document.getElementById('r-equivalents').innerHTML = html;
+  }
+
+  function setQty(i, v) {
+    v = Math.max(0, Math.min(999, Math.round(v || 0)));
+    qty[i] = v;
+    var input = groupsEl.querySelector('.qty-in[data-i="' + i + '"]');
+    if (input) input.value = v;
+    render();
+  }
+
+  groupsEl.addEventListener('click', function (e) {
+    var btn = e.target.closest('button[data-act]');
+    if (!btn) return;
+    var i = +btn.getAttribute('data-i');
+    setQty(i, qty[i] + (btn.getAttribute('data-act') === 'inc' ? 1 : -1));
+  });
+  groupsEl.addEventListener('input', function (e) {
+    var inp = e.target.closest('.qty-in');
+    if (!inp) return;
+    var i = +inp.getAttribute('data-i');
+    qty[i] = Math.max(0, Math.min(999, Math.round(Number(String(inp.value).replace(/[^0-9]/g, '')) || 0)));
+    render();
+  });
+  document.getElementById('calc-reset').addEventListener('click', function () {
+    qty = qty.map(function () { return 0; });
+    groupsEl.querySelectorAll('.qty-in').forEach(function (el) { el.value = 0; });
+    render();
+  });
+
+  render();
+})();
+</script>
 </body>
 </html>
