@@ -7,6 +7,27 @@
   var URL_ = 'https://sqosmiifjqecidxhyjtg.supabase.co';
   var KEY = 'sb_publishable_mq6t15oAQU7f4ZAjXQZA5w_ELcgDfbt';
   var AVG_MONTH_MS = 30.4375 * 24 * 60 * 60 * 1000;
+  var FOUNDED_MS = new Date(2017, 0, 1).getTime();
+
+  function daysSinceFounded() {
+    return Math.max(30, (Date.now() - FOUNDED_MS) / (24 * 60 * 60 * 1000));
+  }
+
+  // A "how fast" note derived from the live value, so it tracks the admin numbers.
+  function statNote(key, val) {
+    var d = daysSinceFounded(), w = d / 7, mo = d / 30.4375;
+    function per(x) { return Math.max(1, Math.round(x)); }
+    switch (key) {
+      case 'clothes':        return '~' + fmt(per(val / d)) + ' recycled every day';
+      case 'sales':          var s = per(val / w); return '~' + fmt(s) + (s === 1 ? ' sale' : ' sales') + ' every week';
+      case 'volunteers':     return '~' + fmt(per(val / w)) + ' new joining every week';
+      case 'medical':        return '~' + fmt(per(val / mo)) + ' helped every month';
+      case 'drop_locations': return 'Across Ahmedabad & Baroda';
+      case 'students':       return 'On scholarships every year';
+      case 'cities':         return 'Ahmedabad & Vadodara';
+      default:               return '';
+    }
+  }
 
   function monthsElapsed(asOf) {
     // asOf is "YYYY-MM" (start of that month). Returns fractional months to now, >= 0.
@@ -84,6 +105,14 @@
         var cfg = stats[el.getAttribute('data-stat')];
         if (!cfg) return;
         setStat(el, liveValue(cfg), (cfg.suffix || ''));
+      });
+      // Derived "how fast" sub-labels (Our Impact page), driven by the same live values
+      document.querySelectorAll('[data-stat-sub]').forEach(function (el) {
+        var key = el.getAttribute('data-stat-sub');
+        var cfg = stats[key];
+        if (!cfg) return;
+        var note = statNote(key, liveValue(cfg));
+        if (note) el.textContent = note;
       });
 
       content.get = get;

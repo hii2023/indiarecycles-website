@@ -3,6 +3,9 @@
    navigate normally (no breakage). Direction is set by js/transitions.js. */
 @view-transition { navigation: auto; }
 
+/* Keep the top nav on a single line */
+nav a { white-space: nowrap; }
+
 @keyframes ir-new-fwd  { from { transform: translateX(100%); }  to { transform: translateX(0); } }
 @keyframes ir-old-fwd  { from { transform: translateX(0); opacity: 1; } to { transform: translateX(-18%); opacity: .4; } }
 @keyframes ir-new-back { from { transform: translateX(-100%); } to { transform: translateX(0); } }
