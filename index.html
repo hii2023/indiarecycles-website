@@ -107,6 +107,7 @@
     .nav-dd-item:hover { background: #f6f7f6; color: var(--brand-green); }
   </style>
   <link rel="stylesheet" href="css/transitions.css?v=1"/>
+  <link rel="stylesheet" href="css/layout.css?v=1"/>
 </head>
 <body class="antialiased">
 
@@ -119,13 +120,13 @@
     <div style="flex:1;display:flex;justify-content:center;align-items:center;">
       <div class="hidden lg:flex" style="align-items:center;gap:2px;background:#1c5439;border-radius:9999px;padding:5px 6px;">
         <a href="index.html" style="display:inline-flex;align-items:center;padding:6px 10px;border-radius:9999px;color:#fff;font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;background:rgba(255,255,255,0.22);">Home</a>
-        <a href="about-us.html" style="display:inline-flex;align-items:center;padding:6px 10px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">About Us</a>
+        <div class="nav-dd"><a href="about-us.html" style="display:inline-flex;align-items:center;padding:6px 10px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">About Us<svg style="width:11px;height:11px;margin-left:3px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a><div class="nav-dd-panel"><div class="nav-dd-card"><a href="about-us.html" class="nav-dd-item">About Us</a><a href="meet-the-team.html" class="nav-dd-item">Meet the Team</a></div></div></div>
         <a href="our-model.html" style="display:inline-flex;align-items:center;padding:6px 10px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">Our Model</a>
         <div class="nav-dd"><a href="our-impact.html" style="display:inline-flex;align-items:center;padding:6px 10px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">Our Impact<svg style="width:11px;height:11px;margin-left:3px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a><div class="nav-dd-panel"><div class="nav-dd-card"><a href="our-impact.html" class="nav-dd-item">Our Impact</a><a href="zero-waste-promise.html" class="nav-dd-item">Zero Waste</a></div></div></div>
         <a href="revibe.html" style="display:inline-flex;align-items:center;padding:6px 10px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">ReVibe</a>
         <div class="nav-dd"><a href="volunteer.html" style="display:inline-flex;align-items:center;padding:6px 10px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">Join Us<svg style="width:11px;height:11px;margin-left:3px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a><div class="nav-dd-panel"><div class="nav-dd-card"><a href="our-partners.html" class="nav-dd-item">Partners</a><a href="careers.html" class="nav-dd-item">Careers</a><a href="volunteer.html" class="nav-dd-item">Volunteer</a><a href="drop-locations.html" class="nav-dd-item">Become a Drop Location</a></div></div></div>
         <a href="contact.html" style="display:inline-flex;align-items:center;padding:6px 10px;border-radius:9999px;color:rgba(255,255,255,0.82);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">Contact</a>
-        <a href="impact-calculator.html" style="display:inline-flex;align-items:center;gap:5px;padding:6px 10px;border-radius:9999px;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'"><svg style="width:13px;height:13px;flex-shrink:0;fill:none;stroke:#aed3bf;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;" viewBox="0 0 24 24"><rect width="16" height="20" x="4" y="2" rx="2"/><path d="M8 6h8"/><path d="M8 10h.01"/><path d="M12 10h.01"/><path d="M16 10h.01"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/></svg><span style="color:#aed3bf;">Calculator</span></a><span style="display:inline-block;width:1px;height:16px;background:rgba(255,255,255,0.2);margin:0 4px;"></span><a href="https://store.indiarecycles.org" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:5px;padding:6px 10px;border-radius:9999px;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'"><svg style="width:12px;height:12px;flex-shrink:0;fill:none;stroke:#aed3bf;stroke-width:2.5;stroke-linecap:round;" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span style="color:#aed3bf;">Thrift Store</span></a>
+        <a href="impact-calculator.html" style="display:inline-flex;align-items:center;gap:5px;padding:6px 10px;border-radius:9999px;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'"><svg style="width:13px;height:13px;flex-shrink:0;fill:none;stroke:#aed3bf;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;" viewBox="0 0 24 24"><rect width="16" height="20" x="4" y="2" rx="2"/><path d="M8 6h8"/><path d="M8 10h.01"/><path d="M12 10h.01"/><path d="M16 10h.01"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/></svg><span style="color:#aed3bf;">Impact Calculator</span></a><span style="display:inline-block;width:1px;height:16px;background:rgba(255,255,255,0.2);margin:0 4px;"></span><a href="https://store.indiarecycles.org" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:5px;padding:6px 10px;border-radius:9999px;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'"><svg style="width:12px;height:12px;flex-shrink:0;fill:none;stroke:#aed3bf;stroke-width:2.5;stroke-linecap:round;" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span style="color:#aed3bf;">Thrift Store</span></a>
       </div>
     </div>
     <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
@@ -138,7 +139,7 @@
   <div id="mob-menu" class="lg:hidden" style="background:#fff;border-top:1px solid rgba(0,0,0,0.08);">
     <div style="padding:10px 16px;display:flex;flex-direction:column;gap:2px;">
       <a href="index.html" style="display:block;padding:9px 14px;border-radius:8px;background:#f6f7f6;color:#1a1a1a;font-size:14px;font-weight:500;text-decoration:none;">Home</a>
-      <a href="about-us.html" style="display:block;padding:9px 14px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">About Us</a>
+      <a href="about-us.html" style="display:block;padding:9px 14px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">About Us</a><a href="meet-the-team.html" style="display:block;padding:9px 24px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Meet the Team</a>
       <a href="our-model.html" style="display:block;padding:9px 14px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Our Model</a>
       <div style="padding:12px 14px 4px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#767676;">Our Impact</div>
       <a href="our-impact.html" style="display:block;padding:9px 24px;border-radius:8px;color:#6b6b6b;font-size:14px;font-weight:400;text-decoration:none;">Our Impact</a>
@@ -273,26 +274,26 @@
 <div class="bg-gray-100 border-y border-gray-200 py-3 overflow-hidden" aria-label="Key statistics ticker">
   <div class="flex whitespace-nowrap marquee-track">
     <div class="flex gap-14 shrink-0 pr-14 text-[13px] font-semibold text-gray-600">
-      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-green-600" aria-hidden="true"></span>35,500+ Clothes Recycled</span>
-      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-green-600" aria-hidden="true"></span>132 Slum Sales Conducted</span>
-      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-green-600" aria-hidden="true"></span>400+ Active Volunteers</span>
-      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-green-600" aria-hidden="true"></span>1,000+ Medical Camp Beneficiaries</span>
-      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-green-600" aria-hidden="true"></span>25+ Students Supported</span>
-      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-green-600" aria-hidden="true"></span>Founded 2017 in Ahmedabad</span>
+      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-green-600" aria-hidden="true"></span>About 90 tonnes of clothing kept out of landfill</span>
+      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-green-600" aria-hidden="true"></span>CO2 cut equal to about 390 cars off the road for a year</span>
+      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-green-600" aria-hidden="true"></span>Water saved fills about 220 Olympic pools</span>
+      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-green-600" aria-hidden="true"></span>Energy saved could power about 1,200 homes for a year</span>
+      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-green-600" aria-hidden="true"></span>Enough clothes to fill about 150 delivery trucks</span>
+      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-green-600" aria-hidden="true"></span>Dignified slum sales in Ahmedabad and Vadodara since 2017</span>
     </div>
     <div class="flex gap-14 shrink-0 pr-14 text-[13px] font-semibold text-gray-600" aria-hidden="true">
-      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-green-600"></span>35,500+ Clothes Recycled</span>
-      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-green-600"></span>132 Slum Sales Conducted</span>
-      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-green-600"></span>400+ Active Volunteers</span>
-      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-green-600"></span>1,000+ Medical Camp Beneficiaries</span>
-      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-green-600"></span>25+ Students Supported</span>
-      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-green-600"></span>Founded 2017 in Ahmedabad</span>
+      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-green-600"></span>About 90 tonnes of clothing kept out of landfill</span>
+      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-green-600"></span>CO2 cut equal to about 390 cars off the road for a year</span>
+      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-green-600"></span>Water saved fills about 220 Olympic pools</span>
+      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-green-600"></span>Energy saved could power about 1,200 homes for a year</span>
+      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-green-600"></span>Enough clothes to fill about 150 delivery trucks</span>
+      <span class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-green-600"></span>Dignified slum sales in Ahmedabad and Vadodara since 2017</span>
     </div>
   </div>
 </div>
 
 <!-- ════════════ ABOUT ════════════ -->
-<section class="py-16 lg:py-16 lg:py-24 bg-white leaf-bg relative overflow-hidden" aria-labelledby="about-h2">
+<section class="py-12 lg:py-12 lg:py-16 bg-white leaf-bg relative overflow-hidden" aria-labelledby="about-h2">
   <!-- Full-bleed photo, left side (desktop) -->
   <div class="hidden lg:block absolute top-0 left-0 bottom-0 w-1/2 overflow-hidden">
     <img src="images/event2.jpg" alt="India Recycles community slum sale event" class="zoom-crop w-full h-full object-cover object-center"/>
@@ -350,7 +351,7 @@
 <div class="divider"></div>
 
 <!-- ════════════ HOW IT WORKS ════════════ -->
-<section class="py-16 lg:py-16 lg:py-24 bg-white" aria-labelledby="model-h2">
+<section class="py-12 lg:py-12 lg:py-16 bg-white" aria-labelledby="model-h2">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-12">
       <span class="inline-flex items-center gap-1.5 bg-gray-100 text-gray-600 border border-gray-200 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-widest mb-5">How It Works</span>
@@ -415,7 +416,7 @@
 <div class="divider"></div>
 
 <!-- ════════════ COMMUNITY IMPACT ════════════ -->
-<section class="py-16 lg:py-16 lg:py-24 bg-white ring-bg" aria-labelledby="impact-h2">
+<section class="py-12 lg:py-12 lg:py-16 bg-white ring-bg" aria-labelledby="impact-h2">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-12">
       <span class="inline-flex items-center gap-1.5 bg-gray-100 text-gray-600 border border-gray-200 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-widest mb-5">Beyond Clothes</span>
@@ -477,7 +478,7 @@
 <div class="divider"></div>
 
 <!-- ════════════ TESTIMONIALS ════════════ -->
-<section class="py-16 lg:py-16 lg:py-24 bg-gray-50" aria-labelledby="testimonials-h2">
+<section class="py-12 lg:py-12 lg:py-16 bg-gray-50" aria-labelledby="testimonials-h2">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-12">
       <span class="inline-flex items-center gap-1.5 bg-green-100 text-green-700 border border-green-200 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-widest mb-5">Community Voices</span>
@@ -540,7 +541,7 @@
 <div class="divider"></div>
 
 <!-- ════════════ GALLERY ════════════ -->
-<section class="py-16 lg:py-16 lg:py-24 bg-white leaf-bg" aria-labelledby="gallery-h2">
+<section class="py-12 lg:py-12 lg:py-16 bg-white leaf-bg" aria-labelledby="gallery-h2">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-10">
       <span class="inline-flex items-center gap-1.5 bg-gray-100 text-gray-600 border border-gray-200 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-widest mb-5">Photo Gallery</span>
@@ -583,7 +584,7 @@
 <div class="divider"></div>
 
 <!-- ════════════ PARTNERS ════════════ -->
-<section class="py-14 bg-gray-50" aria-labelledby="partners-h2">
+<section class="py-10 bg-gray-50" aria-labelledby="partners-h2">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
     <span class="inline-flex items-center gap-1.5 bg-gray-100 text-gray-600 border border-gray-200 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-widest mb-4">Our Partners</span>
     <h2 id="partners-h2" class="text-2xl font-bold text-gray-900 mb-8">Mission Partners</h2>
@@ -601,7 +602,7 @@
 
 <!-- ════════════ DONATE CTA ════════════ -->
 <!-- Solid dark green - NO photo overlay. Recycling SVGs at low opacity. Perfect contrast. -->
-<section class="relative py-16 lg:py-20 lg:py-28 overflow-hidden" style="background-color:#1c5439;" aria-labelledby="cta-h2">
+<section class="relative py-12 lg:py-14 lg:py-20 overflow-hidden" style="background-color:#1c5439;" aria-labelledby="cta-h2">
 
   <!-- Low-opacity recycling decorations -->
   <!-- Giant recycle ring - centred background -->
@@ -749,7 +750,7 @@
   });
 </script>
 
-<script src="js/cms.js?v=4"></script>
+<script src="js/cms.js?v=5"></script>
 <script>
 IR_CMS.then(function (c) {
   var h = c.home || {};
@@ -762,29 +763,38 @@ IR_CMS.then(function (c) {
     }
   }
   {
-    var st = window.IR_STATS || {};
-    function liveText(key, fallback) {
-      if (!window.IR_LIVE || window.IR_LIVE(key) == null) return fallback;
-      return Number(window.IR_LIVE(key)).toLocaleString('en-IN') + ((st[key] && st[key].suffix) || '');
+    // Turn the raw "clothes recycled" count into relatable, easy-to-grasp impact.
+    // Per reused garment (blended average): 0.3 kg, ~6 kg CO2e, ~1,800 L water, ~4 kWh saved.
+    var clothes = (window.IR_LIVE && window.IR_LIVE('clothes') != null) ? window.IR_LIVE('clothes') : 300000;
+    function nice(n) {
+      // round to 2 significant figures so numbers stay tidy and easy to read
+      if (n >= 100) { var p = Math.pow(10, Math.floor(Math.log10(n)) - 1); n = Math.round(n / p) * p; }
+      else { n = Math.round(n); }
+      return Number(n).toLocaleString('en-IN');
     }
+    var tonnes = clothes * 0.3 / 1000;
+    var cars   = clothes * 6 / 4600;          // avg car ~4.6 t CO2 / year
+    var pools  = clothes * 1800 / 2500000;    // Olympic pool ~2.5 million L
+    var homes  = clothes * 4 / 1000;          // avg Indian home ~1,000 kWh / year
+    var trucks = clothes / 2000;              // ~2,000 garments per delivery truck
     var items = [
-      [liveText('clothes', '35,500+'), 'Clothes Recycled'],
-      [liveText('sales', '132'), 'Slum Sales Conducted'],
-      [liveText('volunteers', '400+'), 'Active Volunteers'],
-      [liveText('medical', '1,000+'), 'Medical Camp Beneficiaries'],
-      [liveText('students', '25+'), 'Students Supported'],
-      ['', 'Founded 2017 in Ahmedabad']
+      'About ' + nice(tonnes) + ' tonnes of clothing kept out of landfill',
+      'CO2 cut equal to about ' + nice(cars) + ' cars off the road for a year',
+      'Water saved fills about ' + nice(pools) + ' Olympic pools',
+      'Energy saved could power about ' + nice(homes) + ' homes for a year',
+      'Enough clothes to fill about ' + nice(trucks) + ' delivery trucks',
+      'Dignified slum sales in Ahmedabad and Vadodara since 2017'
     ];
     document.querySelectorAll('.marquee-track > div').forEach(function (g) {
       g.innerHTML = '';
-      items.forEach(function (it) {
+      items.forEach(function (text) {
         var outer = document.createElement('span');
         outer.className = 'flex items-center gap-2.5';
         var dot = document.createElement('span');
         dot.className = 'w-1.5 h-1.5 rounded-full bg-green-600';
         dot.setAttribute('aria-hidden', 'true');
         outer.appendChild(dot);
-        outer.appendChild(document.createTextNode((it[0] ? it[0] + ' ' : '') + it[1]));
+        outer.appendChild(document.createTextNode(text));
         g.appendChild(outer);
       });
     });

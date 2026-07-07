@@ -76,7 +76,8 @@
     }, 40);
   }
 
-  window.IR_CMS = fetch(URL_ + '/rest/v1/recycle_site_content?select=section,data', {
+  // Exclude the (potentially large) team section - only the Meet the Team page needs it.
+  window.IR_CMS = fetch(URL_ + '/rest/v1/recycle_site_content?section=neq.team&select=section,data', {
     headers: { apikey: KEY, Authorization: 'Bearer ' + KEY }
   })
     .then(function (r) { return r.ok ? r.json() : []; })
