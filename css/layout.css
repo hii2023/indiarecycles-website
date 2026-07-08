@@ -15,10 +15,12 @@
     scroll-snap-stop: normal;
   }
 
-  /* The hero fills the first screen so you never see a half of the next
-     section peeking below the fold. */
-  main > section:first-child {
-    min-height: 100vh;
+  /* Homepage hero fills the first screen but stops ~3.25rem short so the stats
+     ticker that follows it is visible without scrolling (it reads as part of
+     the hero). Only the homepage opts in via this class; sub-page heroes keep
+     their natural (compact) height so the next section fits into view. */
+  .snap-hero-fill {
+    min-height: calc(100vh - 3.25rem);
     display: flex;
     flex-direction: column;
     justify-content: center;
