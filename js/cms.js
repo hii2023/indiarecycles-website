@@ -96,10 +96,12 @@
         if (typeof v === 'string' && v.trim()) el.textContent = v;
       });
 
-      /* Image swaps: replace any images/<name> src with an admin-uploaded URL */
+      /* Image swaps: per-location override by data-img-key first, else by filename */
       var imgMap = content.images || {};
       if (imgMap && typeof imgMap === 'object') {
         document.querySelectorAll('img[src]').forEach(function (img) {
+          var key = img.getAttribute('data-img-key');
+          if (key && imgMap[key]) { img.src = imgMap[key]; return; }
           var m = (img.getAttribute('src') || '').match(/(?:^|\/)images\/([^\/?#]+)/);
           var name = m && m[1];
           if (name && imgMap[name]) img.src = imgMap[name];
