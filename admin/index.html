@@ -112,6 +112,14 @@
       <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
       Donations / Bank
     </button>
+    <button class="tab-btn text-left px-4 py-3 rounded-xl text-sm font-medium cursor-pointer text-forest-600 hover:bg-forest-50" onclick="switchTab('resources', this)">
+      <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/><path d="M14 2v5h5"/></svg>
+      Reports &amp; Media
+    </button>
+    <button class="tab-btn text-left px-4 py-3 rounded-xl text-sm font-medium cursor-pointer text-forest-600 hover:bg-forest-50" onclick="switchTab('settings', this)">
+      <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+      Settings
+    </button>
   </nav>
   <div class="p-4 border-t border-forest-100">
     <a href="../index.html" class="block text-center text-xs text-forest-400 hover:text-forest-700 cursor-pointer transition-colors py-2">← Back to website</a>
@@ -635,6 +643,61 @@
       <strong>Live:</strong> Saving here publishes instantly. The Donate page shows these bank and UPI details on every page view.</div>
   </section>
 
+
+  <!-- ═══ REPORTS & MEDIA ═══ -->
+  <section id="tab-resources" class="tab-content" aria-labelledby="res-tab-heading">
+    <div class="flex items-center justify-between mb-8">
+      <div>
+        <h1 id="res-tab-heading" class="font-serif text-2xl text-forest-800">Reports &amp; Media</h1>
+        <p class="text-forest-500 text-sm mt-1">Upload reports (PDF or documents) and media coverage. Both appear on the Resources page.</p>
+      </div>
+    </div>
+    <div class="grid lg:grid-cols-2 gap-6">
+      <div class="bg-white rounded-3xl p-6 border border-forest-100">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="font-semibold text-forest-800 text-sm uppercase tracking-wide">Reports &amp; Documents</h2>
+          <div class="flex items-center gap-2">
+            <button onclick="addReport()" class="text-xs bg-forest-100 hover:bg-forest-200 text-forest-700 px-3 py-1.5 rounded-lg cursor-pointer transition-colors">+ Add</button>
+            <button onclick="saveSection('reports')" class="save-btn bg-forest-600 hover:bg-forest-700 text-white px-4 py-1.5 rounded-lg font-semibold text-xs cursor-pointer shadow">Save Changes</button>
+          </div>
+        </div>
+        <p class="text-xs text-forest-400 mb-3">Upload the file first, then give it a title. PDF, Word or any document up to 10 MB. Add as many as you need.</p>
+        <div id="reports-items" class="space-y-3"></div>
+      </div>
+      <div class="bg-white rounded-3xl p-6 border border-forest-100">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="font-semibold text-forest-800 text-sm uppercase tracking-wide">Media Coverage</h2>
+          <div class="flex items-center gap-2">
+            <button onclick="addMedia()" class="text-xs bg-forest-100 hover:bg-forest-200 text-forest-700 px-3 py-1.5 rounded-lg cursor-pointer transition-colors">+ Add</button>
+            <button onclick="saveSection('media')" class="save-btn bg-forest-600 hover:bg-forest-700 text-white px-4 py-1.5 rounded-lg font-semibold text-xs cursor-pointer shadow">Save Changes</button>
+          </div>
+        </div>
+        <p class="text-xs text-forest-400 mb-3">Upload a photo, add a title, and optionally a link to the article or video. The link is optional; a photo alone is fine.</p>
+        <div id="media-items" class="space-y-3"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SETTINGS ═══ -->
+  <section id="tab-settings" class="tab-content" aria-labelledby="set-tab-heading">
+    <div class="flex items-center justify-between mb-8">
+      <div>
+        <h1 id="set-tab-heading" class="font-serif text-2xl text-forest-800">Website Settings</h1>
+        <p class="text-forest-500 text-sm mt-1">Turn website features on or off.</p>
+      </div>
+      <button onclick="saveSection('settings')" class="save-btn bg-forest-600 hover:bg-forest-700 text-white px-6 py-2.5 rounded-xl font-semibold text-sm cursor-pointer shadow">Save Changes</button>
+    </div>
+    <div class="bg-white rounded-3xl p-6 border border-forest-100 max-w-xl">
+      <label class="flex items-start gap-4 cursor-pointer">
+        <input type="checkbox" id="set-pickup" checked class="mt-1 w-5 h-5 accent-[#256b49] cursor-pointer"/>
+        <span>
+          <span class="block font-semibold text-forest-800 text-sm">Pickup request form</span>
+          <span class="block text-xs text-forest-500 mt-1 leading-relaxed">Shows a "Request a Pickup" form on the Drop Locations page so people who cannot reach a drop point can ask for a collection. Turn it off any time and the form disappears from the website.</span>
+        </span>
+      </label>
+    </div>
+  </section>
+
 </main>
 </div>
 
@@ -687,6 +750,29 @@
         };
       }).filter(function (m) { return m.name || m.photo || m.desc; });
       return { members: members };
+    }
+    if (section === 'reports') {
+      var reps = Array.from(document.querySelectorAll('#reports-items [data-report-card]')).map(function (c) {
+        return {
+          title: c.querySelector('[data-title]').value.trim(),
+          date:  c.querySelector('[data-date]').value.trim(),
+          url:   c.getAttribute('data-url') || ''
+        };
+      }).filter(function (r) { return r.url && r.title; });
+      return { items: reps };
+    }
+    if (section === 'media') {
+      var meds = Array.from(document.querySelectorAll('#media-items [data-media-card]')).map(function (c) {
+        return {
+          title: c.querySelector('[data-title]').value.trim(),
+          link:  c.querySelector('[data-link]').value.trim(),
+          image: c.getAttribute('data-image') || ''
+        };
+      }).filter(function (m) { return m.image || m.title; });
+      return { items: meds };
+    }
+    if (section === 'settings') {
+      return { pickup_enabled: document.getElementById('set-pickup').checked };
     }
     if (section === 'stats') {
       const out = {};
@@ -779,6 +865,9 @@
       if (cms.team && Array.isArray(cms.team.members) && cms.team.members.length) {
         renderMembers(cms.team.members);
       }
+      if (cms.reports && Array.isArray(cms.reports.items)) renderReports(cms.reports.items);
+      if (cms.media && Array.isArray(cms.media.items)) renderMedia(cms.media.items);
+      if (cms.settings) document.getElementById('set-pickup').checked = cms.settings.pickup_enabled !== false;
       if (cms.images && typeof cms.images === 'object') {
         imageOverrides = Object.assign({}, cms.images);
         renderGallery();
@@ -1092,6 +1181,133 @@
   renderLocations(ahmLocations, 'ahm-locations');
   renderLocations(vadLocations, 'vad-locations');
   renderMembers(defaultTeam);
+  // ── Reports & Media managers ──────────────────────────────────
+  const docInput = 'w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white';
+  function escA(t) { return String(t == null ? '' : t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;'); }
+
+  function reportCard(r) {
+    r = r || {};
+    var hasFile = !!r.url;
+    return '<div class="p-4 bg-cream rounded-2xl border border-forest-100" data-report-card data-url="' + escA(r.url) + '">' +
+      '<div class="flex items-center justify-between mb-2">' +
+        '<span class="text-[11px] font-bold ' + (hasFile ? 'text-forest-600' : 'text-amber-600') + '" data-file-label>' + (hasFile ? 'File uploaded' : 'No file yet') + '</span>' +
+        '<button onclick="this.closest(\'[data-report-card]\').remove()" class="w-7 h-7 bg-red-50 hover:bg-red-100 text-red-400 rounded-lg flex items-center justify-center cursor-pointer" aria-label="Remove report">&times;</button>' +
+      '</div>' +
+      '<div class="space-y-2">' +
+        '<input type="text" data-title value="' + escA(r.title) + '" placeholder="Report title (e.g. Annual Report 2025)" class="' + docInput + '"/>' +
+        '<input type="text" data-date value="' + escA(r.date) + '" placeholder="Date or year (optional)" class="' + docInput + '"/>' +
+        '<div class="flex items-center gap-2">' +
+          '<label class="flex-1 text-center text-xs font-semibold text-forest-700 bg-forest-50 hover:bg-forest-100 rounded-lg py-2 cursor-pointer transition-colors">' + (hasFile ? 'Replace file' : 'Upload file (PDF/doc)') + '<input type="file" accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,image/*" class="hidden" onchange="onDocPick(this)"/></label>' +
+          (hasFile ? '<a href="' + escA(r.url) + '" target="_blank" rel="noopener" class="text-xs text-forest-600 underline px-2">View</a>' : '') +
+        '</div>' +
+        '<div class="text-[10px] text-forest-500 h-4 leading-4" data-doc-status></div>' +
+      '</div></div>';
+  }
+  function mediaCard(m) {
+    m = m || {};
+    var hasImg = !!m.image;
+    return '<div class="p-4 bg-cream rounded-2xl border border-forest-100" data-media-card data-image="' + escA(m.image) + '">' +
+      '<div class="flex items-center justify-between mb-2">' +
+        '<div class="w-16 h-12 rounded-lg overflow-hidden bg-forest-50 border border-forest-100" data-thumb>' + (hasImg ? '<img src="' + escA(m.image) + '" class="w-full h-full object-cover"/>' : '') + '</div>' +
+        '<button onclick="this.closest(\'[data-media-card]\').remove()" class="w-7 h-7 bg-red-50 hover:bg-red-100 text-red-400 rounded-lg flex items-center justify-center cursor-pointer" aria-label="Remove media">&times;</button>' +
+      '</div>' +
+      '<div class="space-y-2">' +
+        '<input type="text" data-title value="' + escA(m.title) + '" placeholder="Title / caption" class="' + docInput + '"/>' +
+        '<input type="url" data-link value="' + escA(m.link) + '" placeholder="Article or video link (optional)" class="' + docInput + '"/>' +
+        '<label class="block text-center text-xs font-semibold text-forest-700 bg-forest-50 hover:bg-forest-100 rounded-lg py-2 cursor-pointer transition-colors">' + (hasImg ? 'Replace photo' : 'Upload photo') + '<input type="file" accept="image/*" class="hidden" onchange="onMediaImgPick(this)"/></label>' +
+        '<div class="text-[10px] text-forest-500 h-4 leading-4" data-doc-status></div>' +
+      '</div></div>';
+  }
+  function renderReports(items) {
+    document.getElementById('reports-items').innerHTML = (items && items.length ? items : [{}]).map(reportCard).join('');
+  }
+  function renderMedia(items) {
+    document.getElementById('media-items').innerHTML = (items && items.length ? items : [{}]).map(mediaCard).join('');
+  }
+  function addReport() {
+    document.getElementById('reports-items').insertAdjacentHTML('beforeend', reportCard({}));
+  }
+  function addMedia() {
+    document.getElementById('media-items').insertAdjacentHTML('beforeend', mediaCard({}));
+  }
+
+  function uploadRaw(file, statusEl) {
+    // Documents go up as-is (no image processing); the edge function stores any content type.
+    return new Promise(function (resolve, reject) {
+      if (file.size > 10 * 1024 * 1024) { reject(new Error('File is larger than 10 MB')); return; }
+      var fr = new FileReader();
+      fr.onload = function () {
+        var passcode = getPasscode();
+        if (!passcode) { reject(new Error('No passcode')); return; }
+        statusEl.textContent = 'Uploading...';
+        fetch(UPLOAD_FN, {
+          method: 'POST',
+          headers: { apikey: SB_KEY, Authorization: 'Bearer ' + SB_KEY, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: file.name, contentType: file.type || 'application/octet-stream', dataBase64: String(fr.result).split(',')[1], passcode: passcode })
+        }).then(function (res) { return res.json().then(function (j) { return { ok: res.ok, j: j }; }); })
+          .then(function (r) {
+            if (!r.ok) {
+              if ((r.j.error || '').indexOf('Invalid passcode') !== -1) sessionStorage.removeItem('ir_pass');
+              reject(new Error(r.j.error || 'Upload failed'));
+              return;
+            }
+            resolve(r.j.url);
+          }).catch(reject);
+      };
+      fr.onerror = function () { reject(new Error('Could not read the file')); };
+      fr.readAsDataURL(file);
+    });
+  }
+
+  function onDocPick(input) {
+    var file = input.files && input.files[0];
+    if (!file) return;
+    var card = input.closest('[data-report-card]');
+    var status = card.querySelector('[data-doc-status]');
+    uploadRaw(file, status).then(function (url) {
+      card.setAttribute('data-url', url);
+      var lbl = card.querySelector('[data-file-label]');
+      lbl.textContent = 'File uploaded';
+      lbl.className = 'text-[11px] font-bold text-forest-600';
+      status.textContent = 'Done. Click Save Changes to publish.';
+    }).catch(function (e) {
+      status.textContent = '';
+      alert('Upload failed: ' + e.message);
+    });
+    input.value = '';
+  }
+
+  function onMediaImgPick(input) {
+    var file = input.files && input.files[0];
+    if (!file) return;
+    var card = input.closest('[data-media-card]');
+    var status = card.querySelector('[data-doc-status]');
+    var passcode = getPasscode();
+    if (!passcode) { input.value = ''; return; }
+    status.textContent = 'Uploading...';
+    fileToUpload(file).then(function (u) {
+      return fetch(UPLOAD_FN, {
+        method: 'POST',
+        headers: { apikey: SB_KEY, Authorization: 'Bearer ' + SB_KEY, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: file.name, contentType: u.contentType, dataBase64: u.base64, passcode: passcode })
+      });
+    }).then(function (res) { return res.json().then(function (j) { return { ok: res.ok, j: j }; }); })
+      .then(function (r) {
+        if (!r.ok) {
+          if ((r.j.error || '').indexOf('Invalid passcode') !== -1) { sessionStorage.removeItem('ir_pass'); alert('Wrong passcode. Try again.'); }
+          else alert('Upload failed: ' + (r.j.error || 'unknown error'));
+          status.textContent = '';
+          return;
+        }
+        card.setAttribute('data-image', r.j.url);
+        card.querySelector('[data-thumb]').innerHTML = '<img src="' + escA(r.j.url) + '" class="w-full h-full object-cover"/>';
+        status.textContent = 'Done. Click Save Changes to publish.';
+      }).catch(function (e) { status.textContent = ''; alert('Upload failed: ' + e.message); });
+    input.value = '';
+  }
+
+  renderReports([]);
+  renderMedia([]);
   renderGallery();
   loadContent();
 </script>

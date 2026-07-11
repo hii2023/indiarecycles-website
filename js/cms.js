@@ -128,6 +128,39 @@
         if (note) el.textContent = note;
       });
 
+      /* Reports & Media (Resources page) */
+      function esc(t) { var d = document.createElement('div'); d.textContent = t == null ? '' : String(t); return d.innerHTML; }
+      var reportsEl = document.getElementById('reports-list');
+      if (reportsEl) {
+        var reps = (content.reports && content.reports.items) || [];
+        if (reps.length) {
+          reportsEl.innerHTML = reps.map(function (r) {
+            return '<a href="' + esc(r.url) + '" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 bg-white rounded-2xl border border-green-100 p-4 hover:border-green-300 transition-colors">' +
+              '<span class="w-11 h-11 rounded-xl bg-green-100 text-green-700 flex items-center justify-center shrink-0"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/><path d="M14 2v5h5"/></svg></span>' +
+              '<span class="min-w-0 flex-1"><span class="block font-semibold text-green-800 text-sm">' + esc(r.title) + '</span>' + (r.date ? '<span class="block text-xs text-green-500 mt-0.5">' + esc(r.date) + '</span>' : '') + '</span>' +
+              '<span class="text-green-700 text-sm font-semibold shrink-0">Open</span></a>';
+          }).join('');
+        }
+      }
+      var mediaEl = document.getElementById('media-grid');
+      if (mediaEl) {
+        var med = (content.media && content.media.items) || [];
+        if (med.length) {
+          mediaEl.innerHTML = med.map(function (m) {
+            var inner = '<div class="aspect-[4/3] overflow-hidden bg-green-50">' + (m.image ? '<img src="' + esc(m.image) + '" alt="' + esc(m.title) + '" class="w-full h-full object-cover"/>' : '') + '</div>' +
+              (m.title ? '<div class="p-3"><div class="text-sm font-semibold text-green-800 leading-snug">' + esc(m.title) + '</div></div>' : '');
+            if (m.link) return '<a href="' + esc(m.link) + '" target="_blank" rel="noopener noreferrer" class="block bg-white rounded-2xl overflow-hidden border border-green-100 hover:border-green-300 transition-colors">' + inner + '</a>';
+            return '<div class="bg-white rounded-2xl overflow-hidden border border-green-100">' + inner + '</div>';
+          }).join('');
+        }
+      }
+
+      /* Pickup-request form toggle (settings.pickup_enabled) */
+      var pickupOn = !(content.settings && content.settings.pickup_enabled === false);
+      document.querySelectorAll('[data-pickup-form]').forEach(function (el) {
+        el.style.display = pickupOn ? '' : 'none';
+      });
+
       content.get = get;
       return content;
     })

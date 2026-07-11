@@ -4,7 +4,7 @@
   if (!('startViewTransition' in document) || !window.navigation) return;
 
   var ORDER = [
-    'index.html', 'about-us.html', 'our-model.html', 'our-impact.html', 'impact-calculator.html',
+    'index.html', 'about-us.html', 'our-model.html', 'our-impact.html', 'impact-calculator.html', 'resources.html',
     'zero-waste-promise.html', 'revibe.html', 'our-partners.html',
     'careers.html', 'volunteer.html', 'drop-locations.html',
     'contact.html', 'donate.html', 'thank-you.html'

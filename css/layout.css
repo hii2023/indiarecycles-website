@@ -30,3 +30,25 @@
     html { scroll-snap-type: none; }
   }
 }
+
+/* ── Mobile UX pass ─────────────────────────────────────────────
+   Tighter section rhythm, comfortable tap targets, and a sticky
+   quick-action bar so Donate is always one tap away on phones. */
+@media (max-width: 767px) {
+  main section[class*="py-16"] { padding-top: 2.5rem !important; padding-bottom: 2.5rem !important; }
+  main section[class*="py-12"] { padding-top: 2.25rem !important; padding-bottom: 2.25rem !important; }
+  main section[class*="py-10"] { padding-top: 2rem !important; padding-bottom: 2rem !important; }
+}
+@media (max-width: 1023px) {
+  #mob-menu a { padding-top: 12px !important; padding-bottom: 12px !important; }
+  .ir-sticky-cta {
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 45;
+    display: flex; gap: 10px;
+    padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+    background: rgba(255,255,255,0.96);
+    -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+    border-top: 1px solid rgba(0,0,0,0.08);
+  }
+  body:has(.ir-sticky-cta) { padding-bottom: 72px; }
+}
+@media (min-width: 1024px) { .ir-sticky-cta { display: none !important; } }
