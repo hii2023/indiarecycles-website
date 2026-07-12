@@ -7,6 +7,45 @@
   var URL_ = 'https://sqosmiifjqecidxhyjtg.supabase.co';
   var KEY = 'sb_publishable_mq6t15oAQU7f4ZAjXQZA5w_ELcgDfbt';
   var AVG_MONTH_MS = 30.4375 * 24 * 60 * 60 * 1000;
+
+  /* Form submissions: store every submit in Supabase (for the admin inbox) while the
+     form's own FormSubmit action still emails + redirects. Attached immediately so a
+     fast submit is never missed; the notify-email swap happens once settings load. */
+  function irSubmissionType(base, hint) {
+    hint = (hint || '').toLowerCase();
+    if (hint.indexOf('corporate') !== -1 || hint === 'partner') return 'corporate';
+    if (hint.indexOf('drop') !== -1) return 'drop_point';
+    if (hint.indexOf('intern') !== -1) return 'intern';
+    if (hint.indexOf('pickup') !== -1) return 'pickup';
+    if (hint.indexOf('volunteer') !== -1) return 'volunteer';
+    if (hint.indexOf('other') !== -1) return 'other';
+    return base;
+  }
+  (function () {
+    function wire() {
+      document.querySelectorAll('form[data-collect]').forEach(function (form) {
+        if (form.__irWired) return; form.__irWired = true;
+        form.addEventListener('submit', function () {
+          if (form.querySelector('[name="_honey"]') && form.querySelector('[name="_honey"]').value) return;
+          var data = {};
+          new FormData(form).forEach(function (v, k) {
+            if (k.charAt(0) !== '_' && typeof v === 'string' && v.trim()) data[k] = v.trim();
+          });
+          var type = irSubmissionType(form.getAttribute('data-collect'), data.how_join || data.form_type);
+          try {
+            fetch(URL_ + '/rest/v1/recycle_submissions', {
+              method: 'POST', keepalive: true,
+              headers: { apikey: KEY, Authorization: 'Bearer ' + KEY, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
+              body: JSON.stringify({ type: type, data: data })
+            });
+          } catch (e) {}
+          // No preventDefault: the native FormSubmit POST sends the email and redirects.
+        });
+      });
+    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', wire);
+    else wire();
+  })();
   var FOUNDED_MS = new Date(2017, 0, 1).getTime();
 
   function daysSinceFounded() {
@@ -153,6 +192,15 @@
             return '<div class="bg-white rounded-2xl overflow-hidden border border-green-100">' + inner + '</div>';
           }).join('');
         }
+      }
+
+      /* Configurable notification email: point FormSubmit at the admin-set address */
+      var notify = content.settings && content.settings.notify_email;
+      if (notify && /@/.test(notify)) {
+        document.querySelectorAll('form[data-collect]').forEach(function (form) {
+          var act = form.getAttribute('action') || '';
+          if (act.indexOf('formsubmit.co') !== -1) form.setAttribute('action', 'https://formsubmit.co/' + notify);
+        });
       }
 
       /* Pickup-request form toggle (settings.pickup_enabled) */

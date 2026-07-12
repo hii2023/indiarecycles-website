@@ -120,6 +120,10 @@
       <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
       Settings
     </button>
+    <button class="tab-btn text-left px-4 py-3 rounded-xl text-sm font-medium cursor-pointer text-forest-600 hover:bg-forest-50" onclick="switchTab('submissions', this); loadSubmissions();">
+      <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg>
+      Submissions
+    </button>
   </nav>
   <div class="p-4 border-t border-forest-100">
     <a href="../index.html" class="block text-center text-xs text-forest-400 hover:text-forest-700 cursor-pointer transition-colors py-2">← Back to website</a>
@@ -688,6 +692,11 @@
       <button onclick="saveSection('settings')" class="save-btn bg-forest-600 hover:bg-forest-700 text-white px-6 py-2.5 rounded-xl font-semibold text-sm cursor-pointer shadow">Save Changes</button>
     </div>
     <div class="bg-white rounded-3xl p-6 border border-forest-100 max-w-xl">
+      <div class="mb-6">
+        <label class="block text-xs font-semibold text-forest-600 mb-1.5">Where form submissions are emailed</label>
+        <input type="email" id="set-notify" placeholder="you@example.com" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream"/>
+        <p class="text-xs text-forest-400 mt-1.5">Every form on the site (volunteer, corporate, drop point, pickup, contact) emails a copy here and is saved in the Submissions tab. If you change this address, the new inbox gets one activation email from FormSubmit; click its link once to start receiving.</p>
+      </div>
       <label class="flex items-start gap-4 cursor-pointer">
         <input type="checkbox" id="set-pickup" checked class="mt-1 w-5 h-5 accent-[#256b49] cursor-pointer"/>
         <span>
@@ -696,6 +705,23 @@
         </span>
       </label>
     </div>
+  </section>
+
+
+  <!-- ═══ SUBMISSIONS ═══ -->
+  <section id="tab-submissions" class="tab-content" aria-labelledby="sub-tab-heading">
+    <div class="flex items-center justify-between mb-6">
+      <div>
+        <h1 id="sub-tab-heading" class="font-serif text-2xl text-forest-800">Submissions</h1>
+        <p class="text-forest-500 text-sm mt-1">Everyone who filled a form on the website. Grouped by what they want.</p>
+      </div>
+      <button onclick="loadSubmissions()" class="text-sm text-forest-700 hover:text-forest-900 font-semibold cursor-pointer inline-flex items-center gap-1.5">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+        Refresh
+      </button>
+    </div>
+    <div id="sub-filter" class="flex flex-wrap gap-2 mb-5"></div>
+    <div id="sub-list" class="space-y-3"><div class="text-forest-400 text-sm">Loading submissions...</div></div>
   </section>
 
 </main>
@@ -772,7 +798,7 @@
       return { items: meds };
     }
     if (section === 'settings') {
-      return { pickup_enabled: document.getElementById('set-pickup').checked };
+      return { pickup_enabled: document.getElementById('set-pickup').checked, notify_email: (document.getElementById('set-notify').value || '').trim() };
     }
     if (section === 'stats') {
       const out = {};
@@ -867,7 +893,7 @@
       }
       if (cms.reports && Array.isArray(cms.reports.items)) renderReports(cms.reports.items);
       if (cms.media && Array.isArray(cms.media.items)) renderMedia(cms.media.items);
-      if (cms.settings) document.getElementById('set-pickup').checked = cms.settings.pickup_enabled !== false;
+      if (cms.settings) { document.getElementById('set-pickup').checked = cms.settings.pickup_enabled !== false; if (cms.settings.notify_email) document.getElementById('set-notify').value = cms.settings.notify_email; }
       if (cms.images && typeof cms.images === 'object') {
         imageOverrides = Object.assign({}, cms.images);
         renderGallery();
@@ -1305,6 +1331,108 @@
         status.textContent = 'Done. Click Save Changes to publish.';
       }).catch(function (e) { status.textContent = ''; alert('Upload failed: ' + e.message); });
     input.value = '';
+  }
+
+  // ── Submissions inbox ─────────────────────────────────────────
+  var SUB_TYPES = [
+    { key: 'volunteer',  label: 'Volunteers' },
+    { key: 'corporate',  label: 'Corporate partnerships' },
+    { key: 'drop_point', label: 'Drop point hosts' },
+    { key: 'pickup',     label: 'Pickup requests' },
+    { key: 'intern',     label: 'Interns' },
+    { key: 'contact',    label: 'Contact / general' },
+    { key: 'other',      label: 'Other' }
+  ];
+  var subCache = [];
+  var subFilter = 'all';
+
+  function esc2(t){ return String(t==null?'':t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;'); }
+  function labelFor(k){ for (var i=0;i<SUB_TYPES.length;i++){ if (SUB_TYPES[i].key===k) return SUB_TYPES[i].label; } return k; }
+  function niceKey(k){ return k.replace(/_/g,' ').replace(/\b\w/g, function(c){return c.toUpperCase();}); }
+  function fmtDate(s){ try { return new Date(s).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'}) + ', ' + new Date(s).toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'}); } catch(e){ return s; } }
+
+  async function loadSubmissions() {
+    var pass = getPasscode(); if (!pass) return;
+    var list = document.getElementById('sub-list');
+    list.innerHTML = '<div class="text-forest-400 text-sm">Loading submissions...</div>';
+    try {
+      var res = await fetch(SB_URL + '/rest/v1/rpc/recycle_list_submissions', {
+        method: 'POST', headers: SB_HEADERS, body: JSON.stringify({ p_passcode: pass })
+      });
+      var j = await res.json();
+      if (!res.ok) {
+        if ((j.message || '').indexOf('Invalid passcode') !== -1) { sessionStorage.removeItem('ir_pass'); list.innerHTML = '<div class="text-red-500 text-sm">Wrong passcode. Refresh and try again.</div>'; }
+        else list.innerHTML = '<div class="text-red-500 text-sm">Could not load: ' + esc2(j.message || res.status) + '</div>';
+        return;
+      }
+      subCache = Array.isArray(j) ? j : [];
+      renderSubFilter();
+      renderSubs();
+    } catch (e) {
+      list.innerHTML = '<div class="text-red-500 text-sm">Network error loading submissions.</div>';
+    }
+  }
+
+  function renderSubFilter() {
+    var counts = {}; subCache.forEach(function (s) { if (!s.archived) counts[s.type] = (counts[s.type]||0)+1; });
+    var total = subCache.filter(function(s){return !s.archived;}).length;
+    var chips = [{ key:'all', label:'All', n: total }];
+    SUB_TYPES.forEach(function (t) { if (counts[t.key]) chips.push({ key:t.key, label:t.label, n:counts[t.key] }); });
+    document.getElementById('sub-filter').innerHTML = chips.map(function (c) {
+      var on = subFilter === c.key;
+      return '<button onclick="setSubFilter(\'' + c.key + '\')" class="px-3 py-1.5 rounded-full text-xs font-semibold cursor-pointer transition-colors ' + (on ? 'bg-forest-600 text-white' : 'bg-forest-50 text-forest-700 hover:bg-forest-100') + '">' + esc2(c.label) + ' (' + c.n + ')</button>';
+    }).join('');
+  }
+  function setSubFilter(k){ subFilter = k; renderSubFilter(); renderSubs(); }
+
+  function renderSubs() {
+    var rows = subCache.filter(function (s) { return !s.archived && (subFilter === 'all' || s.type === subFilter); });
+    var list = document.getElementById('sub-list');
+    if (!rows.length) { list.innerHTML = '<div class="text-forest-400 text-sm">No submissions yet.</div>'; return; }
+    list.innerHTML = rows.map(function (s) {
+      var d = s.data || {};
+      var fields = Object.keys(d).map(function (k) {
+        return '<div class="flex gap-2"><span class="text-forest-400 min-w-[92px] shrink-0">' + esc2(niceKey(k)) + '</span><span class="text-forest-800 break-words">' + esc2(d[k]) + '</span></div>';
+      }).join('');
+      var phone = d.phone || d.mobile || '';
+      var email = d.email || '';
+      return '<div class="bg-white rounded-2xl border border-forest-100 p-4">' +
+        '<div class="flex items-start justify-between gap-3 mb-2">' +
+          '<div><span class="inline-block bg-forest-100 text-forest-700 text-[11px] font-bold px-2 py-0.5 rounded-full">' + esc2(labelFor(s.type)) + '</span>' +
+          '<span class="text-forest-400 text-xs ml-2">' + esc2(fmtDate(s.created_at)) + '</span></div>' +
+          '<div class="flex items-center gap-2 shrink-0">' +
+            (phone ? '<a href="https://wa.me/' + esc2(String(phone).replace(/[^0-9]/g,'')) + '" target="_blank" rel="noopener" class="text-[11px] font-semibold text-green-600 hover:text-green-800">WhatsApp</a>' : '') +
+            (email ? '<a href="mailto:' + esc2(email) + '" class="text-[11px] font-semibold text-forest-600 hover:text-forest-800">Email</a>' : '') +
+            '<button onclick="archiveSub(\'' + s.id + '\')" class="text-[11px] font-semibold text-forest-400 hover:text-forest-700" title="Mark as done">Done</button>' +
+            '<button onclick="deleteSub(\'' + s.id + '\')" class="text-[11px] font-semibold text-red-400 hover:text-red-600" title="Delete">Delete</button>' +
+          '</div>' +
+        '</div>' +
+        '<div class="text-sm space-y-1">' + fields + '</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  async function subAction(rpc, body, okThen) {
+    var pass = getPasscode(); if (!pass) return;
+    body.p_passcode = pass;
+    try {
+      var res = await fetch(SB_URL + '/rest/v1/rpc/' + rpc, { method:'POST', headers: SB_HEADERS, body: JSON.stringify(body) });
+      if (res.ok) okThen();
+      else { var j = await res.json().catch(function(){return{};}); alert('Failed: ' + (j.message || res.status)); }
+    } catch (e) { alert('Network error.'); }
+  }
+  function archiveSub(id) {
+    subAction('recycle_set_submission_archived', { p_id:id, p_archived:true }, function () {
+      subCache.forEach(function (s) { if (s.id === id) s.archived = true; });
+      renderSubFilter(); renderSubs();
+    });
+  }
+  function deleteSub(id) {
+    if (!confirm('Delete this submission permanently?')) return;
+    subAction('recycle_delete_submission', { p_id:id }, function () {
+      subCache = subCache.filter(function (s) { return s.id !== id; });
+      renderSubFilter(); renderSubs();
+    });
   }
 
   renderReports([]);

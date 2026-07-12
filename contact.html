@@ -182,8 +182,7 @@
       <!-- FIRST TIME SETUP: When someone submits this form for the very first time,   -->
       <!-- FormSubmit will email indiarecycles@gmail.com asking you to click a link    -->
       <!-- to confirm. After that one click, ALL future submissions email you instantly -->
-      <form class="space-y-5" method="POST"
-            action="https://formsubmit.co/indiarecycles@gmail.com"
+      <form data-collect="contact" class="space-y-5" method="POST"             action="https://formsubmit.co/indiarecycles@gmail.com"
             aria-label="Contact form">
         <!-- FormSubmit settings -->
         <input type="hidden" name="_subject"  value="New message via IndiaRecycles.org"/>
@@ -413,7 +412,7 @@
   });
 </script>
 
-<script src="js/cms.js?v=8"></script>
+<script src="js/cms.js?v=9"></script>
 <script>
 IR_CMS.then(function (c) {
   var ci = c['contact-info'] || {};

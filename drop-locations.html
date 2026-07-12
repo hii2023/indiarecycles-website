@@ -561,7 +561,7 @@
       <h2 id="pickup-heading" class="text-2xl lg:text-3xl text-green-800 mb-2">Request a Pickup</h2>
       <p class="text-green-600 text-sm max-w-xl mx-auto">Tell us where you are and roughly how many clothes you have. Our team will get in touch to arrange a collection.</p>
     </div>
-    <form action="https://formsubmit.co/indiarecycles@gmail.com" method="POST" class="bg-[#f6f7f6] rounded-3xl border border-green-100 p-6 sm:p-8">
+    <form data-collect="pickup" action="https://formsubmit.co/indiarecycles@gmail.com" method="POST" class="bg-[#f6f7f6] rounded-3xl border border-green-100 p-6 sm:p-8">
       <input type="hidden" name="_subject" value="Pickup request via IndiaRecycles.org"/>
       <input type="hidden" name="_next" value="https://indiarecycles.org/thank-you.html"/>
       <input type="hidden" name="_captcha" value="false"/>
@@ -731,7 +731,7 @@
   });
 </script>
 
-<script src="js/cms.js?v=8"></script>
+<script src="js/cms.js?v=9"></script>
 <script>
 IR_CMS.then(function (c) {
   var loc = c.locations || {};
