@@ -66,3 +66,6 @@
   .ir-back:active { background: #e0ede5; }
 }
 @media (min-width: 1024px) { .ir-back { display: none !important; } }
+
+/* Anchored sections land below the fixed navbar */
+section[id] { scroll-margin-top: 96px; }

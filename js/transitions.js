@@ -1,3 +1,17 @@
+/* Ensure #hash links land on their section even when the page arrives
+   through a cross-document view transition (which can swallow the
+   browser's own anchor scroll). */
+(function () {
+  function go() {
+    if (!location.hash) return;
+    var el = null;
+    try { el = document.querySelector(location.hash); } catch (e) { return; }
+    if (el) el.scrollIntoView({ block: 'start' });
+  }
+  window.addEventListener('pagereveal', function () { setTimeout(go, 80); });
+  window.addEventListener('load', function () { setTimeout(go, 80); });
+})();
+
 /* Mobile back chip: every sub-page gets a clear way back.
    Goes to the previous page when you arrived from within the site,
    otherwise straight to the homepage. Hidden on desktop and on the homepage. */
