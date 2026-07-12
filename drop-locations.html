@@ -55,7 +55,8 @@
     #mob-menu.open { display: block; }
     .grad-accent, em.grad-accent { color: var(--brand-accent); font-style: normal; background: none; -webkit-text-fill-color: unset; }
     @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-    .marquee-track { animation: marquee 8s linear infinite; }
+    .marquee-track { animation: marquee 12s linear infinite; }
+    @media (max-width: 1023px) { .marquee-track { animation-duration: 8s; } }
     @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }
     .card { transition: transform .2s ease, box-shadow .2s ease; }
     .card:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(0,0,0,.07); }
@@ -175,18 +176,26 @@
 </section>
 
 <!-- STATS BAR -->
-<section class="bg-green-700 py-5" aria-label="Drop location counts">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap justify-center gap-12 text-center">
-    <div><div id="ahm-count" class="font-serif text-3xl text-white font-bold">16</div><div class="text-green-300 text-sm mt-0.5">Ahmedabad Locations</div></div>
+<section class="bg-green-700 py-2.5" aria-label="Drop location counts">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap justify-center items-center gap-8 text-center">
+    <div><div id="ahm-count" class="font-serif text-lg text-white font-bold leading-none">16</div><div class="text-green-300 text-[11px] mt-0.5">Ahmedabad Locations</div></div>
     <div class="w-px bg-green-600 hidden sm:block" aria-hidden="true"></div>
-    <div><div id="vad-count" class="font-serif text-3xl text-white font-bold">5</div><div class="text-green-300 text-sm mt-0.5">Vadodara Locations</div></div>
+    <div><div id="vad-count" class="font-serif text-lg text-white font-bold leading-none">5</div><div class="text-green-300 text-[11px] mt-0.5">Vadodara Locations</div></div>
     <div class="w-px bg-green-600 hidden sm:block" aria-hidden="true"></div>
-    <div><div class="font-serif text-3xl text-green-400 font-bold">Always</div><div class="text-green-300 text-sm mt-0.5">Open for donations</div></div>
+    <div><div class="font-serif text-lg text-green-400 font-bold leading-none">Always</div><div class="text-green-300 text-[11px] mt-0.5">Open for donations</div></div>
   </div>
 </section>
 
+<!-- CITY TOGGLE -->
+<div class="bg-[#f6f7f6] texture-bg pt-8 text-center">
+  <div class="inline-flex bg-white border border-green-200 rounded-full p-1 shadow-sm" role="tablist" aria-label="Choose a city">
+    <button id="city-btn-ahm" type="button" role="tab" aria-selected="true" aria-controls="ahm-section" class="px-7 py-2.5 rounded-full text-sm font-semibold bg-green-700 text-white cursor-pointer transition-colors">Ahmedabad</button>
+    <button id="city-btn-vad" type="button" role="tab" aria-selected="false" aria-controls="vad-section" class="px-7 py-2.5 rounded-full text-sm font-semibold text-green-700 hover:bg-green-50 cursor-pointer transition-colors">Baroda</button>
+  </div>
+</div>
+
 <!-- AHMEDABAD LOCATIONS -->
-<section class="py-12 bg-[#f6f7f6] texture-bg" aria-labelledby="ahm-heading">
+<section id="ahm-section" class="py-8 bg-[#f6f7f6] texture-bg" aria-labelledby="ahm-heading">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center gap-4 mb-10">
       <div class="w-12 h-12 bg-green-600 rounded-2xl flex items-center justify-center shadow-sm">
@@ -446,7 +455,7 @@
 </section>
 
 <!-- VADODARA LOCATIONS -->
-<section class="py-12 bg-white" aria-labelledby="vad-heading">
+<section id="vad-section" class="py-8 bg-[#f6f7f6] texture-bg" aria-labelledby="vad-heading" style="display:none;">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center gap-4 mb-10">
       <div class="w-12 h-12 bg-green-800 rounded-2xl flex items-center justify-center shadow-sm">
@@ -759,5 +768,23 @@ IR_CMS.then(function (c) {
   <a href="drop-locations.html" class="flex-1 text-center bg-green-700 text-white text-sm font-semibold py-3 rounded-xl">Find Drop Location</a>
   <a href="volunteer.html#join" class="flex-1 text-center border border-green-700 text-green-800 bg-white text-sm font-semibold py-3 rounded-xl">Join the Movement</a>
 </div>
+<script>
+(function () {
+  var btns = { ahm: document.getElementById('city-btn-ahm'), vad: document.getElementById('city-btn-vad') };
+  var secs = { ahm: document.getElementById('ahm-section'), vad: document.getElementById('vad-section') };
+  var ON  = 'px-7 py-2.5 rounded-full text-sm font-semibold bg-green-700 text-white cursor-pointer transition-colors';
+  var OFF = 'px-7 py-2.5 rounded-full text-sm font-semibold text-green-700 hover:bg-green-50 cursor-pointer transition-colors';
+  function show(city) {
+    ['ahm', 'vad'].forEach(function (c) {
+      var on = c === city;
+      secs[c].style.display = on ? '' : 'none';
+      btns[c].className = on ? ON : OFF;
+      btns[c].setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+  }
+  btns.ahm.addEventListener('click', function () { show('ahm'); });
+  btns.vad.addEventListener('click', function () { show('vad'); });
+})();
+</script>
 </body>
 </html>
