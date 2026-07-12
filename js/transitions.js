@@ -1,3 +1,54 @@
+/* Exit guard: if pressing Back would LEAVE the site (you arrived from outside),
+   trap that first Back press and ask before actually leaving. In-site Back is
+   never touched. MPA-safe: arms only on pages whose referrer is off-site. */
+(function () {
+  if (window.__irExitGuard) return;
+  var host = location.host;
+  var internal = document.referrer && (function () {
+    try { return new URL(document.referrer).host === host; } catch (e) { return false; }
+  })();
+  if (internal) return;               // came from within the site: leave Back alone
+  window.__irExitGuard = true;
+
+  history.pushState({ irExit: 1 }, '');   // trap entry
+  var leaving = false;
+
+  window.addEventListener('popstate', function () {
+    if (leaving) return;
+    history.pushState({ irExit: 1 }, '');  // hold position while we ask
+    ask();
+  });
+
+  function close() { var m = document.getElementById('ir-exit-modal'); if (m) m.remove(); }
+
+  function ask() {
+    if (document.getElementById('ir-exit-modal')) return;
+    var w = document.createElement('div');
+    w.id = 'ir-exit-modal';
+    w.setAttribute('role', 'dialog');
+    w.setAttribute('aria-modal', 'true');
+    w.style.cssText = 'position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(10,28,17,0.55);-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px);';
+    w.innerHTML =
+      '<div style="background:#fff;border-radius:20px;max-width:340px;width:100%;padding:24px;text-align:center;box-shadow:0 20px 50px rgba(0,0,0,.25);font-family:Inter,system-ui,sans-serif;">' +
+        '<div style="font-size:17px;font-weight:700;color:#133a28;margin-bottom:6px;">Leave India Recycles?</div>' +
+        '<div style="font-size:14px;color:#4b5563;line-height:1.5;margin-bottom:20px;">You are about to leave the site. Stay on the page, or go back?</div>' +
+        '<div style="display:flex;gap:10px;">' +
+          '<button id="ir-exit-stay" style="flex:1;padding:12px;border:none;border-radius:12px;background:#256b49;color:#fff;font-size:14px;font-weight:600;cursor:pointer;">Stay</button>' +
+          '<button id="ir-exit-leave" style="flex:1;padding:12px;border:1px solid #d1d5db;border-radius:12px;background:#fff;color:#374151;font-size:14px;font-weight:600;cursor:pointer;">Leave</button>' +
+        '</div>' +
+      '</div>';
+    document.body.appendChild(w);
+    document.getElementById('ir-exit-stay').addEventListener('click', close);
+    document.getElementById('ir-exit-leave').addEventListener('click', function () {
+      leaving = true; close(); history.go(-2);
+    });
+    w.addEventListener('click', function (e) { if (e.target === w) close(); });
+    document.addEventListener('keydown', function esc(e) {
+      if (e.key === 'Escape') { close(); document.removeEventListener('keydown', esc); }
+    });
+  }
+})();
+
 /* Ensure #hash links land on their section even when the page arrives
    through a cross-document view transition (which can swallow the
    browser's own anchor scroll). */
