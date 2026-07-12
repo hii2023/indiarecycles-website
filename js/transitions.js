@@ -1,3 +1,28 @@
+/* Mobile back chip: every sub-page gets a clear way back.
+   Goes to the previous page when you arrived from within the site,
+   otherwise straight to the homepage. Hidden on desktop and on the homepage. */
+(function () {
+  function init() {
+    var file = location.pathname.split('/').pop() || 'index.html';
+    if (file === '' || file === 'index.html') return;
+    var slot = document.querySelector('nav > div');
+    if (!slot || slot.querySelector('.ir-back')) return;
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'ir-back';
+    btn.setAttribute('aria-label', 'Go back');
+    btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>';
+    btn.addEventListener('click', function () {
+      var cameFromSite = document.referrer && document.referrer.indexOf(location.host) !== -1;
+      if (history.length > 1 && cameFromSite) history.back();
+      else location.href = 'index.html';
+    });
+    slot.insertBefore(btn, slot.firstChild);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+
 /* Directional page transitions: pick slide direction from nav order.
    Falls back silently to normal navigation on unsupported browsers. */
 (function () {

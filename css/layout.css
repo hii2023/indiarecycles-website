@@ -52,3 +52,17 @@
   body:has(.ir-sticky-cta) { padding-bottom: 72px; }
 }
 @media (min-width: 1024px) { .ir-sticky-cta { display: none !important; } }
+
+/* ── Mobile back chip (injected by transitions.js on sub-pages) ──
+   Gives an app-like way back from any page: previous page if you came
+   from within the site, otherwise straight to the homepage. */
+@media (max-width: 1023px) {
+  .ir-back {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 40px; height: 40px; margin-right: 6px; flex-shrink: 0;
+    border-radius: 9999px; border: 1px solid rgba(0,0,0,0.10);
+    background: #f2f7f4; color: #1c5439; cursor: pointer;
+  }
+  .ir-back:active { background: #e0ede5; }
+}
+@media (min-width: 1024px) { .ir-back { display: none !important; } }
