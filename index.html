@@ -32,7 +32,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:wght@500;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:wght@500;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet"/>
   <style>
     :root {
       --font-sans: 'Inter', sans-serif;
@@ -55,9 +55,9 @@
     #mob-menu.open { display: block; }
     .grad-accent, em.grad-accent { color: var(--brand-accent); font-style: normal; background: none; -webkit-text-fill-color: unset; }
     @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-    .marquee-track { animation: marquee 12s linear infinite; }
-    @media (max-width: 1023px) { .marquee-track { animation-duration: 8s; } }
-    @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }
+    .marquee-track { animation: marquee 8s linear infinite; }
+    @media (max-width: 1023px) { .marquee-track { animation-duration: 5.3s; } }
+
     .card { transition: transform .2s ease, box-shadow .2s ease; }
     .card:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(0,0,0,.07); }
     @media (prefers-reduced-motion: reduce) { .card:hover { transform: none; } }
@@ -84,6 +84,7 @@
     }
 
     .font-serif { font-family: 'Lora', Georgia, serif !important; font-style: normal; }
+    #hero-l1, #hero-l2 { font-family: 'Gotham', 'Montserrat', 'Inter', sans-serif !important; letter-spacing: -0.015em; }
 
     /* ── Collecting badge: bigger on mobile ─────────────────────────────────────── */
     @media (max-width: 1023px) {
