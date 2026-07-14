@@ -236,9 +236,9 @@
               </div>
               <div id="r-human-impact" class="space-y-3">
                 <div class="bg-gradient-to-r from-green-50 to-green-100 rounded-2xl px-4 py-4 border-2 border-green-300">
-                  <div class="text-green-600 text-xs font-semibold uppercase tracking-wide mb-1">Days of breathing</div>
-                  <div class="font-serif text-5xl font-bold text-green-800" id="r-breathing-days">0</div>
-                  <div class="text-green-700 text-sm mt-1">CO₂ you saved = <span id="r-breathing-years" class="font-bold">0</span> years of breathing</div>
+                  <div class="text-green-600 text-xs font-semibold uppercase tracking-wide mb-1">That equals</div>
+                  <div class="font-serif text-5xl font-bold text-green-800" id="r-breathing-duration">0</div>
+                  <div class="text-green-700 text-sm mt-1">worth of average human breathing</div>
                 </div>
                 <div class="text-center bg-white rounded-lg px-3 py-2 border border-green-200">
                   <div class="text-2xl" id="r-breath-emoji">💨</div>
@@ -294,11 +294,65 @@
       </div>
     </div>
 
-    <!-- Scientific basis -->
+    <!-- Textile calculation -->
+    <div class="bg-blue-50 rounded-2xl p-6 border-2 border-blue-300 mb-8">
+      <h3 class="text-lg font-semibold text-blue-900 mb-3 flex items-center gap-2">
+        <span class="text-2xl">👕</span>
+        How we calculate textile impact
+      </h3>
+      <div class="bg-white rounded-lg p-4 mb-4">
+        <div class="font-mono text-sm text-blue-900 mb-3">
+          <div class="mb-2"><strong>For each garment:</strong></div>
+          <div class="text-xs mb-2 text-blue-800">
+            CO₂ saved = Garment Weight (kg) × Fabric Impact Factor (kg CO₂/kg)
+          </div>
+        </div>
+        <div class="border-t border-blue-200 pt-3 text-xs text-blue-800">
+          <div class="grid grid-cols-2 gap-3 text-center">
+            <div>
+              <div class="font-bold text-blue-900">Cotton T-shirt</div>
+              <div class="text-xs mt-1">0.18 kg × 18 = <strong>3.24 kg CO₂</strong></div>
+            </div>
+            <div>
+              <div class="font-bold text-blue-900">Denim Jeans</div>
+              <div class="text-xs mt-1">0.70 kg × 22 = <strong>15.4 kg CO₂</strong></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mb-4">
+        <h4 class="text-sm font-semibold text-blue-900 mb-2">Impact factors by fabric (per kg):</h4>
+        <div class="grid grid-cols-2 sm:grid-cols-5 gap-2 text-center text-xs">
+          <div class="bg-white rounded p-2">
+            <div class="font-bold text-blue-700">Cotton</div>
+            <div class="text-blue-600">18 kg CO₂</div>
+          </div>
+          <div class="bg-white rounded p-2">
+            <div class="font-bold text-blue-700">Denim</div>
+            <div class="text-blue-600">22 kg CO₂</div>
+          </div>
+          <div class="bg-white rounded p-2">
+            <div class="font-bold text-blue-700">Wool</div>
+            <div class="text-blue-600">28 kg CO₂</div>
+          </div>
+          <div class="bg-white rounded p-2">
+            <div class="font-bold text-blue-700">Mixed</div>
+            <div class="text-blue-600">15 kg CO₂</div>
+          </div>
+          <div class="bg-white rounded p-2">
+            <div class="font-bold text-blue-700">Polyester</div>
+            <div class="text-blue-600">8 kg CO₂</div>
+          </div>
+        </div>
+      </div>
+      <p class="text-xs text-blue-700 italic">These factors represent CO₂ saved by diverting textiles from landfill vs. producing new fabric</p>
+    </div>
+
+    <!-- Scientific basis: Breathing -->
     <div class="bg-green-100/50 rounded-2xl p-6 border-2 border-green-300 mb-8">
       <h3 class="text-lg font-semibold text-green-900 mb-3 flex items-center gap-2">
         <span class="text-2xl">🔬</span>
-        Scientific basis
+        Human breathing: Scientific basis
       </h3>
       <ul class="space-y-2 text-sm text-green-800">
         <li class="flex gap-3">
@@ -552,10 +606,25 @@
     // Source: Respiratory physiology - humans exhale 200mL CO2 per breath × 12-20 breaths/min × 24h
     var co2PerDayBreathing = 0.5; // kg CO2/day
     var breathingDaysOffset = r.co2 / co2PerDayBreathing;
-    var breathingYearsOffset = breathingDaysOffset / 365;
+    var totalYears = breathingDaysOffset / 365;
+    var years = Math.floor(totalYears);
+    var remainingDays = breathingDaysOffset - (years * 365);
+    var months = Math.floor(remainingDays / 30.44);
 
-    document.getElementById('r-breathing-days').textContent = fmt(breathingDaysOffset, 1);
-    document.getElementById('r-breathing-years').textContent = fmt(breathingYearsOffset, 2);
+    var durationText = '';
+    if (years > 0) {
+      durationText = years + ' year' + (years !== 1 ? 's' : '');
+      if (months > 0) {
+        durationText += ' ' + months + ' month' + (months !== 1 ? 's' : '');
+      }
+    } else if (months > 0) {
+      durationText = months + ' month' + (months !== 1 ? 's' : '');
+    } else {
+      var remainingDays2 = Math.round(breathingDaysOffset);
+      durationText = remainingDays2 + ' day' + (remainingDays2 !== 1 ? 's' : '');
+    }
+
+    document.getElementById('r-breathing-duration').textContent = durationText;
 
     var eq = [
       ['tree', fmt(r.co2 / 22, 1), 'trees absorbing carbon for a year'],
