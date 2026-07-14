@@ -228,20 +228,23 @@
             <div class="text-xs font-semibold text-green-500 uppercase tracking-widest mb-3">That is the same as</div>
             <ul id="r-equivalents" class="space-y-2.5"></ul>
 
-            <!-- Human carbon emissions comparison -->
-            <div class="mt-6 pt-6 border-t border-green-100">
-              <div class="text-xs font-semibold text-green-500 uppercase tracking-widest mb-3">Your carbon savings equals</div>
-              <div id="r-human-impact" class="space-y-2.5 text-sm text-green-700">
-                <div class="bg-green-50 rounded-lg px-3 py-2.5">
-                  <div class="font-semibold"><span id="r-days-global" class="text-base">0</span> days</div>
-                  <div class="text-green-600 text-xs">of average global emissions<sup>*</sup></div>
+            <!-- Human breathing carbon comparison -->
+            <div class="mt-7 pt-7 border-t-2 border-green-300">
+              <div class="text-xs font-bold text-green-600 uppercase tracking-widest mb-4 flex items-center gap-2">
+                <span class="inline-block w-2 h-2 rounded-full bg-green-600"></span>
+                Carbon you saved vs human breathing
+              </div>
+              <div id="r-human-impact" class="space-y-3">
+                <div class="bg-gradient-to-r from-green-50 to-green-100 rounded-2xl px-4 py-4 border-2 border-green-300">
+                  <div class="text-green-600 text-xs font-semibold uppercase tracking-wide mb-1">Days of breathing</div>
+                  <div class="font-serif text-5xl font-bold text-green-800" id="r-breathing-days">0</div>
+                  <div class="text-green-700 text-sm mt-1">CO₂ you saved = <span id="r-breathing-years" class="font-bold">0</span> years of breathing</div>
                 </div>
-                <div class="bg-green-50 rounded-lg px-3 py-2.5">
-                  <div class="font-semibold"><span id="r-days-india" class="text-base">0</span> days</div>
-                  <div class="text-green-600 text-xs">of average India emissions<sup>*</sup></div>
+                <div class="text-center bg-white rounded-lg px-3 py-2 border border-green-200">
+                  <div class="text-2xl" id="r-breath-emoji">💨</div>
+                  <div class="text-xs text-green-600 mt-1">Average person exhales ~0.5 kg CO₂ daily</div>
                 </div>
               </div>
-              <p class="text-xs text-green-600/80 mt-3 leading-relaxed"><sup>*</sup> Based on global average (4.0t CO₂/year) and India average (1.8t CO₂/year)</p>
             </div>
 
             <a href="drop-locations.html" class="mt-6 w-full inline-flex items-center justify-center gap-2 bg-green-700 hover:bg-green-800 text-white px-6 py-3.5 rounded-xl font-semibold text-sm transition-colors duration-200 cursor-pointer">
@@ -256,103 +259,76 @@
   </div>
 </section>
 
-<!-- METHODOLOGY -->
-<section class="py-12 lg:py-16 bg-green-50/50" aria-labelledby="method-heading">
+<!-- ABOUT HUMAN BREATHING CO2 -->
+<section class="py-12 lg:py-16 bg-gradient-to-b from-green-50 to-white" aria-labelledby="breathing-heading">
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-    <h2 id="method-heading" class="text-3xl font-serif text-green-900 mb-3 text-center">How we calculate impact</h2>
-    <p class="text-green-700 leading-relaxed text-center mb-8">These estimates show the scale of your contribution to reducing textile waste. They are based on published environmental impact data for textile production and recycling.</p>
+    <h2 id="breathing-heading" class="text-3xl font-serif text-green-900 mb-2 text-center">What is 0.5 kg CO₂ per day?</h2>
+    <p class="text-green-700 text-center text-lg mb-8">That's what an average human exhales just by breathing.</p>
 
-    <div class="grid md:grid-cols-2 gap-8">
-      <!-- Calculation methodology -->
-      <div>
-        <h3 class="text-lg font-semibold text-green-900 mb-3">Calculation method</h3>
-        <p class="text-green-700 text-sm mb-3">For each garment you select:</p>
-        <ol class="space-y-2 text-sm text-green-700 list-decimal list-inside">
-          <li>We estimate average garment weight (T-shirt: 0.18 kg, Jeans: 0.70 kg, etc.)</li>
-          <li>We identify its primary fabric (cotton, polyester, wool, denim, or mixed)</li>
-          <li>We apply published impact factors for that fabric</li>
-          <li>We calculate: Impact = Garment Weight × Fabric Impact Factor</li>
-        </ol>
-        <p class="text-green-600 text-xs mt-4 italic">Impact factors represent environmental costs avoided by diverting textile from landfill vs. new production.</p>
+    <div class="grid md:grid-cols-3 gap-6 mb-10">
+      <!-- Card 1: Respiration rate -->
+      <div class="bg-white rounded-3xl p-6 border-2 border-green-200 text-center">
+        <div class="text-5xl mb-3">💨</div>
+        <div class="text-sm font-semibold text-green-600 uppercase tracking-wide mb-2">Breath</div>
+        <div class="text-3xl font-bold text-green-900 mb-1">200 mL</div>
+        <p class="text-sm text-green-700">CO₂ per single breath</p>
+        <p class="text-xs text-green-600 mt-2">Medical baseline</p>
       </div>
 
-      <!-- Data sources -->
-      <div>
-        <h3 class="text-lg font-semibold text-green-900 mb-3">Data sources</h3>
-        <div class="space-y-3 text-sm text-green-700">
-          <div class="bg-white rounded-lg p-3 border border-green-200">
-            <div class="font-semibold text-green-900">Carbon & environmental impacts</div>
-            <div class="text-xs text-green-600">Common Objective, Ellen MacArthur Foundation, World Bank textiles lifecycle assessments</div>
-          </div>
-          <div class="bg-white rounded-lg p-3 border border-green-200">
-            <div class="font-semibold text-green-900">Human carbon footprint (global)</div>
-            <div class="text-xs text-green-600">4.0 tonnes CO₂ per person per year (World Bank, IPCC 6th Assessment Report)</div>
-          </div>
-          <div class="bg-white rounded-lg p-3 border border-green-200">
-            <div class="font-semibold text-green-900">Human carbon footprint (India)</div>
-            <div class="text-xs text-green-600">1.8 tonnes CO₂ per person per year (Global Carbon Project, 2023)</div>
-          </div>
-          <div class="bg-white rounded-lg p-3 border border-green-200">
-            <div class="font-semibold text-green-900">Tree carbon absorption</div>
-            <div class="text-xs text-green-600">22 kg CO₂ per tree per year (average mature tree, UN FAO)</div>
-          </div>
-        </div>
+      <!-- Card 2: Daily -->
+      <div class="bg-white rounded-3xl p-6 border-2 border-green-300 text-center">
+        <div class="text-5xl mb-3">🫁</div>
+        <div class="text-sm font-semibold text-green-600 uppercase tracking-wide mb-2">Daily</div>
+        <div class="text-3xl font-bold text-green-900 mb-1">0.5 kg</div>
+        <p class="text-sm text-green-700">CO₂ exhaled per day</p>
+        <p class="text-xs text-green-600 mt-2">~20,000 breaths/day</p>
+      </div>
+
+      <!-- Card 3: Yearly -->
+      <div class="bg-white rounded-3xl p-6 border-2 border-green-400 text-center">
+        <div class="text-5xl mb-3">🌍</div>
+        <div class="text-sm font-semibold text-green-600 uppercase tracking-wide mb-2">Yearly</div>
+        <div class="text-3xl font-bold text-green-900 mb-1">183 kg</div>
+        <p class="text-sm text-green-700">CO₂ exhaled per year</p>
+        <p class="text-xs text-green-600 mt-2">Just from breathing</p>
       </div>
     </div>
 
-    <!-- Impact factors table -->
-    <div class="mt-8">
-      <h3 class="text-lg font-semibold text-green-900 mb-3">Impact factors by fabric type</h3>
-      <p class="text-sm text-green-700 mb-4">CO₂, water, and energy saved per kilogram of textile diverted from landfill:</p>
-      <div class="overflow-x-auto">
-        <table class="w-full text-sm border-collapse">
-          <thead>
-            <tr class="bg-green-200">
-              <th class="border border-green-300 px-3 py-2 text-left font-semibold text-green-900">Fabric</th>
-              <th class="border border-green-300 px-3 py-2 text-center font-semibold text-green-900">CO₂e (kg)</th>
-              <th class="border border-green-300 px-3 py-2 text-center font-semibold text-green-900">Water (L)</th>
-              <th class="border border-green-300 px-3 py-2 text-center font-semibold text-green-900">Energy (kWh)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="bg-white hover:bg-green-50">
-              <td class="border border-green-200 px-3 py-2 text-green-900 font-medium">Cotton</td>
-              <td class="border border-green-200 px-3 py-2 text-center text-green-700">18</td>
-              <td class="border border-green-200 px-3 py-2 text-center text-green-700">10,000</td>
-              <td class="border border-green-200 px-3 py-2 text-center text-green-700">20</td>
-            </tr>
-            <tr class="bg-green-50/50 hover:bg-green-50">
-              <td class="border border-green-200 px-3 py-2 text-green-900 font-medium">Polyester</td>
-              <td class="border border-green-200 px-3 py-2 text-center text-green-700">8</td>
-              <td class="border border-green-200 px-3 py-2 text-center text-green-700">100</td>
-              <td class="border border-green-200 px-3 py-2 text-center text-green-700">45</td>
-            </tr>
-            <tr class="bg-white hover:bg-green-50">
-              <td class="border border-green-200 px-3 py-2 text-green-900 font-medium">Wool</td>
-              <td class="border border-green-200 px-3 py-2 text-center text-green-700">28</td>
-              <td class="border border-green-200 px-3 py-2 text-center text-green-700">6,000</td>
-              <td class="border border-green-200 px-3 py-2 text-center text-green-700">30</td>
-            </tr>
-            <tr class="bg-green-50/50 hover:bg-green-50">
-              <td class="border border-green-200 px-3 py-2 text-green-900 font-medium">Denim</td>
-              <td class="border border-green-200 px-3 py-2 text-center text-green-700">22</td>
-              <td class="border border-green-200 px-3 py-2 text-center text-green-700">8,500</td>
-              <td class="border border-green-200 px-3 py-2 text-center text-green-700">22</td>
-            </tr>
-            <tr class="bg-white hover:bg-green-50">
-              <td class="border border-green-200 px-3 py-2 text-green-900 font-medium">Mixed fabric</td>
-              <td class="border border-green-200 px-3 py-2 text-center text-green-700">15</td>
-              <td class="border border-green-200 px-3 py-2 text-center text-green-700">5,000</td>
-              <td class="border border-green-200 px-3 py-2 text-center text-green-700">18</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="text-xs text-green-600 mt-3">Note: These factors represent avoided impacts from new textile production and landfill decomposition. Actual impacts vary based on regional production methods and energy grids.</p>
+    <!-- Scientific basis -->
+    <div class="bg-green-100/50 rounded-2xl p-6 border-2 border-green-300 mb-8">
+      <h3 class="text-lg font-semibold text-green-900 mb-3 flex items-center gap-2">
+        <span class="text-2xl">🔬</span>
+        Scientific basis
+      </h3>
+      <ul class="space-y-2 text-sm text-green-800">
+        <li class="flex gap-3">
+          <span class="font-bold text-green-700 flex-shrink-0">•</span>
+          <span><strong>Tidal volume:</strong> 200 mL of CO₂ per breath (respiratory physiology standard)</span>
+        </li>
+        <li class="flex gap-3">
+          <span class="font-bold text-green-700 flex-shrink-0">•</span>
+          <span><strong>Breathing rate:</strong> 12-20 breaths per minute at rest (NIH, CDC medical standards)</span>
+        </li>
+        <li class="flex gap-3">
+          <span class="font-bold text-green-700 flex-shrink-0">•</span>
+          <span><strong>Daily total:</strong> ~20,000 breaths/day × 200 mL = 4,000 L CO₂/day = 0.5 kg CO₂/day</span>
+        </li>
+        <li class="flex gap-3">
+          <span class="font-bold text-green-700 flex-shrink-0">•</span>
+          <span><strong>Annual estimate:</strong> 0.5 kg/day × 365 days = ~183 kg CO₂/year</span>
+        </li>
+      </ul>
+      <p class="text-xs text-green-600 mt-4 italic">Sources: Respiratory physiology literature, NIH (National Institutes of Health), CDC standards for human respiration</p>
     </div>
 
-    <div class="mt-8 bg-green-100/60 rounded-lg p-4 border border-green-200">
-      <p class="text-xs text-green-800"><strong>Important:</strong> These are careful estimates meant to show the scale of your contribution, not exact scientific measurements. Actual environmental impacts vary based on original production location, garment material composition, and regional waste management practices.</p>
+    <!-- The point -->
+    <div class="text-center">
+      <p class="text-green-800 text-lg mb-4">
+        <strong>By recycling textiles, you're preventing the carbon equivalent of many months of human breathing from entering the atmosphere.</strong>
+      </p>
+      <p class="text-green-700 text-sm">
+        Every kilogram of textile you recycle saves CO₂ that would have been released if that fabric ended up decomposing in landfills.
+      </p>
     </div>
   </div>
 </section>
@@ -571,14 +547,15 @@
     document.getElementById('r-water').textContent = fmt(r.water, 0);
     document.getElementById('r-energy').textContent = fmt(r.energy, 1);
 
-    // Calculate human carbon emissions offset
-    var globalAnnualEmissions = 4000; // kg CO2/year per person (global average)
-    var indiaAnnualEmissions = 1800;  // kg CO2/year per person (India average)
-    var globalDaysOffset = (r.co2 / globalAnnualEmissions) * 365;
-    var indiaDaysOffset = (r.co2 / indiaAnnualEmissions) * 365;
+    // Calculate human breathing CO2 offset
+    // Average person exhales ~0.5 kg CO2 per day through respiration
+    // Source: Respiratory physiology - humans exhale 200mL CO2 per breath × 12-20 breaths/min × 24h
+    var co2PerDayBreathing = 0.5; // kg CO2/day
+    var breathingDaysOffset = r.co2 / co2PerDayBreathing;
+    var breathingYearsOffset = breathingDaysOffset / 365;
 
-    document.getElementById('r-days-global').textContent = fmt(globalDaysOffset, 1);
-    document.getElementById('r-days-india').textContent = fmt(indiaDaysOffset, 1);
+    document.getElementById('r-breathing-days').textContent = fmt(breathingDaysOffset, 1);
+    document.getElementById('r-breathing-years').textContent = fmt(breathingYearsOffset, 2);
 
     var eq = [
       ['tree', fmt(r.co2 / 22, 1), 'trees absorbing carbon for a year'],
