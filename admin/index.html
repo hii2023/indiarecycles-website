@@ -120,6 +120,10 @@
       <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="15" x="2" y="4.5" rx="2"/><path d="m10 8.5 6 3.5-6 3.5z"/></svg>
       IR Talks
     </button>
+    <button class="tab-btn text-left px-4 py-3 rounded-xl text-sm font-medium cursor-pointer text-forest-600 hover:bg-forest-50" onclick="switchTab('testimonials', this)">
+      <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+      Testimonials
+    </button>
     <button class="tab-btn text-left px-4 py-3 rounded-xl text-sm font-medium cursor-pointer text-forest-600 hover:bg-forest-50" onclick="switchTab('settings', this)">
       <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
       Settings
@@ -715,6 +719,29 @@
       <strong>Tip:</strong> Paste any YouTube link (watch, youtu.be or embed). Photo is optional - if left blank the video thumbnail is used. Click <strong>Save Changes</strong> to publish - the IR Talks page updates instantly.</div>
   </section>
 
+  <!-- ═══ TESTIMONIALS ═══ -->
+  <section id="tab-testimonials" class="tab-content" aria-labelledby="tm-tab-heading">
+    <div class="flex items-center justify-between mb-8">
+      <div>
+        <h1 id="tm-tab-heading" class="font-serif text-2xl text-forest-800">Testimonials</h1>
+        <p class="text-forest-500 text-sm mt-1">Add community voices with a photo, name, who they are and their quote. Publishes to the homepage "Community Voices" section.</p>
+      </div>
+      <button onclick="saveSection('testimonials')" class="save-btn bg-forest-600 hover:bg-forest-700 text-white px-6 py-2.5 rounded-xl font-semibold text-sm cursor-pointer shadow">Save Changes</button>
+    </div>
+    <div class="bg-white rounded-3xl p-6 border border-forest-100">
+      <div class="flex items-center justify-between mb-5">
+        <h2 class="font-semibold text-forest-800 text-sm uppercase tracking-wide">Testimonials</h2>
+        <button onclick="addTestimonial()" class="bg-forest-50 hover:bg-forest-100 text-forest-700 px-4 py-2 rounded-xl text-sm font-semibold cursor-pointer inline-flex items-center gap-1.5">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Add Testimonial
+        </button>
+      </div>
+      <div id="testimonials-editor" class="grid sm:grid-cols-2 gap-4"></div>
+    </div>
+    <div class="mt-6 bg-amber-50 rounded-2xl px-5 py-4 border border-amber-100 text-sm text-amber-800">
+      <strong>Tip:</strong> Photo is optional - if left blank, the person's initials are shown. Click <strong>Save Changes</strong> to publish.</div>
+  </section>
+
   <!-- ═══ SETTINGS ═══ -->
   <section id="tab-settings" class="tab-content" aria-labelledby="set-tab-heading">
     <div class="flex items-center justify-between mb-8">
@@ -843,6 +870,17 @@
       }).filter(function (t) { return t.title || t.video || t.photo; });
       return { description: (document.getElementById('talks-desc').value || '').trim(), items: talks };
     }
+    if (section === 'testimonials') {
+      var tms = Array.from(document.querySelectorAll('#testimonials-editor [data-tm-card]')).map(function (c) {
+        return {
+          quote: c.querySelector('[data-quote]').value.trim(),
+          name:  c.querySelector('[data-name]').value.trim(),
+          role:  c.querySelector('[data-role]').value.trim(),
+          photo: c.querySelector('[data-photo]').value.trim()
+        };
+      }).filter(function (t) { return t.quote || t.name; });
+      return { items: tms };
+    }
     if (section === 'settings') {
       return { pickup_enabled: document.getElementById('set-pickup').checked, notify_email: (document.getElementById('set-notify').value || '').trim() };
     }
@@ -943,6 +981,7 @@
         if (typeof cms.talks.description === 'string') document.getElementById('talks-desc').value = cms.talks.description;
         if (Array.isArray(cms.talks.items)) renderTalks(cms.talks.items);
       }
+      if (cms.testimonials && Array.isArray(cms.testimonials.items)) renderTestimonials(cms.testimonials.items);
       if (cms.settings) { document.getElementById('set-pickup').checked = cms.settings.pickup_enabled !== false; if (cms.settings.notify_email) document.getElementById('set-notify').value = cms.settings.notify_email; }
       if (cms.images && typeof cms.images === 'object') {
         imageOverrides = Object.assign({}, cms.images);
@@ -1193,6 +1232,79 @@
       var img = new Image();
       img.onload = function () {
         var max = 640;
+        var w = img.width, h = img.height;
+        if (w > h && w > max) { h = Math.round(h * max / w); w = max; }
+        else if (h >= w && h > max) { w = Math.round(w * max / h); h = max; }
+        var c = document.createElement('canvas');
+        c.width = w; c.height = h;
+        c.getContext('2d').drawImage(img, 0, 0, w, h);
+        var url = c.toDataURL('image/jpeg', 0.82);
+        card.querySelector('[data-photo]').value = url;
+        card.querySelector('[data-photo-preview]').innerHTML = '<img src="' + url + '" class="w-full h-full object-cover"/>';
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  // ── Testimonials editor ──────────────────────────────────────
+  function testimonialCard(t) {
+    t = t || {};
+    var photo = t.photo || '';
+    var prev = photo && photo.indexOf('images/') === 0 ? '../' + photo : photo;
+    var preview = photo
+      ? '<img src="' + attrEsc(prev) + '" class="w-full h-full object-cover"/>'
+      : '<span class="text-[9px] text-forest-400 text-center px-1">No photo</span>';
+    return '<div class="p-4 bg-cream rounded-2xl border border-forest-100" data-tm-card>'
+      + '<div class="flex items-center justify-between mb-3">'
+      +   '<span class="text-xs font-semibold text-forest-500">Testimonial</span>'
+      +   '<div class="flex items-center gap-1">'
+      +     '<button onclick="moveTestimonial(this,-1)" class="w-7 h-7 bg-forest-50 hover:bg-forest-100 text-forest-600 rounded-lg flex items-center justify-center cursor-pointer" aria-label="Move up" title="Move up"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg></button>'
+      +     '<button onclick="moveTestimonial(this,1)" class="w-7 h-7 bg-forest-50 hover:bg-forest-100 text-forest-600 rounded-lg flex items-center justify-center cursor-pointer" aria-label="Move down" title="Move down"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>'
+      +     '<button onclick="removeTestimonial(this)" class="w-7 h-7 bg-red-50 hover:bg-red-100 text-red-400 rounded-lg flex items-center justify-center cursor-pointer" aria-label="Remove testimonial">' + xIcon + '</button>'
+      +   '</div>'
+      + '</div>'
+      + '<div class="flex gap-3 mb-3">'
+      +   '<div class="shrink-0">'
+      +     '<div class="w-16 h-16 rounded-full overflow-hidden bg-forest-50 border border-forest-200 flex items-center justify-center" data-photo-preview>' + preview + '</div>'
+      +     '<label class="mt-1.5 block text-center text-[11px] font-semibold text-forest-600 cursor-pointer hover:text-forest-800">Photo<input type="file" accept="image/*" class="hidden" onchange="onTestimonialPhotoPick(this)"/></label>'
+      +     '<input type="hidden" data-photo value="' + attrEsc(photo) + '"/>'
+      +   '</div>'
+      +   '<div class="flex-1 space-y-2">'
+      +     '<input type="text" data-name value="' + attrEsc(t.name) + '" placeholder="Name" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm font-semibold text-forest-800 bg-white"/>'
+      +     '<input type="text" data-role value="' + attrEsc(t.role) + '" placeholder="Who they are (e.g. Volunteer)" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white"/>'
+      +   '</div>'
+      + '</div>'
+      + '<textarea data-quote rows="3" placeholder="Their testimonial / quote" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white resize-none">' + textEsc(t.quote) + '</textarea>'
+      + '</div>';
+  }
+  function renderTestimonials(arr) {
+    document.getElementById('testimonials-editor').innerHTML = (arr || []).map(testimonialCard).join('');
+  }
+  function addTestimonial() {
+    var wrap = document.getElementById('testimonials-editor');
+    var div = document.createElement('div');
+    div.innerHTML = testimonialCard({});
+    var card = div.firstChild;
+    wrap.appendChild(card);
+    card.querySelector('[data-name]').focus();
+  }
+  function removeTestimonial(btn) { btn.closest('[data-tm-card]').remove(); }
+  function moveTestimonial(btn, dir) {
+    var card = btn.closest('[data-tm-card]');
+    var wrap = document.getElementById('testimonials-editor');
+    if (dir < 0 && card.previousElementSibling) wrap.insertBefore(card, card.previousElementSibling);
+    if (dir > 0 && card.nextElementSibling) wrap.insertBefore(card.nextElementSibling, card);
+  }
+  function onTestimonialPhotoPick(input) {
+    var file = input.files && input.files[0];
+    if (!file) return;
+    var card = input.closest('[data-tm-card]');
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      var img = new Image();
+      img.onload = function () {
+        var max = 320;
         var w = img.width, h = img.height;
         if (w > h && w > max) { h = Math.round(h * max / w); w = max; }
         else if (h >= w && h > max) { w = Math.round(w * max / h); h = max; }

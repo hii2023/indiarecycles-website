@@ -242,6 +242,30 @@
         }
       }
 
+      /* Testimonials (homepage Community Voices) */
+      var tmEl = document.getElementById('testimonials-list');
+      if (tmEl) {
+        var tms = (content.testimonials && content.testimonials.items) || [];
+        if (tms.length) {
+          var star = '<svg class="w-3.5 h-3.5 text-green-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>';
+          var stars = '<div class="flex gap-0.5 mb-4" aria-label="5 stars">' + star + star + star + star + star + '</div>';
+          tmEl.innerHTML = tms.map(function (t) {
+            var nm = (t.name || '').trim();
+            var initials = (nm || '?').split(/\s+/).map(function (w) { return w.charAt(0); }).slice(0, 2).join('').toUpperCase();
+            var avatar = t.photo
+              ? '<div class="w-11 h-11 rounded-full overflow-hidden bg-green-100 shrink-0"><img src="' + esc(t.photo) + '" alt="' + esc(nm) + '" class="w-full h-full object-cover"/></div>'
+              : '<div class="w-11 h-11 rounded-full bg-green-100 text-green-700 font-semibold flex items-center justify-center shrink-0 text-sm">' + esc(initials) + '</div>';
+            return '<div class="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm flex flex-col">' +
+              stars +
+              '<p class="text-gray-800 text-[14px] leading-relaxed italic flex-1">' + (t.quote ? '&ldquo;' + esc(t.quote) + '&rdquo;' : '') + '</p>' +
+              '<div class="mt-5 flex items-center gap-3">' + avatar +
+                '<div><div class="font-semibold text-green-800 text-sm">' + esc(nm) + '</div>' +
+                (t.role ? '<div class="text-gray-500 text-xs">' + esc(t.role) + '</div>' : '') + '</div>' +
+              '</div></div>';
+          }).join('');
+        }
+      }
+
       /* Configurable notification email: point FormSubmit at the admin-set address */
       var notify = content.settings && content.settings.notify_email;
       if (notify && /@/.test(notify)) {
