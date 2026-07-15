@@ -266,6 +266,25 @@
         }
       }
 
+      /* Partners (Our Partners page) */
+      var partnersEl = document.getElementById('partners-list');
+      if (partnersEl) {
+        var partners = (content.partners && content.partners.items) || [];
+        if (partners.length) {
+          partnersEl.innerHTML = partners.map(function (p) {
+            var logo = p.logo
+              ? '<div class="h-16 flex items-center mb-4"><img src="' + esc(p.logo) + '" alt="' + esc(p.name) + '" class="max-h-16 max-w-[70%] object-contain"/></div>'
+              : '<div class="h-16 flex items-center mb-4"><span class="text-green-800 font-semibold text-lg">' + esc(p.name) + '</span></div>';
+            var inner = logo +
+              (p.name ? '<h3 class="font-semibold text-green-800">' + esc(p.name) + '</h3>' : '') +
+              (p.description ? '<p class="text-green-600 text-sm mt-1 leading-relaxed">' + esc(p.description) + '</p>' : '') +
+              (p.link ? '<span class="mt-3 inline-flex items-center gap-1 text-green-700 text-sm font-semibold">Visit site <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>' : '');
+            if (p.link) return '<a href="' + esc(p.link) + '" target="_blank" rel="noopener noreferrer" class="block rounded-2xl border border-green-100 bg-white p-6 hover:border-green-300 transition-colors">' + inner + '</a>';
+            return '<div class="rounded-2xl border border-green-100 bg-white p-6">' + inner + '</div>';
+          }).join('');
+        }
+      }
+
       /* Configurable notification email: point FormSubmit at the admin-set address */
       var notify = content.settings && content.settings.notify_email;
       if (notify && /@/.test(notify)) {
