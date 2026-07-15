@@ -338,6 +338,56 @@
         fillBucket(evPast, evItems.filter(function (e) { return e.status === 'past'; }));
       }
 
+      /* Community Impact causes (Our Impact page) */
+      var causesEl = document.getElementById('causes-list');
+      if (causesEl) {
+        var causes = (content.causes && content.causes.items) || [];
+        if (causes.length) {
+          causesEl.innerHTML = causes.map(function (cu) {
+            var photo = cu.photo ? '<div class="aspect-[16/10] bg-green-50"><img src="' + esc(cu.photo) + '" alt="' + esc(cu.name) + '" class="w-full h-full object-cover"/></div>' : '';
+            var loc = cu.location ? '<div class="text-green-500 text-sm mt-1 inline-flex items-center gap-1"><svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>' + esc(cu.location) + '</div>' : '';
+            return '<article class="rounded-2xl border border-green-100 bg-white overflow-hidden flex flex-col shadow-sm">' + photo +
+              '<div class="p-5 flex-1 flex flex-col">' +
+                '<h3 class="text-lg font-semibold text-green-800">' + esc(cu.name) + '</h3>' + loc +
+                (cu.description ? '<p class="text-green-600 text-sm mt-2 leading-relaxed flex-1">' + esc(cu.description) + '</p>' : '') +
+              '</div></article>';
+          }).join('');
+        }
+      }
+
+      /* Videos (homepage "See Us in Action") */
+      var vidsEl = document.getElementById('videos-list');
+      if (vidsEl) {
+        var vids = (content.videos && content.videos.items) || [];
+        if (vids.length) {
+          var vsec = document.getElementById('videos-section');
+          if (vsec) vsec.style.display = '';
+          vidsEl.innerHTML = vids.map(function (v) {
+            var vid = ytId(v.video);
+            var poster = v.photo ? esc(v.photo) : (vid ? 'https://img.youtube.com/vi/' + vid + '/hqdefault.jpg' : '');
+            var media = '';
+            if (vid) {
+              media = '<button type="button" class="ir-talk-play group relative block w-full aspect-video bg-green-900 cursor-pointer" data-embed="https://www.youtube.com/embed/' + vid + '?autoplay=1&rel=0" aria-label="Play video">' +
+                (poster ? '<img src="' + poster + '" alt="" class="w-full h-full object-cover"/>' : '') +
+                '<span class="absolute inset-0 flex items-center justify-center"><span class="w-16 h-16 rounded-full bg-red-600 flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform"><svg class="w-7 h-7 text-white ml-1" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></span></button>';
+            }
+            return '<article class="rounded-2xl border border-green-100 overflow-hidden bg-white flex flex-col shadow-sm">' + media +
+              '<div class="p-5 flex-1 flex flex-col">' +
+                (v.title ? '<h3 class="text-lg font-semibold text-green-800">' + esc(v.title) + '</h3>' : '') +
+                (v.description ? '<p class="text-green-600 text-sm mt-2 leading-relaxed flex-1">' + esc(v.description) + '</p>' : '') +
+              '</div></article>';
+          }).join('');
+          vidsEl.addEventListener('click', function (e) {
+            var btn = e.target.closest('.ir-talk-play');
+            if (!btn) return;
+            var wrap = document.createElement('div');
+            wrap.className = 'aspect-video';
+            wrap.innerHTML = '<iframe src="' + btn.getAttribute('data-embed') + '" class="w-full h-full" style="border:0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+            btn.replaceWith(wrap);
+          });
+        }
+      }
+
       /* Configurable notification email: point FormSubmit at the admin-set address */
       var notify = content.settings && content.settings.notify_email;
       if (notify && /@/.test(notify)) {
