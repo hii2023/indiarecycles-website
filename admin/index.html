@@ -128,6 +128,10 @@
       <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
       Partners
     </button>
+    <button class="tab-btn text-left px-4 py-3 rounded-xl text-sm font-medium cursor-pointer text-forest-600 hover:bg-forest-50" onclick="switchTab('corporate', this)">
+      <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/></svg>
+      Corporate / Interns
+    </button>
     <button class="tab-btn text-left px-4 py-3 rounded-xl text-sm font-medium cursor-pointer text-forest-600 hover:bg-forest-50" onclick="switchTab('settings', this)">
       <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
       Settings
@@ -769,6 +773,29 @@
       <strong>Tip:</strong> Upload the partner's logo (PNG with transparent background looks best). Click <strong>Save Changes</strong> to publish.</div>
   </section>
 
+  <!-- ═══ CORPORATE TIE-UPS / INTERNSHIPS ═══ -->
+  <section id="tab-corporate" class="tab-content" aria-labelledby="cp-tab-heading">
+    <div class="flex items-center justify-between mb-8">
+      <div>
+        <h1 id="cp-tab-heading" class="font-serif text-2xl text-forest-800">Corporate Tie-ups &amp; Internships</h1>
+        <p class="text-forest-500 text-sm mt-1">Add each company or campus logo (with an optional website link). Publishes to the Our Partners page.</p>
+      </div>
+      <button onclick="saveSection('corporate')" class="save-btn bg-forest-600 hover:bg-forest-700 text-white px-6 py-2.5 rounded-xl font-semibold text-sm cursor-pointer shadow">Save Changes</button>
+    </div>
+    <div class="bg-white rounded-3xl p-6 border border-forest-100">
+      <div class="flex items-center justify-between mb-5">
+        <h2 class="font-semibold text-forest-800 text-sm uppercase tracking-wide">Logos</h2>
+        <button onclick="addCorporate()" class="bg-forest-50 hover:bg-forest-100 text-forest-700 px-4 py-2 rounded-xl text-sm font-semibold cursor-pointer inline-flex items-center gap-1.5">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Add Logo
+        </button>
+      </div>
+      <div id="corporate-editor" class="grid sm:grid-cols-3 gap-4"></div>
+    </div>
+    <div class="mt-6 bg-amber-50 rounded-2xl px-5 py-4 border border-amber-100 text-sm text-amber-800">
+      <strong>Tip:</strong> Upload the logo and give the company/campus a name (used as the tooltip and fallback). A website link is optional. Click <strong>Save Changes</strong> to publish.</div>
+  </section>
+
   <!-- ═══ SETTINGS ═══ -->
   <section id="tab-settings" class="tab-content" aria-labelledby="set-tab-heading">
     <div class="flex items-center justify-between mb-8">
@@ -919,6 +946,16 @@
       }).filter(function (p) { return p.name || p.logo; });
       return { items: pns };
     }
+    if (section === 'corporate') {
+      var cps = Array.from(document.querySelectorAll('#corporate-editor [data-corp-card]')).map(function (c) {
+        return {
+          name: c.querySelector('[data-name]').value.trim(),
+          link: c.querySelector('[data-link]').value.trim(),
+          logo: c.querySelector('[data-photo]').value.trim()
+        };
+      }).filter(function (c) { return c.name || c.logo; });
+      return { items: cps };
+    }
     if (section === 'settings') {
       return { pickup_enabled: document.getElementById('set-pickup').checked, notify_email: (document.getElementById('set-notify').value || '').trim() };
     }
@@ -1021,6 +1058,7 @@
       }
       if (cms.testimonials && Array.isArray(cms.testimonials.items)) renderTestimonials(cms.testimonials.items);
       if (cms.partners && Array.isArray(cms.partners.items)) renderPartners(cms.partners.items);
+      if (cms.corporate && Array.isArray(cms.corporate.items)) renderCorporate(cms.corporate.items);
       if (cms.settings) { document.getElementById('set-pickup').checked = cms.settings.pickup_enabled !== false; if (cms.settings.notify_email) document.getElementById('set-notify').value = cms.settings.notify_email; }
       if (cms.images && typeof cms.images === 'object') {
         imageOverrides = Object.assign({}, cms.images);
@@ -1406,6 +1444,69 @@
     var file = input.files && input.files[0];
     if (!file) return;
     var card = input.closest('[data-partner-card]');
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      var img = new Image();
+      img.onload = function () {
+        var max = 400;
+        var w = img.width, h = img.height;
+        if (w > h && w > max) { h = Math.round(h * max / w); w = max; }
+        else if (h >= w && h > max) { w = Math.round(w * max / h); h = max; }
+        var c = document.createElement('canvas');
+        c.width = w; c.height = h;
+        c.getContext('2d').drawImage(img, 0, 0, w, h);
+        var url = c.toDataURL('image/png');
+        card.querySelector('[data-photo]').value = url;
+        card.querySelector('[data-photo-preview]').innerHTML = '<img src="' + url + '" class="max-w-full max-h-full object-contain"/>';
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  // ── Corporate tie-ups / internships editor ───────────────────
+  function corporateCard(c0) {
+    c0 = c0 || {};
+    var photo = c0.logo || '';
+    var prev = photo && photo.indexOf('images/') === 0 ? '../' + photo : photo;
+    var preview = photo
+      ? '<img src="' + attrEsc(prev) + '" class="max-w-full max-h-full object-contain"/>'
+      : '<span class="text-[9px] text-forest-400 text-center px-1">No logo</span>';
+    return '<div class="p-3 bg-cream rounded-2xl border border-forest-100" data-corp-card>'
+      + '<div class="flex items-center justify-end gap-1 mb-2">'
+      +     '<button onclick="moveCorporate(this,-1)" class="w-6 h-6 bg-forest-50 hover:bg-forest-100 text-forest-600 rounded-lg flex items-center justify-center cursor-pointer" aria-label="Move up" title="Move up"><svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg></button>'
+      +     '<button onclick="moveCorporate(this,1)" class="w-6 h-6 bg-forest-50 hover:bg-forest-100 text-forest-600 rounded-lg flex items-center justify-center cursor-pointer" aria-label="Move down" title="Move down"><svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>'
+      +     '<button onclick="removeCorporate(this)" class="w-6 h-6 bg-red-50 hover:bg-red-100 text-red-400 rounded-lg flex items-center justify-center cursor-pointer" aria-label="Remove">' + xIcon + '</button>'
+      + '</div>'
+      + '<div class="h-16 rounded-xl overflow-hidden bg-white border border-forest-200 flex items-center justify-center mb-1.5 p-2" data-photo-preview>' + preview + '</div>'
+      + '<label class="block text-center text-[11px] font-semibold text-forest-600 cursor-pointer hover:text-forest-800 mb-2">Upload logo<input type="file" accept="image/*" class="hidden" onchange="onCorporatePhotoPick(this)"/></label>'
+      + '<input type="hidden" data-photo value="' + attrEsc(photo) + '"/>'
+      + '<input type="text" data-name value="' + attrEsc(c0.name) + '" placeholder="Name" class="w-full px-2.5 py-1.5 rounded-lg border border-forest-200 text-xs font-semibold text-forest-800 bg-white mb-1.5"/>'
+      + '<input type="text" data-link value="' + attrEsc(c0.link) + '" placeholder="Website (optional)" class="w-full px-2.5 py-1.5 rounded-lg border border-forest-200 text-xs text-forest-800 bg-white"/>'
+      + '</div>';
+  }
+  function renderCorporate(arr) {
+    document.getElementById('corporate-editor').innerHTML = (arr || []).map(corporateCard).join('');
+  }
+  function addCorporate() {
+    var wrap = document.getElementById('corporate-editor');
+    var div = document.createElement('div');
+    div.innerHTML = corporateCard({});
+    var card = div.firstChild;
+    wrap.appendChild(card);
+    card.querySelector('[data-name]').focus();
+  }
+  function removeCorporate(btn) { btn.closest('[data-corp-card]').remove(); }
+  function moveCorporate(btn, dir) {
+    var card = btn.closest('[data-corp-card]');
+    var wrap = document.getElementById('corporate-editor');
+    if (dir < 0 && card.previousElementSibling) wrap.insertBefore(card, card.previousElementSibling);
+    if (dir > 0 && card.nextElementSibling) wrap.insertBefore(card.nextElementSibling, card);
+  }
+  function onCorporatePhotoPick(input) {
+    var file = input.files && input.files[0];
+    if (!file) return;
+    var card = input.closest('[data-corp-card]');
     var reader = new FileReader();
     reader.onload = function (e) {
       var img = new Image();

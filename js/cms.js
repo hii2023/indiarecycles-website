@@ -285,6 +285,22 @@
         }
       }
 
+      /* Corporate tie-ups & internships (Our Partners page) */
+      var corpEl = document.getElementById('corporate-list');
+      if (corpEl) {
+        var corps = (content.corporate && content.corporate.items) || [];
+        if (corps.length) {
+          corpEl.innerHTML = corps.map(function (c) {
+            var inner = c.logo
+              ? '<img src="' + esc(c.logo) + '" alt="' + esc(c.name) + '" class="max-h-16 max-w-full object-contain"/>'
+              : '<span class="text-green-800 font-semibold text-center text-sm">' + esc(c.name) + '</span>';
+            var cls = 'flex items-center justify-center h-24 rounded-2xl border border-green-100 bg-white p-4';
+            if (c.link) return '<a href="' + esc(c.link) + '" target="_blank" rel="noopener noreferrer" title="' + esc(c.name) + '" class="' + cls + ' hover:border-green-300 transition-colors">' + inner + '</a>';
+            return '<div title="' + esc(c.name) + '" class="' + cls + '">' + inner + '</div>';
+          }).join('');
+        }
+      }
+
       /* Configurable notification email: point FormSubmit at the admin-set address */
       var notify = content.settings && content.settings.notify_email;
       if (notify && /@/.test(notify)) {
