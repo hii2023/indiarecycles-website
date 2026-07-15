@@ -72,6 +72,7 @@
     <div class="text-xs text-forest-500">Click to edit any page content</div>
   </div>
   <nav class="flex flex-col gap-1 p-3 flex-1">
+    <div class="px-4 pt-3 pb-1 text-[10px] font-bold uppercase tracking-widest text-forest-400">Site Pages</div>
     <button class="tab-btn active text-left px-4 py-3 rounded-xl text-sm font-medium cursor-pointer" onclick="switchTab('home', this)">
       <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
       Home / Stats
@@ -96,25 +97,19 @@
       <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
       Impact Stats
     </button>
-    <button class="tab-btn text-left px-4 py-3 rounded-xl text-sm font-medium cursor-pointer text-forest-600 hover:bg-forest-50" onclick="switchTab('programs', this)">
-      <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-      Programs
-    </button>
     <button class="tab-btn text-left px-4 py-3 rounded-xl text-sm font-medium cursor-pointer text-forest-600 hover:bg-forest-50" onclick="switchTab('contact-info', this)">
       <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
       Contact Info
-    </button>
-    <button class="tab-btn text-left px-4 py-3 rounded-xl text-sm font-medium cursor-pointer text-forest-600 hover:bg-forest-50" onclick="switchTab('gallery', this)">
-      <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
-      Gallery / Images
     </button>
     <button class="tab-btn text-left px-4 py-3 rounded-xl text-sm font-medium cursor-pointer text-forest-600 hover:bg-forest-50" onclick="switchTab('donations', this)">
       <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
       Donations / Bank
     </button>
-    <button class="tab-btn text-left px-4 py-3 rounded-xl text-sm font-medium cursor-pointer text-forest-600 hover:bg-forest-50" onclick="switchTab('resources', this)">
-      <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/><path d="M14 2v5h5"/></svg>
-      Reports &amp; Media
+
+    <div class="px-4 pt-5 pb-1 text-[10px] font-bold uppercase tracking-widest text-forest-400">Content</div>
+    <button class="tab-btn text-left px-4 py-3 rounded-xl text-sm font-medium cursor-pointer text-forest-600 hover:bg-forest-50" onclick="switchTab('programs', this)">
+      <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Programs
     </button>
     <button class="tab-btn text-left px-4 py-3 rounded-xl text-sm font-medium cursor-pointer text-forest-600 hover:bg-forest-50" onclick="switchTab('talks', this)">
       <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="15" x="2" y="4.5" rx="2"/><path d="m10 8.5 6 3.5-6 3.5z"/></svg>
@@ -132,10 +127,6 @@
       <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/></svg>
       Corporate / Interns
     </button>
-    <button class="tab-btn text-left px-4 py-3 rounded-xl text-sm font-medium cursor-pointer text-forest-600 hover:bg-forest-50" onclick="switchTab('photos', this)">
-      <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
-      Photo Gallery
-    </button>
     <button class="tab-btn text-left px-4 py-3 rounded-xl text-sm font-medium cursor-pointer text-forest-600 hover:bg-forest-50" onclick="switchTab('events', this)">
       <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><path d="M3 10h18M8 2v4M16 2v4"/></svg>
       Events
@@ -144,17 +135,27 @@
       <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
       Community Impact
     </button>
+    <button class="tab-btn text-left px-4 py-3 rounded-xl text-sm font-medium cursor-pointer text-forest-600 hover:bg-forest-50" onclick="switchTab('photos', this)">
+      <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+      Photo Gallery
+    </button>
     <button class="tab-btn text-left px-4 py-3 rounded-xl text-sm font-medium cursor-pointer text-forest-600 hover:bg-forest-50" onclick="switchTab('videos', this)">
       <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 8-6 4 6 4V8Z"/><rect width="14" height="12" x="2" y="6" rx="2" ry="2"/></svg>
       Videos
     </button>
-    <button class="tab-btn text-left px-4 py-3 rounded-xl text-sm font-medium cursor-pointer text-forest-600 hover:bg-forest-50" onclick="switchTab('settings', this)">
-      <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
-      Settings
+    <button class="tab-btn text-left px-4 py-3 rounded-xl text-sm font-medium cursor-pointer text-forest-600 hover:bg-forest-50" onclick="switchTab('resources', this)">
+      <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/><path d="M14 2v5h5"/></svg>
+      Reports &amp; Media
+    </button>
+
+    <div class="px-4 pt-5 pb-1 text-[10px] font-bold uppercase tracking-widest text-forest-400">Configure</div>
+    <button class="tab-btn text-left px-4 py-3 rounded-xl text-sm font-medium cursor-pointer text-forest-600 hover:bg-forest-50" onclick="switchTab('gallery', this)">
+      <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+      Website Images
     </button>
     <button class="tab-btn text-left px-4 py-3 rounded-xl text-sm font-medium cursor-pointer text-forest-600 hover:bg-forest-50" onclick="switchTab('submissions', this); loadSubmissions();">
       <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg>
-      Submissions
+      Inquiry
     </button>
   </nav>
   <div class="p-4 border-t border-forest-100">
@@ -904,20 +905,35 @@
       <strong>Tip:</strong> Paste any YouTube link (watch, youtu.be or embed). The thumbnail loads automatically. The homepage video section stays hidden until you add at least one video. Click <strong>Save Changes</strong> to publish.</div>
   </section>
 
-  <!-- ═══ SETTINGS ═══ -->
-  <section id="tab-settings" class="tab-content" aria-labelledby="set-tab-heading">
-    <div class="flex items-center justify-between mb-8">
+  <!-- ═══ INQUIRY (submissions + settings) ═══ -->
+  <section id="tab-submissions" class="tab-content" aria-labelledby="sub-tab-heading">
+    <div class="flex items-center justify-between mb-6">
       <div>
-        <h1 id="set-tab-heading" class="font-serif text-2xl text-forest-800">Website Settings</h1>
-        <p class="text-forest-500 text-sm mt-1">Turn website features on or off.</p>
+        <h1 id="sub-tab-heading" class="font-serif text-2xl text-forest-800">Inquiries</h1>
+        <p class="text-forest-500 text-sm mt-1">Everyone who filled a form on the website, with call / WhatsApp / email shortcuts and CSV export.</p>
       </div>
-      <button onclick="saveSection('settings')" class="save-btn bg-forest-600 hover:bg-forest-700 text-white px-6 py-2.5 rounded-xl font-semibold text-sm cursor-pointer shadow">Save Changes</button>
+      <div class="flex items-center gap-4">
+        <button onclick="exportSubs()" class="text-sm text-forest-700 hover:text-forest-900 font-semibold cursor-pointer inline-flex items-center gap-1.5">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+          Export CSV
+        </button>
+        <button onclick="loadSubmissions()" class="text-sm text-forest-700 hover:text-forest-900 font-semibold cursor-pointer inline-flex items-center gap-1.5">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+          Refresh
+        </button>
+      </div>
     </div>
-    <div class="bg-white rounded-3xl p-6 border border-forest-100 max-w-xl">
+
+    <!-- Configure (moved from the old Settings tab) -->
+    <div class="bg-white rounded-3xl p-6 border border-forest-100 mb-6">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="font-semibold text-forest-800 text-sm uppercase tracking-wide">Configure</h2>
+        <button onclick="saveSection('settings')" class="save-btn bg-forest-600 hover:bg-forest-700 text-white px-4 py-1.5 rounded-lg font-semibold text-xs cursor-pointer shadow">Save Settings</button>
+      </div>
       <div class="mb-6">
         <label class="block text-xs font-semibold text-forest-600 mb-1.5">Where form submissions are emailed</label>
-        <input type="email" id="set-notify" placeholder="you@example.com" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream"/>
-        <p class="text-xs text-forest-400 mt-1.5">Every form on the site (volunteer, corporate, drop point, pickup, contact) emails a copy here and is saved in the Submissions tab. If you change this address, the new inbox gets one activation email from FormSubmit; click its link once to start receiving.</p>
+        <input type="email" id="set-notify" placeholder="you@example.com" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream max-w-xl"/>
+        <p class="text-xs text-forest-400 mt-1.5">Every form on the site (volunteer, corporate, drop point, pickup, contact) emails a copy here and is saved below. If you change this address, the new inbox gets one activation email from FormSubmit; click its link once to start receiving.</p>
       </div>
       <label class="flex items-start gap-4 cursor-pointer">
         <input type="checkbox" id="set-pickup" checked class="mt-1 w-5 h-5 accent-[#256b49] cursor-pointer"/>
@@ -927,23 +943,9 @@
         </span>
       </label>
     </div>
-  </section>
 
-
-  <!-- ═══ SUBMISSIONS ═══ -->
-  <section id="tab-submissions" class="tab-content" aria-labelledby="sub-tab-heading">
-    <div class="flex items-center justify-between mb-6">
-      <div>
-        <h1 id="sub-tab-heading" class="font-serif text-2xl text-forest-800">Submissions</h1>
-        <p class="text-forest-500 text-sm mt-1">Everyone who filled a form on the website. Grouped by what they want.</p>
-      </div>
-      <button onclick="loadSubmissions()" class="text-sm text-forest-700 hover:text-forest-900 font-semibold cursor-pointer inline-flex items-center gap-1.5">
-        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
-        Refresh
-      </button>
-    </div>
     <div id="sub-filter" class="flex flex-wrap gap-2 mb-5"></div>
-    <div id="sub-list" class="space-y-3"><div class="text-forest-400 text-sm">Loading submissions...</div></div>
+    <div id="sub-list" class="overflow-x-auto"><div class="text-forest-400 text-sm">Loading inquiries...</div></div>
   </section>
 
 </main>
@@ -2217,31 +2219,77 @@
   }
   function setSubFilter(k){ subFilter = k; renderSubFilter(); renderSubs(); }
 
+  var SUB_HIDE_KEYS = ['name', 'full_name', 'phone', 'mobile', 'email'];
+  function waNumber(phone) {
+    var digits = String(phone || '').replace(/[^0-9]/g, '');
+    if (!digits) return '';
+    if (digits.length === 10) return '91' + digits;               // bare 10-digit Indian number
+    if (digits.length === 11 && digits.charAt(0) === '0') return '91' + digits.slice(1);
+    return digits;                                                 // already has country code
+  }
+  var CALL_ICON = '<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.11 12 19.79 19.79 0 0 1 1.07 3.38 2 2 0 0 1 3.05 1.2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.09 8.9a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21 15.91z"/></svg>';
+  var WA_ICON = '<svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 0 1 8.413 3.488 11.824 11.824 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 0 0 1.51 5.26l-.999 3.648 3.978-1.607zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.767.966-.941 1.164-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>';
+  var MAIL_ICON = '<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>';
+
   function renderSubs() {
     var rows = subCache.filter(function (s) { return !s.archived && (subFilter === 'all' || s.type === subFilter); });
     var list = document.getElementById('sub-list');
-    if (!rows.length) { list.innerHTML = '<div class="text-forest-400 text-sm">No submissions yet.</div>'; return; }
-    list.innerHTML = rows.map(function (s) {
+    if (!rows.length) { list.innerHTML = '<div class="text-forest-400 text-sm">No inquiries yet.</div>'; return; }
+    var body = rows.map(function (s) {
       var d = s.data || {};
-      var fields = Object.keys(d).map(function (k) {
-        return '<div class="flex gap-2"><span class="text-forest-400 min-w-[92px] shrink-0">' + esc2(niceKey(k)) + '</span><span class="text-forest-800 break-words">' + esc2(d[k]) + '</span></div>';
-      }).join('');
-      var phone = d.phone || d.mobile || '';
-      var email = d.email || '';
-      return '<div class="bg-white rounded-2xl border border-forest-100 p-4">' +
-        '<div class="flex items-start justify-between gap-3 mb-2">' +
-          '<div><span class="inline-block bg-forest-100 text-forest-700 text-[11px] font-bold px-2 py-0.5 rounded-full">' + esc2(labelFor(s.type)) + '</span>' +
-          '<span class="text-forest-400 text-xs ml-2">' + esc2(fmtDate(s.created_at)) + '</span></div>' +
-          '<div class="flex items-center gap-2 shrink-0">' +
-            (phone ? '<a href="https://wa.me/' + esc2(String(phone).replace(/[^0-9]/g,'')) + '" target="_blank" rel="noopener" class="text-[11px] font-semibold text-green-600 hover:text-green-800">WhatsApp</a>' : '') +
-            (email ? '<a href="mailto:' + esc2(email) + '" class="text-[11px] font-semibold text-forest-600 hover:text-forest-800">Email</a>' : '') +
-            '<button onclick="archiveSub(\'' + s.id + '\')" class="text-[11px] font-semibold text-forest-400 hover:text-forest-700" title="Mark as done">Done</button>' +
-            '<button onclick="deleteSub(\'' + s.id + '\')" class="text-[11px] font-semibold text-red-400 hover:text-red-600" title="Delete">Delete</button>' +
-          '</div>' +
-        '</div>' +
-        '<div class="text-sm space-y-1">' + fields + '</div>' +
-      '</div>';
+      var phone = String(d.phone || d.mobile || '').trim();
+      var email = String(d.email || '').trim();
+      var name = d.name || d.full_name || '-';
+      var wa = waNumber(phone);
+      var details = Object.keys(d).filter(function (k) { return SUB_HIDE_KEYS.indexOf(k) === -1; })
+        .map(function (k) { return '<span class="text-forest-400">' + esc2(niceKey(k)) + ':</span> ' + esc2(d[k]); }).join('<br>');
+      var contact = '';
+      if (phone) {
+        contact += '<div class="flex items-center gap-2 whitespace-nowrap"><a href="tel:' + esc2(phone) + '" class="text-forest-800 hover:text-forest-900 font-medium">' + esc2(phone) + '</a>' +
+          '<a href="tel:' + esc2(phone) + '" title="Call" class="text-forest-500 hover:text-forest-700">' + CALL_ICON + '</a>' +
+          (wa ? '<a href="https://wa.me/' + esc2(wa) + '" target="_blank" rel="noopener" title="WhatsApp" class="text-green-600 hover:text-green-800">' + WA_ICON + '</a>' : '') +
+          '</div>';
+      }
+      if (email) {
+        contact += '<div class="flex items-center gap-2 whitespace-nowrap mt-1"><a href="mailto:' + esc2(email) + '" class="text-forest-600 hover:text-forest-800 text-xs">' + esc2(email) + '</a>' +
+          '<a href="mailto:' + esc2(email) + '" title="Email" class="text-forest-500 hover:text-forest-700">' + MAIL_ICON + '</a></div>';
+      }
+      if (!contact) contact = '<span class="text-forest-300 text-xs">-</span>';
+      return '<tr class="border-b border-forest-50 align-top">' +
+        '<td class="py-3 pr-3 text-xs text-forest-500 whitespace-nowrap">' + esc2(fmtDate(s.created_at)) + '</td>' +
+        '<td class="py-3 pr-3"><span class="inline-block bg-forest-100 text-forest-700 text-[11px] font-bold px-2 py-0.5 rounded-full whitespace-nowrap">' + esc2(labelFor(s.type)) + '</span></td>' +
+        '<td class="py-3 pr-3 text-sm font-semibold text-forest-800 whitespace-nowrap">' + esc2(name) + '</td>' +
+        '<td class="py-3 pr-3 text-sm">' + contact + '</td>' +
+        '<td class="py-3 pr-3 text-xs text-forest-600 min-w-[200px] max-w-[320px]">' + (details || '<span class="text-forest-300">-</span>') + '</td>' +
+        '<td class="py-3 text-right whitespace-nowrap"><button onclick="archiveSub(\'' + s.id + '\')" class="text-[11px] font-semibold text-forest-400 hover:text-forest-700 mr-3" title="Mark as done">Done</button><button onclick="deleteSub(\'' + s.id + '\')" class="text-[11px] font-semibold text-red-400 hover:text-red-600" title="Delete">Delete</button></td>' +
+        '</tr>';
     }).join('');
+    list.innerHTML = '<table class="w-full text-left border-collapse min-w-[760px]">' +
+      '<thead><tr class="text-[11px] uppercase tracking-wide text-forest-400 border-b border-forest-100">' +
+        '<th class="py-2 pr-3 font-semibold">Date</th><th class="py-2 pr-3 font-semibold">Type</th><th class="py-2 pr-3 font-semibold">Name</th><th class="py-2 pr-3 font-semibold">Contact</th><th class="py-2 pr-3 font-semibold">Details</th><th class="py-2 font-semibold text-right">Actions</th>' +
+      '</tr></thead><tbody>' + body + '</tbody></table>';
+  }
+
+  function csvCell(v) { return '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"'; }
+  function exportSubs() {
+    var rows = subCache.filter(function (s) { return !s.archived && (subFilter === 'all' || s.type === subFilter); });
+    if (!rows.length) { alert('No inquiries to export.'); return; }
+    var keySet = {};
+    rows.forEach(function (s) { Object.keys(s.data || {}).forEach(function (k) { keySet[k] = 1; }); });
+    var keys = Object.keys(keySet);
+    var header = ['Date', 'Type'].concat(keys.map(niceKey));
+    var lines = [header.map(csvCell).join(',')];
+    rows.forEach(function (s) {
+      var d = s.data || {};
+      var row = [fmtDate(s.created_at), labelFor(s.type)].concat(keys.map(function (k) { return d[k] == null ? '' : d[k]; }));
+      lines.push(row.map(csvCell).join(','));
+    });
+    var blob = new Blob(['﻿' + lines.join('\r\n')], { type: 'text/csv;charset=utf-8;' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'inquiries-' + (subFilter === 'all' ? 'all' : subFilter) + '-' + new Date().toISOString().slice(0, 10) + '.csv';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
   }
 
   async function subAction(rpc, body, okThen) {
