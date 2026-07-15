@@ -313,6 +313,31 @@
         }
       }
 
+      /* Events (Events page: upcoming + past) */
+      var evUp = document.getElementById('events-upcoming');
+      var evPast = document.getElementById('events-past');
+      if (evUp || evPast) {
+        var evItems = (content.events && content.events.items) || [];
+        var eventCard = function (ev) {
+          var photo = ev.photo ? '<div class="aspect-[16/10] bg-green-50"><img src="' + esc(ev.photo) + '" alt="' + esc(ev.title) + '" class="w-full h-full object-cover"/></div>' : '';
+          var when = ev.when ? '<span class="inline-flex items-center gap-1 text-xs font-semibold text-green-600"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18M8 2v4M16 2v4"/></svg>' + esc(ev.when) + '</span>' : '';
+          var loc = ev.location ? '<div class="text-green-500 text-sm mt-1 inline-flex items-center gap-1"><svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>' + esc(ev.location) + '</div>' : '';
+          return '<article class="rounded-2xl border border-green-100 bg-white overflow-hidden flex flex-col shadow-sm">' + photo +
+            '<div class="p-5 flex-1 flex flex-col">' + when +
+              '<h3 class="text-lg font-semibold text-green-800 mt-1">' + esc(ev.title) + '</h3>' + loc +
+              (ev.description ? '<p class="text-green-600 text-sm mt-2 leading-relaxed flex-1">' + esc(ev.description) + '</p>' : '') +
+            '</div></article>';
+        };
+        var fillBucket = function (el, list) {
+          if (!el) return;
+          var sec = el.closest('section');
+          if (!list.length) { if (evItems.length && sec) sec.style.display = 'none'; return; }
+          el.innerHTML = list.map(eventCard).join('');
+        };
+        fillBucket(evUp, evItems.filter(function (e) { return (e.status || 'upcoming') === 'upcoming'; }));
+        fillBucket(evPast, evItems.filter(function (e) { return e.status === 'past'; }));
+      }
+
       /* Configurable notification email: point FormSubmit at the admin-set address */
       var notify = content.settings && content.settings.notify_email;
       if (notify && /@/.test(notify)) {

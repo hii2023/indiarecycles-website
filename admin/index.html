@@ -136,6 +136,10 @@
       <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
       Photo Gallery
     </button>
+    <button class="tab-btn text-left px-4 py-3 rounded-xl text-sm font-medium cursor-pointer text-forest-600 hover:bg-forest-50" onclick="switchTab('events', this)">
+      <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><path d="M3 10h18M8 2v4M16 2v4"/></svg>
+      Events
+    </button>
     <button class="tab-btn text-left px-4 py-3 rounded-xl text-sm font-medium cursor-pointer text-forest-600 hover:bg-forest-50" onclick="switchTab('settings', this)">
       <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
       Settings
@@ -823,6 +827,29 @@
       <strong>Tip:</strong> Photos are resized automatically on upload. Caption is optional. Click <strong>Save Changes</strong> to publish.</div>
   </section>
 
+  <!-- ═══ EVENTS ═══ -->
+  <section id="tab-events" class="tab-content" aria-labelledby="ev-tab-heading">
+    <div class="flex items-center justify-between mb-8">
+      <div>
+        <h1 id="ev-tab-heading" class="font-serif text-2xl text-forest-800">Events</h1>
+        <p class="text-forest-500 text-sm mt-1">Add each event with a title, date, location, description and photo. Set it as Upcoming or Past. Publishes to the Events page.</p>
+      </div>
+      <button onclick="saveSection('events')" class="save-btn bg-forest-600 hover:bg-forest-700 text-white px-6 py-2.5 rounded-xl font-semibold text-sm cursor-pointer shadow">Save Changes</button>
+    </div>
+    <div class="bg-white rounded-3xl p-6 border border-forest-100">
+      <div class="flex items-center justify-between mb-5">
+        <h2 class="font-semibold text-forest-800 text-sm uppercase tracking-wide">Events</h2>
+        <button onclick="addEvent()" class="bg-forest-50 hover:bg-forest-100 text-forest-700 px-4 py-2 rounded-xl text-sm font-semibold cursor-pointer inline-flex items-center gap-1.5">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Add Event
+        </button>
+      </div>
+      <div id="events-editor" class="grid sm:grid-cols-2 gap-4"></div>
+    </div>
+    <div class="mt-6 bg-amber-50 rounded-2xl px-5 py-4 border border-amber-100 text-sm text-amber-800">
+      <strong>Tip:</strong> Use the Upcoming/Past dropdown to place each event in the right section. Photo is optional. Click <strong>Save Changes</strong> to publish.</div>
+  </section>
+
   <!-- ═══ SETTINGS ═══ -->
   <section id="tab-settings" class="tab-content" aria-labelledby="set-tab-heading">
     <div class="flex items-center justify-between mb-8">
@@ -992,6 +1019,19 @@
       }).filter(function (g) { return g.photo; });
       return { items: gls };
     }
+    if (section === 'events') {
+      var evs = Array.from(document.querySelectorAll('#events-editor [data-event-card]')).map(function (c) {
+        return {
+          title:       c.querySelector('[data-title]').value.trim(),
+          when:        c.querySelector('[data-when]').value.trim(),
+          location:    c.querySelector('[data-location]').value.trim(),
+          description: c.querySelector('[data-desc]').value.trim(),
+          status:      c.querySelector('[data-status]').value,
+          photo:       c.querySelector('[data-photo]').value.trim()
+        };
+      }).filter(function (e) { return e.title || e.photo; });
+      return { items: evs };
+    }
     if (section === 'settings') {
       return { pickup_enabled: document.getElementById('set-pickup').checked, notify_email: (document.getElementById('set-notify').value || '').trim() };
     }
@@ -1096,6 +1136,7 @@
       if (cms.partners && Array.isArray(cms.partners.items)) renderPartners(cms.partners.items);
       if (cms.corporate && Array.isArray(cms.corporate.items)) renderCorporate(cms.corporate.items);
       if (cms.gallery && Array.isArray(cms.gallery.items)) renderGal(cms.gallery.items);
+      if (cms.events && Array.isArray(cms.events.items)) renderEvents(cms.events.items);
       if (cms.settings) { document.getElementById('set-pickup').checked = cms.settings.pickup_enabled !== false; if (cms.settings.notify_email) document.getElementById('set-notify').value = cms.settings.notify_email; }
       if (cms.images && typeof cms.images === 'object') {
         imageOverrides = Object.assign({}, cms.images);
@@ -1604,6 +1645,80 @@
     var file = input.files && input.files[0];
     if (!file) return;
     var card = input.closest('[data-gal-card]');
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      var img = new Image();
+      img.onload = function () {
+        var max = 900;
+        var w = img.width, h = img.height;
+        if (w > h && w > max) { h = Math.round(h * max / w); w = max; }
+        else if (h >= w && h > max) { w = Math.round(w * max / h); h = max; }
+        var c = document.createElement('canvas');
+        c.width = w; c.height = h;
+        c.getContext('2d').drawImage(img, 0, 0, w, h);
+        var url = c.toDataURL('image/jpeg', 0.82);
+        card.querySelector('[data-photo]').value = url;
+        card.querySelector('[data-photo-preview]').innerHTML = '<img src="' + url + '" class="w-full h-full object-cover"/>';
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  // ── Events editor ────────────────────────────────────────────
+  function eventCard(ev) {
+    ev = ev || {};
+    var photo = ev.photo || '';
+    var prev = photo && photo.indexOf('images/') === 0 ? '../' + photo : photo;
+    var preview = photo
+      ? '<img src="' + attrEsc(prev) + '" class="w-full h-full object-cover"/>'
+      : '<span class="text-[10px] text-forest-400 text-center px-2">No photo</span>';
+    var st = ev.status === 'past' ? 'past' : 'upcoming';
+    return '<div class="p-4 bg-cream rounded-2xl border border-forest-100" data-event-card>'
+      + '<div class="flex items-center justify-between mb-3">'
+      +   '<select data-status class="px-2.5 py-1 rounded-lg border border-forest-200 text-xs font-semibold text-forest-700 bg-white cursor-pointer">'
+      +     '<option value="upcoming"' + (st === 'upcoming' ? ' selected' : '') + '>Upcoming</option>'
+      +     '<option value="past"' + (st === 'past' ? ' selected' : '') + '>Past</option>'
+      +   '</select>'
+      +   '<div class="flex items-center gap-1">'
+      +     '<button onclick="moveEvent(this,-1)" class="w-7 h-7 bg-forest-50 hover:bg-forest-100 text-forest-600 rounded-lg flex items-center justify-center cursor-pointer" aria-label="Move up" title="Move up"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg></button>'
+      +     '<button onclick="moveEvent(this,1)" class="w-7 h-7 bg-forest-50 hover:bg-forest-100 text-forest-600 rounded-lg flex items-center justify-center cursor-pointer" aria-label="Move down" title="Move down"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>'
+      +     '<button onclick="removeEvent(this)" class="w-7 h-7 bg-red-50 hover:bg-red-100 text-red-400 rounded-lg flex items-center justify-center cursor-pointer" aria-label="Remove event">' + xIcon + '</button>'
+      +   '</div>'
+      + '</div>'
+      + '<div class="aspect-[16/10] w-full rounded-xl overflow-hidden bg-forest-50 border border-forest-200 flex items-center justify-center mb-1.5" data-photo-preview>' + preview + '</div>'
+      + '<label class="block text-center text-[11px] font-semibold text-forest-600 cursor-pointer hover:text-forest-800 mb-3">Upload photo (optional)<input type="file" accept="image/*" class="hidden" onchange="onEventPhoto(this)"/></label>'
+      + '<input type="hidden" data-photo value="' + attrEsc(photo) + '"/>'
+      + '<input type="text" data-title value="' + attrEsc(ev.title) + '" placeholder="Event title" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm font-semibold text-forest-800 bg-white mb-2"/>'
+      + '<div class="grid grid-cols-2 gap-2 mb-2">'
+      +   '<input type="text" data-when value="' + attrEsc(ev.when) + '" placeholder="Date (e.g. 15 Aug 2026)" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white"/>'
+      +   '<input type="text" data-location value="' + attrEsc(ev.location) + '" placeholder="Location" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white"/>'
+      + '</div>'
+      + '<textarea data-desc rows="2" placeholder="Short description" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white resize-none">' + textEsc(ev.description) + '</textarea>'
+      + '</div>';
+  }
+  function renderEvents(arr) {
+    document.getElementById('events-editor').innerHTML = (arr || []).map(eventCard).join('');
+  }
+  function addEvent() {
+    var wrap = document.getElementById('events-editor');
+    var div = document.createElement('div');
+    div.innerHTML = eventCard({});
+    var card = div.firstChild;
+    wrap.appendChild(card);
+    card.querySelector('[data-title]').focus();
+  }
+  function removeEvent(btn) { btn.closest('[data-event-card]').remove(); }
+  function moveEvent(btn, dir) {
+    var card = btn.closest('[data-event-card]');
+    var wrap = document.getElementById('events-editor');
+    if (dir < 0 && card.previousElementSibling) wrap.insertBefore(card, card.previousElementSibling);
+    if (dir > 0 && card.nextElementSibling) wrap.insertBefore(card.nextElementSibling, card);
+  }
+  function onEventPhoto(input) {
+    var file = input.files && input.files[0];
+    if (!file) return;
+    var card = input.closest('[data-event-card]');
     var reader = new FileReader();
     reader.onload = function (e) {
       var img = new Image();
