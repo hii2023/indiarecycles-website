@@ -202,6 +202,9 @@
       }
       var talksEl = document.getElementById('talks-list');
       if (talksEl) {
+        /* IR page main image (configurable) */
+        var talkImg = content.talks && content.talks.image;
+        if (talkImg) { var irHero = document.querySelector('img[data-img-key="ir-talks-1"]'); if (irHero) irHero.src = talkImg; }
         var talks = (content.talks && content.talks.items) || [];
         if (talks.length) {
           talksEl.innerHTML = talks.map(function (t) {
@@ -215,19 +218,19 @@
             } else if (poster) {
               media = '<div class="aspect-video bg-green-50"><img src="' + poster + '" alt="" class="w-full h-full object-cover"/></div>';
             }
-            var host = '';
-            if (t.host_name || t.host_url) {
-              var hn = esc(t.host_name || 'Host');
-              host = '<div class="mt-4 pt-4 border-t border-green-100 text-sm text-green-600">Featuring ' +
-                (t.host_url ? '<a href="' + esc(t.host_url) + '" target="_blank" rel="noopener noreferrer" class="text-green-700 font-semibold hover:underline">' + hn + '</a>' : '<span class="text-green-700 font-semibold">' + hn + '</span>') +
-                '</div>';
+            var parts = [];
+            if (t.host_name) parts.push('<div><span class="text-green-400">Host:</span> <span class="text-green-700 font-semibold">' + esc(t.host_name) + '</span></div>');
+            if (t.guest_name) {
+              var g = t.guest_url ? '<a href="' + esc(t.guest_url) + '" target="_blank" rel="noopener noreferrer" class="text-green-700 font-semibold hover:underline">' + esc(t.guest_name) + '</a>' : '<span class="text-green-700 font-semibold">' + esc(t.guest_name) + '</span>';
+              parts.push('<div><span class="text-green-400">Guest:</span> ' + g + '</div>');
             }
+            var meta = parts.length ? '<div class="mt-4 pt-4 border-t border-green-100 text-sm text-green-600 space-y-0.5">' + parts.join('') + '</div>' : '';
             return '<article class="rounded-2xl border border-green-100 overflow-hidden bg-white flex flex-col shadow-sm">' +
               media +
               '<div class="p-5 flex-1 flex flex-col">' +
                 '<h3 class="text-lg font-semibold text-green-800">' + esc(t.title) + '</h3>' +
-                (t.description ? '<p class="text-green-600 text-sm mt-2 leading-relaxed flex-1">' + esc(t.description) + '</p>' : '') +
-                host +
+                (t.description ? '<p class="text-green-600 text-sm mt-2 leading-relaxed flex-1" style="white-space:pre-line">' + esc(t.description) + '</p>' : '') +
+                meta +
               '</div></article>';
           }).join('');
           talksEl.addEventListener('click', function (e) {
@@ -318,14 +321,26 @@
       var evPast = document.getElementById('events-past');
       if (evUp || evPast) {
         var evItems = (content.events && content.events.items) || [];
+        var PIN = '<svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>';
         var eventCard = function (ev) {
+          var idx = evItems.indexOf(ev);
           var photo = ev.photo ? '<div class="aspect-[16/10] bg-green-50"><img src="' + esc(ev.photo) + '" alt="' + esc(ev.title) + '" class="w-full h-full object-cover"/></div>' : '';
-          var when = ev.when ? '<span class="inline-flex items-center gap-1 text-xs font-semibold text-green-600"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18M8 2v4M16 2v4"/></svg>' + esc(ev.when) + '</span>' : '';
-          var loc = ev.location ? '<div class="text-green-500 text-sm mt-1 inline-flex items-center gap-1"><svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>' + esc(ev.location) + '</div>' : '';
-          return '<article class="rounded-2xl border border-green-100 bg-white overflow-hidden flex flex-col shadow-sm">' + photo +
+          var whenBits = [];
+          if (ev.when) whenBits.push(esc(ev.when));
+          if (ev.time) whenBits.push(esc(ev.time));
+          var when = whenBits.length ? '<span class="inline-flex items-center gap-1 text-xs font-semibold text-green-600"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18M8 2v4M16 2v4"/></svg>' + whenBits.join(' &middot; ') + '</span>' : '';
+          var loc = '';
+          if (ev.location_link) {
+            loc = '<a href="' + esc(ev.location_link) + '" target="_blank" rel="noopener noreferrer" class="text-green-600 hover:text-green-800 text-sm mt-1 inline-flex items-center gap-1 font-medium">' + PIN + (ev.location ? esc(ev.location) : 'Directions') + '<span class="text-green-500">&nbsp;&rarr;</span></a>';
+          } else if (ev.location) {
+            loc = '<div class="text-green-500 text-sm mt-1 inline-flex items-center gap-1">' + PIN + esc(ev.location) + '</div>';
+          }
+          var share = '<button type="button" class="ir-ev-share mt-3 self-start inline-flex items-center gap-1.5 text-xs font-semibold text-green-700 hover:text-green-900 cursor-pointer" data-title="' + esc(ev.title) + '" data-anchor="event-' + idx + '"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>Share</button>';
+          return '<article id="event-' + idx + '" class="rounded-2xl border border-green-100 bg-white overflow-hidden flex flex-col shadow-sm scroll-mt-24">' + photo +
             '<div class="p-5 flex-1 flex flex-col">' + when +
               '<h3 class="text-lg font-semibold text-green-800 mt-1">' + esc(ev.title) + '</h3>' + loc +
-              (ev.description ? '<p class="text-green-600 text-sm mt-2 leading-relaxed flex-1">' + esc(ev.description) + '</p>' : '') +
+              (ev.description ? '<p class="text-green-600 text-sm mt-2 leading-relaxed flex-1" style="white-space:pre-line">' + esc(ev.description) + '</p>' : '<div class="flex-1"></div>') +
+              share +
             '</div></article>';
         };
         var fillBucket = function (el, list) {
@@ -336,6 +351,14 @@
         };
         fillBucket(evUp, evItems.filter(function (e) { return (e.status || 'upcoming') === 'upcoming'; }));
         fillBucket(evPast, evItems.filter(function (e) { return e.status === 'past'; }));
+        document.addEventListener('click', function (e) {
+          var b = e.target.closest('.ir-ev-share');
+          if (!b) return;
+          var url = location.origin + location.pathname + '#' + b.getAttribute('data-anchor');
+          var title = b.getAttribute('data-title');
+          if (navigator.share) { navigator.share({ title: title, text: title + ' - India Recycles', url: url }).catch(function () {}); }
+          else if (navigator.clipboard) { navigator.clipboard.writeText(url); var o = b.innerHTML; b.innerHTML = 'Link copied'; setTimeout(function () { b.innerHTML = o; }, 1500); }
+        });
       }
 
       /* Community Impact causes (Our Impact page) */
@@ -349,7 +372,7 @@
             return '<article class="rounded-2xl border border-green-100 bg-white overflow-hidden flex flex-col shadow-sm">' + photo +
               '<div class="p-5 flex-1 flex flex-col">' +
                 '<h3 class="text-lg font-semibold text-green-800">' + esc(cu.name) + '</h3>' + loc +
-                (cu.description ? '<p class="text-green-600 text-sm mt-2 leading-relaxed flex-1">' + esc(cu.description) + '</p>' : '') +
+                (cu.description ? '<p class="text-green-600 text-sm mt-2 leading-relaxed flex-1" style="white-space:pre-line">' + esc(cu.description) + '</p>' : '') +
               '</div></article>';
           }).join('');
         }

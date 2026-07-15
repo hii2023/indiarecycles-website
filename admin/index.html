@@ -726,8 +726,18 @@
     </div>
 
     <div class="bg-white rounded-3xl p-6 border border-forest-100 mb-6">
-      <label class="block text-sm font-semibold text-forest-700 mb-2">Section description</label>
-      <textarea id="talks-desc" rows="3" placeholder="Short intro shown at the top of the IR Talks page" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white resize-none"></textarea>
+      <div class="grid md:grid-cols-[220px_1fr] gap-5 items-start">
+        <div>
+          <label class="block text-sm font-semibold text-forest-700 mb-2">Main image (IR page)</label>
+          <div class="aspect-[16/10] rounded-xl overflow-hidden bg-forest-50 border border-forest-200 flex items-center justify-center" id="talks-image-preview"><span class="text-[10px] text-forest-400 text-center px-2">Using default image</span></div>
+          <label class="mt-1.5 block text-center text-[11px] font-semibold text-forest-600 cursor-pointer hover:text-forest-800">Upload image<input type="file" accept="image/*" class="hidden" onchange="onTalksImagePick(this)"/></label>
+          <input type="hidden" id="talks-image" value=""/>
+        </div>
+        <div>
+          <label class="block text-sm font-semibold text-forest-700 mb-2">Main description</label>
+          <textarea id="talks-desc" rows="6" placeholder="Intro shown at the top of the IR Talks page (line breaks are kept)" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white resize-none"></textarea>
+        </div>
+      </div>
     </div>
 
     <div class="bg-white rounded-3xl p-6 border border-forest-100">
@@ -1029,10 +1039,15 @@
           video:       c.querySelector('[data-video]').value.trim(),
           photo:       c.querySelector('[data-photo]').value.trim(),
           host_name:   c.querySelector('[data-host-name]').value.trim(),
-          host_url:    c.querySelector('[data-host-url]').value.trim()
+          guest_name:  c.querySelector('[data-guest-name]').value.trim(),
+          guest_url:   c.querySelector('[data-guest-url]').value.trim()
         };
       }).filter(function (t) { return t.title || t.video || t.photo; });
-      return { description: (document.getElementById('talks-desc').value || '').trim(), items: talks };
+      return {
+        description: (document.getElementById('talks-desc').value || '').trim(),
+        image: (document.getElementById('talks-image').value || '').trim(),
+        items: talks
+      };
     }
     if (section === 'testimonials') {
       var tms = Array.from(document.querySelectorAll('#testimonials-editor [data-tm-card]')).map(function (c) {
@@ -1078,12 +1093,14 @@
     if (section === 'events') {
       var evs = Array.from(document.querySelectorAll('#events-editor [data-event-card]')).map(function (c) {
         return {
-          title:       c.querySelector('[data-title]').value.trim(),
-          when:        c.querySelector('[data-when]').value.trim(),
-          location:    c.querySelector('[data-location]').value.trim(),
-          description: c.querySelector('[data-desc]').value.trim(),
-          status:      c.querySelector('[data-status]').value,
-          photo:       c.querySelector('[data-photo]').value.trim()
+          title:         c.querySelector('[data-title]').value.trim(),
+          when:          c.querySelector('[data-when]').value.trim(),
+          time:          c.querySelector('[data-time]').value.trim(),
+          location:      c.querySelector('[data-location]').value.trim(),
+          location_link: c.querySelector('[data-location-link]').value.trim(),
+          description:   c.querySelector('[data-desc]').value.trim(),
+          status:        c.querySelector('[data-status]').value,
+          photo:         c.querySelector('[data-photo]').value.trim()
         };
       }).filter(function (e) { return e.title || e.photo; });
       return { items: evs };
@@ -1207,6 +1224,11 @@
       if (cms.media && Array.isArray(cms.media.items)) renderMedia(cms.media.items);
       if (cms.talks) {
         if (typeof cms.talks.description === 'string') document.getElementById('talks-desc').value = cms.talks.description;
+        if (typeof cms.talks.image === 'string' && cms.talks.image) {
+          document.getElementById('talks-image').value = cms.talks.image;
+          var tip = cms.talks.image.indexOf('images/') === 0 ? '../' + cms.talks.image : cms.talks.image;
+          document.getElementById('talks-image-preview').innerHTML = '<img src="' + tip + '" class="w-full h-full object-cover"/>';
+        }
         if (Array.isArray(cms.talks.items)) renderTalks(cms.talks.items);
       }
       if (cms.testimonials && Array.isArray(cms.testimonials.items)) renderTestimonials(cms.testimonials.items);
@@ -1432,15 +1454,38 @@
       + '<input type="hidden" data-photo value="' + attrEsc(photo) + '"/>'
       + '<input type="text" data-title value="' + attrEsc(t.title) + '" placeholder="Talk title" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm font-semibold text-forest-800 bg-white mb-2"/>'
       + '<input type="text" data-video value="' + attrEsc(t.video) + '" placeholder="YouTube link (https://youtu.be/...)" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white mb-2"/>'
-      + '<textarea data-desc rows="2" placeholder="Short description" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white resize-none mb-2">' + textEsc(t.description) + '</textarea>'
+      + '<textarea data-desc rows="3" placeholder="Description (line breaks are kept)" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white resize-none mb-2">' + textEsc(t.description) + '</textarea>'
+      + '<input type="text" data-host-name value="' + attrEsc(t.host_name) + '" placeholder="Host name" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white mb-2"/>'
       + '<div class="grid grid-cols-2 gap-2">'
-      +   '<input type="text" data-host-name value="' + attrEsc(t.host_name) + '" placeholder="Host name" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white"/>'
-      +   '<input type="text" data-host-url value="' + attrEsc(t.host_url) + '" placeholder="Host link (website)" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white"/>'
+      +   '<input type="text" data-guest-name value="' + attrEsc(t.guest_name) + '" placeholder="Guest name" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white"/>'
+      +   '<input type="text" data-guest-url value="' + attrEsc(t.guest_url) + '" placeholder="Guest link (website)" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white"/>'
       + '</div>'
       + '</div>';
   }
   function renderTalks(arr) {
     document.getElementById('talks-editor').innerHTML = (arr || []).map(talkCard).join('');
+  }
+  function onTalksImagePick(input) {
+    var file = input.files && input.files[0];
+    if (!file) return;
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      var img = new Image();
+      img.onload = function () {
+        var max = 1400;
+        var w = img.width, h = img.height;
+        if (w > h && w > max) { h = Math.round(h * max / w); w = max; }
+        else if (h >= w && h > max) { w = Math.round(w * max / h); h = max; }
+        var c = document.createElement('canvas');
+        c.width = w; c.height = h;
+        c.getContext('2d').drawImage(img, 0, 0, w, h);
+        var url = c.toDataURL('image/jpeg', 0.82);
+        document.getElementById('talks-image').value = url;
+        document.getElementById('talks-image-preview').innerHTML = '<img src="' + url + '" class="w-full h-full object-cover"/>';
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
   }
   function addTalk() {
     var wrap = document.getElementById('talks-editor');
@@ -1771,9 +1816,11 @@
       + '<input type="text" data-title value="' + attrEsc(ev.title) + '" placeholder="Event title" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm font-semibold text-forest-800 bg-white mb-2"/>'
       + '<div class="grid grid-cols-2 gap-2 mb-2">'
       +   '<input type="text" data-when value="' + attrEsc(ev.when) + '" placeholder="Date (e.g. 15 Aug 2026)" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white"/>'
-      +   '<input type="text" data-location value="' + attrEsc(ev.location) + '" placeholder="Location" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white"/>'
+      +   '<input type="text" data-time value="' + attrEsc(ev.time) + '" placeholder="Time (e.g. 10 AM - 2 PM)" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white"/>'
       + '</div>'
-      + '<textarea data-desc rows="2" placeholder="Short description" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white resize-none">' + textEsc(ev.description) + '</textarea>'
+      + '<input type="text" data-location value="' + attrEsc(ev.location) + '" placeholder="Location (shown as text)" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white mb-2"/>'
+      + '<input type="text" data-location-link value="' + attrEsc(ev.location_link) + '" placeholder="Map / directions link (optional)" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white mb-2"/>'
+      + '<textarea data-desc rows="3" placeholder="Description (line breaks are kept)" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white resize-none">' + textEsc(ev.description) + '</textarea>'
       + '</div>';
   }
   function renderEvents(arr) {

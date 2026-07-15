@@ -254,6 +254,38 @@
       <h2 id="team-heading" class="text-4xl text-green-800">Our Team</h2>
       <p class="text-green-600 mt-3 max-w-xl mx-auto">Passionate individuals driving a sustainable future for India's textile ecosystem.</p>
     </div>
+    <div class="grid sm:grid-cols-2 gap-8 max-w-2xl mx-auto mb-12">
+      <div class="bg-white rounded-3xl overflow-hidden border border-green-100 card-lift cursor-default">
+        <div class="photo-zoom aspect-[3/4]">
+          <img data-img-key="about-us-4" src="images/team1.jpg" alt="Renu Pokharna - Co-Founder, India Recycles" class="w-full h-full object-cover object-top"/>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl text-green-800 mb-1">Renu Pokharna</h3>
+          <p class="text-green-700 text-sm font-semibold mb-2">Co-Founder</p>
+          <p class="text-green-600 text-sm leading-relaxed">Renu holds a degree in public policy from Columbia University, New York, served as a Chief Minister's Fellow in Gujarat and worked at a social enterprise in Uganda.</p>
+          <button type="button" onclick="var p=this.nextElementSibling,h=p.classList.toggle('hidden');this.querySelector('span').textContent=h?'Read more':'Show less';this.querySelector('svg').style.transform=h?'':'rotate(180deg)';" class="mt-2 inline-flex items-center gap-1 text-green-700 font-semibold text-sm cursor-pointer">
+            <span>Read more</span>
+            <svg class="w-3.5 h-3.5 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <p class="hidden mt-2 text-green-600 text-sm leading-relaxed">Published in The Wall Street Journal, she returned to India in 2017 and founded India Recycles from a single clothing swap in Ahmedabad. She leads strategy, fundraising and external partnerships.</p>
+        </div>
+      </div>
+      <div class="bg-white rounded-3xl overflow-hidden border border-green-100 card-lift cursor-default">
+        <div class="photo-zoom aspect-[3/4]">
+          <img data-img-key="about-us-5" src="images/team2.jpg" alt="Pranav Gupta - Co-Founder, India Recycles" class="w-full h-full object-cover object-top"/>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl text-green-800 mb-1">Pranav Gupta</h3>
+          <p class="text-green-700 text-sm font-semibold mb-2">Co-Founder</p>
+          <p class="text-green-600 text-sm leading-relaxed">Pranav is a CSR and sustainability policy specialist who joined as co-founder to drive operational execution.</p>
+          <button type="button" onclick="var p=this.nextElementSibling,h=p.classList.toggle('hidden');this.querySelector('span').textContent=h?'Read more':'Show less';this.querySelector('svg').style.transform=h?'':'rotate(180deg)';" class="mt-2 inline-flex items-center gap-1 text-green-700 font-semibold text-sm cursor-pointer">
+            <span>Read more</span>
+            <svg class="w-3.5 h-3.5 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <p class="hidden mt-2 text-green-600 text-sm leading-relaxed">He manages stakeholder partnerships, volunteer coordination and day-to-day programs including community sales, medical camps and upcycling initiatives across Ahmedabad and Vadodara.</p>
+        </div>
+      </div>
+    </div>
     <div class="text-center mb-12">
       <a href="meet-the-team.html" class="inline-flex items-center gap-2 bg-white border border-green-200 hover:border-green-400 text-green-800 px-8 py-4 rounded-2xl font-semibold transition-colors cursor-pointer shadow-sm">
         Meet the Entire Team
@@ -367,7 +399,7 @@
   });
 </script>
 
-<script src="js/cms.js?v=9"></script>
+<script src="js/cms.js?v=10"></script>
 
 <script src="js/transitions.js?v=4"></script>
 <div class="ir-sticky-cta lg:hidden" role="navigation" aria-label="Quick actions">
