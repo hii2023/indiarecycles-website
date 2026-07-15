@@ -194,6 +194,54 @@
         }
       }
 
+      /* IR Talks (India Recycles Talks page) */
+      function ytId(u) {
+        if (!u) return '';
+        var m = String(u).match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/|v\/))([A-Za-z0-9_-]{6,})/);
+        return m ? m[1] : '';
+      }
+      var talksEl = document.getElementById('talks-list');
+      if (talksEl) {
+        var talks = (content.talks && content.talks.items) || [];
+        if (talks.length) {
+          talksEl.innerHTML = talks.map(function (t) {
+            var vid = ytId(t.video);
+            var poster = t.photo ? esc(t.photo) : (vid ? 'https://img.youtube.com/vi/' + vid + '/hqdefault.jpg' : '');
+            var media = '';
+            if (vid) {
+              media = '<button type="button" class="ir-talk-play group relative block w-full aspect-video bg-green-900 cursor-pointer" data-embed="https://www.youtube.com/embed/' + vid + '?autoplay=1&rel=0" aria-label="Play video">' +
+                (poster ? '<img src="' + poster + '" alt="" class="w-full h-full object-cover"/>' : '') +
+                '<span class="absolute inset-0 flex items-center justify-center"><span class="w-16 h-16 rounded-full bg-red-600 flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform"><svg class="w-7 h-7 text-white ml-1" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></span></button>';
+            } else if (poster) {
+              media = '<div class="aspect-video bg-green-50"><img src="' + poster + '" alt="" class="w-full h-full object-cover"/></div>';
+            }
+            var host = '';
+            if (t.host_name || t.host_url) {
+              var hn = esc(t.host_name || 'Host');
+              host = '<div class="mt-4 pt-4 border-t border-green-100 text-sm text-green-600">Featuring ' +
+                (t.host_url ? '<a href="' + esc(t.host_url) + '" target="_blank" rel="noopener noreferrer" class="text-green-700 font-semibold hover:underline">' + hn + '</a>' : '<span class="text-green-700 font-semibold">' + hn + '</span>') +
+                '</div>';
+            }
+            return '<article class="rounded-2xl border border-green-100 overflow-hidden bg-white flex flex-col shadow-sm">' +
+              media +
+              '<div class="p-5 flex-1 flex flex-col">' +
+                '<h3 class="text-lg font-semibold text-green-800">' + esc(t.title) + '</h3>' +
+                (t.description ? '<p class="text-green-600 text-sm mt-2 leading-relaxed flex-1">' + esc(t.description) + '</p>' : '') +
+                host +
+              '</div></article>';
+          }).join('');
+          talksEl.addEventListener('click', function (e) {
+            var btn = e.target.closest('.ir-talk-play');
+            if (!btn) return;
+            var src = btn.getAttribute('data-embed');
+            var wrap = document.createElement('div');
+            wrap.className = 'aspect-video';
+            wrap.innerHTML = '<iframe src="' + src + '" class="w-full h-full" style="border:0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+            btn.replaceWith(wrap);
+          });
+        }
+      }
+
       /* Configurable notification email: point FormSubmit at the admin-set address */
       var notify = content.settings && content.settings.notify_email;
       if (notify && /@/.test(notify)) {
