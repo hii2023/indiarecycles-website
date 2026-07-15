@@ -301,6 +301,18 @@
         }
       }
 
+      /* Photo gallery (Our Impact page) */
+      var galEl = document.getElementById('gallery-list');
+      if (galEl) {
+        var gal = (content.gallery && content.gallery.items) || [];
+        if (gal.length) {
+          galEl.innerHTML = gal.map(function (g) {
+            var cap = g.caption ? '<div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent p-3"><span class="text-white text-xs font-medium">' + esc(g.caption) + '</span></div>' : '';
+            return '<div class="relative rounded-3xl overflow-hidden aspect-square"><img src="' + esc(g.photo) + '" alt="' + esc(g.caption || '') + '" class="w-full h-full object-cover"/>' + cap + '</div>';
+          }).join('');
+        }
+      }
+
       /* Configurable notification email: point FormSubmit at the admin-set address */
       var notify = content.settings && content.settings.notify_email;
       if (notify && /@/.test(notify)) {
