@@ -117,7 +117,11 @@
     </button>
     <button class="tab-btn text-left px-4 py-3 rounded-xl text-sm font-medium cursor-pointer text-forest-600 hover:bg-forest-50" onclick="switchTab('testimonials', this)">
       <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
-      Testimonials
+      Community Voices
+    </button>
+    <button class="tab-btn text-left px-4 py-3 rounded-xl text-sm font-medium cursor-pointer text-forest-600 hover:bg-forest-50" onclick="switchTab('collaborations', this)">
+      <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M13 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+      Collaboration
     </button>
     <button class="tab-btn text-left px-4 py-3 rounded-xl text-sm font-medium cursor-pointer text-forest-600 hover:bg-forest-50" onclick="switchTab('partners', this)">
       <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
@@ -754,27 +758,54 @@
       <strong>Tip:</strong> Paste any YouTube link (watch, youtu.be or embed). Photo is optional - if left blank the video thumbnail is used. Click <strong>Save Changes</strong> to publish - the IR Talks page updates instantly.</div>
   </section>
 
-  <!-- ═══ TESTIMONIALS ═══ -->
+  <!-- ═══ COMMUNITY VOICES ═══ -->
   <section id="tab-testimonials" class="tab-content" aria-labelledby="tm-tab-heading">
     <div class="flex items-center justify-between mb-8">
       <div>
-        <h1 id="tm-tab-heading" class="font-serif text-2xl text-forest-800">Testimonials</h1>
-        <p class="text-forest-500 text-sm mt-1">Add community voices with a photo, name, who they are and their quote. Publishes to the homepage "Community Voices" section.</p>
+        <h1 id="tm-tab-heading" class="font-serif text-2xl text-forest-800">Community Voices</h1>
+        <p class="text-forest-500 text-sm mt-1">Add a community voice with a photo, name, who they are and what they said. Publishes to the homepage "Community Voices" section.</p>
       </div>
       <button onclick="saveSection('testimonials')" class="save-btn bg-forest-600 hover:bg-forest-700 text-white px-6 py-2.5 rounded-xl font-semibold text-sm cursor-pointer shadow">Save Changes</button>
     </div>
     <div class="bg-white rounded-3xl p-6 border border-forest-100">
       <div class="flex items-center justify-between mb-5">
-        <h2 class="font-semibold text-forest-800 text-sm uppercase tracking-wide">Testimonials</h2>
+        <h2 class="font-semibold text-forest-800 text-sm uppercase tracking-wide">Community Voices</h2>
         <button onclick="addTestimonial()" class="bg-forest-50 hover:bg-forest-100 text-forest-700 px-4 py-2 rounded-xl text-sm font-semibold cursor-pointer inline-flex items-center gap-1.5">
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-          Add Testimonial
+          Add Community Voice
         </button>
       </div>
       <div id="testimonials-editor" class="grid sm:grid-cols-2 gap-4"></div>
     </div>
     <div class="mt-6 bg-amber-50 rounded-2xl px-5 py-4 border border-amber-100 text-sm text-amber-800">
       <strong>Tip:</strong> Photo is optional - if left blank, the person's initials are shown. Click <strong>Save Changes</strong> to publish.</div>
+  </section>
+
+  <!-- ═══ COLLABORATION ═══ -->
+  <section id="tab-collaborations" class="tab-content" aria-labelledby="cb-tab-heading">
+    <div class="flex items-center justify-between mb-8">
+      <div>
+        <h1 id="cb-tab-heading" class="font-serif text-2xl text-forest-800">Collaboration</h1>
+        <p class="text-forest-500 text-sm mt-1">Add each collaboration with a title, description, photo and the collaborator's logo. Publishes to the Collaboration page (under Activities).</p>
+      </div>
+      <button onclick="saveSection('collaborations')" class="save-btn bg-forest-600 hover:bg-forest-700 text-white px-6 py-2.5 rounded-xl font-semibold text-sm cursor-pointer shadow">Save Changes</button>
+    </div>
+    <div class="bg-white rounded-3xl p-6 border border-forest-100 mb-6">
+      <label for="collab-desc" class="block text-xs font-semibold text-forest-500 uppercase tracking-wide mb-2">Page intro</label>
+      <textarea id="collab-desc" rows="2" placeholder="Short line shown under the page title" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white resize-none"></textarea>
+    </div>
+    <div class="bg-white rounded-3xl p-6 border border-forest-100">
+      <div class="flex items-center justify-between mb-5">
+        <h2 class="font-semibold text-forest-800 text-sm uppercase tracking-wide">Collaborations</h2>
+        <button onclick="addCollab()" class="bg-forest-50 hover:bg-forest-100 text-forest-700 px-4 py-2 rounded-xl text-sm font-semibold cursor-pointer inline-flex items-center gap-1.5">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Add Collaboration
+        </button>
+      </div>
+      <div id="collaborations-editor" class="grid sm:grid-cols-2 gap-4"></div>
+    </div>
+    <div class="mt-6 bg-amber-50 rounded-2xl px-5 py-4 border border-amber-100 text-sm text-amber-800">
+      <strong>Tip:</strong> The photo is the big picture on the card; the logo is the collaborator's brand mark shown above the title. Both are optional. Click <strong>Save Changes</strong> to publish.</div>
   </section>
 
   <!-- ═══ PARTNERS ═══ -->
@@ -1060,6 +1091,17 @@
       }).filter(function (t) { return t.quote || t.name; });
       return { items: tms };
     }
+    if (section === 'collaborations') {
+      var cbs = Array.from(document.querySelectorAll('#collaborations-editor [data-collab-card]')).map(function (c) {
+        return {
+          title:       c.querySelector('[data-title]').value.trim(),
+          description: c.querySelector('[data-desc]').value.trim(),
+          photo:       c.querySelector('[data-photo]').value.trim(),
+          logo:        c.querySelector('[data-logo]').value.trim()
+        };
+      }).filter(function (c) { return c.title || c.photo || c.logo; });
+      return { description: (document.getElementById('collab-desc').value || '').trim(), items: cbs };
+    }
     if (section === 'partners') {
       var pns = Array.from(document.querySelectorAll('#partners-editor [data-partner-card]')).map(function (c) {
         return {
@@ -1232,6 +1274,10 @@
         if (Array.isArray(cms.talks.items)) renderTalks(cms.talks.items);
       }
       if (cms.testimonials && Array.isArray(cms.testimonials.items)) renderTestimonials(cms.testimonials.items);
+      if (cms.collaborations) {
+        if (typeof cms.collaborations.description === 'string') document.getElementById('collab-desc').value = cms.collaborations.description;
+        if (Array.isArray(cms.collaborations.items)) renderCollabs(cms.collaborations.items);
+      }
       if (cms.partners && Array.isArray(cms.partners.items)) renderPartners(cms.partners.items);
       if (cms.corporate && Array.isArray(cms.corporate.items)) renderCorporate(cms.corporate.items);
       if (cms.gallery && Array.isArray(cms.gallery.items)) renderGal(cms.gallery.items);
@@ -1598,6 +1644,88 @@
     };
     reader.readAsDataURL(file);
   }
+
+  // ── Collaborations editor ────────────────────────────────────
+  function collabCard(co) {
+    co = co || {};
+    function prevSrc(p) { return p && p.indexOf('images/') === 0 ? '../' + p : p; }
+    var photoPrev = co.photo
+      ? '<img src="' + attrEsc(prevSrc(co.photo)) + '" class="w-full h-full object-cover"/>'
+      : '<span class="text-[10px] text-forest-400">No photo</span>';
+    var logoPrev = co.logo
+      ? '<img src="' + attrEsc(prevSrc(co.logo)) + '" class="max-w-full max-h-full object-contain"/>'
+      : '<span class="text-[9px] text-forest-400 text-center px-1">No logo</span>';
+    return '<div class="p-4 bg-cream rounded-2xl border border-forest-100" data-collab-card>'
+      + '<div class="flex items-center justify-between mb-3">'
+      +   '<span class="text-xs font-semibold text-forest-500">Collaboration</span>'
+      +   '<div class="flex items-center gap-1">'
+      +     '<button onclick="moveCollab(this,-1)" class="w-7 h-7 bg-forest-50 hover:bg-forest-100 text-forest-600 rounded-lg flex items-center justify-center cursor-pointer" aria-label="Move up" title="Move up"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg></button>'
+      +     '<button onclick="moveCollab(this,1)" class="w-7 h-7 bg-forest-50 hover:bg-forest-100 text-forest-600 rounded-lg flex items-center justify-center cursor-pointer" aria-label="Move down" title="Move down"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>'
+      +     '<button onclick="removeCollab(this)" class="w-7 h-7 bg-red-50 hover:bg-red-100 text-red-400 rounded-lg flex items-center justify-center cursor-pointer" aria-label="Remove collaboration">' + xIcon + '</button>'
+      +   '</div>'
+      + '</div>'
+      + '<div class="grid grid-cols-3 gap-3 mb-3">'
+      +   '<div class="col-span-2">'
+      +     '<div class="h-24 rounded-xl overflow-hidden bg-white border border-forest-200 flex items-center justify-center" data-collab-photo-preview>' + photoPrev + '</div>'
+      +     '<label class="mt-1.5 block text-center text-[11px] font-semibold text-forest-600 cursor-pointer hover:text-forest-800">Upload photo<input type="file" accept="image/*" class="hidden" onchange="onCollabPhoto(this)"/></label>'
+      +     '<input type="hidden" data-photo value="' + attrEsc(co.photo) + '"/>'
+      +   '</div>'
+      +   '<div>'
+      +     '<div class="h-24 rounded-xl overflow-hidden bg-white border border-forest-200 flex items-center justify-center p-2" data-collab-logo-preview>' + logoPrev + '</div>'
+      +     '<label class="mt-1.5 block text-center text-[11px] font-semibold text-forest-600 cursor-pointer hover:text-forest-800">Upload logo<input type="file" accept="image/*" class="hidden" onchange="onCollabLogo(this)"/></label>'
+      +     '<input type="hidden" data-logo value="' + attrEsc(co.logo) + '"/>'
+      +   '</div>'
+      + '</div>'
+      + '<input type="text" data-title value="' + attrEsc(co.title) + '" placeholder="Collaboration title" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm font-semibold text-forest-800 bg-white mb-2"/>'
+      + '<textarea data-desc rows="3" placeholder="Description" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white resize-none">' + textEsc(co.description) + '</textarea>'
+      + '</div>';
+  }
+  function renderCollabs(arr) {
+    document.getElementById('collaborations-editor').innerHTML = (arr || []).map(collabCard).join('');
+  }
+  function addCollab() {
+    var wrap = document.getElementById('collaborations-editor');
+    var div = document.createElement('div');
+    div.innerHTML = collabCard({});
+    var card = div.firstChild;
+    wrap.appendChild(card);
+    card.querySelector('[data-title]').focus();
+  }
+  function removeCollab(btn) { btn.closest('[data-collab-card]').remove(); }
+  function moveCollab(btn, dir) {
+    var card = btn.closest('[data-collab-card]');
+    var wrap = document.getElementById('collaborations-editor');
+    if (dir < 0 && card.previousElementSibling) wrap.insertBefore(card, card.previousElementSibling);
+    if (dir > 0 && card.nextElementSibling) wrap.insertBefore(card.nextElementSibling, card);
+  }
+  // kind: 'photo' (cover, JPEG 900px) or 'logo' (brand mark, PNG 400px so transparency survives)
+  function collabPick(input, kind) {
+    var file = input.files && input.files[0];
+    if (!file) return;
+    var card = input.closest('[data-collab-card]');
+    var isLogo = kind === 'logo';
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      var img = new Image();
+      img.onload = function () {
+        var max = isLogo ? 400 : 900;
+        var w = img.width, h = img.height;
+        if (w > h && w > max) { h = Math.round(h * max / w); w = max; }
+        else if (h >= w && h > max) { w = Math.round(w * max / h); h = max; }
+        var c = document.createElement('canvas');
+        c.width = w; c.height = h;
+        c.getContext('2d').drawImage(img, 0, 0, w, h);
+        var url = isLogo ? c.toDataURL('image/png') : c.toDataURL('image/jpeg', 0.82);
+        card.querySelector(isLogo ? '[data-logo]' : '[data-photo]').value = url;
+        card.querySelector(isLogo ? '[data-collab-logo-preview]' : '[data-collab-photo-preview]').innerHTML =
+          '<img src="' + url + '" class="' + (isLogo ? 'max-w-full max-h-full object-contain' : 'w-full h-full object-cover') + '"/>';
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+  function onCollabPhoto(input) { collabPick(input, 'photo'); }
+  function onCollabLogo(input) { collabPick(input, 'logo'); }
 
   // ── Partners editor ──────────────────────────────────────────
   function partnerCard(p) {
@@ -1969,7 +2097,7 @@
   }
 
   // Every image usage on the site (one editable slot per location), built from the pages.
-  const IMAGE_SLOTS = [{"key":"logo.png","page":"All pages","file":"logo.png","label":"Site logo"},{"key":"about-us-1","page":"About Us","file":"event2.jpg","label":"India Recycles community event"},{"key":"about-us-2","page":"About Us","file":"event3.jpg","label":"India Recycles team at a community event"},{"key":"about-us-3","page":"About Us","file":"event3.jpg","label":"India Recycles team at a community event"},{"key":"about-us-4","page":"About Us","file":"team1.jpg","label":"Renu Pokharna - Co-Founder, India Recycles"},{"key":"about-us-5","page":"About Us","file":"team2.jpg","label":"Pranav Gupta - Co-Founder, India Recycles"},{"key":"about-us-6","page":"About Us","file":"impact8.jpg","label":"Background / photo (impact8.jpg)"},{"key":"contact-1","page":"Contact","file":"event3.jpg","label":"India Recycles team"},{"key":"donate-1","page":"Donate","file":"impact8.jpg","label":"India Recycles community"},{"key":"donate-2","page":"Donate","file":"donation-qr.png","label":"India Recycles UPI QR Code"},{"key":"drop-locations-1","page":"Drop Locations","file":"event1.jpg","label":"Drop location at India Recycles"},{"key":"impact-calculator-1","page":"Impact Calculator","file":"event1.jpg","label":"India Recycles community slum sale"},{"key":"index-1","page":"Home","file":"event1.jpg","label":"India Recycles community event"},{"key":"index-2","page":"Home","file":"event1.jpg","label":"India Recycles community event"},{"key":"index-3","page":"Home","file":"event2.jpg","label":"India Recycles community slum sale event"},{"key":"index-4","page":"Home","file":"event2.jpg","label":"India Recycles community slum sale event"},{"key":"index-5","page":"Home","file":"model1.jpg","label":"Donate clothes at collection points"},{"key":"index-6","page":"Home","file":"model2.jpg","label":"Sorting and cleaning donated clothes"},{"key":"index-7","page":"Home","file":"model3.jpg","label":"Weekly slum sale event"},{"key":"index-8","page":"Home","file":"model4.jpg","label":"Zero waste upcycling process"},{"key":"index-9","page":"Home","file":"impact4.png","label":"Medical camps for slum communities"},{"key":"index-10","page":"Home","file":"impact5.png","label":"Students supported through scholarships"},{"key":"index-11","page":"Home","file":"sdg.png","label":"India Recycles SDG alignment"},{"key":"index-12","page":"Home","file":"carbon.png","label":"Carbon footprint impact"},{"key":"index-13","page":"Home","file":"testimonial1.png","label":"Volunteer testimonial screenshot"},{"key":"index-14","page":"Home","file":"testimonial2.png","label":"Volunteer testimonial screenshot"},{"key":"index-15","page":"Home","file":"testimonial3.png","label":"Community member testimonial screenshot"},{"key":"index-16","page":"Home","file":"testimonial4.png","label":"Community member testimonial screenshot"},{"key":"index-17","page":"Home","file":"gallery1.png","label":"India Recycles slum sale"},{"key":"index-18","page":"Home","file":"gallery2.png","label":"Community event at India Recycles"},{"key":"index-19","page":"Home","file":"gallery3.png","label":"Community members at slum sale"},{"key":"index-20","page":"Home","file":"model5.jpg","label":"Clothes sorting volunteers"},{"key":"index-21","page":"Home","file":"model6.jpg","label":"Volunteers preparing clothes"},{"key":"index-22","page":"Home","file":"zw1.jpg","label":"ReVibe upcycled products"},{"key":"index-23","page":"Home","file":"godadi2.jpg","label":"Godadi mattress project"},{"key":"index-24","page":"Home","file":"event2.jpg","label":"India Recycles community event"},{"key":"index-25","page":"Home","file":"revibe1.jpg","label":"ReVibe upcycled apparel products"},{"key":"index-26","page":"Home","file":"partners.png","label":"India Recycles mission partners logos"},{"key":"meet-the-team-1","page":"Meet the Team","file":"event1.jpg","label":"India Recycles volunteers at a community event"},{"key":"meet-the-team-2","page":"Meet the Team","file":"team1.jpg","label":"Renu Pokharna - Co-Founder, India Recycles"},{"key":"meet-the-team-3","page":"Meet the Team","file":"team2.jpg","label":"Pranav Gupta - Co-Founder, India Recycles"},{"key":"our-impact-1","page":"Our Impact","file":"impact8.jpg","label":"India Recycles community impact"},{"key":"our-impact-2","page":"Our Impact","file":"impact1.jpg","label":"India Recycles community event"},{"key":"our-impact-3","page":"Our Impact","file":"impact2.jpg","label":"Volunteers at India Recycles"},{"key":"our-impact-4","page":"Our Impact","file":"impact3.jpg","label":"Medical camp beneficiaries"},{"key":"our-impact-5","page":"Our Impact","file":"impact4.png","label":"Community at India Recycles slum sale"},{"key":"our-impact-6","page":"Our Impact","file":"sdg.png","label":"UN SDGs supported by India Recycles"},{"key":"our-impact-7","page":"Our Impact","file":"carbon.png","label":"Carbon footprint reduction"},{"key":"our-impact-8","page":"Our Impact","file":"impact5.png","label":"Medical camp by India Recycles"},{"key":"our-impact-9","page":"Our Impact","file":"impact6.jpg","label":"Education scholarships by India Recycles"},{"key":"our-impact-10","page":"Our Impact","file":"impact7.jpg","label":"Women livelihood by India Recycles"},{"key":"our-impact-11","page":"Our Impact","file":"testimonial1.png","label":"Community member testimonial"},{"key":"our-impact-12","page":"Our Impact","file":"testimonial2.png","label":"Volunteer testimonial"},{"key":"our-impact-13","page":"Our Impact","file":"testimonial3.png","label":"Donor testimonial"},{"key":"our-impact-14","page":"Our Impact","file":"testimonial4.png","label":"Slum sale buyer testimonial"},{"key":"our-impact-15","page":"Our Impact","file":"impact2.jpg","label":"Background / photo (impact2.jpg)"},{"key":"our-model-1","page":"Our Model","file":"model1.jpg","label":"India Recycles clothes sorting and distribution"},{"key":"our-model-2","page":"Our Model","file":"model2.jpg","label":"India Recycles slum sale event"},{"key":"our-model-3","page":"Our Model","file":"model2.jpg","label":"India Recycles slum sale event"},{"key":"our-model-4","page":"Our Model","file":"model3.jpg","label":"India Recycles yearly sale event"},{"key":"our-model-5","page":"Our Model","file":"model3.jpg","label":"India Recycles yearly sale event"},{"key":"our-model-6","page":"Our Model","file":"model4.jpg","label":"Sorted clothing ready for sale"},{"key":"our-model-7","page":"Our Model","file":"model5.jpg","label":"Volunteer sorting donations"},{"key":"our-model-8","page":"Our Model","file":"model6.jpg","label":"Clothes collection drive"},{"key":"our-model-9","page":"Our Model","file":"revibe1.jpg","label":"ReVibe upcycled products"},{"key":"our-partners-1","page":"Our Partners","file":"event2.jpg","label":"India Recycles partners"},{"key":"our-partners-2","page":"Our Partners","file":"partners_picture7_orig.png","label":"Government, NGO and Educational partners of India Recycles"},{"key":"our-partners-3","page":"Our Partners","file":"partners_picture6_orig.png","label":"Corporate partners hosting India Recycles drop boxes"},{"key":"our-partners-4","page":"Our Partners","file":"partners_picture8_orig.png","label":"Hospitality sector partners of India Recycles"},{"key":"our-partners-5","page":"Our Partners","file":"partners_96_orig.png","label":"Design partners collaborating with India Recycles on ReVibe"},{"key":"revibe-1","page":"ReVibe","file":"revibe1.jpg","label":"ReVibe upcycled products"},{"key":"revibe-2","page":"ReVibe","file":"revibe1.jpg","label":"ReVibe upcycled products"},{"key":"revibe-3","page":"ReVibe","file":"revibe2.png","label":"ReVibe artisans at work"},{"key":"revibe-4","page":"ReVibe","file":"revibe3.jpg","label":"ReVibe upcycled goods"},{"key":"volunteer-1","page":"Join Us (Volunteer)","file":"event3.jpg","label":"India Recycles volunteers helping at a community event"},{"key":"zero-waste-promise-1","page":"Zero Waste","file":"zw1.jpg","label":"Zero waste textile upcycling"},{"key":"zero-waste-promise-2","page":"Zero Waste","file":"revibe1.jpg","label":"ReVibe upcycled shoes"},{"key":"zero-waste-promise-3","page":"Zero Waste","file":"revibe2.png","label":"ReVibe product range"},{"key":"zero-waste-promise-4","page":"Zero Waste","file":"godadi1.jpg","label":"Godadi mattress being made"},{"key":"zero-waste-promise-5","page":"Zero Waste","file":"godadi2.jpg","label":"Women making Godadi mattresses"},{"key":"zero-waste-promise-6","page":"Zero Waste","file":"zw3.jpg","label":"Background / photo (zw3.jpg)"}];
+  const IMAGE_SLOTS = [{"key":"logo.png","page":"All pages","file":"logo.png","label":"Site logo"},{"key":"about-us-1","page":"About Us","file":"event2.jpg","label":"India Recycles community event"},{"key":"about-us-2","page":"About Us","file":"event3.jpg","label":"India Recycles team at a community event"},{"key":"about-us-3","page":"About Us","file":"event3.jpg","label":"India Recycles team at a community event"},{"key":"about-us-4","page":"About Us","file":"team1.jpg","label":"Renu Pokharna - Co-Founder, India Recycles"},{"key":"about-us-5","page":"About Us","file":"team2.jpg","label":"Pranav Gupta - Co-Founder, India Recycles"},{"key":"about-us-6","page":"About Us","file":"impact8.jpg","label":"Background / photo (impact8.jpg)"},{"key":"contact-1","page":"Contact","file":"event3.jpg","label":"India Recycles team"},{"key":"donate-1","page":"Donate","file":"impact8.jpg","label":"India Recycles community"},{"key":"donate-2","page":"Donate","file":"donation-qr.png","label":"India Recycles UPI QR Code"},{"key":"drop-locations-1","page":"Drop Locations","file":"event1.jpg","label":"Drop location at India Recycles"},{"key":"impact-calculator-1","page":"Impact Calculator","file":"event1.jpg","label":"India Recycles community slum sale"},{"key":"collaborations-1","page":"Collaboration","file":"event2.jpg","label":"India Recycles collaborations"},{"key":"index-1","page":"Home","file":"event1.jpg","label":"India Recycles community event"},{"key":"index-2","page":"Home","file":"event1.jpg","label":"India Recycles community event"},{"key":"index-3","page":"Home","file":"event2.jpg","label":"India Recycles community slum sale event"},{"key":"index-4","page":"Home","file":"event2.jpg","label":"India Recycles community slum sale event"},{"key":"index-5","page":"Home","file":"model1.jpg","label":"Donate clothes at collection points"},{"key":"index-6","page":"Home","file":"model2.jpg","label":"Sorting and cleaning donated clothes"},{"key":"index-7","page":"Home","file":"model3.jpg","label":"Weekly community sale event"},{"key":"index-8","page":"Home","file":"model4.jpg","label":"Zero waste upcycling process"},{"key":"index-27","page":"Home","file":"model5.jpg","label":"Thrift sale event for urban audiences"},{"key":"index-28","page":"Home","file":"revibe1.jpg","label":"ReVibe upcycled products"},{"key":"index-9","page":"Home","file":"impact4.png","label":"Medical camps for slum communities"},{"key":"index-10","page":"Home","file":"impact5.png","label":"Students supported through scholarships"},{"key":"index-11","page":"Home","file":"sdg.png","label":"India Recycles SDG alignment"},{"key":"index-12","page":"Home","file":"carbon.png","label":"Carbon footprint impact"},{"key":"index-13","page":"Home","file":"testimonial1.png","label":"Volunteer testimonial screenshot"},{"key":"index-14","page":"Home","file":"testimonial2.png","label":"Volunteer testimonial screenshot"},{"key":"index-15","page":"Home","file":"testimonial3.png","label":"Community member testimonial screenshot"},{"key":"index-16","page":"Home","file":"testimonial4.png","label":"Community member testimonial screenshot"},{"key":"index-17","page":"Home","file":"gallery1.png","label":"India Recycles slum sale"},{"key":"index-18","page":"Home","file":"gallery2.png","label":"Community event at India Recycles"},{"key":"index-19","page":"Home","file":"gallery3.png","label":"Community members at slum sale"},{"key":"index-20","page":"Home","file":"model5.jpg","label":"Clothes sorting volunteers"},{"key":"index-21","page":"Home","file":"model6.jpg","label":"Volunteers preparing clothes"},{"key":"index-22","page":"Home","file":"zw1.jpg","label":"ReVibe upcycled products"},{"key":"index-23","page":"Home","file":"godadi2.jpg","label":"Godadi mattress project"},{"key":"index-24","page":"Home","file":"event2.jpg","label":"India Recycles community event"},{"key":"index-25","page":"Home","file":"revibe1.jpg","label":"ReVibe upcycled apparel products"},{"key":"index-26","page":"Home","file":"partners.png","label":"India Recycles mission partners logos"},{"key":"meet-the-team-1","page":"Meet the Team","file":"event1.jpg","label":"India Recycles volunteers at a community event"},{"key":"meet-the-team-2","page":"Meet the Team","file":"team1.jpg","label":"Renu Pokharna - Co-Founder, India Recycles"},{"key":"meet-the-team-3","page":"Meet the Team","file":"team2.jpg","label":"Pranav Gupta - Co-Founder, India Recycles"},{"key":"our-impact-1","page":"Our Impact","file":"impact8.jpg","label":"India Recycles community impact"},{"key":"our-impact-2","page":"Our Impact","file":"impact1.jpg","label":"India Recycles community event"},{"key":"our-impact-3","page":"Our Impact","file":"impact2.jpg","label":"Volunteers at India Recycles"},{"key":"our-impact-4","page":"Our Impact","file":"impact3.jpg","label":"Medical camp beneficiaries"},{"key":"our-impact-5","page":"Our Impact","file":"impact4.png","label":"Community at India Recycles slum sale"},{"key":"our-impact-6","page":"Our Impact","file":"sdg.png","label":"UN SDGs supported by India Recycles"},{"key":"our-impact-7","page":"Our Impact","file":"carbon.png","label":"Carbon footprint reduction"},{"key":"our-impact-8","page":"Our Impact","file":"impact5.png","label":"Medical camp by India Recycles"},{"key":"our-impact-9","page":"Our Impact","file":"impact6.jpg","label":"Education scholarships by India Recycles"},{"key":"our-impact-10","page":"Our Impact","file":"impact7.jpg","label":"Women livelihood by India Recycles"},{"key":"our-impact-11","page":"Our Impact","file":"testimonial1.png","label":"Community member testimonial"},{"key":"our-impact-12","page":"Our Impact","file":"testimonial2.png","label":"Volunteer testimonial"},{"key":"our-impact-13","page":"Our Impact","file":"testimonial3.png","label":"Donor testimonial"},{"key":"our-impact-14","page":"Our Impact","file":"testimonial4.png","label":"Slum sale buyer testimonial"},{"key":"our-impact-15","page":"Our Impact","file":"impact2.jpg","label":"Background / photo (impact2.jpg)"},{"key":"our-model-1","page":"Our Model","file":"model1.jpg","label":"India Recycles clothes sorting and distribution"},{"key":"our-model-2","page":"Our Model","file":"model2.jpg","label":"India Recycles community sale event"},{"key":"our-model-3","page":"Our Model","file":"model2.jpg","label":"India Recycles community sale event"},{"key":"our-model-4","page":"Our Model","file":"model3.jpg","label":"India Recycles thrift sale event"},{"key":"our-model-5","page":"Our Model","file":"model3.jpg","label":"India Recycles thrift sale event"},{"key":"our-model-6","page":"Our Model","file":"model4.jpg","label":"Sorted clothing ready for sale"},{"key":"our-model-7","page":"Our Model","file":"model5.jpg","label":"Volunteer sorting donations"},{"key":"our-model-8","page":"Our Model","file":"model6.jpg","label":"Clothes collection drive"},{"key":"our-model-9","page":"Our Model","file":"revibe1.jpg","label":"ReVibe upcycled products"},{"key":"our-partners-1","page":"Our Partners","file":"event2.jpg","label":"India Recycles partners"},{"key":"our-partners-2","page":"Our Partners","file":"partners_picture7_orig.png","label":"Government, NGO and Educational partners of India Recycles"},{"key":"our-partners-3","page":"Our Partners","file":"partners_picture6_orig.png","label":"Corporate partners hosting India Recycles drop boxes"},{"key":"our-partners-4","page":"Our Partners","file":"partners_picture8_orig.png","label":"Hospitality sector partners of India Recycles"},{"key":"our-partners-5","page":"Our Partners","file":"partners_96_orig.png","label":"Design partners collaborating with India Recycles on ReVibe"},{"key":"revibe-1","page":"ReVibe","file":"revibe1.jpg","label":"ReVibe upcycled products"},{"key":"revibe-2","page":"ReVibe","file":"revibe1.jpg","label":"ReVibe upcycled products"},{"key":"revibe-3","page":"ReVibe","file":"revibe2.png","label":"ReVibe artisans at work"},{"key":"revibe-4","page":"ReVibe","file":"revibe3.jpg","label":"ReVibe upcycled goods"},{"key":"volunteer-1","page":"Join Us (Volunteer)","file":"event3.jpg","label":"India Recycles volunteers helping at a community event"},{"key":"zero-waste-promise-1","page":"Zero Waste","file":"zw1.jpg","label":"Zero waste textile upcycling"},{"key":"zero-waste-promise-2","page":"Zero Waste","file":"revibe1.jpg","label":"ReVibe upcycled shoes"},{"key":"zero-waste-promise-3","page":"Zero Waste","file":"revibe2.png","label":"ReVibe product range"},{"key":"zero-waste-promise-4","page":"Zero Waste","file":"godadi1.jpg","label":"Godadi mattress being made"},{"key":"zero-waste-promise-5","page":"Zero Waste","file":"godadi2.jpg","label":"Women making Godadi mattresses"},{"key":"zero-waste-promise-6","page":"Zero Waste","file":"zw3.jpg","label":"Background / photo (zw3.jpg)"}];
 
   // ── Image replacement (filename -> published URL) ─────────────
   // Uploads go through the passcode-checked `admin-upload-image` edge function

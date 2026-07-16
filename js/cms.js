@@ -361,6 +361,23 @@
         });
       }
 
+      /* Collaborations (Collaboration page) */
+      var collabEl = document.getElementById('collaborations-list');
+      if (collabEl) {
+        var collabs = (content.collaborations && content.collaborations.items) || [];
+        if (collabs.length) {
+          collabEl.innerHTML = collabs.map(function (co) {
+            var photo = co.photo ? '<div class="aspect-[16/10] bg-green-50"><img src="' + esc(co.photo) + '" alt="' + esc(co.title) + '" class="w-full h-full object-cover"/></div>' : '';
+            var logo = co.logo ? '<div class="h-12 flex items-center mb-3"><img src="' + esc(co.logo) + '" alt="' + esc(co.title) + ' logo" class="max-h-12 max-w-[60%] object-contain object-left"/></div>' : '';
+            return '<article class="rounded-2xl border border-green-100 bg-white overflow-hidden flex flex-col shadow-sm">' + photo +
+              '<div class="p-5 flex-1 flex flex-col">' + logo +
+                '<h3 class="text-lg font-semibold text-green-800">' + esc(co.title) + '</h3>' +
+                (co.description ? '<p class="text-green-600 text-sm mt-2 leading-relaxed flex-1" style="white-space:pre-line">' + esc(co.description) + '</p>' : '') +
+              '</div></article>';
+          }).join('');
+        }
+      }
+
       /* Community Impact causes (Our Impact page) */
       var causesEl = document.getElementById('causes-list');
       if (causesEl) {
