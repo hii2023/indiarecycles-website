@@ -101,6 +101,10 @@
       <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
       Contact Info
     </button>
+    <button class="tab-btn text-left px-4 py-3 rounded-xl text-sm font-medium cursor-pointer text-forest-600 hover:bg-forest-50" onclick="switchTab('social', this)">
+      <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+      Social Links
+    </button>
     <button class="tab-btn text-left px-4 py-3 rounded-xl text-sm font-medium cursor-pointer text-forest-600 hover:bg-forest-50" onclick="switchTab('donations', this)">
       <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
       Donations / Bank
@@ -786,6 +790,53 @@
       <strong>Tip:</strong> Photo is optional - if left blank, the person's initials are shown. Click <strong>Save Changes</strong> to publish.</div>
   </section>
 
+  <!-- ═══ SOCIAL LINKS ═══ -->
+  <section id="tab-social" class="tab-content" aria-labelledby="so-tab-heading">
+    <div class="flex items-center justify-between mb-8">
+      <div>
+        <h1 id="so-tab-heading" class="font-serif text-2xl text-forest-800">Social Links</h1>
+        <p class="text-forest-500 text-sm mt-1">Paste the link to each account. Only the ones with a link show up as icons at the bottom of every page - leave a box empty to hide that icon.</p>
+      </div>
+      <button onclick="saveSection('social')" class="save-btn bg-forest-600 hover:bg-forest-700 text-white px-6 py-2.5 rounded-xl font-semibold text-sm cursor-pointer shadow">Save Changes</button>
+    </div>
+    <div class="bg-white rounded-3xl p-6 border border-forest-100 space-y-4">
+      <div class="flex items-center gap-3">
+        <span class="w-9 h-9 shrink-0 rounded-xl bg-forest-50 text-forest-600 flex items-center justify-center"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></span>
+        <label for="social-instagram" class="w-24 shrink-0 text-sm font-semibold text-forest-700">Instagram</label>
+        <input type="url" id="social-instagram" placeholder="https://www.instagram.com/..." class="flex-1 px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white"/>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="w-9 h-9 shrink-0 rounded-xl bg-forest-50 text-forest-600 flex items-center justify-center"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></span>
+        <label for="social-facebook" class="w-24 shrink-0 text-sm font-semibold text-forest-700">Facebook</label>
+        <input type="url" id="social-facebook" placeholder="https://www.facebook.com/..." class="flex-1 px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white"/>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="w-9 h-9 shrink-0 rounded-xl bg-forest-50 text-forest-600 flex items-center justify-center"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg></span>
+        <label for="social-linkedin" class="w-24 shrink-0 text-sm font-semibold text-forest-700">LinkedIn</label>
+        <input type="url" id="social-linkedin" placeholder="https://www.linkedin.com/company/..." class="flex-1 px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white"/>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="w-9 h-9 shrink-0 rounded-xl bg-forest-50 text-forest-600 flex items-center justify-center"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.96-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#fff"/></svg></span>
+        <label for="social-youtube" class="w-24 shrink-0 text-sm font-semibold text-forest-700">YouTube</label>
+        <input type="url" id="social-youtube" placeholder="https://www.youtube.com/@..." class="flex-1 px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white"/>
+      </div>
+      <div class="pt-4 border-t border-forest-100">
+        <div class="flex items-center gap-3">
+          <span class="w-9 h-9 shrink-0 rounded-xl bg-forest-50 text-forest-600 flex items-center justify-center"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
+          <label for="social-other" class="w-24 shrink-0 text-sm font-semibold text-forest-700">Other</label>
+          <input type="url" id="social-other" placeholder="https://..." class="flex-1 px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white"/>
+        </div>
+        <div class="flex items-center gap-3 mt-2">
+          <span class="w-9 h-9 shrink-0"></span>
+          <label for="social-other-name" class="w-24 shrink-0 text-xs text-forest-500">Its name</label>
+          <input type="text" id="social-other-name" placeholder="e.g. WhatsApp Channel, X (Twitter), Threads" class="flex-1 px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white"/>
+        </div>
+      </div>
+    </div>
+    <div class="mt-6 bg-amber-50 rounded-2xl px-5 py-4 border border-amber-100 text-sm text-amber-800">
+      <strong>Tip:</strong> Paste the full link including <strong>https://</strong>. "Other" shows a globe icon and uses the name you type as its tooltip. Click <strong>Save Changes</strong> to publish.</div>
+  </section>
+
   <!-- ═══ ACTIVITIES PAGE ═══ -->
   <section id="tab-activities" class="tab-content" aria-labelledby="ac-tab-heading">
     <div class="flex items-center justify-between mb-8">
@@ -1123,6 +1174,17 @@
       }).filter(function (t) { return t.quote || t.name; });
       return { items: tms };
     }
+    if (section === 'social') {
+      var val = function (id) { return (document.getElementById(id).value || '').trim(); };
+      return {
+        instagram:  val('social-instagram'),
+        facebook:   val('social-facebook'),
+        linkedin:   val('social-linkedin'),
+        youtube:    val('social-youtube'),
+        other:      val('social-other'),
+        other_name: val('social-other-name')
+      };
+    }
     if (section === 'activities') {
       return {
         image: (document.getElementById('activities-image').value || '').trim(),
@@ -1312,6 +1374,13 @@
         if (Array.isArray(cms.talks.items)) renderTalks(cms.talks.items);
       }
       if (cms.testimonials && Array.isArray(cms.testimonials.items)) renderTestimonials(cms.testimonials.items);
+      if (cms.social) {
+        [['instagram', 'social-instagram'], ['facebook', 'social-facebook'], ['linkedin', 'social-linkedin'],
+         ['youtube', 'social-youtube'], ['other', 'social-other'], ['other_name', 'social-other-name']]
+          .forEach(function (p) {
+            if (typeof cms.social[p[0]] === 'string') document.getElementById(p[1]).value = cms.social[p[0]];
+          });
+      }
       if (cms.activities) {
         if (typeof cms.activities.description === 'string') document.getElementById('activities-desc').value = cms.activities.description;
         if (typeof cms.activities.image === 'string' && cms.activities.image) {
@@ -2308,6 +2377,8 @@
   renderLocations(vadLocations, 'vad-locations');
   renderMembers(defaultTeam);
   renderTestimonials(defaultVoices);
+  // The link the footer already carries, so saving this tab before touching it cannot drop it.
+  document.getElementById('social-instagram').value = 'https://www.instagram.com/india.recycles';
   // ── Reports & Media managers ──────────────────────────────────
   const docInput = 'w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white';
   function escA(t) { return String(t == null ? '' : t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;'); }

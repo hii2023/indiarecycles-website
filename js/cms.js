@@ -363,6 +363,37 @@
         });
       }
 
+      /* Social links (footer): only the ones with a link set are shown */
+      var socialEl = document.querySelector('[data-social]');
+      if (socialEl) {
+        var soc = content.social || {};
+        var ICONS = {
+          instagram: '<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>',
+          facebook:  '<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>',
+          linkedin:  '<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>',
+          youtube:   '<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.96-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#0A1C11"/></svg>',
+          other:     '<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>'
+        };
+        var ORDER = [
+          { key: 'instagram', name: 'Instagram' },
+          { key: 'facebook',  name: 'Facebook' },
+          { key: 'linkedin',  name: 'LinkedIn' },
+          { key: 'youtube',   name: 'YouTube' },
+          { key: 'other',     name: (soc.other_name || '').trim() || 'Website' }
+        ];
+        var links = ORDER.filter(function (o) { return typeof soc[o.key] === 'string' && soc[o.key].trim(); });
+        // Only touch the footer once the admin has saved something; otherwise keep the static markup.
+        if (Object.keys(soc).length) {
+          socialEl.innerHTML = links.map(function (o) {
+            var label = o.key === 'other' ? o.name : 'India Recycles on ' + o.name;
+            return '<a href="' + esc(soc[o.key].trim()) + '" target="_blank" rel="noopener noreferrer" ' +
+              'class="w-8 h-8 bg-white/10 hover:bg-white/25 rounded-lg flex items-center justify-center transition-colors duration-200 cursor-pointer" ' +
+              'aria-label="' + esc(label) + '" title="' + esc(label) + '">' + ICONS[o.key] + '</a>';
+          }).join('');
+          socialEl.style.display = links.length ? '' : 'none';
+        }
+      }
+
       /* Activities page hero image (description rides on data-cms) */
       var actImg = content.activities && content.activities.image;
       if (actImg) {
