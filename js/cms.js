@@ -138,6 +138,8 @@
       /* Image swaps: per-location override by data-img-key first, else by filename */
       var imgMap = content.images || {};
       if (imgMap && typeof imgMap === 'object') {
+        // Cache for js/img-boot.js, which applies these before paint on the next load.
+        try { localStorage.setItem('ir_images', JSON.stringify(imgMap)); } catch (e) {}
         document.querySelectorAll('img[src]').forEach(function (img) {
           var key = img.getAttribute('data-img-key');
           if (key && imgMap[key]) { img.src = imgMap[key]; return; }
