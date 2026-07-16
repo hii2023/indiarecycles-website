@@ -363,6 +363,13 @@
         });
       }
 
+      /* Activities page hero image (description rides on data-cms) */
+      var actImg = content.activities && content.activities.image;
+      if (actImg) {
+        var actHero = document.querySelector('img[data-img-key="activities-1"]');
+        if (actHero) actHero.src = actImg;
+      }
+
       /* Collaborations (Collaboration page) */
       var collabEl = document.getElementById('collaborations-list');
       if (collabEl) {

@@ -11,4 +11,7 @@
   <url><loc>https://www.indiarecycles.org/contact.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
   <url><loc>https://www.indiarecycles.org/donate.html</loc><priority>1.0</priority><changefreq>monthly</changefreq></url>
   <url><loc>https://www.indiarecycles.org/collaborations.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.indiarecycles.org/activities.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.indiarecycles.org/community-sale.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.indiarecycles.org/thrift-sale.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
 </urlset>

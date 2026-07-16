@@ -6,8 +6,30 @@
   <link rel="icon" type="image/png" sizes="64x64" href="/indiarecycles-website/favicon.png"/>
   <link rel="icon" type="image/png" sizes="32x32" href="/indiarecycles-website/favicon-32.png"/>
   <link rel="shortcut icon" href="/indiarecycles-website/favicon.png"/>
-  <title>Thank You - India Recycles</title>
+  <title>Activities - India Recycles</title>
+  <meta name="description" content="Everything happening at India Recycles - IR Talks, events and collaborations."/>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            serif: ['Montserrat', 'sans-serif'],
+          },
+          colors: {
+            green: {
+              50:  '#f2f7f4', 100: '#e0ede5', 200: '#c2dccc',
+              300: '#93c1a5', 400: '#5ca07a', 500: '#35825b',
+              600: '#256b49', 700: '#1c5439', 800: '#133a28', 900: '#0b2418',
+            },
+          },
+          borderRadius: { '4xl': '2rem' },
+        }
+      }
+    }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet"/>
@@ -20,6 +42,9 @@
       --text-secondary: #6b6b6b;
       --text-muted: #767676;
       --border: rgba(0,0,0,0.12);
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
       --brand-green: #1c5439;
       --brand-accent: #256b49;
     }
@@ -28,8 +53,26 @@
     body { font-family: var(--font-sans); color: var(--text-primary); background: var(--bg-primary); font-size: 16px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
     #mob-menu { display: none; }
     #mob-menu.open { display: block; }
-    h1,h2,h3 { font-family: 'Montserrat', sans-serif; color: var(--text-primary); letter-spacing: -0.01em; }
+    .grad-accent, em.grad-accent { color: var(--brand-accent); font-style: normal; background: none; -webkit-text-fill-color: unset; }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .marquee-track { animation: marquee 8s linear infinite; }
+    @media (max-width: 1023px) { .marquee-track { animation-duration: 5.3s; } }
+
+    .card { transition: transform .2s ease, box-shadow .2s ease; }
+    .card:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(0,0,0,.07); }
+    @media (prefers-reduced-motion: reduce) { .card:hover { transform: none; } }
+    .divider { height: 1px; background: var(--border); }
+    .stat-num { font-family: var(--font-sans); font-weight: 700; letter-spacing: -0.02em; }
+    .leaf-bg, .ring-bg {}
+    .badge { display:inline-flex;align-items:center;gap:6px;background:#F3F4F6;color:#6b6b6b;border:1px solid rgba(0,0,0,0.1);padding:3px 12px;border-radius:9999px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.12em;margin-bottom:16px; }
+    h1,h2,h3,h4 { font-family: 'Montserrat', sans-serif; line-height: 1.2; color: var(--text-primary); letter-spacing: -0.01em; }
     h1 { font-weight: 600; }
+    h2 { font-weight: 600; }
+    h3 { font-weight: 500; }
+    p  { line-height: 1.7; }
+    .amount-btn { transition: all .15s ease; }
+    .amount-btn.selected { background-color: var(--brand-green) !important; color: #fff !important; border-color: var(--brand-green) !important; }
+    input:focus, textarea:focus { outline: 2px solid var(--brand-green); outline-offset: 1px; }
 
     /* ── Page transitions ─────────────────── */
     @keyframes ir-in {
@@ -64,7 +107,7 @@
   <link rel="stylesheet" href="css/layout.css?v=5"/>
   <script src="js/img-boot.js?v=1"></script>
 </head>
-<body>
+<body class="antialiased">
 
 <!-- NAVBAR -->
 <nav style="position:fixed;top:0;left:0;right:0;z-index:50;background:#ffffff;border-bottom:1px solid rgba(0,0,0,0.08);box-shadow:0 1px 3px rgba(0,0,0,0.05);" role="navigation" aria-label="Main navigation">
@@ -114,20 +157,152 @@
   </div>
 </nav>
 
-<main style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:80px 24px 48px;">
-  <div style="max-width:480px;text-align:center;">
-    <div style="width:72px;height:72px;background:#f6f7f6;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 28px;">
-      <svg style="width:36px;height:36px;color:#1c5439;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+<main>
+
+<!-- HERO -->
+<section class="relative pt-[84px] overflow-hidden" aria-labelledby="activities-h1">
+  <div class="absolute inset-0">
+    <img data-img-key="activities-1" src="images/event1.jpg" alt="India Recycles activities" class="zoom-crop w-full h-full object-cover object-center"/>
+    <div class="absolute inset-0 bg-gradient-to-b from-green-900/80 via-green-900/70 to-green-900/90"></div>
+  </div>
+  <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8 text-center">
+    <div class="inline-flex items-center gap-2 bg-green-700/90 text-white px-4 py-2 rounded-full text-sm font-semibold mb-4 backdrop-blur-sm">Activities</div>
+    <h1 id="activities-h1" class="text-2xl lg:text-3xl text-white mb-2 leading-tight">Our <em class="not-italic text-green-400">Activities</em></h1>
+    <p class="text-green-100 text-base lg:text-lg max-w-2xl mx-auto leading-relaxed" data-cms="activities.description" style="white-space:pre-line">Talks, events and collaborations - everything happening around India Recycles, in one place.</p>
+  </div>
+</section>
+
+<!-- SUB-SECTIONS -->
+<section class="py-10 lg:py-16 bg-white" aria-labelledby="activities-heading">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="mb-8">
+      <span class="inline-flex items-center gap-1.5 bg-green-100 text-green-700 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-widest mb-3">What we do</span>
+      <h2 id="activities-heading" class="text-2xl lg:text-3xl text-green-800">Where to start</h2>
     </div>
-    <h1 style="font-size:2rem;font-weight:600;color:#1a1a1a;margin-bottom:12px;letter-spacing:-0.02em;">Thank You!</h1>
-    <p style="color:#6b6b6b;font-size:16px;line-height:1.7;margin-bottom:8px;">Your message has been received. We'll get back to you within 1-2 working days.</p>
-    <p style="color:#767676;font-size:13px;margin-bottom:36px;">If you'd like to reach us sooner, email us directly at <a href="mailto:indiarecycles@gmail.com" style="color:#1c5439;font-weight:500;text-decoration:underline;">indiarecycles@gmail.com</a></p>
-    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px;">
-      <a href="index.html" style="background:#1c5439;color:#fff;padding:10px 28px;border-radius:9999px;font-size:14px;font-weight:500;text-decoration:none;cursor:pointer;transition:background .2s;" onmouseover="this.style.background='#12311f'" onmouseout="this.style.background='#1c5439'">Back to Home</a>
-      <a href="donate.html" style="border:1.5px solid rgba(0,0,0,0.12);color:#1a1a1a;padding:10px 28px;border-radius:9999px;font-size:14px;font-weight:500;text-decoration:none;cursor:pointer;transition:background .2s;" onmouseover="this.style.background='#f6f7f6'" onmouseout="this.style.background='transparent'">Donate Instead</a>
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <a href="ir-talks.html" class="group rounded-2xl border border-green-100 bg-white overflow-hidden flex flex-col shadow-sm hover:border-green-300 transition-colors">
+        <div class="aspect-[16/10] overflow-hidden bg-green-50">
+          <img data-img-key="activities-2" src="images/event3.jpg" alt="IR Talks" class="zoom-crop w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+        </div>
+        <div class="p-5 flex-1 flex flex-col">
+          <span class="inline-flex items-center gap-1.5 self-start bg-green-100 text-green-700 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-widest mb-3">Conversations</span>
+          <h3 class="text-lg font-semibold text-green-800">IR Talks</h3>
+          <p class="text-green-600 text-sm mt-2 leading-relaxed flex-1">Conversations with the people shaping circular fashion, waste and livelihoods in India. Each talk pairs a host with a guest working on the ground.</p>
+          <span class="mt-4 inline-flex items-center gap-1 text-green-700 text-sm font-semibold">Watch IR Talks
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </span>
+        </div>
+      </a>
+      <a href="events.html" class="group rounded-2xl border border-green-100 bg-white overflow-hidden flex flex-col shadow-sm hover:border-green-300 transition-colors">
+        <div class="aspect-[16/10] overflow-hidden bg-green-50">
+          <img data-img-key="activities-3" src="images/event1.jpg" alt="Events" class="zoom-crop w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+        </div>
+        <div class="p-5 flex-1 flex flex-col">
+          <span class="inline-flex items-center gap-1.5 self-start bg-green-100 text-green-700 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-widest mb-3">On the ground</span>
+          <h3 class="text-lg font-semibold text-green-800">Events</h3>
+          <p class="text-green-600 text-sm mt-2 leading-relaxed flex-1">Community sales, thrift sales, collection drives and medical camps. See what is coming up and where we have been.</p>
+          <span class="mt-4 inline-flex items-center gap-1 text-green-700 text-sm font-semibold">See all events
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </span>
+        </div>
+      </a>
+      <a href="collaborations.html" class="group rounded-2xl border border-green-100 bg-white overflow-hidden flex flex-col shadow-sm hover:border-green-300 transition-colors">
+        <div class="aspect-[16/10] overflow-hidden bg-green-50">
+          <img data-img-key="activities-4" src="images/event2.jpg" alt="Collaboration" class="zoom-crop w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+        </div>
+        <div class="p-5 flex-1 flex flex-col">
+          <span class="inline-flex items-center gap-1.5 self-start bg-green-100 text-green-700 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-widest mb-3">Together</span>
+          <h3 class="text-lg font-semibold text-green-800">Collaboration</h3>
+          <p class="text-green-600 text-sm mt-2 leading-relaxed flex-1">Brands, campuses and community groups working with India Recycles to keep clothes in circulation.</p>
+          <span class="mt-4 inline-flex items-center gap-1 text-green-700 text-sm font-semibold">See collaborations
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </span>
+        </div>
+      </a>
     </div>
   </div>
+</section>
+
+<!-- CTA -->
+<section class="py-10 lg:py-14 bg-[#f6f7f6] texture-bg" aria-labelledby="activities-cta-heading">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <h2 id="activities-cta-heading" class="text-2xl lg:text-3xl text-green-800 mb-3">Want to be part of it?</h2>
+    <p class="text-green-600 mb-6">Join an event, host a drop point or collaborate with us.</p>
+    <a href="volunteer.html#join" class="inline-flex items-center gap-2 bg-green-700 hover:bg-green-800 text-white px-6 py-3 rounded-xl font-semibold text-sm transition-colors duration-200 cursor-pointer">Join the movement</a>
+  </div>
+</section>
+
 </main>
+
+<!-- FOOTER -->
+<footer class="bg-[#0A1C11] text-white" role="contentinfo">
+  <!-- Gradient accent line -->
+  <div class="h-0.5 bg-gradient-to-r from-green-700 via-green-600 to-green-700"></div>
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
+      <!-- Brand -->
+      <div>
+        <a href="index.html" class="flex items-center gap-3 mb-4 cursor-pointer">
+          <img src="images/logo.png" alt="India Recycles" class="h-[54px] w-auto brightness-200"/>
+          <span class="font-bold text-[15px] text-white" style="font-family:var(--font-sans);">India Recycles</span>
+        </a>
+        <p class="text-green-300/80 text-[13px] leading-relaxed mb-5">Love the Pre-Loved. A non-profit giving donated clothes a dignified second life across India.</p>
+        <div class="flex gap-2">
+          <a href="#" class="w-8 h-8 bg-white/10 hover:bg-white/25 rounded-lg flex items-center justify-center transition-colors duration-200 cursor-pointer" aria-label="Facebook">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/india.recycles" target="_blank" rel="noopener noreferrer" class="w-8 h-8 bg-white/10 hover:bg-white/25 rounded-lg flex items-center justify-center transition-colors duration-200 cursor-pointer" aria-label="India Recycles on Instagram">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="#" class="w-8 h-8 bg-white/10 hover:bg-white/25 rounded-lg flex items-center justify-center transition-colors duration-200 cursor-pointer" aria-label="YouTube">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.96-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#0A1C11"/></svg>
+          </a>
+        </div>
+      </div>
+      <!-- Quick Links -->
+      <div>
+        <h3 class="font-bold text-[11px] uppercase tracking-widest text-green-300/70 mb-4">Quick Links</h3>
+        <ul class="space-y-2.5 text-[13px]">
+          <li><a href="about-us.html"           class="text-green-300/80 hover:text-white transition-colors duration-200 cursor-pointer">About Us</a></li>
+          <li><a href="our-model.html"          class="text-green-300/80 hover:text-white transition-colors duration-200 cursor-pointer">Our Model</a></li>
+          <li><a href="drop-locations.html"     class="text-green-300/80 hover:text-white transition-colors duration-200 cursor-pointer">Drop Locations</a></li>
+          <li><a href="our-impact.html"         class="text-green-300/80 hover:text-white transition-colors duration-200 cursor-pointer">Our Impact</a></li>
+          <li><a href="our-partners.html"       class="text-green-300/80 hover:text-white transition-colors duration-200 cursor-pointer">Our Partners</a></li>
+          <li><a href="resources.html"          class="text-green-300/80 hover:text-white transition-colors duration-200 cursor-pointer">Reports &amp; Media</a></li>
+        </ul>
+      </div>
+      <!-- Programs -->
+      <div>
+        <h3 class="font-bold text-[11px] uppercase tracking-widest text-green-300/70 mb-4">Programs</h3>
+        <ul class="space-y-2.5 text-[13px]">
+          <li><a href="our-model.html"          class="text-green-300/80 hover:text-white transition-colors duration-200 cursor-pointer">Community Sales</a></li>
+          <li><a href="revibe.html" class="text-green-300/80 hover:text-white transition-colors duration-200 cursor-pointer">ReVibe Upcycling</a></li>
+          <li><a href="zero-waste-promise.html" class="text-green-300/80 hover:text-white transition-colors duration-200 cursor-pointer">Godadi Project</a></li>
+          <li><a href="our-impact.html"         class="text-green-300/80 hover:text-white transition-colors duration-200 cursor-pointer">Medical Camps</a></li>
+          <li><a href="our-impact.html"         class="text-green-300/80 hover:text-white transition-colors duration-200 cursor-pointer">Scholarships</a></li>
+        </ul>
+      </div>
+      <!-- Get Involved -->
+      <div>
+        <h3 class="font-bold text-[11px] uppercase tracking-widest text-green-300/70 mb-4">Get Involved</h3>
+        <ul class="space-y-2.5 text-[13px] mb-5">
+          <li><a href="volunteer.html" class="text-green-300/80 hover:text-white transition-colors duration-200 cursor-pointer">Volunteer</a></li>
+          <li><a href="contact.html" class="text-green-300/80 hover:text-white transition-colors duration-200 cursor-pointer">Become a Drop Location</a></li>
+          <li><a href="donate.html"  class="text-green-300/80 hover:text-white transition-colors duration-200 cursor-pointer">Donate</a></li>
+        </ul>
+        <a href="donate.html" class="inline-block bg-white hover:bg-green-100 text-green-800 px-5 py-2.5 rounded-lg font-bold text-[13px] transition-colors duration-200 cursor-pointer">Donate Now</a>
+      </div>
+    </div>
+    <!-- Bottom bar -->
+    <div class="border-t border-white/10 pt-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-[12px] text-green-400/60">
+      <p data-cms="contact-info.copyright">&copy; 2026 India Recycles. Registered non-profit, Gujarat, India.</p>
+      <div class="flex gap-5">
+        <a href="#" class="hover:text-green-300 transition-colors cursor-pointer">Terms and Conditions</a>
+        <a href="#" class="hover:text-green-300 transition-colors cursor-pointer">Privacy Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
 
 <script>
   const toggle = document.getElementById('menu-toggle');
@@ -141,5 +316,9 @@
 <script src="js/cms.js?v=13"></script>
 
 <script src="js/transitions.js?v=4"></script>
+<div class="ir-sticky-cta lg:hidden" role="navigation" aria-label="Quick actions">
+  <a href="drop-locations.html" class="flex-1 text-center bg-green-700 text-white text-sm font-semibold py-3 rounded-xl">Find Drop Location</a>
+  <a href="volunteer.html#join" class="flex-1 text-center border border-green-700 text-green-800 bg-white text-sm font-semibold py-3 rounded-xl">Join the Movement</a>
+</div>
 </body>
 </html>
