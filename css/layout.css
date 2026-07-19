@@ -5,14 +5,12 @@
    screen as you settle. Disabled on touch / small screens where it feels wrong. */
 
 @media (min-width: 1024px) and (pointer: fine) {
+  /* No vertical scroll-snapping. Making every section a snap point meant the
+     viewport kept getting pulled toward section boundaries mid-scroll, which
+     reads as the page fighting you. Anchors still land clear of the navbar via
+     scroll-padding-top, and html{scroll-behavior:smooth} keeps jumps smooth. */
   html {
-    scroll-snap-type: y proximity;
     scroll-padding-top: 84px;          /* height of the fixed navbar */
-  }
-
-  main > section {
-    scroll-snap-align: start;
-    scroll-snap-stop: normal;
   }
 
   /* Homepage hero fills the first screen but stops ~3.25rem short so the stats
@@ -26,9 +24,6 @@
     justify-content: center;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    html { scroll-snap-type: none; }
-  }
 }
 
 /* ── Mobile UX pass ─────────────────────────────────────────────
@@ -282,3 +277,21 @@ section[id] { scroll-margin-top: 96px; }
 /* Bigger partner logos on the homepage strip */
 .ir-strip-item { width: 208px; height: 130px; padding: 20px; }
 @media (max-width: 640px) { .ir-strip-item { width: 170px; height: 112px; padding: 16px; } }
+
+/* ── Section rhythm ──
+   Desktop sections were 64px top + 64px bottom, so 128px of empty space between
+   every block (160px in places). Tightened to keep the page moving. */
+@media (min-width: 1024px) {
+  section[class*="lg:py-20"] { padding-top: 3rem   !important; padding-bottom: 3rem   !important; }
+  section[class*="lg:py-16"] { padding-top: 2.75rem !important; padding-bottom: 2.75rem !important; }
+  section[class*="lg:py-14"] { padding-top: 2.5rem !important; padding-bottom: 2.5rem !important; }
+  section[class*="lg:py-12"] { padding-top: 2.5rem !important; padding-bottom: 2.5rem !important; }
+  /* page heroes keep their fixed-navbar offset */
+  section[class*="pt-[84px]"] { padding-top: 84px !important; }
+}
+@media (min-width: 641px) and (max-width: 1023px) {
+  section[class*="py-12"], section[class*="py-10"], section[class*="py-8"] {
+    padding-top: 2.25rem !important; padding-bottom: 2.25rem !important;
+  }
+  section[class*="pt-[84px]"] { padding-top: 84px !important; }
+}
