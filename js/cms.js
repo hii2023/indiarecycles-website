@@ -648,7 +648,7 @@
             return '<article class="rounded-2xl border border-green-100 overflow-hidden bg-white flex flex-col shadow-sm">' + media +
               '<div class="p-5 flex-1 flex flex-col">' +
                 (v.title ? '<h3 class="text-lg font-semibold text-green-800">' + esc(v.title) + '</h3>' : '') +
-                (v.description ? '<p class="text-green-600 text-sm mt-2 leading-relaxed flex-1">' + esc(v.description) + '</p>' : '') +
+                (v.description ? '<p class="text-green-600 text-sm mt-2 leading-relaxed flex-1">' + clamp(v.description, 200) + '</p>' : '') +
               '</div></article>';
           }).join('');
           vidsEl.addEventListener('click', function (e) {
