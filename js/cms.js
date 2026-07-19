@@ -115,11 +115,22 @@
     }, 40);
   }
 
+  // This script tag sits before the end of <body>, so elements like the sticky CTA bar
+  // are not parsed yet. A cached/fast response can resolve before the parser gets there,
+  // leaving those elements untouched - wait for the DOM before applying anything.
+  function domReady() {
+    return new Promise(function (res) {
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', res, { once: true });
+      else res();
+    });
+  }
+
   // Exclude the (potentially large) team section - only the Meet the Team page needs it.
   window.IR_CMS = fetch(URL_ + '/rest/v1/recycle_site_content?section=neq.team&select=section,data', {
     headers: { apikey: KEY, Authorization: 'Bearer ' + KEY }
   })
     .then(function (r) { return r.ok ? r.json() : []; })
+    .then(function (rows) { return domReady().then(function () { return rows; }); })
     .then(function (rows) {
       var content = {};
       rows.forEach(function (r) { content[r.section] = r.data || {}; });
@@ -361,6 +372,26 @@
           if (navigator.share) { navigator.share({ title: title, text: title + ' - India Recycles', url: url }).catch(function () {}); }
           else if (navigator.clipboard) { navigator.clipboard.writeText(url); var o = b.innerHTML; b.innerHTML = 'Link copied'; setTimeout(function () { b.innerHTML = o; }, 1500); }
         });
+      }
+
+      /* Mobile sticky bar: the admin picks what the first button does */
+      var ctaEl = document.querySelector('[data-cta-primary]');
+      if (ctaEl) {
+        var pick = (content.settings && content.settings.sticky_cta) || 'drop';
+        var evs = (content.events && content.events.items) || [];
+        // "Next event" points at the first upcoming event, falling back to the events page
+        var upcoming = evs.filter(function (e) { return (e.status || 'upcoming') === 'upcoming'; });
+        var nextEvent = upcoming.length ? 'events.html#event-' + evs.indexOf(upcoming[0]) : 'events.html';
+        var CTA = {
+          drop:   { href: 'drop-locations.html', text: 'Find Drop Location' },
+          event:  { href: nextEvent,             text: 'Next Event' },
+          talk:   { href: 'ir-talks.html',       text: 'Next IR Talk' },
+          donate: { href: 'donate.html',         text: 'Donate' },
+          revibe: { href: 'revibe.html',         text: 'Shop with ReVibe' }
+        };
+        var cta = CTA[pick] || CTA.drop;
+        ctaEl.setAttribute('href', cta.href);
+        ctaEl.textContent = cta.text;
       }
 
       /* Social links (footer): only the ones with a link set are shown */

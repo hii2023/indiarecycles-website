@@ -108,7 +108,7 @@
     .nav-dd-item:hover { background: #f6f7f6; color: var(--brand-green); }
   </style>
   <link rel="stylesheet" href="css/transitions.css?v=1"/>
-  <link rel="stylesheet" href="css/layout.css?v=5"/>
+  <link rel="stylesheet" href="css/layout.css?v=6"/>
   <script src="js/img-boot.js?v=1"></script>
 </head>
 <body class="antialiased">
@@ -218,13 +218,13 @@
 </section>
 
 <!-- JOIN US FORM -->
-<section id="join" class="py-8 lg:py-12 bg-white" aria-labelledby="join-heading">
+<section id="join-section" class="py-8 lg:py-12 bg-white" aria-labelledby="join-heading">
   <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-8">
       <h2 id="join-heading" class="text-2xl lg:text-3xl mb-3">Sign Up to Join Us</h2>
       <p class="text-[var(--text-secondary)] text-base">Tell us a little about yourself and how you would like to help. We will get back to you with the next steps.</p>
     </div>
-    <form data-collect="volunteer" class="space-y-5" method="POST" action="https://formsubmit.co/indiarecycles@gmail.com" aria-label="Join us form">
+    <form id="join" data-collect="volunteer" class="space-y-5" method="POST" action="https://formsubmit.co/indiarecycles@gmail.com" aria-label="Join us form">
       <input type="hidden" name="_subject"  value="New Join Us request via IndiaRecycles.org"/>
       <input type="hidden" name="_next"     value="https://indiarecycles.org/thank-you.html"/>
       <input type="hidden" name="_template" value="table"/>
@@ -402,11 +402,34 @@
   });
 </script>
 
-<script src="js/cms.js?v=14"></script>
+<script src="js/cms.js?v=15"></script>
+<script src="js/gallery.js?v=1"></script>
 
+<script>
+/* Arriving at #join (e.g. the "Join the Movement" button) should land on the form
+   itself, not on the section heading with the fields pushed below the fold, and
+   put the cursor in Full Name so typing can start straight away. */
+(function () {
+  /* The anchor lives on the <form> and CSS scroll-margin-top handles the position,
+     so the browser does the scrolling. All this needs to do is park the cursor -
+     with preventScroll, so focusing cannot fight the browser's own placement. */
+  function focusJoin() {
+    if (location.hash !== '#join') return;
+    var name = document.getElementById('j-name');
+    if (!name) return;
+    setTimeout(function () {
+      try { name.focus({ preventScroll: true }); } catch (e) { name.focus(); }
+    }, 350);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', focusJoin);
+  else focusJoin();
+  window.addEventListener('hashchange', focusJoin);
+  window.addEventListener('pagereveal', focusJoin);   // cross-document view transitions
+})();
+</script>
 <script src="js/transitions.js?v=4"></script>
 <div class="ir-sticky-cta lg:hidden" role="navigation" aria-label="Quick actions">
-  <a href="drop-locations.html" class="flex-1 text-center bg-green-700 text-white text-sm font-semibold py-3 rounded-xl">Find Drop Location</a>
+  <a href="drop-locations.html" data-cta-primary class="flex-1 text-center bg-green-700 text-white text-sm font-semibold py-3 rounded-xl">Find Drop Location</a>
   <a href="volunteer.html#join" class="flex-1 text-center border border-green-700 text-green-800 bg-white text-sm font-semibold py-3 rounded-xl">Join the Movement</a>
 </div>
 </body>

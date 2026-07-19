@@ -69,3 +69,85 @@
 
 /* Anchored sections land below the fixed navbar */
 section[id] { scroll-margin-top: 96px; }
+
+/* ── Stat numbers must never be clipped on small screens ──
+   These values grow over time (live counters) and some are words, not numbers
+   ("Weekly"), so a fixed mobile font size eventually overflows its card. Scale
+   with the viewport instead, with a floor so it stays readable. */
+@media (max-width: 640px) {
+  [data-stat] { font-size: clamp(15px, 5.4vw, 28px) !important; }
+  /* three-across cards are ~40% narrower, so they need a tighter ramp */
+  .grid-cols-3 [data-stat],
+  .grid-cols-3 .stat-value { font-size: clamp(13px, 4.4vw, 24px) !important; }
+  .grid-cols-3 > * { min-width: 0; }
+  /* let long words break rather than spill outside the card */
+  [data-stat], .stat-value { overflow-wrap: anywhere; }
+  /* three-across labels ("MEDICAL BENEFICIARIES") need to breathe too */
+  .grid-cols-3 [data-stat] ~ div { font-size: 10.5px !important; line-height: 1.35; letter-spacing: .01em; }
+  .grid-cols-3 [data-stat] ~ div + div { font-size: 10px !important; }
+}
+
+/* ── Photo gallery: lightbox + "show all" ─────────────────── */
+.ir-lb-tile { cursor: zoom-in; }
+.ir-lb-tile:focus-visible { outline: 3px solid #256b49; outline-offset: 3px; }
+.ir-more-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 11px 22px; border-radius: 12px; cursor: pointer;
+  background: #fff; color: #1c5439; border: 1px solid #c2dccc;
+  font-size: 14px; font-weight: 600; transition: background .15s, border-color .15s;
+}
+.ir-more-btn:hover { background: #f2f7f4; border-color: #93c1a5; }
+.ir-more-btn svg { width: 16px; height: 16px; transition: transform .2s ease; }
+
+.ir-lb {
+  position: fixed; inset: 0; z-index: 200; display: none;
+  align-items: center; justify-content: center;
+  background: rgba(8, 20, 13, 0.94);
+  -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+  padding: 16px;
+}
+.ir-lb.open { display: flex; }
+.ir-lb-fig { margin: 0; max-width: 92vw; max-height: 88vh; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.ir-lb-img {
+  max-width: 92vw; max-height: 78vh; width: auto; height: auto;
+  object-fit: contain; border-radius: 10px; background: #0b2418;
+}
+.ir-lb-cap { color: rgba(255,255,255,0.86); font-size: 13px; text-align: center; max-width: 60ch; line-height: 1.5; }
+.ir-lb-close, .ir-lb-nav {
+  position: absolute; display: flex; align-items: center; justify-content: center;
+  background: rgba(255,255,255,0.12); color: #fff; border: 0; cursor: pointer;
+  border-radius: 9999px; transition: background .15s;
+}
+.ir-lb-close:hover, .ir-lb-nav:hover { background: rgba(255,255,255,0.26); }
+.ir-lb-close { top: 16px; right: 16px; width: 44px; height: 44px; }
+.ir-lb-close svg { width: 22px; height: 22px; }
+.ir-lb-nav { top: 50%; transform: translateY(-50%); width: 46px; height: 46px; }
+.ir-lb-nav svg { width: 24px; height: 24px; }
+.ir-lb-prev { left: 12px; }
+.ir-lb-next { right: 12px; }
+.ir-lb-count {
+  position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%);
+  color: rgba(255,255,255,0.8); font-size: 12px; font-weight: 600; letter-spacing: .04em;
+}
+@media (max-width: 640px) {
+  .ir-lb-img { max-height: 70vh; }
+  .ir-lb-nav { width: 40px; height: 40px; }
+  .ir-lb-prev { left: 6px; }
+  .ir-lb-next { right: 6px; }
+}
+
+/* The Join Us anchor sits on the form itself so a #join link lands on the first
+   field, under the fixed navbar, with the whole form in view. */
+#join { scroll-margin-top: 100px; }
+@media (max-width: 640px) {
+  /* Tighten the rhythm just enough that the whole form - through the submit
+     button - clears the fixed navbar and the sticky bottom bar on a phone. */
+  #join { scroll-margin-top: 92px; }
+  #join.space-y-5 > * + * { margin-top: 0.875rem; }
+}
+@media (max-width: 1023px) {
+  /* On the Join page the sticky bar sits right on top of the form's submit button,
+     and both of its actions are redundant there - you are already on the form. */
+  body:has(#join) .ir-sticky-cta { display: none !important; }
+  body:has(#join) { padding-bottom: 0 !important; }
+}

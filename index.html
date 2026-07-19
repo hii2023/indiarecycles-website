@@ -55,8 +55,12 @@
     #mob-menu.open { display: block; }
     .grad-accent, em.grad-accent { color: var(--brand-accent); font-style: normal; background: none; -webkit-text-fill-color: unset; }
     @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-    .marquee-track { animation: marquee 8s linear infinite; }
-    @media (max-width: 1023px) { .marquee-track { animation-duration: 5.3s; } }
+    /* width:max-content is load-bearing: -50% must equal exactly ONE of the two identical
+       groups. Without it the track is only as wide as the viewport, so on a phone it slid
+       ~190px (about one fact) and snapped back instead of looping seamlessly. */
+    .marquee-track { width: max-content; animation: marquee 46s linear infinite; }
+    @media (max-width: 1023px) { .marquee-track { animation-duration: 34s; } }
+    @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }
 
     .card { transition: transform .2s ease, box-shadow .2s ease; }
     .card:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(0,0,0,.07); }
@@ -109,7 +113,7 @@
     .nav-dd-item:hover { background: #f6f7f6; color: var(--brand-green); }
   </style>
   <link rel="stylesheet" href="css/transitions.css?v=1"/>
-  <link rel="stylesheet" href="css/layout.css?v=5"/>
+  <link rel="stylesheet" href="css/layout.css?v=6"/>
   <script src="js/img-boot.js?v=1"></script>
 </head>
 <body class="antialiased">
@@ -530,7 +534,7 @@
       <p class="text-gray-700 text-[15px]">Real moments from our events, volunteers and communities.</p>
     </div>
     <!-- 3×3 grid -->
-    <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-3" data-gallery>
       <div class="rounded-2xl overflow-hidden aspect-square group cursor-pointer shadow-sm border border-gray-100">
         <img data-img-key="index-17" src="images/gallery1.png" alt="India Recycles community sale" class="zoom-crop w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy"/>
       </div>
@@ -726,7 +730,8 @@
   });
 </script>
 
-<script src="js/cms.js?v=14"></script>
+<script src="js/cms.js?v=15"></script>
+<script src="js/gallery.js?v=1"></script>
 <script>
 IR_CMS.then(function (c) {
   var h = c.home || {};
@@ -779,7 +784,7 @@ IR_CMS.then(function (c) {
 </script>
 <script src="js/transitions.js?v=4"></script>
 <div class="ir-sticky-cta lg:hidden" role="navigation" aria-label="Quick actions">
-  <a href="drop-locations.html" class="flex-1 text-center bg-green-700 text-white text-sm font-semibold py-3 rounded-xl">Find Drop Location</a>
+  <a href="drop-locations.html" data-cta-primary class="flex-1 text-center bg-green-700 text-white text-sm font-semibold py-3 rounded-xl">Find Drop Location</a>
   <a href="volunteer.html#join" class="flex-1 text-center border border-green-700 text-green-800 bg-white text-sm font-semibold py-3 rounded-xl">Join the Movement</a>
 </div>
 </body>
