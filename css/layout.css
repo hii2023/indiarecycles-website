@@ -159,13 +159,13 @@ section[id] { scroll-margin-top: 96px; }
 
 /* ── Logo strip: one logo per partner on a single scrollable line ── */
 .ir-strip {
-  display: flex; gap: 12px; overflow-x: auto; scroll-behavior: smooth;
-  scroll-snap-type: x proximity; padding: 4px 2px;
+  display: flex; gap: 12px; overflow-x: auto;
+  padding: 4px 2px;
   scrollbar-width: none; -ms-overflow-style: none;
 }
 .ir-strip::-webkit-scrollbar { display: none; }
 .ir-strip-item {
-  flex: 0 0 auto; scroll-snap-align: start;
+  flex: 0 0 auto;
   width: 150px; height: 96px; padding: 14px;
   display: flex; align-items: center; justify-content: center;
   background: #fff; border: 1px solid #e5e7eb; border-radius: 16px;

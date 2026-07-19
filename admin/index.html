@@ -1159,6 +1159,7 @@
     if (section === 'talks') {
       var talks = Array.from(document.querySelectorAll('#talks-editor [data-talk-card]')).map(function (c) {
         return {
+          date:        c.querySelector('[data-date]').value.trim(),
           title:       c.querySelector('[data-title]').value.trim(),
           description: c.querySelector('[data-desc]').value.trim(),
           video:       c.querySelector('[data-video]').value.trim(),
@@ -1247,6 +1248,7 @@
       var evs = Array.from(document.querySelectorAll('#events-editor [data-event-card]')).map(function (c) {
         return {
           title:         c.querySelector('[data-title]').value.trim(),
+          date:          c.querySelector('[data-date]').value.trim(),
           when:          c.querySelector('[data-when]').value.trim(),
           time:          c.querySelector('[data-time]').value.trim(),
           location:      c.querySelector('[data-location]').value.trim(),
@@ -1633,6 +1635,8 @@
       + '<div class="aspect-video w-full rounded-xl overflow-hidden bg-forest-50 border border-forest-200 flex items-center justify-center mb-1.5" data-photo-preview>' + preview + '</div>'
       + '<label class="block text-center text-[11px] font-semibold text-forest-600 cursor-pointer hover:text-forest-800 mb-3">Upload photo (optional)<input type="file" accept="image/*" class="hidden" onchange="onTalkPhotoPick(this)"/></label><div class="text-[10px] text-forest-400 text-center leading-tight mt-0.5">JPG &middot; 1280&times;720 &middot; leave blank to use the YouTube thumbnail</div>'
       + '<input type="hidden" data-photo value="' + attrEsc(photo) + '"/>'
+      + '<label class="block text-[10px] font-semibold text-forest-500 mb-1">Date (used to order talks, newest first)</label>'
+      + '<input type="date" data-date value="' + attrEsc(t.date) + '" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white mb-2"/>'
       + '<input type="text" data-title value="' + attrEsc(t.title) + '" placeholder="Talk title" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm font-semibold text-forest-800 bg-white mb-2"/>'
       + '<input type="text" data-video value="' + attrEsc(t.video) + '" placeholder="YouTube link (https://youtu.be/...)" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white mb-2"/>'
       + '<textarea data-desc rows="3" placeholder="Description (line breaks are kept)" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white resize-none mb-2">' + textEsc(t.description) + '</textarea>'
@@ -2102,6 +2106,8 @@
       + '<input type="hidden" data-photo value="' + attrEsc(photo) + '"/>'
       + '<input type="text" data-title value="' + attrEsc(ev.title) + '" placeholder="Event title" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm font-semibold text-forest-800 bg-white mb-2"/>'
       + '<div class="grid grid-cols-2 gap-2 mb-2">'
+      +   '<label class="block text-[10px] font-semibold text-forest-500 mb-1">Date (used to order events, newest first)</label>'
+      +   '<input type="date" data-date value="' + attrEsc(ev.date) + '" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white mb-2"/>'
       +   '<input type="text" data-when value="' + attrEsc(ev.when) + '" placeholder="Date (e.g. 15 Aug 2026)" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white"/>'
       +   '<input type="text" data-time value="' + attrEsc(ev.time) + '" placeholder="Time (e.g. 10 AM - 2 PM)" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white"/>'
       + '</div>'

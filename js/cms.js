@@ -125,13 +125,24 @@
     });
   }
 
-  // Exclude the (potentially large) team section - only the Meet the Team page needs it.
-  window.IR_CMS = fetch(URL_ + '/rest/v1/recycle_site_content?section=neq.team&select=section,data', {
-    headers: { apikey: KEY, Authorization: 'Bearer ' + KEY }
-  })
-    .then(function (r) { return r.ok ? r.json() : []; })
-    .then(function (rows) { return domReady().then(function () { return rows; }); })
-    .then(function (rows) {
+  var CACHE_KEY = 'ir_cms';
+  var bound = {};            // listeners are attached once, even if applied twice
+
+  /* Order a list by its optional Date field. ascending=true gives soonest-first,
+     false gives newest-first. Entries without a date keep the order set in the
+     admin and sit after the dated ones, so nothing disappears or jumps around. */
+  function sortByDate(items, ascending) {
+    var withDate = [], without = [];
+    items.forEach(function (it, i) {
+      var t = it && it.date ? Date.parse(it.date) : NaN;
+      (isNaN(t) ? without : withDate).push({ it: it, t: t, i: i });
+    });
+    withDate.sort(function (a, b) { return ascending ? a.t - b.t : b.t - a.t; });
+    if (!ascending) without.reverse();   // newest-added first when there is no date
+    return withDate.concat(without).map(function (x) { return x.it; });
+  }
+
+  function applyContent(rows) {
       var content = {};
       rows.forEach(function (r) { content[r.section] = r.data || {}; });
 
@@ -187,10 +198,19 @@
         var reps = (content.reports && content.reports.items) || [];
         if (reps.length) {
           reportsEl.innerHTML = reps.map(function (r) {
-            return '<a href="' + esc(r.url) + '" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 bg-white rounded-2xl border border-green-100 p-4 hover:border-green-300 transition-colors">' +
+            // Supabase serves storage objects inline, so a click loaded a multi-MB PDF
+            // into the browser viewer and felt like nothing happened. ?download=<name>
+            // sets Content-Disposition: attachment, so it saves straight away.
+            var href = r.url;
+            if (/\/storage\/v1\/object\/public\//.test(href) && href.indexOf('download') === -1) {
+              var fname = (r.title || 'India-Recycles').replace(/[^\w\- ]+/g, '').trim().replace(/\s+/g, '-');
+              var ext = (href.split('?')[0].match(/\.([a-z0-9]{2,5})$/i) || [, 'pdf'])[1];
+              href += (href.indexOf('?') === -1 ? '?' : '&') + 'download=' + encodeURIComponent(fname + '.' + ext);
+            }
+            return '<a href="' + esc(href) + '" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 bg-white rounded-2xl border border-green-100 p-4 hover:border-green-300 transition-colors">' +
               '<span class="w-11 h-11 rounded-xl bg-green-100 text-green-700 flex items-center justify-center shrink-0"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/><path d="M14 2v5h5"/></svg></span>' +
               '<span class="min-w-0 flex-1"><span class="block font-semibold text-green-800 text-sm">' + esc(r.title) + '</span>' + (r.date ? '<span class="block text-xs text-green-500 mt-0.5">' + esc(r.date) + '</span>' : '') + '</span>' +
-              '<span class="text-green-700 text-sm font-semibold shrink-0">Open</span></a>';
+              '<span class="text-green-700 text-sm font-semibold shrink-0">Download</span></a>';
           }).join('');
         }
       }
@@ -218,7 +238,7 @@
         /* IR page main image (configurable) */
         var talkImg = content.talks && content.talks.image;
         if (talkImg) { var irHero = document.querySelector('img[data-img-key="ir-talks-1"]'); if (irHero) irHero.src = talkImg; }
-        var talks = (content.talks && content.talks.items) || [];
+        var talks = sortByDate((content.talks && content.talks.items) || [], false);
         if (talks.length) {
           talksEl.innerHTML = talks.map(function (t) {
             var vid = ytId(t.video);
@@ -246,6 +266,7 @@
                 meta +
               '</div></article>';
           }).join('');
+          if (!bound.talks) { bound.talks = true;
           talksEl.addEventListener('click', function (e) {
             var btn = e.target.closest('.ir-talk-play');
             if (!btn) return;
@@ -254,7 +275,7 @@
             wrap.className = 'aspect-video';
             wrap.innerHTML = '<iframe src="' + src + '" class="w-full h-full" style="border:0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
             btn.replaceWith(wrap);
-          });
+          }); }
         }
       }
 
@@ -281,11 +302,12 @@
           }).join('');
 
           /* Clicking a voice opens it in full - photo, whole quote, who they are. */
-          var tmModal = document.createElement('div');
+          var tmModal = document.querySelector('.ir-tm-modal') || document.createElement('div');
+          var tmFresh = !tmModal.parentNode;
           tmModal.className = 'ir-tm-modal';
           tmModal.setAttribute('role', 'dialog');
           tmModal.setAttribute('aria-modal', 'true');
-          tmModal.innerHTML =
+          if (tmFresh) tmModal.innerHTML =
             '<div class="ir-tm-box">' +
               '<button class="ir-tm-close" aria-label="Close">' +
                 '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>' +
@@ -297,7 +319,7 @@
                 '<div class="ir-tm-who"><div class="ir-tm-name"></div><div class="ir-tm-role"></div></div>' +
               '</div>' +
             '</div>';
-          document.body.appendChild(tmModal);
+          if (tmFresh) document.body.appendChild(tmModal);
           var tmLast;
           function tmOpen(i) {
             var t = tms[i]; if (!t) return;
@@ -324,7 +346,7 @@
             document.body.style.overflow = '';
             if (tmLast && tmLast.focus) tmLast.focus();
           }
-          tmModal.querySelector('.ir-tm-close').addEventListener('click', tmClose);
+          if (tmFresh) { tmModal.querySelector('.ir-tm-close').addEventListener('click', tmClose);
           tmModal.addEventListener('click', function (e) { if (e.target === tmModal) tmClose(); });
           document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape' && tmModal.classList.contains('open')) tmClose();
@@ -337,7 +359,7 @@
           tmEl.addEventListener('keydown', function (e) {
             var c = e.target.closest('[data-tm]');
             if (c && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); tmOpen(Number(c.getAttribute('data-tm'))); }
-          });
+          }); }
         }
       }
 
@@ -358,6 +380,7 @@
                  '<button type="button" class="ir-clamp-btn">More</button>' +
                '</span>';
       }
+      if (!bound.clamp) { bound.clamp = true;
       document.addEventListener('click', function (e) {
         var b = e.target.closest('.ir-clamp-btn');
         if (!b) return;
@@ -367,7 +390,7 @@
         var open = full.hidden === false;
         full.hidden = open; short.hidden = !open;
         b.textContent = open ? 'More' : 'Less';
-      });
+      }); }
 
       /* Homepage: 3 most recent events, with a link through to the full page */
       var heEl = document.getElementById('home-events');
@@ -429,18 +452,46 @@
               : '<div class="' + cls + '"' + title + '>' + inner + '</div>';
           }).join('');
 
+          // Duplicate the row so the auto-scroll can loop without a visible jump.
+          hpEl.setAttribute('data-loop-count', String(withLogo.length));
+          hpEl.innerHTML += hpEl.innerHTML;
+
           var strip = hpEl, prev = document.querySelector('.ir-strip-prev'), next = document.querySelector('.ir-strip-next');
           function syncNav() {
-            var max = strip.scrollWidth - strip.clientWidth - 2;
-            prev.disabled = strip.scrollLeft <= 2;
-            next.disabled = strip.scrollLeft >= max;
-            var overflows = strip.scrollWidth > strip.clientWidth + 2;
+            // The row loops, so the arrows never dead-end; only hide them when
+            // every logo already fits on screen.
+            var overflows = strip.scrollWidth / 2 > strip.clientWidth + 2;
             prev.style.visibility = next.style.visibility = overflows ? '' : 'hidden';
           }
+          if (!bound.strip) { bound.strip = true;
           prev.addEventListener('click', function () { strip.scrollBy({ left: -strip.clientWidth * 0.8, behavior: 'smooth' }); });
           next.addEventListener('click', function () { strip.scrollBy({ left:  strip.clientWidth * 0.8, behavior: 'smooth' }); });
           strip.addEventListener('scroll', syncNav);
           window.addEventListener('resize', syncNav);
+
+          /* Drift the logos along slowly and loop seamlessly. Pauses on hover,
+             while the tab is hidden, and for anyone who prefers reduced motion. */
+          var half = function () { return strip.scrollWidth / 2; };
+          var paused = false;
+          var SPEED = 22;   // pixels per second
+          strip.addEventListener('mouseenter', function () { paused = true; });
+          strip.addEventListener('mouseleave', function () { paused = false; });
+          // Every pause needs a matching resume, or one tap/focus stops it for good.
+          strip.addEventListener('touchstart', function () { paused = true; }, { passive: true });
+          strip.addEventListener('touchend', function () { setTimeout(function () { paused = false; }, 2500); }, { passive: true });
+          strip.addEventListener('focusin', function () { paused = true; });
+          strip.addEventListener('focusout', function () { paused = false; });
+          [prev, next].forEach(function (b) {
+            b.addEventListener('click', function () { paused = true; setTimeout(function () { paused = false; }, 2500); });
+          });
+          if (!reduceMotion) {
+            var STEP_MS = 30;
+            setInterval(function () {
+              if (paused || document.hidden) return;
+              strip.scrollLeft += SPEED * (STEP_MS / 1000);
+              if (strip.scrollLeft >= half()) strip.scrollLeft -= half();
+            }, STEP_MS);
+          } }
           setTimeout(syncNav, 50);
         }
       }
@@ -525,8 +576,11 @@
           if (!list.length) { if (evItems.length && sec) sec.style.display = 'none'; return; }
           el.innerHTML = list.map(eventCard).join('');
         };
-        fillBucket(evUp, evItems.filter(function (e) { return (e.status || 'upcoming') === 'upcoming'; }));
-        fillBucket(evPast, evItems.filter(function (e) { return e.status === 'past'; }));
+        // Upcoming reads soonest-first (the next one you can attend); past reads
+        // newest-first. Items carrying a Date sort by it, the rest keep admin order.
+        fillBucket(evUp, sortByDate(evItems.filter(function (e) { return (e.status || 'upcoming') === 'upcoming'; }), true));
+        fillBucket(evPast, sortByDate(evItems.filter(function (e) { return e.status === 'past'; }), false));
+        if (!bound.share) { bound.share = true;
         document.addEventListener('click', function (e) {
           var b = e.target.closest('.ir-ev-share');
           if (!b) return;
@@ -534,7 +588,7 @@
           var title = b.getAttribute('data-title');
           if (navigator.share) { navigator.share({ title: title, text: title + ' - India Recycles', url: url }).catch(function () {}); }
           else if (navigator.clipboard) { navigator.clipboard.writeText(url); var o = b.innerHTML; b.innerHTML = 'Link copied'; setTimeout(function () { b.innerHTML = o; }, 1500); }
-        });
+        }); }
       }
 
       /* Mobile sticky bar: the admin picks what the first button does */
@@ -651,6 +705,7 @@
                 (v.description ? '<p class="text-green-600 text-sm mt-2 leading-relaxed flex-1">' + clamp(v.description, 200) + '</p>' : '') +
               '</div></article>';
           }).join('');
+          if (!bound.vids) { bound.vids = true;
           vidsEl.addEventListener('click', function (e) {
             var btn = e.target.closest('.ir-talk-play');
             if (!btn) return;
@@ -658,7 +713,7 @@
             wrap.className = 'aspect-video';
             wrap.innerHTML = '<iframe src="' + btn.getAttribute('data-embed') + '" class="w-full h-full" style="border:0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
             btn.replaceWith(wrap);
-          });
+          }); }
         }
       }
 
@@ -679,6 +734,44 @@
 
       content.get = get;
       return content;
+  }
+
+  /* Refresh used to show the built-in fallback text until the CMS reply arrived,
+     roughly a second later, so stale numbers and placeholder copy flashed first.
+     Keep the last payload and render it as soon as the DOM is ready; the network
+     copy is only re-applied when it actually differs. */
+  var cachedRaw = null;
+  try { cachedRaw = localStorage.getItem(CACHE_KEY); } catch (e) {}
+
+  /* Photos and logos are stored as base64 inside the payload, so a few sections run
+     to megabytes (the gallery alone is ~8MB) - far past what localStorage accepts.
+     Cache only the light, text-bearing sections: those are what visibly flashed.
+     The heavy, below-the-fold ones keep loading from the network as before. */
+  var MAX_SECTION_BYTES = 120 * 1024;
+  function cacheable(rows) {
+    return rows.filter(function (r) {
+      try { return JSON.stringify(r).length <= MAX_SECTION_BYTES; } catch (e) { return false; }
+    });
+  }
+
+  window.IR_CMS = new Promise(function (resolve) {
+    domReady().then(function () {
+      if (!cachedRaw) return;
+      try { applyContent(JSON.parse(cachedRaw)); } catch (e) {}
+    });
+
+    fetch(URL_ + '/rest/v1/recycle_site_content?section=neq.team&select=section,data', {
+      headers: { apikey: KEY, Authorization: 'Bearer ' + KEY }
     })
-    .catch(function () { return { get: function () { return undefined; } }; });
+      .then(function (r) { return r.ok ? r.json() : []; })
+      .then(function (rows) { return domReady().then(function () { return rows; }); })
+      .then(function (rows) {
+        try { localStorage.setItem(CACHE_KEY, JSON.stringify(cacheable(rows))); }
+        catch (e) { try { localStorage.removeItem(CACHE_KEY); } catch (e2) {} }
+        // Applied a second time with the full payload; every listener is guarded
+        // by `bound`, so nothing double-binds and the text simply rewrites itself.
+        resolve(applyContent(rows));
+      })
+      .catch(function () { resolve({ get: function () { return undefined; } }); });
+  });
 })();
