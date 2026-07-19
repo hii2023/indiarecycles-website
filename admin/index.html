@@ -743,7 +743,7 @@
         <div>
           <label class="block text-sm font-semibold text-forest-700 mb-2">Main image (IR page)</label>
           <div class="aspect-[16/10] rounded-xl overflow-hidden bg-forest-50 border border-forest-200 flex items-center justify-center" id="talks-image-preview"><span class="text-[10px] text-forest-400 text-center px-2">Using default image</span></div>
-          <label class="mt-1.5 block text-center text-[11px] font-semibold text-forest-600 cursor-pointer hover:text-forest-800">Upload image<input type="file" accept="image/*" class="hidden" onchange="onTalksImagePick(this)"/></label>
+          <label class="mt-1.5 block text-center text-[11px] font-semibold text-forest-600 cursor-pointer hover:text-forest-800">Upload image<input type="file" accept="image/*" class="hidden" onchange="onTalksImagePick(this)"/></label><div class="text-[10px] text-forest-400 text-center leading-tight mt-0.5">JPG &middot; 1600&times;1000 &middot; wide 16:10</div>
           <input type="hidden" id="talks-image" value=""/>
         </div>
         <div>
@@ -851,7 +851,7 @@
         <div>
           <label class="block text-sm font-semibold text-forest-700 mb-2">Main image</label>
           <div class="aspect-[16/10] rounded-xl overflow-hidden bg-forest-50 border border-forest-200 flex items-center justify-center" id="activities-image-preview"><span class="text-[10px] text-forest-400 text-center px-2">Using default image</span></div>
-          <label class="mt-1.5 block text-center text-[11px] font-semibold text-forest-600 cursor-pointer hover:text-forest-800">Upload image<input type="file" accept="image/*" class="hidden" onchange="onActivitiesImagePick(this)"/></label>
+          <label class="mt-1.5 block text-center text-[11px] font-semibold text-forest-600 cursor-pointer hover:text-forest-800">Upload image<input type="file" accept="image/*" class="hidden" onchange="onActivitiesImagePick(this)"/></label><div class="text-[10px] text-forest-400 text-center leading-tight mt-0.5">JPG &middot; 1600&times;1000 &middot; wide 16:10</div>
           <input type="hidden" id="activities-image" value=""/>
         </div>
         <div>
@@ -1553,7 +1553,7 @@
       + '<div class="flex gap-3 mb-3">'
       +   '<div class="shrink-0">'
       +     '<div class="w-20 h-24 rounded-xl overflow-hidden bg-forest-50 border border-forest-200 flex items-center justify-center" data-photo-preview>' + preview + '</div>'
-      +     '<label class="mt-1.5 block text-center text-[11px] font-semibold text-forest-600 cursor-pointer hover:text-forest-800">Upload photo<input type="file" accept="image/*" class="hidden" onchange="onPhotoPick(this)"/></label>'
+      +     '<label class="mt-1.5 block text-center text-[11px] font-semibold text-forest-600 cursor-pointer hover:text-forest-800">Upload photo<input type="file" accept="image/*" class="hidden" onchange="onPhotoPick(this)"/></label><div class="text-[10px] text-forest-400 text-center leading-tight mt-0.5">JPG &middot; 800&times;800 &middot; square, face centred</div>'
       +     '<input type="hidden" data-photo value="' + attrEsc(photo) + '"/>'
       +   '</div>'
       +   '<div class="flex-1 space-y-2">'
@@ -1631,7 +1631,7 @@
       +   '</div>'
       + '</div>'
       + '<div class="aspect-video w-full rounded-xl overflow-hidden bg-forest-50 border border-forest-200 flex items-center justify-center mb-1.5" data-photo-preview>' + preview + '</div>'
-      + '<label class="block text-center text-[11px] font-semibold text-forest-600 cursor-pointer hover:text-forest-800 mb-3">Upload photo (optional)<input type="file" accept="image/*" class="hidden" onchange="onTalkPhotoPick(this)"/></label>'
+      + '<label class="block text-center text-[11px] font-semibold text-forest-600 cursor-pointer hover:text-forest-800 mb-3">Upload photo (optional)<input type="file" accept="image/*" class="hidden" onchange="onTalkPhotoPick(this)"/></label><div class="text-[10px] text-forest-400 text-center leading-tight mt-0.5">JPG &middot; 1280&times;720 &middot; leave blank to use the YouTube thumbnail</div>'
       + '<input type="hidden" data-photo value="' + attrEsc(photo) + '"/>'
       + '<input type="text" data-title value="' + attrEsc(t.title) + '" placeholder="Talk title" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm font-semibold text-forest-800 bg-white mb-2"/>'
       + '<input type="text" data-video value="' + attrEsc(t.video) + '" placeholder="YouTube link (https://youtu.be/...)" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white mb-2"/>'
@@ -1727,7 +1727,7 @@
       + '<div class="flex gap-3 mb-3">'
       +   '<div class="shrink-0">'
       +     '<div class="w-16 h-16 rounded-full overflow-hidden bg-forest-50 border border-forest-200 flex items-center justify-center" data-photo-preview>' + preview + '</div>'
-      +     '<label class="mt-1.5 block text-center text-[11px] font-semibold text-forest-600 cursor-pointer hover:text-forest-800">Photo<input type="file" accept="image/*" class="hidden" onchange="onTestimonialPhotoPick(this)"/></label>'
+      +     '<label class="mt-1.5 block text-center text-[11px] font-semibold text-forest-600 cursor-pointer hover:text-forest-800">Photo<input type="file" accept="image/*" class="hidden" onchange="onTestimonialPhotoPick(this)"/></label><div class="text-[10px] text-forest-400 text-center leading-tight mt-0.5">JPG &middot; 600&times;600 &middot; square, face centred</div>'
       +     '<input type="hidden" data-photo value="' + attrEsc(photo) + '"/>'
       +   '</div>'
       +   '<div class="flex-1 space-y-2">'
@@ -1826,12 +1826,12 @@
       + '<div class="grid grid-cols-3 gap-3 mb-3">'
       +   '<div class="col-span-2">'
       +     '<div class="h-24 rounded-xl overflow-hidden bg-white border border-forest-200 flex items-center justify-center" data-collab-photo-preview>' + photoPrev + '</div>'
-      +     '<label class="mt-1.5 block text-center text-[11px] font-semibold text-forest-600 cursor-pointer hover:text-forest-800">Upload photo<input type="file" accept="image/*" class="hidden" onchange="onCollabPhoto(this)"/></label>'
+      +     '<label class="mt-1.5 block text-center text-[11px] font-semibold text-forest-600 cursor-pointer hover:text-forest-800">Upload photo<input type="file" accept="image/*" class="hidden" onchange="onCollabPhoto(this)"/></label><div class="text-[10px] text-forest-400 text-center leading-tight mt-0.5">JPG &middot; 1200&times;750 &middot; wide 16:10</div>'
       +     '<input type="hidden" data-photo value="' + attrEsc(co.photo) + '"/>'
       +   '</div>'
       +   '<div>'
       +     '<div class="h-24 rounded-xl overflow-hidden bg-white border border-forest-200 flex items-center justify-center p-2" data-collab-logo-preview>' + logoPrev + '</div>'
-      +     '<label class="mt-1.5 block text-center text-[11px] font-semibold text-forest-600 cursor-pointer hover:text-forest-800">Upload logo<input type="file" accept="image/*" class="hidden" onchange="onCollabLogo(this)"/></label>'
+      +     '<label class="mt-1.5 block text-center text-[11px] font-semibold text-forest-600 cursor-pointer hover:text-forest-800">Upload logo<input type="file" accept="image/*" class="hidden" onchange="onCollabLogo(this)"/></label><div class="text-[10px] text-forest-400 text-center leading-tight mt-0.5">PNG &middot; 600&times;300 &middot; transparent bg</div>'
       +     '<input type="hidden" data-logo value="' + attrEsc(co.logo) + '"/>'
       +   '</div>'
       + '</div>'
@@ -1904,7 +1904,7 @@
       +   '</div>'
       + '</div>'
       + '<div class="h-20 rounded-xl overflow-hidden bg-white border border-forest-200 flex items-center justify-center mb-1.5 p-2" data-photo-preview>' + preview + '</div>'
-      + '<label class="block text-center text-[11px] font-semibold text-forest-600 cursor-pointer hover:text-forest-800 mb-3">Upload logo<input type="file" accept="image/*" class="hidden" onchange="onPartnerPhotoPick(this)"/></label>'
+      + '<label class="block text-center text-[11px] font-semibold text-forest-600 cursor-pointer hover:text-forest-800 mb-3">Upload logo<input type="file" accept="image/*" class="hidden" onchange="onPartnerPhotoPick(this)"/></label><div class="text-[10px] text-forest-400 text-center leading-tight mt-0.5">PNG &middot; 600&times;300 &middot; transparent bg</div>'
       + '<input type="hidden" data-photo value="' + attrEsc(photo) + '"/>'
       + '<input type="text" data-name value="' + attrEsc(p.name) + '" placeholder="Partner name" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm font-semibold text-forest-800 bg-white mb-2"/>'
       + '<input type="text" data-link value="' + attrEsc(p.link) + '" placeholder="Website link (https://...)" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white mb-2"/>'
@@ -1968,7 +1968,7 @@
       +     '<button onclick="removeCorporate(this)" class="w-6 h-6 bg-red-50 hover:bg-red-100 text-red-400 rounded-lg flex items-center justify-center cursor-pointer" aria-label="Remove">' + xIcon + '</button>'
       + '</div>'
       + '<div class="h-16 rounded-xl overflow-hidden bg-white border border-forest-200 flex items-center justify-center mb-1.5 p-2" data-photo-preview>' + preview + '</div>'
-      + '<label class="block text-center text-[11px] font-semibold text-forest-600 cursor-pointer hover:text-forest-800 mb-2">Upload logo<input type="file" accept="image/*" class="hidden" onchange="onCorporatePhotoPick(this)"/></label>'
+      + '<label class="block text-center text-[11px] font-semibold text-forest-600 cursor-pointer hover:text-forest-800 mb-2">Upload logo<input type="file" accept="image/*" class="hidden" onchange="onCorporatePhotoPick(this)"/></label><div class="text-[10px] text-forest-400 text-center leading-tight mt-0.5">PNG &middot; 600&times;300 &middot; transparent bg</div>'
       + '<input type="hidden" data-photo value="' + attrEsc(photo) + '"/>'
       + '<input type="text" data-name value="' + attrEsc(c0.name) + '" placeholder="Name" class="w-full px-2.5 py-1.5 rounded-lg border border-forest-200 text-xs font-semibold text-forest-800 bg-white mb-1.5"/>'
       + '<input type="text" data-link value="' + attrEsc(c0.link) + '" placeholder="Website (optional)" class="w-full px-2.5 py-1.5 rounded-lg border border-forest-200 text-xs text-forest-800 bg-white"/>'
@@ -2031,7 +2031,7 @@
       +     '<button onclick="removeGal(this)" class="w-6 h-6 bg-red-50 hover:bg-red-100 text-red-400 rounded-lg flex items-center justify-center cursor-pointer" aria-label="Remove photo">' + xIcon + '</button>'
       + '</div>'
       + '<div class="aspect-square rounded-xl overflow-hidden bg-forest-50 border border-forest-200 flex items-center justify-center mb-1.5" data-photo-preview>' + preview + '</div>'
-      + '<label class="block text-center text-[11px] font-semibold text-forest-600 cursor-pointer hover:text-forest-800 mb-2">Upload photo<input type="file" accept="image/*" class="hidden" onchange="onGalPhoto(this)"/></label>'
+      + '<label class="block text-center text-[11px] font-semibold text-forest-600 cursor-pointer hover:text-forest-800 mb-2">Upload photo<input type="file" accept="image/*" class="hidden" onchange="onGalPhoto(this)"/></label><div class="text-[10px] text-forest-400 text-center leading-tight mt-0.5">JPG &middot; 1000&times;1000 &middot; square</div>'
       + '<input type="hidden" data-photo value="' + attrEsc(photo) + '"/>'
       + '<input type="text" data-caption value="' + attrEsc(g.caption) + '" placeholder="Caption (optional)" class="w-full px-2.5 py-1.5 rounded-lg border border-forest-200 text-xs text-forest-800 bg-white"/>'
       + '</div>';
@@ -2098,7 +2098,7 @@
       +   '</div>'
       + '</div>'
       + '<div class="aspect-[16/10] w-full rounded-xl overflow-hidden bg-forest-50 border border-forest-200 flex items-center justify-center mb-1.5" data-photo-preview>' + preview + '</div>'
-      + '<label class="block text-center text-[11px] font-semibold text-forest-600 cursor-pointer hover:text-forest-800 mb-3">Upload photo (optional)<input type="file" accept="image/*" class="hidden" onchange="onEventPhoto(this)"/></label>'
+      + '<label class="block text-center text-[11px] font-semibold text-forest-600 cursor-pointer hover:text-forest-800 mb-3">Upload photo (optional)<input type="file" accept="image/*" class="hidden" onchange="onEventPhoto(this)"/></label><div class="text-[10px] text-forest-400 text-center leading-tight mt-0.5">JPG &middot; 1200&times;750 &middot; wide 16:10</div>'
       + '<input type="hidden" data-photo value="' + attrEsc(photo) + '"/>'
       + '<input type="text" data-title value="' + attrEsc(ev.title) + '" placeholder="Event title" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm font-semibold text-forest-800 bg-white mb-2"/>'
       + '<div class="grid grid-cols-2 gap-2 mb-2">'
@@ -2170,7 +2170,7 @@
       +   '</div>'
       + '</div>'
       + '<div class="aspect-[16/10] w-full rounded-xl overflow-hidden bg-forest-50 border border-forest-200 flex items-center justify-center mb-1.5" data-photo-preview>' + preview + '</div>'
-      + '<label class="block text-center text-[11px] font-semibold text-forest-600 cursor-pointer hover:text-forest-800 mb-3">Upload photo (optional)<input type="file" accept="image/*" class="hidden" onchange="onCausePhoto(this)"/></label>'
+      + '<label class="block text-center text-[11px] font-semibold text-forest-600 cursor-pointer hover:text-forest-800 mb-3">Upload photo (optional)<input type="file" accept="image/*" class="hidden" onchange="onCausePhoto(this)"/></label><div class="text-[10px] text-forest-400 text-center leading-tight mt-0.5">JPG &middot; 1200&times;750 &middot; wide 16:10</div>'
       + '<input type="hidden" data-photo value="' + attrEsc(photo) + '"/>'
       + '<input type="text" data-name value="' + attrEsc(cu.name) + '" placeholder="Cause name (e.g. Medical Camps)" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm font-semibold text-forest-800 bg-white mb-2"/>'
       + '<input type="text" data-location value="' + attrEsc(cu.location) + '" placeholder="Location(s)" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white mb-2"/>'
@@ -2423,7 +2423,7 @@
       '<div class="space-y-2">' +
         '<input type="text" data-title value="' + escA(m.title) + '" placeholder="Title / caption" class="' + docInput + '"/>' +
         '<input type="url" data-link value="' + escA(m.link) + '" placeholder="Article or video link (optional)" class="' + docInput + '"/>' +
-        '<label class="block text-center text-xs font-semibold text-forest-700 bg-forest-50 hover:bg-forest-100 rounded-lg py-2 cursor-pointer transition-colors">' + (hasImg ? 'Replace photo' : 'Upload photo') + '<input type="file" accept="image/*" class="hidden" onchange="onMediaImgPick(this)"/></label>' +
+        '<label class="block text-center text-xs font-semibold text-forest-700 bg-forest-50 hover:bg-forest-100 rounded-lg py-2 cursor-pointer transition-colors">' + (hasImg ? 'Replace photo' : 'Upload photo') + '<input type="file" accept="image/*" class="hidden" onchange="onMediaImgPick(this)"/></label><div class="text-[10px] text-forest-400 text-center leading-tight mt-0.5">JPG &middot; 1000&times;750 &middot; 4:3</div>' +
         '<div class="text-[10px] text-forest-500 h-4 leading-4" data-doc-status></div>' +
       '</div></div>';
   }

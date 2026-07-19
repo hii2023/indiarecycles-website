@@ -151,3 +151,91 @@ section[id] { scroll-margin-top: 96px; }
   body:has(#join) .ir-sticky-cta { display: none !important; }
   body:has(#join) { padding-bottom: 0 !important; }
 }
+
+/* ── Homepage "Our Model" cards ──
+   The photo gets a taller 4:3 frame flush to the card edges (no inner bezel) and
+   is shown uncropped; the text sits on its own solid panel that stretches to a
+   common height, so copy never reads as part of the picture. */
+.model-card-media { aspect-ratio: 4 / 3; background: #f2f7f4; }
+.model-card-body { background: #ffffff; }
+@media (max-width: 640px) {
+  .model-card-media { aspect-ratio: 16 / 10; }
+}
+
+/* ── Logo strip: one logo per partner on a single scrollable line ── */
+.ir-strip {
+  display: flex; gap: 12px; overflow-x: auto; scroll-behavior: smooth;
+  scroll-snap-type: x proximity; padding: 4px 2px;
+  scrollbar-width: none; -ms-overflow-style: none;
+}
+.ir-strip::-webkit-scrollbar { display: none; }
+.ir-strip-item {
+  flex: 0 0 auto; scroll-snap-align: start;
+  width: 150px; height: 96px; padding: 14px;
+  display: flex; align-items: center; justify-content: center;
+  background: #fff; border: 1px solid #e5e7eb; border-radius: 16px;
+  transition: border-color .15s, box-shadow .15s;
+}
+.ir-strip-item:hover { border-color: #93c1a5; box-shadow: 0 6px 18px rgba(0,0,0,.06); }
+.ir-strip-item img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.ir-strip-item span { font-size: 12px; font-weight: 600; color: #1c5439; text-align: center; line-height: 1.3; }
+.ir-strip-nav {
+  position: absolute; top: 50%; transform: translateY(-50%); z-index: 2;
+  width: 38px; height: 38px; border-radius: 9999px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  background: #fff; color: #1c5439; border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 14px rgba(0,0,0,.10); transition: background .15s, opacity .15s;
+}
+.ir-strip-nav:hover { background: #f2f7f4; }
+.ir-strip-nav[disabled] { opacity: .35; cursor: default; }
+.ir-strip-nav svg { width: 19px; height: 19px; }
+.ir-strip-prev { left: -6px; }
+.ir-strip-next { right: -6px; }
+@media (max-width: 640px) {
+  .ir-strip-item { width: 124px; height: 84px; }
+  .ir-strip-nav { display: none; }   /* swipe instead */
+}
+
+/* ── "More" toggle for long card copy ── */
+.ir-clamp-btn {
+  background: none; border: 0; padding: 0; cursor: pointer;
+  color: #1c5439; font-weight: 700; font-size: inherit; text-decoration: underline;
+}
+.ir-clamp-btn:hover { color: #0b2418; }
+
+/* ── Community Voice: full quote in a panel ── */
+.ir-tm-card { cursor: pointer; transition: border-color .15s, box-shadow .15s; }
+.ir-tm-card:hover { border-color: #93c1a5; box-shadow: 0 8px 22px rgba(0,0,0,.07); }
+.ir-tm-card:focus-visible { outline: 3px solid #256b49; outline-offset: 3px; }
+.ir-tm-modal {
+  position: fixed; inset: 0; z-index: 200; display: none;
+  align-items: center; justify-content: center; padding: 16px;
+  background: rgba(8, 20, 13, 0.86);
+  -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+}
+.ir-tm-modal.open { display: flex; }
+.ir-tm-box {
+  position: relative; background: #fff; border-radius: 20px; overflow: hidden;
+  width: min(560px, 100%); max-height: 88vh; overflow-y: auto;
+  box-shadow: 0 24px 60px rgba(0,0,0,.35);
+}
+.ir-tm-media { background: #f2f7f4; }
+.ir-tm-media img { width: 100%; max-height: 46vh; object-fit: cover; display: block; }
+.ir-tm-body { padding: 24px; }
+.ir-tm-stars { margin-bottom: 4px; }
+.ir-tm-quote {
+  margin: 0 0 18px; font-size: 16px; line-height: 1.7; color: #1a1a1a;
+  font-style: italic; white-space: pre-line;
+}
+.ir-tm-quote::before { content: '\201C'; }
+.ir-tm-quote::after  { content: '\201D'; }
+.ir-tm-name { font-weight: 700; color: #133a28; font-size: 14px; }
+.ir-tm-role { color: #6b7280; font-size: 12px; margin-top: 2px; }
+.ir-tm-close {
+  position: absolute; top: 12px; right: 12px; width: 38px; height: 38px;
+  display: flex; align-items: center; justify-content: center; cursor: pointer;
+  border: 0; border-radius: 9999px; background: rgba(255,255,255,.92); color: #133a28;
+  box-shadow: 0 2px 10px rgba(0,0,0,.18);
+}
+.ir-tm-close:hover { background: #fff; }
+.ir-tm-close svg { width: 20px; height: 20px; }

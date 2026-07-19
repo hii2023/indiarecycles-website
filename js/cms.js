@@ -265,13 +265,13 @@
         if (tms.length) {
           var star = '<svg class="w-3.5 h-3.5 text-green-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>';
           var stars = '<div class="flex gap-0.5 mb-4" aria-label="5 stars">' + star + star + star + star + star + '</div>';
-          tmEl.innerHTML = tms.map(function (t) {
+          tmEl.innerHTML = tms.map(function (t, i) {
             var nm = (t.name || '').trim();
             var initials = (nm || '?').split(/\s+/).map(function (w) { return w.charAt(0); }).slice(0, 2).join('').toUpperCase();
             var avatar = t.photo
               ? '<div class="w-11 h-11 rounded-full overflow-hidden bg-green-100 shrink-0"><img src="' + esc(t.photo) + '" alt="' + esc(nm) + '" class="w-full h-full object-cover"/></div>'
               : '<div class="w-11 h-11 rounded-full bg-green-100 text-green-700 font-semibold flex items-center justify-center shrink-0 text-sm">' + esc(initials) + '</div>';
-            return '<div class="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm flex flex-col">' +
+            return '<div class="ir-tm-card bg-white rounded-2xl p-6 border border-gray-200 shadow-sm flex flex-col" role="button" tabindex="0" data-tm="' + i + '" aria-label="Read what ' + esc(nm || 'this person') + ' said">' +
               stars +
               '<p class="text-gray-800 text-[14px] leading-relaxed italic flex-1">' + (t.quote ? '&ldquo;' + esc(t.quote) + '&rdquo;' : '') + '</p>' +
               '<div class="mt-5 flex items-center gap-3">' + avatar +
@@ -279,6 +279,169 @@
                 (t.role ? '<div class="text-gray-500 text-xs">' + esc(t.role) + '</div>' : '') + '</div>' +
               '</div></div>';
           }).join('');
+
+          /* Clicking a voice opens it in full - photo, whole quote, who they are. */
+          var tmModal = document.createElement('div');
+          tmModal.className = 'ir-tm-modal';
+          tmModal.setAttribute('role', 'dialog');
+          tmModal.setAttribute('aria-modal', 'true');
+          tmModal.innerHTML =
+            '<div class="ir-tm-box">' +
+              '<button class="ir-tm-close" aria-label="Close">' +
+                '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>' +
+              '</button>' +
+              '<div class="ir-tm-media"></div>' +
+              '<div class="ir-tm-body">' +
+                '<div class="ir-tm-stars">' + stars + '</div>' +
+                '<blockquote class="ir-tm-quote"></blockquote>' +
+                '<div class="ir-tm-who"><div class="ir-tm-name"></div><div class="ir-tm-role"></div></div>' +
+              '</div>' +
+            '</div>';
+          document.body.appendChild(tmModal);
+          var tmLast;
+          function tmOpen(i) {
+            var t = tms[i]; if (!t) return;
+            var nm2 = (t.name || '').trim();
+            var media = tmModal.querySelector('.ir-tm-media');
+            if (t.photo) {
+              media.innerHTML = '<img src="' + esc(t.photo) + '" alt="' + esc(nm2) + '"/>';
+              media.style.display = '';
+            } else {
+              media.innerHTML = ''; media.style.display = 'none';
+            }
+            tmModal.querySelector('.ir-tm-quote').textContent = t.quote || '';
+            tmModal.querySelector('.ir-tm-name').textContent = nm2;
+            var roleEl = tmModal.querySelector('.ir-tm-role');
+            roleEl.textContent = t.role || '';
+            roleEl.style.display = t.role ? '' : 'none';
+            tmLast = document.activeElement;
+            tmModal.classList.add('open');
+            document.body.style.overflow = 'hidden';
+            tmModal.querySelector('.ir-tm-close').focus();
+          }
+          function tmClose() {
+            tmModal.classList.remove('open');
+            document.body.style.overflow = '';
+            if (tmLast && tmLast.focus) tmLast.focus();
+          }
+          tmModal.querySelector('.ir-tm-close').addEventListener('click', tmClose);
+          tmModal.addEventListener('click', function (e) { if (e.target === tmModal) tmClose(); });
+          document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && tmModal.classList.contains('open')) tmClose();
+          });
+          tmEl.addEventListener('click', function (e) {
+            if (e.target.closest('.ir-clamp-btn')) return;
+            var c = e.target.closest('[data-tm]');
+            if (c) tmOpen(Number(c.getAttribute('data-tm')));
+          });
+          tmEl.addEventListener('keydown', function (e) {
+            var c = e.target.closest('[data-tm]');
+            if (c && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); tmOpen(Number(c.getAttribute('data-tm'))); }
+          });
+        }
+      }
+
+      /* Long card copy is clamped to ~200 characters with a "More" toggle, so a
+         wordy description cannot push everything else off the screen. */
+      function clamp(text, n) {
+        text = (text || '').trim();
+        if (!text) return '';
+        if (text.length <= (n || 200)) {
+          return '<span style="white-space:pre-line">' + esc(text) + '</span>';
+        }
+        var cut = text.slice(0, n || 200);
+        var sp = cut.lastIndexOf(' ');
+        if (sp > 120) cut = cut.slice(0, sp);
+        return '<span class="ir-clamp" style="white-space:pre-line">' +
+                 '<span class="ir-clamp-short">' + esc(cut) + '… </span>' +
+                 '<span class="ir-clamp-full" hidden>' + esc(text) + ' </span>' +
+                 '<button type="button" class="ir-clamp-btn">More</button>' +
+               '</span>';
+      }
+      document.addEventListener('click', function (e) {
+        var b = e.target.closest('.ir-clamp-btn');
+        if (!b) return;
+        e.preventDefault(); e.stopPropagation();
+        var wrap = b.closest('.ir-clamp');
+        var short = wrap.querySelector('.ir-clamp-short'), full = wrap.querySelector('.ir-clamp-full');
+        var open = full.hidden === false;
+        full.hidden = open; short.hidden = !open;
+        b.textContent = open ? 'More' : 'Less';
+      });
+
+      /* Homepage: 3 most recent events, with a link through to the full page */
+      var heEl = document.getElementById('home-events');
+      if (heEl) {
+        var evAll = (content.events && content.events.items) || [];
+        // upcoming first, then the most recent past ones
+        var ordered = evAll.filter(function (e) { return (e.status || 'upcoming') === 'upcoming'; })
+          .concat(evAll.filter(function (e) { return e.status === 'past'; }).reverse());
+        if (ordered.length) {
+          document.getElementById('home-events-section').style.display = '';
+          heEl.innerHTML = ordered.slice(0, 3).map(function (ev) {
+            var i = evAll.indexOf(ev);
+            var photo = ev.photo ? '<div class="aspect-[16/10] bg-green-50 overflow-hidden"><img src="' + esc(ev.photo) + '" alt="' + esc(ev.title) + '" class="w-full h-full object-cover" loading="lazy"/></div>' : '';
+            var when = [ev.when, ev.time].filter(Boolean).map(esc).join(' &middot; ');
+            return '<a href="events.html#event-' + i + '" class="rounded-2xl border border-gray-200 bg-white overflow-hidden flex flex-col shadow-sm hover:border-green-300 transition-colors">' + photo +
+              '<div class="p-5 flex-1 flex flex-col">' +
+                (when ? '<span class="text-xs font-semibold text-green-600 mb-1">' + when + '</span>' : '') +
+                '<h3 class="font-bold text-gray-900 text-[15px] mb-1.5">' + esc(ev.title) + '</h3>' +
+                (ev.description ? '<p class="text-gray-800 text-[13px] leading-relaxed flex-1">' + clamp(ev.description, 200) + '</p>' : '') +
+              '</div></a>';
+          }).join('');
+        }
+      }
+
+      /* Homepage: 3 collaborations, with a link through to the full page */
+      var hcEl = document.getElementById('home-collabs');
+      if (hcEl) {
+        var coAll = (content.collaborations && content.collaborations.items) || [];
+        if (coAll.length) {
+          document.getElementById('home-collabs-section').style.display = '';
+          hcEl.innerHTML = coAll.slice(0, 3).map(function (co) {
+            var photo = co.photo ? '<div class="aspect-[16/10] bg-green-50 overflow-hidden"><img src="' + esc(co.photo) + '" alt="' + esc(co.title) + '" class="w-full h-full object-cover" loading="lazy"/></div>' : '';
+            var logo = co.logo ? '<div class="h-9 flex items-center mb-2"><img src="' + esc(co.logo) + '" alt="" class="max-h-9 max-w-[55%] object-contain object-left"/></div>' : '';
+            return '<a href="collaborations.html" class="rounded-2xl border border-gray-200 bg-white overflow-hidden flex flex-col shadow-sm hover:border-green-300 transition-colors">' + photo +
+              '<div class="p-5 flex-1 flex flex-col">' + logo +
+                '<h3 class="font-bold text-gray-900 text-[15px] mb-1.5">' + esc(co.title) + '</h3>' +
+                (co.description ? '<p class="text-gray-800 text-[13px] leading-relaxed flex-1">' + clamp(co.description, 200) + '</p>' : '') +
+              '</div></a>';
+          }).join('');
+        }
+      }
+
+      /* Homepage: one logo per mission partner, on a single scrollable line */
+      var hpEl = document.getElementById('home-partners');
+      if (hpEl) {
+        var pAll = (content.partners && content.partners.items) || [];
+        var withLogo = pAll.filter(function (p) { return p.logo || p.name; });
+        if (withLogo.length) {
+          document.getElementById('home-partners-strip').style.display = '';
+          var fb = document.getElementById('home-partners-fallback');
+          if (fb) fb.style.display = 'none';
+          hpEl.innerHTML = withLogo.map(function (p) {
+            var inner = p.logo
+              ? '<img src="' + esc(p.logo) + '" alt="' + esc(p.name) + '" loading="lazy"/>'
+              : '<span>' + esc(p.name) + '</span>';
+            var cls = 'ir-strip-item', title = ' title="' + esc(p.name) + '" role="listitem"';
+            return p.link
+              ? '<a href="' + esc(p.link) + '" target="_blank" rel="noopener noreferrer" class="' + cls + '"' + title + '>' + inner + '</a>'
+              : '<div class="' + cls + '"' + title + '>' + inner + '</div>';
+          }).join('');
+
+          var strip = hpEl, prev = document.querySelector('.ir-strip-prev'), next = document.querySelector('.ir-strip-next');
+          function syncNav() {
+            var max = strip.scrollWidth - strip.clientWidth - 2;
+            prev.disabled = strip.scrollLeft <= 2;
+            next.disabled = strip.scrollLeft >= max;
+            var overflows = strip.scrollWidth > strip.clientWidth + 2;
+            prev.style.visibility = next.style.visibility = overflows ? '' : 'hidden';
+          }
+          prev.addEventListener('click', function () { strip.scrollBy({ left: -strip.clientWidth * 0.8, behavior: 'smooth' }); });
+          next.addEventListener('click', function () { strip.scrollBy({ left:  strip.clientWidth * 0.8, behavior: 'smooth' }); });
+          strip.addEventListener('scroll', syncNav);
+          window.addEventListener('resize', syncNav);
+          setTimeout(syncNav, 50);
         }
       }
 
