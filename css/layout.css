@@ -239,3 +239,46 @@ section[id] { scroll-margin-top: 96px; }
 }
 .ir-tm-close:hover { background: #fff; }
 .ir-tm-close svg { width: 20px; height: 20px; }
+
+/* ── "How India Recycles Works" step cards ──
+   Illustration-led card: pastel STEP pill top-left, artwork, then centred copy.
+   The artwork is an <img>, so each one is replaceable from the admin. */
+.step-card {
+  background: #fff; border: 1px solid #eef2f0; border-radius: 22px;
+  padding: 18px 22px 26px; text-align: center;
+  display: flex; flex-direction: column;
+  box-shadow: 0 2px 10px rgba(16, 40, 28, .04);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.step-card:hover { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(16, 40, 28, .09); }
+@media (prefers-reduced-motion: reduce) { .step-card:hover { transform: none; } }
+
+.step-badge {
+  align-self: flex-start; display: inline-block;
+  padding: 6px 14px; border-radius: 9999px;
+  font-size: 11px; font-weight: 800; letter-spacing: .09em; text-transform: uppercase;
+}
+.step-badge--green  { background: #dcfce7; color: #15803d; }
+.step-badge--amber  { background: #fef3c7; color: #b45309; }
+.step-badge--violet { background: #ede9fe; color: #6d28d9; }
+.step-badge--rose   { background: #ffe4e6; color: #be123c; }
+.step-badge--blue   { background: #dbeafe; color: #1d4ed8; }
+
+.step-art { padding: 6px 0 2px; }
+.step-art img { display: block; width: 100%; max-width: 210px; height: auto; margin: 0 auto; }
+
+.step-title {
+  font-family: 'Montserrat', sans-serif; font-weight: 700;
+  font-size: 20px; color: #14344a; margin: 6px 0 10px;
+}
+.step-desc { color: #5b7185; font-size: 14px; line-height: 1.65; margin: 0; }
+
+@media (max-width: 640px) {
+  .step-card { padding: 16px 18px 22px; }
+  .step-art img { max-width: 168px; }
+  .step-title { font-size: 18px; }
+}
+
+/* Bigger partner logos on the homepage strip */
+.ir-strip-item { width: 208px; height: 130px; padding: 20px; }
+@media (max-width: 640px) { .ir-strip-item { width: 170px; height: 112px; padding: 16px; } }

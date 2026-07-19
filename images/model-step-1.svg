@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 200" role="img" aria-label="Donating clothes into a collection box">
+  <ellipse cx="120" cy="112" rx="96" ry="72" fill="#dcfce7"/>
+  <path d="M28 150c14-8 26 4 40-2" stroke="#86efac" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path d="M186 62c8 6 6 16 14 20" stroke="#86efac" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path d="M62 92h116l-8 74a12 12 0 0 1-12 11H82a12 12 0 0 1-12-11z" fill="#4ade80"/>
+  <path d="M62 92h116l-8 74a12 12 0 0 1-12 11h-38V92z" fill="#22c55e"/>
+  <rect x="52" y="78" width="136" height="26" rx="10" fill="#16a34a"/>
+  <path d="M120 122c-4-9-18-9-18 2 0 8 12 15 18 20 6-5 18-12 18-20 0-11-14-11-18-2z" fill="#fff"/>
+  <path d="M96 62c-9 0-16 6-16 14v6h34V76c0-8-8-14-18-14z" fill="#fb7185"/>
+  <path d="M104 56h20l6 8-8 6-8-5-8 5-8-6z" fill="#f43f5e"/>
+  <path d="M148 58c-8 0-14 6-14 13v11h30V71c0-7-7-13-16-13z" fill="#60a5fa"/>
+  <circle cx="150" cy="66" r="5" fill="#fff" opacity=".9"/>
+  <path d="M56 60c-10 2-14 12-8 18 6-6 12-10 8-18z" fill="#4ade80"/>
+</svg>

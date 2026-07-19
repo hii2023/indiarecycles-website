@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 200" role="img" aria-label="A basket of folded clothes at a community sale">
+  <ellipse cx="120" cy="114" rx="96" ry="70" fill="#ede9fe"/>
+  <rect x="76" y="72" width="30" height="18" rx="4" fill="#f87171"/>
+  <rect x="110" y="66" width="30" height="24" rx="4" fill="#fbbf24"/>
+  <rect x="144" y="74" width="26" height="16" rx="4" fill="#60a5fa"/>
+  <path d="M58 88h124l-12 74a14 14 0 0 1-14 12H84a14 14 0 0 1-14-12z" fill="#a78bfa"/>
+  <path d="M58 88h124l-12 74a14 14 0 0 1-14 12h-36V88z" fill="#8b5cf6"/>
+  <g stroke="#c4b5fd" stroke-width="4" stroke-linecap="round">
+    <path d="M82 104v58M104 104v58M126 104v58M148 104v58"/>
+  </g>
+  <rect x="50" y="80" width="140" height="20" rx="9" fill="#7c3aed"/>
+  <path d="M92 80c0-16 12-28 28-28s28 12 28 28" stroke="#7c3aed" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <g transform="rotate(-18 176 108)">
+    <rect x="160" y="96" width="34" height="26" rx="7" fill="#f472b6"/>
+    <circle cx="169" cy="105" r="3.5" fill="#fff"/>
+  </g>
+  <path d="M206 62l4 9 9 4-9 4-4 9-4-9-9-4 9-4z" fill="#c4b5fd"/>
+  <path d="M30 96l3 7 7 3-7 3-3 7-3-7-7-3 7-3z" fill="#c4b5fd"/>
+</svg>

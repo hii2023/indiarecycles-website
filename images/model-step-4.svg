@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 200" role="img" aria-label="Curated clothing and a tote bag at a thrift sale">
+  <ellipse cx="120" cy="116" rx="96" ry="68" fill="#ffe4e6"/>
+  <path d="M96 46c0-8 14-8 14 0 0 6-6 8-6 14" stroke="#94a3b8" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M104 60l-34 16c-4 2-5 6-3 10l8 14 12-6v58a8 8 0 0 0 8 8h38a8 8 0 0 0 8-8v-58l12 6 8-14c2-4 1-8-3-10l-34-16z" fill="#fb7185"/>
+  <path d="M104 60h30l34 16c4 2 5 6 3 10l-8 14-12-6v58a8 8 0 0 1-8 8h-19z" fill="#f43f5e"/>
+  <path d="M104 60c0 9 7 15 16 15s16-6 16-15" stroke="#fecdd3" stroke-width="4" fill="none"/>
+  <path d="M150 108h58v58a10 10 0 0 1-10 10h-38a10 10 0 0 1-10-10z" fill="#fde5c8"/>
+  <path d="M179 108h29v58a10 10 0 0 1-10 10h-19z" fill="#f8d3a8"/>
+  <path d="M166 108c0-14 6-22 13-22s13 8 13 22" stroke="#e8b887" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path d="M179 132c-3-7-14-7-14 2 0 7 10 12 14 16 4-4 14-9 14-16 0-9-11-9-14-2z" fill="#f43f5e"/>
+  <path d="M34 84l4 9 9 4-9 4-4 9-4-9-9-4 9-4z" fill="#fda4af"/>
+  <path d="M208 66l3 7 7 3-7 3-3 7-3-7-7-3 7-3z" fill="#fda4af"/>
+</svg>
