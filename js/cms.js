@@ -249,7 +249,7 @@
                 (poster ? '<img src="' + poster + '" alt="" class="w-full h-full object-cover"/>' : '') +
                 '<span class="absolute inset-0 flex items-center justify-center"><span class="w-16 h-16 rounded-full bg-red-600 flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform"><svg class="w-7 h-7 text-white ml-1" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></span></button>';
             } else if (poster) {
-              media = '<div class="aspect-video bg-green-50"><img src="' + poster + '" alt="" class="w-full h-full object-cover"/></div>';
+              media = '<div class="aspect-video bg-green-50 ir-lb-tile" data-lightbox role="button" tabindex="0" aria-label="View full image: ' + esc(t.title) + '"><img src="' + poster + '" alt="' + esc(t.title) + '" class="w-full h-full object-cover"/></div>';
             }
             var parts = [];
             if (t.host_name) parts.push('<div><span class="text-green-400">Host:</span> <span class="text-green-700 font-semibold">' + esc(t.host_name) + '</span></div>');
@@ -555,7 +555,7 @@
         var PIN = '<svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>';
         var eventCard = function (ev) {
           var idx = evItems.indexOf(ev);
-          var photo = ev.photo ? '<div class="aspect-[16/10] bg-green-50"><img src="' + esc(ev.photo) + '" alt="' + esc(ev.title) + '" class="w-full h-full object-cover"/></div>' : '';
+          var photo = ev.photo ? '<div class="aspect-[16/10] bg-green-50 ir-lb-tile" data-lightbox role="button" tabindex="0" aria-label="View full image: ' + esc(ev.title) + '"><img src="' + esc(ev.photo) + '" alt="' + esc(ev.title) + '" class="w-full h-full object-cover"/></div>' : '';
           var whenBits = [];
           if (ev.when) whenBits.push(esc(ev.when));
           if (ev.time) whenBits.push(esc(ev.time));
@@ -709,7 +709,7 @@
         var collabs = (content.collaborations && content.collaborations.items) || [];
         if (collabs.length) {
           collabEl.innerHTML = collabs.map(function (co) {
-            var photo = co.photo ? '<div class="aspect-[16/10] bg-green-50"><img src="' + esc(co.photo) + '" alt="' + esc(co.title) + '" class="w-full h-full object-cover"/></div>' : '';
+            var photo = co.photo ? '<div class="aspect-[16/10] bg-green-50 ir-lb-tile" data-lightbox role="button" tabindex="0" aria-label="View full image: ' + esc(co.title) + '"><img src="' + esc(co.photo) + '" alt="' + esc(co.title) + '" class="w-full h-full object-cover"/></div>' : '';
             var logo = co.logo ? '<div class="h-12 flex items-center mb-3"><img src="' + esc(co.logo) + '" alt="' + esc(co.title) + ' logo" class="max-h-12 max-w-[60%] object-contain object-left"/></div>' : '';
             return '<article class="rounded-2xl border border-green-100 bg-white overflow-hidden flex flex-col shadow-sm">' + photo +
               '<div class="p-5 flex-1 flex flex-col">' + logo +

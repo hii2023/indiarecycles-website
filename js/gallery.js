@@ -153,6 +153,23 @@
     document.querySelectorAll('[data-gallery]').forEach(initGrid);
   }
 
+  /* Any element marked data-lightbox (cms.js card photos on Events,
+     Collaboration and IR Talks) opens its image full size on click. */
+  function openSingle(el) {
+    var img = el.tagName === 'IMG' ? el : el.querySelector('img');
+    if (!img || !(img.currentSrc || img.src)) return;
+    open([{ full: img.currentSrc || img.src, alt: img.getAttribute('alt') || '' }], 0);
+  }
+  document.addEventListener('click', function (e) {
+    var el = e.target.closest('[data-lightbox]');
+    if (el) openSingle(el);
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    var el = e.target.closest && e.target.closest('[data-lightbox]');
+    if (el) { e.preventDefault(); openSingle(el); }
+  });
+
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initAll);
   else initAll();
 
