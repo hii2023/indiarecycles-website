@@ -1398,6 +1398,35 @@
     return p;
   }
 
+  /* Images sit in the editor as data URLs for instant preview, but published
+     content must carry Storage URLs - base64 in the JSON made the public site
+     download 11MB before anything rendered. Upload each embedded image and
+     swap in the returned public URL before saving. */
+  async function uploadEmbeddedImages(value, passcode, label) {
+    if (typeof value === 'string') {
+      if (value.indexOf('data:image/') !== 0) return value;
+      const res = await fetch(SB_URL + '/functions/v1/ir-upload', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ passcode: passcode, name: label, dataUrl: value })
+      });
+      const out = await res.json().catch(() => ({}));
+      if (!res.ok || !out.url) throw new Error(out.error || 'Image upload failed (HTTP ' + res.status + ')');
+      return out.url;
+    }
+    if (Array.isArray(value)) {
+      const arr = [];
+      for (const item of value) arr.push(await uploadEmbeddedImages(item, passcode, label));
+      return arr;
+    }
+    if (value && typeof value === 'object') {
+      const obj = {};
+      for (const k of Object.keys(value)) obj[k] = await uploadEmbeddedImages(value[k], passcode, label + '-' + k);
+      return obj;
+    }
+    return value;
+  }
+
   async function saveSection(section) {
     const btn = event.target;
     const orig = btn.textContent;
@@ -1406,10 +1435,14 @@
     btn.textContent = 'Publishing...';
     btn.disabled = true;
     try {
+      let data = collectSection(section);
+      btn.textContent = 'Uploading images...';
+      data = await uploadEmbeddedImages(data, passcode, section);
+      btn.textContent = 'Publishing...';
       const res = await fetch(SB_URL + '/rest/v1/rpc/recycle_save_content', {
         method: 'POST',
         headers: SB_HEADERS,
-        body: JSON.stringify({ p_section: section, p_data: collectSection(section), p_passcode: passcode })
+        body: JSON.stringify({ p_section: section, p_data: data, p_passcode: passcode })
       });
       if (!res.ok) {
         const err = await res.json().catch(() => ({}));
@@ -1427,7 +1460,12 @@
       btn.classList.add('bg-forest-800');
       setTimeout(() => { btn.textContent = orig; btn.disabled = false; btn.classList.remove('bg-forest-800'); }, 2500);
     } catch (e) {
-      alert('Network error, changes NOT published: ' + e.message);
+      if ((e.message || '').indexOf('Invalid passcode') !== -1) {
+        sessionStorage.removeItem('ir_pass');
+        alert('Wrong passcode. Click Save again and re-enter it.');
+      } else {
+        alert('Changes NOT published: ' + e.message);
+      }
       btn.textContent = orig;
       btn.disabled = false;
     }
