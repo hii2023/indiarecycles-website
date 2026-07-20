@@ -316,6 +316,7 @@
               '<div class="ir-tm-body">' +
                 '<div class="ir-tm-stars">' + stars + '</div>' +
                 '<blockquote class="ir-tm-quote"></blockquote>' +
+                '<p class="ir-tm-desc"></p>' +
                 '<div class="ir-tm-who"><div class="ir-tm-name"></div><div class="ir-tm-role"></div></div>' +
               '</div>' +
             '</div>';
@@ -332,6 +333,9 @@
               media.innerHTML = ''; media.style.display = 'none';
             }
             tmModal.querySelector('.ir-tm-quote').textContent = t.quote || '';
+            var descEl = tmModal.querySelector('.ir-tm-desc');
+            descEl.textContent = t.description || '';
+            descEl.style.display = (t.description || '').trim() ? '' : 'none';
             tmModal.querySelector('.ir-tm-name').textContent = nm2;
             var roleEl = tmModal.querySelector('.ir-tm-role');
             roleEl.textContent = t.role || '';

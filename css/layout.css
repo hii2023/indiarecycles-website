@@ -224,6 +224,7 @@ section[id] { scroll-margin-top: 96px; }
 }
 .ir-tm-quote::before { content: '\201C'; }
 .ir-tm-quote::after  { content: '\201D'; }
+.ir-tm-desc { margin: 0 0 18px; font-size: 14px; line-height: 1.65; color: #445; white-space: pre-line; }
 .ir-tm-name { font-weight: 700; color: #133a28; font-size: 14px; }
 .ir-tm-role { color: #6b7280; font-size: 12px; margin-top: 2px; }
 .ir-tm-close {
@@ -324,7 +325,10 @@ section[id] { scroll-margin-top: 96px; }
   background: #5ca07a; box-shadow: 0 0 0 0 rgba(92,160,122,.7); animation: irFlashPulse 2s infinite;
 }
 @keyframes irFlashPulse { 0%{box-shadow:0 0 0 0 rgba(92,160,122,.6)} 70%{box-shadow:0 0 0 10px rgba(92,160,122,0)} 100%{box-shadow:0 0 0 0 rgba(92,160,122,0)} }
-@media (max-width: 1023px) { .ir-flash-tab { top: auto; bottom: 210px; padding: 10px 12px; } }
+/* On phones sit the flash tab in the upper-middle of the right edge (~25% higher
+   than the old near-bottom spot), well clear of the WhatsApp/Call bubble. The base
+   rule's translateY(-50%) centres it on this top offset. */
+@media (max-width: 1023px) { .ir-flash-tab { top: 38%; bottom: auto; padding: 10px 12px; } }
 @media (prefers-reduced-motion: reduce) { .ir-flash-tab .ir-flash-dot { animation: none; } }
 
 .ir-flash-modal {

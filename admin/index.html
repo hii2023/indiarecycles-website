@@ -1251,6 +1251,7 @@
       var tms = Array.from(document.querySelectorAll('#testimonials-editor [data-tm-card]')).map(function (c) {
         return {
           quote: c.querySelector('[data-quote]').value.trim(),
+          description: c.querySelector('[data-desc]').value.trim(),
           name:  c.querySelector('[data-name]').value.trim(),
           role:  c.querySelector('[data-role]').value.trim(),
           photo: c.querySelector('[data-photo]').value.trim()
@@ -1836,7 +1837,8 @@
       +     '<input type="text" data-role value="' + attrEsc(t.role) + '" placeholder="Who they are (e.g. Volunteer)" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white"/>'
       +   '</div>'
       + '</div>'
-      + '<textarea data-quote rows="3" placeholder="Their testimonial / quote" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white resize-none">' + textEsc(t.quote) + '</textarea>'
+      + '<textarea data-quote rows="2" placeholder="Short quote (shown on the card)" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white resize-none mb-2">' + textEsc(t.quote) + '</textarea>'
+      + '<textarea data-desc rows="3" placeholder="Longer story (optional - shown in the popup when clicked)" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white resize-none">' + textEsc(t.description) + '</textarea>'
       + '</div>';
   }
   function renderTestimonials(arr) {
