@@ -105,6 +105,10 @@
       <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
       Social Links
     </button>
+    <button class="tab-btn text-left px-4 py-3 rounded-xl text-sm font-medium cursor-pointer text-forest-600 hover:bg-forest-50" onclick="switchTab('flash', this)">
+      <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      Flash Popup
+    </button>
     <button class="tab-btn text-left px-4 py-3 rounded-xl text-sm font-medium cursor-pointer text-forest-600 hover:bg-forest-50" onclick="switchTab('donations', this)">
       <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
       Donations / Bank
@@ -837,6 +841,74 @@
       <strong>Tip:</strong> Paste the full link including <strong>https://</strong>. "Other" shows a globe icon and uses the name you type as its tooltip. Click <strong>Save Changes</strong> to publish.</div>
   </section>
 
+  <!-- ═══ FLASH POPUP ═══ -->
+  <section id="tab-flash" class="tab-content" aria-labelledby="fl-tab-heading">
+    <div class="flex items-center justify-between mb-8">
+      <div>
+        <h1 id="fl-tab-heading" class="font-serif text-2xl text-forest-800">Flash Popup</h1>
+        <p class="text-forest-500 text-sm mt-1">A little tab pinned to the side of every page. Visitors click it to see a popup - use it to flash an event, a talk, a workshop or any announcement. Turn it off when it is over.</p>
+      </div>
+      <button onclick="saveSection('flash')" class="save-btn bg-forest-600 hover:bg-forest-700 text-white px-6 py-2.5 rounded-xl font-semibold text-sm cursor-pointer shadow">Save Changes</button>
+    </div>
+    <div class="bg-white rounded-3xl p-6 border border-forest-100 space-y-5">
+      <label class="flex items-start gap-4 cursor-pointer">
+        <input type="checkbox" id="flash-enabled" class="mt-1 w-5 h-5 accent-[#256b49] cursor-pointer"/>
+        <span>
+          <span class="block font-semibold text-forest-800 text-sm">Show the flash popup</span>
+          <span class="block text-xs text-forest-500 mt-1 leading-relaxed">When on, the side tab appears on every page. Leave it off (or clear the title) to hide it completely.</span>
+        </span>
+      </label>
+      <div class="grid sm:grid-cols-2 gap-4">
+        <div>
+          <label for="flash-kind" class="block text-xs font-semibold text-forest-500 uppercase tracking-wide mb-1.5">Type (shown on the tab)</label>
+          <input type="text" id="flash-kind" list="flash-kinds" placeholder="Event / Talk / Workshop" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          <datalist id="flash-kinds"><option value="Event"></option><option value="IR Talk"></option><option value="Workshop"></option><option value="Announcement"></option><option value="New"></option></datalist>
+        </div>
+        <div>
+          <label for="flash-title" class="block text-xs font-semibold text-forest-500 uppercase tracking-wide mb-1.5">Title</label>
+          <input type="text" id="flash-title" placeholder="e.g. July Thrift Fest" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream"/>
+        </div>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-4">
+        <div>
+          <label for="flash-date" class="block text-xs font-semibold text-forest-500 uppercase tracking-wide mb-1.5">Date (optional)</label>
+          <input type="date" id="flash-date" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream"/>
+        </div>
+        <div>
+          <label for="flash-time" class="block text-xs font-semibold text-forest-500 uppercase tracking-wide mb-1.5">Time (optional)</label>
+          <input type="text" id="flash-time" placeholder="e.g. 11 AM - 8 PM" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream"/>
+        </div>
+      </div>
+      <div>
+        <label for="flash-desc" class="block text-xs font-semibold text-forest-500 uppercase tracking-wide mb-1.5">Description</label>
+        <textarea id="flash-desc" rows="3" placeholder="What is happening, where, and who should come" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream resize-none"></textarea>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-4">
+        <div>
+          <label for="flash-link" class="block text-xs font-semibold text-forest-500 uppercase tracking-wide mb-1.5">Button link (optional)</label>
+          <input type="url" id="flash-link" placeholder="https://..." class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream"/>
+        </div>
+        <div>
+          <label for="flash-link-label" class="block text-xs font-semibold text-forest-500 uppercase tracking-wide mb-1.5">Button text</label>
+          <input type="text" id="flash-link-label" placeholder="e.g. Register, See details" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream"/>
+        </div>
+      </div>
+      <div>
+        <label class="block text-xs font-semibold text-forest-500 uppercase tracking-wide mb-1.5">Photo (optional)</label>
+        <div class="flex items-center gap-4">
+          <div class="w-40 aspect-[16/10] rounded-xl overflow-hidden bg-forest-50 border border-forest-200 flex items-center justify-center shrink-0" id="flash-photo-preview"><span class="text-[10px] text-forest-400 text-center px-2">No photo</span></div>
+          <div>
+            <label class="inline-block text-[12px] font-semibold text-forest-700 bg-forest-50 hover:bg-forest-100 rounded-lg px-4 py-2 cursor-pointer">Upload photo<input type="file" accept="image/*" class="hidden" onchange="onFlashPhoto(this)"/></label>
+            <div class="text-[10px] text-forest-400 mt-1.5">JPG &middot; 1200&times;750 &middot; wide 16:10</div>
+            <input type="hidden" id="flash-photo" value=""/>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mt-6 bg-amber-50 rounded-2xl px-5 py-4 border border-amber-100 text-sm text-amber-800">
+      <strong>Tip:</strong> Only the Type and Title are needed to show the popup. Everything else is optional. Click <strong>Save Changes</strong> to publish.</div>
+  </section>
+
   <!-- ═══ ACTIVITIES PAGE ═══ -->
   <section id="tab-activities" class="tab-content" aria-labelledby="ac-tab-heading">
     <div class="flex items-center justify-between mb-8">
@@ -1186,6 +1258,20 @@
       }).filter(function (t) { return t.quote || t.name; });
       return { items: tms };
     }
+    if (section === 'flash') {
+      var fv = function (id) { return (document.getElementById(id).value || '').trim(); };
+      return {
+        enabled:    document.getElementById('flash-enabled').checked,
+        kind:       fv('flash-kind'),
+        title:      fv('flash-title'),
+        date:       fv('flash-date'),
+        time:       fv('flash-time'),
+        description: fv('flash-desc'),
+        link:       fv('flash-link'),
+        link_label: fv('flash-link-label'),
+        photo:      fv('flash-photo')
+      };
+    }
     if (section === 'social') {
       var val = function (id) { return (document.getElementById(id).value || '').trim(); };
       return {
@@ -1387,6 +1473,17 @@
         if (Array.isArray(cms.talks.items)) renderTalks(cms.talks.items);
       }
       if (cms.testimonials && Array.isArray(cms.testimonials.items)) renderTestimonials(cms.testimonials.items);
+      if (cms.flash) {
+        var fl = cms.flash;
+        document.getElementById('flash-enabled').checked = fl.enabled === true;
+        [['kind','flash-kind'],['title','flash-title'],['date','flash-date'],['time','flash-time'],
+         ['description','flash-desc'],['link','flash-link'],['link_label','flash-link-label'],['photo','flash-photo']]
+          .forEach(function (p) { if (typeof fl[p[0]] === 'string') document.getElementById(p[1]).value = fl[p[0]]; });
+        if (fl.photo) {
+          var fp = fl.photo.indexOf('images/') === 0 ? '../' + fl.photo : fl.photo;
+          document.getElementById('flash-photo-preview').innerHTML = '<img src="' + fp + '" class="w-full h-full object-cover"/>';
+        }
+      }
       if (cms.social) {
         [['instagram', 'social-instagram'], ['facebook', 'social-facebook'], ['linkedin', 'social-linkedin'],
          ['youtube', 'social-youtube'], ['other', 'social-other'], ['other_name', 'social-other-name']]
@@ -1785,6 +1882,29 @@
   }
 
   // ── Activities page (hero image + description) ───────────────
+  function onFlashPhoto(input) {
+    var file = input.files && input.files[0];
+    if (!file) return;
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      var img = new Image();
+      img.onload = function () {
+        var max = 1200;
+        var w = img.width, h = img.height;
+        if (w > h && w > max) { h = Math.round(h * max / w); w = max; }
+        else if (h >= w && h > max) { w = Math.round(w * max / h); h = max; }
+        var c = document.createElement('canvas');
+        c.width = w; c.height = h;
+        c.getContext('2d').drawImage(img, 0, 0, w, h);
+        var url = c.toDataURL('image/jpeg', 0.82);
+        document.getElementById('flash-photo').value = url;
+        document.getElementById('flash-photo-preview').innerHTML = '<img src="' + url + '" class="w-full h-full object-cover"/>';
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
   function onActivitiesImagePick(input) {
     var file = input.files && input.files[0];
     if (!file) return;
