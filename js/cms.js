@@ -663,6 +663,17 @@
             '</div>' +
           '</div>';
         modal.querySelector('.ir-flash-close').addEventListener('click', function () { modal.__close(); });
+
+        /* Pop the announcement open on arrival instead of hoping visitors spot the
+           side tab. Once per session per announcement: closing it keeps it closed
+           across pages until the admin publishes a different one. */
+        try {
+          var flashSig = (f.title || '') + '|' + (f.date || '') + '|' + (f.time || '');
+          if (sessionStorage.getItem('ir_flash_seen') !== flashSig) {
+            sessionStorage.setItem('ir_flash_seen', flashSig);
+            setTimeout(function () { if (!modal.classList.contains('open')) tab.click(); }, 600);
+          }
+        } catch (e) {}
       })();
 
       /* Social links (footer): only the ones with a link set are shown */
@@ -803,9 +814,20 @@
      The heavy, below-the-fold ones keep loading from the network as before. */
   var MAX_SECTION_BYTES = 120 * 1024;
   function cacheable(rows) {
-    return rows.filter(function (r) {
-      try { return JSON.stringify(r).length <= MAX_SECTION_BYTES; } catch (e) { return false; }
-    });
+    return rows.reduce(function (out, r) {
+      var fits = false;
+      try { fits = JSON.stringify(r).length <= MAX_SECTION_BYTES; } catch (e) {}
+      if (fits) { out.push(r); return out; }
+      /* The flash announcement drives the popup; its base64 photo alone pushes it
+         past the cap, which used to leave it out of the cache entirely and made the
+         tab wait on the network every visit. Cache its text without the photo. */
+      if (r.section === 'flash' && r.data) {
+        var slim = { section: 'flash', data: {} };
+        for (var k in r.data) { if (k !== 'photo') slim.data[k] = r.data[k]; }
+        try { if (JSON.stringify(slim).length <= MAX_SECTION_BYTES) out.push(slim); } catch (e) {}
+      }
+      return out;
+    }, []);
   }
 
   window.IR_CMS = new Promise(function (resolve) {
