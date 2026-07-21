@@ -100,6 +100,9 @@
     var tiles = tilesOf(grid);
     if (!tiles.length) return;
 
+    // A grid can override how many photos show before "Show all" via data-gallery-step.
+    var step = parseInt(grid.getAttribute('data-gallery-step'), 10) || STEP;
+
     // clean up anything from a previous run (cms.js may have rebuilt the grid)
     var oldBtn = grid.parentNode.querySelector('[data-gallery-more]');
     if (oldBtn) oldBtn.remove();
@@ -110,7 +113,7 @@
     });
 
     tiles.forEach(function (t, i) {
-      t.style.display = i < STEP ? '' : 'none';
+      t.style.display = i < step ? '' : 'none';
       if (!t.__irBound) {
         t.__irBound = true;
         t.classList.add('ir-lb-tile');
@@ -124,7 +127,7 @@
       }
     });
 
-    if (tiles.length <= STEP) return;
+    if (tiles.length <= step) return;
 
     var wrap = document.createElement('div');
     wrap.className = 'text-center mt-7';
@@ -140,7 +143,7 @@
     }
     btn.addEventListener('click', function () {
       expanded = !expanded;
-      tiles.forEach(function (t, i) { t.style.display = (expanded || i < STEP) ? '' : 'none'; });
+      tiles.forEach(function (t, i) { t.style.display = (expanded || i < step) ? '' : 'none'; });
       label();
       if (!expanded) grid.scrollIntoView({ block: 'start', behavior: 'smooth' });
     });

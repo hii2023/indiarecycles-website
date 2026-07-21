@@ -644,7 +644,7 @@
           event:  { href: nextEvent,             text: 'Next Event' },
           talk:   { href: 'ir-talks.html',       text: 'Next IR Talk' },
           donate: { href: 'donate.html',         text: 'Donate' },
-          revibe: { href: 'revibe.html',         text: 'Shop with ReVibe' }
+          revibe: { href: 'revibe.html',         text: 'Shop with Re-Vibe' }
         };
         var cta = CTA[pick] || CTA.drop;
         ctaEl.setAttribute('href', cta.href);
