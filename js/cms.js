@@ -193,6 +193,35 @@
 
       /* Reports & Media (Resources page) */
       function esc(t) { var d = document.createElement('div'); d.textContent = t == null ? '' : String(t); return d.innerHTML; }
+
+      /* Photos per item: prefer the `photos` array, fall back to a legacy single `photo`. */
+      function itemPhotos(it) {
+        if (it && Array.isArray(it.photos)) return it.photos.filter(Boolean);
+        return it && it.photo ? [it.photo] : [];
+      }
+      /* A clickable cover that opens the whole set in the gallery.js lightbox,
+         with a small "N photos" badge when there is more than one. */
+      function photoCover(photos, alt, wrapClass) {
+        if (!photos.length) return '';
+        var group = esc(JSON.stringify(photos));
+        var badge = photos.length > 1
+          ? '<span class="absolute bottom-2 right-2 inline-flex items-center gap-1 bg-black/60 text-white text-[11px] font-semibold px-2 py-0.5 rounded-full backdrop-blur-sm pointer-events-none">' +
+              '<svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>' + photos.length +
+            '</span>'
+          : '';
+        return '<div class="relative ' + wrapClass + ' ir-lb-tile" data-lightbox data-photos="' + group + '" data-alt="' + esc(alt) + '" role="button" tabindex="0" aria-label="View ' + (photos.length > 1 ? photos.length + ' photos' : 'full image') + ': ' + esc(alt) + '">' +
+          '<img src="' + esc(photos[0]) + '" alt="' + esc(alt) + '" class="w-full h-full object-cover"/>' + badge +
+        '</div>';
+      }
+      /* A row of small thumbnails (used under a talk video); each opens the set at its index. */
+      function photoStrip(photos, alt) {
+        if (photos.length < 2) return '';
+        var group = esc(JSON.stringify(photos));
+        return '<div class="flex gap-2 px-5 pt-4 flex-wrap">' + photos.map(function (p, i) {
+          return '<div class="w-14 h-14 rounded-lg overflow-hidden border border-green-100 ir-lb-tile" data-lightbox data-photos="' + group + '" data-start="' + i + '" data-alt="' + esc(alt) + '" role="button" tabindex="0" aria-label="View photo ' + (i + 1) + ' of ' + photos.length + '">' +
+            '<img src="' + esc(p) + '" alt="" class="w-full h-full object-cover"/></div>';
+        }).join('') + '</div>';
+      }
       var reportsEl = document.getElementById('reports-list');
       if (reportsEl) {
         var reps = (content.reports && content.reports.items) || [];
@@ -242,14 +271,17 @@
         if (talks.length) {
           talksEl.innerHTML = talks.map(function (t) {
             var vid = ytId(t.video);
-            var poster = t.photo ? esc(t.photo) : (vid ? 'https://img.youtube.com/vi/' + vid + '/hqdefault.jpg' : '');
-            var media = '';
+            var photos = itemPhotos(t);
+            var media = '', strip = '';
             if (vid) {
+              // Video is primary; its poster is the first photo (or the YouTube thumbnail).
+              var poster = photos.length ? esc(photos[0]) : 'https://img.youtube.com/vi/' + vid + '/hqdefault.jpg';
               media = '<button type="button" class="ir-talk-play group relative block w-full aspect-video bg-green-900 cursor-pointer" data-embed="https://www.youtube.com/embed/' + vid + '?autoplay=1&rel=0" aria-label="Play video">' +
-                (poster ? '<img src="' + poster + '" alt="" class="w-full h-full object-cover"/>' : '') +
+                '<img src="' + poster + '" alt="" class="w-full h-full object-cover"/>' +
                 '<span class="absolute inset-0 flex items-center justify-center"><span class="w-16 h-16 rounded-full bg-red-600 flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform"><svg class="w-7 h-7 text-white ml-1" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></span></button>';
-            } else if (poster) {
-              media = '<div class="aspect-video bg-green-50 ir-lb-tile" data-lightbox role="button" tabindex="0" aria-label="View full image: ' + esc(t.title) + '"><img src="' + poster + '" alt="' + esc(t.title) + '" class="w-full h-full object-cover"/></div>';
+              strip = photoStrip(photos, t.title); // extra talk photos below the video
+            } else {
+              media = photoCover(photos, t.title, 'aspect-video bg-green-50');
             }
             var parts = [];
             if (t.host_name) parts.push('<div><span class="text-green-400">Host:</span> <span class="text-green-700 font-semibold">' + esc(t.host_name) + '</span></div>');
@@ -259,7 +291,7 @@
             }
             var meta = parts.length ? '<div class="mt-4 pt-4 border-t border-green-100 text-sm text-green-600 space-y-0.5">' + parts.join('') + '</div>' : '';
             return '<article class="rounded-2xl border border-green-100 overflow-hidden bg-white flex flex-col shadow-sm">' +
-              media +
+              media + strip +
               '<div class="p-5 flex-1 flex flex-col">' +
                 '<h3 class="text-lg font-semibold text-green-800">' + esc(t.title) + '</h3>' +
                 (t.description ? '<p class="text-green-600 text-sm mt-2 leading-relaxed flex-1" style="white-space:pre-line">' + esc(t.description) + '</p>' : '') +
@@ -407,7 +439,8 @@
           document.getElementById('home-events-section').style.display = '';
           heEl.innerHTML = ordered.slice(0, 3).map(function (ev) {
             var i = evAll.indexOf(ev);
-            var photo = ev.photo ? '<div class="aspect-[16/10] bg-green-50 overflow-hidden"><img src="' + esc(ev.photo) + '" alt="' + esc(ev.title) + '" class="w-full h-full object-cover" loading="lazy"/></div>' : '';
+            var cover = itemPhotos(ev)[0];
+            var photo = cover ? '<div class="aspect-[16/10] bg-green-50 overflow-hidden"><img src="' + esc(cover) + '" alt="' + esc(ev.title) + '" class="w-full h-full object-cover" loading="lazy"/></div>' : '';
             var when = [ev.when, ev.time].filter(Boolean).map(esc).join(' &middot; ');
             return '<a href="events.html#event-' + i + '" class="rounded-2xl border border-gray-200 bg-white overflow-hidden flex flex-col shadow-sm hover:border-green-300 transition-colors">' + photo +
               '<div class="p-5 flex-1 flex flex-col">' +
@@ -426,7 +459,8 @@
         if (coAll.length) {
           document.getElementById('home-collabs-section').style.display = '';
           hcEl.innerHTML = coAll.slice(0, 3).map(function (co) {
-            var photo = co.photo ? '<div class="aspect-[16/10] bg-green-50 overflow-hidden"><img src="' + esc(co.photo) + '" alt="' + esc(co.title) + '" class="w-full h-full object-cover" loading="lazy"/></div>' : '';
+            var cover = itemPhotos(co)[0];
+            var photo = cover ? '<div class="aspect-[16/10] bg-green-50 overflow-hidden"><img src="' + esc(cover) + '" alt="' + esc(co.title) + '" class="w-full h-full object-cover" loading="lazy"/></div>' : '';
             var logo = co.logo ? '<div class="h-9 flex items-center mb-2"><img src="' + esc(co.logo) + '" alt="" class="max-h-9 max-w-[55%] object-contain object-left"/></div>' : '';
             return '<a href="collaborations.html" class="rounded-2xl border border-gray-200 bg-white overflow-hidden flex flex-col shadow-sm hover:border-green-300 transition-colors">' + photo +
               '<div class="p-5 flex-1 flex flex-col">' + logo +
@@ -555,7 +589,7 @@
         var PIN = '<svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>';
         var eventCard = function (ev) {
           var idx = evItems.indexOf(ev);
-          var photo = ev.photo ? '<div class="aspect-[16/10] bg-green-50 ir-lb-tile" data-lightbox role="button" tabindex="0" aria-label="View full image: ' + esc(ev.title) + '"><img src="' + esc(ev.photo) + '" alt="' + esc(ev.title) + '" class="w-full h-full object-cover"/></div>' : '';
+          var photo = photoCover(itemPhotos(ev), ev.title, 'aspect-[16/10] bg-green-50 overflow-hidden');
           var whenBits = [];
           if (ev.when) whenBits.push(esc(ev.when));
           if (ev.time) whenBits.push(esc(ev.time));
@@ -720,7 +754,7 @@
         var collabs = (content.collaborations && content.collaborations.items) || [];
         if (collabs.length) {
           collabEl.innerHTML = collabs.map(function (co) {
-            var photo = co.photo ? '<div class="aspect-[16/10] bg-green-50 ir-lb-tile" data-lightbox role="button" tabindex="0" aria-label="View full image: ' + esc(co.title) + '"><img src="' + esc(co.photo) + '" alt="' + esc(co.title) + '" class="w-full h-full object-cover"/></div>' : '';
+            var photo = photoCover(itemPhotos(co), co.title, 'aspect-[16/10] bg-green-50 overflow-hidden');
             var logo = co.logo ? '<div class="h-12 flex items-center mb-3"><img src="' + esc(co.logo) + '" alt="' + esc(co.title) + ' logo" class="max-h-12 max-w-[60%] object-contain object-left"/></div>' : '';
             return '<article class="rounded-2xl border border-green-100 bg-white overflow-hidden flex flex-col shadow-sm">' + photo +
               '<div class="p-5 flex-1 flex flex-col">' + logo +

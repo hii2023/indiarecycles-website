@@ -154,8 +154,22 @@
   }
 
   /* Any element marked data-lightbox (cms.js card photos on Events,
-     Collaboration and IR Talks) opens its image full size on click. */
+     Collaboration and IR Talks) opens full size on click. A tile may carry
+     data-photos (a JSON array of image URLs) to open the whole set navigable,
+     optionally starting at data-start; otherwise its single image is shown. */
   function openSingle(el) {
+    var group = el.getAttribute('data-photos');
+    if (group) {
+      try {
+        var urls = JSON.parse(group);
+        if (urls && urls.length) {
+          var alt = el.getAttribute('data-alt') || '';
+          var start = parseInt(el.getAttribute('data-start'), 10) || 0;
+          open(urls.map(function (u) { return { full: u, alt: alt }; }), start);
+          return;
+        }
+      } catch (e) {}
+    }
     var img = el.tagName === 'IMG' ? el : el.querySelector('img');
     if (!img || !(img.currentSrc || img.src)) return;
     open([{ full: img.currentSrc || img.src, alt: img.getAttribute('alt') || '' }], 0);
