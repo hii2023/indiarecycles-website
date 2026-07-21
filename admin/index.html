@@ -127,6 +127,10 @@
       <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
       Community Voices
     </button>
+    <button class="tab-btn text-left px-4 py-3 rounded-xl text-sm font-medium cursor-pointer text-forest-600 hover:bg-forest-50" onclick="switchTab('impact_voices', this)">
+      <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 6.1H3M21 12.1H3M15.1 18H3"/></svg>
+      What People Say
+    </button>
     <button class="tab-btn text-left px-4 py-3 rounded-xl text-sm font-medium cursor-pointer text-forest-600 hover:bg-forest-50" onclick="switchTab('activities', this)">
       <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
       Activities Page
@@ -794,6 +798,29 @@
       <strong>Tip:</strong> Photo is optional - if left blank, the person's initials are shown. Click <strong>Save Changes</strong> to publish.</div>
   </section>
 
+  <!-- ═══ WHAT PEOPLE SAY (Our Impact page) ═══ -->
+  <section id="tab-impact_voices" class="tab-content" aria-labelledby="iv-tab-heading">
+    <div class="flex items-center justify-between mb-8">
+      <div>
+        <h1 id="iv-tab-heading" class="font-serif text-2xl text-forest-800">What People Say</h1>
+        <p class="text-forest-500 text-sm mt-1">Add a photo, name, who they are and what they said. Publishes to the Our Impact page "What People Say" section. This is a separate list from Community Voices.</p>
+      </div>
+      <button onclick="saveSection('impact_voices')" class="save-btn bg-forest-600 hover:bg-forest-700 text-white px-6 py-2.5 rounded-xl font-semibold text-sm cursor-pointer shadow">Save Changes</button>
+    </div>
+    <div class="bg-white rounded-3xl p-6 border border-forest-100">
+      <div class="flex items-center justify-between mb-5">
+        <h2 class="font-semibold text-forest-800 text-sm uppercase tracking-wide">What People Say</h2>
+        <button onclick="addImpactVoice()" class="bg-forest-50 hover:bg-forest-100 text-forest-700 px-4 py-2 rounded-xl text-sm font-semibold cursor-pointer inline-flex items-center gap-1.5">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Add Voice
+        </button>
+      </div>
+      <div id="impact-voices-editor" class="grid sm:grid-cols-2 gap-4"></div>
+    </div>
+    <div class="mt-6 bg-amber-50 rounded-2xl px-5 py-4 border border-amber-100 text-sm text-amber-800">
+      <strong>Tip:</strong> Until you add voices here, the Our Impact page keeps showing its current four testimonial images. Add at least one voice and Save to replace them with photo + testimonial cards.</div>
+  </section>
+
   <!-- ═══ SOCIAL LINKS ═══ -->
   <section id="tab-social" class="tab-content" aria-labelledby="so-tab-heading">
     <div class="flex items-center justify-between mb-8">
@@ -1259,6 +1286,18 @@
       }).filter(function (t) { return t.quote || t.name; });
       return { items: tms };
     }
+    if (section === 'impact_voices') {
+      var ivs = Array.from(document.querySelectorAll('#impact-voices-editor [data-tm-card]')).map(function (c) {
+        return {
+          quote: c.querySelector('[data-quote]').value.trim(),
+          description: c.querySelector('[data-desc]').value.trim(),
+          name:  c.querySelector('[data-name]').value.trim(),
+          role:  c.querySelector('[data-role]').value.trim(),
+          photo: c.querySelector('[data-photo]').value.trim()
+        };
+      }).filter(function (t) { return t.quote || t.name; });
+      return { items: ivs };
+    }
     if (section === 'flash') {
       var fv = function (id) { return (document.getElementById(id).value || '').trim(); };
       return {
@@ -1512,6 +1551,7 @@
         if (Array.isArray(cms.talks.items)) renderTalks(cms.talks.items);
       }
       if (cms.testimonials && Array.isArray(cms.testimonials.items)) renderTestimonials(cms.testimonials.items);
+      if (cms.impact_voices && Array.isArray(cms.impact_voices.items)) renderImpactVoices(cms.impact_voices.items);
       if (cms.flash) {
         var fl = cms.flash;
         document.getElementById('flash-enabled').checked = fl.enabled === true;
@@ -1894,7 +1934,7 @@
       : '<span class="text-[9px] text-forest-400 text-center px-1">No photo</span>';
     return '<div class="p-4 bg-cream rounded-2xl border border-forest-100" data-tm-card>'
       + '<div class="flex items-center justify-between mb-3">'
-      +   '<span class="text-xs font-semibold text-forest-500">Community Voice</span>'
+      +   '<span class="text-xs font-semibold text-forest-500">Voice</span>'
       +   '<div class="flex items-center gap-1">'
       +     '<button onclick="moveTestimonial(this,-1)" class="w-7 h-7 bg-forest-50 hover:bg-forest-100 text-forest-600 rounded-lg flex items-center justify-center cursor-pointer" aria-label="Move up" title="Move up"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg></button>'
       +     '<button onclick="moveTestimonial(this,1)" class="w-7 h-7 bg-forest-50 hover:bg-forest-100 text-forest-600 rounded-lg flex items-center justify-center cursor-pointer" aria-label="Move down" title="Move down"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>'
@@ -1930,9 +1970,22 @@
   function removeTestimonial(btn) { btn.closest('[data-tm-card]').remove(); }
   function moveTestimonial(btn, dir) {
     var card = btn.closest('[data-tm-card]');
-    var wrap = document.getElementById('testimonials-editor');
+    var wrap = card.parentElement;
     if (dir < 0 && card.previousElementSibling) wrap.insertBefore(card, card.previousElementSibling);
     if (dir > 0 && card.nextElementSibling) wrap.insertBefore(card.nextElementSibling, card);
+  }
+  // Our Impact "What People Say" reuses the Community Voice card + photo handlers,
+  // rendered into its own editor and saved as the separate impact_voices section.
+  function renderImpactVoices(arr) {
+    document.getElementById('impact-voices-editor').innerHTML = (arr || []).map(testimonialCard).join('');
+  }
+  function addImpactVoice() {
+    var wrap = document.getElementById('impact-voices-editor');
+    var div = document.createElement('div');
+    div.innerHTML = testimonialCard({});
+    var card = div.firstChild;
+    wrap.appendChild(card);
+    card.querySelector('[data-name]').focus();
   }
   function onTestimonialPhotoPick(input) {
     var file = input.files && input.files[0];

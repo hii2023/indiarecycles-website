@@ -327,7 +327,9 @@
       <div class="inline-flex items-center gap-2 bg-green-100 text-green-700 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wide mb-4">Real Voices</div>
       <h2 id="test-heading" class="text-4xl text-green-800">What People Say</h2>
     </div>
-    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+    <!-- CMS-driven: photo + testimonial cards from the admin "What People Say" tab.
+         The images below are the fallback shown until voices are added. -->
+    <div id="impact-voices-list" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
       <div class="rounded-3xl overflow-hidden shadow-md card-lift cursor-default">
         <img data-img-key="our-impact-11" src="images/testimonial1.png" alt="Community member testimonial" class="w-full h-auto"/>
       </div>
@@ -435,7 +437,7 @@
   });
 </script>
 
-<script src="js/cms.js?v=25"></script>
+<script src="js/cms.js?v=26"></script>
 <script src="js/reveal.js?v=1" defer></script>
 <script src="js/gallery.js?v=3"></script>
 <script src="js/transitions.js?v=4"></script>

@@ -311,11 +311,12 @@
         }
       }
 
-      /* Testimonials (homepage Community Voices) */
-      var tmEl = document.getElementById('testimonials-list');
-      if (tmEl) {
-        var tms = (content.testimonials && content.testimonials.items) || [];
-        if (tms.length) {
+      /* Testimonial voices: the homepage "Community Voices" (#testimonials-list)
+         and the Our Impact "What People Say" (#impact-voices-list) sections share
+         this card + popup renderer, each fed by its own CMS list. */
+      function renderVoices(containerId, tms) {
+        var tmEl = document.getElementById(containerId);
+        if (!tmEl || !tms || !tms.length) return;
           var star = '<svg class="w-3.5 h-3.5 text-green-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>';
           var stars = '<div class="flex gap-0.5 mb-4" aria-label="5 stars">' + star + star + star + star + star + '</div>';
           tmEl.innerHTML = tms.map(function (t, i) {
@@ -396,8 +397,9 @@
             var c = e.target.closest('[data-tm]');
             if (c && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); tmOpen(Number(c.getAttribute('data-tm'))); }
           }); }
-        }
       }
+      renderVoices('testimonials-list', (content.testimonials && content.testimonials.items) || []);
+      renderVoices('impact-voices-list', (content.impact_voices && content.impact_voices.items) || []);
 
       /* Long card copy is clamped to ~200 characters with a "More" toggle, so a
          wordy description cannot push everything else off the screen. */
