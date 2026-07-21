@@ -151,10 +151,36 @@ section[id] { scroll-margin-top: 96px; }
    The photo gets a taller 4:3 frame flush to the card edges (no inner bezel) and
    is shown uncropped; the text sits on its own solid panel that stretches to a
    common height, so copy never reads as part of the picture. */
-.model-card-media { aspect-ratio: 4 / 3; background: #f2f7f4; }
+.model-card-media { aspect-ratio: 4 / 3; background: #f2f7f4; position: relative; }
 .model-card-body { background: #ffffff; }
 @media (max-width: 640px) {
   .model-card-media { aspect-ratio: 16 / 10; }
+}
+
+/* The step number + name float on the photo in a frosted "liquid glass" panel;
+   only the description sits in the body below. The panel is a sibling of the
+   image, so the photo can still zoom on hover behind the glass. */
+.model-step {
+  position: absolute;
+  left: 12px; right: 12px; bottom: 12px;
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 14px;
+  border-radius: 16px;
+  background: rgba(12, 28, 20, 0.30);
+  backdrop-filter: blur(12px) saturate(150%);
+  -webkit-backdrop-filter: blur(12px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.20), inset 0 1px 0 rgba(255, 255, 255, 0.45);
+}
+.model-step-num {
+  flex-shrink: 0;
+  font-size: 30px; font-weight: 800; line-height: 1;
+  letter-spacing: -0.02em; color: #ffffff;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
+}
+.model-step-title {
+  font-size: 15px; font-weight: 700; line-height: 1.15; color: #ffffff;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.55);
 }
 
 /* ── Logo strip: one logo per partner on a single scrollable line ── */
