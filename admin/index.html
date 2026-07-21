@@ -131,6 +131,10 @@
       <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 6.1H3M21 12.1H3M15.1 18H3"/></svg>
       What People Say
     </button>
+    <button class="tab-btn text-left px-4 py-3 rounded-xl text-sm font-medium cursor-pointer text-forest-600 hover:bg-forest-50" onclick="switchTab('volunteer_ways', this)">
+      <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Ways to Help
+    </button>
     <button class="tab-btn text-left px-4 py-3 rounded-xl text-sm font-medium cursor-pointer text-forest-600 hover:bg-forest-50" onclick="switchTab('activities', this)">
       <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
       Activities Page
@@ -818,7 +822,30 @@
       <div id="impact-voices-editor" class="grid sm:grid-cols-2 gap-4"></div>
     </div>
     <div class="mt-6 bg-amber-50 rounded-2xl px-5 py-4 border border-amber-100 text-sm text-amber-800">
-      <strong>Tip:</strong> Until you add voices here, the Our Impact page keeps showing its current four testimonial images. Add at least one voice and Save to replace them with photo + testimonial cards.</div>
+      <strong>Tip:</strong> Until you add voices here, the Our Impact page keeps showing its current four testimonial images. Add at least one voice and Save to replace them with photo + testimonial cards. Tick <strong>"Also show on Join Us page"</strong> on any voice to feature it on the Join Us page too.</div>
+  </section>
+
+  <!-- ═══ WAYS TO HELP (Join Us page) ═══ -->
+  <section id="tab-volunteer_ways" class="tab-content" aria-labelledby="vw-tab-heading">
+    <div class="flex items-center justify-between mb-8">
+      <div>
+        <h1 id="vw-tab-heading" class="font-serif text-2xl text-forest-800">Ways to Help</h1>
+        <p class="text-forest-500 text-sm mt-1">The cards under "Ways to Help" on the Join Us page. Give each a short title and a small description. Icons are added automatically in order.</p>
+      </div>
+      <button onclick="saveSection('volunteer_ways')" class="save-btn bg-forest-600 hover:bg-forest-700 text-white px-6 py-2.5 rounded-xl font-semibold text-sm cursor-pointer shadow">Save Changes</button>
+    </div>
+    <div class="bg-white rounded-3xl p-6 border border-forest-100">
+      <div class="flex items-center justify-between mb-5">
+        <h2 class="font-semibold text-forest-800 text-sm uppercase tracking-wide">Ways to Help</h2>
+        <button onclick="addWay()" class="bg-forest-50 hover:bg-forest-100 text-forest-700 px-4 py-2 rounded-xl text-sm font-semibold cursor-pointer inline-flex items-center gap-1.5">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Add Way to Help
+        </button>
+      </div>
+      <div id="volunteer-ways-editor" class="grid sm:grid-cols-2 gap-4"></div>
+    </div>
+    <div class="mt-6 bg-amber-50 rounded-2xl px-5 py-4 border border-amber-100 text-sm text-amber-800">
+      <strong>Tip:</strong> Until you add ways here, the Join Us page keeps its current four cards. Add at least one and Save to take over.</div>
   </section>
 
   <!-- ═══ SOCIAL LINKS ═══ -->
@@ -1293,10 +1320,20 @@
           description: c.querySelector('[data-desc]').value.trim(),
           name:  c.querySelector('[data-name]').value.trim(),
           role:  c.querySelector('[data-role]').value.trim(),
-          photo: c.querySelector('[data-photo]').value.trim()
+          photo: c.querySelector('[data-photo]').value.trim(),
+          on_volunteer: !!(c.querySelector('[data-on-volunteer]') && c.querySelector('[data-on-volunteer]').checked)
         };
       }).filter(function (t) { return t.quote || t.name; });
       return { items: ivs };
+    }
+    if (section === 'volunteer_ways') {
+      var ways = Array.from(document.querySelectorAll('#volunteer-ways-editor [data-way-card]')).map(function (c) {
+        return {
+          title:       c.querySelector('[data-title]').value.trim(),
+          description: c.querySelector('[data-desc]').value.trim()
+        };
+      }).filter(function (w) { return w.title; });
+      return { items: ways };
     }
     if (section === 'flash') {
       var fv = function (id) { return (document.getElementById(id).value || '').trim(); };
@@ -1402,7 +1439,8 @@
         return {
           title:       c.querySelector('[data-title]').value.trim(),
           video:       c.querySelector('[data-video]').value.trim(),
-          description: c.querySelector('[data-desc]').value.trim()
+          description: c.querySelector('[data-desc]').value.trim(),
+          on_volunteer: !!(c.querySelector('[data-on-volunteer]') && c.querySelector('[data-on-volunteer]').checked)
         };
       }).filter(function (v) { return v.video || v.title; });
       return { items: vds };
@@ -1552,6 +1590,7 @@
       }
       if (cms.testimonials && Array.isArray(cms.testimonials.items)) renderTestimonials(cms.testimonials.items);
       if (cms.impact_voices && Array.isArray(cms.impact_voices.items)) renderImpactVoices(cms.impact_voices.items);
+      if (cms.volunteer_ways && Array.isArray(cms.volunteer_ways.items)) renderWays(cms.volunteer_ways.items);
       if (cms.flash) {
         var fl = cms.flash;
         document.getElementById('flash-enabled').checked = fl.enabled === true;
@@ -1925,8 +1964,8 @@
   }
 
   // ── Testimonials editor ──────────────────────────────────────
-  function testimonialCard(t) {
-    t = t || {};
+  function testimonialCard(t, opts) {
+    t = t || {}; opts = opts || {};
     var photo = t.photo || '';
     var prev = photo && photo.indexOf('images/') === 0 ? '../' + photo : photo;
     var preview = photo
@@ -1954,10 +1993,11 @@
       + '</div>'
       + '<textarea data-quote rows="2" placeholder="Short quote (shown on the card)" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white resize-none mb-2">' + textEsc(t.quote) + '</textarea>'
       + '<textarea data-desc rows="3" placeholder="Longer story (optional - shown in the popup when clicked)" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white resize-none">' + textEsc(t.description) + '</textarea>'
+      + (opts.volunteerToggle ? '<label class="flex items-center gap-2 mt-2 text-[12px] font-medium text-forest-700 cursor-pointer select-none"><input type="checkbox" data-on-volunteer' + (t.on_volunteer ? ' checked' : '') + ' class="w-4 h-4 accent-forest-600"/> Also show on Join Us page</label>' : '')
       + '</div>';
   }
   function renderTestimonials(arr) {
-    document.getElementById('testimonials-editor').innerHTML = (arr || []).map(testimonialCard).join('');
+    document.getElementById('testimonials-editor').innerHTML = (arr || []).map(function (t) { return testimonialCard(t); }).join('');
   }
   function addTestimonial() {
     var wrap = document.getElementById('testimonials-editor');
@@ -1977,16 +2017,52 @@
   // Our Impact "What People Say" reuses the Community Voice card + photo handlers,
   // rendered into its own editor and saved as the separate impact_voices section.
   function renderImpactVoices(arr) {
-    document.getElementById('impact-voices-editor').innerHTML = (arr || []).map(testimonialCard).join('');
+    document.getElementById('impact-voices-editor').innerHTML = (arr || []).map(function (t) { return testimonialCard(t, { volunteerToggle: true }); }).join('');
   }
   function addImpactVoice() {
     var wrap = document.getElementById('impact-voices-editor');
     var div = document.createElement('div');
-    div.innerHTML = testimonialCard({});
+    div.innerHTML = testimonialCard({}, { volunteerToggle: true });
     var card = div.firstChild;
     wrap.appendChild(card);
     card.querySelector('[data-name]').focus();
   }
+
+  // ── Ways to Help editor (Join Us page) ───────────────────────
+  function wayCard(w) {
+    w = w || {};
+    return '<div class="p-4 bg-cream rounded-2xl border border-forest-100" data-way-card>'
+      + '<div class="flex items-center justify-between mb-3">'
+      +   '<span class="text-xs font-semibold text-forest-500">Way to Help</span>'
+      +   '<div class="flex items-center gap-1">'
+      +     '<button onclick="moveWay(this,-1)" class="w-7 h-7 bg-forest-50 hover:bg-forest-100 text-forest-600 rounded-lg flex items-center justify-center cursor-pointer" aria-label="Move up" title="Move up"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg></button>'
+      +     '<button onclick="moveWay(this,1)" class="w-7 h-7 bg-forest-50 hover:bg-forest-100 text-forest-600 rounded-lg flex items-center justify-center cursor-pointer" aria-label="Move down" title="Move down"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>'
+      +     '<button onclick="removeWay(this)" class="w-7 h-7 bg-red-50 hover:bg-red-100 text-red-400 rounded-lg flex items-center justify-center cursor-pointer" aria-label="Remove way to help">' + xIcon + '</button>'
+      +   '</div>'
+      + '</div>'
+      + '<input type="text" data-title value="' + attrEsc(w.title) + '" placeholder="Title (e.g. Sorting and packing)" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm font-semibold text-forest-800 bg-white mb-2"/>'
+      + '<textarea data-desc rows="3" placeholder="Small description" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white resize-none">' + textEsc(w.description) + '</textarea>'
+      + '</div>';
+  }
+  function renderWays(arr) {
+    document.getElementById('volunteer-ways-editor').innerHTML = (arr || []).map(wayCard).join('');
+  }
+  function addWay() {
+    var wrap = document.getElementById('volunteer-ways-editor');
+    var div = document.createElement('div');
+    div.innerHTML = wayCard({});
+    var card = div.firstChild;
+    wrap.appendChild(card);
+    card.querySelector('[data-title]').focus();
+  }
+  function removeWay(btn) { btn.closest('[data-way-card]').remove(); }
+  function moveWay(btn, dir) {
+    var card = btn.closest('[data-way-card]');
+    var wrap = card.parentElement;
+    if (dir < 0 && card.previousElementSibling) wrap.insertBefore(card, card.previousElementSibling);
+    if (dir > 0 && card.nextElementSibling) wrap.insertBefore(card.nextElementSibling, card);
+  }
+
   function onTestimonialPhotoPick(input) {
     var file = input.files && input.files[0];
     if (!file) return;
@@ -2452,7 +2528,8 @@
       + '</div>'
       + '<input type="text" data-title value="' + attrEsc(v.title) + '" placeholder="Video title" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm font-semibold text-forest-800 bg-white mb-2"/>'
       + '<input type="text" data-video value="' + attrEsc(v.video) + '" placeholder="YouTube link (https://youtu.be/...)" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white mb-2"/>'
-      + '<textarea data-desc rows="2" placeholder="Short description" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white resize-none">' + textEsc(v.description) + '</textarea>'
+      + '<textarea data-desc rows="2" placeholder="Short description" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white resize-none mb-2">' + textEsc(v.description) + '</textarea>'
+      + '<label class="flex items-center gap-2 text-[12px] font-medium text-forest-700 cursor-pointer select-none"><input type="checkbox" data-on-volunteer' + (v.on_volunteer ? ' checked' : '') + ' class="w-4 h-4 accent-forest-600"/> Also show on Join Us page</label>'
       + '</div>';
   }
   function renderVideos(arr) {

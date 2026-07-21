@@ -784,37 +784,68 @@
         }
       }
 
-      /* Videos (homepage "See Us in Action") */
-      var vidsEl = document.getElementById('videos-list');
-      if (vidsEl) {
-        var vids = (content.videos && content.videos.items) || [];
-        if (vids.length) {
-          var vsec = document.getElementById('videos-section');
-          if (vsec) vsec.style.display = '';
-          vidsEl.innerHTML = vids.map(function (v) {
-            var vid = ytId(v.video);
-            var poster = v.photo ? esc(v.photo) : (vid ? 'https://img.youtube.com/vi/' + vid + '/hqdefault.jpg' : '');
-            var media = '';
-            if (vid) {
-              media = '<button type="button" class="ir-talk-play group relative block w-full aspect-video bg-green-900 cursor-pointer" data-embed="https://www.youtube.com/embed/' + vid + '?autoplay=1&rel=0" aria-label="Play video">' +
-                (poster ? '<img src="' + poster + '" alt="" class="w-full h-full object-cover"/>' : '') +
-                '<span class="absolute inset-0 flex items-center justify-center"><span class="w-16 h-16 rounded-full bg-red-600 flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform"><svg class="w-7 h-7 text-white ml-1" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></span></button>';
-            }
-            return '<article class="rounded-2xl border border-green-100 overflow-hidden bg-white flex flex-col shadow-sm">' + media +
-              '<div class="p-5 flex-1 flex flex-col">' +
-                (v.title ? '<h3 class="text-lg font-semibold text-green-800">' + esc(v.title) + '</h3>' : '') +
-                (v.description ? '<p class="text-green-600 text-sm mt-2 leading-relaxed flex-1">' + clamp(v.description, 200) + '</p>' : '') +
-              '</div></article>';
+      /* Videos: homepage "See Us in Action" (#videos-list) and, on the Join Us
+         page, the ones ticked "show on Join Us" (#volunteer-videos-list). */
+      function renderVideos(containerId, vids, sectionId) {
+        var vidsEl = document.getElementById(containerId);
+        if (!vidsEl || !vids || !vids.length) return;
+        var vsec = sectionId && document.getElementById(sectionId);
+        if (vsec) vsec.style.display = '';
+        vidsEl.innerHTML = vids.map(function (v) {
+          var vid = ytId(v.video);
+          var poster = v.photo ? esc(v.photo) : (vid ? 'https://img.youtube.com/vi/' + vid + '/hqdefault.jpg' : '');
+          var media = '';
+          if (vid) {
+            media = '<button type="button" class="ir-talk-play group relative block w-full aspect-video bg-green-900 cursor-pointer" data-embed="https://www.youtube.com/embed/' + vid + '?autoplay=1&rel=0" aria-label="Play video">' +
+              (poster ? '<img src="' + poster + '" alt="" class="w-full h-full object-cover"/>' : '') +
+              '<span class="absolute inset-0 flex items-center justify-center"><span class="w-16 h-16 rounded-full bg-red-600 flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform"><svg class="w-7 h-7 text-white ml-1" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></span></button>';
+          }
+          return '<article class="rounded-2xl border border-green-100 overflow-hidden bg-white flex flex-col shadow-sm">' + media +
+            '<div class="p-5 flex-1 flex flex-col">' +
+              (v.title ? '<h3 class="text-lg font-semibold text-green-800">' + esc(v.title) + '</h3>' : '') +
+              (v.description ? '<p class="text-green-600 text-sm mt-2 leading-relaxed flex-1">' + clamp(v.description, 200) + '</p>' : '') +
+            '</div></article>';
+        }).join('');
+        if (!vidsEl.__vidBound) { vidsEl.__vidBound = true;
+        vidsEl.addEventListener('click', function (e) {
+          var btn = e.target.closest('.ir-talk-play');
+          if (!btn) return;
+          var wrap = document.createElement('div');
+          wrap.className = 'aspect-video';
+          wrap.innerHTML = '<iframe src="' + btn.getAttribute('data-embed') + '" class="w-full h-full" style="border:0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+          btn.replaceWith(wrap);
+        }); }
+      }
+      var allVideos = (content.videos && content.videos.items) || [];
+      renderVideos('videos-list', allVideos, 'videos-section');
+      renderVideos('volunteer-videos-list', allVideos.filter(function (v) { return v.on_volunteer; }), 'volunteer-videos-section');
+
+      /* Join Us page: the reviews ticked "show on Join Us" from What People Say. */
+      var volVoices = ((content.impact_voices && content.impact_voices.items) || []).filter(function (t) { return t.on_volunteer; });
+      renderVoices('volunteer-voices-list', volVoices);
+      var vvSec = document.getElementById('volunteer-voices-section');
+      if (vvSec && volVoices.length) vvSec.style.display = '';
+
+      /* Join Us page: editable "Ways to Help" cards (icons cycle by position). */
+      var waysEl = document.getElementById('volunteer-ways');
+      if (waysEl) {
+        var ways = (content.volunteer_ways && content.volunteer_ways.items) || [];
+        if (ways.length) {
+          var WAY_ICONS = [
+            '<path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="M3.3 7 12 12l8.7-5"/><path d="M12 22V12"/>',
+            '<path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/>',
+            '<path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/>',
+            '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+            '<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/>'
+          ];
+          waysEl.innerHTML = ways.map(function (w, i) {
+            var icon = WAY_ICONS[i % WAY_ICONS.length];
+            return '<div class="flex gap-4 rounded-2xl bg-white border border-green-100 p-4 hover:border-green-300 transition-colors">' +
+              '<span class="w-11 h-11 shrink-0 rounded-xl bg-green-100 text-green-700 flex items-center justify-center"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + icon + '</svg></span>' +
+              '<div><h3 class="text-[15px] font-semibold text-green-800 mb-0.5">' + esc(w.title) + '</h3>' +
+              (w.description ? '<p class="text-[var(--text-secondary)] text-[13px] leading-relaxed">' + esc(w.description) + '</p>' : '') +
+              '</div></div>';
           }).join('');
-          if (!bound.vids) { bound.vids = true;
-          vidsEl.addEventListener('click', function (e) {
-            var btn = e.target.closest('.ir-talk-play');
-            if (!btn) return;
-            var wrap = document.createElement('div');
-            wrap.className = 'aspect-video';
-            wrap.innerHTML = '<iframe src="' + btn.getAttribute('data-embed') + '" class="w-full h-full" style="border:0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
-            btn.replaceWith(wrap);
-          }); }
         }
       }
 
