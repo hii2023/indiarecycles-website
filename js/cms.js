@@ -157,6 +157,19 @@
         if (typeof v === 'string' && v.trim()) el.textContent = v;
       });
 
+      /* About Us story: editable multi-paragraph description (admin About Us tab).
+         Each non-blank line becomes its own paragraph; static markup is the fallback. */
+      var aboutStory = content.about && content.about.story;
+      var aboutEl = document.getElementById('about-story');
+      if (aboutEl && typeof aboutStory === 'string' && aboutStory.trim()) {
+        aboutEl.innerHTML = aboutStory.trim().split(/\n+/).map(function (line) {
+          var t = line.trim();
+          if (!t) return '';
+          t = t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+          return '<p>' + t + '</p>';
+        }).join('');
+      }
+
       /* Image swaps: per-location override by data-img-key first, else by filename */
       var imgMap = content.images || {};
       if (imgMap && typeof imgMap === 'object') {

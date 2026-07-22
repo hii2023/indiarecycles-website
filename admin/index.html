@@ -233,26 +233,23 @@
     <div class="flex items-center justify-between mb-8">
       <div>
         <h1 id="about-tab-heading" class="font-serif text-2xl text-forest-800">About Us Page</h1>
-        <p class="text-forest-500 text-sm mt-1">Edit the story text, team member names and roles.</p>
+        <p class="text-forest-500 text-sm mt-1">Edit the About Us description, team member names and roles.</p>
       </div>
       <button onclick="saveSection('about')" class="save-btn bg-forest-600 hover:bg-forest-700 text-white px-6 py-2.5 rounded-xl font-semibold text-sm cursor-pointer shadow">Save Changes</button>
     </div>
     <div class="grid lg:grid-cols-2 gap-6">
       <div class="bg-white rounded-3xl p-6 border border-forest-100">
-        <h2 class="font-semibold text-forest-800 mb-4 text-sm uppercase tracking-wide">Our Story</h2>
-        <div class="space-y-4">
-          <div>
-            <label class="block text-xs font-semibold text-forest-600 mb-1.5">Section Heading</label>
-            <input type="text" value="A Simple Observation, A Big Change" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream"/>
-          </div>
-          <div>
-            <label class="block text-xs font-semibold text-forest-600 mb-1.5">Story Paragraph 1</label>
-            <textarea rows="4" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream resize-none">India Recycles was born from a simple observation: households across Indian cities have wardrobes full of clothes they no longer wear — while families in the same cities struggle to afford even basic garments.</textarea>
-          </div>
-          <div>
-            <label class="block text-xs font-semibold text-forest-600 mb-1.5">Founded Year Badge</label>
-            <input type="text" value="Since 2017" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream"/>
-          </div>
+        <h2 class="font-semibold text-forest-800 mb-4 text-sm uppercase tracking-wide">About Us Description</h2>
+        <div class="space-y-2">
+          <label class="block text-xs font-semibold text-forest-600 mb-1.5">Story text (the "A Simple Observation, A Big Change" section on the About Us page)</label>
+          <textarea rows="16" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream leading-relaxed">India Recycles began in 2017 when co-founder Renu Pokharna organised a simple clothing swap event in Ahmedabad. Renu had studied public policy at Columbia University in New York, served as a Chief Minister's Fellow in Gujarat and worked at a social enterprise in Uganda. After returning to India, she was struck by how much the city's households discarded and how much its communities needed. The swap was a first answer.
+
+Within months the small swap grew into something structured: a non-profit that collects donated clothes at drop points across the city, sorts them with the help of dedicated volunteers, and sells them at weekly community events in urban slum neighbourhoods. Every item is priced between ₹10 and ₹50 so that cost is never a barrier to dignity.
+
+Every garment that cannot be resold finds a second life through our upcycling programs, Re-Vibe and the Godadi Project, creating handcrafted products and warm bedding made entirely from donated textiles and providing livelihoods to women in the communities we serve.
+
+Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locations, 400+ volunteers and over 35,000 lives touched through clothes alone. Surplus sales revenue funds medical camps, scholarships and livelihood programs.</textarea>
+          <p class="text-[11px] text-forest-500 mt-1.5">Leave a blank line between paragraphs. Each paragraph shows separately on the site.</p>
         </div>
       </div>
       <div class="bg-white rounded-3xl p-6 border border-forest-100">
@@ -1248,7 +1245,7 @@
   // Field keys in the same order as the inputs inside each tab
   const FIELD_MAP = {
     'home': ['hero_headline','hero_sub','badge'],
-    'about': ['story_heading','story_p1','founded_badge','t1_name','t1_role','t1_photo','t2_name','t2_role','t2_photo'],
+    'about': ['story','t1_name','t1_role','t1_photo','t2_name','t2_role','t2_photo'],
     'model': ['sales_held','max_price','frequency','description','p1_title','p1_desc','p2_title','p2_desc','p3_title','p3_desc'],
     'programs': ['revibe_tagline','revibe_desc','revibe_tags','godadi_tagline','godadi_desc','godadi_location'],
     'contact-info': ['email','phone','address','website','copyright'],
