@@ -2763,6 +2763,7 @@
           // older filename-wide override, so preview that rather than a missing file.
           const src = over || imageOverrides[sl.file] || ('../images/' + sl.file);
           const pos = imageOverrides[sl.key + '::pos'];
+          const altVal = imageOverrides[sl.key + '::alt'] || '';
           const focal = isFocalSlot(sl);
           html +=
             '<div class="rounded-xl border border-forest-100 p-2" data-img-card>' +
@@ -2773,6 +2774,8 @@
               '</div>' +
               '<div class="mt-1.5 text-[10px] text-forest-600 leading-snug" title="' + esc(sl.desc) + '">' + esc(sl.desc) + '</div>' +
               '<div class="text-[10px] text-forest-400 truncate mt-0.5">' + esc(sl.file) + (focal ? ' &middot; best size ' + recommendedSize(sl) : '') + '</div>' +
+              '<label class="block text-[9px] font-semibold text-forest-500 mt-1.5 mb-0.5">Image name (alt text for SEO)</label>' +
+              '<input type="text" value="' + esc(altVal) + '" placeholder="' + esc(sl.label || 'Describe this photo') + '" oninput="setImgAlt(\'' + sl.key + '\', this.value)" class="w-full px-2 py-1 rounded-lg border border-forest-200 text-[11px] text-forest-700 bg-white"/>' +
               '<div class="mt-1 flex items-center gap-1 flex-wrap">' +
                 '<label class="flex-1 text-center text-[11px] font-semibold text-forest-700 bg-forest-50 hover:bg-forest-100 rounded-lg py-1.5 cursor-pointer transition-colors">Replace<input type="file" accept="image/*" class="hidden" onchange="onImagePick(this,\'' + sl.key + '\')"/></label>' +
                 (focal ? '<button onclick="openFocalPicker(\'' + sl.key + '\')" class="text-[11px] font-semibold text-forest-600 hover:text-forest-800 px-2 py-1.5 cursor-pointer" title="Choose which part of the photo stays visible">Reposition</button>' : '') +
@@ -2866,6 +2869,14 @@
     delete imageOverrides[fname];
     delete imageOverrides[fname + '::pos'];
     renderGallery();
+  }
+
+  // Editable alt text (image "name") per slot, kept in the images map as "<key>::alt".
+  // No re-render, so typing keeps focus; applied on the public site by cms.js/img-boot.
+  function setImgAlt(fname, val) {
+    val = (val || '').trim();
+    if (val) imageOverrides[fname + '::alt'] = val;
+    else delete imageOverrides[fname + '::alt'];
   }
 
   // Init

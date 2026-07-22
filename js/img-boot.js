@@ -17,6 +17,8 @@
     else if (name && map[name]) img.src = map[name];
     var pos = (key && map[key + '::pos']) || (name && map[name + '::pos']);
     if (pos) img.style.objectPosition = pos;
+    var alt = (key && map[key + '::alt']) || (name && map[name + '::alt']);
+    if (alt) img.alt = alt;
   }
 
   var obs = new MutationObserver(function (recs) {

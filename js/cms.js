@@ -171,6 +171,9 @@
           // Focal point chosen in the admin: which part of the image stays visible.
           var pos = (key && imgMap[key + '::pos']) || (name && imgMap[name + '::pos']);
           if (pos) img.style.objectPosition = pos;
+          // Admin-set alt text (image name, for SEO / screen readers).
+          var alt = (key && imgMap[key + '::alt']) || (name && imgMap[name + '::alt']);
+          if (alt) img.alt = alt;
         });
       }
 
