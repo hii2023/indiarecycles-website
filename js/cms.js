@@ -762,65 +762,65 @@
         ctaEl.textContent = cta.text;
       }
 
-      /* Flash announcement: a configurable side tab + popup (event / talk / workshop).
-         Shown on every page when enabled in the admin; built once, updated on re-apply. */
+      /* Flash side bars: one or more pinned tabs + popups (event / talk / announcement).
+         Each side bar shows its tab when enabled; auto_open decides whether the popup
+         pops open on arrival (off = tab only, visitor clicks to open). */
       (function () {
         var f = content.flash || {};
-        var on = f.enabled !== false && (f.title || '').trim();
-        var tab = document.querySelector('.ir-flash-tab');
-        var modal = document.querySelector('.ir-flash-modal');
-        if (!on) { if (tab) tab.remove(); if (modal) modal.remove(); return; }
-
-        var kind = (f.kind || 'Update').trim();
-        if (!tab) {
-          tab = document.createElement('button');
+        var items = Array.isArray(f.items) ? f.items : ((f.title || f.kind) ? [f] : []);
+        // Rebuild from scratch on each apply.
+        Array.prototype.forEach.call(document.querySelectorAll('.ir-flash-tab, .ir-flash-modal'), function (el) { el.remove(); });
+        var live = items.filter(function (it) { return it && it.enabled !== false && (it.title || '').trim(); });
+        if (!live.length) return;
+        var n = live.length, autoTarget = null, autoSig = '';
+        live.forEach(function (it, i) {
+          var kind = (it.kind || 'Update').trim();
+          var tab = document.createElement('button');
           tab.type = 'button';
           tab.className = 'ir-flash-tab';
           tab.setAttribute('aria-haspopup', 'dialog');
+          if (n > 1) tab.style.top = 'calc(50% + ' + Math.round((i - (n - 1) / 2) * 78) + 'px)';
           document.body.appendChild(tab);
-          modal = document.createElement('div');
+          var modal = document.createElement('div');
           modal.className = 'ir-flash-modal';
           modal.setAttribute('role', 'dialog');
           modal.setAttribute('aria-modal', 'true');
           modal.setAttribute('aria-label', 'Announcement');
           document.body.appendChild(modal);
           var lastF;
-          function fOpen() { lastF = document.activeElement; modal.classList.add('open'); document.body.style.overflow = 'hidden'; modal.querySelector('.ir-flash-close').focus(); }
+          function fOpen() { lastF = document.activeElement; modal.classList.add('open'); document.body.style.overflow = 'hidden'; var c = modal.querySelector('.ir-flash-close'); if (c) c.focus(); }
           function fClose() { modal.classList.remove('open'); document.body.style.overflow = ''; if (lastF && lastF.focus) lastF.focus(); }
           tab.addEventListener('click', fOpen);
           modal.addEventListener('click', function (e) { if (e.target === modal) fClose(); });
           document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && modal.classList.contains('open')) fClose(); });
-          modal.__close = fClose;
+          tab.innerHTML = '<span class="ir-flash-dot" aria-hidden="true"></span>' + esc(kind);
+          tab.setAttribute('aria-label', kind + ': ' + (it.title || ''));
+          var when = [it.date ? new Date(it.date + 'T00:00:00').toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' }) : '', it.time].filter(Boolean).join(' &middot; ');
+          var cta = it.link ? '<a href="' + esc(it.link) + '" target="_blank" rel="noopener noreferrer" class="ir-flash-cta">' + esc(it.link_label || 'Learn more') + '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>' : '';
+          modal.innerHTML =
+            '<div class="ir-flash-box">' +
+              '<button class="ir-flash-close" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>' +
+              (it.photo ? '<img src="' + esc(it.photo) + '" alt="' + esc(it.title) + '"/>' : '') +
+              '<div class="ir-flash-body">' +
+                '<span class="ir-flash-kind"><span class="ir-flash-dot" style="width:7px;height:7px" aria-hidden="true"></span>' + esc(kind) + '</span>' +
+                '<h3 class="ir-flash-title">' + esc(it.title) + '</h3>' +
+                (when ? '<div class="ir-flash-when">' + when + '</div>' : '') +
+                (it.description ? '<p class="ir-flash-desc">' + esc(it.description) + '</p>' : '') +
+                cta +
+              '</div>' +
+            '</div>';
+          modal.querySelector('.ir-flash-close').addEventListener('click', fClose);
+          if (!autoTarget && it.auto_open !== false) autoTarget = tab;
+          autoSig += (it.title || '') + '|' + (it.date || '') + '|' + (it.time || '') + '||';
+        });
+        if (autoTarget) {
+          try {
+            if (sessionStorage.getItem('ir_flash_seen') !== autoSig) {
+              sessionStorage.setItem('ir_flash_seen', autoSig);
+              setTimeout(function () { autoTarget.click(); }, 600);
+            }
+          } catch (e) {}
         }
-        tab.innerHTML = '<span class="ir-flash-dot" aria-hidden="true"></span>' + esc(kind);
-        tab.setAttribute('aria-label', kind + ': ' + (f.title || ''));
-
-        var when = [f.date ? new Date(f.date + 'T00:00:00').toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' }) : '', f.time].filter(Boolean).join(' &middot; ');
-        var cta = f.link ? '<a href="' + esc(f.link) + '" target="_blank" rel="noopener noreferrer" class="ir-flash-cta">' + esc(f.link_label || 'Learn more') + '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>' : '';
-        modal.innerHTML =
-          '<div class="ir-flash-box">' +
-            '<button class="ir-flash-close" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>' +
-            (f.photo ? '<img src="' + esc(f.photo) + '" alt="' + esc(f.title) + '"/>' : '') +
-            '<div class="ir-flash-body">' +
-              '<span class="ir-flash-kind"><span class="ir-flash-dot" style="width:7px;height:7px" aria-hidden="true"></span>' + esc(kind) + '</span>' +
-              '<h3 class="ir-flash-title">' + esc(f.title) + '</h3>' +
-              (when ? '<div class="ir-flash-when">' + when + '</div>' : '') +
-              (f.description ? '<p class="ir-flash-desc">' + esc(f.description) + '</p>' : '') +
-              cta +
-            '</div>' +
-          '</div>';
-        modal.querySelector('.ir-flash-close').addEventListener('click', function () { modal.__close(); });
-
-        /* Pop the announcement open on arrival instead of hoping visitors spot the
-           side tab. Once per session per announcement: closing it keeps it closed
-           across pages until the admin publishes a different one. */
-        try {
-          var flashSig = (f.title || '') + '|' + (f.date || '') + '|' + (f.time || '');
-          if (sessionStorage.getItem('ir_flash_seen') !== flashSig) {
-            sessionStorage.setItem('ir_flash_seen', flashSig);
-            setTimeout(function () { if (!modal.classList.contains('open')) tab.click(); }, 600);
-          }
-        } catch (e) {}
       })();
 
       /* Social links (footer): only the ones with a link set are shown */

@@ -855,67 +855,19 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
     <div class="flex items-center justify-between mb-8">
       <div>
         <h1 id="fl-tab-heading" class="font-serif text-2xl text-forest-800">Flash Popup</h1>
-        <p class="text-forest-500 text-sm mt-1">A little tab pinned to the side of every page. Visitors click it to see a popup - use it to flash an event, a talk, a workshop or any announcement. Turn it off when it is over.</p>
+        <p class="text-forest-500 text-sm mt-1">Little tabs pinned to the side of every page. Each one can flash an event, talk or announcement. Turn a side bar off when it is over, or turn off just its auto-popup.</p>
       </div>
       <button onclick="saveSection('flash')" class="save-btn bg-forest-600 hover:bg-forest-700 text-white px-6 py-2.5 rounded-xl font-semibold text-sm cursor-pointer shadow">Save Changes</button>
     </div>
-    <div class="bg-white rounded-3xl p-6 border border-forest-100 space-y-5">
-      <label class="flex items-start gap-4 cursor-pointer">
-        <input type="checkbox" id="flash-enabled" class="mt-1 w-5 h-5 accent-[#256b49] cursor-pointer"/>
-        <span>
-          <span class="block font-semibold text-forest-800 text-sm">Show the flash popup</span>
-          <span class="block text-xs text-forest-500 mt-1 leading-relaxed">When on, the side tab appears on every page. Leave it off (or clear the title) to hide it completely.</span>
-        </span>
-      </label>
-      <div class="grid sm:grid-cols-2 gap-4">
-        <div>
-          <label for="flash-kind" class="block text-xs font-semibold text-forest-500 uppercase tracking-wide mb-1.5">Type (shown on the tab)</label>
-          <input type="text" id="flash-kind" list="flash-kinds" placeholder="Event / Talk / Workshop" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream"/>
-          <datalist id="flash-kinds"><option value="Event"></option><option value="IR Talk"></option><option value="Workshop"></option><option value="Announcement"></option><option value="New"></option></datalist>
-        </div>
-        <div>
-          <label for="flash-title" class="block text-xs font-semibold text-forest-500 uppercase tracking-wide mb-1.5">Title</label>
-          <input type="text" id="flash-title" placeholder="e.g. July Thrift Fest" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream"/>
-        </div>
-      </div>
-      <div class="grid sm:grid-cols-2 gap-4">
-        <div>
-          <label for="flash-date" class="block text-xs font-semibold text-forest-500 uppercase tracking-wide mb-1.5">Date (optional)</label>
-          <input type="date" id="flash-date" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream"/>
-        </div>
-        <div>
-          <label for="flash-time" class="block text-xs font-semibold text-forest-500 uppercase tracking-wide mb-1.5">Time (optional)</label>
-          <input type="text" id="flash-time" placeholder="e.g. 11 AM - 8 PM" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream"/>
-        </div>
-      </div>
-      <div>
-        <label for="flash-desc" class="block text-xs font-semibold text-forest-500 uppercase tracking-wide mb-1.5">Description</label>
-        <textarea id="flash-desc" rows="3" placeholder="What is happening, where, and who should come" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream resize-none"></textarea>
-      </div>
-      <div class="grid sm:grid-cols-2 gap-4">
-        <div>
-          <label for="flash-link" class="block text-xs font-semibold text-forest-500 uppercase tracking-wide mb-1.5">Button link (optional)</label>
-          <input type="url" id="flash-link" placeholder="https://..." class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream"/>
-        </div>
-        <div>
-          <label for="flash-link-label" class="block text-xs font-semibold text-forest-500 uppercase tracking-wide mb-1.5">Button text</label>
-          <input type="text" id="flash-link-label" placeholder="e.g. Register, See details" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream"/>
-        </div>
-      </div>
-      <div>
-        <label class="block text-xs font-semibold text-forest-500 uppercase tracking-wide mb-1.5">Photo (optional)</label>
-        <div class="flex items-center gap-4">
-          <div class="w-40 aspect-[16/10] rounded-xl overflow-hidden bg-forest-50 border border-forest-200 flex items-center justify-center shrink-0" id="flash-photo-preview"><span class="text-[10px] text-forest-400 text-center px-2">No photo</span></div>
-          <div>
-            <label class="inline-block text-[12px] font-semibold text-forest-700 bg-forest-50 hover:bg-forest-100 rounded-lg px-4 py-2 cursor-pointer">Upload photo<input type="file" accept="image/*" class="hidden" onchange="onFlashPhoto(this)"/></label>
-            <div class="text-[10px] text-forest-400 mt-1.5">JPG &middot; 1200&times;750 &middot; wide 16:10</div>
-            <input type="hidden" id="flash-photo" value=""/>
-          </div>
-        </div>
-      </div>
+    <div class="bg-forest-50 rounded-2xl px-5 py-4 border border-forest-100 text-sm text-forest-600 mb-5">Each side bar is a small tab pinned to the right edge of every page. Turn on <strong>Show this side bar</strong> to display its tab, and <strong>Pop it open automatically</strong> to make the popup appear when a visitor arrives (leave that off to show only the tab, which visitors click to open). Add as many as you like.</div>
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="font-semibold text-forest-800 text-sm uppercase tracking-wide">Side bars</h2>
+      <button onclick="addFlash()" class="bg-forest-50 hover:bg-forest-100 text-forest-700 px-4 py-2 rounded-xl text-sm font-semibold cursor-pointer inline-flex items-center gap-1.5"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Add side bar</button>
     </div>
+    <div id="flash-editor" class="space-y-5"></div>
+    
     <div class="mt-6 bg-amber-50 rounded-2xl px-5 py-4 border border-amber-100 text-sm text-amber-800">
-      <strong>Tip:</strong> Only the Type and Title are needed to show the popup. Everything else is optional. Click <strong>Save Changes</strong> to publish.</div>
+      <strong>Tip:</strong> Only the Type and Title are needed. Everything else is optional. Click <strong>Save Changes</strong> to publish.</div>
   </section>
 
   <!-- ═══ ACTIVITIES PAGE ═══ -->
@@ -1303,18 +1255,22 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
       return { items: ways };
     }
     if (section === 'flash') {
-      var fv = function (id) { return (document.getElementById(id).value || '').trim(); };
-      return {
-        enabled:    document.getElementById('flash-enabled').checked,
-        kind:       fv('flash-kind'),
-        title:      fv('flash-title'),
-        date:       fv('flash-date'),
-        time:       fv('flash-time'),
-        description: fv('flash-desc'),
-        link:       fv('flash-link'),
-        link_label: fv('flash-link-label'),
-        photo:      fv('flash-photo')
-      };
+      var flItems = Array.from(document.querySelectorAll('#flash-editor [data-flash-card]')).map(function (c) {
+        var q = function (sel) { return c.querySelector(sel); };
+        return {
+          enabled:    !!q('[data-enabled]').checked,
+          auto_open:  !!q('[data-autoopen]').checked,
+          kind:       q('[data-kind]').value.trim(),
+          title:      q('[data-title]').value.trim(),
+          date:       q('[data-date]').value.trim(),
+          time:       q('[data-time]').value.trim(),
+          description: q('[data-desc]').value.trim(),
+          link:       q('[data-link]').value.trim(),
+          link_label: q('[data-linklabel]').value.trim(),
+          photo:      q('[data-photo]').value.trim()
+        };
+      }).filter(function (f) { return f.title || f.kind || f.photo; });
+      return { items: flItems };
     }
     if (section === 'social') {
       var val = function (id) { return (document.getElementById(id).value || '').trim(); };
@@ -1641,15 +1597,9 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
       if (cms.impact_stats && Array.isArray(cms.impact_stats.items) && cms.impact_stats.items.length) renderStats(cms.impact_stats.items);
       if (cms.volunteer_ways && Array.isArray(cms.volunteer_ways.items)) renderWays(cms.volunteer_ways.items);
       if (cms.flash) {
-        var fl = cms.flash;
-        document.getElementById('flash-enabled').checked = fl.enabled === true;
-        [['kind','flash-kind'],['title','flash-title'],['date','flash-date'],['time','flash-time'],
-         ['description','flash-desc'],['link','flash-link'],['link_label','flash-link-label'],['photo','flash-photo']]
-          .forEach(function (p) { if (typeof fl[p[0]] === 'string') document.getElementById(p[1]).value = fl[p[0]]; });
-        if (fl.photo) {
-          var fp = fl.photo.indexOf('images/') === 0 ? '../' + fl.photo : fl.photo;
-          document.getElementById('flash-photo-preview').innerHTML = '<img src="' + fp + '" class="w-full h-full object-cover"/>';
-        }
+        var flList = Array.isArray(cms.flash.items) ? cms.flash.items
+                   : ((cms.flash.title || cms.flash.kind) ? [cms.flash] : []);
+        renderFlashList(flList);
       }
       if (cms.social) {
         [['instagram', 'social-instagram'], ['facebook', 'social-facebook'], ['linkedin', 'social-linkedin'],
@@ -2660,6 +2610,86 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
     reader.readAsDataURL(file);
   }
 
+  /* Flash side bars (multiple pinned tabs + popups) */
+  function flashCard(f) {
+    f = f || {};
+    var photo = f.photo || '';
+    var prev = photo && photo.indexOf('images/') === 0 ? '../' + photo : photo;
+    var preview = photo ? '<img src="' + attrEsc(prev) + '" class="w-full h-full object-cover"/>' : '<span class="text-[10px] text-forest-400 text-center px-2">No photo</span>';
+    var inp = 'class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream"';
+    return '<div class="bg-white rounded-3xl p-6 border border-forest-100" data-flash-card>'
+      + '<div class="flex items-center justify-between mb-4"><span class="text-xs font-semibold text-forest-500">Side bar</span>'
+      +   '<div class="flex items-center gap-1">'
+      +     '<button onclick="moveFlash(this,-1)" class="w-7 h-7 bg-forest-50 hover:bg-forest-100 text-forest-600 rounded-lg flex items-center justify-center cursor-pointer" aria-label="Move up" title="Move up"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg></button>'
+      +     '<button onclick="moveFlash(this,1)" class="w-7 h-7 bg-forest-50 hover:bg-forest-100 text-forest-600 rounded-lg flex items-center justify-center cursor-pointer" aria-label="Move down" title="Move down"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>'
+      +     '<button onclick="removeFlash(this)" class="w-7 h-7 bg-red-50 hover:bg-red-100 text-red-400 rounded-lg flex items-center justify-center cursor-pointer" aria-label="Remove side bar">' + xIcon + '</button>'
+      +   '</div></div>'
+      + '<div class="grid sm:grid-cols-2 gap-3 mb-4">'
+      +   '<label class="flex items-center gap-2 text-sm font-medium text-forest-700 cursor-pointer"><input type="checkbox" data-enabled ' + (f.enabled === false ? '' : 'checked') + ' class="w-4 h-4 accent-[#256b49] cursor-pointer"/>Show this side bar</label>'
+      +   '<label class="flex items-center gap-2 text-sm font-medium text-forest-700 cursor-pointer"><input type="checkbox" data-autoopen ' + (f.auto_open === false ? '' : 'checked') + ' class="w-4 h-4 accent-[#256b49] cursor-pointer"/>Pop it open automatically</label>'
+      + '</div>'
+      + '<div class="grid sm:grid-cols-2 gap-3 mb-3">'
+      +   '<input type="text" data-kind value="' + attrEsc(f.kind) + '" placeholder="Type (Event / Talk / Workshop)" ' + inp + '/>'
+      +   '<input type="text" data-title value="' + attrEsc(f.title) + '" placeholder="Title" ' + inp + '/>'
+      + '</div>'
+      + '<div class="grid sm:grid-cols-2 gap-3 mb-3">'
+      +   '<input type="date" data-date value="' + attrEsc(f.date) + '" ' + inp + '/>'
+      +   '<input type="text" data-time value="' + attrEsc(f.time) + '" placeholder="Time (optional)" ' + inp + '/>'
+      + '</div>'
+      + '<textarea data-desc rows="2" placeholder="Description" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream resize-none mb-3">' + textEsc(f.description) + '</textarea>'
+      + '<div class="grid sm:grid-cols-2 gap-3 mb-3">'
+      +   '<input type="url" data-link value="' + attrEsc(f.link) + '" placeholder="Button link (optional)" ' + inp + '/>'
+      +   '<input type="text" data-linklabel value="' + attrEsc(f.link_label) + '" placeholder="Button text" ' + inp + '/>'
+      + '</div>'
+      + '<div class="flex items-center gap-4">'
+      +   '<div class="w-32 aspect-[16/10] rounded-xl overflow-hidden bg-forest-50 border border-forest-200 flex items-center justify-center shrink-0" data-photo-preview>' + preview + '</div>'
+      +   '<div><label class="inline-block text-[12px] font-semibold text-forest-700 bg-forest-50 hover:bg-forest-100 rounded-lg px-4 py-2 cursor-pointer">Upload photo<input type="file" accept="image/*" class="hidden" onchange="onFlashCardPhoto(this)"/></label><div class="text-[10px] text-forest-400 mt-1.5">JPG &middot; 1200&times;750</div><input type="hidden" data-photo value="' + attrEsc(photo) + '"/></div>'
+      + '</div>'
+      + '</div>';
+  }
+  function renderFlashList(arr) {
+    arr = (arr && arr.length) ? arr : [{}];
+    document.getElementById('flash-editor').innerHTML = arr.map(flashCard).join('');
+  }
+  function addFlash() {
+    var wrap = document.getElementById('flash-editor');
+    var div = document.createElement('div');
+    div.innerHTML = flashCard({});
+    var card = div.firstChild;
+    wrap.appendChild(card);
+    card.querySelector('[data-title]').focus();
+  }
+  function removeFlash(btn) { btn.closest('[data-flash-card]').remove(); }
+  function moveFlash(btn, dir) {
+    var card = btn.closest('[data-flash-card]');
+    var wrap = document.getElementById('flash-editor');
+    if (dir < 0 && card.previousElementSibling) wrap.insertBefore(card, card.previousElementSibling);
+    if (dir > 0 && card.nextElementSibling) wrap.insertBefore(card.nextElementSibling, card);
+  }
+  function onFlashCardPhoto(input) {
+    var file = input.files && input.files[0];
+    if (!file) return;
+    var card = input.closest('[data-flash-card]');
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      var img = new Image();
+      img.onload = function () {
+        var max = 1000;
+        var w = img.width, h = img.height;
+        if (w > h && w > max) { h = Math.round(h * max / w); w = max; }
+        else if (h >= w && h > max) { w = Math.round(w * max / h); h = max; }
+        var c = document.createElement('canvas');
+        c.width = w; c.height = h;
+        c.getContext('2d').drawImage(img, 0, 0, w, h);
+        var url = c.toDataURL('image/jpeg', 0.82);
+        card.querySelector('[data-photo]').value = url;
+        card.querySelector('[data-photo-preview]').innerHTML = '<img src="' + url + '" class="w-full h-full object-cover"/>';
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
   function causeCard(cu) {
     cu = cu || {};
     var photo = cu.photo || '';
@@ -3026,6 +3056,7 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
   renderMembers(defaultTeam);
   renderTestimonials(defaultVoices);
   renderStats(defaultImpactStats);
+  renderFlashList([]);
   // The link the footer already carries, so saving this tab before touching it cannot drop it.
   document.getElementById('social-instagram').value = 'https://www.instagram.com/india.recycles';
   // ── Reports & Media managers ──────────────────────────────────
