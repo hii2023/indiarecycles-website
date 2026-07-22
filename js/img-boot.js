@@ -11,9 +11,12 @@
 
   function apply(img) {
     var key = img.getAttribute('data-img-key');
-    if (key && map[key]) { img.src = map[key]; return; }
     var m = (img.getAttribute('src') || '').match(/(?:^|\/)images\/([^\/?#]+)/);
-    if (m && map[m[1]]) img.src = map[m[1]];
+    var name = m && m[1];
+    if (key && map[key]) img.src = map[key];
+    else if (name && map[name]) img.src = map[name];
+    var pos = (key && map[key + '::pos']) || (name && map[name + '::pos']);
+    if (pos) img.style.objectPosition = pos;
   }
 
   var obs = new MutationObserver(function (recs) {

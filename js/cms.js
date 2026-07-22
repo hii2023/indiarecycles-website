@@ -164,10 +164,13 @@
         try { localStorage.setItem('ir_images', JSON.stringify(imgMap)); } catch (e) {}
         document.querySelectorAll('img[src]').forEach(function (img) {
           var key = img.getAttribute('data-img-key');
-          if (key && imgMap[key]) { img.src = imgMap[key]; return; }
           var m = (img.getAttribute('src') || '').match(/(?:^|\/)images\/([^\/?#]+)/);
           var name = m && m[1];
-          if (name && imgMap[name]) img.src = imgMap[name];
+          if (key && imgMap[key]) img.src = imgMap[key];
+          else if (name && imgMap[name]) img.src = imgMap[name];
+          // Focal point chosen in the admin: which part of the image stays visible.
+          var pos = (key && imgMap[key + '::pos']) || (name && imgMap[name + '::pos']);
+          if (pos) img.style.objectPosition = pos;
         });
       }
 
@@ -193,6 +196,31 @@
 
       /* Reports & Media (Resources page) */
       function esc(t) { var d = document.createElement('div'); d.textContent = t == null ? '' : String(t); return d.innerHTML; }
+
+      /* Our Impact page: a fully editable list of impact numbers the admin controls
+         (add any title + number). Only items that have a value are shown; a trailing
+         "+", "%" or "k" is picked out and shown in the accent colour. If no custom
+         stats are set, the page keeps its built-in stat cards. */
+      var impStatsEl = document.getElementById('impact-stats-list');
+      if (impStatsEl) {
+        var impStats = ((content.impact_stats && content.impact_stats.items) || []).filter(function (s) {
+          return s && String(s.label || '').trim() && String(s.value == null ? '' : s.value).trim();
+        });
+        if (impStats.length) {
+          impStatsEl.innerHTML = impStats.map(function (s) {
+            var val = String(s.value).trim();
+            var mm = val.match(/^([\d.,\s]+)(.*)$/);
+            var main = mm ? mm[1].trim() : val;
+            var suf = mm ? mm[2] : '';
+            return '<div class="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 text-center border border-green-100 card-lift cursor-default">' +
+              '<div class="font-serif text-[28px] sm:text-4xl text-green-700 font-bold mb-1 leading-none whitespace-nowrap">' + esc(main) + (suf ? '<span class="text-green-500">' + esc(suf) + '</span>' : '') + '</div>' +
+              '<div class="text-green-700 text-[12px] sm:text-[13px] font-semibold uppercase tracking-wide">' + esc(s.label) + '</div>' +
+              (s.sub ? '<div class="text-green-500 text-[11px] sm:text-xs mt-1.5 leading-snug">' + esc(s.sub) + '</div>' : '') +
+              '</div>';
+          }).join('');
+          impStatsEl.className = 'grid grid-cols-2 lg:grid-cols-4 gap-4';
+        }
+      }
 
       /* Photos per item: prefer the `photos` array, fall back to a legacy single `photo`. */
       function itemPhotos(it) {
@@ -311,6 +339,69 @@
         }
       }
 
+      /* Turn a row of review cards into a horizontal slider with prev/next arrows.
+         Idempotent: cms.js applies content twice (cache then network), so this must
+         be safe to call again - the arrows live outside the track and survive the
+         innerHTML rebuild, and the wrapper is only created once. */
+      function setupReviewSlider(track) {
+        if (!document.getElementById('ir-rev-style')) {
+          var st = document.createElement('style');
+          st.id = 'ir-rev-style';
+          st.textContent = '.ir-rev-viewport{position:relative}'
+            + '.ir-rev-track{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;scrollbar-width:none;-ms-overflow-style:none;padding:4px 2px 14px}'
+            + '.ir-rev-track::-webkit-scrollbar{display:none}'
+            + '.ir-rev-item{scroll-snap-align:start;flex:0 0 auto;width:280px}'
+            + '@media(min-width:640px){.ir-rev-item{width:320px}}'
+            + '.ir-rev-arrow{position:absolute;top:calc(50% - 7px);transform:translateY(-50%);width:44px;height:44px;border-radius:9999px;background:#fff;border:1px solid rgba(0,0,0,.1);box-shadow:0 6px 18px rgba(0,0,0,.14);color:#1c5439;display:none;align-items:center;justify-content:center;cursor:pointer;z-index:5;transition:background .15s,opacity .15s}'
+            + '.ir-rev-arrow svg{width:20px;height:20px}'
+            + '.ir-rev-arrow:hover{background:#f2f7f4}'
+            + '.ir-rev-arrow:disabled{opacity:.3;cursor:default}'
+            + '.ir-rev-prev{left:-10px}.ir-rev-next{right:-10px}'
+            + '@media(max-width:640px){.ir-rev-prev{left:2px}.ir-rev-next{right:2px}}'
+            + '.ir-rev-viewport.has-overflow .ir-rev-arrow{display:flex}';
+          document.head.appendChild(st);
+        }
+        track.className = 'ir-rev-track';
+        var wrap = track.parentNode;
+        if (!wrap.classList || !wrap.classList.contains('ir-rev-viewport')) {
+          wrap = document.createElement('div');
+          wrap.className = 'ir-rev-viewport';
+          track.parentNode.insertBefore(wrap, track);
+          wrap.appendChild(track);
+          var mk = function (dir, label, pts) {
+            var b = document.createElement('button');
+            b.type = 'button'; b.className = 'ir-rev-arrow ir-rev-' + dir;
+            b.setAttribute('aria-label', label);
+            b.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="' + pts + '"/></svg>';
+            return b;
+          };
+          var prevB = mk('prev', 'Previous reviews', '15 18 9 12 15 6');
+          var nextB = mk('next', 'See more reviews', '9 18 15 12 9 6');
+          wrap.appendChild(prevB); wrap.appendChild(nextB);
+          var stepW = function () { var c = track.querySelector('.ir-rev-item'); return c ? c.getBoundingClientRect().width + 20 : track.clientWidth * 0.85; };
+          // Animate scrollLeft with a timer (not rAF - rAF is throttled to nothing in
+          // headless/background tabs, the same reason the count-up uses setInterval).
+          var animateBy = function (delta) {
+            var startL = track.scrollLeft, target = startL + delta, t0 = performance.now(), dur = 340;
+            var timer = setInterval(function () {
+              var p = Math.min((performance.now() - t0) / dur, 1), e = 1 - Math.pow(1 - p, 3);
+              track.scrollLeft = startL + (target - startL) * e;
+              if (p >= 1) clearInterval(timer);
+            }, 16);
+          };
+          prevB.addEventListener('click', function () { animateBy(-stepW()); });
+          nextB.addEventListener('click', function () { animateBy(stepW()); });
+          // Show the arrows only when the row actually overflows; both stay clickable
+          // and scrolling clamps at the ends (simpler and more robust than toggling
+          // `disabled`, which would swallow clicks and depends on async scroll events).
+          wrap.__sync = function () {
+            wrap.classList.toggle('has-overflow', track.scrollWidth > track.clientWidth + 4);
+          };
+          window.addEventListener('resize', wrap.__sync);
+        }
+        if (wrap.__sync) setTimeout(wrap.__sync, 60);
+      }
+
       /* Testimonial voices: the homepage "Community Voices" (#testimonials-list)
          and the Our Impact "What People Say" (#impact-voices-list) sections share
          this card + popup renderer, each fed by its own CMS list. */
@@ -323,16 +414,20 @@
             var nm = (t.name || '').trim();
             var initials = (nm || '?').split(/\s+/).map(function (w) { return w.charAt(0); }).slice(0, 2).join('').toUpperCase();
             var avatar = t.photo
-              ? '<div class="w-11 h-11 rounded-full overflow-hidden bg-green-100 shrink-0"><img src="' + esc(t.photo) + '" alt="' + esc(nm) + '" class="w-full h-full object-cover"/></div>'
-              : '<div class="w-11 h-11 rounded-full bg-green-100 text-green-700 font-semibold flex items-center justify-center shrink-0 text-sm">' + esc(initials) + '</div>';
-            return '<div class="ir-tm-card bg-white rounded-2xl p-6 border border-gray-200 shadow-sm flex flex-col" role="button" tabindex="0" data-tm="' + i + '" aria-label="Read what ' + esc(nm || 'this person') + ' said">' +
+              ? '<div class="w-12 h-12 rounded-full overflow-hidden bg-green-100 shrink-0"><img src="' + esc(t.photo) + '" alt="' + esc(nm) + '" class="w-full h-full object-cover"/></div>'
+              : '<div class="w-12 h-12 rounded-full bg-green-100 text-green-700 font-semibold flex items-center justify-center shrink-0 text-base">' + esc(initials) + '</div>';
+            return '<div class="ir-rev-item ir-tm-card bg-white rounded-2xl p-6 border border-gray-200 shadow-sm flex flex-col" role="button" tabindex="0" data-tm="' + i + '" aria-label="Read what ' + esc(nm || 'this person') + ' said">' +
               stars +
               '<p class="text-gray-800 text-[14px] leading-relaxed italic flex-1">' + (t.quote ? '&ldquo;' + esc(t.quote) + '&rdquo;' : '') + '</p>' +
               '<div class="mt-5 flex items-center gap-3">' + avatar +
-                '<div><div class="font-semibold text-green-800 text-sm">' + esc(nm) + '</div>' +
-                (t.role ? '<div class="text-gray-500 text-xs">' + esc(t.role) + '</div>' : '') + '</div>' +
+                '<div><div class="font-bold text-green-800 text-base leading-tight">' + esc(nm) + '</div>' +
+                (t.role ? '<div class="text-gray-500 text-sm mt-0.5">' + esc(t.role) + '</div>' : '') + '</div>' +
               '</div></div>';
           }).join('');
+
+          /* Lay the cards out as a horizontal, swipeable slider with prev/next
+             arrows, so many reviews fit without stacking down the page. */
+          setupReviewSlider(tmEl);
 
           /* Clicking a voice opens it in full - photo, whole quote, who they are. */
           var tmModal = document.querySelector('.ir-tm-modal') || document.createElement('div');
@@ -758,10 +853,14 @@
           collabEl.innerHTML = collabs.map(function (co) {
             var photo = photoCover(itemPhotos(co), co.title, 'aspect-[16/10] bg-green-50 overflow-hidden');
             var logo = co.logo ? '<div class="h-12 flex items-center mb-3"><img src="' + esc(co.logo) + '" alt="' + esc(co.title) + ' logo" class="max-h-12 max-w-[60%] object-contain object-left"/></div>' : '';
+            // A partner website link is a real backlink (no rel="nofollow"), so the
+            // collaborator gets SEO value from being featured here.
+            var visit = co.link ? '<a href="' + esc(co.link) + '" target="_blank" rel="noopener noreferrer" class="mt-3 self-start inline-flex items-center gap-1 text-green-700 text-sm font-semibold hover:text-green-900">Visit website <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>' : '';
             return '<article class="rounded-2xl border border-green-100 bg-white overflow-hidden flex flex-col shadow-sm">' + photo +
               '<div class="p-5 flex-1 flex flex-col">' + logo +
                 '<h3 class="text-lg font-semibold text-green-800">' + esc(co.title) + '</h3>' +
-                (co.description ? '<p class="text-green-600 text-sm mt-2 leading-relaxed flex-1" style="white-space:pre-line">' + esc(co.description) + '</p>' : '') +
+                (co.description ? '<p class="text-green-600 text-sm mt-2 leading-relaxed' + (visit ? '' : ' flex-1') + '" style="white-space:pre-line">' + esc(co.description) + '</p>' : (visit ? '<div class="flex-1"></div>' : '')) +
+                visit +
               '</div></article>';
           }).join('');
         }

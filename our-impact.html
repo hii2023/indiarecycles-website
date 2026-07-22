@@ -105,7 +105,7 @@
   </style>
   <link rel="stylesheet" href="css/transitions.css?v=1"/>
   <link rel="stylesheet" href="css/layout.css?v=14"/>
-  <script src="js/img-boot.js?v=1"></script>
+  <script src="js/img-boot.js?v=2"></script>
 </head>
 <body class="antialiased">
 
@@ -172,70 +172,43 @@
   </div>
 </section>
 
-<!-- STATS BENTO GRID -->
+<!-- IMPACT STATS (editable list - admin "Impact Numbers" tab) -->
 <section class="py-12 bg-[#f6f7f6] texture-bg" aria-labelledby="stats-heading">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     <h2 id="stats-heading" class="sr-only">Impact statistics</h2>
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+    <!-- CMS-driven: the admin can add, remove, reorder and rename any stat here, and
+         only stats with a number are shown. The cards below are the fallback until
+         custom stats are saved. -->
+    <div id="impact-stats-list" class="grid grid-cols-2 lg:grid-cols-4 gap-4">
       <div class="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 text-center border border-green-100 card-lift cursor-default">
-        <div class="font-serif text-[28px] sm:text-4xl text-green-700 font-bold mb-1 leading-none whitespace-nowrap" data-stat="clothes">3,00,000<span class="text-green-500">+</span></div>
+        <div class="font-serif text-[28px] sm:text-4xl text-green-700 font-bold mb-1 leading-none whitespace-nowrap">3,00,000<span class="text-green-500">+</span></div>
         <div class="text-green-700 text-[12px] sm:text-[13px] font-semibold uppercase tracking-wide">Clothes Recycled</div>
-        <div class="text-green-500 text-[11px] sm:text-xs mt-1.5 leading-snug" data-stat-sub="clothes">Diverted from landfill</div>
+        <div class="text-green-500 text-[11px] sm:text-xs mt-1.5 leading-snug">Diverted from landfill</div>
       </div>
       <div class="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 text-center border border-green-100 card-lift cursor-default">
-        <div class="font-serif text-[28px] sm:text-4xl text-green-700 font-bold mb-1 leading-none whitespace-nowrap" data-stat="sales">500<span class="text-green-500">+</span></div>
+        <div class="font-serif text-[28px] sm:text-4xl text-green-700 font-bold mb-1 leading-none whitespace-nowrap">500<span class="text-green-500">+</span></div>
         <div class="text-green-700 text-[12px] sm:text-[13px] font-semibold uppercase tracking-wide">Community Sales Held</div>
-        <div class="text-green-500 text-[11px] sm:text-xs mt-1.5 leading-snug" data-stat-sub="sales">Weekly across two cities</div>
+        <div class="text-green-500 text-[11px] sm:text-xs mt-1.5 leading-snug">Held across two cities</div>
       </div>
       <div class="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 text-center border border-green-100 card-lift cursor-default">
-        <div class="font-serif text-[28px] sm:text-4xl text-green-700 font-bold mb-1 leading-none whitespace-nowrap" data-stat="volunteers">2,500<span class="text-green-500">+</span></div>
+        <div class="font-serif text-[28px] sm:text-4xl text-green-700 font-bold mb-1 leading-none whitespace-nowrap">2,500<span class="text-green-500">+</span></div>
         <div class="text-green-700 text-[12px] sm:text-[13px] font-semibold uppercase tracking-wide">Active Volunteers</div>
-        <div class="text-green-500 text-[11px] sm:text-xs mt-1.5 leading-snug" data-stat-sub="volunteers">Growing every week</div>
+        <div class="text-green-500 text-[11px] sm:text-xs mt-1.5 leading-snug">Growing every week</div>
       </div>
       <div class="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 text-center border border-green-100 card-lift cursor-default">
-        <div class="font-serif text-[28px] sm:text-4xl text-green-700 font-bold mb-1 leading-none whitespace-nowrap" data-stat="drop_locations">20<span class="text-green-500">+</span></div>
+        <div class="font-serif text-[28px] sm:text-4xl text-green-700 font-bold mb-1 leading-none whitespace-nowrap">20<span class="text-green-500">+</span></div>
         <div class="text-green-700 text-[12px] sm:text-[13px] font-semibold uppercase tracking-wide">Drop Locations</div>
-        <div class="text-green-500 text-[11px] sm:text-xs mt-1.5 leading-snug" data-stat-sub="drop_locations">Across Ahmedabad &amp; Baroda</div>
+        <div class="text-green-500 text-[11px] sm:text-xs mt-1.5 leading-snug">Across Ahmedabad &amp; Baroda</div>
       </div>
-    </div>
-    <div class="grid grid-cols-3 gap-4">
       <div class="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 text-center border border-green-100 card-lift cursor-default">
-        <div class="font-serif text-[28px] sm:text-4xl text-green-700 font-bold mb-1 leading-none whitespace-nowrap" data-stat="medical">1,000<span class="text-green-500">+</span></div>
+        <div class="font-serif text-[28px] sm:text-4xl text-green-700 font-bold mb-1 leading-none whitespace-nowrap">1,000<span class="text-green-500">+</span></div>
         <div class="text-green-700 text-[12px] sm:text-[13px] font-semibold uppercase tracking-wide">Medical Beneficiaries</div>
-        <div class="text-green-500 text-[11px] sm:text-xs mt-1.5 leading-snug" data-stat-sub="medical">Health camps held</div>
+        <div class="text-green-500 text-[11px] sm:text-xs mt-1.5 leading-snug">Health camps held</div>
       </div>
       <div class="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 text-center border border-green-100 card-lift cursor-default">
-        <div class="font-serif text-[28px] sm:text-4xl text-green-700 font-bold mb-1 leading-none whitespace-nowrap" data-stat="students">25<span class="text-green-500">+</span></div>
+        <div class="font-serif text-[28px] sm:text-4xl text-green-700 font-bold mb-1 leading-none whitespace-nowrap">25<span class="text-green-500">+</span></div>
         <div class="text-green-700 text-[12px] sm:text-[13px] font-semibold uppercase tracking-wide">Students Supported</div>
-        <div class="text-green-500 text-[11px] sm:text-xs mt-1.5 leading-snug" data-stat-sub="students">Scholarships every year</div>
-      </div>
-      <div class="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 text-center border border-green-100 card-lift cursor-default">
-        <div class="font-serif text-[28px] sm:text-4xl text-green-700 font-bold mb-1 leading-none whitespace-nowrap" data-stat="cities">2</div>
-        <div class="text-green-700 text-[12px] sm:text-[13px] font-semibold uppercase tracking-wide">Cities Served</div>
-        <div class="text-green-500 text-[11px] sm:text-xs mt-1.5 leading-snug" data-stat-sub="cities">Ahmedabad &amp; Vadodara</div>
-      </div>
-    </div>
-  </section>
-
-<!-- IMPACT PHOTO GALLERY (CMS-driven) -->
-<section class="py-12 bg-white" aria-labelledby="gallery-heading">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="max-w-2xl mb-8">
-      <span class="inline-flex items-center gap-1.5 bg-green-100 text-green-700 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-widest mb-3">Gallery</span>
-      <h2 id="gallery-heading" class="text-3xl lg:text-4xl text-green-800">Moments from the ground</h2>
-    </div>
-    <div id="gallery-list" class="grid grid-cols-2 md:grid-cols-4 gap-4" data-gallery data-gallery-step="8">
-      <div class="photo-zoom rounded-3xl overflow-hidden aspect-square">
-        <img data-img-key="our-impact-2" src="images/impact1.jpg" alt="India Recycles community event" class="zoom-crop w-full h-full object-cover"/>
-      </div>
-      <div class="photo-zoom rounded-3xl overflow-hidden aspect-square">
-        <img data-img-key="our-impact-3" src="images/impact2.jpg" alt="Volunteers at India Recycles" class="zoom-crop w-full h-full object-cover"/>
-      </div>
-      <div class="photo-zoom rounded-3xl overflow-hidden aspect-square">
-        <img data-img-key="our-impact-4" src="images/impact3.jpg" alt="Medical camp beneficiaries" class="zoom-crop w-full h-full object-cover"/>
-      </div>
-      <div class="photo-zoom rounded-3xl overflow-hidden aspect-square">
-        <img data-img-key="our-impact-5" src="images/impact4.png" alt="Community at India Recycles community sale" class="zoom-crop w-full h-full object-cover"/>
+        <div class="text-green-500 text-[11px] sm:text-xs mt-1.5 leading-snug">Scholarships every year</div>
       </div>
     </div>
   </div>
@@ -346,6 +319,30 @@
   </div>
 </section>
 
+<!-- IMPACT PHOTO GALLERY (CMS-driven) -->
+<section class="py-12 bg-white" aria-labelledby="gallery-heading">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-2xl mb-8">
+      <span class="inline-flex items-center gap-1.5 bg-green-100 text-green-700 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-widest mb-3">Gallery</span>
+      <h2 id="gallery-heading" class="text-3xl lg:text-4xl text-green-800">Moments from the ground</h2>
+    </div>
+    <div id="gallery-list" class="grid grid-cols-2 md:grid-cols-4 gap-4" data-gallery data-gallery-step="8">
+      <div class="photo-zoom rounded-3xl overflow-hidden aspect-square">
+        <img data-img-key="our-impact-2" src="images/impact1.jpg" alt="India Recycles community event" class="zoom-crop w-full h-full object-cover"/>
+      </div>
+      <div class="photo-zoom rounded-3xl overflow-hidden aspect-square">
+        <img data-img-key="our-impact-3" src="images/impact2.jpg" alt="Volunteers at India Recycles" class="zoom-crop w-full h-full object-cover"/>
+      </div>
+      <div class="photo-zoom rounded-3xl overflow-hidden aspect-square">
+        <img data-img-key="our-impact-4" src="images/impact3.jpg" alt="Medical camp beneficiaries" class="zoom-crop w-full h-full object-cover"/>
+      </div>
+      <div class="photo-zoom rounded-3xl overflow-hidden aspect-square">
+        <img data-img-key="our-impact-5" src="images/impact4.png" alt="Community at India Recycles community sale" class="zoom-crop w-full h-full object-cover"/>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- CTA -->
 <section class="relative py-8 lg:py-12 overflow-hidden" aria-labelledby="impact-cta">
   <div class="absolute inset-0">
@@ -414,7 +411,6 @@
           <li><a href="contact.html" class="text-green-300/80 hover:text-white transition-colors duration-200 cursor-pointer">Become a Drop Location</a></li>
           <li><a href="donate.html"  class="text-green-300/80 hover:text-white transition-colors duration-200 cursor-pointer">Donate</a></li>
         </ul>
-        <a href="donate.html" class="inline-block bg-white hover:bg-green-100 text-green-800 px-5 py-2.5 rounded-lg font-bold text-[13px] transition-colors duration-200 cursor-pointer">Donate Now</a>
       </div>
     </div>
     <!-- Bottom bar -->
@@ -437,7 +433,7 @@
   });
 </script>
 
-<script src="js/cms.js?v=28"></script>
+<script src="js/cms.js?v=32"></script>
 <script src="js/reveal.js?v=1" defer></script>
 <script src="js/gallery.js?v=4"></script>
 <script src="js/transitions.js?v=4"></script>

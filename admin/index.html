@@ -95,7 +95,11 @@
     </button>
     <button class="tab-btn text-left px-4 py-3 rounded-xl text-sm font-medium cursor-pointer text-forest-600 hover:bg-forest-50" onclick="switchTab('stats', this)">
       <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-      Impact Stats
+      Impact Stats (Home)
+    </button>
+    <button class="tab-btn text-left px-4 py-3 rounded-xl text-sm font-medium cursor-pointer text-forest-600 hover:bg-forest-50" onclick="switchTab('impact_stats', this)">
+      <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+      Impact Numbers
     </button>
     <button class="tab-btn text-left px-4 py-3 rounded-xl text-sm font-medium cursor-pointer text-forest-600 hover:bg-forest-50" onclick="switchTab('contact-info', this)">
       <svg class="w-4 h-4 inline mr-2.5 -mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
@@ -533,6 +537,29 @@
         </div>
       </div>
     </div>
+  </section>
+
+  <!-- ═══ IMPACT NUMBERS (Our Impact page - editable stat cards) ═══ -->
+  <section id="tab-impact_stats" class="tab-content" aria-labelledby="in-tab-heading">
+    <div class="flex items-center justify-between mb-8">
+      <div>
+        <h1 id="in-tab-heading" class="font-serif text-2xl text-forest-800">Impact Numbers</h1>
+        <p class="text-forest-500 text-sm mt-1">The big stat cards at the top of the Our Impact page. Add any stat with a title and a number - only stats that have a number are shown. Reorder with the arrows (top = shown first).</p>
+      </div>
+      <button onclick="saveSection('impact_stats')" class="save-btn bg-forest-600 hover:bg-forest-700 text-white px-6 py-2.5 rounded-xl font-semibold text-sm cursor-pointer shadow">Save Changes</button>
+    </div>
+    <div class="bg-white rounded-3xl p-6 border border-forest-100">
+      <div class="flex items-center justify-between mb-5">
+        <h2 class="font-semibold text-forest-800 text-sm uppercase tracking-wide">Impact Numbers</h2>
+        <button onclick="addStat()" class="bg-forest-50 hover:bg-forest-100 text-forest-700 px-4 py-2 rounded-xl text-sm font-semibold cursor-pointer inline-flex items-center gap-1.5">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Add Stat
+        </button>
+      </div>
+      <div id="impact-stats-editor" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+    </div>
+    <div class="mt-6 bg-amber-50 rounded-2xl px-5 py-4 border border-amber-100 text-sm text-amber-800">
+      <strong>Tip:</strong> Type the number exactly as it should appear, e.g. <strong>3,00,000+</strong>, <strong>2,500+</strong> or <strong>25</strong> - a trailing +, % or k shows in green. Leave the number blank to hide that stat. Empty rows like "Employment Provided" and "People Reached" appear here ready for you to fill in. Click <strong>Save Changes</strong> to publish.</div>
   </section>
 
   <!-- ═══ PROGRAMS ═══ -->
@@ -1326,6 +1353,16 @@
       }).filter(function (t) { return t.quote || t.name; });
       return { items: ivs };
     }
+    if (section === 'impact_stats') {
+      var sts = Array.from(document.querySelectorAll('#impact-stats-editor [data-stat-card]')).map(function (c) {
+        return {
+          value: c.querySelector('[data-value]').value.trim(),
+          label: c.querySelector('[data-label]').value.trim(),
+          sub:   c.querySelector('[data-sub]').value.trim()
+        };
+      }).filter(function (s) { return s.label || s.value; });
+      return { items: sts };
+    }
     if (section === 'volunteer_ways') {
       var ways = Array.from(document.querySelectorAll('#volunteer-ways-editor [data-way-card]')).map(function (c) {
         return {
@@ -1372,7 +1409,8 @@
           title:       c.querySelector('[data-title]').value.trim(),
           description: c.querySelector('[data-desc]').value.trim(),
           photos:      collectPhotos(c),
-          logo:        c.querySelector('[data-logo]').value.trim()
+          logo:        c.querySelector('[data-logo]').value.trim(),
+          link:        c.querySelector('[data-link]').value.trim()
         };
       }).filter(function (c) { return c.title || c.photos.length || c.logo; });
       return { description: (document.getElementById('collab-desc').value || '').trim(), items: cbs };
@@ -1590,6 +1628,7 @@
       }
       if (cms.testimonials && Array.isArray(cms.testimonials.items)) renderTestimonials(cms.testimonials.items);
       if (cms.impact_voices && Array.isArray(cms.impact_voices.items)) renderImpactVoices(cms.impact_voices.items);
+      if (cms.impact_stats && Array.isArray(cms.impact_stats.items) && cms.impact_stats.items.length) renderStats(cms.impact_stats.items);
       if (cms.volunteer_ways && Array.isArray(cms.volunteer_ways.items)) renderWays(cms.volunteer_ways.items);
       if (cms.flash) {
         var fl = cms.flash;
@@ -2028,6 +2067,60 @@
     card.querySelector('[data-name]').focus();
   }
 
+  // ── Impact Numbers editor (Our Impact page stat cards) ───────
+  // Rows seeded until the CMS has saved data. The four the user asked for
+  // (Employment / People Reached / Talks Hosted / Events Organized) start blank
+  // so they only appear on the page once a number is filled in.
+  var defaultImpactStats = [
+    { value: '',          label: 'Employment Provided',   sub: '' },
+    { value: '',          label: 'People Reached',        sub: '' },
+    { value: '3,00,000+', label: 'Clothes Recycled',      sub: 'Diverted from landfill' },
+    { value: '500+',      label: 'Community Sales Held',  sub: 'Held across two cities' },
+    { value: '2,500+',    label: 'Active Volunteers',     sub: 'Growing every week' },
+    { value: '20+',       label: 'Drop Locations',        sub: 'Across Ahmedabad & Baroda' },
+    { value: '',          label: 'Talks Hosted',          sub: '' },
+    { value: '',          label: 'Events Organized',      sub: '' },
+    { value: '1,000+',    label: 'Medical Beneficiaries', sub: 'Health camps held' },
+    { value: '25+',       label: 'Students Supported',    sub: 'Scholarships every year' }
+  ];
+  function statCard(s) {
+    s = s || {};
+    return '<div class="p-4 bg-cream rounded-2xl border border-forest-100" data-stat-card>'
+      + '<div class="flex items-center justify-between mb-3">'
+      +   '<span class="text-xs font-semibold text-forest-500">Stat</span>'
+      +   '<div class="flex items-center gap-1">'
+      +     '<button onclick="moveStat(this,-1)" class="w-7 h-7 bg-forest-50 hover:bg-forest-100 text-forest-600 rounded-lg flex items-center justify-center cursor-pointer" aria-label="Move up" title="Move up"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg></button>'
+      +     '<button onclick="moveStat(this,1)" class="w-7 h-7 bg-forest-50 hover:bg-forest-100 text-forest-600 rounded-lg flex items-center justify-center cursor-pointer" aria-label="Move down" title="Move down"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>'
+      +     '<button onclick="removeStat(this)" class="w-7 h-7 bg-red-50 hover:bg-red-100 text-red-400 rounded-lg flex items-center justify-center cursor-pointer" aria-label="Remove stat">' + xIcon + '</button>'
+      +   '</div>'
+      + '</div>'
+      + '<label class="block text-[10px] font-semibold text-forest-500 mb-1">Number (shown big, e.g. 2,500+)</label>'
+      + '<input type="text" data-value value="' + attrEsc(s.value) + '" placeholder="e.g. 2,500+ (blank = hidden)" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm font-semibold text-forest-800 bg-white mb-2"/>'
+      + '<label class="block text-[10px] font-semibold text-forest-500 mb-1">Title</label>'
+      + '<input type="text" data-label value="' + attrEsc(s.label) + '" placeholder="e.g. Employment Provided" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white mb-2"/>'
+      + '<label class="block text-[10px] font-semibold text-forest-500 mb-1">Small note (optional)</label>'
+      + '<input type="text" data-sub value="' + attrEsc(s.sub) + '" placeholder="e.g. Across two cities" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white"/>'
+      + '</div>';
+  }
+  function renderStats(arr) {
+    document.getElementById('impact-stats-editor').innerHTML = (arr && arr.length ? arr : defaultImpactStats).map(statCard).join('');
+  }
+  function addStat() {
+    var wrap = document.getElementById('impact-stats-editor');
+    var div = document.createElement('div');
+    div.innerHTML = statCard({});
+    var card = div.firstChild;
+    wrap.appendChild(card);
+    card.querySelector('[data-value]').focus();
+  }
+  function removeStat(btn) { btn.closest('[data-stat-card]').remove(); }
+  function moveStat(btn, dir) {
+    var card = btn.closest('[data-stat-card]');
+    var wrap = card.parentElement;
+    if (dir < 0 && card.previousElementSibling) wrap.insertBefore(card, card.previousElementSibling);
+    if (dir > 0 && card.nextElementSibling) wrap.insertBefore(card.nextElementSibling, card);
+  }
+
   // ── Ways to Help editor (Join Us page) ───────────────────────
   function wayCard(w) {
     w = w || {};
@@ -2161,7 +2254,8 @@
       +   '<input type="hidden" data-logo value="' + attrEsc(co.logo) + '"/>'
       + '</div>'
       + '<input type="text" data-title value="' + attrEsc(co.title) + '" placeholder="Collaboration title" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm font-semibold text-forest-800 bg-white mb-2"/>'
-      + '<textarea data-desc rows="3" placeholder="Description" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white resize-none">' + textEsc(co.description) + '</textarea>'
+      + '<textarea data-desc rows="3" placeholder="Description" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white resize-none mb-2">' + textEsc(co.description) + '</textarea>'
+      + '<input type="url" data-link value="' + attrEsc(co.link) + '" placeholder="Partner website (https://...) - shows a Visit website link + gives them a backlink" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white"/>'
       + '</div>';
   }
   function renderCollabs(arr) {
@@ -2561,6 +2655,93 @@
   const UPLOAD_FN = SB_URL + '/functions/v1/admin-upload-image';
   let imageOverrides = {};
 
+  // Photos where choosing a focal point makes sense (skip logos, QR, SVG artwork).
+  function isFocalSlot(sl) {
+    if (!sl) return false;
+    if (sl.key === 'logo.png') return false;
+    if (/\.svg$/i.test(sl.file || '')) return false;
+    if (/illustration|logo|qr code|\bqr\b/i.test(sl.desc || '')) return false;
+    return true;
+  }
+  function recommendedSize(sl) {
+    return /big background photo/i.test(sl.desc || '') ? '1600×900px' : '1200×900px';
+  }
+
+  /* Focal-point picker: drag on the photo to set which part stays visible.
+     Stores an object-position like "50% 30%" under "<key>::pos" in the images
+     map; cms.js and img-boot.js apply it site-wide. */
+  function openFocalPicker(key) {
+    var sl = null;
+    for (var i = 0; i < IMAGE_SLOTS.length; i++) { if (IMAGE_SLOTS[i].key === key) { sl = IMAGE_SLOTS[i]; break; } }
+    if (!sl) return;
+    var src = imageOverrides[sl.key] || imageOverrides[sl.file] || ('../images/' + sl.file);
+    var wide = /big background photo/i.test(sl.desc || '');
+    var ratio = wide ? '42%' : '66%';   // frame height as a % of its width
+    var cur = imageOverrides[sl.key + '::pos'] || '50% 50%';
+    var mm = cur.match(/([\d.]+)%\s+([\d.]+)%/);
+    var px = mm ? parseFloat(mm[1]) : 50, py = mm ? parseFloat(mm[2]) : 50;
+
+    var back = document.createElement('div');
+    back.className = 'fixed inset-0 z-[100] flex items-center justify-center p-4';
+    back.style.background = 'rgba(15,30,20,0.6)';
+    back.innerHTML =
+      '<div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg p-5" role="dialog" aria-modal="true" aria-label="Choose the visible part of the image">' +
+        '<div class="flex items-center justify-between mb-3">' +
+          '<h3 class="font-serif text-lg text-forest-800">Choose what stays visible</h3>' +
+          '<button data-fp-x class="w-8 h-8 rounded-lg bg-forest-50 hover:bg-forest-100 text-forest-600 flex items-center justify-center cursor-pointer" aria-label="Close">' + xIcon + '</button>' +
+        '</div>' +
+        '<p class="text-forest-800 text-[13px] font-semibold mb-1">' + attrEsc(sl.label || sl.desc || 'Photo') + '</p>' +
+        '<p class="text-forest-500 text-[12px] mb-1">' + attrEsc(sl.desc || '') + '</p>' +
+        '<p class="text-forest-600 text-[12px] font-semibold mb-2">Best size: ' + recommendedSize(sl) + ' &middot; JPG</p>' +
+        '<p class="text-forest-500 text-[13px] mb-3">Drag on the photo to pick the part that stays in view. The frame is roughly how it appears on the site.</p>' +
+        '<div data-fp-frame class="relative w-full rounded-xl overflow-hidden border border-forest-200 bg-forest-50 cursor-move select-none" style="padding-bottom:' + ratio + '">' +
+          '<img data-fp-img src="' + attrEsc(src) + '" alt="" class="absolute inset-0 w-full h-full object-cover" style="object-position:' + px + '% ' + py + '%"/>' +
+          '<div data-fp-dot class="absolute w-5 h-5 -ml-2.5 -mt-2.5 rounded-full border-2 border-white shadow pointer-events-none" style="left:' + px + '%;top:' + py + '%;background:rgba(37,107,73,0.85)"></div>' +
+        '</div>' +
+        '<div class="flex items-center justify-between mt-4">' +
+          '<button data-fp-reset class="text-[13px] text-forest-500 hover:text-forest-700 font-semibold cursor-pointer">Reset to centre</button>' +
+          '<div class="flex items-center gap-2">' +
+            '<button data-fp-cancel class="px-4 py-2 rounded-xl text-sm font-semibold text-forest-600 bg-forest-50 hover:bg-forest-100 cursor-pointer">Cancel</button>' +
+            '<button data-fp-save class="px-4 py-2 rounded-xl text-sm font-semibold text-white bg-forest-600 hover:bg-forest-700 cursor-pointer shadow">Use this framing</button>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    document.body.appendChild(back);
+    var frame = back.querySelector('[data-fp-frame]');
+    var img = back.querySelector('[data-fp-img]');
+    var dot = back.querySelector('[data-fp-dot]');
+    function setFromEvent(e) {
+      var r = frame.getBoundingClientRect();
+      var pt = e.touches && e.touches[0] ? e.touches[0] : e;
+      px = Math.max(0, Math.min(100, Math.round((pt.clientX - r.left) / r.width * 100)));
+      py = Math.max(0, Math.min(100, Math.round((pt.clientY - r.top) / r.height * 100)));
+      img.style.objectPosition = px + '% ' + py + '%';
+      dot.style.left = px + '%'; dot.style.top = py + '%';
+    }
+    var dragging = false;
+    var onMove = function (e) { if (dragging) setFromEvent(e); };
+    var onUp = function () { dragging = false; };
+    frame.addEventListener('mousedown', function (e) { dragging = true; setFromEvent(e); e.preventDefault(); });
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('mouseup', onUp);
+    frame.addEventListener('touchstart', function (e) { dragging = true; setFromEvent(e); }, { passive: true });
+    frame.addEventListener('touchmove', function (e) { if (dragging) setFromEvent(e); }, { passive: true });
+    frame.addEventListener('touchend', function () { dragging = false; });
+    function close() { window.removeEventListener('mousemove', onMove); window.removeEventListener('mouseup', onUp); back.remove(); }
+    back.querySelector('[data-fp-x]').addEventListener('click', close);
+    back.querySelector('[data-fp-cancel]').addEventListener('click', close);
+    back.addEventListener('mousedown', function (e) { if (e.target === back) close(); });
+    back.querySelector('[data-fp-reset]').addEventListener('click', function () {
+      px = 50; py = 50; img.style.objectPosition = '50% 50%'; dot.style.left = '50%'; dot.style.top = '50%';
+    });
+    back.querySelector('[data-fp-save]').addEventListener('click', function () {
+      if (px === 50 && py === 50) delete imageOverrides[sl.key + '::pos'];
+      else imageOverrides[sl.key + '::pos'] = px + '% ' + py + '%';
+      close();
+      renderGallery();
+    });
+  }
+
   function renderGallery() {
     const grid = document.getElementById('image-grid');
     const esc = function (t) { return String(t == null ? '' : t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;'); };
@@ -2581,17 +2762,20 @@
           // Mirror cms.js: a slot with no override of its own can still be covered by an
           // older filename-wide override, so preview that rather than a missing file.
           const src = over || imageOverrides[sl.file] || ('../images/' + sl.file);
+          const pos = imageOverrides[sl.key + '::pos'];
+          const focal = isFocalSlot(sl);
           html +=
             '<div class="rounded-xl border border-forest-100 p-2" data-img-card>' +
               '<div class="aspect-square rounded-lg overflow-hidden bg-forest-50 border border-forest-100 relative">' +
-                '<img src="' + esc(src) + '" alt="" class="w-full h-full object-cover"/>' +
+                '<img src="' + esc(src) + '" alt="" class="w-full h-full object-cover"' + (pos ? ' style="object-position:' + esc(pos) + '"' : '') + '/>' +
                 (over ? '<span class="absolute top-1 left-1 bg-forest-600 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full">Changed</span>' : '') +
                 (sl.both ? '<span class="absolute bottom-1 right-1 bg-white/90 text-forest-600 text-[8px] font-bold px-1.5 py-0.5 rounded-full border border-forest-100">Web + Mobile</span>' : '') +
               '</div>' +
               '<div class="mt-1.5 text-[10px] text-forest-600 leading-snug" title="' + esc(sl.desc) + '">' + esc(sl.desc) + '</div>' +
-              '<div class="text-[10px] text-forest-400 truncate mt-0.5">' + esc(sl.file) + '</div>' +
-              '<div class="mt-1 flex items-center gap-1">' +
+              '<div class="text-[10px] text-forest-400 truncate mt-0.5">' + esc(sl.file) + (focal ? ' &middot; best size ' + recommendedSize(sl) : '') + '</div>' +
+              '<div class="mt-1 flex items-center gap-1 flex-wrap">' +
                 '<label class="flex-1 text-center text-[11px] font-semibold text-forest-700 bg-forest-50 hover:bg-forest-100 rounded-lg py-1.5 cursor-pointer transition-colors">Replace<input type="file" accept="image/*" class="hidden" onchange="onImagePick(this,\'' + sl.key + '\')"/></label>' +
+                (focal ? '<button onclick="openFocalPicker(\'' + sl.key + '\')" class="text-[11px] font-semibold text-forest-600 hover:text-forest-800 px-2 py-1.5 cursor-pointer" title="Choose which part of the photo stays visible">Reposition</button>' : '') +
                 (over ? '<button onclick="resetImage(\'' + sl.key + '\')" class="text-[11px] text-red-400 hover:text-red-600 px-2 py-1.5 cursor-pointer" title="Reset to original">Reset</button>' : '') +
               '</div>' +
               '<div class="text-[10px] text-forest-500 mt-0.5 h-4 leading-4" data-img-status></div>' +
@@ -2667,6 +2851,10 @@
       }
       imageOverrides[fname] = r.j.url;
       renderGallery();
+      // Straight after uploading a photo, let them pick which part stays visible.
+      var slot = null;
+      for (var i = 0; i < IMAGE_SLOTS.length; i++) { if (IMAGE_SLOTS[i].key === fname) { slot = IMAGE_SLOTS[i]; break; } }
+      if (slot && isFocalSlot(slot)) openFocalPicker(fname);
     }).catch(function (e) {
       status.textContent = '';
       alert('Upload failed: ' + e.message);
@@ -2676,6 +2864,7 @@
 
   function resetImage(fname) {
     delete imageOverrides[fname];
+    delete imageOverrides[fname + '::pos'];
     renderGallery();
   }
 
@@ -2684,6 +2873,7 @@
   renderLocations(vadLocations, 'vad-locations');
   renderMembers(defaultTeam);
   renderTestimonials(defaultVoices);
+  renderStats(defaultImpactStats);
   // The link the footer already carries, so saving this tab before touching it cannot drop it.
   document.getElementById('social-instagram').value = 'https://www.instagram.com/india.recycles';
   // ── Reports & Media managers ──────────────────────────────────
