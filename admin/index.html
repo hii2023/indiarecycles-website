@@ -171,12 +171,12 @@
     <div class="flex items-center justify-between mb-8">
       <div>
         <h1 id="about-tab-heading" class="font-serif text-2xl text-forest-800">About Us Page</h1>
-        <p class="text-forest-500 text-sm mt-1">Edit the About Us description, team member names and roles.</p>
+        <p class="text-forest-500 text-sm mt-1">Edit the About Us story description. Team members come from Meet the Team.</p>
       </div>
       <button onclick="saveSection('about')" class="save-btn bg-forest-600 hover:bg-forest-700 text-white px-6 py-2.5 rounded-xl font-semibold text-sm cursor-pointer shadow">Save Changes</button>
     </div>
     <div class="grid lg:grid-cols-2 gap-6">
-      <div class="bg-white rounded-3xl p-6 border border-forest-100">
+      <div class="bg-white rounded-3xl p-6 border border-forest-100 lg:col-span-2">
         <h2 class="font-semibold text-forest-800 mb-4 text-sm uppercase tracking-wide">About Us Description</h2>
         <div class="space-y-2">
           <label class="block text-xs font-semibold text-forest-600 mb-1.5">Story text (the "A Simple Observation, A Big Change" section on the About Us page)</label>
@@ -190,23 +190,10 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
           <p class="text-[11px] text-forest-500 mt-1.5">Leave a blank line between paragraphs. Each paragraph shows separately on the site.</p>
         </div>
       </div>
-      <div class="bg-white rounded-3xl p-6 border border-forest-100">
-        <h2 class="font-semibold text-forest-800 mb-4 text-sm uppercase tracking-wide">Team Members</h2>
-        <div class="space-y-4">
-          <div class="p-4 bg-cream rounded-2xl border border-forest-100">
-            <div class="text-xs font-semibold text-forest-500 mb-2">Member 1</div>
-            <input type="text" value="Renu Pokharna" placeholder="Name" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white mb-2"/>
-            <input type="text" value="Co-Founder" placeholder="Role/Title" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white mb-2"/>
-            <input type="text" value="images/team1.jpg" placeholder="Photo path" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white"/>
-          </div>
-          <div class="p-4 bg-cream rounded-2xl border border-forest-100">
-            <div class="text-xs font-semibold text-forest-500 mb-2">Member 2</div>
-            <input type="text" value="Pranav Gupta" placeholder="Name" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white mb-2"/>
-            <input type="text" value="Co-Founder" placeholder="Role/Title" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white mb-2"/>
-            <input type="text" value="images/team2.jpg" placeholder="Photo path" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white"/>
-          </div>
-        </div>
-      </div>
+    </div>
+    <div class="bg-white rounded-3xl p-5 border border-forest-100 max-w-3xl mt-5 text-sm text-forest-600 flex items-start gap-3">
+      <svg class="w-5 h-5 shrink-0 text-forest-400 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+      <span>Team members are managed once, under <strong>Meet the Team</strong> (same group, next tab). Tick <strong>&ldquo;Show on About Us page&rdquo;</strong> on any member there and they appear in the &ldquo;Our Team&rdquo; section of the About Us page &mdash; no need to enter them twice.</span>
     </div>
   </section>
 
@@ -548,10 +535,10 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
   <section id="tab-contact-info" class="tab-content" aria-labelledby="contact-tab-heading">
     <div class="flex items-center justify-between mb-8">
       <div>
-        <h1 id="contact-tab-heading" class="font-serif text-2xl text-forest-800">Contact Information</h1>
-        <p class="text-forest-500 text-sm mt-1">Edit the email, phone and social links shown site-wide.</p>
+        <h1 id="contact-tab-heading" class="font-serif text-2xl text-forest-800">Contact &amp; Social</h1>
+        <p class="text-forest-500 text-sm mt-1">Edit contact details and the social links shown site-wide. One Save publishes both.</p>
       </div>
-      <button onclick="saveSection('contact-info')" class="save-btn bg-forest-600 hover:bg-forest-700 text-white px-6 py-2.5 rounded-xl font-semibold text-sm cursor-pointer shadow">Save Changes</button>
+      <button onclick="saveContactAndSocial(this)" class="save-btn bg-forest-600 hover:bg-forest-700 text-white px-6 py-2.5 rounded-xl font-semibold text-sm cursor-pointer shadow">Save Changes</button>
     </div>
     <div class="bg-white rounded-3xl p-6 border border-forest-100 max-w-2xl">
       <div class="space-y-4">
@@ -577,6 +564,43 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
         </div>
       </div>
     </div>
+    <div class="text-xs font-semibold text-forest-500 uppercase tracking-wide mt-8 mb-3">Social Links</div>
+    <div class="bg-white rounded-3xl p-6 border border-forest-100 space-y-4">
+      <div class="flex items-center gap-3">
+        <span class="w-9 h-9 shrink-0 rounded-xl bg-forest-50 text-forest-600 flex items-center justify-center"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></span>
+        <label for="social-instagram" class="w-24 shrink-0 text-sm font-semibold text-forest-700">Instagram</label>
+        <input type="url" id="social-instagram" placeholder="https://www.instagram.com/..." class="flex-1 px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white"/>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="w-9 h-9 shrink-0 rounded-xl bg-forest-50 text-forest-600 flex items-center justify-center"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></span>
+        <label for="social-facebook" class="w-24 shrink-0 text-sm font-semibold text-forest-700">Facebook</label>
+        <input type="url" id="social-facebook" placeholder="https://www.facebook.com/..." class="flex-1 px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white"/>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="w-9 h-9 shrink-0 rounded-xl bg-forest-50 text-forest-600 flex items-center justify-center"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg></span>
+        <label for="social-linkedin" class="w-24 shrink-0 text-sm font-semibold text-forest-700">LinkedIn</label>
+        <input type="url" id="social-linkedin" placeholder="https://www.linkedin.com/company/..." class="flex-1 px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white"/>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="w-9 h-9 shrink-0 rounded-xl bg-forest-50 text-forest-600 flex items-center justify-center"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.96-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#fff"/></svg></span>
+        <label for="social-youtube" class="w-24 shrink-0 text-sm font-semibold text-forest-700">YouTube</label>
+        <input type="url" id="social-youtube" placeholder="https://www.youtube.com/@..." class="flex-1 px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white"/>
+      </div>
+      <div class="pt-4 border-t border-forest-100">
+        <div class="flex items-center gap-3">
+          <span class="w-9 h-9 shrink-0 rounded-xl bg-forest-50 text-forest-600 flex items-center justify-center"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
+          <label for="social-other" class="w-24 shrink-0 text-sm font-semibold text-forest-700">Other</label>
+          <input type="url" id="social-other" placeholder="https://..." class="flex-1 px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white"/>
+        </div>
+        <div class="flex items-center gap-3 mt-2">
+          <span class="w-9 h-9 shrink-0"></span>
+          <label for="social-other-name" class="w-24 shrink-0 text-xs text-forest-500">Its name</label>
+          <input type="text" id="social-other-name" placeholder="e.g. WhatsApp Channel, X (Twitter), Threads" class="flex-1 px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white"/>
+        </div>
+      </div>
+    </div>
+    <div class="mt-6 bg-amber-50 rounded-2xl px-5 py-4 border border-amber-100 text-sm text-amber-800">
+      <strong>Tip:</strong> Paste the full link including <strong>https://</strong>. "Other" shows a globe icon and uses the name you type as its tooltip. Click <strong>Save Changes</strong> to publish.</div>
   </section>
 
   <!-- ═══ GALLERY ═══ -->
@@ -815,51 +839,7 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
   </section>
 
   <!-- ═══ SOCIAL LINKS ═══ -->
-  <section id="tab-social" class="tab-content" aria-labelledby="so-tab-heading">
-    <div class="flex items-center justify-between mb-8">
-      <div>
-        <h1 id="so-tab-heading" class="font-serif text-2xl text-forest-800">Social Links</h1>
-        <p class="text-forest-500 text-sm mt-1">Paste the link to each account. Only the ones with a link show up as icons at the bottom of every page - leave a box empty to hide that icon.</p>
-      </div>
-      <button onclick="saveSection('social')" class="save-btn bg-forest-600 hover:bg-forest-700 text-white px-6 py-2.5 rounded-xl font-semibold text-sm cursor-pointer shadow">Save Changes</button>
-    </div>
-    <div class="bg-white rounded-3xl p-6 border border-forest-100 space-y-4">
-      <div class="flex items-center gap-3">
-        <span class="w-9 h-9 shrink-0 rounded-xl bg-forest-50 text-forest-600 flex items-center justify-center"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></span>
-        <label for="social-instagram" class="w-24 shrink-0 text-sm font-semibold text-forest-700">Instagram</label>
-        <input type="url" id="social-instagram" placeholder="https://www.instagram.com/..." class="flex-1 px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white"/>
-      </div>
-      <div class="flex items-center gap-3">
-        <span class="w-9 h-9 shrink-0 rounded-xl bg-forest-50 text-forest-600 flex items-center justify-center"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></span>
-        <label for="social-facebook" class="w-24 shrink-0 text-sm font-semibold text-forest-700">Facebook</label>
-        <input type="url" id="social-facebook" placeholder="https://www.facebook.com/..." class="flex-1 px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white"/>
-      </div>
-      <div class="flex items-center gap-3">
-        <span class="w-9 h-9 shrink-0 rounded-xl bg-forest-50 text-forest-600 flex items-center justify-center"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg></span>
-        <label for="social-linkedin" class="w-24 shrink-0 text-sm font-semibold text-forest-700">LinkedIn</label>
-        <input type="url" id="social-linkedin" placeholder="https://www.linkedin.com/company/..." class="flex-1 px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white"/>
-      </div>
-      <div class="flex items-center gap-3">
-        <span class="w-9 h-9 shrink-0 rounded-xl bg-forest-50 text-forest-600 flex items-center justify-center"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.96-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#fff"/></svg></span>
-        <label for="social-youtube" class="w-24 shrink-0 text-sm font-semibold text-forest-700">YouTube</label>
-        <input type="url" id="social-youtube" placeholder="https://www.youtube.com/@..." class="flex-1 px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white"/>
-      </div>
-      <div class="pt-4 border-t border-forest-100">
-        <div class="flex items-center gap-3">
-          <span class="w-9 h-9 shrink-0 rounded-xl bg-forest-50 text-forest-600 flex items-center justify-center"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
-          <label for="social-other" class="w-24 shrink-0 text-sm font-semibold text-forest-700">Other</label>
-          <input type="url" id="social-other" placeholder="https://..." class="flex-1 px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white"/>
-        </div>
-        <div class="flex items-center gap-3 mt-2">
-          <span class="w-9 h-9 shrink-0"></span>
-          <label for="social-other-name" class="w-24 shrink-0 text-xs text-forest-500">Its name</label>
-          <input type="text" id="social-other-name" placeholder="e.g. WhatsApp Channel, X (Twitter), Threads" class="flex-1 px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white"/>
-        </div>
-      </div>
-    </div>
-    <div class="mt-6 bg-amber-50 rounded-2xl px-5 py-4 border border-amber-100 text-sm text-amber-800">
-      <strong>Tip:</strong> Paste the full link including <strong>https://</strong>. "Other" shows a globe icon and uses the name you type as its tooltip. Click <strong>Save Changes</strong> to publish.</div>
-  </section>
+  
 
   <!-- ═══ FLASH POPUP ═══ -->
   <section id="tab-flash" class="tab-content" aria-labelledby="fl-tab-heading">
@@ -1187,7 +1167,7 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
   // Field keys in the same order as the inputs inside each tab
   const FIELD_MAP = {
     'home': ['hero_headline','hero_sub','badge'],
-    'about': ['story','t1_name','t1_role','t1_photo','t2_name','t2_role','t2_photo'],
+    'about': ['story'],
     'model': ['sales_held','max_price','frequency','description','p1_title','p1_desc','p2_title','p2_desc','p3_title','p3_desc'],
     'programs': ['revibe_tagline','revibe_desc','revibe_tags','godadi_tagline','godadi_desc','godadi_location'],
     'contact-info': ['email','phone','address','website','copyright'],
@@ -1223,7 +1203,8 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
           name:  card.querySelector('[data-name]').value.trim(),
           role:  card.querySelector('[data-role]').value.trim(),
           desc:  card.querySelector('[data-desc]').value.trim(),
-          photo: card.querySelector('[data-photo]').value.trim()
+          photo: card.querySelector('[data-photo]').value.trim(),
+          on_about: !!(card.querySelector('[data-on-about]') && card.querySelector('[data-on-about]').checked)
         };
       }).filter(function (m) { return m.name || m.photo || m.desc; });
       return { members: members };
@@ -1525,6 +1506,41 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
     }
   }
 
+  // Contact & Social share one page and one Save button (two CMS sections).
+  async function saveContactAndSocial(btn) {
+    const orig = btn.textContent;
+    const passcode = getPasscode();
+    if (!passcode) return;
+    btn.disabled = true;
+    try {
+      for (const section of ['contact-info', 'social']) {
+        btn.textContent = 'Publishing...';
+        let data = collectSection(section);
+        data = await uploadEmbeddedImages(data, passcode, section);
+        const res = await fetch(SB_URL + '/rest/v1/rpc/recycle_save_content', {
+          method: 'POST', headers: SB_HEADERS,
+          body: JSON.stringify({ p_section: section, p_data: data, p_passcode: passcode })
+        });
+        if (!res.ok) {
+          const err = await res.json().catch(() => ({}));
+          if ((err.message || '').indexOf('Invalid passcode') !== -1) {
+            sessionStorage.removeItem('ir_pass');
+            alert('Wrong passcode. Click Save again and re-enter it.');
+          } else {
+            alert('Could not publish: ' + (err.message || ('HTTP ' + res.status)));
+          }
+          btn.textContent = orig; btn.disabled = false; return;
+        }
+      }
+      btn.textContent = 'Published - LIVE';
+      btn.classList.add('bg-forest-800');
+      setTimeout(() => { btn.textContent = orig; btn.disabled = false; btn.classList.remove('bg-forest-800'); }, 2500);
+    } catch (e) {
+      alert('Changes NOT published: ' + e.message);
+      btn.textContent = orig; btn.disabled = false;
+    }
+  }
+
   async function loadContent() {
     try {
       const res = await fetch(SB_URL + '/rest/v1/recycle_site_content?select=section,data', { headers: SB_HEADERS });
@@ -1626,7 +1642,7 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
     media:    { tabs: [['photos','Photo Gallery'],['videos','Videos'],['resources','Reports & Media']] },
     partners: { tabs: [['partners','Partners'],['corporate','Corporate / Interns']] },
     join:     { tabs: [['volunteer_ways','Ways to Help'],['locations','Drop Locations']] },
-    contact:  { tabs: [['contact-info','Contact Info'],['social','Social Links']] },
+    contact:  { tabs: [['contact-info','Contact & Social']] },
     giving:   { tabs: [['programs','Programs'],['donations','Donations / Bank'],['flash','Flash Popup']] },
     site:     { tabs: [['gallery','Website Images'],['submissions','Inquiry']] }
   };
@@ -1862,6 +1878,7 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
       +   '</div>'
       + '</div>'
       + '<textarea data-desc rows="3" placeholder="Short description" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white resize-none">' + textEsc(m.desc) + '</textarea>'
+      + '<label class="flex items-center gap-2 mt-2 text-xs font-medium text-forest-600 cursor-pointer"><input type="checkbox" data-on-about ' + (m.on_about ? 'checked' : '') + ' class="w-4 h-4 accent-[#256b49] cursor-pointer"/>Show this person on the About Us page too</label>'
       + '</div>';
   }
 

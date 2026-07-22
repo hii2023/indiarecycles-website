@@ -252,7 +252,7 @@
       <h2 id="team-heading" class="text-4xl text-green-800">Our Team</h2>
       <p class="text-green-600 mt-3 max-w-xl mx-auto">Passionate individuals driving a sustainable future for India's textile ecosystem.</p>
     </div>
-    <div class="grid sm:grid-cols-2 gap-8 max-w-2xl mx-auto mb-12">
+    <div id="about-team-list" class="grid sm:grid-cols-2 gap-8 max-w-2xl mx-auto mb-12">
       <div class="bg-white rounded-3xl overflow-hidden border border-green-100 card-lift cursor-default">
         <div class="photo-zoom aspect-[3/4]">
           <img data-img-key="about-us-4" src="images/team1.jpg" alt="Renu Pokharna - Co-Founder, India Recycles" class="w-full h-full object-cover object-top"/>
@@ -315,6 +315,41 @@
     </div>
   </div>
 </section>
+
+<!-- About Us "Our Team": show members ticked "Show on About Us page" in the CMS -->
+<script>
+(function () {
+  var SB = 'https://sqosmiifjqecidxhyjtg.supabase.co';
+  var KEY = 'sb_publishable_mq6t15oAQU7f4ZAjXQZA5w_ELcgDfbt';
+  function esc(s) { var d = document.createElement('div'); d.textContent = (s == null ? '' : s); return d.innerHTML; }
+  function card(m) {
+    var photo = (m.photo && String(m.photo).trim()) ? m.photo : '';
+    var img = photo
+      ? '<img src="' + esc(photo) + '" alt="' + esc(m.name) + '" class="w-full h-full object-cover object-top" loading="lazy"/>'
+      : '<div class="w-full h-full bg-green-50 flex items-center justify-center text-green-300 text-5xl font-bold">' + esc((m.name || '?').charAt(0)) + '</div>';
+    return '<div class="bg-white rounded-3xl overflow-hidden border border-green-100 card-lift cursor-default">'
+      + '<div class="photo-zoom aspect-[3/4]">' + img + '</div>'
+      + '<div class="p-6">'
+      + '<h3 class="text-xl text-green-800 mb-1">' + esc(m.name) + '</h3>'
+      + (m.role ? '<p class="text-green-700 text-sm font-semibold mb-2">' + esc(m.role) + '</p>' : '')
+      + (m.desc ? '<p class="text-green-600 text-sm leading-relaxed" style="white-space:pre-line">' + esc(m.desc) + '</p>' : '')
+      + '</div></div>';
+  }
+  fetch(SB + '/rest/v1/recycle_site_content?section=eq.team&select=data', { headers: { apikey: KEY, Authorization: 'Bearer ' + KEY } })
+    .then(function (r) { return r.ok ? r.json() : []; })
+    .then(function (rows) {
+      var data = rows[0] && rows[0].data;
+      var list = (data && Array.isArray(data.members)) ? data.members : [];
+      var featured = list.filter(function (m) { return m && m.on_about; });
+      var grid = document.getElementById('about-team-list');
+      if (grid && featured.length) {
+        grid.innerHTML = featured.map(card).join('');
+        if (featured.length > 2) { grid.classList.remove('max-w-2xl'); grid.classList.add('max-w-5xl', 'lg:grid-cols-3'); }
+      }
+    })
+    .catch(function () {});
+})();
+</script>
 
 </main>
 
