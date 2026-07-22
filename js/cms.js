@@ -899,6 +899,24 @@
         }
       }
 
+      /* Featured Models (Our Model page) - hidden until items exist */
+      var modelsEl = document.getElementById('models-list');
+      if (modelsEl) {
+        var models = (content.models && content.models.items) || [];
+        var mSec = document.getElementById('models-section');
+        if (models.length) {
+          if (mSec) mSec.style.display = '';
+          modelsEl.innerHTML = models.map(function (m) {
+            var photo = m.photo ? '<div class="aspect-[16/10] bg-green-50"><img src="' + esc(m.photo) + '" alt="' + esc(m.title) + '" class="w-full h-full object-cover"/></div>' : '';
+            return '<article class="rounded-2xl border border-green-100 bg-white overflow-hidden flex flex-col shadow-sm">' + photo +
+              '<div class="p-5 flex-1 flex flex-col">' +
+                '<h3 class="text-lg font-semibold text-green-800">' + esc(m.title) + '</h3>' +
+                (m.description ? '<p class="text-green-600 text-sm mt-2 leading-relaxed flex-1" style="white-space:pre-line">' + esc(m.description) + '</p>' : '') +
+              '</div></article>';
+          }).join('');
+        }
+      }
+
       /* Videos: homepage "See Us in Action" (#videos-list) and, on the Join Us
          page, the ones ticked "show on Join Us" (#volunteer-videos-list). */
       function renderVideos(containerId, vids, sectionId) {
