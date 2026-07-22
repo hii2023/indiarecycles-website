@@ -136,12 +136,12 @@
     <div class="flex items-center justify-between mb-8">
       <div>
         <h1 id="home-tab-heading" class="font-serif text-2xl text-forest-800">Home Page</h1>
-        <p class="text-forest-500 text-sm mt-1">Edit the hero headline and tagline. All impact numbers now live in the <strong>Stats</strong> tab.</p>
+        <p class="text-forest-500 text-sm mt-1">Edit the hero headline and tagline. All impact numbers live under <strong>Impact &rarr; Impact Numbers</strong>.</p>
       </div>
       <button onclick="saveSection('home')" class="save-btn bg-forest-600 hover:bg-forest-700 text-white px-6 py-2.5 rounded-xl font-semibold text-sm cursor-pointer shadow">Save Changes</button>
     </div>
     <div class="grid lg:grid-cols-2 gap-6">
-      <div class="bg-white rounded-3xl p-6 border border-forest-100">
+      <div class="bg-white rounded-3xl p-6 border border-forest-100 lg:col-span-2">
         <h2 class="font-semibold text-forest-800 mb-4 text-sm uppercase tracking-wide">Hero Section</h2>
         <div class="space-y-4">
           <div>
@@ -157,10 +157,6 @@
             <input type="text" value="WE ARE COLLECTING, ALWAYS!" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream"/>
           </div>
         </div>
-      </div>
-      <div class="bg-forest-50 rounded-3xl p-6 border border-forest-100 flex flex-col justify-center">
-        <h2 class="font-semibold text-forest-800 mb-2 text-sm uppercase tracking-wide">Impact Numbers</h2>
-        <p class="text-forest-600 text-sm leading-relaxed">All the impact numbers (clothes recycled, slum sales, volunteers, and so on) are now managed together in the <strong>Stats</strong> tab, where you can also set a monthly growth rate so the numbers keep rising automatically.</p>
       </div>
     </div>
   </section>
@@ -4482,8 +4478,14 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
   }
 
   function jumpImgPage(id) {
-    var main = document.querySelector('main');
-    if (id === '__top__') { if (main) main.scrollTo({ top: 0, behavior: 'smooth' }); return; }
+    if (id === '__top__') {
+      // The page (window), the <main> pane and the images tab could each be the
+      // scroll container depending on layout - reset all of them so Top always works.
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      var m = document.querySelector('main'); if (m) m.scrollTo({ top: 0, behavior: 'smooth' });
+      var tab = document.getElementById('tab-gallery'); if (tab) tab.scrollTo && tab.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
     var el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
