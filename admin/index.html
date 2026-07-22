@@ -131,7 +131,6 @@
   <!-- SUB-TAB BAR (populated by switchGroup) -->
   <div id="subtab-bar" class="flex flex-wrap gap-2 mb-6 pb-4 border-b border-forest-100"></div>
 
-
   <!-- ═══ HOME / STATS ═══ -->
   <section id="tab-home" class="tab-content active" aria-labelledby="home-tab-heading">
     <div class="flex items-center justify-between mb-8">
@@ -327,14 +326,31 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
   </section>
 
   <!-- ═══ STATS (all impact numbers in one place) ═══ -->
-  <section id="tab-stats" class="tab-content" aria-labelledby="stats-tab-heading">
+  
+
+  <!-- ═══ IMPACT NUMBERS (Our Impact page - editable stat cards) ═══ -->
+  <section id="tab-impact_stats" class="tab-content" aria-labelledby="in-tab-heading">
     <div class="flex items-center justify-between mb-8">
       <div>
-        <h1 id="stats-tab-heading" class="font-serif text-2xl text-forest-800">Impact Stats</h1>
-        <p class="text-forest-500 text-sm mt-1">Every impact number on the website, in one place. Set a monthly average and the numbers rise on their own.</p>
+        <h1 id="in-tab-heading" class="font-serif text-2xl text-forest-800">Impact Numbers</h1>
+        <p class="text-forest-500 text-sm mt-1">All impact figures in one place. Tick the box on any card to show it on the Our Impact page. The Home Page counters below auto-rise over time. One Save publishes everything.</p>
       </div>
-      <button onclick="saveSection('stats')" class="save-btn bg-forest-600 hover:bg-forest-700 text-white px-6 py-2.5 rounded-xl font-semibold text-sm cursor-pointer shadow">Save Changes</button>
+      <button onclick="saveImpactAll(this)" class="save-btn bg-forest-600 hover:bg-forest-700 text-white px-6 py-2.5 rounded-xl font-semibold text-sm cursor-pointer shadow">Save Changes</button>
     </div>
+    <div class="bg-white rounded-3xl p-6 border border-forest-100">
+      <div class="flex items-center justify-between mb-5">
+        <h2 class="font-semibold text-forest-800 text-sm uppercase tracking-wide">Impact Numbers</h2>
+        <button onclick="addStat()" class="bg-forest-50 hover:bg-forest-100 text-forest-700 px-4 py-2 rounded-xl text-sm font-semibold cursor-pointer inline-flex items-center gap-1.5">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Add Stat
+        </button>
+      </div>
+      <div id="impact-stats-editor" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+    </div>
+    <div class="mt-6 bg-amber-50 rounded-2xl px-5 py-4 border border-amber-100 text-sm text-amber-800">
+      <strong>Tip:</strong> Type the number exactly as it should appear, e.g. <strong>3,00,000+</strong>, <strong>2,500+</strong> or <strong>25</strong> - a trailing +, % or k shows in green. Leave the number blank to hide that stat. Empty rows like "Employment Provided" and "People Reached" appear here ready for you to fill in. Click <strong>Save Changes</strong> to publish.</div>
+    <div class="text-xs font-semibold text-forest-500 uppercase tracking-wide mt-10 mb-1">Home Page Counters</div>
+    <p class="text-forest-500 text-sm mb-4">These auto-rising numbers drive the Home page hero and ticker. Set a monthly average and they climb on their own.</p>
     <div class="bg-forest-50 rounded-2xl px-5 py-4 border border-forest-100 text-sm text-forest-600 mb-6">
       <strong>How the auto-increase works:</strong> Enter today&apos;s <em>Current count</em> and the <em>average added each month</em>. From the <em>Counting since</em> month onward, the website adds that monthly amount automatically over time, so the figures keep climbing without you editing anything. Leave &quot;Avg added / month&quot; at 0 to keep a number fixed.
     </div>
@@ -482,29 +498,6 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
     </div>
   </section>
 
-  <!-- ═══ IMPACT NUMBERS (Our Impact page - editable stat cards) ═══ -->
-  <section id="tab-impact_stats" class="tab-content" aria-labelledby="in-tab-heading">
-    <div class="flex items-center justify-between mb-8">
-      <div>
-        <h1 id="in-tab-heading" class="font-serif text-2xl text-forest-800">Impact Numbers</h1>
-        <p class="text-forest-500 text-sm mt-1">The big stat cards at the top of the Our Impact page. Add any stat with a title and a number - only stats that have a number are shown. Reorder with the arrows (top = shown first).</p>
-      </div>
-      <button onclick="saveSection('impact_stats')" class="save-btn bg-forest-600 hover:bg-forest-700 text-white px-6 py-2.5 rounded-xl font-semibold text-sm cursor-pointer shadow">Save Changes</button>
-    </div>
-    <div class="bg-white rounded-3xl p-6 border border-forest-100">
-      <div class="flex items-center justify-between mb-5">
-        <h2 class="font-semibold text-forest-800 text-sm uppercase tracking-wide">Impact Numbers</h2>
-        <button onclick="addStat()" class="bg-forest-50 hover:bg-forest-100 text-forest-700 px-4 py-2 rounded-xl text-sm font-semibold cursor-pointer inline-flex items-center gap-1.5">
-          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-          Add Stat
-        </button>
-      </div>
-      <div id="impact-stats-editor" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
-    </div>
-    <div class="mt-6 bg-amber-50 rounded-2xl px-5 py-4 border border-amber-100 text-sm text-amber-800">
-      <strong>Tip:</strong> Type the number exactly as it should appear, e.g. <strong>3,00,000+</strong>, <strong>2,500+</strong> or <strong>25</strong> - a trailing +, % or k shows in green. Leave the number blank to hide that stat. Empty rows like "Employment Provided" and "People Reached" appear here ready for you to fill in. Click <strong>Save Changes</strong> to publish.</div>
-  </section>
-
   <!-- ═══ PROGRAMS ═══ -->
   <section id="tab-programs" class="tab-content" aria-labelledby="prog-tab-heading">
     <div class="flex items-center justify-between mb-8">
@@ -622,6 +615,153 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
     </div>
     <div class="mt-6 bg-amber-50 rounded-2xl px-5 py-4 border border-amber-100 text-sm text-amber-800">
       <strong>Tip:</strong> Paste the full link including <strong>https://</strong>. "Other" shows a globe icon and uses the name you type as its tooltip. Click <strong>Save Changes</strong> to publish.</div>
+    <div class="text-xs font-semibold text-forest-500 uppercase tracking-wide mt-10 mb-1">Home Page Counters</div>
+    <p class="text-forest-500 text-sm mb-4">These auto-rising numbers drive the Home page hero and ticker. Set a monthly average and they climb on their own.</p>
+    <div class="bg-forest-50 rounded-2xl px-5 py-4 border border-forest-100 text-sm text-forest-600 mb-6">
+      <strong>How the auto-increase works:</strong> Enter today&apos;s <em>Current count</em> and the <em>average added each month</em>. From the <em>Counting since</em> month onward, the website adds that monthly amount automatically over time, so the figures keep climbing without you editing anything. Leave &quot;Avg added / month&quot; at 0 to keep a number fixed.
+    </div>
+    <div class="grid lg:grid-cols-2 gap-4">
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Clothes Recycled</div>
+          <div class="text-xs text-forest-400">e.g. 3,00,000+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="clothes.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="clothes.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="clothes.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Slum Sales</div>
+          <div class="text-xs text-forest-400">e.g. 500+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="sales.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="sales.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="sales.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Volunteers</div>
+          <div class="text-xs text-forest-400">e.g. 2,500+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="volunteers.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="volunteers.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="volunteers.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Medical Beneficiaries</div>
+          <div class="text-xs text-forest-400">e.g. 1,000+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="medical.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="medical.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="medical.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Students Supported</div>
+          <div class="text-xs text-forest-400">e.g. 25+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="students.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="students.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="students.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Drop Locations</div>
+          <div class="text-xs text-forest-400">e.g. 20+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="drop_locations.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="drop_locations.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="drop_locations.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Cities Active</div>
+          <div class="text-xs text-forest-400">e.g. 2</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="cities.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="cities.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="cities.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- ═══ GALLERY ═══ -->
@@ -715,7 +855,6 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
     <div class="mt-6 bg-amber-50 rounded-2xl px-5 py-4 border border-amber-100 text-sm text-amber-800">
       <strong>Live:</strong> Saving here publishes instantly. The Donate page shows these bank and UPI details on every page view.</div>
   </section>
-
 
   <!-- ═══ REPORTS & MEDIA ═══ -->
   <section id="tab-resources" class="tab-content" aria-labelledby="res-tab-heading">
@@ -811,6 +950,153 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
     </div>
     <div class="mt-6 bg-amber-50 rounded-2xl px-5 py-4 border border-amber-100 text-sm text-amber-800">
       <strong>Tip:</strong> Photo is optional - if left blank, the person's initials are shown. Click <strong>Save Changes</strong> to publish.</div>
+    <div class="text-xs font-semibold text-forest-500 uppercase tracking-wide mt-10 mb-1">Home Page Counters</div>
+    <p class="text-forest-500 text-sm mb-4">These auto-rising numbers drive the Home page hero and ticker. Set a monthly average and they climb on their own.</p>
+    <div class="bg-forest-50 rounded-2xl px-5 py-4 border border-forest-100 text-sm text-forest-600 mb-6">
+      <strong>How the auto-increase works:</strong> Enter today&apos;s <em>Current count</em> and the <em>average added each month</em>. From the <em>Counting since</em> month onward, the website adds that monthly amount automatically over time, so the figures keep climbing without you editing anything. Leave &quot;Avg added / month&quot; at 0 to keep a number fixed.
+    </div>
+    <div class="grid lg:grid-cols-2 gap-4">
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Clothes Recycled</div>
+          <div class="text-xs text-forest-400">e.g. 3,00,000+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="clothes.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="clothes.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="clothes.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Slum Sales</div>
+          <div class="text-xs text-forest-400">e.g. 500+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="sales.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="sales.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="sales.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Volunteers</div>
+          <div class="text-xs text-forest-400">e.g. 2,500+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="volunteers.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="volunteers.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="volunteers.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Medical Beneficiaries</div>
+          <div class="text-xs text-forest-400">e.g. 1,000+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="medical.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="medical.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="medical.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Students Supported</div>
+          <div class="text-xs text-forest-400">e.g. 25+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="students.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="students.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="students.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Drop Locations</div>
+          <div class="text-xs text-forest-400">e.g. 20+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="drop_locations.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="drop_locations.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="drop_locations.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Cities Active</div>
+          <div class="text-xs text-forest-400">e.g. 2</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="cities.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="cities.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="cities.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- ═══ WHAT PEOPLE SAY (Our Impact page) ═══ -->
@@ -928,6 +1214,153 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
     </div>
     <div class="mt-6 bg-amber-50 rounded-2xl px-5 py-4 border border-amber-100 text-sm text-amber-800">
       <strong>Tip:</strong> Only the Type and Title are needed to show the popup. Everything else is optional. Click <strong>Save Changes</strong> to publish.</div>
+    <div class="text-xs font-semibold text-forest-500 uppercase tracking-wide mt-10 mb-1">Home Page Counters</div>
+    <p class="text-forest-500 text-sm mb-4">These auto-rising numbers drive the Home page hero and ticker. Set a monthly average and they climb on their own.</p>
+    <div class="bg-forest-50 rounded-2xl px-5 py-4 border border-forest-100 text-sm text-forest-600 mb-6">
+      <strong>How the auto-increase works:</strong> Enter today&apos;s <em>Current count</em> and the <em>average added each month</em>. From the <em>Counting since</em> month onward, the website adds that monthly amount automatically over time, so the figures keep climbing without you editing anything. Leave &quot;Avg added / month&quot; at 0 to keep a number fixed.
+    </div>
+    <div class="grid lg:grid-cols-2 gap-4">
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Clothes Recycled</div>
+          <div class="text-xs text-forest-400">e.g. 3,00,000+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="clothes.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="clothes.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="clothes.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Slum Sales</div>
+          <div class="text-xs text-forest-400">e.g. 500+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="sales.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="sales.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="sales.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Volunteers</div>
+          <div class="text-xs text-forest-400">e.g. 2,500+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="volunteers.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="volunteers.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="volunteers.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Medical Beneficiaries</div>
+          <div class="text-xs text-forest-400">e.g. 1,000+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="medical.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="medical.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="medical.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Students Supported</div>
+          <div class="text-xs text-forest-400">e.g. 25+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="students.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="students.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="students.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Drop Locations</div>
+          <div class="text-xs text-forest-400">e.g. 20+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="drop_locations.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="drop_locations.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="drop_locations.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Cities Active</div>
+          <div class="text-xs text-forest-400">e.g. 2</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="cities.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="cities.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="cities.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- ═══ ACTIVITIES PAGE ═══ -->
@@ -955,6 +1388,153 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
     </div>
     <div class="mt-6 bg-amber-50 rounded-2xl px-5 py-4 border border-amber-100 text-sm text-amber-800">
       <strong>Tip:</strong> The Activities page lists IR Talks, Events and Collaboration. Edit those in their own tabs. Click <strong>Save Changes</strong> to publish.</div>
+    <div class="text-xs font-semibold text-forest-500 uppercase tracking-wide mt-10 mb-1">Home Page Counters</div>
+    <p class="text-forest-500 text-sm mb-4">These auto-rising numbers drive the Home page hero and ticker. Set a monthly average and they climb on their own.</p>
+    <div class="bg-forest-50 rounded-2xl px-5 py-4 border border-forest-100 text-sm text-forest-600 mb-6">
+      <strong>How the auto-increase works:</strong> Enter today&apos;s <em>Current count</em> and the <em>average added each month</em>. From the <em>Counting since</em> month onward, the website adds that monthly amount automatically over time, so the figures keep climbing without you editing anything. Leave &quot;Avg added / month&quot; at 0 to keep a number fixed.
+    </div>
+    <div class="grid lg:grid-cols-2 gap-4">
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Clothes Recycled</div>
+          <div class="text-xs text-forest-400">e.g. 3,00,000+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="clothes.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="clothes.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="clothes.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Slum Sales</div>
+          <div class="text-xs text-forest-400">e.g. 500+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="sales.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="sales.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="sales.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Volunteers</div>
+          <div class="text-xs text-forest-400">e.g. 2,500+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="volunteers.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="volunteers.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="volunteers.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Medical Beneficiaries</div>
+          <div class="text-xs text-forest-400">e.g. 1,000+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="medical.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="medical.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="medical.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Students Supported</div>
+          <div class="text-xs text-forest-400">e.g. 25+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="students.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="students.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="students.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Drop Locations</div>
+          <div class="text-xs text-forest-400">e.g. 20+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="drop_locations.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="drop_locations.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="drop_locations.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Cities Active</div>
+          <div class="text-xs text-forest-400">e.g. 2</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="cities.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="cities.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="cities.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- ═══ COLLABORATION ═══ -->
@@ -982,6 +1562,153 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
     </div>
     <div class="mt-6 bg-amber-50 rounded-2xl px-5 py-4 border border-amber-100 text-sm text-amber-800">
       <strong>Tip:</strong> The photo is the big picture on the card; the logo is the collaborator's brand mark shown above the title. Both are optional. Click <strong>Save Changes</strong> to publish.</div>
+    <div class="text-xs font-semibold text-forest-500 uppercase tracking-wide mt-10 mb-1">Home Page Counters</div>
+    <p class="text-forest-500 text-sm mb-4">These auto-rising numbers drive the Home page hero and ticker. Set a monthly average and they climb on their own.</p>
+    <div class="bg-forest-50 rounded-2xl px-5 py-4 border border-forest-100 text-sm text-forest-600 mb-6">
+      <strong>How the auto-increase works:</strong> Enter today&apos;s <em>Current count</em> and the <em>average added each month</em>. From the <em>Counting since</em> month onward, the website adds that monthly amount automatically over time, so the figures keep climbing without you editing anything. Leave &quot;Avg added / month&quot; at 0 to keep a number fixed.
+    </div>
+    <div class="grid lg:grid-cols-2 gap-4">
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Clothes Recycled</div>
+          <div class="text-xs text-forest-400">e.g. 3,00,000+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="clothes.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="clothes.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="clothes.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Slum Sales</div>
+          <div class="text-xs text-forest-400">e.g. 500+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="sales.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="sales.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="sales.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Volunteers</div>
+          <div class="text-xs text-forest-400">e.g. 2,500+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="volunteers.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="volunteers.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="volunteers.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Medical Beneficiaries</div>
+          <div class="text-xs text-forest-400">e.g. 1,000+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="medical.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="medical.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="medical.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Students Supported</div>
+          <div class="text-xs text-forest-400">e.g. 25+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="students.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="students.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="students.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Drop Locations</div>
+          <div class="text-xs text-forest-400">e.g. 20+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="drop_locations.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="drop_locations.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="drop_locations.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Cities Active</div>
+          <div class="text-xs text-forest-400">e.g. 2</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="cities.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="cities.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="cities.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- ═══ PARTNERS ═══ -->
@@ -1005,6 +1732,153 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
     </div>
     <div class="mt-6 bg-amber-50 rounded-2xl px-5 py-4 border border-amber-100 text-sm text-amber-800">
       <strong>Tip:</strong> Upload the partner's logo (PNG with transparent background looks best). Click <strong>Save Changes</strong> to publish.</div>
+    <div class="text-xs font-semibold text-forest-500 uppercase tracking-wide mt-10 mb-1">Home Page Counters</div>
+    <p class="text-forest-500 text-sm mb-4">These auto-rising numbers drive the Home page hero and ticker. Set a monthly average and they climb on their own.</p>
+    <div class="bg-forest-50 rounded-2xl px-5 py-4 border border-forest-100 text-sm text-forest-600 mb-6">
+      <strong>How the auto-increase works:</strong> Enter today&apos;s <em>Current count</em> and the <em>average added each month</em>. From the <em>Counting since</em> month onward, the website adds that monthly amount automatically over time, so the figures keep climbing without you editing anything. Leave &quot;Avg added / month&quot; at 0 to keep a number fixed.
+    </div>
+    <div class="grid lg:grid-cols-2 gap-4">
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Clothes Recycled</div>
+          <div class="text-xs text-forest-400">e.g. 3,00,000+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="clothes.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="clothes.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="clothes.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Slum Sales</div>
+          <div class="text-xs text-forest-400">e.g. 500+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="sales.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="sales.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="sales.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Volunteers</div>
+          <div class="text-xs text-forest-400">e.g. 2,500+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="volunteers.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="volunteers.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="volunteers.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Medical Beneficiaries</div>
+          <div class="text-xs text-forest-400">e.g. 1,000+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="medical.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="medical.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="medical.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Students Supported</div>
+          <div class="text-xs text-forest-400">e.g. 25+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="students.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="students.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="students.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Drop Locations</div>
+          <div class="text-xs text-forest-400">e.g. 20+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="drop_locations.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="drop_locations.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="drop_locations.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Cities Active</div>
+          <div class="text-xs text-forest-400">e.g. 2</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="cities.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="cities.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="cities.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- ═══ CORPORATE TIE-UPS / INTERNSHIPS ═══ -->
@@ -1028,6 +1902,153 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
     </div>
     <div class="mt-6 bg-amber-50 rounded-2xl px-5 py-4 border border-amber-100 text-sm text-amber-800">
       <strong>Tip:</strong> Upload the logo and give the company/campus a name (used as the tooltip and fallback). A website link is optional. Click <strong>Save Changes</strong> to publish.</div>
+    <div class="text-xs font-semibold text-forest-500 uppercase tracking-wide mt-10 mb-1">Home Page Counters</div>
+    <p class="text-forest-500 text-sm mb-4">These auto-rising numbers drive the Home page hero and ticker. Set a monthly average and they climb on their own.</p>
+    <div class="bg-forest-50 rounded-2xl px-5 py-4 border border-forest-100 text-sm text-forest-600 mb-6">
+      <strong>How the auto-increase works:</strong> Enter today&apos;s <em>Current count</em> and the <em>average added each month</em>. From the <em>Counting since</em> month onward, the website adds that monthly amount automatically over time, so the figures keep climbing without you editing anything. Leave &quot;Avg added / month&quot; at 0 to keep a number fixed.
+    </div>
+    <div class="grid lg:grid-cols-2 gap-4">
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Clothes Recycled</div>
+          <div class="text-xs text-forest-400">e.g. 3,00,000+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="clothes.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="clothes.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="clothes.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Slum Sales</div>
+          <div class="text-xs text-forest-400">e.g. 500+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="sales.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="sales.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="sales.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Volunteers</div>
+          <div class="text-xs text-forest-400">e.g. 2,500+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="volunteers.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="volunteers.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="volunteers.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Medical Beneficiaries</div>
+          <div class="text-xs text-forest-400">e.g. 1,000+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="medical.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="medical.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="medical.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Students Supported</div>
+          <div class="text-xs text-forest-400">e.g. 25+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="students.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="students.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="students.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Drop Locations</div>
+          <div class="text-xs text-forest-400">e.g. 20+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="drop_locations.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="drop_locations.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="drop_locations.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Cities Active</div>
+          <div class="text-xs text-forest-400">e.g. 2</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="cities.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="cities.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="cities.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- ═══ PHOTO GALLERY ═══ -->
@@ -1051,6 +2072,153 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
     </div>
     <div class="mt-6 bg-amber-50 rounded-2xl px-5 py-4 border border-amber-100 text-sm text-amber-800">
       <strong>Tip:</strong> Photos are resized automatically on upload. Caption is optional. Click <strong>Save Changes</strong> to publish.</div>
+    <div class="text-xs font-semibold text-forest-500 uppercase tracking-wide mt-10 mb-1">Home Page Counters</div>
+    <p class="text-forest-500 text-sm mb-4">These auto-rising numbers drive the Home page hero and ticker. Set a monthly average and they climb on their own.</p>
+    <div class="bg-forest-50 rounded-2xl px-5 py-4 border border-forest-100 text-sm text-forest-600 mb-6">
+      <strong>How the auto-increase works:</strong> Enter today&apos;s <em>Current count</em> and the <em>average added each month</em>. From the <em>Counting since</em> month onward, the website adds that monthly amount automatically over time, so the figures keep climbing without you editing anything. Leave &quot;Avg added / month&quot; at 0 to keep a number fixed.
+    </div>
+    <div class="grid lg:grid-cols-2 gap-4">
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Clothes Recycled</div>
+          <div class="text-xs text-forest-400">e.g. 3,00,000+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="clothes.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="clothes.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="clothes.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Slum Sales</div>
+          <div class="text-xs text-forest-400">e.g. 500+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="sales.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="sales.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="sales.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Volunteers</div>
+          <div class="text-xs text-forest-400">e.g. 2,500+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="volunteers.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="volunteers.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="volunteers.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Medical Beneficiaries</div>
+          <div class="text-xs text-forest-400">e.g. 1,000+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="medical.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="medical.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="medical.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Students Supported</div>
+          <div class="text-xs text-forest-400">e.g. 25+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="students.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="students.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="students.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Drop Locations</div>
+          <div class="text-xs text-forest-400">e.g. 20+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="drop_locations.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="drop_locations.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="drop_locations.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Cities Active</div>
+          <div class="text-xs text-forest-400">e.g. 2</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="cities.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="cities.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="cities.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- ═══ EVENTS ═══ -->
@@ -1074,6 +2242,153 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
     </div>
     <div class="mt-6 bg-amber-50 rounded-2xl px-5 py-4 border border-amber-100 text-sm text-amber-800">
       <strong>Tip:</strong> Use the Upcoming/Past dropdown to place each event in the right section. Photo is optional. Click <strong>Save Changes</strong> to publish.</div>
+    <div class="text-xs font-semibold text-forest-500 uppercase tracking-wide mt-10 mb-1">Home Page Counters</div>
+    <p class="text-forest-500 text-sm mb-4">These auto-rising numbers drive the Home page hero and ticker. Set a monthly average and they climb on their own.</p>
+    <div class="bg-forest-50 rounded-2xl px-5 py-4 border border-forest-100 text-sm text-forest-600 mb-6">
+      <strong>How the auto-increase works:</strong> Enter today&apos;s <em>Current count</em> and the <em>average added each month</em>. From the <em>Counting since</em> month onward, the website adds that monthly amount automatically over time, so the figures keep climbing without you editing anything. Leave &quot;Avg added / month&quot; at 0 to keep a number fixed.
+    </div>
+    <div class="grid lg:grid-cols-2 gap-4">
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Clothes Recycled</div>
+          <div class="text-xs text-forest-400">e.g. 3,00,000+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="clothes.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="clothes.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="clothes.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Slum Sales</div>
+          <div class="text-xs text-forest-400">e.g. 500+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="sales.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="sales.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="sales.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Volunteers</div>
+          <div class="text-xs text-forest-400">e.g. 2,500+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="volunteers.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="volunteers.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="volunteers.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Medical Beneficiaries</div>
+          <div class="text-xs text-forest-400">e.g. 1,000+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="medical.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="medical.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="medical.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Students Supported</div>
+          <div class="text-xs text-forest-400">e.g. 25+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="students.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="students.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="students.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Drop Locations</div>
+          <div class="text-xs text-forest-400">e.g. 20+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="drop_locations.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="drop_locations.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="drop_locations.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Cities Active</div>
+          <div class="text-xs text-forest-400">e.g. 2</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="cities.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="cities.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="cities.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- ═══ COMMUNITY IMPACT / CAUSES ═══ -->
@@ -1097,6 +2412,153 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
     </div>
     <div class="mt-6 bg-amber-50 rounded-2xl px-5 py-4 border border-amber-100 text-sm text-amber-800">
       <strong>Tip:</strong> Location can list one or more places (e.g. "Ahmedabad, Vadodara"). Photo is optional. Click <strong>Save Changes</strong> to publish.</div>
+    <div class="text-xs font-semibold text-forest-500 uppercase tracking-wide mt-10 mb-1">Home Page Counters</div>
+    <p class="text-forest-500 text-sm mb-4">These auto-rising numbers drive the Home page hero and ticker. Set a monthly average and they climb on their own.</p>
+    <div class="bg-forest-50 rounded-2xl px-5 py-4 border border-forest-100 text-sm text-forest-600 mb-6">
+      <strong>How the auto-increase works:</strong> Enter today&apos;s <em>Current count</em> and the <em>average added each month</em>. From the <em>Counting since</em> month onward, the website adds that monthly amount automatically over time, so the figures keep climbing without you editing anything. Leave &quot;Avg added / month&quot; at 0 to keep a number fixed.
+    </div>
+    <div class="grid lg:grid-cols-2 gap-4">
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Clothes Recycled</div>
+          <div class="text-xs text-forest-400">e.g. 3,00,000+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="clothes.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="clothes.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="clothes.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Slum Sales</div>
+          <div class="text-xs text-forest-400">e.g. 500+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="sales.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="sales.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="sales.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Volunteers</div>
+          <div class="text-xs text-forest-400">e.g. 2,500+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="volunteers.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="volunteers.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="volunteers.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Medical Beneficiaries</div>
+          <div class="text-xs text-forest-400">e.g. 1,000+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="medical.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="medical.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="medical.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Students Supported</div>
+          <div class="text-xs text-forest-400">e.g. 25+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="students.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="students.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="students.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Drop Locations</div>
+          <div class="text-xs text-forest-400">e.g. 20+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="drop_locations.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="drop_locations.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="drop_locations.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Cities Active</div>
+          <div class="text-xs text-forest-400">e.g. 2</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="cities.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="cities.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="cities.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- ═══ VIDEOS ═══ -->
@@ -1120,6 +2582,153 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
     </div>
     <div class="mt-6 bg-amber-50 rounded-2xl px-5 py-4 border border-amber-100 text-sm text-amber-800">
       <strong>Tip:</strong> Paste any YouTube link (watch, youtu.be or embed). The thumbnail loads automatically. The homepage video section stays hidden until you add at least one video. Click <strong>Save Changes</strong> to publish.</div>
+    <div class="text-xs font-semibold text-forest-500 uppercase tracking-wide mt-10 mb-1">Home Page Counters</div>
+    <p class="text-forest-500 text-sm mb-4">These auto-rising numbers drive the Home page hero and ticker. Set a monthly average and they climb on their own.</p>
+    <div class="bg-forest-50 rounded-2xl px-5 py-4 border border-forest-100 text-sm text-forest-600 mb-6">
+      <strong>How the auto-increase works:</strong> Enter today&apos;s <em>Current count</em> and the <em>average added each month</em>. From the <em>Counting since</em> month onward, the website adds that monthly amount automatically over time, so the figures keep climbing without you editing anything. Leave &quot;Avg added / month&quot; at 0 to keep a number fixed.
+    </div>
+    <div class="grid lg:grid-cols-2 gap-4">
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Clothes Recycled</div>
+          <div class="text-xs text-forest-400">e.g. 3,00,000+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="clothes.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="clothes.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="clothes.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Slum Sales</div>
+          <div class="text-xs text-forest-400">e.g. 500+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="sales.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="sales.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="sales.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Volunteers</div>
+          <div class="text-xs text-forest-400">e.g. 2,500+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="volunteers.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="volunteers.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="volunteers.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Medical Beneficiaries</div>
+          <div class="text-xs text-forest-400">e.g. 1,000+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="medical.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="medical.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="medical.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Students Supported</div>
+          <div class="text-xs text-forest-400">e.g. 25+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="students.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="students.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="students.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Drop Locations</div>
+          <div class="text-xs text-forest-400">e.g. 20+</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="drop_locations.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="drop_locations.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="drop_locations.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 border border-forest-100">
+        <div class="flex items-center justify-between mb-3">
+          <div class="font-semibold text-forest-800 text-sm">Cities Active</div>
+          <div class="text-xs text-forest-400">e.g. 2</div>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Current count</label>
+            <input type="text" inputmode="numeric" data-stat-field="cities.base" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Avg added / month</label>
+            <input type="text" inputmode="numeric" data-stat-field="cities.per_month" placeholder="0" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-forest-500 mb-1">Counting since</label>
+            <input type="month" data-stat-field="cities.as_of" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-cream"/>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- ═══ INQUIRY (submissions + settings) ═══ -->
@@ -1299,7 +2908,8 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
         return {
           value: c.querySelector('[data-value]').value.trim(),
           label: c.querySelector('[data-label]').value.trim(),
-          sub:   c.querySelector('[data-sub]').value.trim()
+          sub:   c.querySelector('[data-sub]').value.trim(),
+          show:  !!(c.querySelector('[data-show]') && c.querySelector('[data-show]').checked)
         };
       }).filter(function (s) { return s.label || s.value; });
       return { items: sts };
@@ -1440,7 +3050,7 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
     if (section === 'stats') {
       const out = {};
       STAT_KEYS.forEach(k => { out[k] = { base: 0, per_month: 0, as_of: '2026-07', suffix: STAT_SUFFIX[k] }; });
-      document.querySelectorAll('#tab-stats [data-stat-field]').forEach(el => {
+      document.querySelectorAll('#tab-impact_stats [data-stat-field]').forEach(el => {
         const parts = el.getAttribute('data-stat-field').split('.');
         const k = parts[0], sub = parts[1];
         if (!out[k]) return;
@@ -1572,6 +3182,41 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
     }
   }
 
+  // Impact Numbers page publishes both the impact_stats cards and the home stats counters.
+  async function saveImpactAll(btn) {
+    const orig = btn.textContent;
+    const passcode = getPasscode();
+    if (!passcode) return;
+    btn.disabled = true;
+    try {
+      for (const section of ['impact_stats', 'stats']) {
+        btn.textContent = 'Publishing...';
+        let data = collectSection(section);
+        data = await uploadEmbeddedImages(data, passcode, section);
+        const res = await fetch(SB_URL + '/rest/v1/rpc/recycle_save_content', {
+          method: 'POST', headers: SB_HEADERS,
+          body: JSON.stringify({ p_section: section, p_data: data, p_passcode: passcode })
+        });
+        if (!res.ok) {
+          const err = await res.json().catch(() => ({}));
+          if ((err.message || '').indexOf('Invalid passcode') !== -1) {
+            sessionStorage.removeItem('ir_pass');
+            alert('Wrong passcode. Click Save again and re-enter it.');
+          } else {
+            alert('Could not publish: ' + (err.message || ('HTTP ' + res.status)));
+          }
+          btn.textContent = orig; btn.disabled = false; return;
+        }
+      }
+      btn.textContent = 'Published - LIVE';
+      btn.classList.add('bg-forest-800');
+      setTimeout(() => { btn.textContent = orig; btn.disabled = false; btn.classList.remove('bg-forest-800'); }, 2500);
+    } catch (e) {
+      alert('Changes NOT published: ' + e.message);
+      btn.textContent = orig; btn.disabled = false;
+    }
+  }
+
   async function loadContent() {
     try {
       const res = await fetch(SB_URL + '/rest/v1/recycle_site_content?select=section,data', { headers: SB_HEADERS });
@@ -1591,7 +3236,7 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
         if (Array.isArray(cms.locations.vad) && cms.locations.vad.length) renderLocations(cms.locations.vad, 'vad-locations');
       }
       if (cms.stats) {
-        document.querySelectorAll('#tab-stats [data-stat-field]').forEach(el => {
+        document.querySelectorAll('#tab-impact_stats [data-stat-field]').forEach(el => {
           const parts = el.getAttribute('data-stat-field').split('.');
           const cfg = cms.stats[parts[0]];
           if (!cfg || cfg[parts[1]] === undefined || cfg[parts[1]] === null) return;
@@ -1666,7 +3311,7 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
   // Tab switching
   /* ── Grouped navigation: sidebar groups + sub-tabs on top ── */
   const GROUPS = {
-    about:    { tabs: [['home','Home / Hero'],['about','About Story'],['team','Meet the Team'],['stats','Impact Stats (Home)']] },
+    about:    { tabs: [['home','Home / Hero'],['about','About Story'],['team','Meet the Team']] },
     model:    { tabs: [['model','Our Model'],['model_extra','Featured Models']] },
     impact:   { tabs: [['impact_stats','Impact Numbers'],['causes','Community Impact']] },
     voices:   { tabs: [['testimonials','Community Voices'],['impact_voices','What People Say']] },
@@ -2127,6 +3772,7 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
       + '<input type="text" data-label value="' + attrEsc(s.label) + '" placeholder="e.g. Employment Provided" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white mb-2"/>'
       + '<label class="block text-[10px] font-semibold text-forest-500 mb-1">Small note (optional)</label>'
       + '<input type="text" data-sub value="' + attrEsc(s.sub) + '" placeholder="e.g. Across two cities" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white"/>'
+      + '<label class="flex items-center gap-2 mt-2 text-xs font-medium text-forest-600 cursor-pointer"><input type="checkbox" data-show ' + (s.show === false ? '' : 'checked') + ' class="w-4 h-4 accent-[#256b49] cursor-pointer"/>Show on Our Impact page</label>'
       + '</div>';
   }
   function renderStats(arr) {

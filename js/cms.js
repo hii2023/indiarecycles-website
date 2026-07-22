@@ -220,7 +220,7 @@
       var impStatsEl = document.getElementById('impact-stats-list');
       if (impStatsEl) {
         var impStats = ((content.impact_stats && content.impact_stats.items) || []).filter(function (s) {
-          return s && String(s.label || '').trim() && String(s.value == null ? '' : s.value).trim();
+          return s && s.show !== false && String(s.label || '').trim() && String(s.value == null ? '' : s.value).trim();
         });
         if (impStats.length) {
           impStatsEl.innerHTML = impStats.map(function (s) {
