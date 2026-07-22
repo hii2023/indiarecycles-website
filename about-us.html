@@ -102,6 +102,7 @@
     .nav-dd-card { background: #fff; border-radius: 14px; border: 1px solid rgba(0,0,0,0.06); box-shadow: 0 16px 40px rgba(0,0,0,0.14); padding: 8px; min-width: 210px; }
     .nav-dd-item { display: block; padding: 10px 14px; border-radius: 9px; color: #1a1a1a; font-size: 14px; font-weight: 500; text-decoration: none; white-space: nowrap; transition: background .15s, color .15s; }
     .nav-dd-item:hover { background: #f6f7f6; color: var(--brand-green); }
+    @media (min-width:1024px){ .ir-navrow{ justify-content:center; gap:14px; } .ir-navcenter{ flex:0 0 auto !important; } }
   </style>
   <link rel="stylesheet" href="css/transitions.css?v=1"/>
   <link rel="stylesheet" href="css/layout.css?v=14"/>
@@ -111,11 +112,11 @@
 
 <!-- NAVBAR -->
 <nav style="position:fixed;top:0;left:0;right:0;z-index:50;background:#ffffff;border-bottom:1px solid rgba(0,0,0,0.08);box-shadow:0 1px 3px rgba(0,0,0,0.05);" role="navigation" aria-label="Main navigation">
-  <div style="width:100%;max-width:1152px;margin:0 auto;padding:0 32px;height:94px;display:flex;align-items:center;gap:16px;box-sizing:border-box;">
+  <div class="ir-navrow" style="width:100%;max-width:1152px;margin:0 auto;padding:0 24px;height:94px;display:flex;align-items:center;gap:12px;box-sizing:border-box;">
     <a href="index.html" style="flex-shrink:0;text-decoration:none;" aria-label="India Recycles home">
       <img src="images/logo.png" alt="India Recycles logo" style="height:72px;width:auto;display:block;" loading="eager"/>
     </a>
-    <div style="flex:1;display:flex;justify-content:center;align-items:center;">
+    <div class="ir-navcenter" style="flex:1;display:flex;justify-content:center;align-items:center;">
       <div class="hidden lg:flex" style="align-items:center;gap:0px;background:#1c5439;border-radius:9999px;padding:6px 8px;">
         <div class="nav-dd"><a href="about-us.html" style="display:inline-flex;align-items:center;padding:8px 9px;border-radius:9999px;color:#fff;font-size:15px;font-weight:500;cursor:pointer;text-decoration:none;background:rgba(255,255,255,0.22);">About Us<svg style="width:11px;height:11px;margin-left:3px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a><div class="nav-dd-panel"><div class="nav-dd-card"><a href="about-us.html" class="nav-dd-item">About Us</a><a href="meet-the-team.html" class="nav-dd-item">Meet the Team</a></div></div></div>
         <div class="nav-dd"><a href="our-model.html" style="display:inline-flex;align-items:center;padding:8px 9px;border-radius:9999px;color:rgba(255,255,255,0.85);font-size:15px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='transparent'">Our Model<svg style="width:11px;height:11px;margin-left:3px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a><div class="nav-dd-panel"><div class="nav-dd-card"><a href="community-sale.html" class="nav-dd-item">Community Sale</a><a href="thrift-sale.html" class="nav-dd-item">Thrift Sale</a><a href="revibe.html" class="nav-dd-item">Re-Vibe</a><a href="zero-waste-promise.html" class="nav-dd-item">Zero Waste</a></div></div></div>
