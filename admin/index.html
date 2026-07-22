@@ -36,6 +36,9 @@
     .tab-btn.active { background: #1a6b3a; color: white; border-color: #1a6b3a; }
     .group-btn { transition: all .15s ease; }
     .group-btn.active { background: #1a6b3a; color: white; }
+    /* The first photo tile in a row is the cover shown on the website. */
+    [data-photos-wrap] [data-photo-tile]:first-child::after { content: 'Cover'; position: absolute; left: 0; right: 0; bottom: 0; background: rgba(37,107,73,0.92); color: #fff; font-size: 8px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; text-align: center; padding: 1px 0; pointer-events: none; }
+    [data-photos-wrap] [data-photo-tile]:first-child .ir-cover-btn { display: none; }
     .tab-content { display: none; }
     .tab-content.active { display: block; }
     input, textarea, select { transition: border-color .15s; }
@@ -1794,10 +1797,17 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
   // thumbnail carrying its URL in data-url. First tile = cover on the site.
   function photoPreviewSrc(u) { return u && u.indexOf('images/') === 0 ? '../' + u : u; }
   function photoTile(url) {
-    return '<div class="relative w-16 h-16 rounded-lg overflow-hidden border border-forest-200 bg-white shrink-0" data-photo-tile data-url="' + attrEsc(url) + '">'
+    return '<div class="ir-photo-tile relative w-16 h-16 rounded-lg overflow-hidden border border-forest-200 bg-white shrink-0" data-photo-tile data-url="' + attrEsc(url) + '">'
       + '<img src="' + attrEsc(photoPreviewSrc(url)) + '" class="w-full h-full object-cover"/>'
+      + '<button type="button" onclick="makeCover(this)" class="ir-cover-btn absolute bottom-0.5 left-0.5 w-5 h-5 bg-white/90 hover:bg-forest-100 text-forest-600 rounded-md flex items-center justify-center cursor-pointer" aria-label="Make this the cover" title="Make this the cover photo"><svg class="w-3 h-3" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg></button>'
       + '<button type="button" onclick="removePhotoTile(this)" class="absolute top-0.5 right-0.5 w-5 h-5 bg-white/90 hover:bg-red-100 text-red-500 rounded-md flex items-center justify-center cursor-pointer" aria-label="Remove photo"><svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>'
       + '</div>';
+  }
+  // Move a photo to the front of its row - the first photo is the cover shown on the site.
+  function makeCover(btn) {
+    var tile = btn.closest('[data-photo-tile]');
+    var wrap = tile.closest('[data-photos-wrap]');
+    if (wrap && wrap.firstChild !== tile) wrap.insertBefore(tile, wrap.firstChild);
   }
   // urls: array of existing photo URLs. hint: small caption under the row.
   function photosUploaderHTML(urls, hint) {
@@ -1810,7 +1820,7 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
       +     '<input type="file" accept="image/*" multiple class="hidden" onchange="onMultiPhotoPick(this)"/>'
       +   '</label>'
       + '</div>'
-      + '<div class="text-[10px] text-forest-400 leading-tight mt-1.5">' + (hint || 'JPG &middot; first photo is the cover &middot; add as many as you like') + '</div>'
+      + '<div class="text-[10px] text-forest-400 leading-tight mt-1.5">' + (hint || 'The photo marked <strong>Cover</strong> is the one shown on the website card. Tap the &#9733; star on any other photo to make it the cover. The rest open in the gallery.') + '</div>'
       + '</div>';
   }
   function removePhotoTile(btn) { btn.closest('[data-photo-tile]').remove(); }
