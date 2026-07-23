@@ -42,6 +42,8 @@
     .ir-photo-tile:hover .ir-cover-hint { opacity: 1; }
     [data-photos-wrap] [data-photo-tile]:first-child .ir-cover-hint { display: none; }
     [data-photos-wrap] [data-photo-tile]:first-child img { cursor: default; }
+    .ir-crop-dot { display: none; }
+    .ir-photo-tile[data-crop]:not([data-crop=""]) .ir-crop-dot { display: block; }
     .tab-content { display: none; }
     .tab-content.active { display: block; }
     input, textarea, select { transition: border-color .15s; }
@@ -1204,7 +1206,7 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
           description: c.querySelector('[data-desc]').value.trim(),
           video:       c.querySelector('[data-video]').value.trim(),
           photos:      collectPhotos(c),
-          photo_pos:   collectPhotoPos(c),
+          photo_crop:   collectPhotoCrop(c),
           host_name:   c.querySelector('[data-host-name]').value.trim(),
           guest_name:  c.querySelector('[data-guest-name]').value.trim(),
           guest_url:   c.querySelector('[data-guest-url]').value.trim()
@@ -1302,7 +1304,7 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
           title:       c.querySelector('[data-title]').value.trim(),
           description: c.querySelector('[data-desc]').value.trim(),
           photos:      collectPhotos(c),
-          photo_pos:   collectPhotoPos(c),
+          photo_crop:   collectPhotoCrop(c),
           logo:        c.querySelector('[data-logo]').value.trim(),
           link:        c.querySelector('[data-link]').value.trim()
         };
@@ -1351,7 +1353,7 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
           description:   c.querySelector('[data-desc]').value.trim(),
           status:        c.querySelector('[data-status]').value,
           photos:        collectPhotos(c),
-          photo_pos:     collectPhotoPos(c)
+          photo_crop:     collectPhotoCrop(c)
         };
       }).filter(function (e) { return e.title || e.photos.length; });
       return { items: evs };
@@ -1802,10 +1804,11 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
   // Each card holds a [data-photos-wrap]; every photo is a [data-photo-tile]
   // thumbnail carrying its URL in data-url. First tile = cover on the site.
   function photoPreviewSrc(u) { return u && u.indexOf('images/') === 0 ? '../' + u : u; }
-  function photoTile(url, pos) {
-    pos = pos || '50% 50%';
-    return '<div class="ir-photo-tile relative w-16 h-16 rounded-lg overflow-hidden border border-forest-200 bg-white shrink-0" data-photo-tile data-url="' + attrEsc(url) + '" data-pos="' + attrEsc(pos) + '">'
-      + '<img src="' + attrEsc(photoPreviewSrc(url)) + '" onclick="openPhotoFocal(this)" class="w-full h-full object-cover cursor-pointer" style="object-position:' + attrEsc(pos) + '" title="Click to choose which part of this photo shows on the cover"/>'
+  function photoTile(url, crop) {
+    crop = crop || '';
+    return '<div class="ir-photo-tile relative w-16 h-16 rounded-lg overflow-hidden border border-forest-200 bg-white shrink-0" data-photo-tile data-url="' + attrEsc(url) + '" data-crop="' + attrEsc(crop) + '">'
+      + '<img src="' + attrEsc(photoPreviewSrc(url)) + '" onclick="openPhotoCrop(this)" class="w-full h-full object-cover cursor-pointer" title="Click to crop which part shows on the cover"/>'
+      + '<span class="ir-crop-dot absolute top-0.5 left-0.5 w-2.5 h-2.5 rounded-full bg-forest-600 border border-white" title="This photo is cropped for its cover"></span>'
       + '<button type="button" onclick="makeCover(this)" class="ir-cover-btn absolute bottom-0.5 left-0.5 w-5 h-5 bg-white/90 hover:bg-forest-100 text-forest-600 rounded-md flex items-center justify-center cursor-pointer" aria-label="Make this the cover" title="Make this the cover photo"><svg class="w-3 h-3" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg></button>'
       + '<button type="button" onclick="removePhotoTile(this)" class="absolute top-0.5 right-0.5 w-5 h-5 bg-white/90 hover:bg-red-100 text-red-500 rounded-md flex items-center justify-center cursor-pointer" aria-label="Remove photo"><svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>'
       + '</div>';
@@ -1818,84 +1821,113 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
   }
   // Focal picker for a single card photo: drag to choose which part of the image stays
   // visible when it is shown as a cropped cover on the website. Saved on the tile's data-pos.
-  function openPhotoFocal(imgEl) {
+  // Crop-box picker: drag a 16:10 box over the photo and zoom it to pick the exact
+  // rectangle used as the cover. Stored on the tile's data-crop as "fx fy fw fh"
+  // (fractions of the image); the website scales that rectangle to fill the cover.
+  function openPhotoCrop(imgEl) {
     var tile = imgEl.closest('[data-photo-tile]');
     if (!tile) return;
     var src = imgEl.getAttribute('src');
-    var cur = tile.getAttribute('data-pos') || '50% 50%';
-    var mm = cur.match(/([\d.]+)%\s+([\d.]+)%/);
-    var px = mm ? parseFloat(mm[1]) : 50, py = mm ? parseFloat(mm[2]) : 50;
+    var AR = 16 / 10;
+    var cur = (tile.getAttribute('data-crop') || '').trim().split(/\s+/).map(parseFloat);
+    var hasCur = cur.length === 4 && cur.every(function (x) { return !isNaN(x); });
     var back = document.createElement('div');
     back.className = 'fixed inset-0 z-[100] flex items-center justify-center p-4';
     back.style.background = 'rgba(15,30,20,0.6)';
     back.innerHTML =
-      '<div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg p-5" role="dialog" aria-modal="true" aria-label="Choose the visible part of the photo">' +
+      '<div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg p-5" role="dialog" aria-modal="true" aria-label="Crop the cover">' +
         '<div class="flex items-center justify-between mb-3">' +
-          '<h3 class="font-serif text-lg text-forest-800">Choose what shows on the cover</h3>' +
-          '<button data-fp-x class="w-8 h-8 rounded-lg bg-forest-50 hover:bg-forest-100 text-forest-600 flex items-center justify-center cursor-pointer" aria-label="Close">' + xIcon + '</button>' +
+          '<h3 class="font-serif text-lg text-forest-800">Crop the cover</h3>' +
+          '<button data-cp-x class="w-8 h-8 rounded-lg bg-forest-50 hover:bg-forest-100 text-forest-600 flex items-center justify-center cursor-pointer" aria-label="Close">' + xIcon + '</button>' +
         '</div>' +
-        '<p class="text-forest-500 text-[13px] mb-3">Drag on the photo to pick the part that stays in view. The frame is roughly how the cover looks on the website.</p>' +
-        '<div data-fp-frame class="relative w-full rounded-xl overflow-hidden border border-forest-200 bg-forest-50 cursor-move select-none" style="padding-bottom:62.5%">' +
-          '<img data-fp-img src="' + attrEsc(src) + '" alt="" class="absolute inset-0 w-full h-full object-cover" style="object-position:' + px + '% ' + py + '%"/>' +
-          '<div data-fp-dot class="absolute w-5 h-5 -ml-2.5 -mt-2.5 rounded-full border-2 border-white shadow pointer-events-none" style="left:' + px + '%;top:' + py + '%;background:rgba(37,107,73,0.85)"></div>' +
+        '<p class="text-forest-500 text-[13px] mb-3">Drag the box to move it and use the slider to zoom. Whatever is inside the box is exactly what shows on the website card.</p>' +
+        '<div class="w-full flex justify-center bg-forest-50 rounded-xl p-2">' +
+          '<div data-cp-stage class="relative inline-block max-w-full select-none" style="line-height:0;touch-action:none">' +
+            '<img data-cp-img src="' + attrEsc(src) + '" alt="" class="block max-w-full rounded-lg" style="max-height:52vh;width:auto"/>' +
+            '<div data-cp-box class="absolute top-0 left-0 border-2 border-white cursor-move" style="box-shadow:0 0 0 9999px rgba(0,0,0,0.45);border-radius:4px"></div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="flex items-center gap-3 mt-4">' +
+          '<span class="text-[12px] font-semibold text-forest-500">Zoom</span>' +
+          '<input data-cp-zoom type="range" min="0.3" max="1" step="0.01" value="1" class="flex-1 accent-[#256b49] cursor-pointer"/>' +
         '</div>' +
         '<div class="flex items-center justify-between mt-4">' +
-          '<button data-fp-reset class="text-[13px] text-forest-500 hover:text-forest-700 font-semibold cursor-pointer">Reset to centre</button>' +
+          '<button data-cp-reset class="text-[13px] text-forest-500 hover:text-forest-700 font-semibold cursor-pointer">Reset</button>' +
           '<div class="flex items-center gap-2">' +
-            '<button data-fp-cancel class="px-4 py-2 rounded-xl text-sm font-semibold text-forest-600 bg-forest-50 hover:bg-forest-100 cursor-pointer">Cancel</button>' +
-            '<button data-fp-save class="px-4 py-2 rounded-xl text-sm font-semibold text-white bg-forest-600 hover:bg-forest-700 cursor-pointer shadow">Use this framing</button>' +
+            '<button data-cp-cancel class="px-4 py-2 rounded-xl text-sm font-semibold text-forest-600 bg-forest-50 hover:bg-forest-100 cursor-pointer">Cancel</button>' +
+            '<button data-cp-save class="px-4 py-2 rounded-xl text-sm font-semibold text-white bg-forest-600 hover:bg-forest-700 cursor-pointer shadow">Use this crop</button>' +
           '</div>' +
         '</div>' +
       '</div>';
     document.body.appendChild(back);
-    var frame = back.querySelector('[data-fp-frame]');
-    var fimg = back.querySelector('[data-fp-img]');
-    var dot = back.querySelector('[data-fp-dot]');
-    function setFromEvent(e) {
-      var r = frame.getBoundingClientRect();
-      var pt = e.touches && e.touches[0] ? e.touches[0] : e;
-      px = Math.max(0, Math.min(100, Math.round((pt.clientX - r.left) / r.width * 100)));
-      py = Math.max(0, Math.min(100, Math.round((pt.clientY - r.top) / r.height * 100)));
-      fimg.style.objectPosition = px + '% ' + py + '%';
-      dot.style.left = px + '%'; dot.style.top = py + '%';
+    var img = back.querySelector('[data-cp-img]');
+    var box = back.querySelector('[data-cp-box]');
+    var zoom = back.querySelector('[data-cp-zoom]');
+    var IW = 0, IH = 0, bw = 0, bh = 0, bx = 0, by = 0, maxW = 0;
+    function clamp() {
+      bw = Math.max(24, Math.min(bw, IW)); bh = bw / AR;
+      if (bh > IH) { bh = IH; bw = bh * AR; }
+      bx = Math.max(0, Math.min(bx, IW - bw));
+      by = Math.max(0, Math.min(by, IH - bh));
     }
-    var dragging = false;
-    var onMove = function (e) { if (dragging) setFromEvent(e); };
-    var onUp = function () { dragging = false; };
-    frame.addEventListener('mousedown', function (e) { dragging = true; setFromEvent(e); e.preventDefault(); });
-    window.addEventListener('mousemove', onMove);
-    window.addEventListener('mouseup', onUp);
-    frame.addEventListener('touchstart', function (e) { dragging = true; setFromEvent(e); }, { passive: true });
-    frame.addEventListener('touchmove', function (e) { if (dragging) setFromEvent(e); }, { passive: true });
-    frame.addEventListener('touchend', function () { dragging = false; });
-    function close() { window.removeEventListener('mousemove', onMove); window.removeEventListener('mouseup', onUp); back.remove(); }
-    back.querySelector('[data-fp-x]').addEventListener('click', close);
-    back.querySelector('[data-fp-cancel]').addEventListener('click', close);
-    back.addEventListener('mousedown', function (e) { if (e.target === back) close(); });
-    back.querySelector('[data-fp-reset]').addEventListener('click', function () {
-      px = 50; py = 50; fimg.style.objectPosition = '50% 50%'; dot.style.left = '50%'; dot.style.top = '50%';
+    function draw() { box.style.width = bw + 'px'; box.style.height = bh + 'px'; box.style.left = bx + 'px'; box.style.top = by + 'px'; }
+    function init() {
+      var r = img.getBoundingClientRect(); IW = r.width; IH = r.height;
+      maxW = Math.min(IW, IH * AR);
+      if (hasCur) { bw = cur[2] * IW; bh = cur[3] * IH; bx = cur[0] * IW; by = cur[1] * IH; }
+      else { bw = maxW; bh = bw / AR; bx = (IW - bw) / 2; by = (IH - bh) / 2; }
+      clamp(); draw();
+      zoom.value = Math.max(0.3, Math.min(1, maxW ? bw / maxW : 1));
+    }
+    if (img.complete && img.naturalWidth) init(); else img.addEventListener('load', init);
+    zoom.addEventListener('input', function () {
+      var cx = bx + bw / 2, cy = by + bh / 2;
+      bw = maxW * parseFloat(zoom.value); bh = bw / AR;
+      bx = cx - bw / 2; by = cy - bh / 2; clamp(); draw();
     });
-    back.querySelector('[data-fp-save]').addEventListener('click', function () {
-      var val = px + '% ' + py + '%';
-      tile.setAttribute('data-pos', val);
-      imgEl.style.objectPosition = val;
+    var drag = null;
+    function startDrag(cxp, cyp) { drag = { x: cxp, y: cyp, bx: bx, by: by }; }
+    function moveDrag(cxp, cyp) { if (!drag) return; bx = drag.bx + (cxp - drag.x); by = drag.by + (cyp - drag.y); clamp(); draw(); }
+    box.addEventListener('mousedown', function (e) { startDrag(e.clientX, e.clientY); e.preventDefault(); });
+    box.addEventListener('touchstart', function (e) { var t = e.touches[0]; startDrag(t.clientX, t.clientY); }, { passive: true });
+    var mm = function (e) { moveDrag(e.clientX, e.clientY); };
+    var tm = function (e) { if (drag) { var t = e.touches[0]; moveDrag(t.clientX, t.clientY); } };
+    var up = function () { drag = null; };
+    window.addEventListener('mousemove', mm); window.addEventListener('mouseup', up);
+    window.addEventListener('touchmove', tm, { passive: true }); window.addEventListener('touchend', up);
+    function close() {
+      window.removeEventListener('mousemove', mm); window.removeEventListener('mouseup', up);
+      window.removeEventListener('touchmove', tm); window.removeEventListener('touchend', up);
+      back.remove();
+    }
+    back.querySelector('[data-cp-x]').addEventListener('click', close);
+    back.querySelector('[data-cp-cancel]').addEventListener('click', close);
+    back.addEventListener('mousedown', function (e) { if (e.target === back) close(); });
+    back.querySelector('[data-cp-reset]').addEventListener('click', function () {
+      bw = maxW; bh = bw / AR; bx = (IW - bw) / 2; by = (IH - bh) / 2; clamp(); draw(); zoom.value = 1;
+    });
+    back.querySelector('[data-cp-save]').addEventListener('click', function () {
+      var fx = bx / IW, fy = by / IH, fw = bw / IW, fh = bh / IH;
+      var isFull = fw >= 0.999 && fh >= 0.999;
+      if (isFull) tile.setAttribute('data-crop', '');
+      else tile.setAttribute('data-crop', fx.toFixed(4) + ' ' + fy.toFixed(4) + ' ' + fw.toFixed(4) + ' ' + fh.toFixed(4));
       close();
     });
   }
-  // {photoURL: "x% y%"} for tiles the user re-framed (centre is the default, omitted).
-  function collectPhotoPos(card) {
+  // {photoURL: "fx fy fw fh"} for tiles the user cropped (full-frame is default, omitted).
+  function collectPhotoCrop(card) {
     var out = {};
     Array.from(card.querySelectorAll('[data-photos-wrap] [data-photo-tile]')).forEach(function (t) {
       var u = (t.getAttribute('data-url') || '').trim();
-      var p = (t.getAttribute('data-pos') || '').trim();
-      if (u && p && p !== '50% 50%') out[u] = p;
+      var c = (t.getAttribute('data-crop') || '').trim();
+      if (u && c) out[u] = c;
     });
     return out;
   }
   // urls: array of existing photo URLs. hint: small caption under the row.
-  function photosUploaderHTML(urls, hint, posMap) {
-    posMap = posMap || {};
-    var tiles = (urls || []).filter(Boolean).map(function (u) { return photoTile(u, posMap[u]); }).join('');
+  function photosUploaderHTML(urls, hint, cropMap) {
+    cropMap = cropMap || {};
+    var tiles = (urls || []).filter(Boolean).map(function (u) { return photoTile(u, cropMap[u]); }).join('');
     return '<div class="rounded-xl border border-forest-200 bg-white p-2.5 mb-2">'
       + '<div class="flex flex-wrap gap-2 items-center" data-photos-wrap>' + tiles
       +   '<label class="w-16 h-16 rounded-lg border-2 border-dashed border-forest-300 text-forest-500 hover:border-forest-500 hover:text-forest-700 flex flex-col items-center justify-center cursor-pointer shrink-0" title="Add photos">'
@@ -2043,7 +2075,7 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
       +   '</div>'
       + '</div>'
       + '<label class="block text-[10px] font-semibold text-forest-500 mb-1">Photos (optional)</label>'
-      + photosUploaderHTML(itemPhotos(t), 'Click a photo to set which part shows on the cover &middot; &#9733; makes it the cover &middot; blank uses the YouTube thumbnail', t.photo_pos)
+      + photosUploaderHTML(itemPhotos(t), 'Click a photo to set which part shows on the cover &middot; &#9733; makes it the cover &middot; blank uses the YouTube thumbnail', t.photo_crop)
       + '<label class="block text-[10px] font-semibold text-forest-500 mb-1">Date (used to order talks, newest first)</label>'
       + '<input type="date" data-date value="' + attrEsc(t.date) + '" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white mb-2"/>'
       + '<input type="text" data-title value="' + attrEsc(t.title) + '" placeholder="Talk title" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm font-semibold text-forest-800 bg-white mb-2"/>'
@@ -2340,7 +2372,7 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
       +   '</div>'
       + '</div>'
       + '<label class="block text-[10px] font-semibold text-forest-500 mb-1">Photos</label>'
-      + photosUploaderHTML(itemPhotos(co), 'Click a photo to set which part shows on the cover &middot; &#9733; makes it the cover &middot; add several photos', co.photo_pos)
+      + photosUploaderHTML(itemPhotos(co), 'Click a photo to set which part shows on the cover &middot; &#9733; makes it the cover &middot; add several photos', co.photo_crop)
       + '<div class="mb-3">'
       +   '<label class="block text-[10px] font-semibold text-forest-500 mb-1">Partner logo (optional)</label>'
       +   '<div class="flex items-center gap-3">'
@@ -2605,7 +2637,7 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
       +     '<button onclick="removeEvent(this)" class="w-7 h-7 bg-red-50 hover:bg-red-100 text-red-400 rounded-lg flex items-center justify-center cursor-pointer" aria-label="Remove event">' + xIcon + '</button>'
       +   '</div>'
       + '</div>'
-      + photosUploaderHTML(itemPhotos(ev), 'Click a photo to set which part shows on the cover &middot; &#9733; makes it the cover &middot; add several photos', ev.photo_pos)
+      + photosUploaderHTML(itemPhotos(ev), 'Click a photo to set which part shows on the cover &middot; &#9733; makes it the cover &middot; add several photos', ev.photo_crop)
       + '<input type="text" data-title value="' + attrEsc(ev.title) + '" placeholder="Event title" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm font-semibold text-forest-800 bg-white mb-2"/>'
       + '<div class="grid grid-cols-2 gap-2 mb-2">'
       +   '<label class="block text-[10px] font-semibold text-forest-500 mb-1">Date (used to order events, newest first)</label>'

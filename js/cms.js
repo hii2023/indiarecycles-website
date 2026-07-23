@@ -245,17 +245,29 @@
       }
       /* A clickable cover that opens the whole set in the gallery.js lightbox,
          with a small "N photos" badge when there is more than one. */
-      function photoCover(photos, alt, wrapClass, posMap) {
+      // A crop rectangle "fx fy fw fh" (fractions of the image) scaled to fill the
+      // cover box - the img is absolutely positioned so only that rectangle shows.
+      function cropStyle(s) {
+        var p = String(s || '').trim().split(/\s+/).map(parseFloat);
+        if (p.length < 4 || p.some(function (x) { return isNaN(x) || x < 0; })) return '';
+        var fx = p[0], fy = p[1], fw = p[2], fh = p[3];
+        if (fw <= 0 || fh <= 0 || fw > 1 || fh > 1) return '';
+        return 'position:absolute;left:' + (-fx / fw * 100) + '%;top:' + (-fy / fh * 100) + '%;width:' + (100 / fw) + '%;height:' + (100 / fh) + '%;max-width:none;object-fit:cover';
+      }
+      function photoCover(photos, alt, wrapClass, cropMap) {
         if (!photos.length) return '';
         var group = esc(JSON.stringify(photos));
-        var coverPos = (posMap && posMap[photos[0]]) ? ' style="object-position:' + esc(posMap[photos[0]]) + '"' : '';
+        var cs = (cropMap && cropMap[photos[0]]) ? cropStyle(cropMap[photos[0]]) : '';
         var badge = photos.length > 1
           ? '<span class="absolute bottom-2 right-2 inline-flex items-center gap-1 bg-black/60 text-white text-[11px] font-semibold px-2 py-0.5 rounded-full backdrop-blur-sm pointer-events-none">' +
               '<svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>' + photos.length +
             '</span>'
           : '';
-        return '<div class="relative ' + wrapClass + ' ir-lb-tile" data-lightbox data-photos="' + group + '" data-alt="' + esc(alt) + '" role="button" tabindex="0" aria-label="View ' + (photos.length > 1 ? photos.length + ' photos' : 'full image') + ': ' + esc(alt) + '">' +
-          '<img src="' + esc(photos[0]) + '" alt="' + esc(alt) + '" class="w-full h-full object-cover"' + coverPos + '/>' + badge +
+        var coverImg = cs
+          ? '<img src="' + esc(photos[0]) + '" alt="' + esc(alt) + '" style="' + cs + '"/>'
+          : '<img src="' + esc(photos[0]) + '" alt="' + esc(alt) + '" class="w-full h-full object-cover"/>';
+        return '<div class="relative overflow-hidden ' + wrapClass + ' ir-lb-tile" data-lightbox data-photos="' + group + '" data-alt="' + esc(alt) + '" role="button" tabindex="0" aria-label="View ' + (photos.length > 1 ? photos.length + ' photos' : 'full image') + ': ' + esc(alt) + '">' +
+          coverImg + badge +
         '</div>';
       }
       /* A row of small thumbnails (used under a talk video); each opens the set at its index. */
@@ -326,7 +338,7 @@
                 '<span class="absolute inset-0 flex items-center justify-center"><span class="w-16 h-16 rounded-full bg-red-600 flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform"><svg class="w-7 h-7 text-white ml-1" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></span></button>';
               strip = photoStrip(photos, t.title); // extra talk photos below the video
             } else {
-              media = photoCover(photos, t.title, 'aspect-video bg-green-50', t.photo_pos);
+              media = photoCover(photos, t.title, 'aspect-video bg-green-50', t.photo_crop);
             }
             var parts = [];
             if (t.host_name) parts.push('<div><span class="text-green-400">Host:</span> <span class="text-green-700 font-semibold">' + esc(t.host_name) + '</span></div>');
@@ -554,8 +566,8 @@
           heEl.innerHTML = ordered.slice(0, 3).map(function (ev) {
             var i = evAll.indexOf(ev);
             var cover = itemPhotos(ev)[0];
-            var cpos = (ev.photo_pos && cover && ev.photo_pos[cover]) ? ' style="object-position:' + esc(ev.photo_pos[cover]) + '"' : '';
-            var photo = cover ? '<div class="aspect-[16/10] bg-green-50 overflow-hidden"><img src="' + esc(cover) + '" alt="' + esc(ev.title) + '" class="w-full h-full object-cover"' + cpos + ' loading="lazy"/></div>' : '';
+            var ecs = (ev.photo_crop && cover && ev.photo_crop[cover]) ? cropStyle(ev.photo_crop[cover]) : '';
+            var photo = cover ? '<div class="relative aspect-[16/10] bg-green-50 overflow-hidden">' + (ecs ? '<img src="' + esc(cover) + '" alt="' + esc(ev.title) + '" style="' + ecs + '" loading="lazy"/>' : '<img src="' + esc(cover) + '" alt="' + esc(ev.title) + '" class="w-full h-full object-cover" loading="lazy"/>') + '</div>' : '';
             var when = [ev.when, ev.time].filter(Boolean).map(esc).join(' &middot; ');
             return '<a href="events.html#event-' + i + '" class="rounded-2xl border border-gray-200 bg-white overflow-hidden flex flex-col shadow-sm hover:border-green-300 transition-colors">' + photo +
               '<div class="p-5 flex-1 flex flex-col">' +
@@ -575,8 +587,8 @@
           document.getElementById('home-collabs-section').style.display = '';
           hcEl.innerHTML = coAll.slice(0, 3).map(function (co) {
             var cover = itemPhotos(co)[0];
-            var cpos = (co.photo_pos && cover && co.photo_pos[cover]) ? ' style="object-position:' + esc(co.photo_pos[cover]) + '"' : '';
-            var photo = cover ? '<div class="aspect-[16/10] bg-green-50 overflow-hidden"><img src="' + esc(cover) + '" alt="' + esc(co.title) + '" class="w-full h-full object-cover"' + cpos + ' loading="lazy"/></div>' : '';
+            var ccs = (co.photo_crop && cover && co.photo_crop[cover]) ? cropStyle(co.photo_crop[cover]) : '';
+            var photo = cover ? '<div class="relative aspect-[16/10] bg-green-50 overflow-hidden">' + (ccs ? '<img src="' + esc(cover) + '" alt="' + esc(co.title) + '" style="' + ccs + '" loading="lazy"/>' : '<img src="' + esc(cover) + '" alt="' + esc(co.title) + '" class="w-full h-full object-cover" loading="lazy"/>') + '</div>' : '';
             var logo = co.logo ? '<div class="h-9 flex items-center mb-2"><img src="' + esc(co.logo) + '" alt="" class="max-h-9 max-w-[55%] object-contain object-left"/></div>' : '';
             return '<a href="collaborations.html" class="rounded-2xl border border-gray-200 bg-white overflow-hidden flex flex-col shadow-sm hover:border-green-300 transition-colors">' + photo +
               '<div class="p-5 flex-1 flex flex-col">' + logo +
@@ -705,7 +717,7 @@
         var PIN = '<svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>';
         var eventCard = function (ev) {
           var idx = evItems.indexOf(ev);
-          var photo = photoCover(itemPhotos(ev), ev.title, 'aspect-[16/10] bg-green-50 overflow-hidden', ev.photo_pos);
+          var photo = photoCover(itemPhotos(ev), ev.title, 'aspect-[16/10] bg-green-50 overflow-hidden', ev.photo_crop);
           var whenBits = [];
           if (ev.when) whenBits.push(esc(ev.when));
           if (ev.time) whenBits.push(esc(ev.time));
@@ -870,7 +882,7 @@
         var collabs = (content.collaborations && content.collaborations.items) || [];
         if (collabs.length) {
           collabEl.innerHTML = collabs.map(function (co) {
-            var photo = photoCover(itemPhotos(co), co.title, 'aspect-[16/10] bg-green-50 overflow-hidden', co.photo_pos);
+            var photo = photoCover(itemPhotos(co), co.title, 'aspect-[16/10] bg-green-50 overflow-hidden', co.photo_crop);
             var logo = co.logo ? '<div class="h-12 flex items-center mb-3"><img src="' + esc(co.logo) + '" alt="' + esc(co.title) + ' logo" class="max-h-12 max-w-[60%] object-contain object-left"/></div>' : '';
             // A partner website link is a real backlink (no rel="nofollow"), so the
             // collaborator gets SEO value from being featured here.
