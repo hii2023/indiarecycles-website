@@ -589,7 +589,7 @@
             var cover = itemPhotos(co)[0];
             var ccs = (co.photo_crop && cover && co.photo_crop[cover]) ? cropStyle(co.photo_crop[cover]) : '';
             var photo = cover ? '<div class="relative aspect-[16/10] bg-green-50 overflow-hidden">' + (ccs ? '<img src="' + esc(cover) + '" alt="' + esc(co.title) + '" style="' + ccs + '" loading="lazy"/>' : '<img src="' + esc(cover) + '" alt="' + esc(co.title) + '" class="w-full h-full object-cover" loading="lazy"/>') + '</div>' : '';
-            var logo = co.logo ? '<div class="h-9 flex items-center mb-2"><img src="' + esc(co.logo) + '" alt="" class="max-h-9 max-w-[55%] object-contain object-left"/></div>' : '';
+            var logo = co.logo ? '<div class="h-9 flex items-center mb-2"><img src="' + esc(co.logo) + '" alt="' + esc(co.title || 'Partner') + ' logo" class="max-h-9 max-w-[55%] object-contain object-left"/></div>' : '';
             return '<a href="collaborations.html" class="rounded-2xl border border-gray-200 bg-white overflow-hidden flex flex-col shadow-sm hover:border-green-300 transition-colors">' + photo +
               '<div class="p-5 flex-1 flex flex-col">' + logo +
                 '<h3 class="font-bold text-gray-900 text-[15px] mb-1.5">' + esc(co.title) + '</h3>' +
@@ -945,7 +945,7 @@
           var media = '';
           if (vid) {
             media = '<button type="button" class="ir-talk-play group relative block w-full aspect-video bg-green-900 cursor-pointer" data-embed="https://www.youtube.com/embed/' + vid + '?autoplay=1&rel=0" aria-label="Play video">' +
-              (poster ? '<img src="' + poster + '" alt="" class="w-full h-full object-cover"/>' : '') +
+              (poster ? '<img src="' + poster + '" alt="' + esc(v.title || 'India Recycles video') + '" class="w-full h-full object-cover"/>' : '') +
               '<span class="absolute inset-0 flex items-center justify-center"><span class="w-16 h-16 rounded-full bg-red-600 flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform"><svg class="w-7 h-7 text-white ml-1" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></span></button>';
           }
           return '<article class="rounded-2xl border border-green-100 overflow-hidden bg-white flex flex-col shadow-sm">' + media +

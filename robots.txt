@@ -1,5 +1,15 @@
+# India Recycles
+#
+# NOTE: this site is served from a GitHub Pages *project* path
+# (https://hii2023.github.io/indiarecycles-website/). Crawlers only read
+# robots.txt from the host root, so this file is NOT fetched today. It is kept
+# correct so it starts working the moment the site moves to its own domain.
+# Until then:
+#   - /admin/ is kept out of search by its own <meta name="robots" content="noindex">
+#   - the sitemap must be submitted by hand in Google Search Console
+
 User-agent: *
 Allow: /
 Disallow: /admin/
 
-Sitemap: https://www.indiarecycles.org/sitemap.xml
+Sitemap: https://hii2023.github.io/indiarecycles-website/sitemap.xml
