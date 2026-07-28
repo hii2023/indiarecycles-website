@@ -1,9 +1,14 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "_comment": "This Vercel project exists ONLY to serve the admin panel at admin1.indiarecycles.org. The public site is served by GitHub Pages at www.indiarecycles.org. Everything here is noindex so this copy of the site can never compete with the real one in search.",
+  "rewrites": [
+    { "source": "/", "destination": "/admin/index.html" }
+  ],
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow" },
         { "key": "X-Frame-Options", "value": "DENY" },
         { "key": "X-Content-Type-Options", "value": "nosniff" },
         { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
