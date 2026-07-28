@@ -1,14 +1,35 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "_comment": "This Vercel project exists ONLY to serve the admin panel at admin1.indiarecycles.org. The public site is served by GitHub Pages at www.indiarecycles.org. Everything here is noindex so this copy of the site can never compete with the real one in search.",
+  "_comment": "One Vercel project serves both hosts. www.indiarecycles.org gets the public site; admin1.indiarecycles.org serves /admin/index.html at its root and is noindex everywhere so it can never compete with the real site in search.",
+
+  "cleanUrls": false,
+  "trailingSlash": false,
+
   "rewrites": [
-    { "source": "/", "destination": "/admin/index.html" }
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "admin1.indiarecycles.org" }],
+      "destination": "/admin/index.html"
+    }
   ],
+
   "headers": [
     {
       "source": "/(.*)",
+      "has": [{ "type": "host", "value": "admin1.indiarecycles.org" }],
       "headers": [
-        { "key": "X-Robots-Tag", "value": "noindex, nofollow" },
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow" }
+      ]
+    },
+    {
+      "source": "/admin/(.*)",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow" }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
         { "key": "X-Frame-Options", "value": "DENY" },
         { "key": "X-Content-Type-Options", "value": "nosniff" },
         { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
