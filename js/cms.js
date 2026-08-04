@@ -1012,6 +1012,88 @@
         el.style.display = pickupOn ? '' : 'none';
       });
 
+      /* Stories / blog: the index (stories.html #cms-stories-list) shows posts added
+         from the admin; the single-post view (story.html) renders one post by ?slug=.
+         Static story-*.html pages are separate and carry their own SEO markup. */
+      (function () {
+        var storyMonths = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+        function fmtDate(v) {
+          if (!v) return '';
+          var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(v);
+          if (!m) return v;
+          return parseInt(m[3], 10) + ' ' + storyMonths[parseInt(m[2], 10) - 1] + ' ' + m[1];
+        }
+        function slugOf(p) {
+          var s = (p.slug || '').trim();
+          if (s) return s;
+          return (p.title || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+        }
+        var allPosts = (content.posts && content.posts.items) || [];
+        var posts = allPosts.filter(function (p) { return p && (p.title || '').trim() && p.published !== false; });
+
+        /* Index cards (newest first) */
+        var listEl = document.getElementById('cms-stories-list');
+        if (listEl && posts.length) {
+          var ordered = sortByDate(posts.slice(), false);
+          listEl.innerHTML = ordered.map(function (p) {
+            var cover = p.cover
+              ? '<div class="aspect-[16/10] overflow-hidden bg-green-50"><img src="' + esc(p.cover) + '" alt="' + esc(p.title) + '" class="w-full h-full object-cover" loading="lazy"/></div>'
+              : '';
+            var cat = p.category ? '<span class="inline-flex items-center self-start gap-1.5 bg-green-50 text-green-700 px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-widest mb-2">' + esc(p.category) + '</span>' : '';
+            var ex = p.excerpt ? '<p class="text-green-600 text-sm mt-2 leading-relaxed flex-1">' + esc(p.excerpt) + '</p>' : '<div class="flex-1"></div>';
+            return '<a href="story.html?slug=' + encodeURIComponent(slugOf(p)) + '" class="card group rounded-2xl border border-green-100 bg-white overflow-hidden flex flex-col shadow-sm">' + cover +
+              '<div class="p-5 flex-1 flex flex-col">' + cat +
+                '<h3 class="text-lg font-semibold text-green-800 leading-snug">' + esc(p.title) + '</h3>' + ex +
+                '<span class="text-green-700 text-sm font-semibold mt-3 inline-flex items-center gap-1">Read more <span aria-hidden="true">&rarr;</span></span>' +
+              '</div></a>';
+          }).join('');
+          var sec = document.getElementById('cms-stories-section');
+          if (sec) sec.style.display = '';
+        }
+
+        /* Single post view (story.html) */
+        var bodyEl = document.getElementById('story-body');
+        if (bodyEl) {
+          var slug = '';
+          try { slug = new URLSearchParams(location.search).get('slug') || ''; } catch (e) {}
+          var post = posts.filter(function (p) { return slugOf(p) === slug; })[0];
+          var art = document.getElementById('story-article');
+          var nf = document.getElementById('story-notfound');
+          if (post) {
+            var titleEl = document.getElementById('story-title');
+            if (titleEl) titleEl.textContent = post.title;
+            document.title = post.title + ' - India Recycles';
+            var mdesc = document.querySelector('meta[name="description"]');
+            if (mdesc && post.excerpt) mdesc.setAttribute('content', post.excerpt);
+            var catEl = document.getElementById('story-category');
+            if (catEl && post.category) { catEl.textContent = post.category; catEl.style.display = ''; }
+            var metaEl = document.getElementById('story-meta');
+            if (metaEl) {
+              var bits = [];
+              if (post.date) bits.push('<time datetime="' + esc(post.date) + '">' + esc(fmtDate(post.date)) + '</time>');
+              if (post.author) bits.push('<span>By ' + esc(post.author) + '</span>');
+              metaEl.innerHTML = bits.join('<span aria-hidden="true">&middot;</span>');
+            }
+            if (post.cover) {
+              var cw = document.getElementById('story-cover-wrap');
+              var ci = document.getElementById('story-cover');
+              if (ci) { ci.src = post.cover; ci.alt = post.title; }
+              if (cw) cw.style.display = '';
+            }
+            bodyEl.innerHTML = String(post.body || '').trim().split(/\n\s*\n+/).map(function (para) {
+              var t = para.trim();
+              if (!t) return '';
+              return '<p class="mb-5">' + esc(t).replace(/\n/g, '<br/>') + '</p>';
+            }).join('');
+            var ctaEl2 = document.getElementById('story-cta');
+            if (ctaEl2) ctaEl2.innerHTML = '<div class="mt-10 rounded-3xl bg-green-50 border border-green-100 p-6 lg:p-8 text-center"><h3 class="text-lg lg:text-xl font-semibold text-green-800 mb-2">Turn your unused clothes into impact</h3><p class="text-green-700 text-sm lg:text-base mb-5 max-w-xl mx-auto">Drop them at a collection point near you, or request a doorstep pickup.</p><div class="flex flex-wrap gap-3 justify-center"><a href="drop-locations.html" class="inline-flex items-center gap-2 bg-green-700 hover:bg-green-800 text-white text-sm font-semibold px-6 py-3 rounded-xl">Find a Drop Location</a><a href="donate.html" class="inline-flex items-center gap-2 border border-green-700 text-green-800 hover:bg-green-50 text-sm font-semibold px-6 py-3 rounded-xl">Donate Now</a></div></div>';
+          } else {
+            if (art) art.style.display = 'none';
+            if (nf) nf.style.display = '';
+          }
+        }
+      })();
+
       content.get = get;
       return content;
   }

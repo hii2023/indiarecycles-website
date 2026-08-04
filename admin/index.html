@@ -1070,6 +1070,29 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
       <strong>Tip:</strong> Paste any YouTube link (watch, youtu.be or embed). The thumbnail loads automatically. The homepage video section stays hidden until you add at least one video. Click <strong>Save Changes</strong> to publish.</div>
   </section>
 
+  <!-- ═══ STORIES / BLOG ═══ -->
+  <section id="tab-stories" class="tab-content" aria-labelledby="st-tab-heading">
+    <div class="flex items-center justify-between mb-8">
+      <div>
+        <h1 id="st-tab-heading" class="font-serif text-2xl text-forest-800">Stories / Blog</h1>
+        <p class="text-forest-500 text-sm mt-1">Write stories, guides and impact updates. Each one gets its own page and appears on the Stories page. Publishes to stories.html.</p>
+      </div>
+      <button onclick="saveSection('stories')" class="save-btn bg-forest-600 hover:bg-forest-700 text-white px-6 py-2.5 rounded-xl font-semibold text-sm cursor-pointer shadow">Save Changes</button>
+    </div>
+    <div class="bg-white rounded-3xl p-6 border border-forest-100">
+      <div class="flex items-center justify-between mb-5">
+        <h2 class="font-semibold text-forest-800 text-sm uppercase tracking-wide">Stories</h2>
+        <button onclick="addStory()" class="bg-forest-50 hover:bg-forest-100 text-forest-700 px-4 py-2 rounded-xl text-sm font-semibold cursor-pointer inline-flex items-center gap-1.5">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Add Story
+        </button>
+      </div>
+      <div id="stories-editor" class="grid gap-4"></div>
+    </div>
+    <div class="mt-6 bg-amber-50 rounded-2xl px-5 py-4 border border-amber-100 text-sm text-amber-800">
+      <strong>Tip:</strong> Leave the web address (slug) blank and it is built from the title automatically. Separate paragraphs with a blank line. Uncheck <strong>Published</strong> to hide a draft. Click <strong>Save Changes</strong> to publish.</div>
+  </section>
+
   <!-- ═══ INQUIRY (submissions + settings) ═══ -->
   <section id="tab-submissions" class="tab-content" aria-labelledby="sub-tab-heading">
     <div class="flex items-center justify-between mb-6">
@@ -1379,6 +1402,25 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
       }).filter(function (c) { return c.title || c.photo; });
       return { items: mds };
     }
+    if (section === 'stories') {
+      var sps = Array.from(document.querySelectorAll('#stories-editor [data-story-card]')).map(function (c) {
+        var title = c.querySelector('[data-title]').value.trim();
+        var slug = c.querySelector('[data-slug]').value.trim();
+        if (!slug && title) slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+        return {
+          title:     title,
+          slug:      slug,
+          date:      c.querySelector('[data-date]').value.trim(),
+          category:  c.querySelector('[data-category]').value.trim(),
+          author:    c.querySelector('[data-author]').value.trim(),
+          excerpt:   c.querySelector('[data-excerpt]').value.trim(),
+          body:      c.querySelector('[data-body]').value,
+          cover:     c.querySelector('[data-cover]').value.trim(),
+          published: !!(c.querySelector('[data-published]') && c.querySelector('[data-published]').checked)
+        };
+      }).filter(function (p) { return p.title; });
+      return { items: sps };
+    }
     if (section === 'videos') {
       var vds = Array.from(document.querySelectorAll('#videos-editor [data-video-card]')).map(function (c) {
         return {
@@ -1638,6 +1680,7 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
       if (cms.causes && Array.isArray(cms.causes.items)) renderCauses(cms.causes.items);
       if (cms.models && Array.isArray(cms.models.items)) renderModelsList(cms.models.items);
       if (cms.videos && Array.isArray(cms.videos.items)) renderVideos(cms.videos.items);
+      if (cms.stories && Array.isArray(cms.stories.items)) renderStoriesList(cms.stories.items);
       if (cms.settings) { document.getElementById('set-pickup').checked = cms.settings.pickup_enabled !== false; if (cms.settings.notify_email) document.getElementById('set-notify').value = cms.settings.notify_email; if (cms.settings.sticky_cta) document.getElementById('set-cta').value = cms.settings.sticky_cta; }
       if (cms.images && typeof cms.images === 'object') {
         imageOverrides = Object.assign({}, cms.images);
@@ -1656,7 +1699,7 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
     impact:   { tabs: [['impact_stats','Impact Numbers'],['causes','Community Impact']] },
     voices:   { tabs: [['testimonials','Community Voices'],['impact_voices','What People Say']] },
     activity: { tabs: [['talks','IR Talks'],['activities','Activities Page'],['events','Events'],['collaborations','Collaboration']] },
-    media:    { tabs: [['photos','Photo Gallery'],['videos','Videos'],['resources','Reports & Media']] },
+    media:    { tabs: [['photos','Photo Gallery'],['videos','Videos'],['stories','Stories / Blog'],['resources','Reports & Media']] },
     partners: { tabs: [['partners','Partners'],['corporate','Corporate / Interns']] },
     join:     { tabs: [['volunteer_ways','Ways to Help'],['locations','Drop Locations']] },
     contact:  { tabs: [['contact-info','Contact & Social']] },
@@ -2729,6 +2772,82 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
         c.getContext('2d').drawImage(img, 0, 0, w, h);
         var url = c.toDataURL('image/jpeg', 0.82);
         card.querySelector('[data-photo]').value = url;
+        card.querySelector('[data-photo-preview]').innerHTML = '<img src="' + url + '" class="w-full h-full object-cover"/>';
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  /* Stories / blog editor */
+  function storyCard(p) {
+    p = p || {};
+    var photo = p.cover || '';
+    var prev = photo && photo.indexOf('images/') === 0 ? '../' + photo : photo;
+    var preview = photo
+      ? '<img src="' + attrEsc(prev) + '" class="w-full h-full object-cover"/>'
+      : '<span class="text-[10px] text-forest-400 text-center px-2">No cover image</span>';
+    var pub = p.published !== false;
+    return '<div class="p-4 bg-cream rounded-2xl border border-forest-100" data-story-card>'
+      + '<div class="flex items-center justify-between mb-3">'
+      +   '<label class="inline-flex items-center gap-1.5 text-xs font-semibold text-forest-600 cursor-pointer"><input type="checkbox" data-published' + (pub ? ' checked' : '') + '/> Published</label>'
+      +   '<div class="flex items-center gap-1">'
+      +     '<button onclick="moveStory(this,-1)" class="w-7 h-7 bg-forest-50 hover:bg-forest-100 text-forest-600 rounded-lg flex items-center justify-center cursor-pointer" aria-label="Move up" title="Move up"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg></button>'
+      +     '<button onclick="moveStory(this,1)" class="w-7 h-7 bg-forest-50 hover:bg-forest-100 text-forest-600 rounded-lg flex items-center justify-center cursor-pointer" aria-label="Move down" title="Move down"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>'
+      +     '<button onclick="removeStory(this)" class="w-7 h-7 bg-red-50 hover:bg-red-100 text-red-400 rounded-lg flex items-center justify-center cursor-pointer" aria-label="Remove story">' + xIcon + '</button>'
+      +   '</div>'
+      + '</div>'
+      + '<div class="aspect-[16/9] w-full rounded-xl overflow-hidden bg-forest-50 border border-forest-200 flex items-center justify-center mb-1.5" data-photo-preview>' + preview + '</div>'
+      + '<label class="block text-center text-[11px] font-semibold text-forest-600 cursor-pointer hover:text-forest-800 mb-3">Upload cover image (optional)<input type="file" accept="image/*" class="hidden" onchange="onStoryPhoto(this)"/></label><div class="text-[10px] text-forest-400 text-center leading-tight mt-0.5">JPG &middot; 1200&times;675 &middot; wide 16:9</div>'
+      + '<input type="hidden" data-cover value="' + attrEsc(photo) + '"/>'
+      + '<input type="text" data-title value="' + attrEsc(p.title) + '" placeholder="Story title" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm font-semibold text-forest-800 bg-white mb-2"/>'
+      + '<div class="grid grid-cols-2 gap-2 mb-2">'
+      +   '<input type="date" data-date value="' + attrEsc(p.date) + '" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white"/>'
+      +   '<input type="text" data-category value="' + attrEsc(p.category) + '" placeholder="Category (e.g. Donor Guide)" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white"/>'
+      + '</div>'
+      + '<div class="grid grid-cols-2 gap-2 mb-2">'
+      +   '<input type="text" data-slug value="' + attrEsc(p.slug) + '" placeholder="Web address (blank = auto)" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white"/>'
+      +   '<input type="text" data-author value="' + attrEsc(p.author) + '" placeholder="Author (optional)" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white"/>'
+      + '</div>'
+      + '<textarea data-excerpt rows="2" placeholder="Short summary shown on the Stories page" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white resize-none mb-2">' + textEsc(p.excerpt) + '</textarea>'
+      + '<textarea data-body rows="8" placeholder="Write the full story here. Separate paragraphs with a blank line." class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white resize-y">' + textEsc(p.body) + '</textarea>'
+      + '</div>';
+  }
+  function renderStoriesList(arr) {
+    document.getElementById('stories-editor').innerHTML = (arr || []).map(storyCard).join('');
+  }
+  function addStory() {
+    var wrap = document.getElementById('stories-editor');
+    var div = document.createElement('div');
+    div.innerHTML = storyCard({});
+    var card = div.firstChild;
+    wrap.appendChild(card);
+    card.querySelector('[data-title]').focus();
+  }
+  function removeStory(btn) { btn.closest('[data-story-card]').remove(); }
+  function moveStory(btn, dir) {
+    var card = btn.closest('[data-story-card]');
+    var wrap = document.getElementById('stories-editor');
+    if (dir < 0 && card.previousElementSibling) wrap.insertBefore(card, card.previousElementSibling);
+    if (dir > 0 && card.nextElementSibling) wrap.insertBefore(card.nextElementSibling, card);
+  }
+  function onStoryPhoto(input) {
+    var file = input.files && input.files[0];
+    if (!file) return;
+    var card = input.closest('[data-story-card]');
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      var img = new Image();
+      img.onload = function () {
+        var max = 1200;
+        var w = img.width, h = img.height;
+        if (w > h && w > max) { h = Math.round(h * max / w); w = max; }
+        else if (h >= w && h > max) { w = Math.round(w * max / h); h = max; }
+        var c = document.createElement('canvas');
+        c.width = w; c.height = h;
+        c.getContext('2d').drawImage(img, 0, 0, w, h);
+        var url = c.toDataURL('image/jpeg', 0.82);
+        card.querySelector('[data-cover]').value = url;
         card.querySelector('[data-photo-preview]').innerHTML = '<img src="' + url + '" class="w-full h-full object-cover"/>';
       };
       img.src = e.target.result;
