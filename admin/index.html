@@ -55,8 +55,11 @@
 <body class="font-sans text-forest-800 antialiased">
 
 <!-- TOP BAR -->
-<header class="bg-forest-800 text-white px-6 py-4 flex items-center justify-between" role="banner">
-  <div class="flex items-center gap-4">
+<header class="bg-forest-800 text-white px-4 sm:px-6 py-4 flex items-center justify-between sticky top-0 z-30" role="banner">
+  <div class="flex items-center gap-3 sm:gap-4">
+    <button id="menu-btn" onclick="toggleSidebar()" aria-label="Open sections menu" class="lg:hidden text-white p-1.5 -ml-1.5 rounded-lg hover:bg-forest-700 cursor-pointer">
+      <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
     <a href="../index.html" class="flex items-center gap-2.5 cursor-pointer group">
       <img src="../images/logo.png" alt="India Recycles" class="h-7 w-auto brightness-200"/>
       <span class="font-serif text-white text-lg hidden sm:block">India Recycles</span>
@@ -75,11 +78,16 @@
 
 <div class="flex min-h-screen">
 
-<!-- SIDEBAR -->
-<aside class="w-60 bg-white border-r border-forest-100 flex flex-col shrink-0" role="navigation" aria-label="Admin sections">
-  <div class="p-5 border-b border-forest-100">
-    <div class="text-xs font-semibold text-forest-400 uppercase tracking-wider mb-1">Sections</div>
-    <div class="text-xs text-forest-500">Click to edit any page content</div>
+<!-- SIDEBAR (off-canvas drawer on mobile, static on desktop) -->
+<aside id="sidebar" class="w-64 lg:w-60 bg-white border-r border-forest-100 flex flex-col shrink-0 fixed lg:static inset-y-0 left-0 z-50 -translate-x-full lg:translate-x-0 transition-transform duration-300 overflow-y-auto shadow-xl lg:shadow-none" role="navigation" aria-label="Admin sections">
+  <div class="p-5 border-b border-forest-100 flex items-start justify-between gap-2">
+    <div>
+      <div class="text-xs font-semibold text-forest-400 uppercase tracking-wider mb-1">Sections</div>
+      <div class="text-xs text-forest-500">Tap a section to edit its content</div>
+    </div>
+    <button onclick="closeSidebar()" aria-label="Close menu" class="lg:hidden text-forest-400 hover:text-forest-700 hover:bg-forest-50 rounded-lg p-1 -mr-1 cursor-pointer shrink-0">
+      <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
   </div>
   <nav class="flex flex-col gap-1 p-3 flex-1">
     <div class="px-4 pt-3 pb-1 text-[10px] font-bold uppercase tracking-widest text-forest-400">Sections</div>
@@ -133,15 +141,18 @@
   </div>
 </aside>
 
+<!-- MOBILE DRAWER BACKDROP -->
+<div id="sidebar-backdrop" onclick="closeSidebar()" class="fixed inset-0 bg-black/40 z-40 hidden lg:hidden" aria-hidden="true"></div>
+
 <!-- MAIN CONTENT -->
-<main class="flex-1 p-8 overflow-y-auto">
+<main class="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto w-full min-w-0">
 
   <!-- SUB-TAB BAR (populated by switchGroup) -->
-  <div id="subtab-bar" class="flex flex-wrap gap-2 mb-6 pb-4 border-b border-forest-100"></div>
+  <div id="subtab-bar" class="flex gap-2 mb-5 sm:mb-6 pb-4 border-b border-forest-100 overflow-x-auto whitespace-nowrap lg:flex-wrap lg:whitespace-normal -mx-4 px-4 sm:mx-0 sm:px-0"></div>
 
   <!-- ═══ HOME / STATS ═══ -->
   <section id="tab-home" class="tab-content active" aria-labelledby="home-tab-heading">
-    <div class="flex items-center justify-between mb-8">
+    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-6 sm:mb-8">
       <div>
         <h1 id="home-tab-heading" class="font-serif text-2xl text-forest-800">Home Page</h1>
         <p class="text-forest-500 text-sm mt-1">Edit the hero headline and tagline. All impact numbers live under <strong>Impact &rarr; Impact Numbers</strong>.</p>
@@ -171,7 +182,7 @@
 
   <!-- ═══ ABOUT ═══ -->
   <section id="tab-about" class="tab-content" aria-labelledby="about-tab-heading">
-    <div class="flex items-center justify-between mb-8">
+    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-6 sm:mb-8">
       <div>
         <h1 id="about-tab-heading" class="font-serif text-2xl text-forest-800">About Us Page</h1>
         <p class="text-forest-500 text-sm mt-1">Edit the About Us story description. Team members come from Meet the Team.</p>
@@ -202,7 +213,7 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
 
   <!-- ═══ MEET THE TEAM ═══ -->
   <section id="tab-team" class="tab-content" aria-labelledby="team-tab-heading">
-    <div class="flex items-center justify-between mb-8">
+    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-6 sm:mb-8">
       <div>
         <h1 id="team-tab-heading" class="font-serif text-2xl text-forest-800">Meet the Team Page</h1>
         <p class="text-forest-500 text-sm mt-1">Add each member with a photo, name, role and short description. Publishes to the Meet the Team page.</p>
@@ -225,7 +236,7 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
 
   <!-- ═══ MODEL ═══ -->
   <section id="tab-model" class="tab-content" aria-labelledby="model-tab-heading">
-    <div class="flex items-center justify-between mb-8">
+    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-6 sm:mb-8">
       <div>
         <h1 id="model-tab-heading" class="font-serif text-2xl text-forest-800">Our Model Page</h1>
         <p class="text-forest-500 text-sm mt-1">Edit the process steps and program descriptions.</p>
@@ -279,7 +290,7 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
 
   <!-- ═══ FEATURED MODELS (extra model cards) ═══ -->
   <section id="tab-model_extra" class="tab-content" aria-labelledby="me-tab-heading">
-    <div class="flex items-center justify-between mb-8">
+    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-6 sm:mb-8">
       <div>
         <h1 id="me-tab-heading" class="font-serif text-2xl text-forest-800">Featured Models</h1>
         <p class="text-forest-500 text-sm mt-1">Add extra models / programs with a title, description and photo. Anything you add here appears in a "More of Our Models" section on the Our Model page. Leave it empty and that section stays hidden.</p>
@@ -300,7 +311,7 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
 
   <!-- ═══ LOCATIONS ═══ -->
   <section id="tab-locations" class="tab-content" aria-labelledby="loc-tab-heading">
-    <div class="flex items-center justify-between mb-8">
+    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-6 sm:mb-8">
       <div>
         <h1 id="loc-tab-heading" class="font-serif text-2xl text-forest-800">Drop Locations</h1>
         <p class="text-forest-500 text-sm mt-1">Manage collection points across Ahmedabad and Vadodara.</p>
@@ -334,7 +345,7 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
 
   <!-- ═══ IMPACT NUMBERS (Our Impact page - editable stat cards) ═══ -->
   <section id="tab-impact_stats" class="tab-content" aria-labelledby="in-tab-heading">
-    <div class="flex items-center justify-between mb-8">
+    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-6 sm:mb-8">
       <div>
         <h1 id="in-tab-heading" class="font-serif text-2xl text-forest-800">Impact Numbers</h1>
         <p class="text-forest-500 text-sm mt-1">All impact figures in one place. Tick the box on any card to show it on the Our Impact page. The Home Page counters below auto-rise over time. One Save publishes everything.</p>
@@ -504,7 +515,7 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
 
   <!-- ═══ PROGRAMS ═══ -->
   <section id="tab-programs" class="tab-content" aria-labelledby="prog-tab-heading">
-    <div class="flex items-center justify-between mb-8">
+    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-6 sm:mb-8">
       <div>
         <h1 id="prog-tab-heading" class="font-serif text-2xl text-forest-800">Programs</h1>
         <p class="text-forest-500 text-sm mt-1">Edit content for REVIBE and Godadi programs on the Zero Waste page.</p>
@@ -551,7 +562,7 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
 
   <!-- ═══ CONTACT INFO ═══ -->
   <section id="tab-contact-info" class="tab-content" aria-labelledby="contact-tab-heading">
-    <div class="flex items-center justify-between mb-8">
+    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-6 sm:mb-8">
       <div>
         <h1 id="contact-tab-heading" class="font-serif text-2xl text-forest-800">Contact &amp; Social</h1>
         <p class="text-forest-500 text-sm mt-1">Edit contact details and the social links shown site-wide. One Save publishes both.</p>
@@ -623,7 +634,7 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
 
   <!-- ═══ GALLERY ═══ -->
   <section id="tab-gallery" class="tab-content" aria-labelledby="gallery-tab-heading">
-    <div class="flex items-center justify-between mb-8">
+    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-6 sm:mb-8">
       <div>
         <h1 id="gallery-tab-heading" class="font-serif text-2xl text-forest-800">Website Images</h1>
         <p class="text-forest-500 text-sm mt-1">Replace any image on the website - no code needed. Pictures are grouped by page and by the section they appear in, and the line under each one tells you exactly where it shows up.</p>
@@ -647,7 +658,7 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
 
   <!-- ═══ DONATIONS ═══ -->
   <section id="tab-donations" class="tab-content" aria-labelledby="don-tab-heading">
-    <div class="flex items-center justify-between mb-8">
+    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-6 sm:mb-8">
       <div>
         <h1 id="don-tab-heading" class="font-serif text-2xl text-forest-800">Donation Payment Details</h1>
         <p class="text-forest-500 text-sm mt-1">Bank account details and UPI/QR code displayed on the Donate page.</p>
@@ -715,7 +726,7 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
 
   <!-- ═══ REPORTS & MEDIA ═══ -->
   <section id="tab-resources" class="tab-content" aria-labelledby="res-tab-heading">
-    <div class="flex items-center justify-between mb-8">
+    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-6 sm:mb-8">
       <div>
         <h1 id="res-tab-heading" class="font-serif text-2xl text-forest-800">Reports &amp; Media</h1>
         <p class="text-forest-500 text-sm mt-1">Upload reports (PDF or documents) and media coverage. Both appear on the Resources page.</p>
@@ -749,7 +760,7 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
 
   <!-- ═══ IR TALKS ═══ -->
   <section id="tab-talks" class="tab-content" aria-labelledby="talks-tab-heading">
-    <div class="flex items-center justify-between mb-8">
+    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-6 sm:mb-8">
       <div>
         <h1 id="talks-tab-heading" class="font-serif text-2xl text-forest-800">IR Talks Page</h1>
         <p class="text-forest-500 text-sm mt-1">Add each India Recycles Talk with a title, description, photo, YouTube link and host details. Publishes to the IR Talks page.</p>
@@ -788,7 +799,7 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
 
   <!-- ═══ COMMUNITY VOICES ═══ -->
   <section id="tab-testimonials" class="tab-content" aria-labelledby="tm-tab-heading">
-    <div class="flex items-center justify-between mb-8">
+    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-6 sm:mb-8">
       <div>
         <h1 id="tm-tab-heading" class="font-serif text-2xl text-forest-800">Community Voices</h1>
         <p class="text-forest-500 text-sm mt-1">Add a community voice with a photo, name, who they are and what they said. Publishes to the homepage "Community Voices" section.</p>
@@ -811,7 +822,7 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
 
   <!-- ═══ WHAT PEOPLE SAY (Our Impact page) ═══ -->
   <section id="tab-impact_voices" class="tab-content" aria-labelledby="iv-tab-heading">
-    <div class="flex items-center justify-between mb-8">
+    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-6 sm:mb-8">
       <div>
         <h1 id="iv-tab-heading" class="font-serif text-2xl text-forest-800">What People Say</h1>
         <p class="text-forest-500 text-sm mt-1">Add a photo, name, who they are and what they said. Publishes to the Our Impact page "What People Say" section. This is a separate list from Community Voices.</p>
@@ -834,7 +845,7 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
 
   <!-- ═══ WAYS TO HELP (Join Us page) ═══ -->
   <section id="tab-volunteer_ways" class="tab-content" aria-labelledby="vw-tab-heading">
-    <div class="flex items-center justify-between mb-8">
+    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-6 sm:mb-8">
       <div>
         <h1 id="vw-tab-heading" class="font-serif text-2xl text-forest-800">Ways to Help</h1>
         <p class="text-forest-500 text-sm mt-1">The cards under "Ways to Help" on the Join Us page. Give each a short title and a small description. Icons are added automatically in order.</p>
@@ -860,7 +871,7 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
 
   <!-- ═══ FLASH POPUP ═══ -->
   <section id="tab-flash" class="tab-content" aria-labelledby="fl-tab-heading">
-    <div class="flex items-center justify-between mb-8">
+    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-6 sm:mb-8">
       <div>
         <h1 id="fl-tab-heading" class="font-serif text-2xl text-forest-800">Flash Popup</h1>
         <p class="text-forest-500 text-sm mt-1">Little tabs pinned to the side of every page. Each one can flash an event, talk or announcement. Turn a side bar off when it is over, or turn off just its auto-popup.</p>
@@ -880,7 +891,7 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
 
   <!-- ═══ ACTIVITIES PAGE ═══ -->
   <section id="tab-activities" class="tab-content" aria-labelledby="ac-tab-heading">
-    <div class="flex items-center justify-between mb-8">
+    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-6 sm:mb-8">
       <div>
         <h1 id="ac-tab-heading" class="font-serif text-2xl text-forest-800">Activities Page</h1>
         <p class="text-forest-500 text-sm mt-1">The photo and description at the top of the Activities page (the page the "Activities" menu opens).</p>
@@ -907,7 +918,7 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
 
   <!-- ═══ COLLABORATION ═══ -->
   <section id="tab-collaborations" class="tab-content" aria-labelledby="cb-tab-heading">
-    <div class="flex items-center justify-between mb-8">
+    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-6 sm:mb-8">
       <div>
         <h1 id="cb-tab-heading" class="font-serif text-2xl text-forest-800">Collaboration</h1>
         <p class="text-forest-500 text-sm mt-1">Add each collaboration with a title, description, photo and the collaborator's logo. Publishes to the Collaboration page (under Activities).</p>
@@ -934,7 +945,7 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
 
   <!-- ═══ PARTNERS ═══ -->
   <section id="tab-partners" class="tab-content" aria-labelledby="pn-tab-heading">
-    <div class="flex items-center justify-between mb-8">
+    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-6 sm:mb-8">
       <div>
         <h1 id="pn-tab-heading" class="font-serif text-2xl text-forest-800">Partners</h1>
         <p class="text-forest-500 text-sm mt-1">Add each partner with their logo, a short description and a website link. Publishes to the Our Partners page.</p>
@@ -957,7 +968,7 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
 
   <!-- ═══ CORPORATE TIE-UPS / INTERNSHIPS ═══ -->
   <section id="tab-corporate" class="tab-content" aria-labelledby="cp-tab-heading">
-    <div class="flex items-center justify-between mb-8">
+    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-6 sm:mb-8">
       <div>
         <h1 id="cp-tab-heading" class="font-serif text-2xl text-forest-800">Corporate Tie-ups &amp; Internships</h1>
         <p class="text-forest-500 text-sm mt-1">Add each company or campus logo (with an optional website link). Publishes to the Our Partners page.</p>
@@ -980,7 +991,7 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
 
   <!-- ═══ PHOTO GALLERY ═══ -->
   <section id="tab-photos" class="tab-content" aria-labelledby="ph-tab-heading">
-    <div class="flex items-center justify-between mb-8">
+    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-6 sm:mb-8">
       <div>
         <h1 id="ph-tab-heading" class="font-serif text-2xl text-forest-800">Photo Gallery</h1>
         <p class="text-forest-500 text-sm mt-1">Add photos with an optional caption. Publishes to the gallery on the Our Impact page.</p>
@@ -1003,7 +1014,7 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
 
   <!-- ═══ EVENTS ═══ -->
   <section id="tab-events" class="tab-content" aria-labelledby="ev-tab-heading">
-    <div class="flex items-center justify-between mb-8">
+    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-6 sm:mb-8">
       <div>
         <h1 id="ev-tab-heading" class="font-serif text-2xl text-forest-800">Events</h1>
         <p class="text-forest-500 text-sm mt-1">Add each event with a title, date, location, description and photo. Set it as Upcoming or Past. Publishes to the Events page.</p>
@@ -1026,7 +1037,7 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
 
   <!-- ═══ COMMUNITY IMPACT / CAUSES ═══ -->
   <section id="tab-causes" class="tab-content" aria-labelledby="cu-tab-heading">
-    <div class="flex items-center justify-between mb-8">
+    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-6 sm:mb-8">
       <div>
         <h1 id="cu-tab-heading" class="font-serif text-2xl text-forest-800">Community Impact</h1>
         <p class="text-forest-500 text-sm mt-1">Add each cause / activity with a name, description, location and photo. Publishes to the Community Impact section on the Our Impact page.</p>
@@ -1049,7 +1060,7 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
 
   <!-- ═══ VIDEOS ═══ -->
   <section id="tab-videos" class="tab-content" aria-labelledby="vid-tab-heading">
-    <div class="flex items-center justify-between mb-8">
+    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-6 sm:mb-8">
       <div>
         <h1 id="vid-tab-heading" class="font-serif text-2xl text-forest-800">Videos</h1>
         <p class="text-forest-500 text-sm mt-1">Add YouTube videos with a title and description. Publishes to the "See Us in Action" section on the homepage.</p>
@@ -1072,7 +1083,7 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
 
   <!-- ═══ STORIES / BLOG ═══ -->
   <section id="tab-stories" class="tab-content" aria-labelledby="st-tab-heading">
-    <div class="flex items-center justify-between mb-8">
+    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-6 sm:mb-8">
       <div>
         <h1 id="st-tab-heading" class="font-serif text-2xl text-forest-800">Stories / Blog</h1>
         <p class="text-forest-500 text-sm mt-1">Write stories, guides and impact updates. Each one gets its own page and appears on the Stories page. Publishes to stories.html.</p>
@@ -1095,12 +1106,12 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
 
   <!-- ═══ INQUIRY (submissions + settings) ═══ -->
   <section id="tab-submissions" class="tab-content" aria-labelledby="sub-tab-heading">
-    <div class="flex items-center justify-between mb-6">
+    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-6">
       <div>
         <h1 id="sub-tab-heading" class="font-serif text-2xl text-forest-800">Inquiries</h1>
         <p class="text-forest-500 text-sm mt-1">Everyone who filled a form on the website, with call / WhatsApp / email shortcuts and CSV export.</p>
       </div>
-      <div class="flex items-center gap-4">
+      <div class="flex items-center gap-4 shrink-0">
         <button onclick="exportSubs()" class="text-sm text-forest-700 hover:text-forest-900 font-semibold cursor-pointer inline-flex items-center gap-1.5">
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
           Export CSV
@@ -1721,7 +1732,7 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
     var tabs = (GROUPS[gid] || {}).tabs || [];
     tabs.forEach(function (t) {
       var b = document.createElement('button');
-      b.className = 'tab-btn px-4 py-2 rounded-lg text-sm font-medium cursor-pointer text-forest-600 hover:bg-forest-50 border border-forest-100';
+      b.className = 'tab-btn shrink-0 px-4 py-2 rounded-lg text-sm font-medium cursor-pointer text-forest-600 hover:bg-forest-50 border border-forest-100';
       b.setAttribute('data-tab', t[0]);
       b.textContent = t[1];
       b.onclick = function () { switchTab(t[0], b); };
@@ -1729,7 +1740,27 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
     });
     var first = GROUPS[gid] && GROUPS[gid]._last ? GROUPS[gid]._last : (tabs[0] && tabs[0][0]);
     if (first) switchTab(first);
+    closeSidebar();
   }
+
+  // ── Mobile drawer (off-canvas sidebar) ───────────────────────
+  function openSidebar() {
+    document.getElementById('sidebar').classList.remove('-translate-x-full');
+    document.getElementById('sidebar-backdrop').classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeSidebar() {
+    document.getElementById('sidebar').classList.add('-translate-x-full');
+    document.getElementById('sidebar-backdrop').classList.add('hidden');
+    document.body.style.overflow = '';
+  }
+  function toggleSidebar() {
+    if (document.getElementById('sidebar').classList.contains('-translate-x-full')) openSidebar();
+    else closeSidebar();
+  }
+  // Close the drawer with Escape; reset body scroll if resized up to desktop.
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeSidebar(); });
+  window.addEventListener('resize', function () { if (window.innerWidth >= 1024) { document.getElementById('sidebar-backdrop').classList.add('hidden'); document.body.style.overflow = ''; } });
 
   function switchTab(id, btn) {
     document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
