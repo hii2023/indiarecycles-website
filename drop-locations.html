@@ -281,13 +281,9 @@
     <button id="city-btn-ahm" type="button" role="tab" aria-selected="true" aria-controls="ahm-section" class="px-7 py-2.5 rounded-full text-sm font-semibold bg-green-700 text-white cursor-pointer transition-colors">Ahmedabad</button>
     <button id="city-btn-vad" type="button" role="tab" aria-selected="false" aria-controls="vad-section" class="px-7 py-2.5 rounded-full text-sm font-semibold text-green-700 hover:bg-green-50 cursor-pointer transition-colors">Baroda</button>
   </div>
-  <div class="mt-5">
-    <!-- One tap: asks for location, then shows drop points sorted nearest-first. -->
-    <button id="near-me-btn" type="button" class="inline-flex items-center gap-2 bg-green-700 hover:bg-green-800 text-white text-sm font-semibold px-6 py-3 rounded-full cursor-pointer transition-colors shadow-sm">
-      <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-      Donate Clothes Near You
-    </button>
-    <p id="near-status" class="text-green-600 text-xs mt-2.5 min-h-[1rem] max-w-md mx-auto px-4" role="status" aria-live="polite"></p>
+  <div class="mt-4">
+    <!-- Location is requested automatically on load; results sort themselves. -->
+    <p id="near-status" class="text-green-600 text-xs min-h-[1rem] max-w-md mx-auto px-4" role="status" aria-live="polite"></p>
   </div>
 </div>
 
@@ -914,7 +910,6 @@ IR_CMS.then(function (c) {
   /* ─── Find drop points near me ─── */
   (function () {
     var all = [].concat(Array.isArray(loc.ahm) ? loc.ahm : [], Array.isArray(loc.vad) ? loc.vad : []);
-    var btn      = document.getElementById('near-me-btn');
     var statusEl = document.getElementById('near-status');
     var nearSec  = document.getElementById('near-section');
     var nearGrid = document.getElementById('near-grid');
@@ -923,9 +918,9 @@ IR_CMS.then(function (c) {
     var ahmSec   = document.getElementById('ahm-section');
     var vadSec   = document.getElementById('vad-section');
     var toggleBar = document.getElementById('city-toggle-bar');
-    if (!btn || !nearSec || !nearGrid) return;
+    if (!nearSec || !nearGrid) return;
 
-    function setStatus(msg) { if (statusEl) statusEl.textContent = msg || ''; }
+    function setStatus(html) { if (statusEl) statusEl.innerHTML = html || ''; }
 
     function enterNearView() {
       if (toggleBar) toggleBar.style.display = 'none';
@@ -943,7 +938,6 @@ IR_CMS.then(function (c) {
     }
 
     function onLocated(pos) {
-      btn.disabled = false; btn.innerHTML = btn.__label;
       var me = { lat: pos.coords.latitude, lng: pos.coords.longitude };
       var ranked = [];
       var unranked = [];
@@ -968,31 +962,40 @@ IR_CMS.then(function (c) {
       nearSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
-    function onError(err) {
-      btn.disabled = false; btn.innerHTML = btn.__label;
-      var msg = 'Couldn’t get your location. Please try again, or browse all locations below.';
-      if (err && err.code === 1) msg = 'Location access was blocked. Allow it in your browser to sort by distance — meanwhile you can browse all locations below.';
-      else if (err && err.code === 3) msg = 'Locating timed out. Please try again, or browse all locations below.';
-      setStatus(msg);
+    function retryLink(text) {
+      return ' <a href="#" id="near-retry" class="underline font-semibold text-green-700 hover:text-green-900">' + text + '</a>';
+    }
+    function bindRetry() {
+      var r = document.getElementById('near-retry');
+      if (r) r.addEventListener('click', function (e) { e.preventDefault(); locate(); });
     }
 
-    btn.__label = btn.innerHTML;
-    btn.addEventListener('click', function () {
+    function onError(err) {
+      var msg = 'We couldn’t get your location, so all drop points are shown by city below.';
+      if (err && err.code === 1) msg = 'Location access was blocked, so all drop points are shown by city below.';
+      else if (err && err.code === 3) msg = 'Locating took too long.';
+      setStatus(msg + retryLink('Sort by nearest'));
+      bindRetry();
+    }
+
+    function locate() {
       if (!navigator.geolocation) {
-        setStatus('Your browser does not support location sharing. Browse all locations below.');
+        setStatus('Your browser does not support location, so all drop points are shown by city below.');
         return;
       }
       // Nothing to rank until at least one drop point has coordinates in the admin
-      var hasCoords = all.some(function (l) { return !!parseCoords(l); });
-      if (!hasCoords) {
-        setStatus('Distance ranking switches on once drop points have map coordinates added in the admin panel. Showing all locations by city for now.');
+      if (!all.some(function (l) { return !!parseCoords(l); })) {
+        setStatus('Showing all drop points by city.');
         return;
       }
-      setStatus('Getting your location…');
-      btn.disabled = true; btn.innerHTML = 'Locating…';
+      setStatus('Finding drop points near you…');
       navigator.geolocation.getCurrentPosition(onLocated, onError, { enableHighAccuracy: true, timeout: 10000, maximumAge: 60000 });
-    });
+    }
+
     if (backBtn) backBtn.addEventListener('click', exitNearView);
+
+    // Land on the page -> ask for location -> jump straight to the nearest-first list.
+    locate();
   })();
 });
 </script>
