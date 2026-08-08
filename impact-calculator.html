@@ -87,7 +87,9 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="preconnect" href="https://sqosmiifjqecidxhyjtg.supabase.co" crossorigin/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap" media="print" onload="this.media='all'"/>
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap"/></noscript>
   <style>
     :root {
       --font-sans: 'Inter', sans-serif;
@@ -215,7 +217,7 @@
 <!-- HERO -->
 <section class="relative pt-[84px] overflow-hidden" aria-labelledby="calc-h1">
   <div class="absolute inset-0">
-    <img data-img-key="impact-calculator-1" src="images/event1.jpg" alt="India Recycles community community sale" class="zoom-crop w-full h-full object-cover object-center"/>
+    <img fetchpriority="high" loading="eager" data-img-key="impact-calculator-1" src="images/event1.jpg" alt="India Recycles community community sale" class="zoom-crop w-full h-full object-cover object-center"/>
     <div class="absolute inset-0 bg-gradient-to-b from-green-900/80 via-green-900/70 to-green-900/90"></div>
   </div>
   <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8 text-center">
@@ -303,7 +305,7 @@
 
             <a href="drop-locations.html" class="mt-6 w-full inline-flex items-center justify-center gap-2 bg-green-700 hover:bg-green-800 text-white px-6 py-3.5 rounded-xl font-semibold text-sm transition-colors duration-200 cursor-pointer">
               <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-              Find a Drop Location
+              Donate Clothes
             </a>
           </div>
         </div>
@@ -471,7 +473,7 @@
       <!-- Brand -->
       <div>
         <a href="index.html" class="flex items-center gap-3 mb-4 cursor-pointer">
-          <img src="images/logo.png" alt="India Recycles" class="h-[54px] w-auto brightness-200"/>
+          <img loading="lazy" decoding="async" src="images/logo.png" alt="India Recycles" class="h-[54px] w-auto brightness-200"/>
           <span class="font-bold text-[15px] text-white" style="font-family:var(--font-sans);">India Recycles</span>
         </a>
         <p class="text-green-300/80 text-[13px] leading-relaxed mb-5">Love the Pre-Loved. A non-profit giving donated clothes a dignified second life across India.</p>
@@ -534,7 +536,7 @@
   });
 </script>
 
-<script src="js/cms.js?v=41"></script>
+<script src="js/cms.js?v=43"></script>
 <script src="js/reveal.js?v=1" defer></script>
 <script src="js/gallery.js?v=4"></script>
 
@@ -798,7 +800,7 @@
 })();
 </script>
 <div class="ir-sticky-cta lg:hidden" role="navigation" aria-label="Quick actions">
-  <a href="drop-locations.html" data-cta-primary class="flex-1 text-center bg-green-700 text-white text-sm font-semibold py-3 rounded-xl">Find Drop Location</a>
+  <a href="drop-locations.html" data-cta-primary class="flex-1 text-center bg-green-700 text-white text-sm font-semibold py-3 rounded-xl">Donate Clothes</a>
   <a href="volunteer.html#join" class="flex-1 text-center border border-green-700 text-green-800 bg-white text-sm font-semibold py-3 rounded-xl">Join the Movement</a>
 </div>
 </body>

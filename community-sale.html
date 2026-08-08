@@ -87,7 +87,9 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="preconnect" href="https://sqosmiifjqecidxhyjtg.supabase.co" crossorigin/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap" media="print" onload="this.media='all'"/>
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap"/></noscript>
   <style>
     :root {
       --font-sans: 'Inter', sans-serif;
@@ -214,7 +216,7 @@
 <!-- HERO -->
 <section class="relative pt-[84px] overflow-hidden" aria-labelledby="cs-h1">
   <div class="absolute inset-0">
-    <img data-img-key="community-sale-1" src="images/model2.jpg" alt="Community Sale" class="zoom-crop w-full h-full object-cover object-center"/>
+    <img fetchpriority="high" loading="eager" data-img-key="community-sale-1" src="images/model2.jpg" alt="Community Sale" class="zoom-crop w-full h-full object-cover object-center"/>
     <div class="absolute inset-0 bg-gradient-to-b from-green-900/80 via-green-900/70 to-green-900/90"></div>
   </div>
   <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8 text-center">
@@ -237,7 +239,7 @@
       </div>
     </div>
     <div class="rounded-3xl overflow-hidden">
-      <img data-img-key="community-sale-2" src="images/model2.jpg" alt="India Recycles community sale event" class="zoom-crop w-full h-80 object-cover"/>
+      <img loading="lazy" decoding="async" data-img-key="community-sale-2" src="images/model2.jpg" alt="India Recycles community sale event" class="zoom-crop w-full h-80 object-cover"/>
     </div>
   </div>
 </section>
@@ -254,7 +256,7 @@
         <ol class="space-y-3"><li class="flex items-start gap-3"><span class="w-7 h-7 shrink-0 rounded-full bg-green-600 text-white text-xs font-bold flex items-center justify-center">1</span><span class="text-green-700 text-sm leading-relaxed pt-0.5">Sorted, wearable stock is set aside by volunteers after donations are cleaned and categorised.</span></li><li class="flex items-start gap-3"><span class="w-7 h-7 shrink-0 rounded-full bg-green-600 text-white text-xs font-bold flex items-center justify-center">2</span><span class="text-green-700 text-sm leading-relaxed pt-0.5">We fix a date with a community leader in the slum and spread the word locally.</span></li><li class="flex items-start gap-3"><span class="w-7 h-7 shrink-0 rounded-full bg-green-600 text-white text-xs font-bold flex items-center justify-center">3</span><span class="text-green-700 text-sm leading-relaxed pt-0.5">Volunteers set up the stall and lay out clothes by size, type and season.</span></li><li class="flex items-start gap-3"><span class="w-7 h-7 shrink-0 rounded-full bg-green-600 text-white text-xs font-bold flex items-center justify-center">4</span><span class="text-green-700 text-sm leading-relaxed pt-0.5">Families browse and buy what they actually want at &#8377;10 to &#8377;50 an item.</span></li><li class="flex items-start gap-3"><span class="w-7 h-7 shrink-0 rounded-full bg-green-600 text-white text-xs font-bold flex items-center justify-center">5</span><span class="text-green-700 text-sm leading-relaxed pt-0.5">Every rupee collected goes back into our health, education and livelihood programs.</span></li><li class="flex items-start gap-3"><span class="w-7 h-7 shrink-0 rounded-full bg-green-600 text-white text-xs font-bold flex items-center justify-center">6</span><span class="text-green-700 text-sm leading-relaxed pt-0.5">Anything unsold moves on to a Thrift Sale, or to Re-Vibe and Zero Waste if it cannot be worn again.</span></li></ol>
       </div>
       <div class="rounded-3xl overflow-hidden">
-        <img data-img-key="community-sale-3" src="images/model6.jpg" alt="Volunteers preparing a community sale" class="zoom-crop w-full h-full min-h-[320px] object-cover"/>
+        <img loading="lazy" decoding="async" data-img-key="community-sale-3" src="images/model6.jpg" alt="Volunteers preparing a community sale" class="zoom-crop w-full h-full min-h-[320px] object-cover"/>
       </div>
     </div>
   </div>
@@ -283,7 +285,7 @@
       <!-- Brand -->
       <div>
         <a href="index.html" class="flex items-center gap-3 mb-4 cursor-pointer">
-          <img src="images/logo.png" alt="India Recycles" class="h-[54px] w-auto brightness-200"/>
+          <img loading="lazy" decoding="async" src="images/logo.png" alt="India Recycles" class="h-[54px] w-auto brightness-200"/>
           <span class="font-bold text-[15px] text-white" style="font-family:var(--font-sans);">India Recycles</span>
         </a>
         <p class="text-green-300/80 text-[13px] leading-relaxed mb-5">Love the Pre-Loved. A non-profit giving donated clothes a dignified second life across India.</p>
@@ -346,13 +348,13 @@
   });
 </script>
 
-<script src="js/cms.js?v=41"></script>
+<script src="js/cms.js?v=43"></script>
 <script src="js/reveal.js?v=1" defer></script>
 <script src="js/gallery.js?v=4"></script>
 
 <script src="js/transitions.js?v=4"></script>
 <div class="ir-sticky-cta lg:hidden" role="navigation" aria-label="Quick actions">
-  <a href="drop-locations.html" data-cta-primary class="flex-1 text-center bg-green-700 text-white text-sm font-semibold py-3 rounded-xl">Find Drop Location</a>
+  <a href="drop-locations.html" data-cta-primary class="flex-1 text-center bg-green-700 text-white text-sm font-semibold py-3 rounded-xl">Donate Clothes</a>
   <a href="volunteer.html#join" class="flex-1 text-center border border-green-700 text-green-800 bg-white text-sm font-semibold py-3 rounded-xl">Join the Movement</a>
 </div>
 </body>

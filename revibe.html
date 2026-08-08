@@ -87,7 +87,9 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="preconnect" href="https://sqosmiifjqecidxhyjtg.supabase.co" crossorigin/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap" media="print" onload="this.media='all'"/>
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap"/></noscript>
   <style>
     :root {
       --font-sans: 'Inter', sans-serif;
@@ -218,7 +220,7 @@
 <!-- HERO -->
 <section class="relative pt-[84px] overflow-hidden bg-white" aria-labelledby="revibe-h1">
   <div class="hidden lg:block absolute top-[84px] right-0 bottom-0 w-1/2 overflow-hidden">
-    <img data-img-key="revibe-1" src="images/revibe1.jpg" alt="Re-Vibe upcycled products" class="zoom-crop w-full h-full object-cover"/>
+    <img fetchpriority="high" loading="eager" data-img-key="revibe-1" src="images/revibe1.jpg" alt="Re-Vibe upcycled products" class="zoom-crop w-full h-full object-cover"/>
     <div class="absolute inset-y-0 left-0 w-48 bg-gradient-to-r from-white via-white/70 to-transparent pointer-events-none" aria-hidden="true"></div>
   </div>
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 relative">
@@ -234,7 +236,7 @@
       </div>
       <div class="lg:min-h-[420px] min-w-0">
         <div class="lg:hidden relative w-screen left-1/2 -translate-x-1/2 overflow-hidden">
-          <img data-img-key="revibe-1" src="images/revibe1.jpg" alt="Re-Vibe upcycled products" class="zoom-crop w-full h-72 object-cover"/>
+          <img fetchpriority="high" loading="eager" data-img-key="revibe-1" src="images/revibe1.jpg" alt="Re-Vibe upcycled products" class="zoom-crop w-full h-72 object-cover"/>
           <div class="absolute inset-x-0 top-0 h-14 bg-gradient-to-b from-white to-transparent pointer-events-none" aria-hidden="true"></div>
           <div class="absolute inset-x-0 bottom-0 h-14 bg-gradient-to-t from-white to-transparent pointer-events-none" aria-hidden="true"></div>
         </div>
@@ -275,8 +277,8 @@
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     <h2 class="text-3xl lg:text-4xl mb-10 text-center">From the Workshop</h2>
     <div class="grid sm:grid-cols-2 gap-6">
-      <img data-img-key="revibe-3" src="images/revibe2.webp" alt="Re-Vibe artisans at work" class="zoom-crop rounded-3xl w-full h-[340px] object-cover"/>
-      <img data-img-key="revibe-4" src="images/revibe3.jpg" alt="Re-Vibe upcycled goods" class="zoom-crop rounded-3xl w-full h-[340px] object-cover"/>
+      <img loading="lazy" decoding="async" data-img-key="revibe-3" src="images/revibe2.webp" alt="Re-Vibe artisans at work" class="zoom-crop rounded-3xl w-full h-[340px] object-cover"/>
+      <img loading="lazy" decoding="async" data-img-key="revibe-4" src="images/revibe3.jpg" alt="Re-Vibe upcycled goods" class="zoom-crop rounded-3xl w-full h-[340px] object-cover"/>
     </div>
   </div>
 </section>
@@ -305,7 +307,7 @@
       <!-- Brand -->
       <div>
         <a href="index.html" class="flex items-center gap-3 mb-4 cursor-pointer">
-          <img src="images/logo.png" alt="India Recycles" class="h-[54px] w-auto brightness-200"/>
+          <img loading="lazy" decoding="async" src="images/logo.png" alt="India Recycles" class="h-[54px] w-auto brightness-200"/>
           <span class="font-bold text-[15px] text-white" style="font-family:var(--font-sans);">India Recycles</span>
         </a>
         <p class="text-green-300/80 text-[13px] leading-relaxed mb-5">Love the Pre-Loved. A non-profit giving donated clothes a dignified second life across India.</p>
@@ -368,13 +370,13 @@
   });
 </script>
 
-<script src="js/cms.js?v=41"></script>
+<script src="js/cms.js?v=43"></script>
 <script src="js/reveal.js?v=1" defer></script>
 <script src="js/gallery.js?v=4"></script>
 
 <script src="js/transitions.js?v=4"></script>
 <div class="ir-sticky-cta lg:hidden" role="navigation" aria-label="Quick actions">
-  <a href="drop-locations.html" data-cta-primary class="flex-1 text-center bg-green-700 text-white text-sm font-semibold py-3 rounded-xl">Find Drop Location</a>
+  <a href="drop-locations.html" data-cta-primary class="flex-1 text-center bg-green-700 text-white text-sm font-semibold py-3 rounded-xl">Donate Clothes</a>
   <a href="volunteer.html#join" class="flex-1 text-center border border-green-700 text-green-800 bg-white text-sm font-semibold py-3 rounded-xl">Join the Movement</a>
 </div>
 </body>

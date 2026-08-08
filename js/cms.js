@@ -8,6 +8,36 @@
   var KEY = 'sb_publishable_mq6t15oAQU7f4ZAjXQZA5w_ELcgDfbt';
   var AVG_MONTH_MS = 30.4375 * 24 * 60 * 60 * 1000;
 
+  /* Perf: route every CMS image (Supabase Storage) through the on-the-fly
+     image transformer so it is resized to the element's rendered width and
+     auto-served as WebP. Patching the <img>.src setter catches every code
+     path (data-img-key swaps, galleries, covers) with no double download,
+     and leaves local images/... and already-transformed URLs untouched. */
+  try {
+    var _srcDesc = Object.getOwnPropertyDescriptor(HTMLImageElement.prototype, 'src');
+    Object.defineProperty(HTMLImageElement.prototype, 'src', {
+      configurable: true, enumerable: _srcDesc.enumerable,
+      get: function () { return _srcDesc.get.call(this); },
+      set: function (v) {
+        try {
+          if (typeof v === 'string' &&
+              v.indexOf('/storage/v1/object/public/') > -1 &&
+              v.indexOf('/render/image/') === -1) {
+            var w = parseInt(this.getAttribute('data-w'), 10) ||
+                    parseInt(this.getAttribute('width'), 10) ||
+                    Math.round((this.clientWidth || 0) * (window.devicePixelRatio || 1)) ||
+                    1200;
+            if (w < 200) w = 200;
+            if (w > 1600) w = 1600;
+            v = v.replace('/storage/v1/object/public/', '/storage/v1/render/image/public/') +
+                (v.indexOf('?') > -1 ? '&' : '?') + 'width=' + w + '&quality=70';
+          }
+        } catch (e) {}
+        _srcDesc.set.call(this, v);
+      }
+    });
+  } catch (e) {}
+
   /* Form submissions: store every submit in Supabase (for the admin inbox) while the
      form's own FormSubmit action still emails + redirects. Attached immediately so a
      fast submit is never missed; the notify-email swap happens once settings load. */
@@ -264,8 +294,8 @@
             '</span>'
           : '';
         var coverImg = cs
-          ? '<img src="' + esc(photos[0]) + '" alt="' + esc(alt) + '" style="' + cs + '"/>'
-          : '<img src="' + esc(photos[0]) + '" alt="' + esc(alt) + '" class="w-full h-full object-cover"/>';
+          ? '<img loading="lazy" decoding="async" src="' + esc(photos[0]) + '" alt="' + esc(alt) + '" style="' + cs + '"/>'
+          : '<img loading="lazy" decoding="async" src="' + esc(photos[0]) + '" alt="' + esc(alt) + '" class="w-full h-full object-cover"/>';
         return '<div class="relative overflow-hidden ' + wrapClass + ' ir-lb-tile" data-lightbox data-photos="' + group + '" data-alt="' + esc(alt) + '" role="button" tabindex="0" aria-label="View ' + (photos.length > 1 ? photos.length + ' photos' : 'full image') + ': ' + esc(alt) + '">' +
           coverImg + badge +
         '</div>';
@@ -276,7 +306,7 @@
         var group = esc(JSON.stringify(photos));
         return '<div class="flex gap-2 px-5 pt-4 flex-wrap">' + photos.map(function (p, i) {
           return '<div class="w-14 h-14 rounded-lg overflow-hidden border border-green-100 ir-lb-tile" data-lightbox data-photos="' + group + '" data-start="' + i + '" data-alt="' + esc(alt) + '" role="button" tabindex="0" aria-label="View photo ' + (i + 1) + ' of ' + photos.length + '">' +
-            '<img src="' + esc(p) + '" alt="" class="w-full h-full object-cover"/></div>';
+            '<img loading="lazy" decoding="async" src="' + esc(p) + '" alt="" class="w-full h-full object-cover"/></div>';
         }).join('') + '</div>';
       }
       var reportsEl = document.getElementById('reports-list');
@@ -305,7 +335,7 @@
         var med = (content.media && content.media.items) || [];
         if (med.length) {
           mediaEl.innerHTML = med.map(function (m) {
-            var inner = '<div class="aspect-[4/3] overflow-hidden bg-green-50">' + (m.image ? '<img src="' + esc(m.image) + '" alt="' + esc(m.title) + '" class="w-full h-full object-cover"/>' : '') + '</div>' +
+            var inner = '<div class="aspect-[4/3] overflow-hidden bg-green-50">' + (m.image ? '<img loading="lazy" decoding="async" src="' + esc(m.image) + '" alt="' + esc(m.title) + '" class="w-full h-full object-cover"/>' : '') + '</div>' +
               (m.title ? '<div class="p-3"><div class="text-sm font-semibold text-green-800 leading-snug">' + esc(m.title) + '</div></div>' : '');
             if (m.link) return '<a href="' + esc(m.link) + '" target="_blank" rel="noopener noreferrer" class="block bg-white rounded-2xl overflow-hidden border border-green-100 hover:border-green-300 transition-colors">' + inner + '</a>';
             return '<div class="bg-white rounded-2xl overflow-hidden border border-green-100">' + inner + '</div>';
@@ -334,7 +364,7 @@
               // Video is primary; its poster is the first photo (or the YouTube thumbnail).
               var poster = photos.length ? esc(photos[0]) : 'https://img.youtube.com/vi/' + vid + '/hqdefault.jpg';
               media = '<button type="button" class="ir-talk-play group relative block w-full aspect-video bg-green-900 cursor-pointer" data-embed="https://www.youtube.com/embed/' + vid + '?autoplay=1&rel=0" aria-label="Play video">' +
-                '<img src="' + poster + '" alt="" class="w-full h-full object-cover"/>' +
+                '<img loading="lazy" decoding="async" src="' + poster + '" alt="" class="w-full h-full object-cover"/>' +
                 '<span class="absolute inset-0 flex items-center justify-center"><span class="w-16 h-16 rounded-full bg-red-600 flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform"><svg class="w-7 h-7 text-white ml-1" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></span></button>';
               strip = photoStrip(photos, t.title); // extra talk photos below the video
             } else {
@@ -443,7 +473,7 @@
             var nm = (t.name || '').trim();
             var initials = (nm || '?').split(/\s+/).map(function (w) { return w.charAt(0); }).slice(0, 2).join('').toUpperCase();
             var avatar = t.photo
-              ? '<div class="w-12 h-12 rounded-full overflow-hidden bg-green-100 shrink-0"><img src="' + esc(t.photo) + '" alt="' + esc(nm) + '" class="w-full h-full object-cover"/></div>'
+              ? '<div class="w-12 h-12 rounded-full overflow-hidden bg-green-100 shrink-0"><img loading="lazy" decoding="async" src="' + esc(t.photo) + '" alt="' + esc(nm) + '" class="w-full h-full object-cover"/></div>'
               : '<div class="w-12 h-12 rounded-full bg-green-100 text-green-700 font-semibold flex items-center justify-center shrink-0 text-base">' + esc(initials) + '</div>';
             return '<div class="ir-rev-item ir-tm-card bg-white rounded-2xl p-6 border border-gray-200 shadow-sm flex flex-col" role="button" tabindex="0" data-tm="' + i + '" aria-label="Read what ' + esc(nm || 'this person') + ' said">' +
               stars +
@@ -484,7 +514,7 @@
             var nm2 = (t.name || '').trim();
             var media = tmModal.querySelector('.ir-tm-media');
             if (t.photo) {
-              media.innerHTML = '<img src="' + esc(t.photo) + '" alt="' + esc(nm2) + '"/>';
+              media.innerHTML = '<img loading="lazy" decoding="async" src="' + esc(t.photo) + '" alt="' + esc(nm2) + '"/>';
               media.style.display = '';
             } else {
               media.innerHTML = ''; media.style.display = 'none';
@@ -589,7 +619,7 @@
             var cover = itemPhotos(co)[0];
             var ccs = (co.photo_crop && cover && co.photo_crop[cover]) ? cropStyle(co.photo_crop[cover]) : '';
             var photo = cover ? '<div class="relative aspect-[16/10] bg-green-50 overflow-hidden">' + (ccs ? '<img src="' + esc(cover) + '" alt="' + esc(co.title) + '" style="' + ccs + '" loading="lazy"/>' : '<img src="' + esc(cover) + '" alt="' + esc(co.title) + '" class="w-full h-full object-cover" loading="lazy"/>') + '</div>' : '';
-            var logo = co.logo ? '<div class="h-9 flex items-center mb-2"><img src="' + esc(co.logo) + '" alt="' + esc(co.title || 'Partner') + ' logo" class="max-h-9 max-w-[55%] object-contain object-left"/></div>' : '';
+            var logo = co.logo ? '<div class="h-9 flex items-center mb-2"><img loading="lazy" decoding="async" src="' + esc(co.logo) + '" alt="' + esc(co.title || 'Partner') + ' logo" class="max-h-9 max-w-[55%] object-contain object-left"/></div>' : '';
             return '<a href="collaborations.html" class="rounded-2xl border border-gray-200 bg-white overflow-hidden flex flex-col shadow-sm hover:border-green-300 transition-colors">' + photo +
               '<div class="p-5 flex-1 flex flex-col">' + logo +
                 '<h3 class="font-bold text-gray-900 text-[15px] mb-1.5">' + esc(co.title) + '</h3>' +
@@ -669,7 +699,7 @@
         if (partners.length) {
           partnersEl.innerHTML = partners.map(function (p) {
             var logo = p.logo
-              ? '<div class="h-16 flex items-center mb-4"><img src="' + esc(p.logo) + '" alt="' + esc(p.name) + '" class="max-h-16 max-w-[70%] object-contain"/></div>'
+              ? '<div class="h-16 flex items-center mb-4"><img loading="lazy" decoding="async" src="' + esc(p.logo) + '" alt="' + esc(p.name) + '" class="max-h-16 max-w-[70%] object-contain"/></div>'
               : '<div class="h-16 flex items-center mb-4"><span class="text-green-800 font-semibold text-lg">' + esc(p.name) + '</span></div>';
             var inner = logo +
               (p.name ? '<h3 class="font-semibold text-green-800">' + esc(p.name) + '</h3>' : '') +
@@ -688,7 +718,7 @@
         if (corps.length) {
           corpEl.innerHTML = corps.map(function (c) {
             var inner = c.logo
-              ? '<img src="' + esc(c.logo) + '" alt="' + esc(c.name) + '" class="max-h-16 max-w-full object-contain"/>'
+              ? '<img loading="lazy" decoding="async" src="' + esc(c.logo) + '" alt="' + esc(c.name) + '" class="max-h-16 max-w-full object-contain"/>'
               : '<span class="text-green-800 font-semibold text-center text-sm">' + esc(c.name) + '</span>';
             var cls = 'flex items-center justify-center h-24 rounded-2xl border border-green-100 bg-white p-4';
             if (c.link) return '<a href="' + esc(c.link) + '" target="_blank" rel="noopener noreferrer" title="' + esc(c.name) + '" class="' + cls + ' hover:border-green-300 transition-colors">' + inner + '</a>';
@@ -704,7 +734,7 @@
         if (gal.length) {
           galEl.innerHTML = gal.map(function (g) {
             var cap = g.caption ? '<div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent p-3"><span class="text-white text-xs font-medium">' + esc(g.caption) + '</span></div>' : '';
-            return '<div class="relative rounded-3xl overflow-hidden aspect-square"><img src="' + esc(g.photo) + '" alt="' + esc(g.caption || '') + '" class="w-full h-full object-cover"/>' + cap + '</div>';
+            return '<div class="relative rounded-3xl overflow-hidden aspect-square"><img loading="lazy" decoding="async" src="' + esc(g.photo) + '" alt="' + esc(g.caption || '') + '" class="w-full h-full object-cover"/>' + cap + '</div>';
           }).join('');
         }
       }
@@ -766,7 +796,7 @@
         var upcoming = evs.filter(function (e) { return (e.status || 'upcoming') === 'upcoming'; });
         var nextEvent = upcoming.length ? 'events.html#event-' + evs.indexOf(upcoming[0]) : 'events.html';
         var CTA = {
-          drop:   { href: 'drop-locations.html', text: 'Find Drop Location' },
+          drop:   { href: 'drop-locations.html', text: 'Donate Clothes' },
           event:  { href: nextEvent,             text: 'Next Event' },
           talk:   { href: 'ir-talks.html',       text: 'Next IR Talk' },
           donate: { href: 'donate.html',         text: 'Donate' },
@@ -815,7 +845,7 @@
           modal.innerHTML =
             '<div class="ir-flash-box">' +
               '<button class="ir-flash-close" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>' +
-              (it.photo ? '<img src="' + esc(it.photo) + '" alt="' + esc(it.title) + '"/>' : '') +
+              (it.photo ? '<img loading="lazy" decoding="async" src="' + esc(it.photo) + '" alt="' + esc(it.title) + '"/>' : '') +
               '<div class="ir-flash-body">' +
                 '<span class="ir-flash-kind"><span class="ir-flash-dot" style="width:7px;height:7px" aria-hidden="true"></span>' + esc(kind) + '</span>' +
                 '<h3 class="ir-flash-title">' + esc(it.title) + '</h3>' +
@@ -883,7 +913,7 @@
         if (collabs.length) {
           collabEl.innerHTML = collabs.map(function (co) {
             var photo = photoCover(itemPhotos(co), co.title, 'aspect-[16/10] bg-green-50 overflow-hidden', co.photo_crop);
-            var logo = co.logo ? '<div class="h-12 flex items-center mb-3"><img src="' + esc(co.logo) + '" alt="' + esc(co.title) + ' logo" class="max-h-12 max-w-[60%] object-contain object-left"/></div>' : '';
+            var logo = co.logo ? '<div class="h-12 flex items-center mb-3"><img loading="lazy" decoding="async" src="' + esc(co.logo) + '" alt="' + esc(co.title) + ' logo" class="max-h-12 max-w-[60%] object-contain object-left"/></div>' : '';
             // A partner website link is a real backlink (no rel="nofollow"), so the
             // collaborator gets SEO value from being featured here.
             var visit = co.link ? '<a href="' + esc(co.link) + '" target="_blank" rel="noopener noreferrer" class="mt-3 self-start inline-flex items-center gap-1 text-green-700 text-sm font-semibold hover:text-green-900">Visit website <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>' : '';
@@ -903,7 +933,7 @@
         var causes = (content.causes && content.causes.items) || [];
         if (causes.length) {
           causesEl.innerHTML = causes.map(function (cu) {
-            var photo = cu.photo ? '<div class="aspect-[16/10] bg-green-50"><img src="' + esc(cu.photo) + '" alt="' + esc(cu.name) + '" class="w-full h-full object-cover"/></div>' : '';
+            var photo = cu.photo ? '<div class="aspect-[16/10] bg-green-50"><img loading="lazy" decoding="async" src="' + esc(cu.photo) + '" alt="' + esc(cu.name) + '" class="w-full h-full object-cover"/></div>' : '';
             var loc = cu.location ? '<div class="text-green-500 text-sm mt-1 inline-flex items-center gap-1"><svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>' + esc(cu.location) + '</div>' : '';
             return '<article class="rounded-2xl border border-green-100 bg-white overflow-hidden flex flex-col shadow-sm">' + photo +
               '<div class="p-5 flex-1 flex flex-col">' +
@@ -922,7 +952,7 @@
         if (models.length) {
           if (mSec) mSec.style.display = '';
           modelsEl.innerHTML = models.map(function (m) {
-            var photo = m.photo ? '<div class="aspect-[16/10] bg-green-50"><img src="' + esc(m.photo) + '" alt="' + esc(m.title) + '" class="w-full h-full object-cover"/></div>' : '';
+            var photo = m.photo ? '<div class="aspect-[16/10] bg-green-50"><img loading="lazy" decoding="async" src="' + esc(m.photo) + '" alt="' + esc(m.title) + '" class="w-full h-full object-cover"/></div>' : '';
             return '<article class="rounded-2xl border border-green-100 bg-white overflow-hidden flex flex-col shadow-sm">' + photo +
               '<div class="p-5 flex-1 flex flex-col">' +
                 '<h3 class="text-lg font-semibold text-green-800">' + esc(m.title) + '</h3>' +
@@ -945,7 +975,7 @@
           var media = '';
           if (vid) {
             media = '<button type="button" class="ir-talk-play group relative block w-full aspect-video bg-green-900 cursor-pointer" data-embed="https://www.youtube.com/embed/' + vid + '?autoplay=1&rel=0" aria-label="Play video">' +
-              (poster ? '<img src="' + poster + '" alt="' + esc(v.title || 'India Recycles video') + '" class="w-full h-full object-cover"/>' : '') +
+              (poster ? '<img loading="lazy" decoding="async" src="' + poster + '" alt="' + esc(v.title || 'India Recycles video') + '" class="w-full h-full object-cover"/>' : '') +
               '<span class="absolute inset-0 flex items-center justify-center"><span class="w-16 h-16 rounded-full bg-red-600 flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform"><svg class="w-7 h-7 text-white ml-1" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></span></button>';
           }
           return '<article class="rounded-2xl border border-green-100 overflow-hidden bg-white flex flex-col shadow-sm">' + media +
@@ -1086,7 +1116,7 @@
               return '<p class="mb-5">' + esc(t).replace(/\n/g, '<br/>') + '</p>';
             }).join('');
             var ctaEl2 = document.getElementById('story-cta');
-            if (ctaEl2) ctaEl2.innerHTML = '<div class="mt-10 rounded-3xl bg-green-50 border border-green-100 p-6 lg:p-8 text-center"><h3 class="text-lg lg:text-xl font-semibold text-green-800 mb-2">Turn your unused clothes into impact</h3><p class="text-green-700 text-sm lg:text-base mb-5 max-w-xl mx-auto">Drop them at a collection point near you, or request a doorstep pickup.</p><div class="flex flex-wrap gap-3 justify-center"><a href="drop-locations.html" class="inline-flex items-center gap-2 bg-green-700 hover:bg-green-800 text-white text-sm font-semibold px-6 py-3 rounded-xl">Find a Drop Location</a><a href="donate.html" class="inline-flex items-center gap-2 border border-green-700 text-green-800 hover:bg-green-50 text-sm font-semibold px-6 py-3 rounded-xl">Donate Now</a></div></div>';
+            if (ctaEl2) ctaEl2.innerHTML = '<div class="mt-10 rounded-3xl bg-green-50 border border-green-100 p-6 lg:p-8 text-center"><h3 class="text-lg lg:text-xl font-semibold text-green-800 mb-2">Turn your unused clothes into impact</h3><p class="text-green-700 text-sm lg:text-base mb-5 max-w-xl mx-auto">Drop them at a collection point near you, or request a doorstep pickup.</p><div class="flex flex-wrap gap-3 justify-center"><a href="drop-locations.html" class="inline-flex items-center gap-2 bg-green-700 hover:bg-green-800 text-white text-sm font-semibold px-6 py-3 rounded-xl">Donate Clothes</a><a href="donate.html" class="inline-flex items-center gap-2 border border-green-700 text-green-800 hover:bg-green-50 text-sm font-semibold px-6 py-3 rounded-xl">Donate Now</a></div></div>';
           } else {
             if (art) art.style.display = 'none';
             if (nf) nf.style.display = '';

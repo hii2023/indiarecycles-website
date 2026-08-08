@@ -87,7 +87,9 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="preconnect" href="https://sqosmiifjqecidxhyjtg.supabase.co" crossorigin/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap" media="print" onload="this.media='all'"/>
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap"/></noscript>
   <style>
     :root {
       --font-sans: 'Inter', sans-serif;
@@ -214,7 +216,7 @@
 <!-- HERO -->
 <section class="relative pt-[84px] overflow-hidden" aria-labelledby="impact-h1">
   <div class="absolute inset-0">
-    <img data-img-key="our-impact-1" src="images/impact8.jpg" alt="India Recycles community impact" class="zoom-crop w-full h-full object-cover object-center"/>
+    <img fetchpriority="high" loading="eager" data-img-key="our-impact-1" src="images/impact8.jpg" alt="India Recycles community impact" class="zoom-crop w-full h-full object-cover object-center"/>
     <div class="absolute inset-0 bg-gradient-to-b from-green-900/80 via-green-900/65 to-green-900/85"></div>
   </div>
   <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8 text-center">
@@ -277,7 +279,7 @@
     <div class="max-w-4xl mx-auto">
       <h3 class="text-2xl text-green-800 mb-2 text-center">UN SDG Alignment</h3>
       <p class="text-green-600 leading-relaxed text-sm text-center max-w-2xl mx-auto mb-6">India Recycles directly advances five UN Sustainable Development Goals through everything we do.</p>
-      <img data-img-key="our-impact-sdg-logo" src="images/sdg-goals-logo.png" alt="UN Sustainable Development Goals" style="display:none" onload="this.style.display=''" onerror="this.style.display='none'" class="mx-auto mb-8 h-24 w-auto"/>
+      <img loading="lazy" decoding="async" data-img-key="our-impact-sdg-logo" src="images/sdg-goals-logo.png" alt="UN Sustainable Development Goals" style="display:none" onload="this.style.display=''" onerror="this.style.display='none'" class="mx-auto mb-8 h-24 w-auto"/>
       <div class="grid grid-cols-5 gap-2 sm:gap-4">
         <!-- SDG 1 -->
         <div class="relative rounded-2xl overflow-hidden shadow-sm text-white p-2 sm:p-4 flex flex-col justify-between aspect-square" style="background:#E5243B;">
@@ -286,7 +288,7 @@
             <svg class="w-5 h-5 sm:w-[30px] sm:h-[30px]" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><circle cx="7.4" cy="6.8" r="2.4"/><circle cx="16.6" cy="6.8" r="2.4"/><path d="M2.9 18.6c0-2.8 1.9-4.9 4.5-4.9s4.5 2.1 4.5 4.9v.9H2.9z"/><path d="M12.6 19.5v-.9c0-1.7-.5-3.2-1.4-4.4.8-.4 1.7-.6 2.7-.6 2.6 0 4.5 2.1 4.5 4.9v1z"/></svg>
           </div>
           <div class="font-bold uppercase leading-tight" style="font-size:10px;letter-spacing:.02em;">No Poverty</div>
-          <img data-img-key="our-impact-sdg-1" src="images/sdg-1.png" alt="SDG 1: No Poverty" onerror="this.remove()" class="absolute inset-0 w-full h-full object-cover"/>
+          <img fetchpriority="high" loading="eager" data-img-key="our-impact-sdg-1" src="images/sdg-1.png" alt="SDG 1: No Poverty" onerror="this.remove()" class="absolute inset-0 w-full h-full object-cover"/>
         </div>
         <!-- SDG 8 -->
         <div class="relative rounded-2xl overflow-hidden shadow-sm text-white p-2 sm:p-4 flex flex-col justify-between aspect-square" style="background:#A21942;">
@@ -295,7 +297,7 @@
             <svg class="w-5 h-5 sm:w-[30px] sm:h-[30px]" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><rect x="3.2" y="14" width="3.4" height="6.3" rx="0.6"/><rect x="8.7" y="11" width="3.4" height="9.3" rx="0.6"/><rect x="14.2" y="9" width="3.4" height="11.3" rx="0.6"/><path d="M13.6 3.4H21v7.4l-2.5-2.5-3.9 3.9-2.1-2.1 3.9-3.9z"/></svg>
           </div>
           <div class="font-bold uppercase leading-tight" style="font-size:10px;letter-spacing:.02em;">Decent Work &amp; Growth</div>
-          <img data-img-key="our-impact-sdg-8" src="images/sdg-8.png" alt="SDG 8: Decent Work and Economic Growth" onerror="this.remove()" class="absolute inset-0 w-full h-full object-cover"/>
+          <img loading="lazy" decoding="async" data-img-key="our-impact-sdg-8" src="images/sdg-8.png" alt="SDG 8: Decent Work and Economic Growth" onerror="this.remove()" class="absolute inset-0 w-full h-full object-cover"/>
         </div>
         <!-- SDG 10 -->
         <div class="relative rounded-2xl overflow-hidden shadow-sm text-white p-2 sm:p-4 flex flex-col justify-between aspect-square" style="background:#DD1367;">
@@ -304,7 +306,7 @@
             <svg class="w-5 h-5 sm:w-[30px] sm:h-[30px]" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10h6.5"/><path d="M3 14h6.5"/><path d="M14.5 10H21"/><path d="M14.5 14H21"/><path d="M7 6.5 10 9.7 7 12.9"/><path d="M17 11.1 14 14.3 17 17.5"/></svg>
           </div>
           <div class="font-bold uppercase leading-tight" style="font-size:10px;letter-spacing:.02em;">Reduced Inequalities</div>
-          <img data-img-key="our-impact-sdg-10" src="images/sdg-10.png" alt="SDG 10: Reduced Inequalities" onerror="this.remove()" class="absolute inset-0 w-full h-full object-cover"/>
+          <img loading="lazy" decoding="async" data-img-key="our-impact-sdg-10" src="images/sdg-10.png" alt="SDG 10: Reduced Inequalities" onerror="this.remove()" class="absolute inset-0 w-full h-full object-cover"/>
         </div>
         <!-- SDG 12 -->
         <div class="relative rounded-2xl overflow-hidden shadow-sm text-white p-2 sm:p-4 flex flex-col justify-between aspect-square" style="background:#BF8B2E;">
@@ -313,7 +315,7 @@
             <svg class="w-5 h-5 sm:w-[30px] sm:h-[30px]" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.4 8.6c-1.9 0-3.4 1.5-3.4 3.4s1.5 3.4 3.4 3.4c1.8 0 2.9-1.2 4-2.8"/><path d="M15.6 15.4c1.9 0 3.4-1.5 3.4-3.4s-1.5-3.4-3.4-3.4c-1.8 0-2.9 1.2-4 2.8"/></svg>
           </div>
           <div class="font-bold uppercase leading-tight" style="font-size:10px;letter-spacing:.02em;">Responsible Consumption</div>
-          <img data-img-key="our-impact-sdg-12" src="images/sdg-12.png" alt="SDG 12: Responsible Consumption and Production" onerror="this.remove()" class="absolute inset-0 w-full h-full object-cover"/>
+          <img loading="lazy" decoding="async" data-img-key="our-impact-sdg-12" src="images/sdg-12.png" alt="SDG 12: Responsible Consumption and Production" onerror="this.remove()" class="absolute inset-0 w-full h-full object-cover"/>
         </div>
         <!-- SDG 13 -->
         <div class="relative rounded-2xl overflow-hidden shadow-sm text-white p-2 sm:p-4 flex flex-col justify-between aspect-square" style="background:#3F7E44;">
@@ -322,7 +324,7 @@
             <svg class="w-5 h-5 sm:w-[30px] sm:h-[30px]" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 12S6 6.8 12 6.8 21.5 12 21.5 12 18 17.2 12 17.2 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3.1"/><path d="M8.9 12h6.2"/><path d="M12 8.9a7 7 0 0 1 0 6.2 7 7 0 0 1 0-6.2z"/></svg>
           </div>
           <div class="font-bold uppercase leading-tight" style="font-size:10px;letter-spacing:.02em;">Climate Action</div>
-          <img data-img-key="our-impact-sdg-13" src="images/sdg-13.png" alt="SDG 13: Climate Action" onerror="this.remove()" class="absolute inset-0 w-full h-full object-cover"/>
+          <img loading="lazy" decoding="async" data-img-key="our-impact-sdg-13" src="images/sdg-13.png" alt="SDG 13: Climate Action" onerror="this.remove()" class="absolute inset-0 w-full h-full object-cover"/>
         </div>
       </div>
     </div>
@@ -340,21 +342,21 @@
     <div class="grid md:grid-cols-3 gap-6">
       <div class="bg-[#f6f7f6] rounded-3xl p-8 border border-green-100 card-lift cursor-default">
         <div class="photo-zoom rounded-2xl overflow-hidden h-44 mb-5">
-          <img data-img-key="our-impact-8" src="images/impact5.png" alt="Medical camp by India Recycles" class="zoom-crop w-full h-full object-cover"/>
+          <img loading="lazy" decoding="async" data-img-key="our-impact-8" src="images/impact5.png" alt="Medical camp by India Recycles" class="zoom-crop w-full h-full object-cover"/>
         </div>
         <h3 class="text-xl text-green-800 mb-2">Medical Camps</h3>
         <p class="text-green-600 text-sm leading-relaxed">Regular health checkups, eye exams, and gynaecological services for slum residents. 1,000+ beneficiaries served so far.</p>
       </div>
       <div class="bg-[#f6f7f6] rounded-3xl p-8 border border-green-100 card-lift cursor-default">
         <div class="photo-zoom rounded-2xl overflow-hidden h-44 mb-5">
-          <img data-img-key="our-impact-9" src="images/impact6.jpg" alt="Education scholarships by India Recycles" class="zoom-crop w-full h-full object-cover"/>
+          <img loading="lazy" decoding="async" data-img-key="our-impact-9" src="images/impact6.jpg" alt="Education scholarships by India Recycles" class="zoom-crop w-full h-full object-cover"/>
         </div>
         <h3 class="text-xl text-green-800 mb-2">Education Scholarships</h3>
         <p class="text-green-600 text-sm leading-relaxed">School scholarships for children from under-resourced slum families. 25+ students supported to date.</p>
       </div>
       <div class="bg-[#f6f7f6] rounded-3xl p-8 border border-green-100 card-lift cursor-default">
         <div class="photo-zoom rounded-2xl overflow-hidden h-44 mb-5">
-          <img data-img-key="our-impact-10" src="images/impact7.jpg" alt="Women livelihood by India Recycles" class="zoom-crop w-full h-full object-cover"/>
+          <img loading="lazy" decoding="async" data-img-key="our-impact-10" src="images/impact7.jpg" alt="Women livelihood by India Recycles" class="zoom-crop w-full h-full object-cover"/>
         </div>
         <h3 class="text-xl text-green-800 mb-2">Women's Livelihoods</h3>
         <p class="text-green-600 text-sm leading-relaxed">Re-Vibe and Godadi stitching units provide dignified income for women from slum communities in Ahmedabad.</p>
@@ -388,16 +390,16 @@
          The images below are the fallback shown until voices are added. -->
     <div id="impact-voices-list" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
       <div class="rounded-3xl overflow-hidden shadow-md card-lift cursor-default">
-        <img data-img-key="our-impact-11" src="images/testimonial1.png" alt="Community member testimonial" class="w-full h-auto"/>
+        <img loading="lazy" decoding="async" data-img-key="our-impact-11" src="images/testimonial1.png" alt="Community member testimonial" class="w-full h-auto"/>
       </div>
       <div class="rounded-3xl overflow-hidden shadow-md card-lift cursor-default sm:mt-6">
-        <img data-img-key="our-impact-12" src="images/testimonial2.png" alt="Volunteer testimonial" class="w-full h-auto"/>
+        <img loading="lazy" decoding="async" data-img-key="our-impact-12" src="images/testimonial2.png" alt="Volunteer testimonial" class="w-full h-auto"/>
       </div>
       <div class="rounded-3xl overflow-hidden shadow-md card-lift cursor-default">
-        <img data-img-key="our-impact-13" src="images/testimonial3.png" alt="Donor testimonial" class="w-full h-auto"/>
+        <img loading="lazy" decoding="async" data-img-key="our-impact-13" src="images/testimonial3.png" alt="Donor testimonial" class="w-full h-auto"/>
       </div>
       <div class="rounded-3xl overflow-hidden shadow-md card-lift cursor-default sm:mt-6">
-        <img data-img-key="our-impact-14" src="images/testimonial4.png" alt="Community sale buyer testimonial" class="w-full h-auto"/>
+        <img loading="lazy" decoding="async" data-img-key="our-impact-14" src="images/testimonial4.png" alt="Community sale buyer testimonial" class="w-full h-auto"/>
       </div>
     </div>
   </div>
@@ -412,16 +414,16 @@
     </div>
     <div id="gallery-list" class="grid grid-cols-2 md:grid-cols-4 gap-4" data-gallery data-gallery-step="8">
       <div class="photo-zoom rounded-3xl overflow-hidden aspect-square">
-        <img data-img-key="our-impact-2" src="images/impact1.jpg" alt="India Recycles community event" class="zoom-crop w-full h-full object-cover"/>
+        <img loading="lazy" decoding="async" data-img-key="our-impact-2" src="images/impact1.jpg" alt="India Recycles community event" class="zoom-crop w-full h-full object-cover"/>
       </div>
       <div class="photo-zoom rounded-3xl overflow-hidden aspect-square">
-        <img data-img-key="our-impact-3" src="images/impact2.jpg" alt="Volunteers at India Recycles" class="zoom-crop w-full h-full object-cover"/>
+        <img loading="lazy" decoding="async" data-img-key="our-impact-3" src="images/impact2.jpg" alt="Volunteers at India Recycles" class="zoom-crop w-full h-full object-cover"/>
       </div>
       <div class="photo-zoom rounded-3xl overflow-hidden aspect-square">
-        <img data-img-key="our-impact-4" src="images/impact3.jpg" alt="Medical camp beneficiaries" class="zoom-crop w-full h-full object-cover"/>
+        <img loading="lazy" decoding="async" data-img-key="our-impact-4" src="images/impact3.jpg" alt="Medical camp beneficiaries" class="zoom-crop w-full h-full object-cover"/>
       </div>
       <div class="photo-zoom rounded-3xl overflow-hidden aspect-square">
-        <img data-img-key="our-impact-5" src="images/impact4.png" alt="Community at India Recycles community sale" class="zoom-crop w-full h-full object-cover"/>
+        <img loading="lazy" decoding="async" data-img-key="our-impact-5" src="images/impact4.png" alt="Community at India Recycles community sale" class="zoom-crop w-full h-full object-cover"/>
       </div>
     </div>
   </div>
@@ -430,7 +432,7 @@
 <!-- CTA -->
 <section class="relative py-8 lg:py-12 overflow-hidden" aria-labelledby="impact-cta">
   <div class="absolute inset-0">
-    <img data-img-key="our-impact-15" src="images/impact2.jpg" alt="" class="zoom-crop w-full h-full object-cover" aria-hidden="true"/>
+    <img loading="lazy" decoding="async" data-img-key="our-impact-15" src="images/impact2.jpg" alt="" class="zoom-crop w-full h-full object-cover" aria-hidden="true"/>
     <div class="absolute inset-0 bg-green-900/82"></div>
   </div>
   <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -454,7 +456,7 @@
       <!-- Brand -->
       <div>
         <a href="index.html" class="flex items-center gap-3 mb-4 cursor-pointer">
-          <img src="images/logo.png" alt="India Recycles" class="h-[54px] w-auto brightness-200"/>
+          <img loading="lazy" decoding="async" src="images/logo.png" alt="India Recycles" class="h-[54px] w-auto brightness-200"/>
           <span class="font-bold text-[15px] text-white" style="font-family:var(--font-sans);">India Recycles</span>
         </a>
         <p class="text-green-300/80 text-[13px] leading-relaxed mb-5">Love the Pre-Loved. A non-profit giving donated clothes a dignified second life across India.</p>
@@ -517,12 +519,12 @@
   });
 </script>
 
-<script src="js/cms.js?v=41"></script>
+<script src="js/cms.js?v=43"></script>
 <script src="js/reveal.js?v=1" defer></script>
 <script src="js/gallery.js?v=4"></script>
 <script src="js/transitions.js?v=4"></script>
 <div class="ir-sticky-cta lg:hidden" role="navigation" aria-label="Quick actions">
-  <a href="drop-locations.html" data-cta-primary class="flex-1 text-center bg-green-700 text-white text-sm font-semibold py-3 rounded-xl">Find Drop Location</a>
+  <a href="drop-locations.html" data-cta-primary class="flex-1 text-center bg-green-700 text-white text-sm font-semibold py-3 rounded-xl">Donate Clothes</a>
   <a href="volunteer.html#join" class="flex-1 text-center border border-green-700 text-green-800 bg-white text-sm font-semibold py-3 rounded-xl">Join the Movement</a>
 </div>
 </body>

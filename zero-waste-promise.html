@@ -87,7 +87,9 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="preconnect" href="https://sqosmiifjqecidxhyjtg.supabase.co" crossorigin/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap" media="print" onload="this.media='all'"/>
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap"/></noscript>
   <style>
     :root {
       --font-sans: 'Inter', sans-serif;
@@ -214,7 +216,7 @@
 <!-- HERO -->
 <section class="relative pt-[84px] overflow-hidden" aria-labelledby="zw-h1">
   <div class="absolute inset-0">
-    <img data-img-key="zero-waste-promise-1" src="images/zw1.jpg" alt="Zero waste textile upcycling" class="zoom-crop w-full h-full object-cover object-center"/>
+    <img fetchpriority="high" loading="eager" data-img-key="zero-waste-promise-1" src="images/zw1.jpg" alt="Zero waste textile upcycling" class="zoom-crop w-full h-full object-cover object-center"/>
     <div class="absolute inset-0 bg-gradient-to-b from-green-900/80 via-green-900/65 to-green-900/85"></div>
   </div>
   <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8 text-center">
@@ -279,10 +281,10 @@
     </div>
     <div class="grid grid-cols-2 gap-4">
       <div class="photo-zoom rounded-3xl overflow-hidden aspect-square">
-        <img data-img-key="zero-waste-promise-2" src="images/revibe1.jpg" alt="Re-Vibe upcycled shoes" class="zoom-crop w-full h-full object-cover"/>
+        <img loading="lazy" decoding="async" data-img-key="zero-waste-promise-2" src="images/revibe1.jpg" alt="Re-Vibe upcycled shoes" class="zoom-crop w-full h-full object-cover"/>
       </div>
       <div class="photo-zoom rounded-3xl overflow-hidden aspect-square mt-8">
-        <img data-img-key="zero-waste-promise-3" src="images/revibe2.webp" alt="Re-Vibe product range" class="zoom-crop w-full h-full object-cover"/>
+        <img loading="lazy" decoding="async" data-img-key="zero-waste-promise-3" src="images/revibe2.webp" alt="Re-Vibe product range" class="zoom-crop w-full h-full object-cover"/>
       </div>
     </div>
   </div>
@@ -293,10 +295,10 @@
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-16 items-center">
     <div class="grid grid-cols-2 gap-4 order-2 lg:order-1">
       <div class="photo-zoom rounded-3xl overflow-hidden aspect-square">
-        <img data-img-key="zero-waste-promise-4" src="images/godadi1.jpg" alt="Godadi mattress being made" class="zoom-crop w-full h-full object-cover"/>
+        <img loading="lazy" decoding="async" data-img-key="zero-waste-promise-4" src="images/godadi1.jpg" alt="Godadi mattress being made" class="zoom-crop w-full h-full object-cover"/>
       </div>
       <div class="photo-zoom rounded-3xl overflow-hidden aspect-square mt-8">
-        <img data-img-key="zero-waste-promise-5" src="images/godadi2.jpg" alt="Women making Godadi mattresses" class="zoom-crop w-full h-full object-cover"/>
+        <img loading="lazy" decoding="async" data-img-key="zero-waste-promise-5" src="images/godadi2.jpg" alt="Women making Godadi mattresses" class="zoom-crop w-full h-full object-cover"/>
       </div>
     </div>
     <div class="order-1 lg:order-2">
@@ -318,7 +320,7 @@
 <!-- ZW3 PHOTO + QUOTE -->
 <section class="relative py-14 lg:py-20" aria-label="Zero waste impact">
   <div class="absolute inset-0">
-    <img data-img-key="zero-waste-promise-6" src="images/zw3.jpg" alt="" class="zoom-crop w-full h-full object-cover" aria-hidden="true"/>
+    <img loading="lazy" decoding="async" data-img-key="zero-waste-promise-6" src="images/zw3.jpg" alt="" class="zoom-crop w-full h-full object-cover" aria-hidden="true"/>
     <div class="absolute inset-0 bg-green-900/78"></div>
   </div>
   <div class="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -351,7 +353,7 @@
       <!-- Brand -->
       <div>
         <a href="index.html" class="flex items-center gap-3 mb-4 cursor-pointer">
-          <img src="images/logo.png" alt="India Recycles" class="h-[54px] w-auto brightness-200"/>
+          <img loading="lazy" decoding="async" src="images/logo.png" alt="India Recycles" class="h-[54px] w-auto brightness-200"/>
           <span class="font-bold text-[15px] text-white" style="font-family:var(--font-sans);">India Recycles</span>
         </a>
         <p class="text-green-300/80 text-[13px] leading-relaxed mb-5">Love the Pre-Loved. A non-profit giving donated clothes a dignified second life across India.</p>
@@ -414,13 +416,13 @@
   });
 </script>
 
-<script src="js/cms.js?v=41"></script>
+<script src="js/cms.js?v=43"></script>
 <script src="js/reveal.js?v=1" defer></script>
 <script src="js/gallery.js?v=4"></script>
 
 <script src="js/transitions.js?v=4"></script>
 <div class="ir-sticky-cta lg:hidden" role="navigation" aria-label="Quick actions">
-  <a href="drop-locations.html" data-cta-primary class="flex-1 text-center bg-green-700 text-white text-sm font-semibold py-3 rounded-xl">Find Drop Location</a>
+  <a href="drop-locations.html" data-cta-primary class="flex-1 text-center bg-green-700 text-white text-sm font-semibold py-3 rounded-xl">Donate Clothes</a>
   <a href="volunteer.html#join" class="flex-1 text-center border border-green-700 text-green-800 bg-white text-sm font-semibold py-3 rounded-xl">Join the Movement</a>
 </div>
 </body>

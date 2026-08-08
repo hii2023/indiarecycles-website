@@ -87,7 +87,9 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="preconnect" href="https://sqosmiifjqecidxhyjtg.supabase.co" crossorigin/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap" media="print" onload="this.media='all'"/>
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap"/></noscript>
   <style>
     :root {
       --font-sans: 'Inter', sans-serif;
@@ -214,7 +216,7 @@
 <!-- HERO -->
 <section class="relative pt-[84px] overflow-hidden" aria-labelledby="model-h1">
   <div class="absolute inset-0">
-    <img data-img-key="our-model-1" src="images/model1.jpg" alt="India Recycles clothes sorting and distribution" class="zoom-crop w-full h-full object-cover object-center"/>
+    <img fetchpriority="high" loading="eager" data-img-key="our-model-1" src="images/model1.jpg" alt="India Recycles clothes sorting and distribution" class="zoom-crop w-full h-full object-cover object-center"/>
     <div class="absolute inset-0 bg-gradient-to-b from-green-900/75 via-green-900/60 to-green-900/80"></div>
   </div>
   <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8 text-center">
@@ -233,7 +235,7 @@
     </div>
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-7">
       <div class="step-card">
-        <img class="step-img" data-img-key="our-model-step-1" src="images/model-step-1.svg" alt="You Donate" loading="lazy"/>
+        <img fetchpriority="high" loading="eager" class="step-img" data-img-key="our-model-step-1" src="images/model-step-1.svg" alt="You Donate"/>
         <span class="step-badge step-badge--green">STEP 1</span>
         <div class="step-panel">
           <h3 class="step-title">You Donate</h3>
@@ -287,13 +289,13 @@
 <!-- COMMUNITY SALE -->
 <section id="community-sale" class="py-8 lg:py-12 bg-white relative overflow-hidden scroll-mt-24" aria-labelledby="cs-heading">
   <div class="hidden lg:block absolute top-0 right-0 bottom-0 w-1/2 overflow-hidden">
-    <img data-img-key="our-model-2" src="images/model2.jpg" alt="India Recycles community sale event" class="zoom-crop w-full h-full object-cover"/>
+    <img loading="lazy" decoding="async" data-img-key="our-model-2" src="images/model2.jpg" alt="India Recycles community sale event" class="zoom-crop w-full h-full object-cover"/>
     <div class="absolute inset-y-0 left-0 w-48 bg-gradient-to-r from-white via-white/70 to-transparent pointer-events-none" aria-hidden="true"></div>
   </div>
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-16 items-center relative">
     <div class="lg:min-h-[420px] min-w-0 order-1 lg:order-2">
       <div class="lg:hidden relative w-screen left-1/2 -translate-x-1/2 overflow-hidden mb-6">
-        <img data-img-key="our-model-2" src="images/model2.jpg" alt="India Recycles community sale event" class="zoom-crop w-full h-64 object-cover"/>
+        <img loading="lazy" decoding="async" data-img-key="our-model-2" src="images/model2.jpg" alt="India Recycles community sale event" class="zoom-crop w-full h-64 object-cover"/>
         <div class="absolute inset-x-0 top-0 h-14 bg-gradient-to-b from-white to-transparent pointer-events-none" aria-hidden="true"></div>
         <div class="absolute inset-x-0 bottom-0 h-14 bg-gradient-to-t from-white to-transparent pointer-events-none" aria-hidden="true"></div>
       </div>
@@ -313,13 +315,13 @@
 <!-- THRIFT SALE -->
 <section id="thrift-sale" class="py-8 lg:py-12 bg-green-800 relative overflow-hidden scroll-mt-24" aria-labelledby="ts-heading">
   <div class="hidden lg:block absolute top-0 left-0 bottom-0 w-1/2 overflow-hidden">
-    <img data-img-key="our-model-4" src="images/model3.jpg" alt="India Recycles thrift sale event" class="zoom-crop w-full h-full object-cover"/>
+    <img loading="lazy" decoding="async" data-img-key="our-model-4" src="images/model3.jpg" alt="India Recycles thrift sale event" class="zoom-crop w-full h-full object-cover"/>
     <div class="absolute inset-y-0 right-0 w-48 bg-gradient-to-l from-#133a28 via-#133a28/70 to-transparent pointer-events-none" aria-hidden="true"></div>
   </div>
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-16 items-center relative">
     <div class="lg:min-h-[420px] min-w-0 order-1 lg:order-1">
       <div class="lg:hidden relative w-screen left-1/2 -translate-x-1/2 overflow-hidden mb-6">
-        <img data-img-key="our-model-4" src="images/model3.jpg" alt="India Recycles thrift sale event" class="zoom-crop w-full h-64 object-cover"/>
+        <img loading="lazy" decoding="async" data-img-key="our-model-4" src="images/model3.jpg" alt="India Recycles thrift sale event" class="zoom-crop w-full h-64 object-cover"/>
         <div class="absolute inset-x-0 top-0 h-14 bg-gradient-to-b from-#133a28 to-transparent pointer-events-none" aria-hidden="true"></div>
         <div class="absolute inset-x-0 bottom-0 h-14 bg-gradient-to-t from-#133a28 to-transparent pointer-events-none" aria-hidden="true"></div>
       </div>
@@ -339,13 +341,13 @@
 <!-- REVIBE -->
 <section id="revibe" class="py-8 lg:py-12 bg-white relative overflow-hidden scroll-mt-24" aria-labelledby="rv-heading">
   <div class="hidden lg:block absolute top-0 right-0 bottom-0 w-1/2 overflow-hidden">
-    <img data-img-key="our-model-10" src="images/revibe1.jpg" alt="Re-Vibe upcycled products" class="zoom-crop w-full h-full object-cover"/>
+    <img loading="lazy" decoding="async" data-img-key="our-model-10" src="images/revibe1.jpg" alt="Re-Vibe upcycled products" class="zoom-crop w-full h-full object-cover"/>
     <div class="absolute inset-y-0 left-0 w-48 bg-gradient-to-r from-white via-white/70 to-transparent pointer-events-none" aria-hidden="true"></div>
   </div>
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-16 items-center relative">
     <div class="lg:min-h-[420px] min-w-0 order-1 lg:order-2">
       <div class="lg:hidden relative w-screen left-1/2 -translate-x-1/2 overflow-hidden mb-6">
-        <img data-img-key="our-model-10" src="images/revibe1.jpg" alt="Re-Vibe upcycled products" class="zoom-crop w-full h-64 object-cover"/>
+        <img loading="lazy" decoding="async" data-img-key="our-model-10" src="images/revibe1.jpg" alt="Re-Vibe upcycled products" class="zoom-crop w-full h-64 object-cover"/>
         <div class="absolute inset-x-0 top-0 h-14 bg-gradient-to-b from-white to-transparent pointer-events-none" aria-hidden="true"></div>
         <div class="absolute inset-x-0 bottom-0 h-14 bg-gradient-to-t from-white to-transparent pointer-events-none" aria-hidden="true"></div>
       </div>
@@ -365,13 +367,13 @@
 <!-- ZERO WASTE -->
 <section id="zero-waste" class="py-8 lg:py-12 bg-green-800 relative overflow-hidden scroll-mt-24" aria-labelledby="zw-heading">
   <div class="hidden lg:block absolute top-0 left-0 bottom-0 w-1/2 overflow-hidden">
-    <img data-img-key="our-model-11" src="images/godadi2.jpg" alt="Godadi winter mattresses made from leftover textiles" class="zoom-crop w-full h-full object-cover"/>
+    <img loading="lazy" decoding="async" data-img-key="our-model-11" src="images/godadi2.jpg" alt="Godadi winter mattresses made from leftover textiles" class="zoom-crop w-full h-full object-cover"/>
     <div class="absolute inset-y-0 right-0 w-48 bg-gradient-to-l from-#133a28 via-#133a28/70 to-transparent pointer-events-none" aria-hidden="true"></div>
   </div>
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-16 items-center relative">
     <div class="lg:min-h-[420px] min-w-0 order-1 lg:order-1">
       <div class="lg:hidden relative w-screen left-1/2 -translate-x-1/2 overflow-hidden mb-6">
-        <img data-img-key="our-model-11" src="images/godadi2.jpg" alt="Godadi winter mattresses made from leftover textiles" class="zoom-crop w-full h-64 object-cover"/>
+        <img loading="lazy" decoding="async" data-img-key="our-model-11" src="images/godadi2.jpg" alt="Godadi winter mattresses made from leftover textiles" class="zoom-crop w-full h-64 object-cover"/>
         <div class="absolute inset-x-0 top-0 h-14 bg-gradient-to-b from-#133a28 to-transparent pointer-events-none" aria-hidden="true"></div>
         <div class="absolute inset-x-0 bottom-0 h-14 bg-gradient-to-t from-#133a28 to-transparent pointer-events-none" aria-hidden="true"></div>
       </div>
@@ -431,16 +433,16 @@
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
       <div class="photo-zoom rounded-3xl overflow-hidden aspect-square">
-        <img data-img-key="our-model-6" src="images/model4.jpg" alt="Sorted clothing ready for sale" class="zoom-crop w-full h-full object-cover"/>
+        <img loading="lazy" decoding="async" data-img-key="our-model-6" src="images/model4.jpg" alt="Sorted clothing ready for sale" class="zoom-crop w-full h-full object-cover"/>
       </div>
       <div class="photo-zoom rounded-3xl overflow-hidden aspect-square">
-        <img data-img-key="our-model-7" src="images/model5.jpg" alt="Volunteer sorting donations" class="zoom-crop w-full h-full object-cover"/>
+        <img loading="lazy" decoding="async" data-img-key="our-model-7" src="images/model5.jpg" alt="Volunteer sorting donations" class="zoom-crop w-full h-full object-cover"/>
       </div>
       <div class="photo-zoom rounded-3xl overflow-hidden aspect-square">
-        <img data-img-key="our-model-8" src="images/model6.jpg" alt="Clothes collection drive" class="zoom-crop w-full h-full object-cover"/>
+        <img loading="lazy" decoding="async" data-img-key="our-model-8" src="images/model6.jpg" alt="Clothes collection drive" class="zoom-crop w-full h-full object-cover"/>
       </div>
       <div class="photo-zoom rounded-3xl overflow-hidden aspect-square">
-        <img data-img-key="our-model-9" src="images/revibe1.jpg" alt="Re-Vibe upcycled products" class="zoom-crop w-full h-full object-cover"/>
+        <img loading="lazy" decoding="async" data-img-key="our-model-9" src="images/revibe1.jpg" alt="Re-Vibe upcycled products" class="zoom-crop w-full h-full object-cover"/>
       </div>
     </div>
   </div>
@@ -468,7 +470,7 @@
       <!-- Brand -->
       <div>
         <a href="index.html" class="flex items-center gap-3 mb-4 cursor-pointer">
-          <img src="images/logo.png" alt="India Recycles" class="h-[54px] w-auto brightness-200"/>
+          <img loading="lazy" decoding="async" src="images/logo.png" alt="India Recycles" class="h-[54px] w-auto brightness-200"/>
           <span class="font-bold text-[15px] text-white" style="font-family:var(--font-sans);">India Recycles</span>
         </a>
         <p class="text-green-300/80 text-[13px] leading-relaxed mb-5">Love the Pre-Loved. A non-profit giving donated clothes a dignified second life across India.</p>
@@ -531,13 +533,13 @@
   });
 </script>
 
-<script src="js/cms.js?v=41"></script>
+<script src="js/cms.js?v=43"></script>
 <script src="js/reveal.js?v=1" defer></script>
 <script src="js/gallery.js?v=4"></script>
 
 <script src="js/transitions.js?v=4"></script>
 <div class="ir-sticky-cta lg:hidden" role="navigation" aria-label="Quick actions">
-  <a href="drop-locations.html" data-cta-primary class="flex-1 text-center bg-green-700 text-white text-sm font-semibold py-3 rounded-xl">Find Drop Location</a>
+  <a href="drop-locations.html" data-cta-primary class="flex-1 text-center bg-green-700 text-white text-sm font-semibold py-3 rounded-xl">Donate Clothes</a>
   <a href="volunteer.html#join" class="flex-1 text-center border border-green-700 text-green-800 bg-white text-sm font-semibold py-3 rounded-xl">Join the Movement</a>
 </div>
 </body>

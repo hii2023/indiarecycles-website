@@ -282,11 +282,19 @@
     <button id="city-btn-vad" type="button" role="tab" aria-selected="false" aria-controls="vad-section" class="px-7 py-2.5 rounded-full text-sm font-semibold text-green-700 hover:bg-green-50 cursor-pointer transition-colors">Baroda</button>
   </div>
   <div class="mt-5">
-    <button id="near-me-btn" type="button" class="inline-flex items-center gap-2 bg-green-700 hover:bg-green-800 text-white text-sm font-semibold px-6 py-3 rounded-full cursor-pointer transition-colors shadow-sm">
+    <!-- Step 1: primary donate CTA. Keeps location off until the visitor shows intent. -->
+    <button id="donate-cta-btn" type="button" class="inline-flex items-center gap-2 bg-green-700 hover:bg-green-800 text-white text-sm font-semibold px-6 py-3 rounded-full cursor-pointer transition-colors shadow-sm">
       <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-      Find drop points near me
+      Donate Clothes Near You
     </button>
-    <p id="near-status" class="text-green-600 text-xs mt-2.5 min-h-[1rem] max-w-md mx-auto px-4" role="status" aria-live="polite"></p>
+    <!-- Step 2: revealed only after the visitor taps the button above. -->
+    <div id="near-me-wrap" style="display:none">
+      <button id="near-me-btn" type="button" class="inline-flex items-center gap-2 bg-green-700 hover:bg-green-800 text-white text-sm font-semibold px-6 py-3 rounded-full cursor-pointer transition-colors shadow-sm">
+        <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        Find my nearest drop point
+      </button>
+      <p id="near-status" class="text-green-600 text-xs mt-2.5 min-h-[1rem] max-w-md mx-auto px-4" role="status" aria-live="polite"></p>
+    </div>
   </div>
 </div>
 
@@ -839,7 +847,7 @@
   });
 </script>
 
-<script src="js/cms.js?v=42"></script>
+<script src="js/cms.js?v=43"></script>
 <script src="js/reveal.js?v=1" defer></script>
 <script src="js/gallery.js?v=4"></script>
 <script>
@@ -920,9 +928,23 @@ IR_CMS.then(function (c) {
     var ahmSec   = document.getElementById('ahm-section');
     var vadSec   = document.getElementById('vad-section');
     var toggleBar = document.getElementById('city-toggle-bar');
+    var donateBtn = document.getElementById('donate-cta-btn');
+    var nearWrap  = document.getElementById('near-me-wrap');
     if (!btn || !nearSec || !nearGrid) return;
 
     function setStatus(msg) { if (statusEl) statusEl.textContent = msg || ''; }
+
+    // Reveal the location button only after the visitor taps "Donate Clothes Near You"
+    if (donateBtn && nearWrap) {
+      donateBtn.addEventListener('click', function () {
+        donateBtn.style.display = 'none';
+        nearWrap.style.display = '';
+        btn.focus();
+      });
+    }
+    function resetTwoStep() {
+      if (donateBtn && nearWrap) { donateBtn.style.display = ''; nearWrap.style.display = 'none'; }
+    }
 
     function enterNearView() {
       if (toggleBar) toggleBar.style.display = 'none';
@@ -937,6 +959,7 @@ IR_CMS.then(function (c) {
       if (typeof window.__setCity === 'function') { window.__setCity('ahm'); }
       else { if (ahmSec) ahmSec.style.display = ''; if (vadSec) vadSec.style.display = 'none'; }
       setStatus('');
+      resetTwoStep();
     }
 
     function onLocated(pos) {
@@ -995,7 +1018,7 @@ IR_CMS.then(function (c) {
 </script>
 <script src="js/transitions.js?v=4"></script>
 <div class="ir-sticky-cta lg:hidden" role="navigation" aria-label="Quick actions">
-  <a href="drop-locations.html" data-cta-primary class="flex-1 text-center bg-green-700 text-white text-sm font-semibold py-3 rounded-xl">Find Drop Location</a>
+  <a href="drop-locations.html" data-cta-primary class="flex-1 text-center bg-green-700 text-white text-sm font-semibold py-3 rounded-xl">Donate Clothes</a>
   <a href="volunteer.html#join" class="flex-1 text-center border border-green-700 text-green-800 bg-white text-sm font-semibold py-3 rounded-xl">Join the Movement</a>
 </div>
 <script>
