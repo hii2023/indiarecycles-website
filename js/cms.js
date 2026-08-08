@@ -8,35 +8,9 @@
   var KEY = 'sb_publishable_mq6t15oAQU7f4ZAjXQZA5w_ELcgDfbt';
   var AVG_MONTH_MS = 30.4375 * 24 * 60 * 60 * 1000;
 
-  /* Perf: route every CMS image (Supabase Storage) through the on-the-fly
-     image transformer so it is resized to the element's rendered width and
-     auto-served as WebP. Patching the <img>.src setter catches every code
-     path (data-img-key swaps, galleries, covers) with no double download,
-     and leaves local images/... and already-transformed URLs untouched. */
-  try {
-    var _srcDesc = Object.getOwnPropertyDescriptor(HTMLImageElement.prototype, 'src');
-    Object.defineProperty(HTMLImageElement.prototype, 'src', {
-      configurable: true, enumerable: _srcDesc.enumerable,
-      get: function () { return _srcDesc.get.call(this); },
-      set: function (v) {
-        try {
-          if (typeof v === 'string' &&
-              v.indexOf('/storage/v1/object/public/') > -1 &&
-              v.indexOf('/render/image/') === -1) {
-            var w = parseInt(this.getAttribute('data-w'), 10) ||
-                    parseInt(this.getAttribute('width'), 10) ||
-                    Math.round((this.clientWidth || 0) * (window.devicePixelRatio || 1)) ||
-                    1200;
-            if (w < 200) w = 200;
-            if (w > 1600) w = 1600;
-            v = v.replace('/storage/v1/object/public/', '/storage/v1/render/image/public/') +
-                (v.indexOf('?') > -1 ? '&' : '?') + 'width=' + w + '&quality=70';
-          }
-        } catch (e) {}
-        _srcDesc.set.call(this, v);
-      }
-    });
-  } catch (e) {}
+  /* Perf: the <img>.src transformer is installed in img-boot.js (runs first in
+     <head>) so every swap path — img-boot's cached overrides and cms.js's live
+     ones — is routed through Supabase's on-the-fly resize + WebP endpoint. */
 
   /* Form submissions: store every submit in Supabase (for the admin inbox) while the
      form's own FormSubmit action still emails + redirects. Attached immediately so a
