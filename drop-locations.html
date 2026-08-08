@@ -83,27 +83,7 @@
   ]
 }
   </script>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            serif: ['Montserrat', 'sans-serif'],
-          },
-          colors: {
-            green: {
-              50:  '#f2f7f4', 100: '#e0ede5', 200: '#c2dccc',
-              300: '#93c1a5', 400: '#5ca07a', 500: '#35825b',
-              600: '#256b49', 700: '#1c5439', 800: '#133a28', 900: '#0b2418',
-            },
-          },
-          borderRadius: { '4xl': '2rem' },
-        }
-      }
-    }
-  </script>
+  <link rel="stylesheet" href="css/tailwind.css?v=1"/>
 
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -296,12 +276,38 @@
 </section>
 
 <!-- CITY TOGGLE -->
-<div class="bg-[#f6f7f6] texture-bg pt-8 text-center">
+<div id="city-toggle-bar" class="bg-[#f6f7f6] texture-bg pt-8 text-center">
   <div class="inline-flex bg-white border border-green-200 rounded-full p-1 shadow-sm" role="tablist" aria-label="Choose a city">
     <button id="city-btn-ahm" type="button" role="tab" aria-selected="true" aria-controls="ahm-section" class="px-7 py-2.5 rounded-full text-sm font-semibold bg-green-700 text-white cursor-pointer transition-colors">Ahmedabad</button>
     <button id="city-btn-vad" type="button" role="tab" aria-selected="false" aria-controls="vad-section" class="px-7 py-2.5 rounded-full text-sm font-semibold text-green-700 hover:bg-green-50 cursor-pointer transition-colors">Baroda</button>
   </div>
+  <div class="mt-5">
+    <button id="near-me-btn" type="button" class="inline-flex items-center gap-2 bg-green-700 hover:bg-green-800 text-white text-sm font-semibold px-6 py-3 rounded-full cursor-pointer transition-colors shadow-sm">
+      <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+      Find drop points near me
+    </button>
+    <p id="near-status" class="text-green-600 text-xs mt-2.5 min-h-[1rem] max-w-md mx-auto px-4" role="status" aria-live="polite"></p>
+  </div>
 </div>
+
+<!-- NEAREST RESULTS (shown after location is shared) -->
+<section id="near-section" class="py-8 bg-[#f6f7f6] texture-bg" style="display:none" aria-labelledby="near-heading">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between gap-4 mb-8 flex-wrap">
+      <div class="flex items-center gap-4">
+        <div class="w-12 h-12 bg-green-600 rounded-2xl flex items-center justify-center shadow-sm">
+          <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div>
+          <h2 id="near-heading" class="text-3xl text-green-800">Nearest to you</h2>
+          <p id="near-subhead" class="text-green-500">Sorted by distance from your location</p>
+        </div>
+      </div>
+      <button id="near-back" type="button" class="text-sm font-semibold text-green-700 border border-green-300 hover:bg-green-50 px-5 py-2.5 rounded-full cursor-pointer transition-colors">&larr; Show by city</button>
+    </div>
+    <div id="near-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+  </div>
+</section>
 
 <!-- AHMEDABAD LOCATIONS -->
 <section id="ahm-section" class="py-8 bg-[#f6f7f6] texture-bg" aria-labelledby="ahm-heading">
@@ -840,7 +846,37 @@
 IR_CMS.then(function (c) {
   var loc = c.locations || {};
   function esc(t) { var d = document.createElement('div'); d.textContent = t || ''; return d.innerHTML; }
-  function card(l, i) {
+
+  // Parse a "lat, lng" string (what Google Maps copies on right-click) into {lat,lng}
+  function parseCoords(l) {
+    if (!l) return null;
+    var raw = (l.coords != null ? l.coords : '').toString().trim();
+    if (!raw && l.lat != null && l.lng != null) raw = l.lat + ',' + l.lng;
+    if (!raw) return null;
+    var m = raw.match(/-?\d+(?:\.\d+)?/g);
+    if (!m || m.length < 2) return null;
+    var lat = parseFloat(m[0]), lng = parseFloat(m[1]);
+    if (!isFinite(lat) || !isFinite(lng)) return null;
+    if (lat < -90 || lat > 90 || lng < -180 || lng > 180) return null;
+    return { lat: lat, lng: lng };
+  }
+
+  // Straight-line (great-circle) distance in km — no API, no cost
+  function haversine(a, b) {
+    var R = 6371, rad = Math.PI / 180;
+    var dLat = (b.lat - a.lat) * rad, dLng = (b.lng - a.lng) * rad;
+    var la1 = a.lat * rad, la2 = b.lat * rad;
+    var h = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(la1) * Math.cos(la2) * Math.sin(dLng / 2) * Math.sin(dLng / 2);
+    return 2 * R * Math.asin(Math.min(1, Math.sqrt(h)));
+  }
+
+  function fmtKm(km) {
+    if (km < 1) return Math.round(km * 1000) + ' m away';
+    return (km < 10 ? km.toFixed(1) : String(Math.round(km))) + ' km away';
+  }
+
+  function card(l, i, dist) {
     var maps = l.maps || ('https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(l.address || l.name));
     var contactLine = '';
     if (l.contact || l.phone) {
@@ -848,7 +884,13 @@ IR_CMS.then(function (c) {
         (l.contact && l.phone ? ' &middot; ' : '') +
         (l.phone ? '<a href="tel:' + esc(l.phone.replace(/[^+0-9]/g, '')) + '" class="text-green-600 hover:text-green-800 cursor-pointer">' + esc(l.phone) + '</a>' : '') + '</p>';
     }
-    return '<div class="bg-white rounded-3xl p-5 border border-green-100 card-lift">' +
+    var badge = '';
+    if (typeof dist === 'number' && isFinite(dist)) {
+      badge = '<div class="inline-flex items-center gap-1 bg-green-100 text-green-700 text-[11px] font-bold px-2.5 py-1 rounded-full mb-3">' +
+        '<svg class="w-3 h-3 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>' +
+        esc(fmtKm(dist)) + '</div>';
+    }
+    return '<div class="bg-white rounded-3xl p-5 border border-green-100 card-lift">' + badge +
       '<div class="flex items-start gap-3 mb-3">' +
       '<div class="w-8 h-8 bg-green-600 rounded-xl flex items-center justify-center shrink-0"><span class="text-white font-bold text-xs">' + (i + 1) + '</span></div>' +
       '<div class="flex-1 min-w-0"><h3 class="font-semibold text-green-800 mb-0.5">' + esc(l.name) + '</h3>' +
@@ -859,12 +901,96 @@ IR_CMS.then(function (c) {
   function render(list, gridId, countId) {
     if (!Array.isArray(list) || !list.length) return;
     var g = document.getElementById(gridId);
-    if (g) g.innerHTML = list.map(card).join('');
+    if (g) g.innerHTML = list.map(function (l, i) { return card(l, i); }).join('');
     var n = document.getElementById(countId);
     if (n) n.textContent = String(list.length);
   }
   render(loc.ahm, 'ahm-grid', 'ahm-count');
   render(loc.vad, 'vad-grid', 'vad-count');
+
+  /* ─── Find drop points near me ─── */
+  (function () {
+    var all = [].concat(Array.isArray(loc.ahm) ? loc.ahm : [], Array.isArray(loc.vad) ? loc.vad : []);
+    var btn      = document.getElementById('near-me-btn');
+    var statusEl = document.getElementById('near-status');
+    var nearSec  = document.getElementById('near-section');
+    var nearGrid = document.getElementById('near-grid');
+    var nearSub  = document.getElementById('near-subhead');
+    var backBtn  = document.getElementById('near-back');
+    var ahmSec   = document.getElementById('ahm-section');
+    var vadSec   = document.getElementById('vad-section');
+    var toggleBar = document.getElementById('city-toggle-bar');
+    if (!btn || !nearSec || !nearGrid) return;
+
+    function setStatus(msg) { if (statusEl) statusEl.textContent = msg || ''; }
+
+    function enterNearView() {
+      if (toggleBar) toggleBar.style.display = 'none';
+      if (ahmSec) ahmSec.style.display = 'none';
+      if (vadSec) vadSec.style.display = 'none';
+      nearSec.style.display = '';
+    }
+    function exitNearView() {
+      nearSec.style.display = '';
+      nearSec.style.display = 'none';
+      if (toggleBar) toggleBar.style.display = '';
+      if (typeof window.__setCity === 'function') { window.__setCity('ahm'); }
+      else { if (ahmSec) ahmSec.style.display = ''; if (vadSec) vadSec.style.display = 'none'; }
+      setStatus('');
+    }
+
+    function onLocated(pos) {
+      btn.disabled = false; btn.innerHTML = btn.__label;
+      var me = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+      var ranked = [];
+      var unranked = [];
+      all.forEach(function (l) {
+        var c = parseCoords(l);
+        if (c) ranked.push({ l: l, d: haversine(me, c) });
+        else unranked.push(l);
+      });
+      ranked.sort(function (a, b) { return a.d - b.d; });
+
+      var html = ranked.map(function (r, i) { return card(r.l, i, r.d); }).join('');
+      html += unranked.map(function (l, i) { return card(l, ranked.length + i); }).join('');
+      nearGrid.innerHTML = html;
+
+      var sub = 'Closest is ' + fmtKm(ranked[0].d).replace(' away', '') + ' away &middot; ' +
+                ranked.length + ' location' + (ranked.length !== 1 ? 's' : '') + ' ranked';
+      if (unranked.length) sub += ' &middot; ' + unranked.length + ' more listed below';
+      if (nearSub) nearSub.innerHTML = sub;
+
+      setStatus('');
+      enterNearView();
+      nearSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function onError(err) {
+      btn.disabled = false; btn.innerHTML = btn.__label;
+      var msg = 'Couldn’t get your location. Please try again, or browse all locations below.';
+      if (err && err.code === 1) msg = 'Location access was blocked. Allow it in your browser to sort by distance — meanwhile you can browse all locations below.';
+      else if (err && err.code === 3) msg = 'Locating timed out. Please try again, or browse all locations below.';
+      setStatus(msg);
+    }
+
+    btn.__label = btn.innerHTML;
+    btn.addEventListener('click', function () {
+      if (!navigator.geolocation) {
+        setStatus('Your browser does not support location sharing. Browse all locations below.');
+        return;
+      }
+      // Nothing to rank until at least one drop point has coordinates in the admin
+      var hasCoords = all.some(function (l) { return !!parseCoords(l); });
+      if (!hasCoords) {
+        setStatus('Distance ranking switches on once drop points have map coordinates added in the admin panel. Showing all locations by city for now.');
+        return;
+      }
+      setStatus('Getting your location…');
+      btn.disabled = true; btn.innerHTML = 'Locating…';
+      navigator.geolocation.getCurrentPosition(onLocated, onError, { enableHighAccuracy: true, timeout: 10000, maximumAge: 60000 });
+    });
+    if (backBtn) backBtn.addEventListener('click', exitNearView);
+  })();
 });
 </script>
 <script src="js/transitions.js?v=4"></script>
@@ -888,6 +1014,7 @@ IR_CMS.then(function (c) {
   }
   btns.ahm.addEventListener('click', function () { show('ahm'); });
   btns.vad.addEventListener('click', function () { show('vad'); });
+  window.__setCity = show;
 })();
 </script>
 <script src="js/contact-fab.js?v=1"></script>

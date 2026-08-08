@@ -1189,7 +1189,7 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
   function collectCards(containerId) {
     return Array.from(document.getElementById(containerId).querySelectorAll('[data-loc-card]')).map(card => {
       const v = Array.from(card.querySelectorAll('input')).map(i => i.value.trim());
-      return { name: v[0], address: v[1], contact: v[2], phone: v[3], maps: v[4] };
+      return { name: v[0], address: v[1], contact: v[2], phone: v[3], maps: v[4], coords: v[5] };
     }).filter(l => l.name);
   }
 
@@ -1820,6 +1820,8 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
             <input type="tel" value="${(loc.phone || '').replace(/"/g, '&quot;')}" placeholder="Phone (optional)" class="px-3 py-2 rounded-xl border border-forest-200 text-sm text-forest-800 bg-white"/>
           </div>
           <input type="url" value="${(loc.maps || '').replace(/"/g, '&quot;')}" placeholder="Google Maps link" class="w-full px-3 py-2 rounded-xl border border-forest-200 text-xs text-forest-700 bg-white font-mono"/>
+          <input type="text" value="${(loc.coords || '').replace(/"/g, '&quot;')}" placeholder="Coordinates e.g. 23.0225, 72.5714" class="w-full px-3 py-2 rounded-xl border border-forest-200 text-xs text-forest-700 bg-white font-mono"/>
+          <p class="text-[11px] text-forest-400 leading-snug">For "near me" sorting: open Google Maps, right-click the exact spot, click the numbers to copy, paste here. Leave blank if unknown.</p>
         </div>
       </div>
     `).join('');
@@ -1846,6 +1848,8 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
           <input type="tel" placeholder="Phone (optional)" class="px-3 py-2 rounded-xl border border-forest-200 text-sm text-forest-800 bg-white"/>
         </div>
         <input type="url" placeholder="Google Maps link" class="w-full px-3 py-2 rounded-xl border border-forest-200 text-xs text-forest-700 bg-white font-mono"/>
+        <input type="text" placeholder="Coordinates e.g. 23.0225, 72.5714" class="w-full px-3 py-2 rounded-xl border border-forest-200 text-xs text-forest-700 bg-white font-mono"/>
+        <p class="text-[11px] text-forest-400 leading-snug">For "near me" sorting: open Google Maps, right-click the exact spot, click the numbers to copy, paste here. Leave blank if unknown.</p>
       </div>
     `;
     el.appendChild(div);
