@@ -183,15 +183,33 @@
           <h2 class="font-semibold text-forest-800 text-sm uppercase tracking-wide">Phone bottom bar <span class="normal-case font-medium text-forest-400">&mdash; mobile only</span></h2>
           <button onclick="saveSection('settings')" class="save-btn bg-forest-600 hover:bg-forest-700 text-white px-4 py-1.5 rounded-lg font-semibold text-xs cursor-pointer shadow shrink-0">Save</button>
         </div>
-        <label for="set-cta" class="block text-sm font-semibold text-forest-700 mb-1.5">First button</label>
-        <p class="text-xs text-forest-500 mb-2.5 leading-relaxed"><strong>On mobile phones only</strong>, a bar sits at the bottom of every page with two buttons. The second is always &ldquo;Join the Movement&rdquo;; choose what the first one does. This bar does not appear on desktop.</p>
-        <select id="set-cta" class="w-full max-w-xs px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream cursor-pointer">
-          <option value="drop">Find Drop Location</option>
-          <option value="event">Next Event</option>
-          <option value="talk">Next IR Talk</option>
-          <option value="donate">Donate</option>
-          <option value="revibe">Shop with Re-Vibe</option>
-        </select>
+        <p class="text-xs text-forest-500 mb-4 leading-relaxed"><strong>On mobile phones only</strong>, a bar sits at the bottom of every page with two buttons. Choose what each button does. This bar does not appear on desktop.</p>
+        <div class="grid sm:grid-cols-2 gap-4 max-w-xl">
+          <div>
+            <label for="set-cta" class="block text-sm font-semibold text-forest-700 mb-1.5">First button</label>
+            <select id="set-cta" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream cursor-pointer">
+              <option value="drop">Find Drop Location</option>
+              <option value="event">Next Event</option>
+              <option value="talk">Next IR Talk</option>
+              <option value="donate">Donate</option>
+              <option value="revibe">Shop with Re-Vibe</option>
+              <option value="thrift">Thrift Store</option>
+              <option value="join">Join the Movement</option>
+            </select>
+          </div>
+          <div>
+            <label for="set-cta2" class="block text-sm font-semibold text-forest-700 mb-1.5">Second button</label>
+            <select id="set-cta2" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream cursor-pointer">
+              <option value="join">Join the Movement</option>
+              <option value="drop">Find Drop Location</option>
+              <option value="event">Next Event</option>
+              <option value="talk">Next IR Talk</option>
+              <option value="donate">Donate</option>
+              <option value="revibe">Shop with Re-Vibe</option>
+              <option value="thrift">Thrift Store</option>
+            </select>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -1458,7 +1476,7 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
       return { items: vds };
     }
     if (section === 'settings') {
-      return { pickup_enabled: document.getElementById('set-pickup').checked, notify_email: (document.getElementById('set-notify').value || '').trim(), sticky_cta: document.getElementById('set-cta').value };
+      return { pickup_enabled: document.getElementById('set-pickup').checked, notify_email: (document.getElementById('set-notify').value || '').trim(), sticky_cta: document.getElementById('set-cta').value, sticky_cta2: document.getElementById('set-cta2').value };
     }
     if (section === 'stats') {
       const out = {};
@@ -1706,7 +1724,7 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
       if (cms.models && Array.isArray(cms.models.items)) renderModelsList(cms.models.items);
       if (cms.videos && Array.isArray(cms.videos.items)) renderVideos(cms.videos.items);
       if (cms.stories && Array.isArray(cms.stories.items)) renderStoriesList(cms.stories.items);
-      if (cms.settings) { document.getElementById('set-pickup').checked = cms.settings.pickup_enabled !== false; if (cms.settings.notify_email) document.getElementById('set-notify').value = cms.settings.notify_email; if (cms.settings.sticky_cta) document.getElementById('set-cta').value = cms.settings.sticky_cta; }
+      if (cms.settings) { document.getElementById('set-pickup').checked = cms.settings.pickup_enabled !== false; if (cms.settings.notify_email) document.getElementById('set-notify').value = cms.settings.notify_email; if (cms.settings.sticky_cta) document.getElementById('set-cta').value = cms.settings.sticky_cta; if (cms.settings.sticky_cta2) document.getElementById('set-cta2').value = cms.settings.sticky_cta2; }
       if (cms.images && typeof cms.images === 'object') {
         imageOverrides = Object.assign({}, cms.images);
         renderGallery();

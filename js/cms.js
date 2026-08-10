@@ -761,25 +761,36 @@
         }); }
       }
 
-      /* Mobile sticky bar: the admin picks what the first button does */
-      var ctaEl = document.querySelector('[data-cta-primary]');
-      if (ctaEl) {
-        var pick = (content.settings && content.settings.sticky_cta) || 'drop';
+      /* Mobile sticky bar: the admin picks what BOTH buttons do (mobile only). */
+      (function () {
+        var firstEl  = document.querySelector('[data-cta-primary]');
+        var secondEl = document.querySelector('[data-cta-secondary]');
+        if (!firstEl && !secondEl) return;
         var evs = (content.events && content.events.items) || [];
         // "Next event" points at the first upcoming event, falling back to the events page
         var upcoming = evs.filter(function (e) { return (e.status || 'upcoming') === 'upcoming'; });
         var nextEvent = upcoming.length ? 'events.html#event-' + evs.indexOf(upcoming[0]) : 'events.html';
         var CTA = {
-          drop:   { href: 'drop-locations.html', text: 'Donate Clothes' },
-          event:  { href: nextEvent,             text: 'Next Event' },
-          talk:   { href: 'ir-talks.html',       text: 'Next IR Talk' },
-          donate: { href: 'donate.html',         text: 'Donate' },
-          revibe: { href: 'revibe.html',         text: 'Shop with Re-Vibe' }
+          drop:   { href: 'drop-locations.html',            text: 'Donate Clothes' },
+          event:  { href: nextEvent,                        text: 'Next Event' },
+          talk:   { href: 'ir-talks.html',                  text: 'Next IR Talk' },
+          donate: { href: 'donate.html',                    text: 'Donate' },
+          revibe: { href: 'revibe.html',                    text: 'Shop with Re-Vibe' },
+          thrift: { href: 'https://store.indiarecycles.org', text: 'Thrift Store' },
+          join:   { href: 'volunteer.html#join',            text: 'Join the Movement' }
         };
-        var cta = CTA[pick] || CTA.drop;
-        ctaEl.setAttribute('href', cta.href);
-        ctaEl.textContent = cta.text;
-      }
+        function apply(el, pick, fallback) {
+          if (!el) return;
+          var cta = CTA[pick] || CTA[fallback];
+          el.setAttribute('href', cta.href);
+          el.textContent = cta.text;
+          if (/^https?:\/\//i.test(cta.href)) { el.setAttribute('target', '_blank'); el.setAttribute('rel', 'noopener noreferrer'); }
+          else { el.removeAttribute('target'); el.removeAttribute('rel'); }
+        }
+        var s = content.settings || {};
+        apply(firstEl,  s.sticky_cta,  'drop');
+        apply(secondEl, s.sticky_cta2, 'join');
+      })();
 
       /* Flash side bars: pinned tabs + popups. Two sources feed this:
          (1) General announcements (the "General Announcement" admin tab).

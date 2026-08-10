@@ -673,7 +673,7 @@
       <h2 id="pickup-heading" class="text-2xl lg:text-3xl text-green-800 mb-2">Request a Pickup</h2>
       <p class="text-green-600 text-sm max-w-xl mx-auto">Tell us where you are and roughly how many clothes you have. Our team will get in touch to arrange a collection.</p>
     </div>
-    <form data-collect="pickup" action="https://formsubmit.co/indiarecycles@gmail.com" method="POST" class="bg-[#f6f7f6] rounded-3xl border border-green-100 p-6 sm:p-8">
+    <form id="pickup-form" data-collect="pickup" action="https://formsubmit.co/indiarecycles@gmail.com" method="POST" class="bg-[#f6f7f6] rounded-3xl border border-green-100 p-6 sm:p-8">
       <input type="hidden" name="_subject" value="Pickup request via IndiaRecycles.org"/>
       <input type="hidden" name="_next" value="https://www.indiarecycles.org/thank-you.html?pickup=1"/>
       <input type="hidden" name="_captcha" value="false"/>
@@ -715,9 +715,28 @@
         <label for="pk-note" class="block text-xs font-semibold text-green-700 mb-1.5">Anything else? (optional)</label>
         <textarea id="pk-note" name="note" rows="2" placeholder="Preferred day or time, lift availability, etc." class="INP resize-none"></textarea>
       </div>
-      <button type="submit" class="w-full sm:w-auto bg-green-700 hover:bg-green-800 text-white px-8 py-3.5 rounded-xl font-semibold text-sm transition-colors duration-200 cursor-pointer">Request Pickup</button>
+      <button type="button" id="pk-book-btn" class="w-full sm:w-auto bg-green-700 hover:bg-green-800 text-white px-8 py-3.5 rounded-xl font-semibold text-sm transition-colors duration-200 cursor-pointer">Book Pickup</button>
       <p class="text-[11px] text-green-500 mt-3">We usually respond within 2 to 3 working days. Pickups depend on volunteer availability in your area.</p>
     </form>
+  </div>
+
+  <!-- Pickup confirmation popup: shows the charges, and books only on confirm -->
+  <div id="pk-modal" role="dialog" aria-modal="true" aria-labelledby="pk-modal-title" hidden style="position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(20,40,30,0.55);">
+    <div style="background:#fff;border-radius:20px;max-width:440px;width:100%;padding:26px 24px;box-shadow:0 24px 60px rgba(0,0,0,0.28);">
+      <h3 id="pk-modal-title" style="font-size:1.35rem;font-weight:600;color:#1a1a1a;margin-bottom:6px;">Confirm your pickup</h3>
+      <p style="color:#6b6b6b;font-size:14px;line-height:1.6;margin-bottom:16px;">A small pickup charge applies. Please review before booking:</p>
+      <div style="background:#f2f7f4;border:1px solid #cfe4d7;border-radius:14px;padding:14px 16px;margin-bottom:20px;">
+        <ul style="margin:0;padding-left:18px;color:#3f5a4a;font-size:13.5px;line-height:1.9;">
+          <li>Within Ahmedabad, up to 5 km: <strong>₹50</strong></li>
+          <li>Within Ahmedabad, above 5 km: <strong>₹100</strong></li>
+          <li>Outside Ahmedabad: our team will let you know the charges before pickup.</li>
+        </ul>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end;">
+        <button type="button" id="pk-cancel" style="border:1.5px solid rgba(0,0,0,0.14);background:#fff;color:#1a1a1a;padding:10px 20px;border-radius:9999px;font-size:14px;font-weight:500;cursor:pointer;">Cancel</button>
+        <button type="button" id="pk-confirm" style="background:#1c5439;color:#fff;padding:10px 22px;border-radius:9999px;font-size:14px;font-weight:600;cursor:pointer;">Confirm &amp; Book Pickup</button>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -836,7 +855,7 @@
   });
 </script>
 
-<script src="js/cms.js?v=45"></script>
+<script src="js/cms.js?v=46"></script>
 <script src="js/reveal.js?v=1" defer></script>
 <script src="js/gallery.js?v=4"></script>
 <script>
@@ -1002,7 +1021,7 @@ IR_CMS.then(function (c) {
 <script src="js/transitions.js?v=4"></script>
 <div class="ir-sticky-cta lg:hidden" role="navigation" aria-label="Quick actions">
   <a href="drop-locations.html" data-cta-primary class="flex-1 text-center bg-green-700 text-white text-sm font-semibold py-3 rounded-xl">Donate Clothes</a>
-  <a href="volunteer.html#join" class="flex-1 text-center border border-green-700 text-green-800 bg-white text-sm font-semibold py-3 rounded-xl">Join the Movement</a>
+  <a href="volunteer.html#join" data-cta-secondary class="flex-1 text-center border border-green-700 text-green-800 bg-white text-sm font-semibold py-3 rounded-xl">Join the Movement</a>
 </div>
 <script>
 (function () {
@@ -1024,5 +1043,32 @@ IR_CMS.then(function (c) {
 })();
 </script>
 <script src="js/contact-fab.js?v=1"></script>
+<script>
+  // Pickup booking: clicking "Book Pickup" shows the charge popup; the request is
+  // only sent (booked) after the visitor confirms. requestSubmit() keeps the
+  // normal submit flow (cms.js saves to the inbox, then FormSubmit redirects).
+  (function () {
+    var form = document.getElementById('pickup-form');
+    var modal = document.getElementById('pk-modal');
+    if (!form || !modal) return;
+    var openBtn = document.getElementById('pk-book-btn');
+    var cancelBtn = document.getElementById('pk-cancel');
+    var confirmBtn = document.getElementById('pk-confirm');
+    function openModal() { modal.hidden = false; document.body.style.overflow = 'hidden'; confirmBtn.focus(); }
+    function closeModal() { modal.hidden = true; document.body.style.overflow = ''; }
+    openBtn.addEventListener('click', function () {
+      if (form.checkValidity()) openModal();
+      else form.reportValidity();
+    });
+    cancelBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !modal.hidden) closeModal(); });
+    confirmBtn.addEventListener('click', function () {
+      closeModal();
+      if (typeof form.requestSubmit === 'function') { form.requestSubmit(); }
+      else { var b = document.createElement('button'); b.type = 'submit'; b.style.display = 'none'; form.appendChild(b); b.click(); form.removeChild(b); }
+    });
+  })();
+</script>
 </body>
 </html>
