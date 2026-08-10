@@ -721,7 +721,7 @@
   </div>
 
   <!-- Pickup confirmation popup: shows the charges, and books only on confirm -->
-  <div id="pk-modal" role="dialog" aria-modal="true" aria-labelledby="pk-modal-title" hidden style="position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(20,40,30,0.55);">
+  <div id="pk-modal" role="dialog" aria-modal="true" aria-labelledby="pk-modal-title" style="position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(20,40,30,0.55);">
     <div style="background:#fff;border-radius:20px;max-width:440px;width:100%;padding:26px 24px;box-shadow:0 24px 60px rgba(0,0,0,0.28);">
       <h3 id="pk-modal-title" style="font-size:1.35rem;font-weight:600;color:#1a1a1a;margin-bottom:6px;">Confirm your pickup</h3>
       <p style="color:#6b6b6b;font-size:14px;line-height:1.6;margin-bottom:16px;">A small pickup charge applies. Please review before booking:</p>
@@ -1054,15 +1054,15 @@ IR_CMS.then(function (c) {
     var openBtn = document.getElementById('pk-book-btn');
     var cancelBtn = document.getElementById('pk-cancel');
     var confirmBtn = document.getElementById('pk-confirm');
-    function openModal() { modal.hidden = false; document.body.style.overflow = 'hidden'; confirmBtn.focus(); }
-    function closeModal() { modal.hidden = true; document.body.style.overflow = ''; }
+    function openModal() { modal.style.display = 'flex'; document.body.style.overflow = 'hidden'; confirmBtn.focus(); }
+    function closeModal() { modal.style.display = 'none'; document.body.style.overflow = ''; }
     openBtn.addEventListener('click', function () {
       if (form.checkValidity()) openModal();
       else form.reportValidity();
     });
     cancelBtn.addEventListener('click', closeModal);
     modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !modal.hidden) closeModal(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && modal.style.display !== 'none') closeModal(); });
     confirmBtn.addEventListener('click', function () {
       closeModal();
       if (typeof form.requestSubmit === 'function') { form.requestSubmit(); }
