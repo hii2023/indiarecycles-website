@@ -781,19 +781,46 @@
         ctaEl.textContent = cta.text;
       }
 
-      /* Flash side bars: one or more pinned tabs + popups (event / talk / announcement).
-         Each side bar shows its tab when enabled; auto_open decides whether the popup
-         pops open on arrival (off = tab only, visitor clicks to open). */
+      /* Flash side bars: pinned tabs + popups. Two sources feed this:
+         (1) General announcements (the "General Announcement" admin tab).
+         (2) Any Event / Collaboration / IR Talk whose "Flash on the website" is
+             set to a side bar or an auto popup.
+         A tab always shows; auto-popups open once per visitor on arrival. */
       (function () {
+        function coverOf(it) { return (Array.isArray(it.photos) && it.photos[0]) || it.photo || it.logo || ''; }
+        function fmtWhen(d, t) {
+          var parts = [];
+          if (d) { try { parts.push(new Date(d + 'T00:00:00').toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })); } catch (e) { parts.push(esc(d)); } }
+          if (t) parts.push(esc(t));
+          return parts.join(' &middot; ');
+        }
+        var list = [];
+        // (1) General announcements
         var f = content.flash || {};
-        var items = Array.isArray(f.items) ? f.items : ((f.title || f.kind) ? [f] : []);
+        var gitems = Array.isArray(f.items) ? f.items : ((f.title || f.kind) ? [f] : []);
+        gitems.forEach(function (it) {
+          if (!it || it.enabled === false || !(it.title || '').trim()) return;
+          list.push({ kind: (it.kind || 'Update').trim(), title: it.title, when: fmtWhen(it.date, it.time), desc: it.description, link: it.link, linkLabel: it.link_label || 'Learn more', photo: it.photo || '', autoOpen: it.auto_open !== false });
+        });
+        // (2) Events / Collaborations / IR Talks flagged to flash
+        function pull(items, kind, page) {
+          (Array.isArray(items) ? items : []).forEach(function (it) {
+            if (!it || (it.flash !== 'sidebar' && it.flash !== 'popup') || !(it.title || '').trim()) return;
+            var when = kind === 'Event' ? [it.when, it.time].filter(Boolean).map(esc).join(' &middot; ') : fmtWhen(it.date);
+            var hasLink = kind === 'Collaboration' && it.link;
+            list.push({ kind: kind, title: it.title, when: when, desc: it.description, link: hasLink ? it.link : page, linkLabel: hasLink ? 'Visit website' : 'See details', photo: coverOf(it), autoOpen: it.flash === 'popup' });
+          });
+        }
+        pull(content.events && content.events.items, 'Event', 'events.html');
+        pull(content.collaborations && content.collaborations.items, 'Collaboration', 'collaborations.html');
+        pull(content.talks && content.talks.items, 'IR Talk', 'ir-talks.html');
+
         // Rebuild from scratch on each apply.
         Array.prototype.forEach.call(document.querySelectorAll('.ir-flash-tab, .ir-flash-modal'), function (el) { el.remove(); });
-        var live = items.filter(function (it) { return it && it.enabled !== false && (it.title || '').trim(); });
-        if (!live.length) return;
-        var n = live.length, autoTarget = null, autoSig = '';
-        live.forEach(function (it, i) {
-          var kind = (it.kind || 'Update').trim();
+        if (!list.length) return;
+        var n = list.length, autoTarget = null, autoSig = '';
+        list.forEach(function (it, i) {
+          var kind = it.kind;
           var tab = document.createElement('button');
           tab.type = 'button';
           tab.className = 'ir-flash-tab';
@@ -814,8 +841,9 @@
           document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && modal.classList.contains('open')) fClose(); });
           tab.innerHTML = '<span class="ir-flash-dot" aria-hidden="true"></span>' + esc(kind);
           tab.setAttribute('aria-label', kind + ': ' + (it.title || ''));
-          var when = [it.date ? new Date(it.date + 'T00:00:00').toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' }) : '', it.time].filter(Boolean).join(' &middot; ');
-          var cta = it.link ? '<a href="' + esc(it.link) + '" target="_blank" rel="noopener noreferrer" class="ir-flash-cta">' + esc(it.link_label || 'Learn more') + '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>' : '';
+          var when = it.when || '';
+          var ext = /^https?:\/\//i.test(it.link || '');
+          var cta = it.link ? '<a href="' + esc(it.link) + '"' + (ext ? ' target="_blank" rel="noopener noreferrer"' : '') + ' class="ir-flash-cta">' + esc(it.linkLabel || 'Learn more') + '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>' : '';
           modal.innerHTML =
             '<div class="ir-flash-box">' +
               '<button class="ir-flash-close" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>' +
@@ -824,13 +852,13 @@
                 '<span class="ir-flash-kind"><span class="ir-flash-dot" style="width:7px;height:7px" aria-hidden="true"></span>' + esc(kind) + '</span>' +
                 '<h3 class="ir-flash-title">' + esc(it.title) + '</h3>' +
                 (when ? '<div class="ir-flash-when">' + when + '</div>' : '') +
-                (it.description ? '<p class="ir-flash-desc">' + esc(it.description) + '</p>' : '') +
+                (it.desc ? '<p class="ir-flash-desc">' + esc(it.desc) + '</p>' : '') +
                 cta +
               '</div>' +
             '</div>';
           modal.querySelector('.ir-flash-close').addEventListener('click', fClose);
-          if (!autoTarget && it.auto_open !== false) autoTarget = tab;
-          autoSig += (it.title || '') + '|' + (it.date || '') + '|' + (it.time || '') + '||';
+          if (!autoTarget && it.autoOpen) autoTarget = tab;
+          autoSig += (it.title || '') + '|' + kind + '||';
         });
         if (autoTarget) {
           try {
