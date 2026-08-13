@@ -282,6 +282,35 @@
         if (it && it.location) return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(it.location);
         return '';
       }
+      /* Human-readable date + time for an event, built from its start/end datetimes
+         (the single date field the admin now edits). Falls back to the legacy
+         free-text when/time for older events saved before that field existed. */
+      function evWhen(e) {
+        function pd(v) { if (!v) return null; var x = new Date(v); return isNaN(x.getTime()) ? null : x; }
+        var s = pd(e && e.start), en = pd(e && e.end);
+        if (!s && !en) return { when: esc((e && e.when) || ''), time: esc((e && e.time) || '') };
+        var DAY = { day: 'numeric', month: 'short', year: 'numeric' }, TIME = { hour: 'numeric', minute: '2-digit' };
+        function d(x) { return x.toLocaleDateString('en-IN', DAY); }
+        function tm(x) { return x.toLocaleTimeString('en-IN', TIME).replace(/\b([ap])m\b/i, function (m, p) { return p.toUpperCase() + 'M'; }); }
+        if (s && en) {
+          var same = s.toDateString() === en.toDateString();
+          return { when: same ? d(s) : d(s) + ' &ndash; ' + d(en), time: tm(s) + ' &ndash; ' + tm(en) };
+        }
+        var one = s || en;
+        return { when: d(one), time: tm(one) };
+      }
+      /* Order events chronologically by their start datetime (falling back to the
+         legacy all-day date); undated items keep admin order. */
+      function sortEvents(items, ascending) {
+        var withT = [], without = [];
+        (items || []).forEach(function (it, i) {
+          var st = evTimes(it).start, t = st ? st.getTime() : NaN;
+          (isNaN(t) ? without : withT).push({ it: it, t: t, i: i });
+        });
+        withT.sort(function (a, b) { return ascending ? a.t - b.t : b.t - a.t; });
+        if (!ascending) without.reverse();
+        return withT.concat(without).map(function (x) { return x.it; });
+      }
       /* A clickable cover that opens the whole set in the gallery.js lightbox,
          with a small "N photos" badge when there is more than one. */
       // A crop rectangle "fx fy fw fh" (fractions of the image) scaled to fill the
@@ -608,7 +637,7 @@
             var cover = itemPhotos(ev)[0];
             var ecs = (ev.photo_crop && cover && ev.photo_crop[cover]) ? cropStyle(ev.photo_crop[cover]) : '';
             var photo = cover ? '<div class="relative aspect-[16/10] bg-green-50 overflow-hidden">' + (ecs ? '<img src="' + esc(cover) + '" alt="' + esc(ev.title) + '" style="' + ecs + '" loading="lazy"/>' : '<img src="' + esc(cover) + '" alt="' + esc(ev.title) + '" class="w-full h-full object-cover" loading="lazy"/>') + '</div>' : '';
-            var when = [ev.when, ev.time].filter(Boolean).map(esc).join(' &middot; ');
+            var ew = evWhen(ev), when = [ew.when, ew.time].filter(Boolean).join(' &middot; ');
             return '<a href="events.html#event-' + i + '" class="rounded-2xl border border-gray-200 bg-white overflow-hidden flex flex-col shadow-sm hover:border-green-300 transition-colors">' + photo +
               '<div class="p-5 flex-1 flex flex-col">' +
                 (when ? '<span class="text-xs font-semibold text-green-600 mb-1">' + when + '</span>' : '') +
@@ -765,9 +794,7 @@
           var idx = evItems.indexOf(ev);
           var photo = photoCover(itemPhotos(ev), ev.title, 'aspect-[16/10] bg-green-50 overflow-hidden', ev.photo_crop);
           var badge = STATUS_BADGE[evStatus(ev)] || '';
-          var whenBits = [];
-          if (ev.when) whenBits.push(esc(ev.when));
-          if (ev.time) whenBits.push(esc(ev.time));
+          var ew = evWhen(ev), whenBits = [ew.when, ew.time].filter(Boolean);
           var when = whenBits.length ? '<span class="inline-flex items-center gap-1 text-xs font-semibold text-green-600"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18M8 2v4M16 2v4"/></svg>' + whenBits.join(' &middot; ') + '</span>' : '';
           var dl = directionsLink(ev), loc = '';
           if (dl) {
@@ -791,9 +818,9 @@
         // Happening now and upcoming read soonest-first (the next one you can
         // attend); past reads newest-first. Items carrying a Date sort by it, the
         // rest keep admin order. Status now comes from the event's dates.
-        fillBucket(evCurrent, sortByDate(evItems.filter(function (e) { return evStatus(e) === 'current'; }), true));
-        fillBucket(evUp, sortByDate(evItems.filter(function (e) { return evStatus(e) === 'upcoming'; }), true));
-        fillBucket(evPast, sortByDate(evItems.filter(function (e) { return evStatus(e) === 'past'; }), false));
+        fillBucket(evCurrent, sortEvents(evItems.filter(function (e) { return evStatus(e) === 'current'; }), true));
+        fillBucket(evUp, sortEvents(evItems.filter(function (e) { return evStatus(e) === 'upcoming'; }), true));
+        fillBucket(evPast, sortEvents(evItems.filter(function (e) { return evStatus(e) === 'past'; }), false));
         if (!bound.share) { bound.share = true;
         document.addEventListener('click', function (e) {
           var b = e.target.closest('.ir-ev-share');
@@ -868,7 +895,7 @@
         function pull(items, kind, page) {
           (Array.isArray(items) ? items : []).forEach(function (it) {
             if (!it || (it.flash !== 'sidebar' && it.flash !== 'popup') || !(it.title || '').trim() || !flashLive(it)) return;
-            var when = kind === 'Event' ? [it.when, it.time].filter(Boolean).map(esc).join(' &middot; ') : fmtWhen(it.date);
+            var when = kind === 'Event' ? (function () { var w = evWhen(it); return [w.when, w.time].filter(Boolean).join(' &middot; '); })() : fmtWhen(it.date);
             var hasLink = kind === 'Collaboration' && it.link;
             var cover = coverOf(it);
             list.push({ kind: kind, title: it.title, when: when, desc: it.description, link: hasLink ? it.link : page, linkLabel: hasLink ? 'Visit website' : 'See details', photo: cover, crop: coverCrop(it, cover), location: kind === 'Event' ? (it.location || '') : '', dirLink: kind === 'Event' ? directionsLink(it) : '', autoOpen: it.flash === 'popup' });
