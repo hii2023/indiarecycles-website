@@ -1075,7 +1075,7 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
     <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-6 sm:mb-8">
       <div>
         <h1 id="ev-tab-heading" class="font-serif text-2xl text-forest-800">Events</h1>
-        <p class="text-forest-500 text-sm mt-1">Add each event with a title, date, location, description and photo. Set it as Upcoming or Past. Publishes to the Events page.</p>
+        <p class="text-forest-500 text-sm mt-1">Add each event with a title, start &amp; end date-time, location, description and photo. When you set the dates, the event shows as Upcoming, Happening now or Past automatically, and any pop-up removes itself once the event ends. Publishes to the Events page.</p>
       </div>
       <button onclick="saveSection('events')" class="save-btn bg-forest-600 hover:bg-forest-700 text-white px-6 py-2.5 rounded-xl font-semibold text-sm cursor-pointer shadow">Save Changes</button>
     </div>
@@ -1337,6 +1337,8 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
           title:      q('[data-title]').value.trim(),
           date:       q('[data-date]').value.trim(),
           time:       q('[data-time]').value.trim(),
+          start:      q('[data-start]').value.trim(),
+          end:        q('[data-end]').value.trim(),
           description: q('[data-desc]').value.trim(),
           link:       q('[data-link]').value.trim(),
           link_label: q('[data-linklabel]').value.trim(),
@@ -1410,6 +1412,8 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
       var evs = Array.from(document.querySelectorAll('#events-editor [data-event-card]')).map(function (c) {
         return {
           title:         c.querySelector('[data-title]').value.trim(),
+          start:         c.querySelector('[data-start]').value.trim(),
+          end:           c.querySelector('[data-end]').value.trim(),
           date:          c.querySelector('[data-date]').value.trim(),
           when:          c.querySelector('[data-when]').value.trim(),
           time:          c.querySelector('[data-time]').value.trim(),
@@ -2754,9 +2758,9 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
     var st = ev.status === 'past' ? 'past' : 'upcoming';
     return '<div class="p-4 bg-cream rounded-2xl border border-forest-100" data-event-card>'
       + '<div class="flex items-center justify-between mb-3">'
-      +   '<select data-status class="px-2.5 py-1 rounded-lg border border-forest-200 text-xs font-semibold text-forest-700 bg-white cursor-pointer">'
-      +     '<option value="upcoming"' + (st === 'upcoming' ? ' selected' : '') + '>Upcoming</option>'
-      +     '<option value="past"' + (st === 'past' ? ' selected' : '') + '>Past</option>'
+      +   '<select data-status title="Only used when no start/end dates are set below. With dates, the status is decided automatically." class="px-2.5 py-1 rounded-lg border border-forest-200 text-xs font-semibold text-forest-700 bg-white cursor-pointer">'
+      +     '<option value="upcoming"' + (st === 'upcoming' ? ' selected' : '') + '>Upcoming (if no dates)</option>'
+      +     '<option value="past"' + (st === 'past' ? ' selected' : '') + '>Past (if no dates)</option>'
       +   '</select>'
       +   '<div class="flex items-center gap-1">'
       +     '<button onclick="moveEvent(this,-1)" class="w-7 h-7 bg-forest-50 hover:bg-forest-100 text-forest-600 rounded-lg flex items-center justify-center cursor-pointer" aria-label="Move up" title="Move up"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg></button>'
@@ -2766,8 +2770,15 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
       + '</div>'
       + photosUploaderHTML(itemPhotos(ev), 'Click a photo to set which part shows on the cover &middot; &#9733; makes it the cover &middot; add several photos', ev.photo_crop)
       + '<input type="text" data-title value="' + attrEsc(ev.title) + '" placeholder="Event title" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm font-semibold text-forest-800 bg-white mb-2"/>'
+      + '<div class="mb-2">'
+      +   '<label class="block text-[10px] font-semibold text-forest-500 mb-1">Starts &amp; ends &mdash; sets Upcoming / Happening now / Past automatically, and removes the pop-up once it ends</label>'
+      +   '<div class="grid grid-cols-2 gap-2">'
+      +     '<input type="datetime-local" data-start value="' + attrEsc(ev.start) + '" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white" aria-label="Event start date and time"/>'
+      +     '<input type="datetime-local" data-end value="' + attrEsc(ev.end) + '" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white" aria-label="Event end date and time"/>'
+      +   '</div>'
+      + '</div>'
       + '<div class="grid grid-cols-2 gap-2 mb-2">'
-      +   '<label class="block text-[10px] font-semibold text-forest-500 mb-1">Date (used to order events, newest first)</label>'
+      +   '<label class="block text-[10px] font-semibold text-forest-500 mb-1">Display date (shown on the card) &amp; sort date</label>'
       +   '<input type="date" data-date value="' + attrEsc(ev.date) + '" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white mb-2"/>'
       +   '<input type="text" data-when value="' + attrEsc(ev.when) + '" placeholder="Date (e.g. 15 Aug 2026)" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white"/>'
       +   '<input type="text" data-time value="' + attrEsc(ev.time) + '" placeholder="Time (e.g. 10 AM - 2 PM)" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white"/>'
@@ -2965,6 +2976,11 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
       + '<div class="grid sm:grid-cols-2 gap-3 mb-3">'
       +   '<input type="date" data-date value="' + attrEsc(f.date) + '" ' + inp + '/>'
       +   '<input type="text" data-time value="' + attrEsc(f.time) + '" placeholder="Time (optional)" ' + inp + '/>'
+      + '</div>'
+      + '<label class="block text-[11px] font-semibold text-forest-500 mb-1">Show from &amp; show until (optional) &mdash; the side bar disappears on its own once &ldquo;show until&rdquo; passes</label>'
+      + '<div class="grid sm:grid-cols-2 gap-3 mb-3">'
+      +   '<input type="datetime-local" data-start value="' + attrEsc(f.start) + '" ' + inp + ' aria-label="Show from"/>'
+      +   '<input type="datetime-local" data-end value="' + attrEsc(f.end) + '" ' + inp + ' aria-label="Show until"/>'
       + '</div>'
       + '<textarea data-desc rows="2" placeholder="Description" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream resize-none mb-3">' + textEsc(f.description) + '</textarea>'
       + '<div class="grid sm:grid-cols-2 gap-3 mb-3">'

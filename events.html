@@ -168,7 +168,7 @@
     @media (min-width:1024px){ .ir-navrow{ justify-content:center; gap:14px; } .ir-navcenter{ flex:0 0 auto !important; } }
   </style>
   <link rel="stylesheet" href="css/transitions.css?v=1"/>
-  <link rel="stylesheet" href="css/layout.css?v=14"/>
+  <link rel="stylesheet" href="css/layout.css?v=16"/>
   <script src="js/img-boot.js?v=5"></script>
 </head>
 <body class="antialiased">
@@ -233,6 +233,17 @@
 </section>
 
 <!-- UPCOMING EVENTS -->
+<!-- HAPPENING NOW (revealed by the CMS only when an event is currently on) -->
+<section class="py-10 lg:py-16 bg-white" aria-labelledby="events-current-heading" style="display:none">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="mb-8">
+      <span class="inline-flex items-center gap-1.5 bg-amber-100 text-amber-700 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-widest mb-3"><span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>Happening now</span>
+      <h2 id="events-current-heading" class="text-2xl lg:text-3xl text-green-800">Happening Now</h2>
+    </div>
+    <div id="events-current" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3"></div>
+  </div>
+</section>
+
 <section class="py-10 lg:py-16 bg-white" aria-labelledby="events-upcoming-heading">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="mb-8">
@@ -332,7 +343,7 @@
   });
 </script>
 
-<script src="js/cms.js?v=46"></script>
+<script src="js/cms.js?v=47"></script>
 <script src="js/reveal.js?v=1" defer></script>
 <script src="js/gallery.js?v=4"></script>
 

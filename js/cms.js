@@ -247,6 +247,41 @@
         if (it && Array.isArray(it.photos)) return it.photos.filter(Boolean);
         return it && it.photo ? [it.photo] : [];
       }
+      /* Event timing. The admin can set a start and end datetime (datetime-local);
+         older events only carry an all-day `date`. Parse whichever exists into real
+         Dates, then let those dates decide whether an event is upcoming, happening
+         now, or past. Dates always win; the manual Upcoming/Past toggle is only a
+         fallback for events with no dates at all. */
+      function evTimes(e) {
+        function pd(v) { if (!v) return null; var d = new Date(v); return isNaN(d.getTime()) ? null : d; }
+        var s = pd(e && e.start), en = pd(e && e.end);
+        if (!s && !en && e && e.date) { var d = pd(e.date + 'T00:00:00'); if (d) { s = d; en = new Date(d.getTime() + 86399000); } }
+        return { start: s, end: en };
+      }
+      function evStatus(e) {
+        var t = evTimes(e), now = Date.now();
+        if (t.start || t.end) {
+          if (t.end && now > t.end.getTime()) return 'past';
+          if (t.start && now < t.start.getTime()) return 'upcoming';
+          return 'current';
+        }
+        return e && e.status === 'past' ? 'past' : 'upcoming';
+      }
+      /* A flashed item (side-bar tab / auto popup) disappears on its own once the
+         admin-set end datetime passes. Only an explicit `end` expires it - items
+         without one keep showing as before (the display-only `date` never expires). */
+      function flashLive(e) {
+        if (!e || !e.end) return true;
+        var d = new Date(e.end);
+        return isNaN(d.getTime()) || Date.now() <= d.getTime();
+      }
+      /* A directions link for an event: an explicit map link if the admin set one,
+         otherwise a Google Maps search built from the location text. */
+      function directionsLink(it) {
+        if (it && it.location_link) return it.location_link;
+        if (it && it.location) return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(it.location);
+        return '';
+      }
       /* A clickable cover that opens the whole set in the gallery.js lightbox,
          with a small "N photos" badge when there is more than one. */
       // A crop rectangle "fx fy fw fh" (fractions of the image) scaled to fill the
@@ -562,9 +597,10 @@
       var heEl = document.getElementById('home-events');
       if (heEl) {
         var evAll = (content.events && content.events.items) || [];
-        // upcoming first, then the most recent past ones
-        var ordered = evAll.filter(function (e) { return (e.status || 'upcoming') === 'upcoming'; })
-          .concat(evAll.filter(function (e) { return e.status === 'past'; }).reverse());
+        // happening now first, then upcoming, then the most recent past ones
+        var ordered = evAll.filter(function (e) { return evStatus(e) === 'current'; })
+          .concat(evAll.filter(function (e) { return evStatus(e) === 'upcoming'; }))
+          .concat(evAll.filter(function (e) { return evStatus(e) === 'past'; }).reverse());
         if (ordered.length) {
           document.getElementById('home-events-section').style.display = '';
           heEl.innerHTML = ordered.slice(0, 3).map(function (ev) {
@@ -713,28 +749,33 @@
         }
       }
 
-      /* Events (Events page: upcoming + past) */
+      /* Events (Events page: happening now + upcoming + past) */
+      var evCurrent = document.getElementById('events-current');
       var evUp = document.getElementById('events-upcoming');
       var evPast = document.getElementById('events-past');
-      if (evUp || evPast) {
+      if (evCurrent || evUp || evPast) {
         var evItems = (content.events && content.events.items) || [];
         var PIN = '<svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>';
+        var STATUS_BADGE = {
+          current:  '<span class="inline-flex items-center gap-1.5 self-start bg-amber-100 text-amber-700 px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-widest mb-2"><span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>Happening now</span>',
+          upcoming: '<span class="inline-flex items-center self-start bg-green-100 text-green-700 px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-widest mb-2">Upcoming</span>',
+          past:     '<span class="inline-flex items-center self-start bg-gray-100 text-gray-500 px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-widest mb-2">Past</span>'
+        };
         var eventCard = function (ev) {
           var idx = evItems.indexOf(ev);
           var photo = photoCover(itemPhotos(ev), ev.title, 'aspect-[16/10] bg-green-50 overflow-hidden', ev.photo_crop);
+          var badge = STATUS_BADGE[evStatus(ev)] || '';
           var whenBits = [];
           if (ev.when) whenBits.push(esc(ev.when));
           if (ev.time) whenBits.push(esc(ev.time));
           var when = whenBits.length ? '<span class="inline-flex items-center gap-1 text-xs font-semibold text-green-600"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18M8 2v4M16 2v4"/></svg>' + whenBits.join(' &middot; ') + '</span>' : '';
-          var loc = '';
-          if (ev.location_link) {
-            loc = '<a href="' + esc(ev.location_link) + '" target="_blank" rel="noopener noreferrer" class="text-green-600 hover:text-green-800 text-sm mt-1 inline-flex items-center gap-1 font-medium">' + PIN + (ev.location ? esc(ev.location) : 'Directions') + '<span class="text-green-500">&nbsp;&rarr;</span></a>';
-          } else if (ev.location) {
-            loc = '<div class="text-green-500 text-sm mt-1 inline-flex items-center gap-1">' + PIN + esc(ev.location) + '</div>';
+          var dl = directionsLink(ev), loc = '';
+          if (dl) {
+            loc = '<a href="' + esc(dl) + '" target="_blank" rel="noopener noreferrer" class="text-green-600 hover:text-green-800 text-sm mt-1 inline-flex items-center gap-1 font-medium">' + PIN + (ev.location ? esc(ev.location) : 'Directions') + '<span class="text-green-500">&nbsp;&rarr;</span></a>';
           }
           var share = '<button type="button" class="ir-ev-share mt-3 self-start inline-flex items-center gap-1.5 text-xs font-semibold text-green-700 hover:text-green-900 cursor-pointer" data-title="' + esc(ev.title) + '" data-anchor="event-' + idx + '"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>Share</button>';
           return '<article id="event-' + idx + '" class="rounded-2xl border border-green-100 bg-white overflow-hidden flex flex-col shadow-sm scroll-mt-24">' + photo +
-            '<div class="p-5 flex-1 flex flex-col">' + when +
+            '<div class="p-5 flex-1 flex flex-col">' + badge + when +
               '<h3 class="text-lg font-semibold text-green-800 mt-1">' + esc(ev.title) + '</h3>' + loc +
               (ev.description ? '<p class="text-green-600 text-sm mt-2 leading-relaxed flex-1" style="white-space:pre-line">' + esc(ev.description) + '</p>' : '<div class="flex-1"></div>') +
               share +
@@ -744,12 +785,15 @@
           if (!el) return;
           var sec = el.closest('section');
           if (!list.length) { if (evItems.length && sec) sec.style.display = 'none'; return; }
+          if (sec) sec.style.display = '';
           el.innerHTML = list.map(eventCard).join('');
         };
-        // Upcoming reads soonest-first (the next one you can attend); past reads
-        // newest-first. Items carrying a Date sort by it, the rest keep admin order.
-        fillBucket(evUp, sortByDate(evItems.filter(function (e) { return (e.status || 'upcoming') === 'upcoming'; }), true));
-        fillBucket(evPast, sortByDate(evItems.filter(function (e) { return e.status === 'past'; }), false));
+        // Happening now and upcoming read soonest-first (the next one you can
+        // attend); past reads newest-first. Items carrying a Date sort by it, the
+        // rest keep admin order. Status now comes from the event's dates.
+        fillBucket(evCurrent, sortByDate(evItems.filter(function (e) { return evStatus(e) === 'current'; }), true));
+        fillBucket(evUp, sortByDate(evItems.filter(function (e) { return evStatus(e) === 'upcoming'; }), true));
+        fillBucket(evPast, sortByDate(evItems.filter(function (e) { return evStatus(e) === 'past'; }), false));
         if (!bound.share) { bound.share = true;
         document.addEventListener('click', function (e) {
           var b = e.target.closest('.ir-ev-share');
@@ -767,9 +811,11 @@
         var secondEl = document.querySelector('[data-cta-secondary]');
         if (!firstEl && !secondEl) return;
         var evs = (content.events && content.events.items) || [];
-        // "Next event" points at the first upcoming event, falling back to the events page
-        var upcoming = evs.filter(function (e) { return (e.status || 'upcoming') === 'upcoming'; });
-        var nextEvent = upcoming.length ? 'events.html#event-' + evs.indexOf(upcoming[0]) : 'events.html';
+        // "Next event" points at whatever is happening now, else the first upcoming
+        // event, falling back to the events page.
+        var nextUp = evs.filter(function (e) { return evStatus(e) === 'current'; })
+          .concat(evs.filter(function (e) { return evStatus(e) === 'upcoming'; }));
+        var nextEvent = nextUp.length ? 'events.html#event-' + evs.indexOf(nextUp[0]) : 'events.html';
         var CTA = {
           drop:   { href: 'drop-locations.html',            text: 'Donate Clothes' },
           event:  { href: nextEvent,                        text: 'Next Event' },
@@ -792,13 +838,18 @@
         apply(secondEl, s.sticky_cta2, 'join');
       })();
 
-      /* Flash side bars: pinned tabs + popups. Two sources feed this:
+      /* Right-edge tab stack: a persistent Shop tab plus flash side bars.
+         The Shop tab always sits at the top of the stack and links to the thrift
+         store. Below it, flash side bars come from two sources:
          (1) General announcements (the "General Announcement" admin tab).
          (2) Any Event / Collaboration / IR Talk whose "Flash on the website" is
              set to a side bar or an auto popup.
-         A tab always shows; auto-popups open once per visitor on arrival. */
+         Flashed items drop off automatically once their end datetime passes;
+         auto-popups open once per visitor on arrival. */
       (function () {
+        var SHOP_URL = 'https://store.indiarecycles.org';
         function coverOf(it) { return (Array.isArray(it.photos) && it.photos[0]) || it.photo || it.logo || ''; }
+        function coverCrop(it, cover) { return (it && it.photo_crop && cover && it.photo_crop[cover]) ? it.photo_crop[cover] : ''; }
         function fmtWhen(d, t) {
           var parts = [];
           if (d) { try { parts.push(new Date(d + 'T00:00:00').toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })); } catch (e) { parts.push(esc(d)); } }
@@ -810,16 +861,17 @@
         var f = content.flash || {};
         var gitems = Array.isArray(f.items) ? f.items : ((f.title || f.kind) ? [f] : []);
         gitems.forEach(function (it) {
-          if (!it || it.enabled === false || !(it.title || '').trim()) return;
-          list.push({ kind: (it.kind || 'Update').trim(), title: it.title, when: fmtWhen(it.date, it.time), desc: it.description, link: it.link, linkLabel: it.link_label || 'Learn more', photo: it.photo || '', autoOpen: it.auto_open !== false });
+          if (!it || it.enabled === false || !(it.title || '').trim() || !flashLive(it)) return;
+          list.push({ kind: (it.kind || 'Update').trim(), title: it.title, when: fmtWhen(it.date, it.time), desc: it.description, link: it.link, linkLabel: it.link_label || 'Learn more', photo: it.photo || '', crop: '', location: '', dirLink: '', autoOpen: it.auto_open !== false });
         });
         // (2) Events / Collaborations / IR Talks flagged to flash
         function pull(items, kind, page) {
           (Array.isArray(items) ? items : []).forEach(function (it) {
-            if (!it || (it.flash !== 'sidebar' && it.flash !== 'popup') || !(it.title || '').trim()) return;
+            if (!it || (it.flash !== 'sidebar' && it.flash !== 'popup') || !(it.title || '').trim() || !flashLive(it)) return;
             var when = kind === 'Event' ? [it.when, it.time].filter(Boolean).map(esc).join(' &middot; ') : fmtWhen(it.date);
             var hasLink = kind === 'Collaboration' && it.link;
-            list.push({ kind: kind, title: it.title, when: when, desc: it.description, link: hasLink ? it.link : page, linkLabel: hasLink ? 'Visit website' : 'See details', photo: coverOf(it), autoOpen: it.flash === 'popup' });
+            var cover = coverOf(it);
+            list.push({ kind: kind, title: it.title, when: when, desc: it.description, link: hasLink ? it.link : page, linkLabel: hasLink ? 'Visit website' : 'See details', photo: cover, crop: coverCrop(it, cover), location: kind === 'Event' ? (it.location || '') : '', dirLink: kind === 'Event' ? directionsLink(it) : '', autoOpen: it.flash === 'popup' });
           });
         }
         pull(content.events && content.events.items, 'Event', 'events.html');
@@ -828,15 +880,30 @@
 
         // Rebuild from scratch on each apply.
         Array.prototype.forEach.call(document.querySelectorAll('.ir-flash-tab, .ir-flash-modal'), function (el) { el.remove(); });
-        if (!list.length) return;
-        var n = list.length, autoTarget = null, autoSig = '';
+
+        // Tab stack is centred on the viewport: Shop first, then each flash item.
+        var total = 1 + list.length, SP = 76;
+        function posTop(k) { return 'calc(50% + ' + Math.round((k - (total - 1) / 2) * SP) + 'px)'; }
+
+        // Persistent Shop tab (slot 0, top of the stack).
+        var shop = document.createElement('a');
+        shop.className = 'ir-flash-tab ir-shop-tab';
+        shop.href = SHOP_URL;
+        shop.target = '_blank';
+        shop.rel = 'noopener noreferrer';
+        shop.setAttribute('aria-label', 'Shop the thrift store');
+        shop.style.top = posTop(0);
+        shop.innerHTML = '<span class="ir-flash-dot" aria-hidden="true"></span>Shop';
+        document.body.appendChild(shop);
+
+        var autoTarget = null, autoSig = '';
         list.forEach(function (it, i) {
           var kind = it.kind;
           var tab = document.createElement('button');
           tab.type = 'button';
           tab.className = 'ir-flash-tab';
           tab.setAttribute('aria-haspopup', 'dialog');
-          if (n > 1) tab.style.top = 'calc(50% + ' + Math.round((i - (n - 1) / 2) * 78) + 'px)';
+          tab.style.top = posTop(i + 1);
           document.body.appendChild(tab);
           var modal = document.createElement('div');
           modal.className = 'ir-flash-modal';
@@ -855,14 +922,25 @@
           var when = it.when || '';
           var ext = /^https?:\/\//i.test(it.link || '');
           var cta = it.link ? '<a href="' + esc(it.link) + '"' + (ext ? ' target="_blank" rel="noopener noreferrer"' : '') + ' class="ir-flash-cta">' + esc(it.linkLabel || 'Learn more') + '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>' : '';
+          // Cover image, cropped to the admin's framing (same as the rest of the site).
+          var cover = '';
+          if (it.photo) {
+            var cs = it.crop ? cropStyle(it.crop) : '';
+            cover = '<div class="ir-flash-cover">' + (cs
+              ? '<img loading="lazy" decoding="async" src="' + esc(it.photo) + '" alt="' + esc(it.title) + '" style="' + cs + '"/>'
+              : '<img loading="lazy" decoding="async" src="' + esc(it.photo) + '" alt="' + esc(it.title) + '"/>') + '</div>';
+          }
+          // Clickable location under the date/time -> opens directions.
+          var loc = it.dirLink ? '<a class="ir-flash-loc" href="' + esc(it.dirLink) + '" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>' + (it.location ? esc(it.location) : 'Get directions') + '<span aria-hidden="true">&nbsp;&rarr;</span></a>' : '';
           modal.innerHTML =
             '<div class="ir-flash-box">' +
               '<button class="ir-flash-close" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>' +
-              (it.photo ? '<img loading="lazy" decoding="async" src="' + esc(it.photo) + '" alt="' + esc(it.title) + '"/>' : '') +
+              cover +
               '<div class="ir-flash-body">' +
                 '<span class="ir-flash-kind"><span class="ir-flash-dot" style="width:7px;height:7px" aria-hidden="true"></span>' + esc(kind) + '</span>' +
                 '<h3 class="ir-flash-title">' + esc(it.title) + '</h3>' +
                 (when ? '<div class="ir-flash-when">' + when + '</div>' : '') +
+                loc +
                 (it.desc ? '<p class="ir-flash-desc">' + esc(it.desc) + '</p>' : '') +
                 cta +
               '</div>' +

@@ -5,12 +5,18 @@
    screen as you settle. Disabled on touch / small screens where it feels wrong. */
 
 @media (min-width: 1024px) and (pointer: fine) {
-  /* No vertical scroll-snapping. Making every section a snap point meant the
-     viewport kept getting pulled toward section boundaries mid-scroll, which
-     reads as the page fighting you. Anchors still land clear of the navbar via
-     scroll-padding-top, and html{scroll-behavior:smooth} keeps jumps smooth. */
+  /* Section-at-a-time scroll snapping (desktop, fine pointer only). We use
+     `proximity`, not `mandatory`: the browser only nudges a section to the top
+     once you settle near its edge, so tall sections still scroll freely and the
+     page never "fights" you mid-scroll. scroll-padding-top keeps each snapped
+     section clear of the fixed navbar. */
   html {
     scroll-padding-top: 84px;          /* height of the fixed navbar */
+    scroll-snap-type: y proximity;
+  }
+  main > section {
+    scroll-snap-align: start;
+    scroll-snap-stop: normal;
   }
 
   /* Homepage hero fills the first screen but stops ~3.25rem short so the stats
@@ -407,3 +413,22 @@ section[id] { scroll-margin-top: 96px; }
   background: rgba(255,255,255,.92); color: #133a28; box-shadow: 0 2px 10px rgba(0,0,0,.18);
 }
 .ir-flash-close svg { width: 20px; height: 20px; }
+
+/* Popup cover image: a fixed-ratio box so an admin-set crop rectangle shows the
+   same framing here as everywhere else on the site (cover crops are stored per
+   photo and applied via an absolutely-positioned img). */
+.ir-flash-cover { position: relative; width: 100%; aspect-ratio: 16 / 10; overflow: hidden; background: #f2f7f4; }
+.ir-flash-cover img { width: 100%; height: 100%; object-fit: cover; display: block; max-height: none; }
+/* Clickable location under the date/time: opens directions in a new tab. */
+.ir-flash-loc {
+  display: inline-flex; align-items: center; gap: 6px; margin: 0 0 14px;
+  color: #256b49; font-size: 13px; font-weight: 600; text-decoration: none;
+}
+.ir-flash-loc:hover { color: #133a28; }
+.ir-flash-loc svg { width: 15px; height: 15px; flex-shrink: 0; }
+
+/* Persistent "Shop" tab: pinned to the right edge like the flash tabs and
+   stacked with them (it always sits at the top of the stack, above events). */
+.ir-shop-tab { background: #b45309; text-decoration: none; }
+.ir-shop-tab:hover { background: #92400e; padding-right: 18px; }
+.ir-shop-tab .ir-flash-dot { background: #fbbf24; box-shadow: 0 0 0 0 rgba(251,191,36,.7); }
