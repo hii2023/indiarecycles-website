@@ -71,9 +71,13 @@
   }
   function nearest() {
     var y = window.pageYOffset, best = null, bd = Infinity, secs = sections();
-    for (var i = 0; i < secs.length; i++) {
-      var t = restFor(secs[i]), d = Math.abs(t - y);
-      if (d < bd) { bd = d; best = t; }
+    var cands = secs.map(restFor);
+    // The bottom of the page (the footer) is its own valid rest, so you can
+    // settle on the footer instead of being yanked back up to the last section.
+    cands.push(maxScroll());
+    for (var i = 0; i < cands.length; i++) {
+      var d = Math.abs(cands[i] - y);
+      if (d < bd) { bd = d; best = cands[i]; }
     }
     return { top: best, dist: bd };
   }
@@ -86,7 +90,7 @@
   function glideTo(target) {
     var startY = window.pageYOffset, dist = target - startY;
     if (Math.abs(dist) < 2) return;
-    var dur = Math.min(650, Math.max(300, Math.abs(dist) * 0.7)), t0 = null;
+    var dur = Math.min(1000, Math.max(520, Math.abs(dist) * 0.95)), t0 = null;
     prevBehavior = document.documentElement.style.scrollBehavior;
     document.documentElement.style.scrollBehavior = 'auto';  // keep our per-frame writes instant
     snapping = true;
