@@ -322,18 +322,29 @@
         if (fw <= 0 || fh <= 0 || fw > 1 || fh > 1) return '';
         return 'position:absolute;left:' + (-fx / fw * 100) + '%;top:' + (-fy / fh * 100) + '%;width:' + (100 / fw) + '%;height:' + (100 / fh) + '%;max-width:none;object-fit:cover';
       }
-      function photoCover(photos, alt, wrapClass, cropMap) {
+      // The "contain" fit shows the WHOLE image (nothing cut) with a soft blurred
+      // copy of itself filling the letterbox, so a poster reads clearly end to end.
+      function containCover(src, alt) {
+        return '<img loading="lazy" decoding="async" src="' + esc(src) + '" alt="" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:blur(16px);transform:scale(1.12);opacity:.4"/>' +
+               '<img loading="lazy" decoding="async" src="' + esc(src) + '" alt="' + esc(alt) + '" style="position:relative;z-index:1;width:100%;height:100%;object-fit:contain"/>';
+      }
+      function photoCover(photos, alt, wrapClass, cropMap, containFit) {
         if (!photos.length) return '';
         var group = esc(JSON.stringify(photos));
-        var cs = (cropMap && cropMap[photos[0]]) ? cropStyle(cropMap[photos[0]]) : '';
         var badge = photos.length > 1
-          ? '<span class="absolute bottom-2 right-2 inline-flex items-center gap-1 bg-black/60 text-white text-[11px] font-semibold px-2 py-0.5 rounded-full backdrop-blur-sm pointer-events-none">' +
+          ? '<span class="absolute bottom-2 right-2 z-10 inline-flex items-center gap-1 bg-black/60 text-white text-[11px] font-semibold px-2 py-0.5 rounded-full backdrop-blur-sm pointer-events-none">' +
               '<svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>' + photos.length +
             '</span>'
           : '';
-        var coverImg = cs
-          ? '<img loading="lazy" decoding="async" src="' + esc(photos[0]) + '" alt="' + esc(alt) + '" style="' + cs + '"/>'
-          : '<img loading="lazy" decoding="async" src="' + esc(photos[0]) + '" alt="' + esc(alt) + '" class="w-full h-full object-cover"/>';
+        var coverImg;
+        if (containFit) {
+          coverImg = containCover(photos[0], alt);
+        } else {
+          var cs = (cropMap && cropMap[photos[0]]) ? cropStyle(cropMap[photos[0]]) : '';
+          coverImg = cs
+            ? '<img loading="lazy" decoding="async" src="' + esc(photos[0]) + '" alt="' + esc(alt) + '" style="' + cs + '"/>'
+            : '<img loading="lazy" decoding="async" src="' + esc(photos[0]) + '" alt="' + esc(alt) + '" class="w-full h-full object-cover"/>';
+        }
         return '<div class="relative overflow-hidden ' + wrapClass + ' ir-lb-tile" data-lightbox data-photos="' + group + '" data-alt="' + esc(alt) + '" role="button" tabindex="0" aria-label="View ' + (photos.length > 1 ? photos.length + ' photos' : 'full image') + ': ' + esc(alt) + '">' +
           coverImg + badge +
         '</div>';
@@ -633,8 +644,7 @@
           heEl.innerHTML = ordered.slice(0, 3).map(function (ev) {
             var i = evAll.indexOf(ev);
             var cover = itemPhotos(ev)[0];
-            var ecs = (ev.photo_crop && cover && ev.photo_crop[cover]) ? cropStyle(ev.photo_crop[cover]) : '';
-            var photo = cover ? '<div class="relative aspect-[16/10] bg-green-50 overflow-hidden">' + (ecs ? '<img src="' + esc(cover) + '" alt="' + esc(ev.title) + '" style="' + ecs + '" loading="lazy"/>' : '<img src="' + esc(cover) + '" alt="' + esc(ev.title) + '" class="w-full h-full object-cover" loading="lazy"/>') + '</div>' : '';
+            var photo = cover ? '<div class="relative aspect-[16/10] bg-green-50 overflow-hidden">' + containCover(cover, ev.title) + '</div>' : '';
             var ew = evWhen(ev), when = [ew.when, ew.time].filter(Boolean).join(' &middot; ');
             return '<a href="events.html#event-' + i + '" class="rounded-2xl border border-gray-200 bg-white overflow-hidden flex flex-col shadow-sm hover:border-green-300 transition-colors">' + photo +
               '<div class="p-5 flex-1 flex flex-col">' +
@@ -790,7 +800,7 @@
         };
         var eventCard = function (ev) {
           var idx = evItems.indexOf(ev);
-          var photo = photoCover(itemPhotos(ev), ev.title, 'aspect-[16/10] bg-green-50 overflow-hidden', ev.photo_crop);
+          var photo = photoCover(itemPhotos(ev), ev.title, 'aspect-[16/10] bg-green-50 overflow-hidden', ev.photo_crop, true);
           var badge = STATUS_BADGE[evStatus(ev)] || '';
           var ew = evWhen(ev), whenBits = [ew.when, ew.time].filter(Boolean);
           var when = whenBits.length ? '<span class="inline-flex items-center gap-1 text-xs font-semibold text-green-600"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18M8 2v4M16 2v4"/></svg>' + whenBits.join(' &middot; ') + '</span>' : '';
@@ -905,20 +915,36 @@
         // Rebuild from scratch on each apply.
         Array.prototype.forEach.call(document.querySelectorAll('.ir-flash-tab, .ir-flash-modal'), function (el) { el.remove(); });
 
-        // Tab stack is centred on the viewport: Shop first, then each flash item.
-        var total = 1 + list.length, SP = 76;
+        // Persistent action tabs sit above the flash items: Shop everywhere, plus
+        // Book Pickup on any page that carries the pickup form.
+        var actions = [{ cls: 'ir-shop-tab', label: 'Shop', href: SHOP_URL, aria: 'Shop the thrift store' }];
+        var pickupSec = document.querySelector('[data-pickup-form]');
+        if (pickupSec) actions.push({ cls: 'ir-pickup-tab', label: 'Book Pickup', scroll: pickupSec, aria: 'Book a clothes pickup' });
+
+        // Tab stack is centred on the viewport: action tabs first, then flash items.
+        var total = actions.length + list.length, SP = 76;
         function posTop(k) { return 'calc(50% + ' + Math.round((k - (total - 1) / 2) * SP) + 'px)'; }
 
-        // Persistent Shop tab (slot 0, top of the stack).
-        var shop = document.createElement('a');
-        shop.className = 'ir-flash-tab ir-shop-tab';
-        shop.href = SHOP_URL;
-        shop.target = '_blank';
-        shop.rel = 'noopener noreferrer';
-        shop.setAttribute('aria-label', 'Shop the thrift store');
-        shop.style.top = posTop(0);
-        shop.innerHTML = '<span class="ir-flash-dot" aria-hidden="true"></span>Shop';
-        document.body.appendChild(shop);
+        actions.forEach(function (a, ai) {
+          var el;
+          if (a.href) {
+            el = document.createElement('a');
+            el.href = a.href; el.target = '_blank'; el.rel = 'noopener noreferrer';
+          } else {
+            el = document.createElement('button');
+            el.type = 'button';
+            el.addEventListener('click', function () {
+              a.scroll.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              var first = a.scroll.querySelector('input, select, textarea');
+              if (first) { try { first.focus({ preventScroll: true }); } catch (e) { } }
+            });
+          }
+          el.className = 'ir-flash-tab ' + a.cls;
+          el.setAttribute('aria-label', a.aria);
+          el.style.top = posTop(ai);
+          el.innerHTML = '<span class="ir-flash-dot" aria-hidden="true"></span>' + a.label;
+          document.body.appendChild(el);
+        });
 
         var autoTarget = null, autoSig = '';
         list.forEach(function (it, i) {
@@ -927,7 +953,7 @@
           tab.type = 'button';
           tab.className = 'ir-flash-tab';
           tab.setAttribute('aria-haspopup', 'dialog');
-          tab.style.top = posTop(i + 1);
+          tab.style.top = posTop(actions.length + i);
           document.body.appendChild(tab);
           var modal = document.createElement('div');
           modal.className = 'ir-flash-modal';
