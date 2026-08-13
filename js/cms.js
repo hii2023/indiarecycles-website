@@ -895,7 +895,7 @@
             var when = kind === 'Event' ? (function () { var w = evWhen(it); return [w.when, w.time].filter(Boolean).join(' &middot; '); })() : fmtWhen(it.date);
             var hasLink = kind === 'Collaboration' && it.link;
             var cover = coverOf(it);
-            list.push({ kind: kind, title: it.title, when: when, desc: it.description, link: hasLink ? it.link : page, linkLabel: hasLink ? 'Visit website' : 'See details', photo: cover, crop: coverCrop(it, cover), location: kind === 'Event' ? (it.location || '') : '', dirLink: kind === 'Event' ? directionsLink(it) : '', autoOpen: it.flash === 'popup' });
+            list.push({ kind: kind, title: it.title, when: when, desc: it.description, link: hasLink ? it.link : page, linkLabel: hasLink ? 'Visit website' : 'See details', photo: cover, crop: coverCrop(it, cover), photos: itemPhotos(it), crops: it.photo_crop || {}, location: kind === 'Event' ? (it.location || '') : '', dirLink: kind === 'Event' ? directionsLink(it) : '', autoOpen: it.flash === 'popup' });
           });
         }
         pull(content.events && content.events.items, 'Event', 'events.html');
@@ -946,13 +946,26 @@
           var when = it.when || '';
           var ext = /^https?:\/\//i.test(it.link || '');
           var cta = it.link ? '<a href="' + esc(it.link) + '"' + (ext ? ' target="_blank" rel="noopener noreferrer"' : '') + ' class="ir-flash-cta">' + esc(it.linkLabel || 'Learn more') + '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>' : '';
-          // Cover image, cropped to the admin's framing (same as the rest of the site).
+          // Photos: every photo on the item, cropped to the admin's framing (same
+          // as the rest of the site). One photo = a single cover; several = a
+          // swipeable carousel with arrows + dots.
+          var photos = (it.photos && it.photos.length ? it.photos : (it.photo ? [it.photo] : []));
+          function imgTag(src) {
+            var cs = (it.crops && it.crops[src]) ? cropStyle(it.crops[src]) : (photos.length === 1 && it.crop ? cropStyle(it.crop) : '');
+            return cs
+              ? '<img loading="lazy" decoding="async" src="' + esc(src) + '" alt="' + esc(it.title) + '" style="' + cs + '"/>'
+              : '<img loading="lazy" decoding="async" src="' + esc(src) + '" alt="' + esc(it.title) + '"/>';
+          }
           var cover = '';
-          if (it.photo) {
-            var cs = it.crop ? cropStyle(it.crop) : '';
-            cover = '<div class="ir-flash-cover">' + (cs
-              ? '<img loading="lazy" decoding="async" src="' + esc(it.photo) + '" alt="' + esc(it.title) + '" style="' + cs + '"/>'
-              : '<img loading="lazy" decoding="async" src="' + esc(it.photo) + '" alt="' + esc(it.title) + '"/>') + '</div>';
+          if (photos.length === 1) {
+            cover = '<div class="ir-flash-cover">' + imgTag(photos[0]) + '</div>';
+          } else if (photos.length > 1) {
+            var slides = photos.map(function (p) { return '<div class="ir-flash-slide"><div class="ir-flash-cover">' + imgTag(p) + '</div></div>'; }).join('');
+            var dots = photos.map(function (_, di) { return '<span class="ir-flash-gdot' + (di === 0 ? ' on' : '') + '" aria-hidden="true"></span>'; }).join('');
+            var arrow = function (dir, label, d) { return '<button type="button" class="ir-flash-arrow ' + dir + '" aria-label="' + label + '"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="' + d + '"/></svg></button>'; };
+            cover = '<div class="ir-flash-gallery"><div class="ir-flash-track">' + slides + '</div>' +
+              arrow('prev', 'Previous photo', 'm15 18-6-6 6-6') + arrow('next', 'Next photo', 'm9 18 6-6-6-6') +
+              '<div class="ir-flash-dots">' + dots + '</div></div>';
           }
           // Clickable location under the date/time -> opens directions.
           var loc = it.dirLink ? '<a class="ir-flash-loc" href="' + esc(it.dirLink) + '" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>' + (it.location ? esc(it.location) : 'Get directions') + '<span aria-hidden="true">&nbsp;&rarr;</span></a>' : '';
@@ -970,6 +983,18 @@
               '</div>' +
             '</div>';
           modal.querySelector('.ir-flash-close').addEventListener('click', fClose);
+          // Wire the photo carousel (arrows + dots) when there is more than one.
+          (function () {
+            var track = modal.querySelector('.ir-flash-track');
+            if (!track) return;
+            var gdots = modal.querySelectorAll('.ir-flash-gdot');
+            function cur() { return track.clientWidth ? Math.round(track.scrollLeft / track.clientWidth) : 0; }
+            function go(i) { i = Math.max(0, Math.min(gdots.length - 1, i)); track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' }); }
+            var p = modal.querySelector('.ir-flash-arrow.prev'), n = modal.querySelector('.ir-flash-arrow.next');
+            if (p) p.addEventListener('click', function () { go(cur() - 1); });
+            if (n) n.addEventListener('click', function () { go(cur() + 1); });
+            track.addEventListener('scroll', function () { var c = cur(); for (var k = 0; k < gdots.length; k++) gdots[k].classList.toggle('on', k === c); });
+          })();
           if (!autoTarget && it.autoOpen) autoTarget = tab;
           autoSig += (it.title || '') + '|' + kind + '||';
         });
