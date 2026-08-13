@@ -5,18 +5,12 @@
    screen as you settle. Disabled on touch / small screens where it feels wrong. */
 
 @media (min-width: 1024px) and (pointer: fine) {
-  /* Section-at-a-time scroll snapping (desktop, fine pointer only). We use
-     `proximity`, not `mandatory`: the browser only nudges a section to the top
-     once you settle near its edge, so tall sections still scroll freely and the
-     page never "fights" you mid-scroll. scroll-padding-top keeps each snapped
-     section clear of the fixed navbar. */
+  /* Section snapping is handled in JS (js/reveal.js) so it can centre sections
+     that fit and top-align the tall ones, easing smoothly and only when you
+     settle near an edge - things native CSS scroll-snap cannot do without
+     fighting you. scroll-padding-top still keeps anchor jumps clear of the nav. */
   html {
     scroll-padding-top: 84px;          /* height of the fixed navbar */
-    scroll-snap-type: y proximity;
-  }
-  main > section {
-    scroll-snap-align: start;
-    scroll-snap-stop: normal;
   }
 
   /* Homepage hero fills the first screen but stops ~3.25rem short so the stats

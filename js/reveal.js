@@ -40,3 +40,86 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
   else start();
 })();
+
+/* Section snapping. After you stop scrolling, the nearest section eases into a
+   clean frame - centred under the navbar when it fits on screen, top-aligned when
+   it is taller than the screen. It only catches when you settle within half a
+   screen of a section edge, so long sections still scroll freely and it never
+   fights you mid-read. Custom easing keeps it buttery. Desktop pointers only;
+   off for touch and for anyone who prefers reduced motion. */
+(function () {
+  var mq = window.matchMedia;
+  if (!mq) return;
+  if (!mq('(min-width: 1024px) and (pointer: fine)').matches) return;
+  if (mq('(prefers-reduced-motion: reduce)').matches) return;
+
+  var NAV = 84;         // fixed navbar height (matches scroll-padding-top)
+  var CATCH = 0.5;      // only snap when within half a screen of a rest point
+  var raf = null, snapping = false, idle = null, prevBehavior = '';
+
+  function sections() { return [].slice.call(document.querySelectorAll('main > section')); }
+  function maxScroll() { return Math.max(0, document.documentElement.scrollHeight - window.innerHeight); }
+
+  // Where a section should come to rest: centred if it fits under the navbar,
+  // otherwise its top tucked just below the navbar.
+  function restFor(sec) {
+    var r = sec.getBoundingClientRect();
+    var absTop = r.top + window.pageYOffset;
+    var avail = window.innerHeight - NAV;
+    var target = (r.height <= avail) ? absTop - NAV - (avail - r.height) / 2 : absTop - NAV;
+    return Math.max(0, Math.min(Math.round(target), maxScroll()));
+  }
+  function nearest() {
+    var y = window.pageYOffset, best = null, bd = Infinity, secs = sections();
+    for (var i = 0; i < secs.length; i++) {
+      var t = restFor(secs[i]), d = Math.abs(t - y);
+      if (d < bd) { bd = d; best = t; }
+    }
+    return { top: best, dist: bd };
+  }
+  function ease(t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
+
+  function stopGlide() {
+    if (raf) { cancelAnimationFrame(raf); raf = null; }
+    if (snapping) { document.documentElement.style.scrollBehavior = prevBehavior; snapping = false; }
+  }
+  function glideTo(target) {
+    var startY = window.pageYOffset, dist = target - startY;
+    if (Math.abs(dist) < 2) return;
+    var dur = Math.min(650, Math.max(300, Math.abs(dist) * 0.7)), t0 = null;
+    prevBehavior = document.documentElement.style.scrollBehavior;
+    document.documentElement.style.scrollBehavior = 'auto';  // keep our per-frame writes instant
+    snapping = true;
+    (function frame(now) {
+      if (t0 === null) t0 = now;
+      var p = Math.min(1, (now - t0) / dur);
+      window.scrollTo(0, Math.round(startY + dist * ease(p)));
+      if (p < 1) { raf = requestAnimationFrame(frame); }
+      else { raf = null; document.documentElement.style.scrollBehavior = prevBehavior; snapping = false; }
+    })(performance.now());
+  }
+  function maybeSnap() {
+    if (snapping) return;
+    if (sections().length < 2) return;
+    var n = nearest();
+    if (n.top == null || n.dist < 3) return;                 // already framed
+    if (n.dist > window.innerHeight * CATCH) return;         // deep inside a long section: leave it
+    glideTo(n.top);
+  }
+
+  addEventListener('scroll', function () {
+    if (snapping) return;               // ignore the scroll events our own glide emits
+    clearTimeout(idle);
+    idle = setTimeout(maybeSnap, 120);  // wait for trackpad/wheel momentum to settle
+  }, { passive: true });
+
+  // Any real user input during a glide hands control straight back to the user.
+  ['wheel', 'touchstart', 'keydown', 'mousedown'].forEach(function (ev) {
+    addEventListener(ev, function () {
+      if (!snapping) return;
+      stopGlide();
+      clearTimeout(idle);
+      idle = setTimeout(maybeSnap, 180);
+    }, { passive: true });
+  });
+})();
