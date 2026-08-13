@@ -905,11 +905,17 @@
         // Rebuild from scratch on each apply.
         Array.prototype.forEach.call(document.querySelectorAll('.ir-flash-tab, .ir-flash-modal'), function (el) { el.remove(); });
 
-        // Persistent action tabs sit above the flash items: Shop everywhere, plus
-        // Book Pickup on any page that carries the pickup form.
-        var actions = [{ cls: 'ir-shop-tab', label: 'Shop', href: SHOP_URL, aria: 'Shop the thrift store' }];
+        // Action tabs. On the pickup page (drop-locations) we show ONLY Book Pickup
+        // - no Shop, and no event/flash tabs or auto-popup - so it stays focused on
+        // booking. Everywhere else: the Shop tab plus any flash items.
         var pickupSec = document.querySelector('[data-pickup-form]');
-        if (pickupSec) actions.push({ cls: 'ir-pickup-tab', label: 'Book Pickup', scroll: pickupSec, aria: 'Book a clothes pickup' });
+        var actions;
+        if (pickupSec) {
+          actions = [{ cls: 'ir-pickup-tab', label: 'Book Pickup', scroll: pickupSec, aria: 'Book a clothes pickup' }];
+          list = [];
+        } else {
+          actions = [{ cls: 'ir-shop-tab', label: 'Shop', href: SHOP_URL, aria: 'Shop the thrift store' }];
+        }
 
         // Tab stack is centred on the viewport: action tabs first, then flash items.
         // Collected here, then measured and stacked (below) so tabs never overlap
