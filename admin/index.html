@@ -1337,8 +1337,8 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
           title:      q('[data-title]').value.trim(),
           date:       q('[data-date]').value.trim(),
           time:       q('[data-time]').value.trim(),
-          start:      q('[data-start]').value.trim(),
-          end:        q('[data-end]').value.trim(),
+          start:      collectDateTime(c, 'start'),
+          end:        collectDateTime(c, 'end'),
           description: q('[data-desc]').value.trim(),
           link:       q('[data-link]').value.trim(),
           link_label: q('[data-linklabel]').value.trim(),
@@ -1412,8 +1412,8 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
       var evs = Array.from(document.querySelectorAll('#events-editor [data-event-card]')).map(function (c) {
         return {
           title:         c.querySelector('[data-title]').value.trim(),
-          start:         c.querySelector('[data-start]').value.trim(),
-          end:           c.querySelector('[data-end]').value.trim(),
+          start:         collectDateTime(c, 'start'),
+          end:           collectDateTime(c, 'end'),
           location:      c.querySelector('[data-location]').value.trim(),
           location_link: c.querySelector('[data-location-link]').value.trim(),
           description:   c.querySelector('[data-desc]').value.trim(),
@@ -2750,6 +2750,37 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
       + '<p class="text-[10px] text-forest-400 mt-1 leading-tight">Adds a small pinned tab to the side of every page. &ldquo;Pop up&rdquo; also opens it once automatically for each visitor.</p>'
       + '</div>';
   }
+  /* A date + time-of-day picker where the minutes are ONLY 00 / 15 / 30 / 45
+     (native datetime-local lets you scroll every minute, which the user did not
+     want). A plain date input pairs with a 15-minute <select>; collectDateTime()
+     joins them back into an ISO "YYYY-MM-DDTHH:MM" string. */
+  function timeSelectHTML(attr, selected) {
+    var opts = '<option value="">--</option>';
+    for (var h = 0; h < 24; h++) {
+      for (var m = 0; m < 60; m += 15) {
+        var val = String(h).padStart(2, '0') + ':' + String(m).padStart(2, '0');
+        var hh = (h % 12) || 12, ap = h < 12 ? 'AM' : 'PM';
+        var label = hh + ':' + String(m).padStart(2, '0') + ' ' + ap;
+        opts += '<option value="' + val + '"' + (val === selected ? ' selected' : '') + '>' + label + '</option>';
+      }
+    }
+    return '<select ' + attr + ' class="w-full px-2 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white cursor-pointer">' + opts + '</select>';
+  }
+  function dateTimeFieldHTML(prefix, value, label) {
+    var date = '', time = '';
+    if (value) { var p = String(value).split('T'); date = p[0] || ''; time = (p[1] || '').slice(0, 5); }
+    return '<div><span class="block text-[10px] text-forest-400 mb-0.5">' + label + '</span>'
+      + '<div class="grid grid-cols-2 gap-1.5">'
+      +   '<input type="date" data-' + prefix + '-date value="' + attrEsc(date) + '" class="w-full px-2 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white"/>'
+      +   timeSelectHTML('data-' + prefix + '-time', time)
+      + '</div></div>';
+  }
+  function collectDateTime(card, prefix) {
+    var d = (card.querySelector('[data-' + prefix + '-date]') || {}).value || '';
+    var t = (card.querySelector('[data-' + prefix + '-time]') || {}).value || '';
+    d = d.trim(); t = t.trim();
+    return d ? d + 'T' + (t || '00:00') : '';
+  }
   function eventCard(ev) {
     ev = ev || {};
     var st = ev.status === 'past' ? 'past' : 'upcoming';
@@ -2770,8 +2801,8 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
       + '<div class="mb-2">'
       +   '<label class="block text-[10px] font-semibold text-forest-500 mb-1">Date &amp; time &mdash; sets Upcoming / Happening now / Past automatically, and removes the pop-up once it ends</label>'
       +   '<div class="grid grid-cols-2 gap-2">'
-      +     '<div><span class="block text-[10px] text-forest-400 mb-0.5">Starts</span><input type="datetime-local" step="900" data-start value="' + attrEsc(ev.start) + '" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white" aria-label="Event start date and time"/></div>'
-      +     '<div><span class="block text-[10px] text-forest-400 mb-0.5">Ends</span><input type="datetime-local" step="900" data-end value="' + attrEsc(ev.end) + '" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white" aria-label="Event end date and time"/></div>'
+      +     dateTimeFieldHTML('start', ev.start, 'Starts')
+      +     dateTimeFieldHTML('end', ev.end, 'Ends')
       +   '</div>'
       + '</div>'
       + '<input type="text" data-location value="' + attrEsc(ev.location) + '" placeholder="Location (shown as text)" class="w-full px-3 py-2 rounded-lg border border-forest-200 text-sm text-forest-800 bg-white mb-2"/>'
@@ -2973,8 +3004,8 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
       + '</div>'
       + '<label class="block text-[11px] font-semibold text-forest-500 mb-1">Show from &amp; show until (optional) &mdash; the side bar disappears on its own once &ldquo;show until&rdquo; passes</label>'
       + '<div class="grid sm:grid-cols-2 gap-3 mb-3">'
-      +   '<input type="datetime-local" step="900" data-start value="' + attrEsc(f.start) + '" ' + inp + ' aria-label="Show from"/>'
-      +   '<input type="datetime-local" step="900" data-end value="' + attrEsc(f.end) + '" ' + inp + ' aria-label="Show until"/>'
+      +   dateTimeFieldHTML('start', f.start, 'Show from')
+      +   dateTimeFieldHTML('end', f.end, 'Show until')
       + '</div>'
       + '<textarea data-desc rows="2" placeholder="Description" class="w-full px-3 py-2.5 rounded-xl border border-forest-200 text-sm text-forest-800 bg-cream resize-none mb-3">' + textEsc(f.description) + '</textarea>'
       + '<div class="grid sm:grid-cols-2 gap-3 mb-3">'

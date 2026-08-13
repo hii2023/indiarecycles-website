@@ -626,10 +626,8 @@
       var heEl = document.getElementById('home-events');
       if (heEl) {
         var evAll = (content.events && content.events.items) || [];
-        // happening now first, then upcoming, then the most recent past ones
-        var ordered = evAll.filter(function (e) { return evStatus(e) === 'current'; })
-          .concat(evAll.filter(function (e) { return evStatus(e) === 'upcoming'; }))
-          .concat(evAll.filter(function (e) { return evStatus(e) === 'past'; }).reverse());
+        // Latest to oldest across all events (newest date first).
+        var ordered = sortEvents(evAll, false);
         if (ordered.length) {
           document.getElementById('home-events-section').style.display = '';
           heEl.innerHTML = ordered.slice(0, 3).map(function (ev) {
@@ -815,11 +813,10 @@
           if (sec) sec.style.display = '';
           el.innerHTML = list.map(eventCard).join('');
         };
-        // Happening now and upcoming read soonest-first (the next one you can
-        // attend); past reads newest-first. Items carrying a Date sort by it, the
-        // rest keep admin order. Status now comes from the event's dates.
-        fillBucket(evCurrent, sortEvents(evItems.filter(function (e) { return evStatus(e) === 'current'; }), true));
-        fillBucket(evUp, sortEvents(evItems.filter(function (e) { return evStatus(e) === 'upcoming'; }), true));
+        // Every bucket reads latest-first (newest date at the top). Items carrying
+        // a date sort by it; the rest keep admin order. Status comes from the dates.
+        fillBucket(evCurrent, sortEvents(evItems.filter(function (e) { return evStatus(e) === 'current'; }), false));
+        fillBucket(evUp, sortEvents(evItems.filter(function (e) { return evStatus(e) === 'upcoming'; }), false));
         fillBucket(evPast, sortEvents(evItems.filter(function (e) { return evStatus(e) === 'past'; }), false));
         if (!bound.share) { bound.share = true;
         document.addEventListener('click', function (e) {
