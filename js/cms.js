@@ -959,8 +959,11 @@
           modal.setAttribute('aria-label', 'Announcement');
           document.body.appendChild(modal);
           var lastF;
-          function fOpen() { lastF = document.activeElement; modal.classList.add('open'); document.body.style.overflow = 'hidden'; var c = modal.querySelector('.ir-flash-close'); if (c) c.focus(); }
-          function fClose() { modal.classList.remove('open'); document.body.style.overflow = ''; if (lastF && lastF.focus) lastF.focus(); }
+          // The flash announcement floats over the page without locking scroll,
+          // so an auto-opened popup can never leave the page feeling frozen -
+          // visitors can scroll straight past it or tap outside/close to dismiss.
+          function fOpen() { lastF = document.activeElement; modal.classList.add('open'); var c = modal.querySelector('.ir-flash-close'); if (c) c.focus({ preventScroll: true }); }
+          function fClose() { modal.classList.remove('open'); if (lastF && lastF.focus) lastF.focus(); }
           tab.addEventListener('click', fOpen);
           modal.addEventListener('click', function (e) { if (e.target === modal) fClose(); });
           document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && modal.classList.contains('open')) fClose(); });
