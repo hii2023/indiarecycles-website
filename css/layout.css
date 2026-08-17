@@ -445,6 +445,15 @@ section[id] { scroll-margin-top: 96px; }
 .ir-shop-tab:hover { background: #0a1c11; color: #fff; padding-right: 18px; }
 .ir-shop-tab .ir-flash-dot { background: #0a1c11; box-shadow: 0 0 0 0 rgba(10,28,17,.7); }
 
+/* ── Desktop nav alignment ──
+   Pull the logo left so its edge lines up with the hero/content column (which
+   sits 32px inside the 1152 container, vs the nav's own inner offset), and nudge
+   the centred menu pill toward the right. translateX keeps flex layout intact. */
+@media (min-width: 1200px) {
+  nav a[aria-label="India Recycles home"] { transform: translateX(-57px); }
+  .ir-navcenter > div { transform: translateX(10%); }
+}
+
 /* Book Pickup tab (drop-locations page): teal, scrolls to the pickup form. */
 .ir-pickup-tab { background: #0f766e; }
 .ir-pickup-tab:hover { background: #115e59; padding-right: 18px; }
