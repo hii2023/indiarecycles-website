@@ -441,9 +441,9 @@ section[id] { scroll-margin-top: 96px; }
 
 /* Persistent "Shop" tab: pinned to the right edge like the flash tabs and
    stacked with them (it always sits at the top of the stack, above events). */
-.ir-shop-tab { background: #fff; color: #166534; border: 2px solid #b45309; text-decoration: none; }
-.ir-shop-tab:hover { background: #b45309; color: #fff; padding-right: 18px; }
-.ir-shop-tab .ir-flash-dot { background: #b45309; box-shadow: 0 0 0 0 rgba(180,83,9,.7); }
+.ir-shop-tab { background: #fff; color: #166534; border: 2px solid #0a1c11; text-decoration: none; }
+.ir-shop-tab:hover { background: #0a1c11; color: #fff; padding-right: 18px; }
+.ir-shop-tab .ir-flash-dot { background: #0a1c11; box-shadow: 0 0 0 0 rgba(10,28,17,.7); }
 
 /* Book Pickup tab (drop-locations page): teal, scrolls to the pickup form. */
 .ir-pickup-tab { background: #0f766e; }
