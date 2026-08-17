@@ -447,11 +447,10 @@ section[id] { scroll-margin-top: 96px; }
 
 /* ── Desktop nav alignment ──
    Pull the logo left so its edge lines up with the hero/content column (which
-   sits 32px inside the 1152 container, vs the nav's own inner offset), and nudge
-   the centred menu pill toward the right. translateX keeps flex layout intact. */
+   sits 32px inside the 1152 container, vs the nav's own inner offset).
+   translateX keeps flex layout intact. */
 @media (min-width: 1200px) {
   nav a[aria-label="India Recycles home"] { transform: translateX(-57px); }
-  .ir-navcenter > div { transform: translateX(10%); }
 }
 
 /* Book Pickup tab (drop-locations page): teal, scrolls to the pickup form. */
