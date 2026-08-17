@@ -459,6 +459,25 @@ section[id] { scroll-margin-top: 96px; }
   .ir-navcenter > div { gap: 6px !important; transform: translateX(-4%); }
 }
 
+/* ── Premium nav-item hover ──
+   Replace the flat instant tint with a smooth frosted highlight that eases in,
+   the item rising a touch with a soft glow beneath. Easing is easeOutQuint for
+   a refined, unhurried feel. Desktop pill items only. */
+@media (min-width: 1024px) {
+  .ir-navcenter > div > a,
+  .ir-navcenter > div > .nav-dd > a {
+    transition: background .28s cubic-bezier(.22, 1, .36, 1),
+                color .28s ease,
+                transform .28s cubic-bezier(.22, 1, .36, 1),
+                box-shadow .28s ease !important;
+  }
+  .ir-navcenter > div > a:hover,
+  .ir-navcenter > div > .nav-dd > a:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, .18);
+  }
+}
+
 /* Book Pickup tab (drop-locations page): teal, scrolls to the pickup form. */
 .ir-pickup-tab { background: #0f766e; }
 .ir-pickup-tab:hover { background: #115e59; padding-right: 18px; }
