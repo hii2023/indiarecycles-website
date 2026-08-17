@@ -451,6 +451,8 @@ section[id] { scroll-margin-top: 96px; }
    translateX keeps flex layout intact. */
 @media (min-width: 1200px) {
   nav a[aria-label="India Recycles home"] { transform: translateX(-57px); }
+  /* Space the menu items apart (wider pill) and shift it slightly left. */
+  .ir-navcenter > div { gap: 6px !important; transform: translateX(-4%); }
 }
 
 /* Book Pickup tab (drop-locations page): teal, scrolls to the pickup form. */
