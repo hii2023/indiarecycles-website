@@ -446,12 +446,16 @@ section[id] { scroll-margin-top: 96px; }
 .ir-shop-tab .ir-flash-dot { background: #0a1c11; box-shadow: 0 0 0 0 rgba(10,28,17,.7); }
 
 /* ── Desktop nav alignment ──
-   Pull the logo left so its edge lines up with the hero/content column (which
-   sits 32px inside the 1152 container, vs the nav's own inner offset).
-   translateX keeps flex layout intact. */
+   Every page ships a per-page rule that centres the whole nav row, which makes
+   the logo's position depend on the pill width (so it drifts page to page).
+   Override that to a standard left-aligned header: pin the logo to the content
+   column's left edge (32px, the same inset the page container uses) so it lines
+   up with the page content everywhere, and let the pill centre in the rest.
+   Robust across widths - no per-page magic numbers. */
 @media (min-width: 1200px) {
-  nav a[aria-label="India Recycles home"] { transform: translateX(-57px); }
-  /* Space the menu items apart (wider pill) and shift it slightly left. */
+  .ir-navrow { justify-content: flex-start !important; padding-left: 32px !important; }
+  .ir-navcenter { flex: 1 1 auto !important; }
+  /* Wider menu pill (item spacing) nudged slightly left. */
   .ir-navcenter > div { gap: 6px !important; transform: translateX(-4%); }
 }
 
