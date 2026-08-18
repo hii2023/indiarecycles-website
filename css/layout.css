@@ -455,8 +455,8 @@ section[id] { scroll-margin-top: 96px; }
 @media (min-width: 1200px) {
   .ir-navrow { justify-content: flex-start !important; padding-left: 32px !important; }
   .ir-navcenter { flex: 1 1 auto !important; }
-  /* Wider menu pill (item spacing) nudged slightly left. */
-  .ir-navcenter > div { gap: 6px !important; transform: translateX(-4%); }
+  /* Wider menu pill (item spacing), with a little breathing room from the logo. */
+  .ir-navcenter > div { gap: 6px !important; transform: translateX(12px); }
 }
 
 /* ── Premium nav-item hover ──

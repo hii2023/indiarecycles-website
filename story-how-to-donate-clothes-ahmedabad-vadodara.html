@@ -151,8 +151,8 @@
     }
     /* ── Nav dropdowns ─────────────────── */
     .nav-dd { position: relative; display: inline-flex; }
-    .nav-dd-panel { position: absolute; top: 100%; left: 50%; transform: translateX(-50%) translateY(6px); padding-top: 12px; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .18s ease, transform .18s ease; z-index: 60; }
-    .nav-dd:hover .nav-dd-panel, .nav-dd:focus-within .nav-dd-panel { opacity: 1; visibility: visible; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+    .nav-dd-panel { position: absolute; top: 100%; left: 50%; transform: translateX(-50%) translateY(12px) scale(.97); transform-origin: top center; padding-top: 12px; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .3s cubic-bezier(.22,1,.36,1), transform .34s cubic-bezier(.22,1,.36,1); z-index: 60; }
+    .nav-dd:hover .nav-dd-panel, .nav-dd:focus-within .nav-dd-panel { opacity: 1; visibility: visible; pointer-events: auto; transform: translateX(-50%) translateY(0) scale(1); }
     .nav-dd-card { background: #fff; border-radius: 14px; border: 1px solid rgba(0,0,0,0.06); box-shadow: 0 16px 40px rgba(0,0,0,0.14); padding: 8px; min-width: 210px; }
     .nav-dd-item { display: block; padding: 10px 14px; border-radius: 9px; color: #1a1a1a; font-size: 14px; font-weight: 500; text-decoration: none; white-space: nowrap; transition: background .15s, color .15s; }
     .nav-dd-item:hover { background: #f6f7f6; color: var(--brand-green); }
