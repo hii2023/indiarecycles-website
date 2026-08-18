@@ -52,6 +52,8 @@
   if (!mq) return;
   if (!mq('(min-width: 1024px) and (pointer: fine)').matches) return;
   if (mq('(prefers-reduced-motion: reduce)').matches) return;
+  // Pages where settling-snap gets in the way of reading are opted out here.
+  if (/meet-the-team/.test(location.pathname)) return;
 
   var NAV = 84;         // fixed navbar height (matches scroll-padding-top)
   var CATCH = 0.5;      // only snap when within half a screen of a rest point

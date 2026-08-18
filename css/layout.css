@@ -444,6 +444,11 @@ section[id] { scroll-margin-top: 96px; }
 .ir-shop-tab { background: #fff; color: #166534; border: 2px solid #0a1c11; text-decoration: none; }
 .ir-shop-tab:hover { background: #0a1c11; color: #fff; padding-right: 18px; }
 .ir-shop-tab .ir-flash-dot { background: #0a1c11; box-shadow: 0 0 0 0 rgba(10,28,17,.7); }
+/* The Shop side-tab is hidden on phones (clutters the small screen). */
+@media (max-width: 767px) { .ir-shop-tab { display: none !important; } }
+/* Anchor jumps (e.g. Calculator -> #calculator) clear the fixed navbar on every
+   device; desktop refines this inside the snapping media query above. */
+html { scroll-padding-top: 90px; }
 
 /* ── Desktop nav alignment ──
    Every page ships a per-page rule that centres the whole nav row, which makes

@@ -53,14 +53,35 @@
    through a cross-document view transition (which can swallow the
    browser's own anchor scroll). */
 (function () {
+  var NAVOFFSET = 88;   // keep the target clear of the fixed navbar
   function go() {
     if (!location.hash) return;
     var el = null;
     try { el = document.querySelector(location.hash); } catch (e) { return; }
-    if (el) el.scrollIntoView({ block: 'start' });
+    if (!el) return;
+    // If the target is still mid reveal-animation it carries a transform that
+    // throws off the measured position - land it first so the maths is stable.
+    el.classList.remove('ir-reveal'); el.classList.add('ir-reveal-in');
+    var lastY = -1;
+    function jump(force) {
+      // Never fight the user: if they've scrolled away from where we last landed,
+      // stop re-correcting and hand control back.
+      if (!force && lastY >= 0 && Math.abs(window.pageYOffset - lastY) > 4) return;
+      var y = Math.max(0, el.getBoundingClientRect().top + window.pageYOffset - NAVOFFSET);
+      var h = document.documentElement, prev = h.style.scrollBehavior;
+      h.style.scrollBehavior = 'auto';        // instant landing, not a long glide
+      window.scrollTo(0, y);
+      h.style.scrollBehavior = prev;
+      lastY = window.pageYOffset;
+    }
+    jump(true);
+    // Content below the hero (e.g. the calculator grid) builds after load and can
+    // nudge the layout; re-correct only while the user hasn't taken over.
+    setTimeout(jump, 120);
+    setTimeout(jump, 350);
   }
-  window.addEventListener('pagereveal', function () { setTimeout(go, 80); });
-  window.addEventListener('load', function () { setTimeout(go, 80); });
+  window.addEventListener('pagereveal', function () { setTimeout(go, 60); });
+  window.addEventListener('load', function () { setTimeout(go, 60); });
 })();
 
 /* Mobile back chip: every sub-page gets a clear way back.
