@@ -28,8 +28,14 @@
                       1200;
               if (w < 200) w = 200;
               if (w > 1600) w = 1600;
+              // resize=contain keeps the original aspect ratio. Without it the
+              // transformer defaults to a cover crop and, when it actually
+              // downscales (requested width < original), it trims the sides
+              // instead of scaling - e.g. a 1024x1280 poster came back 387x1280.
+              // That mismatched the aspect the admin cropped against, so every
+              // crop rectangle landed on the wrong slice of the image.
               v = v.replace('/storage/v1/object/public/', '/storage/v1/render/image/public/') +
-                  (v.indexOf('?') > -1 ? '&' : '?') + 'width=' + w + '&quality=70';
+                  (v.indexOf('?') > -1 ? '&' : '?') + 'width=' + w + '&resize=contain&quality=70';
             }
           } catch (e) {}
           _d.set.call(this, v);
