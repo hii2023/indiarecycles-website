@@ -322,10 +322,24 @@
         if (fw <= 0 || fh <= 0 || fw > 1 || fh > 1) return '';
         return 'position:absolute;left:' + (-fx / fw * 100) + '%;top:' + (-fy / fh * 100) + '%;width:' + (100 / fw) + '%;height:' + (100 / fh) + '%;max-width:none;object-fit:cover';
       }
+      // The crop for a cover photo. photo_crop is keyed by the photo's URL.
+      // Safety net: if an old save orphaned the key (e.g. a data-URL key that was
+      // never remapped to its Storage URL), a lone photo with a lone crop entry is
+      // still unambiguous - use it, rather than dropping to a centred object-cover
+      // which shows the wrong region. Multi-photo items and intentional full-frame
+      // covers are left untouched.
+      function coverCropVal(cropMap, photos) {
+        if (!cropMap || !photos || !photos.length) return '';
+        var cover = photos[0];
+        if (cropMap[cover]) return cropMap[cover];
+        var keys = Object.keys(cropMap);
+        if (photos.length === 1 && keys.length === 1) return cropMap[keys[0]];
+        return '';
+      }
       function photoCover(photos, alt, wrapClass, cropMap) {
         if (!photos.length) return '';
         var group = esc(JSON.stringify(photos));
-        var cs = (cropMap && cropMap[photos[0]]) ? cropStyle(cropMap[photos[0]]) : '';
+        var cs = cropStyle(coverCropVal(cropMap, photos));
         var badge = photos.length > 1
           ? '<span class="absolute bottom-2 right-2 inline-flex items-center gap-1 bg-black/60 text-white text-[11px] font-semibold px-2 py-0.5 rounded-full backdrop-blur-sm pointer-events-none">' +
               '<svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>' + photos.length +
@@ -632,8 +646,8 @@
           document.getElementById('home-events-section').style.display = '';
           heEl.innerHTML = ordered.slice(0, 3).map(function (ev) {
             var i = evAll.indexOf(ev);
-            var cover = itemPhotos(ev)[0];
-            var ecs = (ev.photo_crop && cover && ev.photo_crop[cover]) ? cropStyle(ev.photo_crop[cover]) : '';
+            var evPhotos = itemPhotos(ev), cover = evPhotos[0];
+            var ecs = cropStyle(coverCropVal(ev.photo_crop, evPhotos));
             var photo = cover ? '<div class="relative aspect-[16/10] bg-green-50 overflow-hidden">' + (ecs ? '<img src="' + esc(cover) + '" alt="' + esc(ev.title) + '" style="' + ecs + '" loading="lazy"/>' : '<img src="' + esc(cover) + '" alt="' + esc(ev.title) + '" class="w-full h-full object-cover" loading="lazy"/>') + '</div>' : '';
             var ew = evWhen(ev), when = [ew.when, ew.time].filter(Boolean).join(' &middot; ');
             return '<a href="events.html#event-' + i + '" class="rounded-2xl border border-gray-200 bg-white overflow-hidden flex flex-col shadow-sm hover:border-green-300 transition-colors">' + photo +
@@ -653,8 +667,8 @@
         if (coAll.length) {
           document.getElementById('home-collabs-section').style.display = '';
           hcEl.innerHTML = coAll.slice(0, 3).map(function (co) {
-            var cover = itemPhotos(co)[0];
-            var ccs = (co.photo_crop && cover && co.photo_crop[cover]) ? cropStyle(co.photo_crop[cover]) : '';
+            var coPhotos = itemPhotos(co), cover = coPhotos[0];
+            var ccs = cropStyle(coverCropVal(co.photo_crop, coPhotos));
             var photo = cover ? '<div class="relative aspect-[16/10] bg-green-50 overflow-hidden">' + (ccs ? '<img src="' + esc(cover) + '" alt="' + esc(co.title) + '" style="' + ccs + '" loading="lazy"/>' : '<img src="' + esc(cover) + '" alt="' + esc(co.title) + '" class="w-full h-full object-cover" loading="lazy"/>') + '</div>' : '';
             var logo = co.logo ? '<div class="h-9 flex items-center mb-2"><img loading="lazy" decoding="async" src="' + esc(co.logo) + '" alt="' + esc(co.title || 'Partner') + ' logo" class="max-h-9 max-w-[55%] object-contain object-left"/></div>' : '';
             return '<a href="collaborations.html" class="rounded-2xl border border-gray-200 bg-white overflow-hidden flex flex-col shadow-sm hover:border-green-300 transition-colors">' + photo +
@@ -873,7 +887,7 @@
       (function () {
         var SHOP_URL = 'https://store.indiarecycles.org';
         function coverOf(it) { return (Array.isArray(it.photos) && it.photos[0]) || it.photo || it.logo || ''; }
-        function coverCrop(it, cover) { return (it && it.photo_crop && cover && it.photo_crop[cover]) ? it.photo_crop[cover] : ''; }
+        function coverCrop(it, cover) { return (it && it.photo_crop && cover && it.photo_crop[cover]) ? it.photo_crop[cover] : coverCropVal(it && it.photo_crop, itemPhotos(it)); }
         function fmtWhen(d, t) {
           var parts = [];
           if (d) { try { parts.push(new Date(d + 'T00:00:00').toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })); } catch (e) { parts.push(esc(d)); } }
