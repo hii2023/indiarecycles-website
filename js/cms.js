@@ -215,7 +215,15 @@
       });
 
       /* Reports & Media (Resources page) */
-      function esc(t) { var d = document.createElement('div'); d.textContent = t == null ? '' : String(t); return d.innerHTML; }
+      // Escape for HTML text AND attribute contexts. The textContent trick only
+      // encodes & < > - not quotes - so a value with a " (e.g. the JSON in a
+      // data-photos attribute) broke out of its attribute and truncated. Encode
+      // quotes too; browsers decode the entities back on getAttribute/render.
+      function esc(t) {
+        return (t == null ? '' : String(t))
+          .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+      }
 
       /* Our Impact page: a fully editable list of impact numbers the admin controls
          (add any title + number). Only items that have a value are shown; a trailing
