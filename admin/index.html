@@ -1509,10 +1509,21 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
   /* Images sit in the editor as data URLs for instant preview, but published
      content must carry Storage URLs - base64 in the JSON made the public site
      download 11MB before anything rendered. Upload each embedded image and
-     swap in the returned public URL before saving. */
-  async function uploadEmbeddedImages(value, passcode, label) {
+     swap in the returned public URL before saving.
+
+     `cache` maps a data URL to the Storage URL it uploaded to, so the SAME image
+     is uploaded only once and always resolves to the same URL. This matters
+     because crop rectangles live in `photo_crop` keyed by the photo's URL: a
+     freshly added photo appears both in `photos` (a value) and as a `photo_crop`
+     key, and both must become the identical Storage URL or the crop is orphaned
+     and the website silently falls back to a centred object-cover instead of the
+     region the user chose. Object keys that are themselves embedded images are
+     therefore remapped through the same cache. */
+  async function uploadEmbeddedImages(value, passcode, label, cache) {
+    cache = cache || {};
     if (typeof value === 'string') {
       if (value.indexOf('data:image/') !== 0) return value;
+      if (cache[value]) return cache[value];
       const res = await fetch(SB_URL + '/functions/v1/ir-upload', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -1520,16 +1531,25 @@ Today, India Recycles operates across Ahmedabad and Vadodara with 20+ drop locat
       });
       const out = await res.json().catch(() => ({}));
       if (!res.ok || !out.url) throw new Error(out.error || 'Image upload failed (HTTP ' + res.status + ')');
+      cache[value] = out.url;
       return out.url;
     }
     if (Array.isArray(value)) {
       const arr = [];
-      for (const item of value) arr.push(await uploadEmbeddedImages(item, passcode, label));
+      for (const item of value) arr.push(await uploadEmbeddedImages(item, passcode, label, cache));
       return arr;
     }
     if (value && typeof value === 'object') {
       const obj = {};
-      for (const k of Object.keys(value)) obj[k] = await uploadEmbeddedImages(value[k], passcode, label + '-' + k);
+      for (const k of Object.keys(value)) {
+        const nv = await uploadEmbeddedImages(value[k], passcode, label + '-' + k, cache);
+        // Remap keys that are themselves embedded images (e.g. photo_crop is
+        // keyed by the photo URL) so the crop stays attached after upload.
+        const nk = k.indexOf('data:image/') === 0
+          ? await uploadEmbeddedImages(k, passcode, label + '-key', cache)
+          : k;
+        obj[nk] = nv;
+      }
       return obj;
     }
     return value;
