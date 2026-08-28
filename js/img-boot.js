@@ -5,37 +5,64 @@
    before the browser paints it. cms.js refreshes the cache on every load, so a newly
    replaced image is correct from the next visit onwards. No cache = old behaviour. */
 (function () {
-  /* Perf: route every CMS image (Supabase Storage) through the on-the-fly
-     image transformer — resized to the element's rendered width and served as
-     WebP. Patching the <img>.src setter here (first script in <head>) covers
-     every swap path with no double download, and leaves local images/... and
-     already-transformed URLs untouched. Guarded so it installs only once. */
+  /* Perf: serve every CMS image (Supabase Storage) from a PRE-GENERATED WebP
+     variant instead of the on-the-fly image transformer.
+
+     Why: /render/image/ is a METERED Supabase feature. Pro includes only 100
+     "origin images" per billing cycle and this site references ~244, so with the
+     spend cap on the transformer gets disabled part-way through every cycle and
+     every CMS image breaks site-wide until the cycle resets. Variants are plain
+     public objects: unmetered, CDN-cacheable, and measurably faster (~0.1-0.3s
+     vs 1-3s for a cold transform).
+
+     Variants sit beside the original at  _v/<object-name>/<width>.webp  for the
+     widths in LADDER, written at upload time by the ir-upload function (and
+     backfilled for images that predate it). They are never upscaled - a step
+     wider than the source is just the source re-encoded - so every step always
+     exists and a legitimate image never 404s.
+
+     Safety net: if a variant is missing anyway, the first error event restores
+     the ORIGINAL url, so a gap degrades to an unoptimised image instead of a
+     broken one. Patching the <img>.src setter here (first script in <head>)
+     covers every swap path with no double download and leaves local images/...
+     alone. Guarded so it installs only once. */
   if (!window.__irImgTx) {
     window.__irImgTx = 1;
     try {
+      var SEG = '/storage/v1/object/public/site-images/';
+      var LADDER = [400, 800, 1200, 1600];
       var _d = Object.getOwnPropertyDescriptor(HTMLImageElement.prototype, 'src');
+
+      var variantFor = function (img, url) {
+        var w = parseInt(img.getAttribute('data-w'), 10) ||
+                parseInt(img.getAttribute('width'), 10) ||
+                Math.round((img.clientWidth || 0) * (window.devicePixelRatio || 1)) ||
+                1200;
+        var step = LADDER[LADDER.length - 1];
+        for (var i = 0; i < LADDER.length; i++) {
+          if (LADDER[i] >= w) { step = LADDER[i]; break; }
+        }
+        return url.split('?')[0].split('#')[0].replace(SEG, SEG + '_v/') + '/' + step + '.webp';
+      };
+
       Object.defineProperty(HTMLImageElement.prototype, 'src', {
         configurable: true, enumerable: _d.enumerable,
         get: function () { return _d.get.call(this); },
         set: function (v) {
+          var self = this;
           try {
-            if (typeof v === 'string' &&
-                v.indexOf('/storage/v1/object/public/') > -1 &&
-                v.indexOf('/render/image/') === -1) {
-              var w = parseInt(this.getAttribute('data-w'), 10) ||
-                      parseInt(this.getAttribute('width'), 10) ||
-                      Math.round((this.clientWidth || 0) * (window.devicePixelRatio || 1)) ||
-                      1200;
-              if (w < 200) w = 200;
-              if (w > 1600) w = 1600;
-              // resize=contain keeps the original aspect ratio. Without it the
-              // transformer defaults to a cover crop and, when it actually
-              // downscales (requested width < original), it trims the sides
-              // instead of scaling - e.g. a 1024x1280 poster came back 387x1280.
-              // That mismatched the aspect the admin cropped against, so every
-              // crop rectangle landed on the wrong slice of the image.
-              v = v.replace('/storage/v1/object/public/', '/storage/v1/render/image/public/') +
-                  (v.indexOf('?') > -1 ? '&' : '?') + 'width=' + w + '&resize=contain&quality=70';
+            if (typeof v === 'string' && !self.__irRaw &&
+                v.indexOf(SEG) > -1 && v.indexOf(SEG + '_v/') === -1) {
+              self.__irOriginal = v;
+              if (!self.__irBound) {
+                self.__irBound = 1;
+                self.addEventListener('error', function () {
+                  if (self.__irRaw) return;   // already on the original: a real failure
+                  self.__irRaw = 1;           // bypass the rewrite on the retry
+                  _d.set.call(self, self.__irOriginal);
+                });
+              }
+              v = variantFor(self, v);
             }
           } catch (e) {}
           _d.set.call(this, v);
@@ -43,13 +70,11 @@
       });
       /* Images built via innerHTML set their src by attribute parsing, which
          bypasses the setter above. Catch those too: when such an <img> is added
-         to the DOM, re-assign its src through the setter (transforming it). They
-         are lazy/off-screen, so this fires before any download — no double load. */
+         to the DOM, re-assign its src through the setter. They are lazy/off-screen,
+         so this fires before any download - no double load. */
       var reapply = function (img) {
         var s = img.getAttribute && img.getAttribute('src');
-        if (s && s.indexOf('/storage/v1/object/public/') > -1 && s.indexOf('/render/image/') === -1) {
-          img.src = s;
-        }
+        if (s && s.indexOf(SEG) > -1 && s.indexOf(SEG + '_v/') === -1) img.src = s;
       };
       new MutationObserver(function (muts) {
         for (var i = 0; i < muts.length; i++) {
