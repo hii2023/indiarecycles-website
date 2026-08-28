@@ -93,13 +93,39 @@
     } catch (e) {}
   }
 
+  /* Below-fold CMS images intentionally ship with NO src attribute; their local
+     path sits in data-fallback instead. Reason: those images always have a CMS
+     override, so a real src just makes the browser download a local file that
+     cms.js immediately replaces - ~2.9 MB of pure waste across the site. The
+     preload scanner starts that fetch before any script can rewrite it, so the
+     only way to stop it is to not ship a src at all.
+
+     cms.js fills these from the CMS. This is the net for when that does not
+     happen (CMS unreachable, entry deleted, cms.js failed) so a slot never stays
+     permanently empty. It runs after load, by which point anything real has
+     already been set, and it only touches images still lacking a src. */
+  (function () {
+    function fill() {
+      var l = document.querySelectorAll('img[data-fallback]:not([src])');
+      for (var i = 0; i < l.length; i++) {
+        var fb = l[i].getAttribute('data-fallback');
+        if (fb) l[i].src = fb;
+      }
+    }
+    if (document.readyState === 'complete') setTimeout(fill, 600);
+    else window.addEventListener('load', function () { setTimeout(fill, 600); });
+  })();
+
   var map;
   try { map = JSON.parse(localStorage.getItem('ir_images') || 'null'); } catch (e) { return; }
   if (!map || typeof map !== 'object') return;
 
   function apply(img) {
     var key = img.getAttribute('data-img-key');
-    var m = (img.getAttribute('src') || '').match(/(?:^|\/)images\/([^\/?#]+)/);
+    // src may be absent by design (see the data-fallback note above), so fall
+    // back to that path for the by-filename lookup.
+    var m = (img.getAttribute('src') || img.getAttribute('data-fallback') || '')
+              .match(/(?:^|\/)images\/([^\/?#]+)/);
     var name = m && m[1];
     if (key && map[key]) img.src = map[key];
     else if (name && map[name]) img.src = map[name];
